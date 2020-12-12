@@ -1,11 +1,11 @@
-- name: HTML5/CSS3
+- name: R
   percentage: 90
   color: danger
 
-- name: Go
-  percentage: 80
+- name: SQL
+  percentage: 70
   color:
 
 - name: Python
-  percentage: 70
+  percentage: 60
   color: dark
