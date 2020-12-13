@@ -1,5 +1,5 @@
 ### Site Settings ###
-title               : portfolYOU
+title               : athan-dial.github.io
 description         : >-
                       I turn coffee :coffee: into code,
                       use tabs over spaces
@@ -25,7 +25,7 @@ nav_exclude:                                            # The following paths ar
 ### Author Info ###
 author:
   name              : Athan Dial
-  image             : https://i.imgur.com/uyDNQnn.jpg
+  image             : https://imgur.com/iOlgeEK.jpg
 # behance           : your_username
 # dribbble          : your_username
   email             : athandial@gmail.com
