@@ -8,9 +8,10 @@ weight: 3
 # **About Me**
 
 Hi, I am Athan :wave:<br>
-I am a scientist by training and an 
+As a scientist by training and analyst by practice, I am passionate about seeking data-driven insights in the pursuit of optimal human health for everyone.<br>
+<br>
+With expertise in bioinformatics, biotechnology, medical research, data privacy and human performance - my breadth of experience has been motivated by the mission to answer meaningful questions using an expansive toolkit of comprehensive data analysis and machine learning techniques.<br>
 
- with expertise in bioinformatics, biotechnology, and medical research - with focus on human health and performance. My diverse experiences have been motivated by my drive to ask and answer meaningful questions using an expansive toolkit of comprehensive data analysis and machine learning techniques.
 
 <div class="row">
 {% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
