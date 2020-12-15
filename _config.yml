@@ -1,9 +1,9 @@
 ### Site Settings ###
 title               : athan-dial.github.io
 description         : >-
-                      I turn coffee into code\
-                      that turns info into insights.\
-                      \
+                      I turn coffee into code
+                      that turns info into insights.
+
                       :coffee: :hash: :bar_chart:
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : athan-dial/athan-dial.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
