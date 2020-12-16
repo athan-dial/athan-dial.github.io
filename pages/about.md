@@ -19,14 +19,13 @@ My experience and tech toolkit are constantly growing - see below for more about
 
 <div class="row">
 {% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
-{% include about/skills.html title="Other Skills" source=site.data.other-skills %}
+{% include about/skills.html title="Soft Skills" source=site.data.other-skills %}
 </div>
 
-<table><tr>
-  <td> <img src="/stickers/dials.svg" width="100"/> </td>
-  <td> <img src="/stickers/tensorflow.svg" width="100"/> </td>
-  <td> <img src="/stickers/ggplot2.svg" width="100"/> </td>
-</tr></table>
+<img src="/stickers/dials.svg" width="100" style="float: right;"/>
+<img src="/stickers/tensorflow.svg" width="100" style="float: left;"/>
+<img src="/stickers/ggplot2.svg" width="100"/>
+
 
 <div class="row">
 {% include about/timeline.html %}
