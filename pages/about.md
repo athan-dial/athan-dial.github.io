@@ -22,11 +22,6 @@ My experience and tech toolkit are constantly growing - see below for more about
 {% include about/skills.html title="Soft Skills" source=site.data.other-skills %}
 </div>
 
-<img src="/stickers/dials.svg" width="100" style="float: right;"/>
-<img src="/stickers/tensorflow.svg" width="100" style="float: left;"/>
-<img src="/stickers/ggplot2.svg" width="100"/>
-
-
 <div class="row">
 {% include about/timeline.html %}
 </div>
