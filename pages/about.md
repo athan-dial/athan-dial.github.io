@@ -22,11 +22,8 @@ My experience and tech toolkit are constantly growing - see below for more about
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
 </div>
 
-<p align="middle">
-  <img src="/stickers/dials.svg" width="100"/>
-  <img src="/stickers/tensorflow.svg" width="100"/>
-  <img src="/stickers/ggplot2.svg" width="100"/>
-</p>
+<img src="/stickers/dials.svg" width="100"/> <img src="/stickers/tensorflow.svg" width="100"/> <img src="/stickers/ggplot2.svg" width="100"/>
+
 
 <div class="row">
 {% include about/timeline.html %}
