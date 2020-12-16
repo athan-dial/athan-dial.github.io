@@ -22,10 +22,7 @@ My experience and tech toolkit are constantly growing - see below for more about
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
 </div>
 
-<div class="column">
-{% include about/skills.html title="Programming Skills 2" source=site.data.programming-skills %}
-{% include about/skills.html title="Other Skills 2" source=site.data.other-skills %}
-</div>
+![sticker](/stickers/dials.svg)
 
 <div class="row">
 {% include about/timeline.html %}
