@@ -8,14 +8,21 @@ weight: 3
 # **About Me**
 
 Hi, I am Athan :wave:<br>
-As a scientist by training and analyst by practice, I am passionate about seeking data-driven insights in the pursuit of optimal human health for everyone.<br>
 <br>
-With expertise in bioinformatics, biotechnology, medical research, data privacy and human performance - my breadth of experience has been motivated by the mission to answer meaningful questions using an expansive toolkit of comprehensive data analysis and machine learning techniques.<br>
-
+As a scientist by training and analyst by practice, I am passionate about seeking data-driven insights in the pursuit of optimizing human health. <br>
+<br>
+With deep, hands-on expertise wide range of healthcare data, including: clinical trials, bioinformatics (microarray, NGS), biomedical (clinical & microscopic imaging), athletic performance - I am able to bring a unique perspective to any healthcare question. My data science tool kit is constantly growing - see below for more about me, or check out my projects page for some of the personal projects I've enjoyed working on. Enjoy! <br>
+<br>
+-AD
 
 <div class="row">
 {% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
+</div>
+
+<div class="row">
+{% include about/skills.html title="Programming Skills 2" source=site.data.programming-skills %}
+{% include about/skills.html title="Other Skills 2" source=site.data.other-skills %}
 </div>
 
 <div class="row">
