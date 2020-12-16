@@ -1,7 +1,7 @@
-- name: Adobe Photoshop
+- name: Oral presentations
   percentage: 95
   color: info
 
-- name: Adobe Illustrator
+- name: Scientific writing
   percentage: 90
   color: success

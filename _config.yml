@@ -18,6 +18,7 @@ plugins:
 ### Navbar Settings ###
 nav_exclude:                                            # The following paths are excluded from navbar
   - pages/tags.html
+  - pages/blog.html
   - pages/404.html
   - pages/index.md
   - documentation/partials/**                           # For Documentation Only
@@ -67,9 +68,9 @@ disqus: your-short-name-disqus                          # Your website Shortname
 
 ### Analytics ###
 analytics:
-  enabled: false                                        # Set true to enable analytics
+  enabled: true                                        # Set true to enable analytics
   google:
-    tracking_id: your-google-tracking-id
+    tracking_id: G-FP4VFRC00M
 
 
 ### Defaults for collections ###

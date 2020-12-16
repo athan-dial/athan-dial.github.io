@@ -11,7 +11,9 @@ Hi, I am Athan :wave:<br>
 <br>
 As a scientist by training and analyst by practice, I am passionate about seeking data-driven insights in the pursuit of optimizing human health. <br>
 <br>
-With deep, hands-on expertise wide range of healthcare data, including: clinical trials, bioinformatics (microarray, NGS), biomedical (clinical & microscopic imaging), athletic performance - I am able to bring a unique perspective to any healthcare question. My data science tool kit is constantly growing - see below for more about me, or check out my projects page for some of the personal projects I've enjoyed working on. Enjoy! <br>
+I have extensive hands-on expertise with a wide range of high dimensional healthcare data, including: **clinical trials**, **bioinformatics** (microarray, NGS), **biomedical** (clinical & microscopic imaging data), **athletic performance** - making me a unique asset for health data science teams. <br>
+<br>
+My experience and tech toolkit are constantly growing - see below for more about me, or check out my projects page for some of the personal projects I've enjoyed working on. Enjoy! <br>
 <br>
 -AD
 
@@ -20,7 +22,7 @@ With deep, hands-on expertise wide range of healthcare data, including: clinical
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
 </div>
 
-<div class="row">
+<div class="column">
 {% include about/skills.html title="Programming Skills 2" source=site.data.programming-skills %}
 {% include about/skills.html title="Other Skills 2" source=site.data.other-skills %}
 </div>
