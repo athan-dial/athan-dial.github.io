@@ -23,6 +23,7 @@ My experience and tech toolkit are constantly growing - see below for more about
 </div>
 
 ![sticker](/stickers/dials.svg)
+![sticker2] <img src="/stickers/dials.svg" alt="drawing" width="200"/>
 
 <div class="row">
 {% include about/timeline.html %}
