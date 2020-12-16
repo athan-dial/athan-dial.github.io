@@ -22,8 +22,13 @@ My experience and tech toolkit are constantly growing - see below for more about
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
 </div>
 
-![sticker](/stickers/dials.svg)
-![sticker2] <img src="/stickers/dials.svg" alt="drawing" width="200"/>
+<img src="/stickers/dials.svg" alt="drawing" width="200"/>
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|  <img src="/stickers/dials.svg" alt="drawing" width="50"/> |   |   |   |   |
+|   |   |  test |   |   |
+|   |   |   |   |   |
 
 <div class="row">
 {% include about/timeline.html %}
