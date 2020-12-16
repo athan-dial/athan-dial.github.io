@@ -22,6 +22,7 @@ My experience and tech toolkit are constantly growing - see below for more about
 {% include about/skills.html title="Other Skills" source=site.data.other-skills %}
 </div>
 
+<img src="/stickers/dials.svg" alt="drawing" width="50"/> Test text
 
 |  <img src="/stickers/dials.svg" alt="drawing" width="50"/> |   |   |   |   |
 |   |   |  test |   |   |
