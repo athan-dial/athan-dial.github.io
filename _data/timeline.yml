@@ -1,11 +1,16 @@
 - title: Data Scientist, Replica Analytics
   from: 2019
   to: 2020
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-               reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  description:
+
+As the first data scientist at Replica, I was charged with developing end-to-end analysis programs
+in **R** and **Python** for data synthesis and privacy assurance on hospital discharge
+and clinical trials data. In my role, I spearheaded projects requiring the intake,
+processing, cleaning, and verifying the integrity of large multi-million row datasets
+for subsequent implementation of proprietary **machine learning** techniques. As a fully
+remote employee, I was able to become very familiar operating in an **AWS** environment to
+ensure end-to-end delivery of projects were completed and documented for internal and external
+clientele.
 
 - title: PhD Candidate, McMaster University
   from: 2017
