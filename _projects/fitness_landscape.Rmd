@@ -1,0 +1,102 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+
+library(tidyverse)
+library(lubridate)
+library(rayshader)
+library(rayrender)
+library(av)
+library(extrafont)
+
+```
+
+```{r}
+
+dat <- read_csv("C:/Users/Dial_/OneDrive - McMaster University/Code/~ main/DV - Data Visualization/fitness_landscape/raw_data/takeout_2020_11_13/Takeout/Fit/Daily Aggregations/Daily Summaries.csv")
+
+dat_c <- 
+  dat %>% 
+  filter(Date > '2020-01-01') %>% 
+  select(Date, `Step count`) %>% 
+  mutate(
+    wday = wday(Date),
+    mday = mday(Date),
+    week = week(Date),
+    mweek = ceiling((day(Date) + first_day_of_month_wday(Date) - 1) / 7),
+    month = month(Date)
+    ) 
+
+```
+
+```{r}
+
+first_day_of_month_wday <- function(dx) {
+  day(dx) <- 1
+  wday(dx)
+}
+
+days_of_week <- c("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
+
+p1 <-
+  dat_c %>% 
+  ggplot(aes(x = week, y = wday, fill = `Step count`))+
+  geom_tile()+
+  geom_vline(xintercept = 12, color = "white")+
+  geom_vline(xintercept = 37, color = "white")+
+  geom_text(x = 6, y = -9, label = "Pre-lockdown", family = "Titillium Web")+
+  geom_text(x = 24, y =-9, label = "Lockdown", family = "Titillium Web")+
+  geom_text(x = 42, y = -9, label = "Lockdown + puppy", family = "Titillium Web")+
+  scale_fill_viridis_c(breaks = c(5000, 10000, 15000), labels = c("5K", "10K", "15K"))+
+  scale_x_continuous(position = "top", breaks = scales::pretty_breaks(), expand = c(0,0))+
+  scale_y_reverse(breaks = c(1:7), labels = days_of_week)+
+  labs(
+    x = "Week",
+    y = "  Weekday"
+  )+
+  theme(
+    text = element_text(size = 14, family = "Titillium Web"),
+    axis.title.x.top = element_text(hjust = 0.5)
+  )+
+  coord_equal(clip = "off")
+
+p1
+
+plot_gg(
+  p1, 
+  width = 10,
+  height = 3, 
+  height_aes = "fill",
+  scale = 400,
+  sunangle = 135,
+  multicore = TRUE,
+  shadow_intensity = 0.6,
+  raytrace = F,
+  preview = F,
+  pointcontract = 1
+  )
+
+# Render movie, orbit
+# render_movie(filename = "movie_plot.mp4", type = "orbit", frames = 720,
+#              phi = 60, theta = 60, zoom = 0.9)
+
+
+# Set up the camera position and angle
+phivechalf = 30 + 60 * 1/(1 + exp(seq(-7, 20, length.out = 360)/2))
+phivecfull = c(phivechalf, rev(phivechalf))
+thetavec = 0 + 60 * sin(seq(0,719,length.out = 720) * pi/360)
+zoomvec = 0.9 + 0.2 * 1/(1 + exp(seq(-5, 20, length.out = 360)))
+zoomvecfull = c(zoomvec, rev(zoomvec))
+
+# Render movie, custom
+render_movie(filename = "step_plot.mp4", type = "custom",
+            frames = 720, fps = 60, phi = phivecfull, zoom = zoomvecfull, theta = thetavec)
+
+
+```
+
+
+
