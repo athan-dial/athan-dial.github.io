@@ -1,9 +1,8 @@
 ---
-name: PlaceHolder Project
-tools: [data-visualization]
+name: Fitness Landscape
+tools: [Data Visualization]
 image: https://www.sketchappsources.com/resources/source-image/project-neon-groove-music-ui.png
 description: 3D plot of step counts
-external_url: ""
 ---
 <!DOCTYPE html>
 
