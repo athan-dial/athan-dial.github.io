@@ -1,7 +1,7 @@
 ---
 name: Activity Landscape
 tools: [data-visualization]
-image: https://github.com/athan-dial/athan-dial.github.io/blob/gh-pages/_data/project_files/step_plot.pnghttps://athan-dial.github.io/_data/project_files/step_plot.png
+image: https://raw.githubusercontent.com/athan-dial/athan-dial.github.io/gh-pages/_data/project_files/step_plot.png
 description: A 3D plot of the up's and down's of my physical activity.
 ---
 
@@ -1820,9 +1820,9 @@ render_movie(filename = &quot;step_plot.mp4&quot;, type = &quot;custom&quot;,
             frames = 720, fps = 60, phi = phivecfull, zoom = zoomvecfull, theta = thetavec)</code></pre>
 <pre><code>## [1] &quot;C:\\Users\\Dial_\\OneDrive - McMaster University\\Code\\~ main\\DV - Data Visualization\\fitness_landscape\\analysis_fies\\step_plot.mp4&quot;</code></pre>
 
-<video width="700" height="100%" controls>
+<center><video width="700" height="100%" controls>
   <source type="video/mp4" src="https://github.com/athan-dial/athan-dial.github.io/blob/gh-pages/_data/project_files/step_plot.mp4?raw=true">
-</video>
+</video></center>
 
 <p>And there it is - the landscape of my year so far, in steps.</p>
 </div>
