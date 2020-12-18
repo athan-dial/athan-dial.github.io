@@ -1,7 +1,7 @@
 ---
 name: Activity Landscape
 tools: [data-visualization]
-image: https://athan-dial.github.io/_data/project_files/step_plot.png
+image: https://github.com/athan-dial/athan-dial.github.io/blob/gh-pages/_data/project_files/step_plot.pnghttps://athan-dial.github.io/_data/project_files/step_plot.png
 description: A 3D plot of the up's and down's of my physical activity.
 ---
 
@@ -1804,6 +1804,9 @@ p1</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
 <pre class="r"><code>render_snapshot(&quot;step_plot.png&quot;)</code></pre>
+
+![snapshot](https://github.com/athan-dial/athan-dial.github.io/blob/gh-pages/_data/project_files/step_plot.png)
+
 <p>If we want to save the result, we can do so as a static image of the plot, or in my case, I wanted to play around with the ability to make it a movie. Because why have 2D when you can have <strike>3D</strike> <strong><em>4D</em></strong>? In my example I set up a couple vectors to customize the camera position, based on the package author’s <a href="https://www.tylermw.com/3d-ggplots-with-rayshader&quot;">original tutorial on the topic</a>.</p>
 <pre class="r"><code># Set up the camera position and angle
 phivechalf = 30 + 60 * 1/(1 + exp(seq(-7, 20, length.out = 360)/2))
@@ -1817,6 +1820,9 @@ render_movie(filename = &quot;step_plot.mp4&quot;, type = &quot;custom&quot;,
             frames = 720, fps = 60, phi = phivecfull, zoom = zoomvecfull, theta = thetavec)</code></pre>
 <pre><code>## [1] &quot;C:\\Users\\Dial_\\OneDrive - McMaster University\\Code\\~ main\\DV - Data Visualization\\fitness_landscape\\analysis_fies\\step_plot.mp4&quot;</code></pre>
 
+<video width="320" height="240" controls>
+  <source type="video/mp4" src="https://github.com/athan-dial/athan-dial.github.io/blob/gh-pages/_data/project_files/step_plot.mp4">
+</video>
 
 <p>And there it is - the landscape of my year so far, in steps.</p>
 </div>
