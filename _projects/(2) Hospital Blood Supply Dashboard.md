@@ -23,7 +23,8 @@ Our teams idea was to create an automated end-to-end predictive modelling system
 I was responsible for the development of the front and backend of the app, including the development of a synthetic dataset that modelled the important parameters of a blood bank database.
 
 <h1> Result </h1>
-The app can be found on [my shiny dashboard](https://athan-dial.shinyapps.io/blood_supply_predictor/ "Blood Supply Predictor"). The source code is available at [my github](https://github.com/athan-dial/mackhacks_2021 "github.com/athan-dial"). You can view the 5-minute video submission created by my team and I on Youtube.</br>
+The app can be found on [my shiny dashboard](https://athan-dial.shinyapps.io/blood_supply_predictor/ "Blood Supply Predictor"). The source code is available at [my github](https://github.com/athan-dial/mackhacks_2021 "github.com/athan-dial"). You can view the 5-minute video submission created by my team and I on Youtube.
+<br>
 <br>
 <div href="http://www.youtube.com/watch?feature=player_embedded&v=VSwHVP7l3ww
 " target="_blank"><img src="http://img.youtube.com/vi/VSwHVP7l3ww/0.jpg"
