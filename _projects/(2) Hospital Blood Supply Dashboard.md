@@ -1,7 +1,7 @@
 ---
-name: Activity Landscape
+name: Blood Supply Predictor
 tools: [shiny-app]
-image: https://raw.githubusercontent.com/athan-dial/athan-dial.github.io/gh-pages/_data/project_files/step_plot.png
+image: https://raw.githubusercontent.com/athan-dial/athan-dial.github.io/gh-pages/_data/project_files/machacks.png
 description: A small web app built for a clinical purpose with Shiny
 ---
 
@@ -23,10 +23,11 @@ Our teams idea was to create an automated end-to-end predictive modelling system
 I was responsible for the development of the front and backend of the app, including the development of a synthetic dataset that modelled the important parameters of a blood bank database.
 
 <h1> Result </h1>
-The app can be found on [my shiny dashboard](https://athan-dial.shinyapps.io/blood_supply_predictor/ "Blood Supply Predictor"). The source code is available at [my github](https://github.com/athan-dial/mackhacks_2021 "github.com/athan-dial"). You can view the 5-minute video submission created by my team and I on Youtube.
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=VSwHVP7l3ww
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg"
-alt="Blood Supply Predictor" width="240" height="180" border="10" /></a>
+The app can be found on [my shiny dashboard](https://athan-dial.shinyapps.io/blood_supply_predictor/ "Blood Supply Predictor"). The source code is available at [my github](https://github.com/athan-dial/mackhacks_2021 "github.com/athan-dial"). You can view the 5-minute video submission created by my team and I on Youtube.</br>
+<br>
+<div href="http://www.youtube.com/watch?feature=player_embedded&v=VSwHVP7l3ww
+" target="_blank"><img src="http://img.youtube.com/vi/VSwHVP7l3ww/0.jpg"
+alt="Blood Supply Predictor" width="480" height="360" border="10" /></div>
 
 
 <h1> [Under development] </h1>
