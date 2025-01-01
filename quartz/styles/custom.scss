@@ -1,3 +1,108 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// Custom styles based on your Obsidian configuration
+
+// Test style to verify CSS is working
+body {
+  --custom-loaded: true;
+}
+
+// Center Images
+img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+// Improved Table Styling (from table-02.css)
+table {
+  border-collapse: collapse !important;
+  margin: 1em 0 !important;
+  width: 100% !important;
+
+  th {
+    font-weight: 600 !important;
+    background-color: var(--lightgray) !important;
+    padding: 0.5em !important;
+    border: 1px solid var(--gray) !important;
+  }
+
+  td {
+    padding: 0.5em !important;
+    border: 1px solid var(--gray) !important;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--light) !important;
+  }
+
+  tr:hover {
+    background-color: var(--highlight) !important;
+  }
+}
+
+// Small Text Utility (from small-text-01.css)
+.small-text {
+  font-size: 0.8em !important;
+}
+
+// Task Headings (from task-heading.css)
+.task-heading {
+  font-weight: 600 !important;
+  color: var(--secondary) !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+// Custom Checkbox Styling
+input[type="checkbox"] {
+  border-radius: 3px !important;
+  margin-right: 0.5em !important;
+  transition: all 0.2s ease !important;
+
+  &:checked {
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+  }
+}
+
+// Improved Link Styling
+a.internal-link {
+  color: var(--secondary) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    color: var(--tertiary) !important;
+    border-bottom-color: var(--tertiary) !important;
+  }
+}
+
+// Clean Sidebar
+.sidebar {
+  background: var(--light) !important;
+  border-right: 1px solid var(--lightgray) !important;
+  padding: 1em !important;
+  
+  nav {
+    font-size: 0.95em !important;
+  }
+}
+
+// Top Fade Effect
+.content {
+  position: relative !important;
+  
+  &::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 100px !important;
+    background: linear-gradient(var(--light), transparent) !important;
+    pointer-events: none !important;
+    z-index: 100 !important;
+  }
+}
