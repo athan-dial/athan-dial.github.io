@@ -35,10 +35,14 @@ jobs:
       - name: Build Quartz
         run: npx quartz build
       
+      - name: List contents of public directory
+        run: ls -la public
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
+          retention-days: 1
 
   deploy:
     needs: build
