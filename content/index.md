@@ -9,3 +9,6 @@ I turn coffee into code that turns info into insights. ☕️ + 💻 = 🎨
 ## About
 
 This is a digital garden where I cultivate ideas at the intersection of technology, philosophy, and systems thinking.
+
+---
+*Last updated: January 2024*
