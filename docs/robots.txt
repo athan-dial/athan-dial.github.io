@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://athan-dial.github.io/sitemap.xml

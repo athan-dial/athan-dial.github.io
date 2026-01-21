@@ -1,0 +1,27 @@
+# -- Main Menu --
+# The main menu is displayed in the header at the top of the page.
+
+[[main]]
+  name = "Home"
+  pageRef = "/"
+  weight = 1
+
+[[main]]
+  name = "Decision Systems"
+  pageRef = "case-studies"
+  weight = 2
+
+[[main]]
+  name = "Advisory"
+  pageRef = "advisory"
+  weight = 3
+
+[[main]]
+  name = "Resume"
+  pageRef = "resume"
+  weight = 4
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 5
