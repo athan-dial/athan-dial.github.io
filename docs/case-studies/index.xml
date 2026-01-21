@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Case Studies on Athan Dial - Portfolio</title>
+    <link>https://athan-dial.github.io/case-studies/</link>
+    <description>Recent content in Case Studies on Athan Dial - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2026 Athan Dial</copyright>
+    <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/case-studies/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</title>
+      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Preventing Metric Theater in Drug Discovery ML</title>
+      <link>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
+      <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
