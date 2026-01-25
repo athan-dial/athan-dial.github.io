@@ -1,7 +1,7 @@
 ---
 title: "Build vs Buy: Strategic Analysis for Analog Generation"
 date: 2025-11-15
-description: "[VOICE: Quantitative framework guiding $250k+ partnership decision]"
+description: "Quantitative analysis guiding $250k+ partnership decision — ROI modeling revealed internal model needed 50× improvement, recommended hybrid approach balancing near-term progress with long-term IP"
 problem_type: "product-strategy"
 scope: "organization"
 complexity: "high"
@@ -10,7 +10,7 @@ tags: ["strategic-analysis", "build-vs-buy", "roi-modeling", "executive-communic
 
 ## Context
 
-[VOICE: Strategic crossroads moment]
+Late 2025 brought Montai to a strategic crossroads. Our core IP hinged on generating novel analog compounds ("Anthrologs") through proprietary AI models — but the internal generative model produced ~360M virtual compounds with uncertain synthetic feasibility. Meanwhile, XtalPi offered curated, higher-confidence AI-suggested compounds from external sources.
 
 **Facts:**
 - Late 2025: Montai's core IP = generating novel analog compounds ("Anthrologs")
@@ -18,7 +18,7 @@ tags: ["strategic-analysis", "build-vs-buy", "roi-modeling", "executive-communic
 - Alternative: XtalPi (external partner) offered curated AI-suggested compounds (more drug-like)
 - Stakes: Resource allocation - invest in internal model improvement OR buy external suggestions?
 
-[VOICE: CSO (Margo) needed evidence-based recommendation by Dec 1, 2025]
+The CSO (Margo) needed an evidence-based recommendation by December 1, 2025. This wasn't a philosophical debate about build vs buy — it was a portfolio allocation decision with measurable ROI implications. I had three weeks to model the tradeoffs quantitatively and make a clear recommendation.
 
 ## Ownership
 
@@ -35,9 +35,9 @@ I influenced:
 
 ## Decision Frame
 
-**Problem statement:** [VOICE: Strategic framing]
+**Problem statement:**
 
-Decide resource allocation for analog generation to maximize discovery speed while managing IP/cost tradeoffs, constrained by:
+Allocate resources between internal generative model improvement and external compound partnerships to maximize discovery speed while managing IP and cost tradeoffs, constrained by:
 - Internal generative model accuracy too low (needed ~50× improvement)
 - XtalPi partnership cost vs potential value unclear
 - Time pressure (programs need compounds NOW, not in 1 year)
@@ -93,7 +93,7 @@ Guided strategic decision that balanced near-term progress with long-term IP:
 - Long-term: Tasked data/ML team to focus on cACN v2/v3 improvements (precision goal)
 - Validation: Some XtalPi compounds became hits in early 2026 (justified spend)
 
-[VOICE: Decision avoided overcommitting in either direction]
+The hybrid approach avoided overcommitting in either direction. Going all-in on internal models would have delayed programs by 6-12 months while we chased a 50× accuracy improvement. Going fully external would have ceded our core IP advantage. The quantitative analysis made it clear that both paths had merit — and that combining them de-risked the strategy while keeping options open.
 
 **Metrics:**
 - Analysis timeframe: ~3 weeks (Nov-Dec 2025)
@@ -120,27 +120,29 @@ Guided strategic decision that balanced near-term progress with long-term IP:
 
 **What I'd do differently:**
 
-[VOICE: Strategic analysis lessons]
+Three strategic analysis lessons emerged in retrospect:
 
 - Start internal model improvements earlier (not wait for crisis/comparison)
 - Engage chemists more in generative model design (synthetic feasibility blindspot)
 - Pilot XtalPi with one program before org-wide (reduce risk)
 
+The first was a failure of proactive planning — we knew the ACN model had accuracy issues but didn't prioritize improvements until external pressure forced the comparison. The second repeated a pattern from the nomination scaling work: treating chemist expertise as validation rather than design input. The third was standard risk mitigation we should have applied but didn't.
+
 **What this taught me about decision-making:**
 
-[VOICE: Strategic thinking]
+This analysis validated three principles about strategic framing:
 
-- Quantitative framing transforms "opinions" into "evidence" (ROI model >>> gut feel)
-- Build vs buy rarely binary (hybrid often optimal)
-- Executive decisions need clear options + recommendation (not "here's data, you decide")
+- Quantitative framing transforms opinions into evidence — the ROI model gave the CSO a concrete basis for decision rather than competing gut feelings about build vs buy
+- Build vs buy is rarely binary — hybrid approaches often dominate pure strategies, especially when timelines and uncertainty favor hedging
+- Executive decisions need clear options plus a recommendation — presenting "here's the data, you decide" abdicates leadership; executives want your synthesis and recommendation backed by evidence
 
 **How this informs future decisions:**
 
-[VOICE: Meta-takeaways]
+These meta-takeaways now guide my approach to strategic analysis:
 
-- Always model tradeoffs quantitatively when stakes high (napkin math > handwaving)
-- Build vs buy = portfolio decision (not all-in bets)
-- Strategic patience requires near-term wins to buy time (hybrid enables long bets)
+- Always model tradeoffs quantitatively when stakes are high — even "napkin math" beats handwaving about strategic direction
+- Build vs buy is a portfolio decision, not an all-in bet — maintaining optionality through hybrid approaches preserves strategic flexibility
+- Strategic patience requires near-term wins to buy time for long bets — the hybrid worked because XtalPi compounds delivered wins while we improved internal models
 
 ---
 

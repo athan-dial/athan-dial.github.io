@@ -1,7 +1,7 @@
 ---
 title: "Standardizing Montai's App Ecosystem with R Shiny"
 date: 2024-06-01
-description: "[VOICE: Framework decision that cut app development time 66%]"
+description: "Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity"
 problem_type: "technical-architecture"
 scope: "team"
 complexity: "medium"
@@ -10,7 +10,7 @@ tags: ["technical-architecture", "developer-experience", "tool-selection", "team
 
 ## Context
 
-[VOICE: Fragmentation problem]
+By mid-2024, Montai's internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.
 
 **Facts:**
 - 2024: Growing need for internal web apps (compound selection, data visualization, report generation)
@@ -18,7 +18,7 @@ tags: ["technical-architecture", "developer-experience", "tool-selection", "team
 - Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost
 - Stakes: Small team (~5-6 people) needed velocity + consistency
 
-[VOICE: Technical leadership needed to converge on single approach]
+Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of "one size fits all" dogma that ignores practical constraints.
 
 ## Ownership
 
@@ -35,9 +35,9 @@ I influenced:
 
 ## Decision Frame
 
-**Problem statement:** [VOICE: Technical choice framing]
+**Problem statement:**
 
-Standardize internal app framework to accelerate development and maintain consistency, constrained by:
+Choose and standardize a single internal app framework to accelerate development velocity and establish consistent UX, constrained by:
 - Mixed team skills (some Python, some R, few full-stack engineers)
 - Data-heavy use cases (need robust plotting + data wrangling)
 - Small team (can't support multiple frameworks well)
@@ -90,7 +90,7 @@ Cut app development time ~66% (3 weeks → 1 week for new apps) while establishi
 - Consistency: All internal apps shared Montai Style components (auth, layout, branding)
 - Capability: Non-engineer (chemist) added filter to Shiny app after training (broadened contributor base)
 
-[VOICE: Enabled small team to punch above weight with unified approach]
+Standardization enabled a small team to punch above its weight. By converging on R Shiny, we transformed app development from bespoke engineering work into repeatable application of templates and patterns. The Montai Style library meant new apps inherited authentication, theming, and layout automatically — developers focused on domain logic, not infrastructure.
 
 **Metrics:**
 - App development time: 3 weeks → 1 week (anecdotal, for similar scope)
@@ -116,27 +116,29 @@ Cut app development time ~66% (3 weeks → 1 week for new apps) while establishi
 
 **What I'd do differently:**
 
-[VOICE: Technical decision lessons]
+Three technical decision lessons stand out:
 
 - Build 2-3 small apps as proof-of-concept (not one large incomplete app)
 - Pair with full-stack engineer earlier (balanced R expertise with UI polish)
 - Evaluate hybrid (Shiny prototype → React for scale) for future-proofing
 
+The Nomination App as flagship proof-of-concept was the right instinct but wrong execution — it remained "in early stages" too long, undermining confidence in the standardization decision. Building multiple small, complete examples would have demonstrated feasibility more convincingly. The other two are standard risk mitigations I should have applied upfront.
+
 **What this taught me about decision-making:**
 
-[VOICE: Architecture choices]
+Framework standardization reinforced three architecture principles:
 
-- Framework standardization is social + technical (adoption > theoretical best tool)
-- Proof-of-concept validates assumptions (not just docs/research)
-- Small team constraints favor simplicity over flexibility (one framework well > many poorly)
+- Standardization is both social and technical — adoption matters more than theoretical "best tool"; R Shiny won because the data team already used R for analysis, not because it was objectively superior to Python frameworks
+- Proof-of-concept validates assumptions better than research — actual implementation exposed deployment constraints and UI limitations that documentation never revealed
+- Small team constraints favor simplicity over flexibility — supporting one framework well beats supporting many poorly; the tradeoff was clear and correct
 
 **How this informs future decisions:**
 
-[VOICE: Tool selection]
+These tool selection principles now guide my technical architecture work:
 
-- Always prototype with real use case before mandating standard
-- Optimize for team strengths, not abstract "best practices"
-- Standardization trades flexibility for velocity (know when tradeoff worth it)
+- Always prototype with a real use case before mandating a standard — abstract evaluation misses practical constraints that only implementation reveals
+- Optimize for team strengths, not abstract "best practices" — the best framework is the one your team can actually use effectively
+- Standardization trades flexibility for velocity — know when that tradeoff is worth it (small teams yes, large platform teams maybe not)
 
 ---
 

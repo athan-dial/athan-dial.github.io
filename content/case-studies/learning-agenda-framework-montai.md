@@ -1,7 +1,7 @@
 ---
 title: "Learning Agendas: Bringing Research Rigor to Product Decisions"
 date: 2025-09-01
-description: "[VOICE: Framework that cut decision cycles 20% by pre-defining success criteria]"
+description: "Designed decision framework cutting R&D cycle time 20% by pre-defining success criteria and pivot triggers — applied academic experimental design to product strategy"
 problem_type: "product-strategy"
 scope: "organization"
 complexity: "medium"
@@ -10,7 +10,7 @@ tags: ["decision-frameworks", "product-strategy", "cross-functional", "phd-trans
 
 ## Context
 
-[VOICE: Ambiguity problem in R&D]
+By 2025, Montai ran multiple concurrent R&D experiments — AI model iterations, assay validations, Anthrolog generation improvements. Each experiment had implicit goals but lacked explicit success criteria. The result: debates about "when to pivot" and "when to scale" became opinion-driven rather than evidence-backed.
 
 **Facts:**
 - By 2025: Multiple concurrent experiments (AI models, assays, Anthrolog generations)
@@ -18,7 +18,7 @@ tags: ["decision-frameworks", "product-strategy", "cross-functional", "phd-trans
 - Example confusion: "AI model improved accuracy" but didn't translate to better compound selection
 - Stakes: Wasted months on meandering experiments without clear learning goals
 
-[VOICE: PhD insight - experiments need hypotheses BEFORE execution]
+The core issue traced back to a fundamental principle from my PhD training: experiments without pre-defined hypotheses produce data, not learning. In academic research, you write your aims before running experiments. In biotech R&D, we were running experiments and retroactively deciding whether results "felt good enough." This had to change.
 
 ## Ownership
 
@@ -35,9 +35,9 @@ I influenced:
 
 ## Decision Frame
 
-**Problem statement:** [VOICE: Articulate need]
+**Problem statement:**
 
-Impose research rigor on product decisions to reduce cycle time and increase pivot clarity, constrained by:
+Establish a lightweight decision framework that imposes research rigor on R&D experiments to reduce cycle time and increase pivot clarity, constrained by:
 - No pre-existing template (creating from scratch)
 - Risk of bureaucracy (scientists see as overhead, not value)
 - Need exec buy-in (not just bottoms-up adoption)
@@ -83,7 +83,7 @@ Cut decision cycle time 20% (~10 weeks → ~8 weeks) while increasing stakeholde
 - Usage: Team consulted agendas in decision meetings (not shelf-ware)
 - Example impact: Stopped underperforming analog screen 2 weeks earlier (learning agenda guardrails triggered pivot)
 
-[VOICE: Shifted culture from opinion debates to evidence-based pivots]
+The cultural shift mattered more than the time savings. Learning Agendas moved the organization from opinion-driven debates ("I think this model is good enough") to evidence-based pivots ("The agenda said we'd pivot if accuracy didn't reach X, and it didn't reach X"). Pre-commitment to decision criteria eliminated retrospective rationalization and made failure a legitimate outcome rather than a political liability.
 
 **Metrics:**
 - Decision cycle time: ~10 weeks → ~8 weeks (20% reduction, major decisions)
@@ -109,27 +109,29 @@ Cut decision cycle time 20% (~10 weeks → ~8 weeks) while increasing stakeholde
 
 **What I'd do differently:**
 
-[VOICE: Process adoption lessons]
+The rollout exposed gaps in my change management approach:
 
 - Pilot with friendly team first (not announce org-wide immediately)
 - Create 2-3 example agendas before rollout (not just template)
 - Pair with decision-making workshop (teach framework, not just distribute)
 
+The template alone wasn't enough — teams needed examples and coaching to see how Learning Agendas applied to their specific experiments. By launching broadly without pilots, I created confusion and had to backfill with one-on-one sessions. A slower, example-driven rollout would have accelerated actual adoption.
+
 **What this taught me about decision-making:**
 
-[VOICE: PhD → Product transfer]
+This project validated a core thesis about PhD → Product skill transfer:
 
-- Academic experimental design translates to business decisions (hypothesis → test → pivot)
-- Pre-commitment to decision criteria reduces politics (agree before data)
-- Lightweight structure >>> heavyweight docs (adoption > thoroughness)
+- Academic experimental design translates directly to business decisions — the logic of hypothesis → test → pivot works whether you're running gels or evaluating AI models
+- Pre-commitment to decision criteria reduces politics — when stakeholders agree on thresholds before seeing data, debates shift from "is this good enough?" to "did we hit the bar?"
+- Lightweight structure beats heavyweight docs — scientists adopted one-page agendas because they didn't feel like bureaucracy; thoroughness without pragmatism kills adoption
 
 **How this informs future decisions:**
 
-[VOICE: Framework thinking]
+Three principles now shape how I design decision systems:
 
-- Always define success criteria BEFORE starting work (not retroactive)
-- Decision frameworks are products (need design, iteration, adoption strategy)
-- Cultural change requires artifacts + enforcement (docs alone insufficient)
+- Always define success criteria before starting work, not retroactively — I now refuse to approve projects without clear "we'll pivot if X" statements
+- Decision frameworks are products — they need user research, design iteration, and adoption strategies, not just documentation
+- Cultural change requires artifacts plus enforcement — the Learning Agenda template worked because program reviews explicitly required agendas, not just because the doc existed
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "From Data Crisis to Data Culture: The STAT6 Incident"
 date: 2025-08-15
-description: "[VOICE: How data incident became turning point for quality culture]"
+description: "Led 6-week crisis response resolving data integrity failure — transformed incident into governance framework reducing future incidents from 3 to 0"
 problem_type: "execution-leadership"
 scope: "organization"
 complexity: "high"
@@ -10,7 +10,7 @@ tags: ["incident-response", "data-quality", "team-leadership", "postmortem"]
 
 ## Context
 
-[VOICE: Setting - rapid growth, technical debt accumulating]
+Mid-2025 was a period of rapid growth at Montai — more programs, more models, more data flowing through pipelines built for smaller scale. Technical debt had accumulated in migration work from earlier systems, creating latent risks that hadn't yet manifested. Until STAT6.
 
 **Facts:**
 - Mid-2025: STAT6 program discovered predictions missing from warehouse
@@ -18,7 +18,7 @@ tags: ["incident-response", "data-quality", "team-leadership", "postmortem"]
 - Symptom: Dashboard DR-3098 failed, analysis queries returned incomplete results
 - Urgency: Program decisions on hold, stakeholder trust eroding
 
-[VOICE: Stakes - not just technical bug but organizational credibility]
+The stakes extended beyond the immediate technical bug. This was organizational credibility on the line — scientists needed confidence that data infrastructure wouldn't become a bottleneck to discovery. A 6-week delay on a critical program signaled deeper quality issues, and stakeholders rightfully questioned whether other datasets harbored similar problems.
 
 ## Ownership
 
@@ -36,9 +36,9 @@ I influenced:
 
 ## Decision Frame
 
-**Problem statement:** [VOICE: How to frame]
+**Problem statement:**
 
-Respond to data integrity failure blocking critical program while preventing future occurrences, constrained by:
+Resolve data integrity failure blocking STAT6 program while establishing systemic safeguards preventing recurrence, constrained by:
 - 258M predictions to backfill (engineering capacity)
 - Ongoing programs needing data NOW (can't wait for perfect fix)
 - Root cause hidden in legacy code (archaeological debugging needed)
@@ -84,7 +84,7 @@ Resolved STAT6 blocker within 6 weeks AND established data quality culture preve
 - Systemic: Zero major data incidents post-fix (Q4 2025 - Q1 2026)
 - Cultural: Postmortem process adopted (3-page report became template)
 
-[VOICE: Transform crisis into capability upgrade]
+The real win wasn't fixing one bug — it was transforming a crisis into a capability upgrade. The postmortem created organizational memory, automated lineage checks prevented similar failures, and ownership assignments clarified accountability. What could have been a "fire-fighting" moment became the foundation for proactive data quality governance.
 
 **Metrics:**
 - Crisis duration: 6 weeks to full resolution
@@ -112,27 +112,29 @@ Resolved STAT6 blocker within 6 weeks AND established data quality culture preve
 
 **What I'd do differently:**
 
-[VOICE: Candid regrets]
+The retrospective is painful but instructive:
 
 - Heeded early Slack warnings (Sep-Oct 2024) about ID confusion
 - Built monitoring infrastructure proactively (not reactively post-crisis)
 - Escalated to "major severity" immediately (not after days of debugging)
 
+The first two represent failures of prioritization — I saw the signals but didn't allocate capacity to de-risk before problems manifested. The third was a judgment error during the incident itself: initial debugging felt routine until it wasn't, and we lost days before mobilizing full resources.
+
 **What this taught me about decision-making:**
 
-[VOICE: Leadership lessons]
+Three leadership lessons emerged:
 
-- Crises reveal latent process gaps (treat as learning opportunities, not failures)
-- Transparency > spin when rebuilding stakeholder trust
-- Postmortems work when blameless and action-focused
+- Crises reveal latent process gaps — the incident exposed governance weaknesses that had existed for months; treating it as a learning opportunity rather than blame exercise turned pain into progress
+- Transparency beats spin when rebuilding stakeholder trust — candid Slack updates and Ops presentations acknowledged the delay and outlined specific fixes, which restored confidence faster than downplaying severity
+- Postmortems work when blameless and action-focused — the 3-page report focused on systems and processes, not individual mistakes, making it a template other teams adopted
 
 **How this informs future decisions:**
 
-[VOICE: Meta-takeaways]
+These principles now guide my approach to operational risk:
 
-- Invest in monitoring before crises hit (proactive >>> reactive)
-- Small data quirks deserve root-causing (don't let anomalies linger)
-- Cultural change requires artifacts (postmortem template, not just talk)
+- Invest in monitoring before crises hit — proactive instrumentation costs less than reactive debugging, and I now allocate capacity to observability upfront
+- Small data quirks deserve root-causing — anomalies are signals of deeper issues; don't let them linger
+- Cultural change requires artifacts — the postmortem template, automated tests, and ownership assignments institutionalized the learning; without those artifacts, the lessons would have faded
 
 ---
 

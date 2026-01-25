@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Developer-Experience on Athan Dial - Portfolio</title>
+    <link>https://athan-dial.github.io/tags/developer-experience/</link>
+    <description>Recent content in Developer-Experience on Athan Dial - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2026 Athan Dial</copyright>
+    <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/tags/developer-experience/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Standardizing Montai&#39;s App Ecosystem with R Shiny</title>
+      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
