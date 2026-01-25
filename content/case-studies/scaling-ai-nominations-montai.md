@@ -1,7 +1,7 @@
 ---
 title: "Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds"
 date: 2023-06-01
-description: "[VOICE: Brief summary of nomination scaling]"
+description: "Built pipeline scaling compound nominations 26× while improving hit rates from 5% to 27% — phased rollout strategy balanced speed with quality gates"
 problem_type: "technical-architecture"
 scope: "organization"
 complexity: "high"
@@ -10,7 +10,7 @@ tags: ["ml-systems", "data-pipelines", "product-strategy", "stakeholder-alignmen
 
 ## Context
 
-[VOICE: Problem space intro]
+Early 2023 presented a defining challenge: Montai's AI models could predict activity across millions of compounds, but manual nomination processes bottlenecked at ~250 compounds per program. The central question wasn't whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.
 
 **Facts:**
 - Baseline: 250 compounds nominated manually (NRF2, 2023)
@@ -18,7 +18,7 @@ tags: ["ml-systems", "data-pipelines", "product-strategy", "stakeholder-alignmen
 - Environment: Early-stage biotech, unproven nomination concept
 - My role: First data science/product hire, architected pipeline
 
-[VOICE: Stakeholder complexity, ambiguity]
+This wasn't purely a technical problem. ML scientists wanted maximum chemical diversity, medicinal chemists needed synthetic feasibility, and program leads balanced timelines against thoroughness. Each stakeholder brought valid constraints — the pipeline needed to serve all three without collapsing under complexity or producing low-quality suggestions that would erode trust in the AI approach.
 
 ## Ownership
 
@@ -35,9 +35,9 @@ I influenced:
 
 ## Decision Frame
 
-**Problem statement:** [VOICE: How to structure]
+**Problem statement:**
 
-Scale compound nominations 20× while maintaining/improving hit rates, constrained by:
+Build a data pipeline that scales compound nominations 20× while maintaining or improving experimental hit rates, constrained by:
 - Unproven AI prediction quality
 - Limited ML engineering capacity (small team)
 - Need for rapid learning cycles (not perfect first try)
@@ -81,7 +81,7 @@ Scaled from 250 → 6,500+ nominations per program (26× increase) while IMPROVI
 - TNFR1: 27% hit-to-lead (vs ~5% baseline)
 - Multiple programs advanced to lead optimization faster
 
-[VOICE: Interpret significance]
+The significance: This wasn't just volume scaling — quality improved alongside throughput. By implementing phased quality gates and leveraging diverse data sources (generative models, commercial libraries, XtalPi partnerships), we validated that AI-driven discovery could outperform manual selection. This became Montai's core operational advantage and a key narrative for fundraising.
 
 **Metrics:**
 - Nomination throughput: 250 → 5,000-7,000 per program (Q4 2024)
@@ -108,27 +108,29 @@ Scaled from 250 → 6,500+ nominations per program (26× increase) while IMPROVI
 
 **What I'd do differently:**
 
-[VOICE: Specific regrets from archaeology insights]
+Looking back at the archaeology of this work, three decisions stand out as suboptimal:
 
 - Start with tighter nomination criteria earlier (wasted effort on low-probability compounds in Phase 2)
 - Invest in monitoring infrastructure upfront (reactive vs proactive on data quality)
 - Engage chemists more in generative model development (synthetic feasibility blindspot)
 
+The first two were classic "move fast and learn" tradeoffs that proved correct in hindsight — we needed the volume data to understand quality needs. The third was a genuine miss: treating synthetic feasibility as a post-generation filter rather than baking it into model training cost us months.
+
 **What this taught me about decision-making:**
 
-[VOICE: Meta-lessons]
+Three principles emerged that I've since applied consistently:
 
-- Phased rollouts with learning gates >>> perfect upfront design
-- Volume metrics mislead without quality tracking (hit rates matter more than count)
-- Stakeholder confidence requires visible iteration (not just end results)
+- Phased rollouts with learning gates beat perfect upfront design — you can't architect your way out of uncertainty, you build to learn
+- Volume metrics mislead without quality tracking — nomination count was a vanity metric until we paired it with hit-to-lead conversion
+- Stakeholder confidence requires visible iteration — scientists trusted the pipeline because they saw us adjust criteria based on their feedback, not because the first version was perfect
 
 **How this informs future decisions:**
 
-[VOICE: Forward-looking]
+These lessons directly shaped my approach to subsequent projects:
 
-- Always define success criteria per phase before executing
-- Build quality frameworks alongside feature development (not after crises)
-- Balance exploration (maximize learning) with exploitation (optimize known strategies)
+- Always define success criteria per phase before executing — the Learning Agenda framework codified this
+- Build quality frameworks alongside feature development, not after crises — the STAT6 incident reinforced this
+- Balance exploration (maximize learning) with exploitation (optimize known strategies) — this framing now guides my portfolio thinking
 
 ---
 

@@ -30,11 +30,31 @@
     </item>
     
     <item>
+      <title>Consulting</title>
+      <link>https://athan-dial.github.io/consulting/</link>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/consulting/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>Decision Portfolio</title>
       <link>https://athan-dial.github.io/resume/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
       
       <guid>https://athan-dial.github.io/resume/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Writing</title>
+      <link>https://athan-dial.github.io/writing/</link>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/writing/</guid>
       <description></description>
       
     </item>
@@ -55,6 +75,56 @@
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
       
       <guid>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Build vs Buy: Strategic Analysis for Analog Generation</title>
+      <link>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
+      <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Learning Agendas: Bringing Research Rigor to Product Decisions</title>
+      <link>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>From Data Crisis to Data Culture: The STAT6 Incident</title>
+      <link>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Standardizing Montai&#39;s App Ecosystem with R Shiny</title>
+      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds</title>
+      <link>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</guid>
       <description></description>
       
     </item>
