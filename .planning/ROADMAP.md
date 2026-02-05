@@ -154,7 +154,11 @@ Model Citizen is a separate publishing system deployed to `athan-dial.github.io/
 3. User can create a sample note in `/sources/` following the schema
 4. User confirms no broken links between Vault and Quartz site
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Scaffold Quartz repo and deploy to GitHub Pages
+- [ ] 04-02-PLAN.md — Create vault repo with folder structure and schema documentation
+- [ ] 04-03-PLAN.md — End-to-end verification with sample note
 
 **Research Flags:** None (standard Quartz setup + folder documentation)
 
