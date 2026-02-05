@@ -1,0 +1,32 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Timeline baseline -->
+  <line x1="50" y1="150" x2="750" y2="150" stroke="#2A2520" stroke-width="3"/>
+
+  <!-- Milestone 1 -->
+  <circle cx="150" cy="150" r="20" fill="#2E5C8A" stroke="#2A2520" stroke-width="2"/>
+  <line x1="150" y1="130" x2="150" y2="60" stroke="#2A2520" stroke-width="2"/>
+  <rect x="90" y="20" width="120" height="40" rx="6" fill="#EBE8E3" stroke="#2A2520" stroke-width="1.5"/>
+  <text x="115" y="45" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#2A2520">Week 1</text>
+
+  <!-- Milestone 2 -->
+  <circle cx="300" cy="150" r="20" fill="#4A7C59" stroke="#2A2520" stroke-width="2"/>
+  <line x1="300" y1="170" x2="300" y2="240" stroke="#2A2520" stroke-width="2"/>
+  <rect x="240" y="240" width="120" height="40" rx="6" fill="#EBE8E3" stroke="#2A2520" stroke-width="1.5"/>
+  <text x="265" y="265" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#2A2520">Week 3</text>
+
+  <!-- Milestone 3 -->
+  <circle cx="450" cy="150" r="20" fill="#C17A47" stroke="#2A2520" stroke-width="2"/>
+  <line x1="450" y1="130" x2="450" y2="60" stroke="#2A2520" stroke-width="2"/>
+  <rect x="390" y="20" width="120" height="40" rx="6" fill="#EBE8E3" stroke="#2A2520" stroke-width="1.5"/>
+  <text x="415" y="45" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#2A2520">Week 5</text>
+
+  <!-- Milestone 4 -->
+  <circle cx="600" cy="150" r="20" fill="#8B6F9E" stroke="#2A2520" stroke-width="2"/>
+  <line x1="600" y1="170" x2="600" y2="240" stroke="#2A2520" stroke-width="2"/>
+  <rect x="540" y="240" width="120" height="40" rx="6" fill="#EBE8E3" stroke="#2A2520" stroke-width="1.5"/>
+  <text x="565" y="265" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#2A2520">Week 7</text>
+
+  <!-- End marker -->
+  <circle cx="750" cy="150" r="25" fill="#5A9367" stroke="#2A2520" stroke-width="3"/>
+  <path d="M 735 150 L 747 162 L 765 140" stroke="#FDFCFA" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

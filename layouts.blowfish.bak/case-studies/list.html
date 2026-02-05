@@ -1,0 +1,21 @@
+{{ define "main" }}
+<main>
+  {{ if .Content }}
+    <div class="content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ if .Pages }}
+    <div class="case-studies-grid">
+      {{ range .Pages }}
+        {{ partial "case-study-card" . }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="case-studies-empty">
+      <p>Case studies coming soon.</p>
+    </div>
+  {{ end }}
+</main>
+{{ end }}

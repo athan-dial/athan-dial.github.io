@@ -1,0 +1,41 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Root decision -->
+  <rect x="325" y="50" width="150" height="60" rx="10" fill="#2E5C8A" opacity="0.9"/>
+  <text x="365" y="85" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#FDFCFA">Decision Point</text>
+
+  <!-- Branches -->
+  <line x1="400" y1="110" x2="250" y2="200" stroke="#2A2520" stroke-width="2"/>
+  <line x1="400" y1="110" x2="400" y2="200" stroke="#2A2520" stroke-width="2"/>
+  <line x1="400" y1="110" x2="550" y2="200" stroke="#2A2520" stroke-width="2"/>
+
+  <!-- Option A -->
+  <rect x="175" y="200" width="150" height="60" rx="10" fill="#AEAEB2" opacity="0.8"/>
+  <text x="230" y="235" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#2A2520">Option A</text>
+
+  <!-- Option B -->
+  <rect x="325" y="200" width="150" height="60" rx="10" fill="#AEAEB2" opacity="0.8"/>
+  <text x="380" y="235" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#2A2520">Option B</text>
+
+  <!-- Option C -->
+  <rect x="475" y="200" width="150" height="60" rx="10" fill="#AEAEB2" opacity="0.8"/>
+  <text x="530" y="235" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#2A2520">Option C</text>
+
+  <!-- Outcomes -->
+  <line x1="250" y1="260" x2="250" y2="350" stroke="#2A2520" stroke-width="2"/>
+  <line x1="400" y1="260" x2="400" y2="350" stroke="#2A2520" stroke-width="2"/>
+  <line x1="550" y1="260" x2="550" y2="350" stroke="#2A2520" stroke-width="2"/>
+
+  <circle cx="250" cy="380" r="30" fill="#C17A47" opacity="0.8"/>
+  <text x="232" y="390" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#FDFCFA">✗</text>
+
+  <circle cx="400" cy="380" r="30" fill="#5A9367" opacity="0.8"/>
+  <text x="387" y="392" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#FDFCFA">✓</text>
+
+  <circle cx="550" cy="380" r="30" fill="#8B857E" opacity="0.8"/>
+  <text x="538" y="390" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#FDFCFA">?</text>
+
+  <!-- Labels -->
+  <text x="210" y="450" font-family="Inter, sans-serif" font-size="14" fill="#5C5550">Rejected</text>
+  <text x="365" y="450" font-family="Inter, sans-serif" font-size="14" fill="#5C5550">Accepted</text>
+  <text x="520" y="450" font-family="Inter, sans-serif" font-size="14" fill="#5C5550">Uncertain</text>
+</svg>

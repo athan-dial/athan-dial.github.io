@@ -1,0 +1,51 @@
+{{/* Case Study Index Card Component - For gallery/grid browsing */}}
+<article class="case-study-card">
+  <a href="{{ .RelPermalink }}" class="case-study-card__link">
+    {{ if .Params.hero_image }}
+      <div class="case-study-card__thumbnail">
+        <img src="{{ .Params.hero_image }}" alt="{{ .Title }} visualization" loading="lazy">
+      </div>
+    {{ else }}
+      {{/* Placeholder gradient based on problem_type */}}
+      <div class="case-study-card__thumbnail case-study-card__thumbnail--placeholder" data-category="{{ .Params.problem_type }}">
+        {{ if eq .Params.problem_type "product-strategy" }}
+          <svg class="case-study-card__thumbnail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="3" stroke-width="2"/>
+            <path d="M12 1v6m0 6v6M1 12h6m6 0h6" stroke-width="2"/>
+          </svg>
+        {{ else if eq .Params.problem_type "technical-architecture" }}
+          <svg class="case-study-card__thumbnail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="7" height="7" stroke-width="2"/>
+            <rect x="14" y="3" width="7" height="7" stroke-width="2"/>
+            <rect x="3" y="14" width="7" height="7" stroke-width="2"/>
+            <rect x="14" y="14" width="7" height="7" stroke-width="2"/>
+          </svg>
+        {{ else }}
+          <svg class="case-study-card__thumbnail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3l7 7-7 7M14 3l7 7-7 7" stroke-width="2"/>
+          </svg>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="case-study-card__content">
+      <h3 class="case-study-card__title">{{ .Title }}</h3>
+      {{ if .Params.subtitle }}
+        <p class="case-study-card__subtitle">{{ .Params.subtitle }}</p>
+      {{ end }}
+      <div class="case-study-card__metadata">
+        {{ if .Params.problem_type }}
+          <span class="case-study-card__tag">{{ .Params.problem_type }}</span>
+        {{ end }}
+        {{ if .Params.scope }}
+          <span class="case-study-card__tag">{{ .Params.scope }}</span>
+        {{ end }}
+        {{ if .Params.complexity }}
+          <span class="case-study-card__tag">{{ .Params.complexity }}</span>
+        {{ end }}
+      </div>
+      {{ if .Description }}
+        <p class="case-study-card__excerpt">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </a>
+</article>

@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Platform-Thinking on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/tags/platform-thinking/</link>
+    <link>http://localhost:1313/tags/platform-thinking/</link>
     <description>Recent content in Platform-Thinking on Athan Dial - Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2026 Athan Dial</copyright>
-    <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/tags/platform-thinking/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/platform-thinking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</title>
-      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <link>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

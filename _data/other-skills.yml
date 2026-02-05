@@ -1,7 +1,0 @@
-- name: Oral presentations
-  percentage: 95
-  color: info
-
-- name: Scientific writing
-  percentage: 90
-  color: success

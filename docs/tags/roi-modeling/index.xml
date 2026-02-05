@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Roi-Modeling on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/tags/roi-modeling/</link>
+    <link>http://localhost:1313/tags/roi-modeling/</link>
     <description>Recent content in Roi-Modeling on Athan Dial - Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2026 Athan Dial</copyright>
-    <lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/tags/roi-modeling/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/roi-modeling/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Build vs Buy: Strategic Analysis for Analog Generation</title>
-      <link>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
+      <link>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Late 2025 brought Montai to a strategic crossroads. Our core IP hinged on generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;) through proprietary AI models — but the internal generative model produced ~360M virtual compounds with uncertain synthetic feasibility. Meanwhile, XtalPi offered curated, higher-confidence AI-suggested compounds from external sources.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Late 2025: Montai&amp;rsquo;s core IP = generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Internal generative model produced ~360M virtual compounds, but many not synthesizable/uncertain value&lt;/li&gt;&#xA;&lt;li&gt;Alternative: XtalPi (external partner) offered curated AI-suggested compounds (more drug-like)&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Resource allocation - invest in internal model improvement OR buy external suggestions?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The CSO (Margo) needed an evidence-based recommendation by December 1, 2025. This wasn&amp;rsquo;t a philosophical debate about build vs buy — it was a portfolio allocation decision with measurable ROI implications. I had three weeks to model the tradeoffs quantitatively and make a clear recommendation.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

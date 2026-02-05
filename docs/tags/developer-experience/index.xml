@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Developer-Experience on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/tags/developer-experience/</link>
+    <link>http://localhost:1313/tags/developer-experience/</link>
     <description>Recent content in Developer-Experience on Athan Dial - Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2026 Athan Dial</copyright>
-    <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/tags/developer-experience/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/developer-experience/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Standardizing Montai&#39;s App Ecosystem with R Shiny</title>
-      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
+      <link>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By mid-2024, Montai&amp;rsquo;s internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;2024: Growing need for internal web apps (compound selection, data visualization, report generation)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Different engineers using different frameworks (Python Streamlit/Dash, R Shiny, Jupyter notebooks)&lt;/li&gt;&#xA;&lt;li&gt;Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Small team (~5-6 people) needed velocity + consistency&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of &amp;ldquo;one size fits all&amp;rdquo; dogma that ignores practical constraints.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

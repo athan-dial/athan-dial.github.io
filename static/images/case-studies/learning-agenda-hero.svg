@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E5C8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5C8A;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#primaryGradient)"/>
+
+  <!-- Root question node -->
+  <circle cx="600" cy="100" r="50" fill="#FDFCFA" stroke="#2E5C8A" stroke-width="3"/>
+  <text x="585" y="115" font-family="Inter, sans-serif" font-size="48" font-weight="700" fill="#2E5C8A">?</text>
+
+  <!-- Branches -->
+  <line x1="600" y1="150" x2="300" y2="300" stroke="#FDFCFA" stroke-width="3"/>
+  <line x1="600" y1="150" x2="600" y2="300" stroke="#FDFCFA" stroke-width="3"/>
+  <line x1="600" y1="150" x2="900" y2="300" stroke="#FDFCFA" stroke-width="3"/>
+
+  <!-- Test nodes -->
+  <rect x="250" y="300" width="100" height="60" rx="10" fill="#FDFCFA" opacity="0.9"/>
+  <text x="280" y="340" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#2E5C8A">Test A</text>
+
+  <rect x="550" y="300" width="100" height="60" rx="10" fill="#FDFCFA" opacity="0.9"/>
+  <text x="580" y="340" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#2E5C8A">Test B</text>
+
+  <rect x="850" y="300" width="100" height="60" rx="10" fill="#FDFCFA" opacity="0.9"/>
+  <text x="880" y="340" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#2E5C8A">Test C</text>
+
+  <!-- Outcomes -->
+  <line x1="300" y1="360" x2="250" y2="480" stroke="#FDFCFA" stroke-width="2"/>
+  <line x1="300" y1="360" x2="350" y2="480" stroke="#FDFCFA" stroke-width="2"/>
+  <circle cx="250" cy="480" r="20" fill="#5A9367"/>
+  <circle cx="350" cy="480" r="20" fill="#C17A47"/>
+
+  <text x="450" y="560" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#FDFCFA">Pivot</text>
+  <text x="800" y="560" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#FDFCFA">Scale</text>
+</svg>

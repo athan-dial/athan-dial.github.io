@@ -1,0 +1,7 @@
+{{/* Case Study Section Component - For 5-question framework sections */}}
+<section class="case-study-section" id="{{ .id | default (lower (replace .title " " "-")) }}">
+  <h2 class="case-study-section__title">{{ .title }}</h2>
+  <div class="case-study-section__content">
+    {{ .content | markdownify }}
+  </div>
+</section>
