@@ -2,6 +2,4 @@
 title: "Athan Dial"
 ---
 
-Data science and product leader who turns ambiguous, high-stakes problems into decision systems that ship measurable outcomes.
-
-I bridge the gap between technical depth and business impact — building teams and systems that transform how organizations make decisions under uncertainty.
+I build product systems that turn uncertainty into velocity. With a PhD in computational biology and experience leading ML product teams, I bridge technical depth with strategic product thinking. I specialize in decision frameworks that help teams move faster without moving recklessly.
