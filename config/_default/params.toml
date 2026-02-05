@@ -1,0 +1,19 @@
+# Hugo Resume Theme Parameters
+
+firstName = "Athan"
+lastName = "Dial"
+address = "San Francisco Bay Area"
+email = "contact via LinkedIn"
+profileImage = "img/profile.jpg"
+favicon = "/favicon.ico"
+showQr = false
+showContact = true
+
+# Social handles
+[[handles]]
+  name = "LinkedIn"
+  link = "https://www.linkedin.com/in/athandial/"
+
+[[handles]]
+  name = "GitHub"
+  link = "https://github.com/athan-dial"
