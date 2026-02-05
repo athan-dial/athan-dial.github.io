@@ -1,87 +1,30 @@
 /* ============================================
-   MINIMAL MODERN — Apple-inspired Portfolio
-   Clean lines, thin weights, confident restraint
+   HUGO RESUME THEME — Custom Branding
+   Executive blue accent + minimal typography
    ============================================ */
-
-/* Typography: TikTok Sans - modern, light, charismatic */
-/* Local font files - self-hosted for better performance */
-@font-face {
-  font-family: 'TikTok Sans';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('/fonts/TikTokSans-Light.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'TikTok Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/TikTokSans-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'TikTok Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/TikTokSans-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'TikTok Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/TikTokSans-SemiBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'TikTok Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/TikTokSans-Bold.ttf') format('truetype');
-}
 
 :root {
   /* ============================================
-     COLOR SYSTEM — Near-monochromatic
+     COLOR SYSTEM — Near-Monochromatic + Executive Blue
      ============================================ */
 
-  /* Backgrounds */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #FAFAFA;
-  --bg-tertiary: #F5F5F7;
-
-  /* Text — Apple-style grays */
-  --text-primary: #1D1D1F;
-  --text-secondary: #86868B;
-  --text-tertiary: #AEAEB2;
-
-  /* Accent — Subtle, sophisticated */
-  --accent: #0071E3;              /* Apple blue - used sparingly */
-  --accent-hover: #0077ED;
-
-  /* Borders — Nearly invisible */
-  --border-light: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.1);
+  /* Light Mode Colors */
+  --color-primary: #1E3A5F;         /* Executive blue */
+  --color-primary-hover: #2A4A75;   /* Hover state */
+  --color-bg: #FFFFFF;              /* Pure white */
+  --color-text: #1D1D1F;            /* Apple black */
+  --color-text-secondary: #86868B;  /* Apple gray */
+  --color-border: #AEAEB2;          /* Border gray */
+  --color-card-bg: #F5F5F7;         /* Light card background */
 
   /* ============================================
      TYPOGRAPHY SYSTEM
      ============================================ */
 
-  --font-family: 'TikTok Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  /* System font stack - elegant without custom fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 
-  /* Weights — Light as default, medium for emphasis */
-  --weight-light: 300;
-  --weight-regular: 300;    /* Default to light */
-  --weight-medium: 400;
-  --weight-semibold: 500;
-  --weight-bold: 600;
-
-  /* Type scale — Generous, confident */
+  /* Type scale */
   --text-xs: 0.75rem;      /* 12px */
   --text-sm: 0.875rem;     /* 14px */
   --text-base: 1rem;       /* 16px */
@@ -90,58 +33,48 @@
   --text-2xl: 1.5rem;      /* 24px */
   --text-3xl: 2rem;        /* 32px */
   --text-4xl: 2.5rem;      /* 40px */
-  --text-5xl: 3.5rem;      /* 56px */
 
-  /* Line heights */
-  --leading-none: 1;
-  --leading-tight: 1.2;
-  --leading-snug: 1.4;
-  --leading-normal: 1.6;
-  --leading-relaxed: 1.8;
-
-  /* Letter spacing */
-  --tracking-tight: -0.03em;
-  --tracking-normal: -0.01em;
-  --tracking-wide: 0.01em;
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
 
   /* ============================================
      SPACING SYSTEM
      ============================================ */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2.5rem;
-  --space-xl: 4rem;
-  --space-2xl: 6rem;
-  --space-3xl: 8rem;
+  --space-xs: 0.5rem;      /* 8px */
+  --space-sm: 1rem;        /* 16px */
+  --space-md: 1.5rem;      /* 24px */
+  --space-lg: 2.5rem;      /* 40px */
+  --space-xl: 4rem;        /* 64px */
+  --space-2xl: 6rem;       /* 96px */
 
   /* ============================================
      EFFECTS
      ============================================ */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
-  --radius-sm: 8px;
+  --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
 
 /* ============================================
-   DARK MODE
+   DARK MODE — Bootstrap data-bs-theme
    ============================================ */
-html.dark {
-  --bg-primary: #000000;
-  --bg-secondary: #0A0A0A;
-  --bg-tertiary: #141414;
-
-  --text-primary: #F5F5F7;
-  --text-secondary: #86868B;
-  --text-tertiary: #6E6E73;
-
-  --accent: #2997FF;
-  --accent-hover: #40A9FF;
-
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.12);
+[data-bs-theme="dark"] {
+  /* Dark Mode Colors */
+  --color-primary: #4A90E2;         /* Brighter blue for contrast */
+  --color-primary-hover: #5BA3F5;   /* Lighter hover */
+  --color-bg: #1D1D1F;              /* Apple dark background */
+  --color-text: #F5F5F7;            /* Light text */
+  --color-text-secondary: #AEAEB2;  /* Gray text */
+  --color-border: #48484A;          /* Dark border */
+  --color-card-bg: #2C2C2E;         /* Dark card background */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================
@@ -153,33 +86,15 @@ html {
 }
 
 body {
-  font-family: var(--font-family) !important;
+  font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: var(--weight-regular);
-  line-height: var(--leading-normal);
-  letter-spacing: var(--tracking-normal);
-  color: var(--text-secondary);
-  background-color: var(--bg-primary);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background-color var(--transition-base), color var(--transition-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Force TikTok Sans on all elements - override theme defaults */
-* {
-  font-family: var(--font-family) !important;
-}
-
-html, html body, html body * {
-  font-family: var(--font-family) !important;
-}
-
-/* Override any theme-specific font declarations */
-.article, .article *, 
-.content, .content *,
-.prose, .prose *,
-main, main *,
-section, section * {
-  font-family: var(--font-family) !important;
 }
 
 /* ============================================
@@ -187,54 +102,53 @@ section, section * {
    ============================================ */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family) !important;
+  font-family: var(--font-sans);
   font-weight: var(--weight-semibold);
-  color: var(--text-primary);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  line-height: 1.2;
   margin-top: 0;
+  transition: color var(--transition-base);
 }
 
 h1 {
-  font-size: var(--text-5xl);
-  font-weight: var(--weight-bold);
-  letter-spacing: -0.04em;
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
 }
 
 h2 {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-medium);
-  color: var(--text-primary);
-  margin-bottom: var(--space-lg);
-  margin-top: var(--space-2xl);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-md);
 }
 
 h3 {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   font-weight: var(--weight-medium);
 }
 
 p {
-  font-size: var(--text-lg);
-  line-height: var(--leading-relaxed);
-  color: var(--text-primary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin-bottom: var(--space-md);
+  transition: color var(--transition-base);
 }
 
 strong {
   font-weight: var(--weight-medium);
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 /* Links */
 a {
-  color: var(--accent);
+  color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--color-primary-hover);
+  text-decoration: underline;
 }
 
 /* Lists */
@@ -245,485 +159,210 @@ ul, ol {
 
 li {
   font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin-bottom: var(--space-xs);
+  transition: color var(--transition-base);
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--accent);
+  background-color: var(--color-primary);
   color: white;
 }
 
-/* Focus */
-*:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* ============================================
+   HEADER / HERO
+   ============================================ */
+
+header h1 {
+  color: var(--color-text);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-sm);
+}
+
+header p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
 }
 
 /* ============================================
-   LAYOUT
+   SECTION HEADINGS — Executive Blue Accent
    ============================================ */
 
-main {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: var(--space-xl) var(--space-md);
-}
-
-.prose {
-  max-width: 680px;
-}
-
-/* Override Blowfish alignment */
-article.flex.flex-col.items-center,
-article[class*="items-center"],
-article[class*="text-center"] {
-  align-items: flex-start !important;
-  text-align: left !important;
-}
-
-.text-center {
-  text-align: left !important;
-}
-
-/* Hero stays centered */
-article > header,
-article > header.text-center {
-  text-align: center !important;
-}
-
-article > header * {
-  text-align: center !important;
-}
-
-article section,
-article .prose,
-section {
-  text-align: left !important;
-  width: 100%;
-}
-
-/* ============================================
-   HERO SECTION — Minimal, confident
-   ============================================ */
-
-article header {
-  margin-bottom: var(--space-3xl) !important;
-  padding-bottom: var(--space-xl);
-}
-
-/* Name — Large, bold */
-article header h1,
-article header h1.text-4xl {
-  font-size: var(--text-5xl) !important;
-  font-weight: var(--weight-bold) !important;
-  color: var(--text-primary) !important;
-  letter-spacing: -0.04em !important;
-  line-height: 1.1 !important;
-  margin-bottom: var(--space-sm) !important;
-  background: none !important;
-  -webkit-text-fill-color: var(--text-primary) !important;
-}
-
-/* Tagline — Subtle, secondary */
-article header h2,
-article header h2.text-xl,
-article header .text-xl {
-  font-size: var(--text-xl) !important;
-  font-weight: var(--weight-regular) !important;
-  color: var(--text-secondary) !important;
-  letter-spacing: var(--tracking-normal) !important;
-  line-height: var(--leading-snug) !important;
-  margin-bottom: 0 !important;
-  margin-top: var(--space-xs) !important;
-  background: none !important;
-  -webkit-text-fill-color: var(--text-secondary) !important;
-}
-
-/* Remove accent line */
-article header::after {
-  display: none;
-}
-
-/* Opening statement */
-article section.prose > p:first-child {
-  font-size: var(--text-lg) !important;
-  font-weight: var(--weight-regular) !important;
-  line-height: var(--leading-relaxed) !important;
-  color: var(--text-secondary) !important;
-  margin-bottom: var(--space-xl) !important;
-  max-width: 600px;
-  font-style: normal;
-}
-
-article section.prose > p:first-child strong:first-child {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-medium);
-  color: var(--text-primary);
-  display: block;
-  margin-bottom: var(--space-md);
-  letter-spacing: var(--tracking-tight);
-  font-style: normal;
-}
-
-/* ============================================
-   PROOF SIGNALS — Minimal cards
-   ============================================ */
-
-.prose h2 {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-lg);
-  padding-bottom: 0;
-  border-bottom: none;
-  position: relative;
-}
-
-.prose h2::after {
-  display: none;
-}
-
-/* Container */
-.proof-signals-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-  margin: var(--space-lg) 0 var(--space-2xl);
-}
-
-@media (min-width: 768px) {
-  .proof-signals-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-  }
-}
-
-@media (min-width: 640px) and (max-width: 767px) {
-  .proof-signals-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Card — Borderless, clean */
-.proof-tile {
-  position: relative;
-  padding: var(--space-lg) 0;
-  background: transparent;
-  border: none;
-  border-top: 1px solid var(--border-light);
-  border-radius: 0;
-  transition: all var(--transition-base);
-  display: flex;
-  flex-direction: column;
-}
-
-.proof-tile:hover {
-  transform: translateX(4px);
-  box-shadow: none;
-}
-
-html.dark .proof-tile {
-  background: transparent;
-}
-
-/* Proof Tile Visual Differentiation - Subtle accent borders */
-.proof-tile:nth-child(1) {
-  border-left: 2px solid rgba(0, 113, 227, 0.3);
-  padding-left: var(--space-md);
-}
-
-.proof-tile:nth-child(2) {
-  border-left: 2px solid rgba(52, 199, 89, 0.3);
-  padding-left: var(--space-md);
-}
-
-.proof-tile:nth-child(3) {
-  border-left: 2px solid rgba(175, 82, 222, 0.3);
-  padding-left: var(--space-md);
-}
-
-/* Dark mode adjustments for proof tile accents */
-html.dark .proof-tile:nth-child(1) {
-  border-left-color: rgba(41, 151, 255, 0.4);
-}
-
-html.dark .proof-tile:nth-child(2) {
-  border-left-color: rgba(48, 209, 88, 0.4);
-}
-
-html.dark .proof-tile:nth-child(3) {
-  border-left-color: rgba(191, 90, 242, 0.4);
-}
-
-/* Card title */
-.proof-tile__title {
-  font-family: var(--font-family);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-medium);
-  color: var(--text-primary);
-  margin-bottom: var(--space-md);
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
-}
-
-/* Card content */
-.proof-tile__content {
-  flex-grow: 1;
-  color: var(--text-secondary);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-}
-
-.proof-tile__content > p:first-child,
-.proof-tile__intro {
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-md);
-}
-
-/* Outcome list */
-.proof-tile__content ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: var(--space-sm);
-  margin-bottom: 0;
-}
-
-.proof-tile__content li {
-  position: relative;
-  padding-left: var(--space-sm);
-  margin-bottom: var(--space-xs);
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
-  color: var(--text-secondary);
-}
-
-.proof-tile__content li:last-child {
-  margin-bottom: 0;
-}
-
-.proof-tile__content li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 3px;
-  height: 3px;
-  background: var(--text-secondary);
-  border-radius: 50%;
-}
-
-/* ============================================
-   CASE STUDIES SECTION
-   ============================================ */
-
-/* CTA Button — Outlined pill for refined, minimal aesthetic */
-a[href*="case-studies"] {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  color: var(--text-primary) !important;
-  border: 1.5px solid var(--border-medium);
-  border-radius: 980px;
-  font-weight: var(--weight-medium);
-  font-size: var(--text-sm);
-  text-decoration: none !important;
-  transition: all var(--transition-base);
-}
-
-a[href*="case-studies"]:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--text-tertiary);
-  transform: translateY(-1px);
-}
-
-html.dark a[href*="case-studies"] {
-  border-color: var(--border-medium);
-  color: var(--text-primary) !important;
-}
-
-html.dark a[href*="case-studies"]:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--text-secondary);
-}
-
-/* Case Studies Grid */
-.case-studies-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-  margin: var(--space-lg) 0;
-}
-
-@media (min-width: 768px) {
-  .case-studies-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-lg);
-  }
-}
-
-/* Case Study Card */
-.case-study-card__link {
-  display: block;
-  padding: var(--space-lg) var(--space-lg);  /* Added horizontal padding */
-  background: transparent;
-  border: 1.5px solid var(--border-light);  /* Full border, slightly thicker */
-  border-radius: 32px;  /* Generous rounding for Apple-style pill shape */
-  text-decoration: none;
-  color: inherit;
-  transition: all var(--transition-base);
-}
-
-.case-study-card__link:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-medium);  /* Subtle border color change on hover */
-  background: var(--bg-secondary);  /* Very subtle background on hover */
-}
-
-.case-study-card__link:hover .case-study-card__title {
-  color: var(--accent);
-}
-
-.case-study-card__title {
-  font-size: var(--text-2xl);  /* Increased from text-xl for better hierarchy */
-  font-weight: var(--weight-medium);
-  color: var(--text-primary);
-  margin-bottom: var(--space-sm);  /* Increased spacing below title */
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  transition: color var(--transition-fast);
-}
-
-.case-study-card__subtitle {
-  font-size: var(--text-base);  /* Increased from text-sm */
-  color: var(--text-secondary);
-  margin-bottom: var(--space-md);  /* Increased spacing */
-  line-height: var(--leading-normal);
-}
-
-.case-study-card__metadata {
-  display: flex;
-  gap: 0.75rem;  /* Increased gap between tags */
-  flex-wrap: wrap;
-  margin-bottom: var(--space-md);  /* Increased spacing below metadata */
-}
-
-.case-study-card__tag {
-  font-size: var(--text-xs);
-  padding: 0.375rem 0.75rem;  /* Increased padding for better touch targets */
-  border-radius: 6px;  /* Slightly more rounded */
-  font-weight: var(--weight-medium);
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
-}
-
-/* Dark mode: ensure proper contrast */
-html.dark .case-study-card__tag {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-}
-
-html.dark .case-study-card__link {
-  border-color: var(--border-light);
-}
-
-html.dark .case-study-card__link:hover {
-  border-color: var(--border-medium);
-  background: var(--bg-secondary);
-}
-
-.case-study-card__excerpt {
-  font-size: var(--text-base);  /* Increased from text-sm for better readability */
-  color: var(--text-secondary);
-  line-height: var(--leading-relaxed);
-  margin-top: 0;
-}
-
-/* ============================================
-   CASE STUDY DETAIL
-   ============================================ */
-
-.case-study-section {
-  margin-bottom: var(--space-2xl);
-  padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.case-study-section:last-child {
-  border-bottom: none;
-}
-
-/* Alternating visual rhythm - even sections have no border */
-.case-study-section:nth-child(even) {
-  border-bottom: none;
-  margin-bottom: var(--space-2xl);
-  padding-bottom: 0;
-}
-
-/* Odd sections keep the border */
-.case-study-section:nth-child(odd) {
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: var(--space-xl);
-  margin-bottom: var(--space-xl);
-}
-
-.case-study-section__title {
+section h2 {
+  color: var(--color-primary);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-medium);
-  color: var(--text-primary);
-  margin-bottom: var(--space-md);
-  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  transition: color var(--transition-base), border-color var(--transition-base);
 }
 
-.case-study-section__content {
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
+/* ============================================
+   EXPERIENCE / SKILLS CARDS
+   ============================================ */
+
+.card,
+.experience-card,
+.skill-card,
+.education-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  transition: transform var(--transition-base),
+              background-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+
+.card:hover,
+.experience-card:hover,
+.skill-card:hover,
+.education-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Dark mode card adjustments */
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .experience-card,
+[data-bs-theme="dark"] .skill-card,
+[data-bs-theme="dark"] .education-card {
+  background: var(--color-card-bg);
+  border-color: var(--color-border);
+}
+
+[data-bs-theme="dark"] .card:hover,
+[data-bs-theme="dark"] .experience-card:hover,
+[data-bs-theme="dark"] .skill-card:hover,
+[data-bs-theme="dark"] .education-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Card titles */
+.card h3,
+.experience-card h3,
+.skill-card h3,
+.education-card h3 {
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-sm);
+}
+
+/* Card metadata (dates, locations) */
+.card-meta,
+.experience-meta,
+.skill-meta {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn,
+button {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ============================================
+   DARK MODE TOGGLE BUTTON
+   ============================================ */
+
+#theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+#theme-toggle:hover {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+#theme-toggle:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Icon visibility - show sun in dark mode, moon in light mode */
+[data-bs-theme="light"] #theme-toggle .light-icon {
+  display: none;
+}
+
+[data-bs-theme="light"] #theme-toggle .dark-icon {
+  display: inline;
+}
+
+[data-bs-theme="dark"] #theme-toggle .light-icon {
+  display: inline;
+}
+
+[data-bs-theme="dark"] #theme-toggle .dark-icon {
+  display: none;
+}
+
+/* Icon sizing */
+#theme-toggle span {
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 /* ============================================
    NAVIGATION
    ============================================ */
 
-nav a,
-.main-menu a {
-  color: var(--text-secondary);
-  font-weight: var(--weight-regular);
-  font-size: var(--text-sm);
-  padding: 0.625rem 1.25rem;  /* Increased from 0.5rem 1rem for better breathing room */
-  border-radius: 980px;
+nav a {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
   transition: all var(--transition-fast);
-  letter-spacing: 0.01em;  /* Slightly wider letter spacing for clarity */
 }
 
-nav a:hover,
-.main-menu a:hover {
-  color: var(--text-primary);
-  background: var(--bg-tertiary);
-}
-
-.main-menu a::after {
-  display: none;
-}
-
-#menu-blur {
-  transition: opacity 0.3s ease;
-}
-
-.main-menu {
-  position: relative;
-  z-index: 10;
-  gap: 0.5rem;  /* Add spacing between nav items */
+nav a:hover {
+  color: var(--color-primary);
+  background-color: var(--color-card-bg);
+  text-decoration: none;
 }
 
 /* ============================================
@@ -731,224 +370,38 @@ nav a:hover,
    ============================================ */
 
 footer {
-  border-top: 1px solid var(--border-light);
-  margin-top: var(--space-3xl);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-2xl);
   padding-top: var(--space-lg);
-}
-
-footer p {
+  color: var(--color-text-secondary);
   font-size: var(--text-sm);
-  color: var(--text-tertiary);
+  transition: border-color var(--transition-base);
 }
 
 footer a {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 footer a:hover {
-  color: var(--text-primary);
-}
-
-/* ============================================
-   CODE & BLOCKQUOTES
-   ============================================ */
-
-code {
-  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-  font-size: 0.875em;
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  padding: 0.125rem 0.375rem;
-  border-radius: 4px;
-}
-
-blockquote {
-  border-left: 2px solid var(--border-medium);
-  padding-left: var(--space-md);
-  margin: var(--space-md) 0;
-  color: var(--text-secondary);
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--border-light);
-  margin: var(--space-2xl) 0;
-}
-
-/* ============================================
-   UTILITY OVERRIDES
-   ============================================ */
-
-article section,
-article .prose section,
-.prose > section,
-article .prose > * {
-  background: transparent !important;
-}
-
-.bg-neutral-50,
-.bg-neutral-100,
-.bg-white,
-.bg-neutral-800,
-.bg-neutral-900,
-[class*="bg-neutral"],
-[class*="bg-white"] {
-  background: transparent !important;
-}
-
-html.dark .prose p,
-html.dark .prose li,
-html.dark article section,
-html.dark article .prose {
-  color: var(--text-secondary) !important;
-}
-
-html.dark .prose strong,
-html.dark article strong {
-  color: var(--text-primary) !important;
-}
-
-html.dark h1, html.dark h2, html.dark h3 {
-  color: var(--text-primary) !important;
-}
-
-ul li::marker,
-ol li::marker {
-  color: var(--text-tertiary);
-}
-
-/* ============================================
-   RESUME PAGE STYLING
-   ============================================ */
-
-/* Resume page - scannable executive summary format */
-.resume-page,
-article[data-page="resume"],
-article:has(h1:contains("Resume")) {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Resume download button styling */
-a[href*="resume.pdf"],
-a[download*="Resume"] {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--accent);
-  color: white !important;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-  margin: 1rem 0;
-}
-
-a[href*="resume.pdf"]:hover,
-a[download*="Resume"]:hover {
-  background-color: var(--accent-hover);
-}
-
-/* Resume section spacing for scannability */
-.resume-page h2,
-article[data-page="resume"] h2 {
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.resume-page h3,
-article[data-page="resume"] h3 {
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-sm);
-  font-weight: var(--weight-semibold);
-}
-
-/* Resume experience bullets - outcome-focused format */
-.resume-page ul li,
-article[data-page="resume"] ul li {
-  margin-bottom: var(--space-sm);
-  line-height: var(--leading-relaxed);
-}
-
-/* Resume executive summary */
-.resume-page > p:first-of-type,
-article[data-page="resume"] > p:first-of-type {
-  font-size: var(--text-lg);
-  line-height: var(--leading-relaxed);
-  color: var(--text-primary);
-  margin-bottom: var(--space-xl);
-}
-}
-
-article header time,
-article header span {
-  color: var(--text-tertiary);
-  font-size: var(--text-xs);
+  color: var(--color-primary);
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
 
-@media (max-width: 639px) {
+@media (max-width: 768px) {
   :root {
-    --text-5xl: 2.5rem;
-    --text-4xl: 2rem;
+    --text-4xl: 2rem;      /* 32px instead of 40px */
+    --text-3xl: 1.75rem;   /* 28px instead of 32px */
     --space-xl: 3rem;
     --space-2xl: 4rem;
   }
 
-  main {
-    padding: var(--space-lg) var(--space-sm);
+  #theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
   }
-
-  .proof-tile {
-    padding: var(--space-md) 0;
-  }
-
-  .case-study-card__link {
-    padding: var(--space-md) var(--space-md);  /* Maintain horizontal padding on mobile */
-    border-radius: 24px;  /* Slightly less rounding on mobile */
-  }
-
-  .case-study-card__title {
-    font-size: var(--text-xl);  /* Smaller on mobile but still readable */
-  }
-
-  .proof-signals-container {
-    gap: var(--space-sm);
-  }
-
-  nav a,
-  .main-menu a {
-    padding: 0.5rem 1rem;  /* Slightly reduce nav pill padding on mobile */
-  }
-
-  a[href*="case-studies"] {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* ============================================
-   REMOVE BACKGROUND TEXTURE
-   ============================================ */
-
-body::before {
-  display: none;
 }
