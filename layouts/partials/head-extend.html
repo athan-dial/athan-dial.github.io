@@ -1,0 +1,10 @@
+<!-- Dark Mode Theme Detection - Prevents FOUC -->
+<script>
+  (function() {
+    // Check localStorage first, then system preference, default to light
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-bs-theme', theme);
+  })();
+</script>
