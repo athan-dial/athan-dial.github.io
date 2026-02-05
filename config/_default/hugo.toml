@@ -1,0 +1,25 @@
+# -- Site Configuration --
+# Hugo Resume Theme Configuration
+
+# CRITICAL: Do not change baseURL or publishDir (GitHub Pages deployment)
+baseURL = "https://athan-dial.github.io/"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+publishDir = "docs"
+
+title = "Athan Dial"
+enableRobotsTXT = true
+
+# Hugo Resume Theme settings
+PygmentsCodeFences = true
+PygmentsCodeFencesGuessSyntax = true
+PygmentsStyle = "monokai"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[sitemap]
+  changefreq = 'daily'
+  filename = 'sitemap.xml'
+  priority = 0.5
