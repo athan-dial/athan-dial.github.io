@@ -213,7 +213,10 @@ Plans:
 3. Output (summary, tags, quotes) is written back to Vault
 4. n8n continues orchestration after agent completes
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 2 plans
+Plans:
+- [ ] 06-01-PLAN.md — SSH infrastructure, wrapper script, and task schema
+- [ ] 06-02-PLAN.md — End-to-end integration test with sample task
 
 **Research Flags:** n8n SSH node reliability, Claude Code remote invocation patterns, timeout handling
 
@@ -308,7 +311,7 @@ Plans:
 
 **Parallelization:** Phases 4, 5 can start simultaneously. Phase 6 depends on Phase 5. Phases 7, 8, 9 are sequential to prior phases.
 
-**n8n ↔ Claude Code Handoff:** Pattern TBD during Phase 6 planning. Options: SSH execution, webhook endpoint, file-based (n8n writes prompts, you invoke manually).
+**n8n ↔ Claude Code Handoff:** SSH execution pattern selected (see Phase 6 CONTEXT.md). n8n creates task files in vault, executes wrapper script via SSH, Claude Code processes and writes output.
 
 **Safety:** Explicit publish gate is non-negotiable. Daily runs should never auto-publish.
 
