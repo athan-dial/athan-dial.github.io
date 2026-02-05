@@ -28,6 +28,10 @@ This roadmap delivers a working professional portfolio by migrating from Blowfis
 3. User runs `hugo mod graph` and sees only Hugo Resume module (no Blowfish traces)
 4. User views site config and sees correct baseURL, title, and author metadata
 
+**Plans:** 1 plan
+Plans:
+- [ ] 01-01-PLAN.md — Install Hugo Resume, remove Blowfish, validate theme fit (Go/No-Go gate)
+
 **Research Flags:** None (standard Hugo module management)
 
 ---
@@ -57,6 +61,8 @@ This roadmap delivers a working professional portfolio by migrating from Blowfis
 6. User toggles to dark mode and sees theme switch without broken styles
 7. User views site on mobile device and confirms responsive layout works
 
+**Plans:** (created by /gsd:plan-phase)
+
 **Research Flags:** None (standard content transformation and CSS customization)
 
 ---
@@ -78,6 +84,8 @@ This roadmap delivers a working professional portfolio by migrating from Blowfis
 4. User shares portfolio link on LinkedIn and sees correct Open Graph preview card
 5. User tests site on mobile device and confirms all sections responsive
 
+**Plans:** (created by /gsd:plan-phase)
+
 **Research Flags:** None (standard deployment validation)
 
 ---
@@ -86,7 +94,7 @@ This roadmap delivers a working professional portfolio by migrating from Blowfis
 
 | Phase | Status | Requirements | Progress |
 |-------|--------|--------------|----------|
-| 1 - Theme Foundation | Pending | THEME-01, THEME-02, THEME-03 | 0% |
+| 1 - Theme Foundation | Planned | THEME-01, THEME-02, THEME-03 | 0% |
 | 2 - Content & Styling | Pending | CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, DESIGN-01, THEME-05, THEME-06 | 0% |
 | 3 - Production Deployment | Pending | THEME-04, DESIGN-02 | 0% |
 
