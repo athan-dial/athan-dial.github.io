@@ -9,9 +9,9 @@ Requirements for initial release. Theme migration + resume content.
 
 ### Theme & Configuration
 
-- [ ] **THEME-01**: Hugo Resume theme installed, Blowfish removed
-- [ ] **THEME-02**: Site configuration set (baseURL, title, author info)
-- [ ] **THEME-03**: Hugo Modules cleaned (go.mod/go.sum updated, no ghost refs)
+- [x] **THEME-01**: Hugo Resume theme installed, Blowfish removed ✓
+- [x] **THEME-02**: Site configuration set (baseURL, title, author info) ✓
+- [x] **THEME-03**: Hugo Modules cleaned (go.mod/go.sum updated, no ghost refs) ✓
 - [ ] **THEME-04**: GitHub Pages deployment verified (docs/ directory builds correctly)
 - [ ] **THEME-05**: Dark mode functional (custom CSS implementation)
 - [ ] **THEME-06**: Accent color customized (replace orange sidebar with modern palette)
@@ -64,9 +64,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| THEME-01 | Phase 1 | Pending |
-| THEME-02 | Phase 1 | Pending |
-| THEME-03 | Phase 1 | Pending |
+| THEME-01 | Phase 1 | Complete |
+| THEME-02 | Phase 1 | Complete |
+| THEME-03 | Phase 1 | Complete |
 | THEME-04 | Phase 3 | Pending |
 | THEME-05 | Phase 2 | Pending |
 | THEME-06 | Phase 2 | Pending |
@@ -85,4 +85,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-04*
-*Last updated: 2026-02-04 after roadmap creation*
+*Last updated: 2026-02-05 after Phase 1 completion*

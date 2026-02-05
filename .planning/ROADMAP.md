@@ -30,7 +30,7 @@ This roadmap delivers a working professional portfolio by migrating from Blowfis
 
 **Plans:** 1 plan
 Plans:
-- [ ] 01-01-PLAN.md — Install Hugo Resume, remove Blowfish, validate theme fit (Go/No-Go gate)
+- [x] 01-01-PLAN.md — Install Hugo Resume, remove Blowfish, validate theme fit (Go/No-Go gate) ✓
 
 **Research Flags:** None (standard Hugo module management)
 
@@ -94,11 +94,11 @@ Plans:
 
 | Phase | Status | Requirements | Progress |
 |-------|--------|--------------|----------|
-| 1 - Theme Foundation | Planned | THEME-01, THEME-02, THEME-03 | 0% |
-| 2 - Content & Styling | Pending | CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, DESIGN-01, THEME-05, THEME-06 | 0% |
+| 1 - Theme Foundation | ✓ Complete | THEME-01, THEME-02, THEME-03 | 100% |
+| 2 - Content & Styling | Ready | CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, DESIGN-01, THEME-05, THEME-06 | 0% |
 | 3 - Production Deployment | Pending | THEME-04, DESIGN-02 | 0% |
 
-**Overall:** 0/13 requirements complete (0%)
+**Overall:** 3/13 requirements complete (23%)
 
 ---
 
@@ -117,4 +117,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-04*
+*Last updated: 2026-02-05*
