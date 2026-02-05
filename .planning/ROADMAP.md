@@ -185,7 +185,10 @@ Plans:
 3. User checks Vault `/sources/` folder and finds normalized Markdown file with frontmatter
 4. User re-runs ingestion with same URL and confirms no duplicate is created
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 2 plans
+Plans:
+- [ ] 05-01-PLAN.md — Set up n8n Docker environment with yt-dlp and vault access
+- [ ] 05-02-PLAN.md — Build YouTube ingestion workflow with idempotency
 
 **Research Flags:** n8n YouTube node availability, yt-dlp integration, idempotency patterns
 
