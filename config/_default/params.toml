@@ -9,6 +9,9 @@ favicon = "/favicon.ico"
 showQr = false
 showContact = true
 
+# Section ordering (top to bottom on page)
+sections = ["skills", "experience", "education"]
+
 # Social handles
 [[handles]]
   name = "LinkedIn"
