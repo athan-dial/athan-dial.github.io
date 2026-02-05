@@ -1,32 +1,26 @@
 [
   {
-    "role": "Director of Product",
-    "company": "[Company Name]",
-    "summary": "Led cross-functional team of 12 engineers and data scientists building ML-powered drug discovery platform. Increased decision velocity 40% through learning agenda framework while reducing pipeline latency from 6 weeks to 2 weeks. Managed $5M annual budget and roadmap across 3 product lines.",
-    "range": "January 2023 - Present"
+    "role": "Head of Decision Science & Product",
+    "company": "Montai Therapeutics",
+    "summary": "Orchestrated AI product adoption (ChatGPT for org; Claude Code for technical team), driving enablement and repeatable workflows. Acted as key IC+ contributor for applied AI product prototypes and agentic workflows (orchestration, guardrails, evaluation loops). Standardized executive decision UX and briefing patterns used for multi-million-dollar R&D trade-offs.",
+    "range": "2025 - Present"
   },
   {
-    "role": "Senior Product Manager",
-    "company": "[Company Name]",
-    "summary": "Built data infrastructure product enabling scientists to run computational experiments 60% faster. Designed evaluation frameworks that prevented metric theater by tying tool adoption to business outcomes. Led technical strategy for platform migration affecting 200+ users across 4 research teams.",
-    "range": "June 2021 - December 2022"
-  },
-  {
-    "role": "Product Manager",
-    "company": "[Company Name]",
-    "summary": "Launched ML model deployment system that reduced time-to-production from months to days. Owned product roadmap balancing technical debt reduction with new feature development. Collaborated with stakeholders to define success metrics and build data pipelines supporting quarterly business reviews.",
-    "range": "March 2020 - May 2021"
-  },
-  {
-    "role": "PhD Researcher",
-    "company": "[University Name]",
-    "summary": "Developed computational methods for analyzing biological networks and experimental design frameworks for high-throughput data. Transitioned research skills to product leadership by applying experimental rigor to product strategy and quantitative analysis to user behavior. Published 5 papers in top-tier journals while building collaboration skills across interdisciplinary teams.",
-    "range": "September 2015 - February 2020"
+    "role": "Data Research Lead",
+    "company": "Montai Therapeutics",
+    "summary": "Owned the end-to-end nomination product sourcing 10K+ compounds per run; redesigned UX, data model, and pipeline to cut cycle time by ~90% and make it the default tool for HTS campaigns. Designed a dbt/S3 warehouse reducing compute cost by ~$75k/yr and shortening analytics turnaround by ~75%. Built exec-ready dashboards used in ~3 portfolio reviews/quarter, guiding $10M+ R&D investment decisions. Integrated predictive modeling into early-stage gates, improving progression precision by ~20% and reducing false positives by ~15%. Product-managed PEAK (institutional knowledge system) from concept to adoption across 6+ discovery teams.",
+    "range": "2022 - 2025"
   },
   {
     "role": "Data Scientist",
-    "company": "[Company Name]",
-    "summary": "Built predictive models and data pipelines for business intelligence and customer analytics. Developed automated reporting systems that reduced manual analysis time by 70%. Collaborated with product and engineering teams to embed analytics into product development workflows.",
-    "range": "June 2013 - August 2015"
+    "company": "Replica Analytics",
+    "summary": "Built R/Python pipelines to clean and validate clinical datasets, improving reliability for research and analysis. Applied ML models to patient data to generate insights supporting clinical trial evidence. Contributed to privacy-preserving synthetic data innovation enabling secure healthcare data sharing.",
+    "range": "2019 - 2020"
+  },
+  {
+    "role": "Chief Analytics Officer",
+    "company": "ArchitecHealth",
+    "summary": "Directed analytics strategy for small-to-medium biotech firms, informing portfolio and research decisions. Oversaw delivery of analytics projects that produced actionable insights and improved client competitiveness.",
+    "range": "2018 - 2019"
   }
 ]

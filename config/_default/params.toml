@@ -1,16 +1,17 @@
 # Hugo Resume Theme Parameters
 
 firstName = "Athan"
-lastName = "Dial"
-address = "San Francisco Bay Area"
-email = "contact via LinkedIn"
+lastName = "Dial, PhD"
+address = "Boston, MA"
+phone = "857-654-4798"
+email = "athandial@gmail.com"
 profileImage = "img/profile.jpg"
 favicon = "/favicon.ico"
 showQr = false
-showContact = true
+showContact = false
 
 # Section ordering (top to bottom on page)
-sections = ["skills", "experience", "education"]
+sections = ["skills", "tools", "experience", "education"]
 
 # Social handles
 [[handles]]

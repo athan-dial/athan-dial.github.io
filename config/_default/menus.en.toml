@@ -1,27 +1,17 @@
 # -- Main Menu --
-# The main menu is displayed in the header at the top of the page.
+# Hugo Resume uses anchor-based single-page navigation
 
 [[main]]
-  name = "Home"
-  pageRef = "/"
+  name = "Skills"
+  url = "/#skills"
   weight = 1
 
 [[main]]
-  name = "Decision Systems"
-  pageRef = "case-studies"
+  name = "Experience"
+  url = "/#experience"
   weight = 2
 
 [[main]]
-  name = "Advisory"
-  pageRef = "advisory"
+  name = "Education"
+  url = "/#education"
   weight = 3
-
-[[main]]
-  name = "Resume"
-  pageRef = "resume"
-  weight = 4
-
-[[main]]
-  name = "About"
-  pageRef = "about"
-  weight = 5

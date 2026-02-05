@@ -1,0 +1,244 @@
+/* ============================================
+   RESUME OVERRIDE — Executive Blue + System Fonts
+   Loaded last via theme's baseof.html
+   ============================================ */
+
+/* ============================================
+   COLOR OVERRIDES — Replace #BD5D38 orange
+   ============================================ */
+
+.bg-primary {
+  background-color: #1E3A5F !important;
+}
+
+.text-primary {
+  color: #1E3A5F !important;
+}
+
+a {
+  color: #1E3A5F;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: #2A4A75;
+}
+
+/* Sidebar background */
+@media (min-width: 992px) {
+  nav#sideNav {
+    background-color: #1E3A5F;
+  }
+}
+
+nav#sideNav .navbar-nav .nav-item .nav-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Social icons */
+.social-icons a:hover {
+  background-color: #1E3A5F;
+}
+
+/* ============================================
+   FONT OVERRIDES — System font stack
+   ============================================ */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.subheading {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+nav#sideNav .navbar-brand {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+nav#sideNav .navbar-nav .nav-item .nav-link {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ============================================
+   TYPOGRAPHY REFINEMENTS
+   ============================================ */
+
+/* Heading weights - lighter for elegance */
+h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+.subheading {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+/* Body text */
+body {
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   SECTION REFINEMENTS
+   ============================================ */
+
+section.resume-section h2 {
+  color: #1E3A5F;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Date range accent color */
+.resume-date .text-primary {
+  color: #1E3A5F !important;
+}
+
+/* Section border */
+section.resume-section {
+  border-bottom: 1px solid #e5e5e7;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] {
+  background-color: #1D1D1F;
+  color: #F5F5F7;
+}
+
+[data-bs-theme="dark"] .text-primary {
+  color: #4A90E2 !important;
+}
+
+[data-bs-theme="dark"] .bg-primary {
+  background-color: #2A4A75 !important;
+}
+
+[data-bs-theme="dark"] a {
+  color: #4A90E2;
+}
+
+[data-bs-theme="dark"] a:hover {
+  color: #5BA3F5;
+}
+
+[data-bs-theme="dark"] section.resume-section {
+  border-bottom-color: #48484A;
+}
+
+[data-bs-theme="dark"] section.resume-section h2 {
+  color: #4A90E2;
+}
+
+[data-bs-theme="dark"] .social-icons a:hover {
+  background-color: #4A90E2;
+}
+
+[data-bs-theme="dark"] nav#sideNav {
+  background-color: #1D1D1F;
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] .subheading {
+  color: #F5F5F7;
+}
+
+[data-bs-theme="dark"] p,
+[data-bs-theme="dark"] li {
+  color: #AEAEB2;
+}
+
+/* ============================================
+   DARK MODE TOGGLE
+   ============================================ */
+
+#theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #AEAEB2;
+  background-color: #FFFFFF;
+  color: #1D1D1F;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0;
+}
+
+#theme-toggle:hover {
+  border-color: #1E3A5F;
+  transform: scale(1.05);
+}
+
+[data-bs-theme="dark"] #theme-toggle {
+  background-color: #2C2C2E;
+  color: #F5F5F7;
+  border-color: #48484A;
+}
+
+[data-bs-theme="dark"] #theme-toggle:hover {
+  border-color: #4A90E2;
+}
+
+/* Icon visibility */
+[data-bs-theme="light"] #theme-toggle .light-icon,
+#theme-toggle .light-icon {
+  display: none;
+}
+
+[data-bs-theme="light"] #theme-toggle .dark-icon,
+#theme-toggle .dark-icon {
+  display: inline;
+}
+
+[data-bs-theme="dark"] #theme-toggle .light-icon {
+  display: inline;
+}
+
+[data-bs-theme="dark"] #theme-toggle .dark-icon {
+  display: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 991px) {
+  #theme-toggle {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 40px;
+    height: 40px;
+  }
+}

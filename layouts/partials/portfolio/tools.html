@@ -1,0 +1,35 @@
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="tools">
+  <div class="my-auto" id="tools-content">
+  <h2 class="mb-5">Tools</h2>
+    {{ $data := $.Data }}
+    {{ range $data.tools }}
+        <div class="subheading mb-3 skills-heading">{{ .grouping }}</div>
+            <ul>
+            {{ range .skills }}
+                {{ $name := "error" }}
+                {{ $iconclass := "" }}
+                {{ if isset . "name" }}
+                    {{ $name = .name }}
+                {{ else }}
+                    {{ $name = . }}
+                {{ end }}
+                {{ if isset . "icon" }}
+                    {{ $iconclass = .icon }}
+                {{ else if isset . "devicon" }}
+                    {{ $iconclass = printf "devicon-%s-plain" ( lower .devicon ) }}
+                {{ else }}
+                    {{ $iconclass = printf "devicon-%s-plain" ( lower $name ) }}
+                {{ end }}
+                <li class="list-inline-item">
+                      <i class="{{ $iconclass }}"></i>
+                      {{ if isset . "link" }}
+                          <a href="{{ .link }}">{{ $name }}</a>
+                      {{ else }}
+                          {{ $name }}
+                      {{ end }}
+                    </li>
+            {{ end }}
+            </ul>
+    {{ end }}
+  </div>
+</section>
