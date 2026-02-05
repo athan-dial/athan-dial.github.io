@@ -1,0 +1,32 @@
+[
+  {
+    "role": "Director of Product",
+    "company": "[Company Name]",
+    "summary": "Led cross-functional team of 12 engineers and data scientists building ML-powered drug discovery platform. Increased decision velocity 40% through learning agenda framework while reducing pipeline latency from 6 weeks to 2 weeks. Managed $5M annual budget and roadmap across 3 product lines.",
+    "range": "January 2023 - Present"
+  },
+  {
+    "role": "Senior Product Manager",
+    "company": "[Company Name]",
+    "summary": "Built data infrastructure product enabling scientists to run computational experiments 60% faster. Designed evaluation frameworks that prevented metric theater by tying tool adoption to business outcomes. Led technical strategy for platform migration affecting 200+ users across 4 research teams.",
+    "range": "June 2021 - December 2022"
+  },
+  {
+    "role": "Product Manager",
+    "company": "[Company Name]",
+    "summary": "Launched ML model deployment system that reduced time-to-production from months to days. Owned product roadmap balancing technical debt reduction with new feature development. Collaborated with stakeholders to define success metrics and build data pipelines supporting quarterly business reviews.",
+    "range": "March 2020 - May 2021"
+  },
+  {
+    "role": "PhD Researcher",
+    "company": "[University Name]",
+    "summary": "Developed computational methods for analyzing biological networks and experimental design frameworks for high-throughput data. Transitioned research skills to product leadership by applying experimental rigor to product strategy and quantitative analysis to user behavior. Published 5 papers in top-tier journals while building collaboration skills across interdisciplinary teams.",
+    "range": "September 2015 - February 2020"
+  },
+  {
+    "role": "Data Scientist",
+    "company": "[Company Name]",
+    "summary": "Built predictive models and data pipelines for business intelligence and customer analytics. Developed automated reporting systems that reduced manual analysis time by 70%. Collaborated with product and engineering teams to embed analytics into product development workflows.",
+    "range": "June 2013 - August 2015"
+  }
+]

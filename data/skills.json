@@ -1,0 +1,54 @@
+[
+  {
+    "grouping": "Product Leadership",
+    "skills": [
+      "Learning Agenda Design",
+      "Roadmap Strategy & Prioritization",
+      "Cross-functional Team Leadership",
+      "Stakeholder Alignment",
+      "Product-Market Fit Validation",
+      "Metrics & KPI Design",
+      "User Research & Experimentation",
+      "Strategic Decision Frameworks"
+    ]
+  },
+  {
+    "grouping": "Data Science & ML",
+    "skills": [
+      "Machine Learning Systems",
+      "Statistical Analysis & Experimentation",
+      "Data Pipeline Architecture",
+      "Computational Biology",
+      "Model Evaluation & Validation",
+      "Python & R Programming",
+      "SQL & Database Design",
+      "Data Visualization"
+    ]
+  },
+  {
+    "grouping": "Technical Leadership",
+    "skills": [
+      "Platform Architecture",
+      "API Design & Integration",
+      "DevOps & CI/CD",
+      "Technical Strategy",
+      "Engineering Team Collaboration",
+      "Code Review & Quality Standards",
+      "System Performance Optimization",
+      "Technical Debt Management"
+    ]
+  },
+  {
+    "grouping": "Tools & Technologies",
+    "skills": [
+      "Python (NumPy, Pandas, Scikit-learn)",
+      "R (Tidyverse, Shiny)",
+      "SQL (PostgreSQL, BigQuery)",
+      "Git & GitHub",
+      "Docker & Kubernetes",
+      "AWS (S3, EC2, Lambda)",
+      "Jupyter & Observable",
+      "Tableau & Looker"
+    ]
+  }
+]
