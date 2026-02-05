@@ -10,20 +10,23 @@ tags: ["ml-systems", "data-pipelines", "product-strategy", "stakeholder-alignmen
 
 ## Context
 
-Early 2023 presented a defining challenge: Montai's AI models could predict activity across millions of compounds, but manual nomination processes bottlenecked at ~250 compounds per program. The central question wasn't whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.
+Early 2023 presented a defining challenge: Montai's AI models could predict activity across millions of compounds, but manual library creation processes were bottlenecked at ~250 compounds per program. The central question wasn't whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.
 
 **Facts:**
-- Baseline: 250 compounds nominated manually (NRF2, 2023)
-- Stakes: Scale to 1000+ per program to enable AI-driven discovery
-- Environment: Early-stage biotech, unproven nomination concept
+- Baseline: 100’s of compounds, chosen manually for screening from within existing library
+- Stakes: Scale 10× to 100× per program to enabled by bioactivity ML models
+- Environment: Early-stage biotech, unproven concept
 - My role: First data science/product hire, architected pipeline
 
-This wasn't purely a technical problem. ML scientists wanted maximum chemical diversity, medicinal chemists needed synthetic feasibility, and program leads balanced timelines against thoroughness. Each stakeholder brought valid constraints — the pipeline needed to serve all three without collapsing under complexity or producing low-quality suggestions that would erode trust in the AI approach.
+## The challenge
+> How do you architect a multi-objective decision system, that provides an optimal starting point for drug discovery funnels, is understandable by all the key decision-makers at the organization?
 
-## Ownership
+This was a multi-faceted problem — ML scientists wanted maximum chemical diversity, medicinal chemists needed synthetic feasibility, and program leads to ensure they didn’t waste their team’s time on a batch of inactive compounds. Each stakeholder brought valid constraints — the pipeline needed to serve all groups while delivering high quality recommendations that would bolster confidence in the AI approach.
+
+## The solution
 
 I owned:
-- End-to-end nomination pipeline architecture
+- **End-to-end ‘nomination’ pipeline architecture:** Our team constructed an orchestrated SQL pipeline that enabled fully traceable, human-interpretable 
 - ML integration strategy (model outputs → analytics)
 - Data quality framework for predictions
 - Phased rollout strategy (MVP → scale → quality)

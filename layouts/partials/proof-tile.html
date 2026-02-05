@@ -1,0 +1,40 @@
+{{/* Proof Tile Component - Displays decision evidence (not achievements) */}}
+<article class="proof-tile">
+  {{ if .icon }}
+    <div class="proof-tile__icon-wrapper">
+      {{ if eq .icon "compass" }}
+        <svg class="proof-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke-width="2"/>
+          <path d="M12 2L12 6M12 18L12 22M2 12L6 12M18 12L22 12" stroke-width="2"/>
+          <path d="M12 8L14 14L8 12Z" fill="currentColor"/>
+        </svg>
+      {{ else if eq .icon "circuit" }}
+        <svg class="proof-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="4" cy="4" r="2" stroke-width="2"/>
+          <circle cx="20" cy="4" r="2" stroke-width="2"/>
+          <circle cx="4" cy="20" r="2" stroke-width="2"/>
+          <circle cx="20" cy="20" r="2" stroke-width="2"/>
+          <rect x="10" y="10" width="4" height="4" stroke-width="2"/>
+          <path d="M6 4L10 10M14 10L18 4M6 20L10 14M14 14L18 20" stroke-width="2"/>
+        </svg>
+      {{ else if eq .icon "mountain" }}
+        <svg class="proof-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 20L8 8L12 14L18 4L22 12L22 20L2 20Z" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M18 4L18 2L20 2" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      {{ end }}
+    </div>
+  {{ end }}
+  {{ if .title }}
+    <h3 class="proof-tile__title">{{ .title }}</h3>
+  {{ end }}
+  {{ if .content }}
+    <p class="proof-tile__content">{{ .content }}</p>
+  {{ end }}
+  {{ if .outcome }}
+    <div class="proof-tile__outcome">{{ .outcome }}</div>
+  {{ end }}
+  {{ if .link }}
+    <a href="{{ .link }}" class="proof-tile__link">Learn more →</a>
+  {{ end }}
+</article>

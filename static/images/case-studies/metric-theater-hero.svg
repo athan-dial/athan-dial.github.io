@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="strategyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E5C8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5C8A;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#strategyGradient)"/>
+
+  <!-- Funnel layers -->
+  <path d="M 300 100 L 900 100 L 750 250 L 450 250 Z" fill="#FDFCFA" opacity="0.8"/>
+  <text x="550" y="190" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#2E5C8A">Vanity Metrics</text>
+
+  <path d="M 450 250 L 750 250 L 650 375 L 550 375 Z" fill="#FDFCFA" opacity="0.7"/>
+  <text x="540" y="325" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#2E5C8A">Activity</text>
+
+  <path d="M 550 375 L 650 375 L 620 470 L 580 470 Z" fill="#5A9367" opacity="0.9"/>
+  <text x="555" y="435" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#FDFCFA">Outcomes</text>
+
+  <!-- X marks on vanity metrics -->
+  <g opacity="0.5">
+    <line x1="350" y1="150" x2="380" y2="180" stroke="#C17A47" stroke-width="4"/>
+    <line x1="380" y1="150" x2="350" y2="180" stroke="#C17A47" stroke-width="4"/>
+
+    <line x1="820" y1="150" x2="850" y2="180" stroke="#C17A47" stroke-width="4"/>
+    <line x1="850" y1="150" x2="820" y2="180" stroke="#C17A47" stroke-width="4"/>
+  </g>
+
+  <!-- Checkmark on outcomes -->
+  <path d="M 630 450 L 645 465 L 670 435" stroke="#FDFCFA" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="400" y="550" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#FDFCFA">Focus on What Matters</text>
+</svg>

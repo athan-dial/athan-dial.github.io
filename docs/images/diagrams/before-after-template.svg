@@ -1,0 +1,25 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <text x="100" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#2A2520">Before</text>
+  <rect x="50" y="100" width="300" height="200" rx="12" fill="#EBE8E3" stroke="#8B857E" stroke-width="2"/>
+
+  <!-- Fragmented elements inside -->
+  <rect x="80" y="130" width="60" height="50" rx="6" fill="#C17A47" opacity="0.6"/>
+  <rect x="160" y="140" width="50" height="40" rx="6" fill="#C17A47" opacity="0.6"/>
+  <rect x="230" y="135" width="70" height="45" rx="6" fill="#C17A47" opacity="0.6"/>
+  <rect x="90" y="200" width="55" height="60" rx="6" fill="#C17A47" opacity="0.6"/>
+  <rect x="170" y="210" width="65" height="50" rx="6" fill="#C17A47" opacity="0.6"/>
+  <rect x="250" y="200" width="60" height="55" rx="6" fill="#C17A47" opacity="0.6"/>
+
+  <text x="550" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#2A2520">After</text>
+  <rect x="500" y="100" width="300" height="200" rx="12" fill="#EBE8E3" stroke="#5A9367" stroke-width="2"/>
+
+  <!-- Unified elements inside -->
+  <rect x="520" y="120" width="120" height="70" rx="6" fill="#5A9367" opacity="0.8"/>
+  <rect x="660" y="120" width="120" height="70" rx="6" fill="#5A9367" opacity="0.8"/>
+  <rect x="520" y="210" width="120" height="70" rx="6" fill="#5A9367" opacity="0.8"/>
+  <rect x="660" y="210" width="120" height="70" rx="6" fill="#5A9367" opacity="0.8"/>
+
+  <!-- Arrow between -->
+  <path d="M 380 200 L 470 200" stroke="#2A2520" stroke-width="3" fill="none"/>
+  <path d="M 450 190 L 470 200 L 450 210" stroke="#2A2520" stroke-width="3" fill="none"/>
+</svg>

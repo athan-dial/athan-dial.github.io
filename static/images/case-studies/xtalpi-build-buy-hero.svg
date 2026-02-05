@@ -1,0 +1,30 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="productGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C17A47;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C17A47;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#productGradient)"/>
+
+  <!-- Build circle -->
+  <circle cx="400" cy="300" r="150" fill="none" stroke="#FDFCFA" stroke-width="4" opacity="0.7"/>
+  <text x="340" y="310" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#FDFCFA">Build</text>
+
+  <!-- Buy circle -->
+  <circle cx="800" cy="300" r="150" fill="none" stroke="#FDFCFA" stroke-width="4" opacity="0.7"/>
+  <text x="750" y="310" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#FDFCFA">Buy</text>
+
+  <!-- Intersection area -->
+  <ellipse cx="600" cy="300" rx="80" ry="120" fill="#FDFCFA" opacity="0.3"/>
+
+  <!-- Balance point -->
+  <circle cx="600" cy="300" r="30" fill="#FDFCFA" stroke="#C17A47" stroke-width="3"/>
+  <text x="570" y="315" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#C17A47">ROI</text>
+
+  <!-- Cost/Time axes indicators -->
+  <text x="250" y="500" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="#FDFCFA" opacity="0.8">Time to Value</text>
+  <text x="850" y="500" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="#FDFCFA" opacity="0.8">Total Cost</text>
+
+  <text x="450" y="80" font-family="Inter, sans-serif" font-size="36" font-weight="600" fill="#FDFCFA">Build vs Buy Analysis</text>
+</svg>

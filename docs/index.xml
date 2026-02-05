@@ -1,133 +1,96 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Athan Dial, PhD on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/</link>
-    <description>Recent content in Athan Dial, PhD on Athan Dial - Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Athan Dial on Athan Dial - Portfolio</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Athan Dial on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2026 Athan Dial</copyright>
-    <lastBuildDate>Tue, 20 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 20 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>https://athan-dial.github.io/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/about/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h2 id=&#34;from-bench-science-to-decision-systems&#34;&gt;From Bench Science to Decision Systems&lt;/h2&gt;&#xA;&lt;p&gt;I didn&amp;rsquo;t plan to leave academic research. I loved the rigor—designing experiments where the question itself is ambiguous, building evaluation frameworks from scratch because no playbook exists. But somewhere between optimizing multi-omics pipelines and presenting at lab meetings, I realized the most valuable skill I&amp;rsquo;d developed wasn&amp;rsquo;t technical depth. It was &lt;strong&gt;designing decision systems under resource constraints.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;In my PhD, I wasn&amp;rsquo;t just analyzing data. I was making judgment calls: Which experiments maximize learning per dollar? How do we design validation that catches false positives before they waste months of work? What counts as &amp;ldquo;sufficient evidence&amp;rdquo; when stakeholders disagree on the underlying question? These weren&amp;rsquo;t biology problems—they were decision-architecture problems.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Advisory &amp; Thought Partnership</title>
-      <link>https://athan-dial.github.io/advisory/</link>
+      <link>http://localhost:1313/advisory/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/advisory/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/advisory/</guid>
+      <description>&lt;h1 id=&#34;lets-talk&#34;&gt;Let&amp;rsquo;s Talk&lt;/h1&gt;&#xA;&lt;p&gt;I occasionally advise teams working on decision systems, evaluation frameworks, and analytics strategy. I enjoy conversations about turning ambiguous, high-stakes problems into decision frameworks that teams can actually use.&lt;/p&gt;&#xA;&lt;p&gt;My background: research-grade evaluation rigor (PhD in multi-omics analysis) + product judgment (drug discovery ML). I design frameworks from first principles, not templates.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;topics-i-think-about&#34;&gt;Topics I Think About&lt;/h2&gt;&#xA;&lt;h3 id=&#34;designing-decision-frameworks&#34;&gt;Designing Decision Frameworks&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How to structure decision contexts for ambiguous problems&lt;/li&gt;&#xA;&lt;li&gt;Building north star + guardrails that actually guide prioritization&lt;/li&gt;&#xA;&lt;li&gt;Stakeholder alignment when definitions of &amp;ldquo;good&amp;rdquo; conflict&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;evaluation-systems-for-ml--data-products&#34;&gt;Evaluation Systems for ML &amp;amp; Data Products&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Offline validation + online monitoring architectures&lt;/li&gt;&#xA;&lt;li&gt;Preventing &amp;ldquo;metric theater&amp;rdquo; in model evaluation&lt;/li&gt;&#xA;&lt;li&gt;What counts as evidence when ground truth is delayed or absent&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;analytics-strategy--capability-building&#34;&gt;Analytics Strategy &amp;amp; Capability Building&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Moving from ad-hoc analyses to repeatable decision systems&lt;/li&gt;&#xA;&lt;li&gt;Aligning analytics with business OKRs&lt;/li&gt;&#xA;&lt;li&gt;Building analytics functions that accelerate decision velocity&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;technical-architecture-for-data-systems&#34;&gt;Technical Architecture for Data Systems&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tradeoff analysis for build vs. buy decisions&lt;/li&gt;&#xA;&lt;li&gt;Data pipeline optimization for cost, latency, reliability&lt;/li&gt;&#xA;&lt;li&gt;Monitoring and observability for production systems&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;how-i-approach-these-conversations&#34;&gt;How I Approach These Conversations&lt;/h2&gt;&#xA;&lt;p&gt;I focus on understanding your decision context first—what&amp;rsquo;s uncertain, what&amp;rsquo;s constrained, what counts as &amp;ldquo;good enough.&amp;rdquo; Then I work through options analysis and tradeoff documentation to make decisions defensible to stakeholders.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Consulting</title>
-      <link>https://athan-dial.github.io/consulting/</link>
+      <link>http://localhost:1313/consulting/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/consulting/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/consulting/</guid>
+      <description>&lt;h1 id=&#34;consulting&#34;&gt;Consulting&lt;/h1&gt;&#xA;&lt;p&gt;If you’re here because you want to talk through a high-stakes decision system, evaluation approach, or analytics strategy, that’s exactly what my advisory work is for.&lt;/p&gt;&#xA;&lt;p&gt;Start here:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/advisory/&#34;&gt;Advisory &amp;amp; thought partnership&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Or go straight to scheduling:&lt;/p&gt;&#xA;&lt;div style=&#34;text-align: center; margin-top: 2rem;&#34;&gt;&#xA;  &lt;a href=&#34;https://calendar.app.google/Skaryd6X15GjQEcG7&#34; target=&#34;_blank&#34; style=&#34;display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: background-color 0.2s;&#34;&gt;&#xA;    📅 Schedule a Chat&#xA;  &lt;/a&gt;&#xA;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>Decision Portfolio</title>
-      <link>https://athan-dial.github.io/resume/</link>
+      <link>http://localhost:1313/resume/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/resume/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/resume/</guid>
+      <description>&lt;div style=&#34;text-align: center; margin-bottom: 2rem;&#34;&gt;&#xA;  &lt;a href=&#34;http://localhost:1313/resume.pdf&#34; download=&#34;Athan-Dial-Resume.pdf&#34; style=&#34;display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: background-color 0.2s;&#34;&gt;&#xA;    📄 Download PDF Resume&#xA;  &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;athan-dial-phd&#34;&gt;Athan Dial, PhD&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;PhD-trained in multi-omics analysis. Product-tested in drug discovery ML.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;I design decision systems for ambiguous, high-stakes problems. I combine research-grade evaluation rigor with product judgment to ship measurable outcomes. I communicate in decisions, metrics, and tradeoffs—not activity.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;decision-systems-portfolio&#34;&gt;Decision Systems Portfolio&lt;/h2&gt;&#xA;&lt;h3 id=&#34;system-1-preventing-metric-theater-in-drug-discovery-ml&#34;&gt;System 1: Preventing Metric Theater in Drug Discovery ML&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Decision Context:&lt;/strong&gt; Data science teams were presenting accuracy metrics without reliability monitoring, creating false confidence in model predictions for multimillion-dollar compound selection decisions. Each compound decision represented $2M+ in development costs, but we lacked visibility into model performance degradation over time.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Writing</title>
-      <link>https://athan-dial.github.io/writing/</link>
+      <link>http://localhost:1313/writing/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/writing/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/writing/</guid>
+      <description>&lt;h1 id=&#34;writing&#34;&gt;Writing&lt;/h1&gt;&#xA;&lt;p&gt;Right now, most of my writing lives in my case studies. They’re written as decision narratives: context → frame → tradeoffs → outcome.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/case-studies/&#34;&gt;Decision systems case studies&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;RSS feed: &lt;a href=&#34;http://localhost:1313/case-studies/index.xml&#34;&gt;Case studies RSS&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;If you’re looking for something specific, start with:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/&#34;&gt;Preventing Metric Theater in Drug Discovery ML&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/&#34;&gt;Reducing Pipeline Latency to Enable Real-Time Decision Loops&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</title>
-      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <link>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Preventing Metric Theater in Drug Discovery ML</title>
-      <link>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
+      <link>http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Data science teams were presenting accuracy metrics without reliability monitoring, creating false confidence in model predictions for multimillion-dollar compound selection decisions. The stakes were high: each compound decision represented $2M+ in development costs, but teams lacked visibility into model performance degradation over time.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the drug discovery ML platform, where prediction models guide which compounds advance to expensive in-vitro and in-vivo testing phases. My role was to own the evaluation framework design and establish decision forums with clear ownership.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Build vs Buy: Strategic Analysis for Analog Generation</title>
-      <link>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
+      <link>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Late 2025 brought Montai to a strategic crossroads. Our core IP hinged on generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;) through proprietary AI models — but the internal generative model produced ~360M virtual compounds with uncertain synthetic feasibility. Meanwhile, XtalPi offered curated, higher-confidence AI-suggested compounds from external sources.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Late 2025: Montai&amp;rsquo;s core IP = generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Internal generative model produced ~360M virtual compounds, but many not synthesizable/uncertain value&lt;/li&gt;&#xA;&lt;li&gt;Alternative: XtalPi (external partner) offered curated AI-suggested compounds (more drug-like)&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Resource allocation - invest in internal model improvement OR buy external suggestions?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The CSO (Margo) needed an evidence-based recommendation by December 1, 2025. This wasn&amp;rsquo;t a philosophical debate about build vs buy — it was a portfolio allocation decision with measurable ROI implications. I had three weeks to model the tradeoffs quantitatively and make a clear recommendation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Learning Agendas: Bringing Research Rigor to Product Decisions</title>
-      <link>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</link>
+      <link>http://localhost:1313/case-studies/learning-agenda-framework-montai/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/learning-agenda-framework-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By 2025, Montai ran multiple concurrent R&amp;amp;D experiments — AI model iterations, assay validations, Anthrolog generation improvements. Each experiment had implicit goals but lacked explicit success criteria. The result: debates about &amp;ldquo;when to pivot&amp;rdquo; and &amp;ldquo;when to scale&amp;rdquo; became opinion-driven rather than evidence-backed.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;By 2025: Multiple concurrent experiments (AI models, assays, Anthrolog generations)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Unclear success criteria per experiment (when to pivot? when to scale?)&lt;/li&gt;&#xA;&lt;li&gt;Example confusion: &amp;ldquo;AI model improved accuracy&amp;rdquo; but didn&amp;rsquo;t translate to better compound selection&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Wasted months on meandering experiments without clear learning goals&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The core issue traced back to a fundamental principle from my PhD training: experiments without pre-defined hypotheses produce data, not learning. In academic research, you write your aims before running experiments. In biotech R&amp;amp;D, we were running experiments and retroactively deciding whether results &amp;ldquo;felt good enough.&amp;rdquo; This had to change.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>From Data Crisis to Data Culture: The STAT6 Incident</title>
-      <link>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</link>
+      <link>http://localhost:1313/case-studies/stat6-data-crisis-response-montai/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/stat6-data-crisis-response-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Mid-2025 was a period of rapid growth at Montai — more programs, more models, more data flowing through pipelines built for smaller scale. Technical debt had accumulated in migration work from earlier systems, creating latent risks that hadn&amp;rsquo;t yet manifested. Until STAT6.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mid-2025: STAT6 program discovered predictions missing from warehouse&lt;/li&gt;&#xA;&lt;li&gt;Impact: Could not evaluate nominations for critical program ($M+ at stake)&lt;/li&gt;&#xA;&lt;li&gt;Symptom: Dashboard DR-3098 failed, analysis queries returned incomplete results&lt;/li&gt;&#xA;&lt;li&gt;Urgency: Program decisions on hold, stakeholder trust eroding&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The stakes extended beyond the immediate technical bug. This was organizational credibility on the line — scientists needed confidence that data infrastructure wouldn&amp;rsquo;t become a bottleneck to discovery. A 6-week delay on a critical program signaled deeper quality issues, and stakeholders rightfully questioned whether other datasets harbored similar problems.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Standardizing Montai&#39;s App Ecosystem with R Shiny</title>
-      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
+      <link>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By mid-2024, Montai&amp;rsquo;s internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;2024: Growing need for internal web apps (compound selection, data visualization, report generation)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Different engineers using different frameworks (Python Streamlit/Dash, R Shiny, Jupyter notebooks)&lt;/li&gt;&#xA;&lt;li&gt;Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Small team (~5-6 people) needed velocity + consistency&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of &amp;ldquo;one size fits all&amp;rdquo; dogma that ignores practical constraints.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds</title>
-      <link>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</link>
+      <link>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Early 2023 presented a defining challenge: Montai&amp;rsquo;s AI models could predict activity across millions of compounds, but manual library creation processes were bottlenecked at ~250 compounds per program. The central question wasn&amp;rsquo;t whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Baseline: 100’s of compounds, chosen manually for screening from within existing library&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Scale 10× to 100× per program to enabled by bioactivity ML models&lt;/li&gt;&#xA;&lt;li&gt;Environment: Early-stage biotech, unproven concept&lt;/li&gt;&#xA;&lt;li&gt;My role: First data science/product hire, architected pipeline&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;the-challenge&#34;&gt;The challenge&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;How do you architect a multi-objective decision system, that provides an optimal starting point for drug discovery funnels, is understandable by all the key decision-makers at the organization?&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

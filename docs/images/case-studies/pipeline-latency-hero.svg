@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="latencyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A7C59;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A7C59;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#latencyGradient)"/>
+
+  <!-- Timeline baseline -->
+  <line x1="100" y1="300" x2="1100" y2="300" stroke="#FDFCFA" stroke-width="3" opacity="0.6"/>
+
+  <!-- Before timeline (slow) -->
+  <g opacity="0.7">
+    <circle cx="150" cy="200" r="30" fill="#C17A47" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="135" y="210" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">W1</text>
+
+    <circle cx="350" cy="200" r="30" fill="#C17A47" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="335" y="210" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">W2</text>
+
+    <circle cx="550" cy="200" r="30" fill="#C17A47" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="535" y="210" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">W3</text>
+
+    <line x1="150" y1="230" x2="150" y2="270" stroke="#FDFCFA" stroke-width="2"/>
+    <line x1="350" y1="230" x2="350" y2="270" stroke="#FDFCFA" stroke-width="2"/>
+    <line x1="550" y1="230" x2="550" y2="270" stroke="#FDFCFA" stroke-width="2"/>
+
+    <text x="50" y="180" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#FDFCFA">Before: 3 weeks</text>
+  </g>
+
+  <!-- After timeline (fast) -->
+  <g opacity="0.9">
+    <circle cx="750" cy="400" r="30" fill="#5A9367" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="735" y="410" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">D1</text>
+
+    <circle cx="900" cy="400" r="30" fill="#5A9367" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="885" y="410" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">D2</text>
+
+    <circle cx="1050" cy="400" r="30" fill="#5A9367" stroke="#FDFCFA" stroke-width="3"/>
+    <text x="1035" y="410" font-family="Inter, sans-serif" font-size="20" fill="#FDFCFA">D3</text>
+
+    <line x1="750" y1="370" x2="750" y2="330" stroke="#FDFCFA" stroke-width="2"/>
+    <line x1="900" y1="370" x2="900" y2="330" stroke="#FDFCFA" stroke-width="2"/>
+    <line x1="1050" y1="370" x2="1050" y2="330" stroke="#FDFCFA" stroke-width="2"/>
+
+    <text x="750" y="480" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#FDFCFA">After: 3 days</text>
+  </g>
+
+  <!-- Speedup indicator -->
+  <path d="M 600 150 L 680 150" stroke="#FDFCFA" stroke-width="3" fill="none"/>
+  <path d="M 680 140 L 700 150 L 680 160" stroke="#FDFCFA" stroke-width="3" fill="none"/>
+  <text x="610" y="140" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#FDFCFA">7x faster</text>
+</svg>

@@ -2,32 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data-Pipelines on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/tags/data-pipelines/</link>
+    <link>http://localhost:1313/tags/data-pipelines/</link>
     <description>Recent content in Data-Pipelines on Athan Dial - Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2026 Athan Dial</copyright>
-    <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/tags/data-pipelines/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data-pipelines/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</title>
-      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <link>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds</title>
-      <link>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</link>
+      <link>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</guid>
-      <description></description>
-      
+      <guid>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Early 2023 presented a defining challenge: Montai&amp;rsquo;s AI models could predict activity across millions of compounds, but manual library creation processes were bottlenecked at ~250 compounds per program. The central question wasn&amp;rsquo;t whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Baseline: 100’s of compounds, chosen manually for screening from within existing library&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Scale 10× to 100× per program to enabled by bioactivity ML models&lt;/li&gt;&#xA;&lt;li&gt;Environment: Early-stage biotech, unproven concept&lt;/li&gt;&#xA;&lt;li&gt;My role: First data science/product hire, architected pipeline&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;the-challenge&#34;&gt;The challenge&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;How do you architect a multi-objective decision system, that provides an optimal starting point for drug discovery funnels, is understandable by all the key decision-makers at the organization?&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

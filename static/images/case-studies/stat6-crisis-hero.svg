@@ -1,0 +1,29 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="crisisGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C17A47;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5A9367;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5A9367;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#crisisGradient)"/>
+
+  <!-- Pipeline left (working) -->
+  <rect x="50" y="280" width="300" height="40" rx="20" fill="#FDFCFA" opacity="0.8"/>
+
+  <!-- Break/alert icon -->
+  <circle cx="500" cy="300" r="60" fill="#C17A47" stroke="#FDFCFA" stroke-width="4"/>
+  <text x="485" y="330" font-family="Inter, sans-serif" font-size="64" font-weight="700" fill="#FDFCFA">!</text>
+
+  <!-- Arrow to fixed -->
+  <path d="M 600 300 L 700 300" stroke="#FDFCFA" stroke-width="4" fill="none"/>
+  <path d="M 680 285 L 700 300 L 680 315" stroke="#FDFCFA" stroke-width="4" fill="none"/>
+
+  <!-- Pipeline right (fixed + monitoring) -->
+  <rect x="750" y="280" width="400" height="40" rx="20" fill="#FDFCFA" opacity="0.8"/>
+  <circle cx="950" cy="300" r="40" fill="#5A9367" stroke="#FDFCFA" stroke-width="4"/>
+  <path d="M 930 300 L 945 315 L 970 285" stroke="#FDFCFA" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="50" y="200" font-family="Inter, sans-serif" font-size="36" font-weight="600" fill="#FDFCFA">Data Pipeline Failure</text>
+  <text x="750" y="200" font-family="Inter, sans-serif" font-size="36" font-weight="600" fill="#FDFCFA">6-Week Recovery</text>
+</svg>
