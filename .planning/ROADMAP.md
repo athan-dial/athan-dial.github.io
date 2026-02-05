@@ -156,9 +156,9 @@ Model Citizen is a separate publishing system deployed to `athan-dial.github.io/
 
 **Plans:** 3 plans
 Plans:
-- [ ] 04-01-PLAN.md — Scaffold Quartz repo and deploy to GitHub Pages
-- [ ] 04-02-PLAN.md — Create vault repo with folder structure and schema documentation
-- [ ] 04-03-PLAN.md — End-to-end verification with sample note
+- [x] 04-01-PLAN.md — Scaffold Quartz repo and deploy to GitHub Pages ✓
+- [x] 04-02-PLAN.md — Create vault repo with folder structure and schema documentation ✓
+- [x] 04-03-PLAN.md — End-to-end verification with sample note ✓
 
 **Research Flags:** None (standard Quartz setup + folder documentation)
 
@@ -284,14 +284,14 @@ Plans:
 
 | Phase | Status | Requirements | Progress |
 |-------|--------|--------------|----------|
-| 4 - Quartz & Vault Schema | Ready | MC-01, MC-02, MC-03, MC-04 | 0% |
+| 4 - Quartz & Vault Schema | ✓ Complete | MC-01, MC-02, MC-03, MC-04 | 100% |
 | 5 - YouTube Ingestion | Ready | MC-05, MC-06, MC-07 | 0% |
 | 6 - Claude Code Integration | Blocked on 5 | MC-08, MC-09, MC-10 | 0% |
 | 7 - Enrichment Pipeline | Blocked on 6 | MC-11, MC-12, MC-13, MC-14 | 0% |
 | 8 - Review & Approval | Blocked on 7 | MC-15, MC-16, MC-17 | 0% |
 | 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
 
-**Overall:** 0/21 requirements complete (0%)
+**Overall:** 4/21 requirements complete (19%)
 
 ---
 
