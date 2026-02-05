@@ -17,15 +17,23 @@
 
 ## Current Position
 
-**Phase:** 1 of 3 - Theme Foundation
-**Plan:** 01 of 01 - Complete
-**Status:** Phase 1 complete - ready for Phase 2
-**Last Activity:** 2026-02-05 - Completed 01-01-PLAN.md
+**Phase:** 4 of 9 - Quartz & Vault Schema
+**Plan:** 02 of 02 - Complete
+**Status:** Phase 4 complete - ready for Phase 5
+**Last Activity:** 2026-02-05 - Completed 04-02-PLAN.md
 
 **Progress:**
 ```
-[███░░░░░░░░░░░░░░░░░] 23% (3/13 requirements)
+Model Citizen Milestone: [████░░░░░░░░░░░░░░░░] 22% (2/9 plans)
 
+Phase 04: Quartz & Vault Schema           [██████████] 2/2 plans ✓
+Phase 05: YouTube Ingestion               [░░░░░░░░░░] 0/2 plans
+Phase 06: Claude Code Integration         [░░░░░░░░░░] 0/1 plans
+Phase 07: Enrichment Pipeline             [░░░░░░░░░░] 0/2 plans
+Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
+Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
+
+Hugo Resume Milestone: [███░░░░░░░░░░░░░░░░░] 23% (3/13 requirements)
 Phase 1: Theme Foundation         [██████████] 3/3 requirements ✓
 Phase 2: Content & Styling        [░░░░░░░░░░] 0/8 requirements
 Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requirements
@@ -35,12 +43,13 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 1 plan in 15 min (3 requirements delivered)
+**Velocity:** 3 plans total (2 Model Citizen + 1 Hugo Resume)
 **Quality:** 100% verification pass rate (all checks passed)
-**Efficiency:** ~5 min per requirement delivered
+**Efficiency:** ~2 min per task delivered
 
 **Phase History:**
-- Phase 1: Complete (15 min, 3/3 requirements) ✓
+- Phase 01 (Hugo): Complete (15 min, 3/3 requirements) ✓
+- Phase 04 (Model Citizen): Complete (5.5 min, 2/2 plans) ✓
 
 ---
 
@@ -57,6 +66,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | Preserved critical GitHub Pages settings | Avoid deployment breakage by manually porting config rather than wholesale replacement | 2026-02-05 | 01-01 |
 | Backed up layouts/ before theme change | Custom Blowfish partials may contain design patterns worth referencing later | 2026-02-05 | 01-01 |
 | Used hugo mod tidy for clean removal | Ensure valid checksums and no ghost references vs manual go.mod editing | 2026-02-05 | 01-01 |
+| Workflow-based folder taxonomy | 7 workflow folders (inbox → published) instead of topic categories | 2026-02-05 | 04-02 |
+| Public vault strategy | Entire vault public on GitHub; Quartz ignorePatterns + ExplicitPublish plugin gate rendering | 2026-02-05 | 04-02 |
+| .gitkeep files for empty folders | Ensures folder structure exists in git for fresh clones | 2026-02-05 | 04-02 |
 
 ### Open Questions
 
@@ -68,10 +80,20 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ### Active Todos
 
+**Hugo Resume Milestone:**
 - [x] Create plan for Phase 1 (complete: 01-01-PLAN.md)
 - [x] Backup existing `layouts/` directory before Blowfish removal (complete: layouts.blowfish.bak/)
 - [x] Document Blowfish config settings before consolidation (complete: preserved in hugo.toml)
 - [ ] Plan Phase 2: Content & Styling (next step)
+
+**Model Citizen Milestone:**
+- [x] Phase 04 complete: Vault repository created (04-01, 04-02)
+- [ ] Plan Phase 05: YouTube ingestion (next step)
+- [ ] Create Quartz site repository
+- [ ] Integrate YouTube API
+- [ ] Build enrichment pipeline
+- [ ] Create review UI
+- [ ] Set up publish sync
 
 ### Blockers
 
@@ -82,22 +104,24 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 1 Plan 01 executed successfully (theme foundation complete)
-- Hugo Resume theme installed, Blowfish fully removed
-- Go/No-Go checkpoint passed: user approved theme fit
-- User feedback captured for Phase 2 styling direction
+- Phase 04 Plan 02 executed successfully (vault repository complete)
+- Created model-citizen-vault repository with 7 workflow folders
+- SCHEMA.md documents frontmatter requirements and publishing rules
+- 4 Obsidian templates created for all workflow stages
+- Repository pushed to GitHub as public repo
 
 **What's Next:**
-- Run `/gsd:plan-phase 2` to create execution plan for Content & Styling
-- Phase 2 will populate resume content and apply custom styling
-- Focus on minimal/elegant aesthetic per user feedback (not tech-y, more executive)
+- Phase 05: YouTube ingestion (capture and transcribe videos)
+- Phase 06: Claude Code integration via SSH
+- Phase 07: Enrichment pipeline (summarize, tag, generate ideas)
 
 **Context for Next Session:**
-- Phase 1 complete: 3/3 requirements delivered in 15 min
-- Theme structural foundation validated - single-page layout approved
-- User feedback: wants elegant typeface, non-orange accent, Apple-inspired aesthetic
-- Blowfish custom partials backed up in layouts.blowfish.bak/ for reference
-- Critical GitHub Pages settings preserved (publishDir = "docs", baseURL intact)
+- Phase 04 complete: 2/2 plans delivered in 5.5 min total
+- Vault structure established: inbox/ → sources/ → enriched/ → ideas/ → drafts/ → publish_queue/ → published/
+- Public vault strategy: entire repo public, Quartz ignorePatterns + ExplicitPublish plugin gate rendering
+- SCHEMA.md defines progressive frontmatter (fields added as notes progress through workflow)
+- GitHub repository: https://github.com/athan-dial/model-citizen-vault
+- Hugo Resume Phase 1 also complete (theme foundation validated)
 
 ---
 *State initialized: 2026-02-04*
