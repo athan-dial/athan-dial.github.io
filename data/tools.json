@@ -1,0 +1,43 @@
+[
+  {
+    "grouping": "Languages",
+    "skills": [
+      {"name": "Python", "devicon": "python"},
+      {"name": "R", "devicon": "r"},
+      {"name": "SQL", "icon": "fas fa-database"}
+    ]
+  },
+  {
+    "grouping": "Databases",
+    "skills": [
+      {"name": "PostgreSQL", "devicon": "postgresql"},
+      {"name": "SQLite", "devicon": "sqlite"},
+      {"name": "DuckDB", "devicon": "duckdb"}
+    ]
+  },
+  {
+    "grouping": "Cloud & Data",
+    "skills": [
+      {"name": "dbt", "icon": "fas fa-layer-group"},
+      {"name": "AWS Athena", "icon": "fab fa-aws"},
+      {"name": "S3 / Parquet", "icon": "fab fa-aws"},
+      {"name": "RDS", "icon": "fab fa-aws"}
+    ]
+  },
+  {
+    "grouping": "Dashboards & Apps",
+    "skills": [
+      {"name": "Django", "devicon": "django"},
+      {"name": "Shiny", "icon": "fas fa-chart-line"},
+      {"name": "Streamlit", "devicon": "streamlit"}
+    ]
+  },
+  {
+    "grouping": "AI Coding",
+    "skills": [
+      {"name": "Claude Code", "icon": "fas fa-terminal"},
+      {"name": "Cursor", "icon": "fas fa-code"},
+      {"name": "OpenAI Codex", "icon": "fas fa-brain"}
+    ]
+  }
+]

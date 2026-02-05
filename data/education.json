@@ -1,16 +1,9 @@
 [
   {
-    "school": "[University Name]",
+    "school": "McMaster University",
     "degree": "PhD",
-    "major": "Computational Biology",
-    "notes": "Thesis on network analysis methods. Developed experimental design and quantitative analysis skills that transferred directly to product leadership — applying research rigor to product strategy and data-driven decision-making.",
-    "range": "2015 - 2020"
-  },
-  {
-    "school": "[University Name]",
-    "degree": "BS",
-    "major": "Biology & Mathematics",
-    "notes": "Double major with honors. Focus on quantitative methods and computational approaches to biological systems.",
-    "range": "2011 - 2015"
+    "major": "",
+    "notes": "Developed multi-omics pipelines translating complex biology into actionable decision contexts.",
+    "range": "2017 - 2022"
   }
 ]
