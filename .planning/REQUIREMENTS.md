@@ -64,25 +64,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| THEME-01 | TBD | Pending |
-| THEME-02 | TBD | Pending |
-| THEME-03 | TBD | Pending |
-| THEME-04 | TBD | Pending |
-| THEME-05 | TBD | Pending |
-| THEME-06 | TBD | Pending |
-| CONT-01 | TBD | Pending |
-| CONT-02 | TBD | Pending |
-| CONT-03 | TBD | Pending |
-| CONT-04 | TBD | Pending |
-| CONT-05 | TBD | Pending |
-| DESIGN-01 | TBD | Pending |
-| DESIGN-02 | TBD | Pending |
+| THEME-01 | Phase 1 | Pending |
+| THEME-02 | Phase 1 | Pending |
+| THEME-03 | Phase 1 | Pending |
+| THEME-04 | Phase 3 | Pending |
+| THEME-05 | Phase 2 | Pending |
+| THEME-06 | Phase 2 | Pending |
+| CONT-01 | Phase 2 | Pending |
+| CONT-02 | Phase 2 | Pending |
+| CONT-03 | Phase 2 | Pending |
+| CONT-04 | Phase 2 | Pending |
+| CONT-05 | Phase 2 | Pending |
+| DESIGN-01 | Phase 2 | Pending |
+| DESIGN-02 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13 ⚠️
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-04*
-*Last updated: 2026-02-04 after initial definition*
+*Last updated: 2026-02-04 after roadmap creation*
