@@ -24,10 +24,10 @@
 
 **Progress:**
 ```
-Model Citizen Milestone: [████░░░░░░░░░░░░░░░░] 33% (3/9 plans)
+Model Citizen Milestone: [██████░░░░░░░░░░░░░░] 56% (5/9 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
-Phase 05: YouTube Ingestion               [░░░░░░░░░░] 0/2 plans
+Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
 Phase 06: Claude Code Integration         [░░░░░░░░░░] 0/1 plans
 Phase 07: Enrichment Pipeline             [░░░░░░░░░░] 0/2 plans
 Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
@@ -81,6 +81,8 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | System font stack for v1 | Achieves minimal/elegant aesthetic without font file complexity; defer custom fonts to v2 | 2026-02-05 | 02-02 |
 | Bootstrap data-bs-theme for dark mode | Hugo Resume uses Bootstrap 5.3+ convention; cleaner than class-based toggling | 2026-02-05 | 02-02 |
 | Executive blue (#1E3A5F) as primary accent | Professional executive positioning, near-monochromatic Apple aesthetic | 2026-02-05 | 02-02 |
+| Host-side yt-dlp (not in container) | Hardened n8n image lacks Python; brew provides auto-updates | 2026-02-05 | 05-01 |
+| Supersede 05-02 with host script | Simpler architecture; n8n orchestration deferred to v2 | 2026-02-05 | 05-02 |
 
 ### Open Questions
 
@@ -105,8 +107,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - [x] Phase 04 Plan 01: Quartz repository created (complete)
 - [x] Phase 04 Plan 02: Vault repository with folder structure (complete)
 - [x] Phase 04 Plan 03: Infrastructure verification (complete)
-- [ ] Plan Phase 05: YouTube ingestion (next step)
-- [ ] Integrate YouTube API
+- [x] Phase 05 Plan 01: n8n Docker environment (complete)
+- [x] Phase 05 Plan 02: YouTube ingestion (superseded by host script)
+- [ ] Plan Phase 06: Claude Code integration (next step)
 - [ ] Build enrichment pipeline
 - [ ] Create review UI
 - [ ] Set up publish sync
@@ -120,29 +123,28 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 02 Plan 02 COMPLETE: Custom branding & dark mode (1.6 min, 2/2 tasks)
-  - Task 1: Executive blue color system (407 lines CSS, down from 1217)
-  - Task 2: Dark mode toggle with localStorage persistence
-- CSS replaced Blowfish-era styling with Hugo Resume branding
-- Near-monochromatic Apple-inspired palette (#1E3A5F executive blue)
-- System font stack (no custom fonts for v1)
-- Bootstrap data-bs-theme for dark mode (no FOUC)
-- Hugo server builds in 103ms with no CSS errors
+- Phase 05 COMPLETE: YouTube Ingestion (2/2 plans)
+  - 05-01: n8n Docker environment with vault bind mount ✓
+  - 05-02: SUPERSEDED by host-side ingestion script
+- Architectural adaptation: yt-dlp runs on Mac (brew) not in container
+- Created `~/model-citizen-vault/scripts/ingest-youtube.sh`
+- Tested with "Me at the zoo" video, idempotency verified
+- n8n accessible at localhost:5678, vault mounted at /vault
 
 **What's Next:**
-- Hugo Resume Plan 02-03: CareerCanvas layout patterns (visual density, scannable hierarchy)
-- Then Phase 3: Production deployment (build, deploy, verify)
-- Model Citizen Phase 05: YouTube ingestion (capture and transcribe videos)
+- Hugo Resume Plan 02-03: Human verification checkpoint (review content + styling)
+- Then Phase 3: Production deployment
+- Model Citizen Phase 06: Claude Code integration (SSH invocation for enrichment)
 
 **Context for Next Session:**
-- Hugo Resume Phase 2: 3/8 requirements complete (46% of milestone)
+- Hugo Resume Phase 2: 2/3 plans complete
   - Plan 01: Professional profile data populated ✓
   - Plan 02: Visual branding applied ✓
-  - Plan 03: CareerCanvas layout (next)
-- Phase 04 Model Citizen complete: 3/3 plans, 10 min total, 100% verification pass
-- Color system decisions finalized: executive blue, system fonts, Bootstrap dark mode
-- SUMMARY.md documents 3 key decisions and zero deviations
-- Ready for CareerCanvas implementation (builds on existing color system)
+  - Plan 03: Human verification (next)
+- Model Citizen: Phase 5 complete (56% of milestone)
+  - Phase 6 (Claude Code Integration) now unblocked
+- n8n orchestration for ingestion deferred to v2
+- Ingestion usage: `~/model-citizen-vault/scripts/ingest-youtube.sh "URL"`
 
 ---
 *State initialized: 2026-02-04*

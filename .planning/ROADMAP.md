@@ -187,8 +187,10 @@ Plans:
 
 **Plans:** 2 plans
 Plans:
-- [ ] 05-01-PLAN.md — Set up n8n Docker environment with yt-dlp and vault access
-- [ ] 05-02-PLAN.md — Build YouTube ingestion workflow with idempotency
+- [x] 05-01-PLAN.md — Set up n8n Docker environment with yt-dlp and vault access ✓
+- [x] 05-02-PLAN.md — SUPERSEDED: Host script handles ingestion (see 05-02-SUMMARY.md)
+
+**Architectural Note:** n8n hardened image lacks Python; yt-dlp runs on host via brew. n8n orchestration deferred to v2.
 
 **Research Flags:** n8n YouTube node availability, yt-dlp integration, idempotency patterns
 
@@ -292,13 +294,13 @@ Plans:
 | Phase | Status | Requirements | Progress |
 |-------|--------|--------------|----------|
 | 4 - Quartz & Vault Schema | ✓ Complete | MC-01, MC-02, MC-03, MC-04 | 100% |
-| 5 - YouTube Ingestion | Ready | MC-05, MC-06, MC-07 | 0% |
-| 6 - Claude Code Integration | Blocked on 5 | MC-08, MC-09, MC-10 | 0% |
+| 5 - YouTube Ingestion | ✓ Complete | MC-05, MC-06, MC-07 | 100% |
+| 6 - Claude Code Integration | Ready | MC-08, MC-09, MC-10 | 0% |
 | 7 - Enrichment Pipeline | Blocked on 6 | MC-11, MC-12, MC-13, MC-14 | 0% |
 | 8 - Review & Approval | Blocked on 7 | MC-15, MC-16, MC-17 | 0% |
 | 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
 
-**Overall:** 4/21 requirements complete (19%)
+**Overall:** 7/21 requirements complete (33%)
 
 ---
 
@@ -311,6 +313,7 @@ Plans:
 **Safety:** Explicit publish gate is non-negotiable. Daily runs should never auto-publish.
 
 **Deferred to v2:**
+- n8n orchestration for YouTube ingestion (webhook trigger, file watcher, or scheduled batch)
 - Email/web link ingestion (Phases 10+)
 - Podcast ingestion
 - Automated backlinking
