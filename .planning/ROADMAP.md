@@ -116,5 +116,197 @@ Plans:
 **Coverage:** All 13 v1 requirements mapped across 3 phases (100%)
 
 ---
+
+## Current Milestone: Model Citizen (Content Engine)
+
+**Project:** Automated Content Generation & Publishing to Quartz
+**Core Value:** Capture knowledge continuously, publish consciously with explicit human approval
+**Depth:** 5 phases (MVP to working system), designed for parallel execution
+**Created:** 2026-02-05
+
+### Overview
+
+Model Citizen is a separate publishing system deployed to `athan-dial.github.io/model-citizen/`. It combines a **public Obsidian vault** (sources, ideas, drafts) with a **Quartz publishing site** (approved content only) and **n8n automation** (daily ingestion → enrichment → ideation → draft → publish gate). Claude Code handles AI-driven synthesis via SSH invocation from n8n workflows.
+
+**Key Architecture:**
+- Repo A (Model Citizen Vault): Public Obsidian vault with all raw material, thinking, sources
+- Repo B (Quartz Site): Published articles only (subset of Vault)
+- n8n (Local Docker): Daily workflow orchestration
+- Claude Code (SSH agent): AI synthesis and drafting on-demand
+
+---
+
+### Phase 4: Quartz Site & Vault Schema (Parallel A)
+
+**Goal:** Quartz project site is deployed to GitHub Pages and vault folder structure is documented
+
+**Dependencies:** None (can start immediately, parallel with other work)
+
+**Requirements:**
+- MC-01: Quartz repo scaffolded with project site config (baseURL = `/model-citizen/`)
+- MC-02: GitHub Pages deploy pipeline working (GitHub Actions or Pages build)
+- MC-03: Vault folder taxonomy documented (inbox/, sources/, enriched/, ideas/, drafts/, publish_queue/)
+- MC-04: Markdown schema documented (frontmatter spec, tags, metadata fields)
+
+**Success Criteria:**
+1. User can deploy empty Quartz site to `athan-dial.github.io/model-citizen/` and see it load
+2. User can inspect Vault folder structure and find documented schema
+3. User can create a sample note in `/sources/` following the schema
+4. User confirms no broken links between Vault and Quartz site
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** None (standard Quartz setup + folder documentation)
+
+---
+
+### Phase 5: n8n YouTube Ingestion (Parallel B)
+
+**Goal:** n8n workflow can download YouTube transcripts, normalize them, and store them in Vault
+
+**Dependencies:** Phase 4 (Vault schema must exist to know where to write)
+
+**Requirements:**
+- MC-05: n8n Docker setup with YouTube integration (yt-dlp for download, transcript extraction)
+- MC-06: Ingestion pipeline idempotent (no duplicate notes on re-runs)
+- MC-07: Source notes normalized to Markdown with consistent frontmatter
+
+**Success Criteria:**
+1. User starts n8n Docker instance and runs YouTube ingestion workflow
+2. User provides YouTube URL and workflow fetches transcript
+3. User checks Vault `/sources/` folder and finds normalized Markdown file with frontmatter
+4. User re-runs ingestion with same URL and confirms no duplicate is created
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** n8n YouTube node availability, yt-dlp integration, idempotency patterns
+
+---
+
+### Phase 6: Claude Code Agent Integration (Parallel C)
+
+**Goal:** n8n can invoke Claude Code via SSH to handle AI-driven synthesis (summaries, tagging, idea generation)
+
+**Dependencies:** Phase 5 (needs ingested content to enrich)
+
+**Requirements:**
+- MC-08: n8n SSH integration working (can execute remote commands on your machine)
+- MC-09: Claude Code wrapper CLI designed (accepts input, triggers workflow, captures output)
+- MC-10: Agent invocation is idempotent (re-runs don't duplicate enrichment)
+
+**Success Criteria:**
+1. n8n workflow executes SSH command and invokes Claude Code on your machine
+2. Claude Code reads input from Vault, executes synthesis task
+3. Output (summary, tags, quotes) is written back to Vault
+4. n8n continues orchestration after agent completes
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** n8n SSH node reliability, Claude Code remote invocation patterns, timeout handling
+
+---
+
+### Phase 7: Enrichment & Idea Generation (Sequential to Phase 6)
+
+**Goal:** Full enrichment pipeline working: summaries, tags, idea cards, draft outlines
+
+**Dependencies:** Phase 6 (requires Claude Code integration to execute)
+
+**Requirements:**
+- MC-11: Summary generation (Claude Code task: 2-3 sentence summary of source)
+- MC-12: Tagging & metadata (Claude extracts topic tags, quotes, key takeaways)
+- MC-13: Idea cards generated (blog angles, outlines, supporting sources identified)
+- MC-14: Drafts scaffolded (Claude creates first outline/draft if requested)
+
+**Success Criteria:**
+1. User ingests YouTube video; n8n runs enrichment pipeline
+2. User checks Vault `/enriched/` folder and sees summary, tags, and metadata
+3. User checks `/ideas/` folder and sees 2-3 blog idea cards for the source
+4. Optional: User checks `/drafts/` and sees draft outline with citations
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** Claude prompting patterns for synthesis, structured output formats, citation generation
+
+---
+
+### Phase 8: Human Review & Approval Dashboard (Sequential to Phase 7)
+
+**Goal:** User has a clear workflow to review, approve, and publish content
+
+**Dependencies:** Phase 7 (needs enriched content to review)
+
+**Requirements:**
+- MC-15: Approval workflow documented (move to `/publish_queue/` or set frontmatter `status: publish`)
+- MC-16: Review screen (Vault-based, shows sources, drafts, approval state)
+- MC-17: Publishing rules clear (only content in `/publish_queue/` or with `status: publish` exports)
+
+**Success Criteria:**
+1. User reviews a draft and related sources in Vault
+2. User moves draft to `/publish_queue/` (or sets `status: publish`)
+3. User understands that only approved content will sync to Quartz
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** Vault UI for approval workflows, frontmatter-based publishing rules
+
+---
+
+### Phase 9: Publish Sync & End-to-End Example (Final)
+
+**Goal:** Approved content syncs to Quartz, deploys to GitHub Pages, and a complete example proves the system works
+
+**Dependencies:** Phases 4-8 (requires all prior work to function)
+
+**Requirements:**
+- MC-18: Publish sync tool (copy approved notes from Vault → Quartz `content/`)
+- MC-19: Asset handling (images, attachments copied and links rewritten if needed)
+- MC-20: Quartz deploy triggered (GitHub Actions or manual push)
+- MC-21: End-to-end example (YouTube → enriched → approved → published article visible)
+
+**Success Criteria:**
+1. User completes full workflow: YouTube → enrichment → approval → publish
+2. User visits `athan-dial.github.io/model-citizen/` and sees published article
+3. Published article links back to Vault sources
+4. Daily n8n run completes without errors
+
+**Plans:** (created by /gsd:plan-phase)
+
+**Research Flags:** Quartz link rewriting, asset copying, deploy automation
+
+---
+
+### Phase Progress
+
+| Phase | Status | Requirements | Progress |
+|-------|--------|--------------|----------|
+| 4 - Quartz & Vault Schema | Ready | MC-01, MC-02, MC-03, MC-04 | 0% |
+| 5 - YouTube Ingestion | Ready | MC-05, MC-06, MC-07 | 0% |
+| 6 - Claude Code Integration | Blocked on 5 | MC-08, MC-09, MC-10 | 0% |
+| 7 - Enrichment Pipeline | Blocked on 6 | MC-11, MC-12, MC-13, MC-14 | 0% |
+| 8 - Review & Approval | Blocked on 7 | MC-15, MC-16, MC-17 | 0% |
+| 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
+
+**Overall:** 0/21 requirements complete (0%)
+
+---
+
+### Notes
+
+**Parallelization:** Phases 4, 5 can start simultaneously. Phase 6 depends on Phase 5. Phases 7, 8, 9 are sequential to prior phases.
+
+**n8n ↔ Claude Code Handoff:** Pattern TBD during Phase 6 planning. Options: SSH execution, webhook endpoint, file-based (n8n writes prompts, you invoke manually).
+
+**Safety:** Explicit publish gate is non-negotiable. Daily runs should never auto-publish.
+
+**Deferred to v2:**
+- Email/web link ingestion (Phases 10+)
+- Podcast ingestion
+- Automated backlinking
+- Vault-native search/tagging UI
+- Quartz preview before publish
+
+---
+
 *Roadmap created: 2026-02-04*
 *Last updated: 2026-02-05*
