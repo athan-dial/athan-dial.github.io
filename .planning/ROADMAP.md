@@ -61,7 +61,11 @@ Plans:
 6. User toggles to dark mode and sees theme switch without broken styles
 7. User views site on mobile device and confirms responsive layout works
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — Populate JSON data files (experience, skills, education) and bio content
+- [ ] 02-02-PLAN.md — Implement custom CSS with executive blue palette and dark mode
+- [ ] 02-03-PLAN.md — Human verification checkpoint for content and styling
 
 **Research Flags:** None (standard content transformation and CSS customization)
 
