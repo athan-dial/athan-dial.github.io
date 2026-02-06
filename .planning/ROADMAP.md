@@ -267,7 +267,9 @@ Plans:
 2. User moves draft to `/publish_queue/` (or sets `status: publish`)
 3. User understands that only approved content will sync to Quartz
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 1 plan
+Plans:
+- [ ] 08-01-PLAN.md — Draft template + review dashboard + approval workflow documentation
 
 **Research Flags:** Vault UI for approval workflows, frontmatter-based publishing rules
 
