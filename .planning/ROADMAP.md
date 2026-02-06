@@ -293,7 +293,10 @@ Plans:
 3. Published article links back to Vault sources
 4. Daily n8n run completes without errors
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 2 plans
+Plans:
+- [ ] 09-01-PLAN.md — Publish sync script and frontmatter transformer
+- [ ] 09-02-PLAN.md — End-to-end example and live site verification
 
 **Research Flags:** Quartz link rewriting, asset copying, deploy automation
 
