@@ -18,17 +18,17 @@
 ## Current Position
 
 **Phase:** 6 of 9 - Claude Code Integration (Model Citizen)
-**Plan:** 1 of 2 - SSH Infrastructure complete
-**Status:** In progress - Plan 06-02 next
-**Last Activity:** 2026-02-06 - Completed 06-01-PLAN.md (SSH infrastructure and wrapper script)
+**Plan:** 2 of 2 - Complete! ✓
+**Status:** Phase complete - Ready for Phase 07
+**Last Activity:** 2026-02-06 - Completed 06-02-PLAN.md (n8n workflow and integration testing)
 
 **Progress:**
 ```
-Model Citizen Milestone: [██████░░░░░░░░░░░░░░] 67% (6/9 plans)
+Model Citizen Milestone: [███████░░░░░░░░░░░░░] 78% (7/9 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
 Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
-Phase 06: Claude Code Integration         [█████░░░░░] 1/2 plans (06-01 complete)
+Phase 06: Claude Code Integration         [██████████] 2/2 plans ✓ COMPLETE
 Phase 07: Enrichment Pipeline             [░░░░░░░░░░] 0/2 plans
 Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
 Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
@@ -43,9 +43,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 10 plans total (4 Model Citizen + 6 Hugo Resume)
+**Velocity:** 11 plans total (5 Model Citizen + 6 Hugo Resume)
 **Quality:** 100% verification pass rate
-**Efficiency:** ~1.9 min per task delivered
+**Efficiency:** ~2.5 min per task delivered
 
 **Phase History:**
 - Phase 01 (Hugo): Complete (15 min, 3/3 requirements) ✓
@@ -55,6 +55,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - Phase 04 (Model Citizen): Complete (10 min, 3/3 plans) ✓
 - Phase 05 (Model Citizen): Complete (YouTube ingestion) ✓
 - Phase 06 Plan 01 (Model Citizen): Complete (2 min, 5/5 tasks) ✓
+- Phase 06 Plan 02 (Model Citizen): Complete (11 min, 3/3 tasks) ✓
 
 ---
 
@@ -96,6 +97,10 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | Atomic file writes with temp + rename | Prevents partial output if Claude crashes mid-execution | 2026-02-06 | 06-01 |
 | Timeout with 600s default | Prevents hung processes from blocking pipeline; overridable per-task in frontmatter | 2026-02-06 | 06-01 |
 | JSON validation non-blocking | Attempt validation but save output regardless to preserve debugging info | 2026-02-06 | 06-01 |
+| Use gtimeout from coreutils | macOS lacks GNU timeout; coreutils provides gtimeout command | 2026-02-06 | 06-02 |
+| Strip markdown code fences from Claude output | Claude Code wraps JSON in ```json fences; sed strips before validation | 2026-02-06 | 06-02 |
+| Full paths for SSH reliability | SSH sessions don't inherit user PATH; use /opt/homebrew/bin/gtimeout and ~/.local/bin/claude | 2026-02-06 | 06-02 |
+| Document setup-token requirement | SSH sessions can't access macOS Keychain; setup-token creates persistent auth | 2026-02-06 | 06-02 |
 
 ### Open Questions
 
@@ -121,8 +126,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 **Model Citizen Milestone:**
 - [x] Phase 04: Quartz & Vault Schema (3/3 plans)
 - [x] Phase 05: YouTube Ingestion (2/2 plans)
-- [x] Phase 06 Plan 01: SSH infrastructure (complete)
-- [ ] Phase 06 Plan 02: n8n workflow configuration
+- [x] Phase 06: Claude Code Integration (2/2 plans) ✓ COMPLETE
 - [ ] Phase 07: Build enrichment pipeline
 - [ ] Phase 08: Create review UI
 - [ ] Phase 09: Set up publish sync
@@ -136,29 +140,33 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 06-01 complete (SSH infrastructure and wrapper script):
-  1. Generated ed25519 SSH key pair (~/.ssh/n8n_docker) for n8n authentication
-  2. User enabled macOS Remote Login (checkpoint)
-  3. Created .model-citizen/tasks/ and outputs/ directories with schema
-  4. Built 218-line claude-task-runner.sh wrapper with idempotency, timeout, atomic writes
-  5. Verified SSH connectivity from localhost (simulates Docker)
-- Commits: 4e1acba (infrastructure), b97a6b8 (wrapper script) in model-citizen-vault repo
+- Phase 06-02 complete (n8n workflow and integration testing):
+  1. Created test task (test-summarize-001) with sample content
+  2. Documented task creation pattern for n8n builders (TASK-CREATION.md)
+  3. Fixed wrapper for macOS compatibility (gtimeout from coreutils)
+  4. Fixed Claude output parsing (strip markdown code fences)
+  5. Fixed SSH context issues (full paths for gtimeout and claude)
+  6. Created exportable n8n workflow JSON (4 nodes: trigger → generate → execute → parse)
+  7. Verified idempotency (re-run skips processing)
+  8. Documented SSH authentication requirements (setup-token for keychain access)
+- Commits: 1a0cc7e, 0eebc9a, c22c562 (portfolio repo); multiple in model-citizen-vault
+- Phase 06 Claude Code Integration COMPLETE ✓
 - All must_haves satisfied, self-check passed
 
 **What's Next:**
-- Model Citizen Phase 06 Plan 02: n8n workflow configuration (SSH node + task orchestration)
+- Model Citizen Phase 07: Enrichment Pipeline (2 plans to be created)
 - Hugo Resume Phase 3: Production Deployment (still needs planning)
 
 **Context for Next Session:**
-- SSH infrastructure ready: host.docker.internal:22, user adial, key ~/.ssh/n8n_docker
-- Wrapper command: ~/model-citizen-vault/scripts/claude-task-runner.sh --task-file <path>
-- Task schema documented in .model-citizen/SCHEMA.md (YAML frontmatter format)
-- Next: Configure n8n SSH node to invoke wrapper script, create test task
+- Complete n8n-Claude integration proven: wrapper works, workflow exported, idempotency verified
+- Before production use: run `claude setup-token` for SSH authentication (interactive OAuth)
+- Integration pattern ready for Phase 07 enrichment tasks (summarize, tag, draft)
 - Hugo Resume still at Phase 2 complete, Phase 3 deployment not started
+- Model Citizen now at 78% complete (7/9 plans), 3 phases remain
 
-**Last session:** 2026-02-06 11:28 UTC
-**Stopped at:** Completed 06-01-PLAN.md
-**Resume file:** .planning/phases/06-claude-code-integration/06-02-PLAN.md
+**Last session:** 2026-02-06 11:42 UTC
+**Stopped at:** Completed 06-02-PLAN.md
+**Resume file:** None (phase complete)
 
 ---
 *State initialized: 2026-02-04*
