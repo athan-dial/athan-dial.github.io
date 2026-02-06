@@ -240,7 +240,10 @@ Plans:
 3. User checks `/ideas/` folder and sees 2-3 blog idea cards for the source
 4. Optional: User checks `/drafts/` and sees draft outline with citations
 
-**Plans:** (created by /gsd:plan-phase)
+**Plans:** 2 plans
+Plans:
+- [ ] 07-01-PLAN.md — Prompt templates, enrichment scripts, frontmatter utility, and end-to-end test
+- [ ] 07-02-PLAN.md — n8n orchestration workflow and integration test
 
 **Research Flags:** Claude prompting patterns for synthesis, structured output formats, citation generation
 
@@ -299,7 +302,7 @@ Plans:
 | 4 - Quartz & Vault Schema | ✓ Complete | MC-01, MC-02, MC-03, MC-04 | 100% |
 | 5 - YouTube Ingestion | ✓ Complete | MC-05, MC-06, MC-07 | 100% |
 | 6 - Claude Code Integration | ✓ Complete | MC-08, MC-09, MC-10 | 100% |
-| 7 - Enrichment Pipeline | Ready | MC-11, MC-12, MC-13, MC-14 | 0% |
+| 7 - Enrichment Pipeline | In Progress | MC-11, MC-12, MC-13, MC-14 | 0% |
 | 8 - Review & Approval | Blocked on 7 | MC-15, MC-16, MC-17 | 0% |
 | 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
 
@@ -326,4 +329,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-05*
+*Last updated: 2026-02-06*
