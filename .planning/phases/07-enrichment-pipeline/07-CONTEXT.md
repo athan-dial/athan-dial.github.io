@@ -1,6 +1,7 @@
 # Phase 7: Enrichment & Idea Generation - Context
 
 **Gathered:** 2026-02-05
+**Updated:** 2026-02-06
 **Status:** Ready for planning
 
 <domain>
@@ -35,7 +36,9 @@ This phase turns raw ingested content into **idea-generation-ready material**: s
 **Task 3: Idea Card Generation**
 - Generate 2-3 blog angles from the source
 - For each angle: suggested title, outline (3-5 bullets), supporting sources to reference
-- Includes why each angle is interesting/valuable
+- **Include rationale**: Why this angle is worth pursuing (unique perspective, shareability, fills gap)
+- **Vault-aware synthesis**: Search existing notes for related content, suggest connections
+- Prioritize: practical application, cross-domain insights, and context-appropriate angles
 - Creates new file in `/ideas/` folder with this structure
 
 **Task 4: Draft Scaffolding (Optional)**
@@ -45,27 +48,51 @@ This phase turns raw ingested content into **idea-generation-ready material**: s
 - Saves to `/drafts/` for user to refine
 
 ### Execution Order
-1. Summarization first (base output)
-2. Tagging second (depends on summary)
-3. Idea generation (can run in parallel with tagging)
-4. Draft scaffolding only if requested
 
-### n8n Workflow
+**Hybrid orchestration**: Summary first, then parallel execution
+1. Summarization runs first (quick context)
+2. Tagging + Idea Generation run in parallel (both read source + summary)
+3. Draft scaffolding only if manually requested
 
-For each ingested YouTube video:
-1. n8n checks if source has `status: enriched` (already processed)
-2. If not: triggers Claude Code summarization task
-3. Waits for completion
-4. Triggers tagging task
-5. Triggers idea generation task
-6. Updates source status to `enriched`
-7. Logs completion in daily summary note
+### Workflow Orchestration
+
+**For each new ingested source:**
+1. n8n checks if source has `status: enriched` (skip if already processed)
+2. If not enriched: triggers Claude Code summarization task
+3. Waits for summary completion
+4. Triggers tagging + idea generation tasks **in parallel**
+5. Updates source frontmatter with `status: enriched`
+6. Logs completion to daily summary note (`.enrichment-daily-YYYY-MM-DD.md`)
+
+**For backfill sources:**
+- Manual trigger only (batch process old content as needed)
+- Prevents quota exhaustion on large backfills
+
+### Output Quality Control
+
+**Light validation approach:**
+- Check required fields exist: `summary`, `tags`, `quotes`, `ideas`
+- Don't enforce strict format/quality (trust Claude, but verify basics)
+
+**Quality flags:**
+- Add `needs_review: true` flag if any of these detected:
+  - **Generic language patterns**: Summary uses vague words ('interesting', 'explores', 'discusses') without specifics
+  - **Low information density**: Summary could apply to many videos, doesn't capture unique insights
+  - **Tag/quote issues**: Tags too broad (e.g., 'technology'), no quotes extracted, required fields empty
+- User can batch-review flagged items later
+
+**Failure handling:**
+- If enrichment task fails validation: retry once automatically
+- If still fails after retry: skip task, log error, continue workflow
+- Partial enrichment is acceptable (better some data than blocking pipeline)
 
 ### Claude's Discretion
 
 - Exact prompt engineering for summaries (length, detail level, style)
+- Prompt structure: single vs modular, examples vs instruction-only
+- Source material handling: inline vs file path reference
 - Tag taxonomy (consistent vocab across all notes)
-- Idea angle selection (what makes a good blog angle)
+- Idea angle balance (when to favor practical vs synthesis vs contrarian)
 - Draft outline depth (outline vs full draft)
 - How to handle multi-part videos or long transcripts (summarize whole or by section)
 
@@ -81,6 +108,8 @@ For each ingested YouTube video:
 
 - **Citations matter:** When Claude Code generates ideas or outlines, it should reference specific quotes/timestamps from the source so you can verify.
 
+- **Vault synthesis is key:** Don't treat each source in isolation — find connections to existing notes, suggest synthesis opportunities, build on previous ideas.
+
 </specifics>
 
 <deferred>
@@ -92,6 +121,7 @@ For each ingested YouTube video:
 - Source clustering (finding related sources automatically)
 - Personalized idea scoring based on your past writing
 - Auto-tagging consistency checking (flag contradictory tags across notes)
+- Real-time enrichment (trigger on ingestion instead of scheduled batch)
 
 </deferred>
 
@@ -99,3 +129,4 @@ For each ingested YouTube video:
 
 *Phase: 07-enrichment-pipeline*
 *Context gathered: 2026-02-05*
+*Context updated: 2026-02-06*
