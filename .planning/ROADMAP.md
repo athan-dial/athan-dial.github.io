@@ -215,8 +215,8 @@ Plans:
 
 **Plans:** 2 plans
 Plans:
-- [ ] 06-01-PLAN.md — SSH infrastructure, wrapper script, and task schema
-- [ ] 06-02-PLAN.md — End-to-end integration test with sample task
+- [x] 06-01-PLAN.md — SSH infrastructure, wrapper script, and task schema ✓
+- [x] 06-02-PLAN.md — End-to-end integration test with sample task ✓
 
 **Research Flags:** n8n SSH node reliability, Claude Code remote invocation patterns, timeout handling
 
@@ -298,12 +298,12 @@ Plans:
 |-------|--------|--------------|----------|
 | 4 - Quartz & Vault Schema | ✓ Complete | MC-01, MC-02, MC-03, MC-04 | 100% |
 | 5 - YouTube Ingestion | ✓ Complete | MC-05, MC-06, MC-07 | 100% |
-| 6 - Claude Code Integration | Ready | MC-08, MC-09, MC-10 | 0% |
-| 7 - Enrichment Pipeline | Blocked on 6 | MC-11, MC-12, MC-13, MC-14 | 0% |
+| 6 - Claude Code Integration | ✓ Complete | MC-08, MC-09, MC-10 | 100% |
+| 7 - Enrichment Pipeline | Ready | MC-11, MC-12, MC-13, MC-14 | 0% |
 | 8 - Review & Approval | Blocked on 7 | MC-15, MC-16, MC-17 | 0% |
 | 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
 
-**Overall:** 7/21 requirements complete (33%)
+**Overall:** 10/21 requirements complete (48%)
 
 ---
 
