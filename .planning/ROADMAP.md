@@ -269,7 +269,7 @@ Plans:
 
 **Plans:** 1 plan
 Plans:
-- [ ] 08-01-PLAN.md — Draft template + review dashboard + approval workflow documentation
+- [x] 08-01-PLAN.md — Draft template + review dashboard + approval workflow documentation ✓
 
 **Research Flags:** Vault UI for approval workflows, frontmatter-based publishing rules
 
@@ -307,10 +307,10 @@ Plans:
 | 5 - YouTube Ingestion | ✓ Complete | MC-05, MC-06, MC-07 | 100% |
 | 6 - Claude Code Integration | ✓ Complete | MC-08, MC-09, MC-10 | 100% |
 | 7 - Enrichment Pipeline | ✓ Complete | MC-11, MC-12, MC-13, MC-14 | 100% |
-| 8 - Review & Approval | Ready | MC-15, MC-16, MC-17 | 0% |
-| 9 - Publish Sync | Blocked on 8 | MC-18, MC-19, MC-20, MC-21 | 0% |
+| 8 - Review & Approval | ✓ Complete | MC-15, MC-16, MC-17 | 100% |
+| 9 - Publish Sync | Ready | MC-18, MC-19, MC-20, MC-21 | 0% |
 
-**Overall:** 14/21 requirements complete (67%)
+**Overall:** 17/21 requirements complete (81%)
 
 ---
 

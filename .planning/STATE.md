@@ -11,26 +11,26 @@
 
 **Target Outcome:** Professional portfolio showcasing PhD → Product leader positioning with working Hugo Resume theme, complete resume content, and validated production deployment
 
-**Current Focus:** Model Citizen Phase 7 complete — enrichment pipeline with daily logging
+**Current Focus:** Model Citizen Phase 8 complete — approval workflow with Bases dashboard
 
 ---
 
 ## Current Position
 
-**Phase:** 7 of 9 - Enrichment Pipeline (Model Citizen)
-**Plan:** 4 of 4 - Complete! ✓
-**Status:** Phase complete (gap closure)
-**Last Activity:** 2026-02-06 - Completed 07-04-PLAN.md (daily log fix)
+**Phase:** 8 of 9 - Review & Approval (Model Citizen)
+**Plan:** 1 of 1 - Complete! ✓
+**Status:** Phase complete
+**Last Activity:** 2026-02-06 - Completed 08-01-PLAN.md (approval workflow)
 
 **Progress:**
 ```
-Model Citizen Milestone: [█████████████████████] 100% (11/11 plans)
+Model Citizen Milestone: [████████████████████████] 100% (12/12 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
 Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
 Phase 06: Claude Code Integration         [██████████] 2/2 plans ✓
 Phase 07: Enrichment Pipeline             [██████████] 4/4 plans ✓ COMPLETE (with gap closure)
-Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
+Phase 08: Review & Approval               [██████████] 1/1 plans ✓ COMPLETE
 Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
 
 Hugo Resume Milestone: [████████████████░░░░] 77% (10/13 requirements)
@@ -43,7 +43,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 15 plans total (11 Model Citizen + 4 Hugo Resume)
+**Velocity:** 16 plans total (12 Model Citizen + 4 Hugo Resume)
 **Quality:** 100% verification pass rate
 **Efficiency:** ~4 min per task delivered
 
@@ -60,6 +60,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - Phase 07 Plan 02 (Model Citizen): Complete (4 min, 2/2 tasks) ✓
 - Phase 07 Plan 03 (Model Citizen): Complete (4 min, 3/3 tasks) ✓ GAP CLOSURE
 - Phase 07 Plan 04 (Model Citizen): Complete (5 min, 1/1 tasks) ✓ GAP CLOSURE
+- Phase 08 Plan 01 (Model Citizen): Complete (12 min, 3/3 tasks) ✓ with human checkpoint
 
 ---
 
@@ -120,6 +121,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | Deferred temp file cleanup | Keep temp files until dependent operations complete | 2026-02-06 | 07-03 |
 | Log both skipped and enriched sources | Complete audit trail requires capturing all script invocations | 2026-02-06 | 07-04 |
 | Early-exit logging pattern | Scripts often exit early; log outcome before any early exits | 2026-02-06 | 07-04 |
+| Obsidian Bases over Dataview DQL | Native core plugin, no community plugin dependency | 2026-02-06 | 08-01 |
+| Vault repos moved to iCloud Obsidian dir | Seamless vault access in Obsidian without manual vault addition | 2026-02-06 | 08-01 |
+| Dual approval: folder OR frontmatter | Folder-based for simplicity, frontmatter for programmatic filtering | 2026-02-06 | 08-01 |
 
 ### Open Questions
 
@@ -147,7 +151,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - [x] Phase 05: YouTube Ingestion (2/2 plans) ✓
 - [x] Phase 06: Claude Code Integration (2/2 plans) ✓
 - [x] Phase 07: Enrichment Pipeline (2/2 plans) ✓ COMPLETE
-- [ ] Phase 08: Review & Approval UI (1 plan)
+- [x] Phase 08: Review & Approval (1/1 plans) ✓ COMPLETE
 - [ ] Phase 09: Publish Sync (1 plan)
 
 ### Blockers
@@ -159,30 +163,31 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 07-04 complete (daily enrichment log gap closure):
-  1. Diagnosed root cause: script exited early for already-enriched sources before reaching log code
-  2. Added daily log creation before early exit (lines 123-131) to capture skipped sources
-  3. Verified daily log file creation with proper format and accumulation
-  4. Closed final Phase 7 verification gap (daily log audit trail)
-- Commit: 9179ba4 (model-citizen-vault)
-- Phase 07 COMPLETE ✓ - All enrichment and logging working: summaries, tags, idea cards, daily audit log
-- Verification: 5/5 truths verified (excluding optional truth #4)
+- Phase 08-01 complete (approval workflow):
+  1. Created draft template with 5-item approval checklist and source/idea backlinks
+  2. Created Obsidian Bases review dashboard (_review-dashboard.base) with 3 views
+  3. Documented dual approval workflow in vault README
+  4. Moved vault and quartz repos to iCloud Obsidian vaults directory
+  5. Updated all script paths to new vault location
+- Commits: 1b5e809, 6e57cb1, c33fd51, a0d5b5c, 14ed714 (model-citizen-vault)
+- Phase 08 COMPLETE ✓ - Verification: 4/4 must-haves passed
 
 **What's Next:**
-- Model Citizen Phase 08: Review & Approval UI (1 plan remaining)
+- Model Citizen Phase 09: Publish Sync (last phase!)
 - Hugo Resume Phase 3: Production Deployment (still needs planning)
 
 **Context for Next Session:**
-- **Phase 07 Complete (with double gap closure):** Full enrichment pipeline with daily audit logging
-- All enrichment types operational: summaries ✓, tagging ✓, idea cards ✓, status updates ✓, daily logs ✓
-- Verification passed: Test source enriched + daily log captures all runs (both skipped and enriched)
-- Gap closures fixed four bugs: tagging extraction, idea card parsing, temp file cleanup, daily log creation
-- Phase 8 ready to start: Can read complete enrichment metadata from frontmatter for human review UI
-- Model Citizen at 100% plans complete (11/11 including gap closures), 2 phases remain (08: Review UI, 09: Publish Sync)
+- **Phase 08 Complete:** Approval workflow with Bases dashboard, draft checklist, dual-method approval
+- Vault moved to: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-vault
+- Quartz moved to: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-quartz
+- All scripts updated with new vault path
+- Used Obsidian Bases (.base) instead of Dataview — native core plugin
+- Phase 9 (Publish Sync) is the final Model Citizen phase: sync approved content to Quartz
+- Model Citizen at 12/12 plans complete, 1 phase remains (09: Publish Sync)
 - Hugo Resume still at Phase 2 complete, Phase 3 deployment not started
 
-**Last session:** 2026-02-06 16:36 UTC
-**Stopped at:** Completed Phase 07-04 (Daily Log Gap Closure)
+**Last session:** 2026-02-06
+**Stopped at:** Completed Phase 08-01 (Approval Workflow)
 **Resume file:** None (phase complete)
 
 ---
