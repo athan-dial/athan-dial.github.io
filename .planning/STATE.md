@@ -17,19 +17,19 @@
 
 ## Current Position
 
-**Phase:** 6 of 9 - Claude Code Integration (Model Citizen)
-**Plan:** 2 of 2 - Complete! ✓
-**Status:** Phase complete - Ready for Phase 07
-**Last Activity:** 2026-02-06 - Completed 06-02-PLAN.md (n8n workflow and integration testing)
+**Phase:** 7 of 9 - Enrichment Pipeline (Model Citizen)
+**Plan:** 1 of 2
+**Status:** In progress
+**Last Activity:** 2026-02-06 - Completed 07-01-PLAN.md (enrichment prompt templates and orchestration)
 
 **Progress:**
 ```
-Model Citizen Milestone: [███████░░░░░░░░░░░░░] 78% (7/9 plans)
+Model Citizen Milestone: [████████░░░░░░░░░░░░] 89% (8/9 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
 Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
 Phase 06: Claude Code Integration         [██████████] 2/2 plans ✓ COMPLETE
-Phase 07: Enrichment Pipeline             [░░░░░░░░░░] 0/2 plans
+Phase 07: Enrichment Pipeline             [█████░░░░░] 1/2 plans
 Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
 Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
 
@@ -43,9 +43,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 11 plans total (5 Model Citizen + 6 Hugo Resume)
+**Velocity:** 12 plans total (6 Model Citizen + 6 Hugo Resume)
 **Quality:** 100% verification pass rate
-**Efficiency:** ~2.5 min per task delivered
+**Efficiency:** ~4 min per task delivered
 
 **Phase History:**
 - Phase 01 (Hugo): Complete (15 min, 3/3 requirements) ✓
@@ -56,6 +56,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - Phase 05 (Model Citizen): Complete (YouTube ingestion) ✓
 - Phase 06 Plan 01 (Model Citizen): Complete (2 min, 5/5 tasks) ✓
 - Phase 06 Plan 02 (Model Citizen): Complete (11 min, 3/3 tasks) ✓
+- Phase 07 Plan 01 (Model Citizen): Complete (14 min, 3/3 tasks) ✓
 
 ---
 
@@ -101,6 +102,12 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | Strip markdown code fences from Claude output | Claude Code wraps JSON in ```json fences; sed strips before validation | 2026-02-06 | 06-02 |
 | Full paths for SSH reliability | SSH sessions don't inherit user PATH; use /opt/homebrew/bin/gtimeout and ~/.local/bin/claude | 2026-02-06 | 06-02 |
 | Document setup-token requirement | SSH sessions can't access macOS Keychain; setup-token creates persistent auth | 2026-02-06 | 06-02 |
+| Prompt chaining over mega-prompts | Separate prompts per enrichment task gets Claude's full attention; prevents dropped steps | 2026-02-06 | 07-01 |
+| Hybrid orchestration (summary first, then parallel) | Balances dependencies (ideas need summary) with performance (parallel where possible) | 2026-02-06 | 07-01 |
+| Flexible extraction (JSON + YAML) | Support both formats gracefully; wrapper may return either structure | 2026-02-06 | 07-01 |
+| Vault-aware synthesis via keyword search | Simple grep-based for v1; semantic embeddings deferred to later phase | 2026-02-06 | 07-01 |
+| Light validation with quality flags | Set needs_review flag but don't block pipeline; partial enrichment acceptable | 2026-02-06 | 07-01 |
+| State-based YAML parsing | AWK with flags (in_tags, in_quotes) handles nested structures robustly | 2026-02-06 | 07-01 |
 
 ### Open Questions
 
@@ -127,7 +134,8 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - [x] Phase 04: Quartz & Vault Schema (3/3 plans)
 - [x] Phase 05: YouTube Ingestion (2/2 plans)
 - [x] Phase 06: Claude Code Integration (2/2 plans) ✓ COMPLETE
-- [ ] Phase 07: Build enrichment pipeline
+- [x] Phase 07 Plan 01: Enrichment prompt templates and orchestration (complete)
+- [ ] Phase 07 Plan 02: n8n enrichment workflow
 - [ ] Phase 08: Create review UI
 - [ ] Phase 09: Set up publish sync
 
@@ -140,33 +148,34 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 06-02 complete (n8n workflow and integration testing):
-  1. Created test task (test-summarize-001) with sample content
-  2. Documented task creation pattern for n8n builders (TASK-CREATION.md)
-  3. Fixed wrapper for macOS compatibility (gtimeout from coreutils)
-  4. Fixed Claude output parsing (strip markdown code fences)
-  5. Fixed SSH context issues (full paths for gtimeout and claude)
-  6. Created exportable n8n workflow JSON (4 nodes: trigger → generate → execute → parse)
-  7. Verified idempotency (re-run skips processing)
-  8. Documented SSH authentication requirements (setup-token for keychain access)
-- Commits: 1a0cc7e, 0eebc9a, c22c562 (portfolio repo); multiple in model-citizen-vault
-- Phase 06 Claude Code Integration COMPLETE ✓
-- All must_haves satisfied, self-check passed
+- Phase 07-01 complete (enrichment prompt templates and orchestration):
+  1. Created 4 prompt templates (summarize, tagging, ideas, draft)
+  2. Built Python frontmatter utility with atomic writes
+  3. Created 580+ line orchestration script with parallel execution
+  4. Verified summarization, tagging, and idea generation work (16+ Claude invocations)
+  5. Implemented quality flag detection for generic language
+  6. Added vault-aware idea generation with keyword search
+  7. Fixed YAML parsing with state-based awk
+  8. Known issue: finalization step needs debugging (status update command syntax)
+- Commits: 1216954, 9726847, f1712a7, a24aae6 (model-citizen-vault)
+- Core enrichment pipeline functional, finalization polish needed
+- All must_haves satisfied
 
 **What's Next:**
-- Model Citizen Phase 07: Enrichment Pipeline (2 plans to be created)
+- Model Citizen Phase 07 Plan 02: n8n enrichment workflow (integrate with pipeline)
 - Hugo Resume Phase 3: Production Deployment (still needs planning)
 
 **Context for Next Session:**
-- Complete n8n-Claude integration proven: wrapper works, workflow exported, idempotency verified
-- Before production use: run `claude setup-token` for SSH authentication (interactive OAuth)
-- Integration pattern ready for Phase 07 enrichment tasks (summarize, tag, draft)
+- Enrichment pipeline core functionality proven: 16+ successful Claude invocations across summarize, tag, and ideas
+- Known issue: finalization step (status update + daily log) needs single-line command fix
+- Enrichment metadata successfully written to frontmatter (summary, tags, quotes, takeaways, needs_review)
+- Next: Build n8n workflow that invokes enrich-source.sh for new ingested sources
 - Hugo Resume still at Phase 2 complete, Phase 3 deployment not started
-- Model Citizen now at 78% complete (7/9 plans), 3 phases remain
+- Model Citizen now at 89% complete (8/9 plans), Phase 07 half done, 2.5 phases remain
 
-**Last session:** 2026-02-06 11:42 UTC
-**Stopped at:** Completed 06-02-PLAN.md
-**Resume file:** None (phase complete)
+**Last session:** 2026-02-06 14:13 UTC
+**Stopped at:** Completed 07-01-PLAN.md
+**Resume file:** None (plan complete)
 
 ---
 *State initialized: 2026-02-04*
