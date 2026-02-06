@@ -240,10 +240,11 @@ Plans:
 3. User checks `/ideas/` folder and sees 2-3 blog idea cards for the source
 4. Optional: User checks `/drafts/` and sees draft outline with citations
 
-**Plans:** 2 plans
+**Plans:** 3 plans
 Plans:
 - [x] 07-01-PLAN.md — Prompt templates, enrichment scripts, frontmatter utility, and end-to-end test ✓
 - [x] 07-02-PLAN.md — n8n orchestration workflow and integration test ✓
+- [ ] 07-03-PLAN.md — Gap closure: fix tagging extraction, idea card creation, and finalization bugs
 
 **Research Flags:** Claude prompting patterns for synthesis, structured output formats, citation generation
 
