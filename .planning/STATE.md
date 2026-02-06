@@ -1,7 +1,7 @@
 # Project State: Athan Dial Portfolio Site
 
-**Last Updated:** 2026-02-05
-**Project:** Hugo Resume Theme Migration
+**Last Updated:** 2026-02-06
+**Project:** Hugo Resume Theme Migration + Model Citizen Automation
 
 ---
 
@@ -11,24 +11,24 @@
 
 **Target Outcome:** Professional portfolio showcasing PhD → Product leader positioning with working Hugo Resume theme, complete resume content, and validated production deployment
 
-**Current Focus:** Phase 2 complete — ready for Phase 3 (Production Deployment)
+**Current Focus:** Model Citizen Phase 6 in progress (1 of 2 plans complete)
 
 ---
 
 ## Current Position
 
-**Phase:** 2 of 3 - Content & Styling (Hugo Resume) — COMPLETE
-**Plan:** 3 of 3 - Complete
-**Status:** Phase 2 done, Phase 3 next
-**Last Activity:** 2026-02-05 - Phase 2 human verification passed with refinements
+**Phase:** 6 of 9 - Claude Code Integration (Model Citizen)
+**Plan:** 1 of 2 - SSH Infrastructure complete
+**Status:** In progress - Plan 06-02 next
+**Last Activity:** 2026-02-06 - Completed 06-01-PLAN.md (SSH infrastructure and wrapper script)
 
 **Progress:**
 ```
-Model Citizen Milestone: [██████░░░░░░░░░░░░░░] 56% (5/9 plans)
+Model Citizen Milestone: [██████░░░░░░░░░░░░░░] 67% (6/9 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
 Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
-Phase 06: Claude Code Integration         [░░░░░░░░░░] 0/2 plans (planned, ready to execute)
+Phase 06: Claude Code Integration         [█████░░░░░] 1/2 plans (06-01 complete)
 Phase 07: Enrichment Pipeline             [░░░░░░░░░░] 0/2 plans
 Phase 08: Review & Approval               [░░░░░░░░░░] 0/1 plans
 Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
@@ -43,9 +43,9 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 9 plans total (3 Model Citizen + 6 Hugo Resume including refinements)
+**Velocity:** 10 plans total (4 Model Citizen + 6 Hugo Resume)
 **Quality:** 100% verification pass rate
-**Efficiency:** ~1.8 min per task delivered
+**Efficiency:** ~1.9 min per task delivered
 
 **Phase History:**
 - Phase 01 (Hugo): Complete (15 min, 3/3 requirements) ✓
@@ -54,7 +54,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - Phase 02 Plan 03 (Hugo): Complete — human verification with refinements ✓
 - Phase 04 (Model Citizen): Complete (10 min, 3/3 plans) ✓
 - Phase 05 (Model Citizen): Complete (YouTube ingestion) ✓
-- Phase 06 (Model Citizen): Planned, ready to execute (2 plans)
+- Phase 06 Plan 01 (Model Citizen): Complete (2 min, 5/5 tasks) ✓
 
 ---
 
@@ -90,6 +90,12 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 | Separate Skills vs Tools sections | Executive signal (capabilities) distinct from named technologies (tech stack) | 2026-02-05 | 02-03 |
 | Anchor nav instead of page links | Hugo Resume is single-page; Blowfish-era page links caused 404s | 2026-02-05 | 02-03 |
 | Disable Contact nav link | No /contact page exists; social links in header serve as contact | 2026-02-05 | 02-03 |
+| ed25519 SSH key without passphrase | Automated n8n-to-host SSH requires passwordless authentication | 2026-02-06 | 06-01 |
+| Idempotency via output file check | Wrapper skips processing if output exists to prevent duplicate work on n8n retries | 2026-02-06 | 06-01 |
+| Restricted tools for automation safety | Limit Claude to Read/Grep/Glob/WebFetch only to prevent accidental file modifications | 2026-02-06 | 06-01 |
+| Atomic file writes with temp + rename | Prevents partial output if Claude crashes mid-execution | 2026-02-06 | 06-01 |
+| Timeout with 600s default | Prevents hung processes from blocking pipeline; overridable per-task in frontmatter | 2026-02-06 | 06-01 |
+| JSON validation non-blocking | Attempt validation but save output regardless to preserve debugging info | 2026-02-06 | 06-01 |
 
 ### Open Questions
 
@@ -115,11 +121,11 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 **Model Citizen Milestone:**
 - [x] Phase 04: Quartz & Vault Schema (3/3 plans)
 - [x] Phase 05: YouTube Ingestion (2/2 plans)
-- [x] Phase 06: Planning complete (2 plans ready)
-- [ ] Execute Phase 06: Claude Code integration
-- [ ] Build enrichment pipeline
-- [ ] Create review UI
-- [ ] Set up publish sync
+- [x] Phase 06 Plan 01: SSH infrastructure (complete)
+- [ ] Phase 06 Plan 02: n8n workflow configuration
+- [ ] Phase 07: Build enrichment pipeline
+- [ ] Phase 08: Create review UI
+- [ ] Phase 09: Set up publish sync
 
 ### Blockers
 
@@ -130,27 +136,29 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 02-03 human verification completed with 4 refinements applied:
-  1. Replaced all placeholder content with real resume PDF data
-  2. Fixed CSS pipeline — created static/css/resume-override.css (theme was ignoring assets/css/custom.css)
-  3. Fixed nav 404s — switched to anchor-based single-page navigation
-  4. Added Tools section — separated executive skills from named technologies with devicon/FA icons
-- New files: tools.json, tools.html template, resume-override.css, i18n/en.json
-- User approved: "Looks good for now"
+- Phase 06-01 complete (SSH infrastructure and wrapper script):
+  1. Generated ed25519 SSH key pair (~/.ssh/n8n_docker) for n8n authentication
+  2. User enabled macOS Remote Login (checkpoint)
+  3. Created .model-citizen/tasks/ and outputs/ directories with schema
+  4. Built 218-line claude-task-runner.sh wrapper with idempotency, timeout, atomic writes
+  5. Verified SSH connectivity from localhost (simulates Docker)
+- Commits: 4e1acba (infrastructure), b97a6b8 (wrapper script) in model-citizen-vault repo
+- All must_haves satisfied, self-check passed
 
 **What's Next:**
-- Hugo Resume Phase 3: Production Deployment (plan then execute)
-- Model Citizen Phase 06: Execute Claude Code integration (2 plans ready)
+- Model Citizen Phase 06 Plan 02: n8n workflow configuration (SSH node + task orchestration)
+- Hugo Resume Phase 3: Production Deployment (still needs planning)
 
 **Context for Next Session:**
-- Hugo Resume Phase 2 COMPLETE — all 3 plans done
-  - Real resume content populated from PDF
-  - Executive blue accent, system fonts, dark mode
-  - Skills/Tools separation with icons
-  - Site builds clean, renders correctly at localhost:1313
-- Phase 3 needs planning — deploy to GitHub Pages from docs/
-- Model Citizen Phase 6 has 2 verified plans ready to execute
-- Changes NOT YET COMMITTED to git
+- SSH infrastructure ready: host.docker.internal:22, user adial, key ~/.ssh/n8n_docker
+- Wrapper command: ~/model-citizen-vault/scripts/claude-task-runner.sh --task-file <path>
+- Task schema documented in .model-citizen/SCHEMA.md (YAML frontmatter format)
+- Next: Configure n8n SSH node to invoke wrapper script, create test task
+- Hugo Resume still at Phase 2 complete, Phase 3 deployment not started
+
+**Last session:** 2026-02-06 11:28 UTC
+**Stopped at:** Completed 06-01-PLAN.md
+**Resume file:** .planning/phases/06-claude-code-integration/06-02-PLAN.md
 
 ---
 *State initialized: 2026-02-04*
