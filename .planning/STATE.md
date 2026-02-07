@@ -11,16 +11,16 @@
 
 **Target Outcome:** Professional portfolio showcasing PhD → Product leader positioning with working Hugo Resume theme, complete resume content, and validated production deployment
 
-**Current Focus:** Model Citizen Phase 8 complete — approval workflow with Bases dashboard
+**Current Focus:** Model Citizen Phase 9 planned — publish sync & end-to-end example ready for execution
 
 ---
 
 ## Current Position
 
-**Phase:** 8 of 9 - Review & Approval (Model Citizen)
-**Plan:** 1 of 1 - Complete! ✓
-**Status:** Phase complete
-**Last Activity:** 2026-02-06 - Completed 08-01-PLAN.md (approval workflow)
+**Phase:** 9 of 9 - Publish Sync & End-to-End Example (Model Citizen)
+**Plan:** 0 of 2 - Planned, ready to execute
+**Status:** Planning complete
+**Last Activity:** 2026-02-06 - Planned Phase 09 (2 plans in 2 waves)
 
 **Progress:**
 ```
@@ -31,7 +31,7 @@ Phase 05: YouTube Ingestion               [██████████] 2/2 p
 Phase 06: Claude Code Integration         [██████████] 2/2 plans ✓
 Phase 07: Enrichment Pipeline             [██████████] 4/4 plans ✓ COMPLETE (with gap closure)
 Phase 08: Review & Approval               [██████████] 1/1 plans ✓ COMPLETE
-Phase 09: Publish Sync                    [░░░░░░░░░░] 0/1 plans
+Phase 09: Publish Sync                    [░░░░░░░░░░] 0/2 plans (PLANNED)
 
 Hugo Resume Milestone: [████████████████░░░░] 77% (10/13 requirements)
 Phase 1: Theme Foundation         [██████████] 3/3 requirements ✓
@@ -152,7 +152,7 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 - [x] Phase 06: Claude Code Integration (2/2 plans) ✓
 - [x] Phase 07: Enrichment Pipeline (2/2 plans) ✓ COMPLETE
 - [x] Phase 08: Review & Approval (1/1 plans) ✓ COMPLETE
-- [ ] Phase 09: Publish Sync (1 plan)
+- [ ] Phase 09: Publish Sync (2 plans) — PLANNED, ready to execute
 
 ### Blockers
 
@@ -163,32 +163,30 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 08-01 complete (approval workflow):
-  1. Created draft template with 5-item approval checklist and source/idea backlinks
-  2. Created Obsidian Bases review dashboard (_review-dashboard.base) with 3 views
-  3. Documented dual approval workflow in vault README
-  4. Moved vault and quartz repos to iCloud Obsidian vaults directory
-  5. Updated all script paths to new vault location
-- Commits: 1b5e809, 6e57cb1, c33fd51, a0d5b5c, 14ed714 (model-citizen-vault)
-- Phase 08 COMPLETE ✓ - Verification: 4/4 must-haves passed
+- Phase 09 planning complete:
+  1. Researched publish sync domain (Quartz v4 native wikilink support simplifies work)
+  2. Created 09-01-PLAN.md: publish-sync.sh + transform-frontmatter.py (wave 1)
+  3. Created 09-02-PLAN.md: end-to-end example + live site verification (wave 2)
+  4. Plan checker found 4 issues across 2 iterations; all resolved
+  5. Key simplification: Quartz handles wikilinks natively, no link rewriting needed
+- Commit: fabc739
 
 **What's Next:**
-- Model Citizen Phase 09: Publish Sync (last phase!)
+- `/gsd:execute-phase 9` — execute both plans (final Model Citizen phase!)
 - Hugo Resume Phase 3: Production Deployment (still needs planning)
 
 **Context for Next Session:**
-- **Phase 08 Complete:** Approval workflow with Bases dashboard, draft checklist, dual-method approval
-- Vault moved to: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-vault
-- Quartz moved to: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-quartz
-- All scripts updated with new vault path
-- Used Obsidian Bases (.base) instead of Dataview — native core plugin
-- Phase 9 (Publish Sync) is the final Model Citizen phase: sync approved content to Quartz
-- Model Citizen at 12/12 plans complete, 1 phase remains (09: Publish Sync)
+- **Phase 09 Planned:** 2 plans, 2 waves. Wave 1 builds publish-sync.sh script. Wave 2 runs end-to-end test with human checkpoint.
+- Key paths: Vault at ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-vault, Quartz at ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-quartz
+- Dual approval: publish_queue/ folder OR status: publish frontmatter
+- Quartz v4 handles [[wikilinks]] natively — script only does frontmatter cleanup + asset copy
+- Bash script (not Node.js) — consistent with existing vault scripts
+- Model Citizen at 12/14 plans complete (2 remaining in Phase 09)
 - Hugo Resume still at Phase 2 complete, Phase 3 deployment not started
 
 **Last session:** 2026-02-06
-**Stopped at:** Completed Phase 08-01 (Approval Workflow)
-**Resume file:** None (phase complete)
+**Stopped at:** Planned Phase 09 (Publish Sync)
+**Resume file:** None (planning complete, ready to execute)
 
 ---
 *State initialized: 2026-02-04*
