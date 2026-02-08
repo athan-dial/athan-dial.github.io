@@ -20,7 +20,7 @@
 **Phase:** 9 of 9 - Publish Sync & End-to-End Example (Model Citizen)
 **Plan:** 1 of 2 - Plan 1 complete
 **Status:** In progress
-**Last Activity:** 2026-02-08 - Completed 09-01-PLAN.md (publish sync scripts)
+**Last Activity:** 2026-02-08 - Completed quick task 1: Delete upstream Quartz template workflows from model-citizen
 
 **Progress:**
 ```
@@ -161,6 +161,12 @@ Phase 3: Production Deployment    [░░░░░░░░░░] 0/2 requireme
 ### Blockers
 
 None currently.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | Delete upstream Quartz template workflows from model-citizen repo (ci.yaml, docker-build-push.yaml, build-preview.yaml, deploy-preview.yaml) | 2026-02-08 | c0c25d5 | [1-delete-upstream-quartz-template-workflow](./quick/1-delete-upstream-quartz-template-workflow/) |
 
 ---
 
