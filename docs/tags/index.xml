@@ -2,157 +2,157 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Athan Dial - Portfolio</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://athan-dial.github.io/tags/</link>
     <description>Recent content in Tags on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://athan-dial.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data-Pipelines</title>
-      <link>http://localhost:1313/tags/data-pipelines/</link>
+      <link>https://athan-dial.github.io/tags/data-pipelines/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/data-pipelines/</guid>
+      <guid>https://athan-dial.github.io/tags/data-pipelines/</guid>
       <description></description>
     </item>
     <item>
       <title>Platform-Thinking</title>
-      <link>http://localhost:1313/tags/platform-thinking/</link>
+      <link>https://athan-dial.github.io/tags/platform-thinking/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/platform-thinking/</guid>
+      <guid>https://athan-dial.github.io/tags/platform-thinking/</guid>
       <description></description>
     </item>
     <item>
       <title>Stakeholder-Alignment</title>
-      <link>http://localhost:1313/tags/stakeholder-alignment/</link>
+      <link>https://athan-dial.github.io/tags/stakeholder-alignment/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/stakeholder-alignment/</guid>
+      <guid>https://athan-dial.github.io/tags/stakeholder-alignment/</guid>
       <description></description>
     </item>
     <item>
       <title>Technical-Architecture</title>
-      <link>http://localhost:1313/tags/technical-architecture/</link>
+      <link>https://athan-dial.github.io/tags/technical-architecture/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/technical-architecture/</guid>
+      <guid>https://athan-dial.github.io/tags/technical-architecture/</guid>
       <description></description>
     </item>
     <item>
       <title>Evaluation-Frameworks</title>
-      <link>http://localhost:1313/tags/evaluation-frameworks/</link>
+      <link>https://athan-dial.github.io/tags/evaluation-frameworks/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/evaluation-frameworks/</guid>
+      <guid>https://athan-dial.github.io/tags/evaluation-frameworks/</guid>
       <description></description>
     </item>
     <item>
       <title>Ml-Systems</title>
-      <link>http://localhost:1313/tags/ml-systems/</link>
+      <link>https://athan-dial.github.io/tags/ml-systems/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ml-systems/</guid>
+      <guid>https://athan-dial.github.io/tags/ml-systems/</guid>
       <description></description>
     </item>
     <item>
       <title>Product-Strategy</title>
-      <link>http://localhost:1313/tags/product-strategy/</link>
+      <link>https://athan-dial.github.io/tags/product-strategy/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/product-strategy/</guid>
+      <guid>https://athan-dial.github.io/tags/product-strategy/</guid>
       <description></description>
     </item>
     <item>
       <title>Build-vs-Buy</title>
-      <link>http://localhost:1313/tags/build-vs-buy/</link>
+      <link>https://athan-dial.github.io/tags/build-vs-buy/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/build-vs-buy/</guid>
+      <guid>https://athan-dial.github.io/tags/build-vs-buy/</guid>
       <description></description>
     </item>
     <item>
       <title>Executive-Communication</title>
-      <link>http://localhost:1313/tags/executive-communication/</link>
+      <link>https://athan-dial.github.io/tags/executive-communication/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/executive-communication/</guid>
+      <guid>https://athan-dial.github.io/tags/executive-communication/</guid>
       <description></description>
     </item>
     <item>
       <title>Roi-Modeling</title>
-      <link>http://localhost:1313/tags/roi-modeling/</link>
+      <link>https://athan-dial.github.io/tags/roi-modeling/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/roi-modeling/</guid>
+      <guid>https://athan-dial.github.io/tags/roi-modeling/</guid>
       <description></description>
     </item>
     <item>
       <title>Strategic-Analysis</title>
-      <link>http://localhost:1313/tags/strategic-analysis/</link>
+      <link>https://athan-dial.github.io/tags/strategic-analysis/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/strategic-analysis/</guid>
+      <guid>https://athan-dial.github.io/tags/strategic-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Cross-Functional</title>
-      <link>http://localhost:1313/tags/cross-functional/</link>
+      <link>https://athan-dial.github.io/tags/cross-functional/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/cross-functional/</guid>
+      <guid>https://athan-dial.github.io/tags/cross-functional/</guid>
       <description></description>
     </item>
     <item>
       <title>Decision-Frameworks</title>
-      <link>http://localhost:1313/tags/decision-frameworks/</link>
+      <link>https://athan-dial.github.io/tags/decision-frameworks/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/decision-frameworks/</guid>
+      <guid>https://athan-dial.github.io/tags/decision-frameworks/</guid>
       <description></description>
     </item>
     <item>
       <title>Phd-Transfer</title>
-      <link>http://localhost:1313/tags/phd-transfer/</link>
+      <link>https://athan-dial.github.io/tags/phd-transfer/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/phd-transfer/</guid>
+      <guid>https://athan-dial.github.io/tags/phd-transfer/</guid>
       <description></description>
     </item>
     <item>
       <title>Data-Quality</title>
-      <link>http://localhost:1313/tags/data-quality/</link>
+      <link>https://athan-dial.github.io/tags/data-quality/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/data-quality/</guid>
+      <guid>https://athan-dial.github.io/tags/data-quality/</guid>
       <description></description>
     </item>
     <item>
       <title>Incident-Response</title>
-      <link>http://localhost:1313/tags/incident-response/</link>
+      <link>https://athan-dial.github.io/tags/incident-response/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/incident-response/</guid>
+      <guid>https://athan-dial.github.io/tags/incident-response/</guid>
       <description></description>
     </item>
     <item>
       <title>Postmortem</title>
-      <link>http://localhost:1313/tags/postmortem/</link>
+      <link>https://athan-dial.github.io/tags/postmortem/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/postmortem/</guid>
+      <guid>https://athan-dial.github.io/tags/postmortem/</guid>
       <description></description>
     </item>
     <item>
       <title>Team-Leadership</title>
-      <link>http://localhost:1313/tags/team-leadership/</link>
+      <link>https://athan-dial.github.io/tags/team-leadership/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/team-leadership/</guid>
+      <guid>https://athan-dial.github.io/tags/team-leadership/</guid>
       <description></description>
     </item>
     <item>
       <title>Developer-Experience</title>
-      <link>http://localhost:1313/tags/developer-experience/</link>
+      <link>https://athan-dial.github.io/tags/developer-experience/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/developer-experience/</guid>
+      <guid>https://athan-dial.github.io/tags/developer-experience/</guid>
       <description></description>
     </item>
     <item>
       <title>Team-Velocity</title>
-      <link>http://localhost:1313/tags/team-velocity/</link>
+      <link>https://athan-dial.github.io/tags/team-velocity/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/team-velocity/</guid>
+      <guid>https://athan-dial.github.io/tags/team-velocity/</guid>
       <description></description>
     </item>
     <item>
       <title>Tool-Selection</title>
-      <link>http://localhost:1313/tags/tool-selection/</link>
+      <link>https://athan-dial.github.io/tags/tool-selection/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/tool-selection/</guid>
+      <guid>https://athan-dial.github.io/tags/tool-selection/</guid>
       <description></description>
     </item>
   </channel>
