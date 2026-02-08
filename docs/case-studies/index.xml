@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Case Studies on Athan Dial - Portfolio</title>
-    <link>http://localhost:1313/case-studies/</link>
+    <link>https://athan-dial.github.io/case-studies/</link>
     <description>Recent content in Case Studies on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/case-studies/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://athan-dial.github.io/case-studies/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</title>
-      <link>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
       <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Preventing Metric Theater in Drug Discovery ML</title>
-      <link>http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
+      <link>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
       <pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
+      <guid>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Data science teams were presenting accuracy metrics without reliability monitoring, creating false confidence in model predictions for multimillion-dollar compound selection decisions. The stakes were high: each compound decision represented $2M+ in development costs, but teams lacked visibility into model performance degradation over time.&lt;/p&gt;&#xA;&lt;p&gt;This work lived in the drug discovery ML platform, where prediction models guide which compounds advance to expensive in-vitro and in-vivo testing phases. My role was to own the evaluation framework design and establish decision forums with clear ownership.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Build vs Buy: Strategic Analysis for Analog Generation</title>
-      <link>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Late 2025 brought Montai to a strategic crossroads. Our core IP hinged on generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;) through proprietary AI models — but the internal generative model produced ~360M virtual compounds with uncertain synthetic feasibility. Meanwhile, XtalPi offered curated, higher-confidence AI-suggested compounds from external sources.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Late 2025: Montai&amp;rsquo;s core IP = generating novel analog compounds (&amp;ldquo;Anthrologs&amp;rdquo;)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Internal generative model produced ~360M virtual compounds, but many not synthesizable/uncertain value&lt;/li&gt;&#xA;&lt;li&gt;Alternative: XtalPi (external partner) offered curated AI-suggested compounds (more drug-like)&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Resource allocation - invest in internal model improvement OR buy external suggestions?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The CSO (Margo) needed an evidence-based recommendation by December 1, 2025. This wasn&amp;rsquo;t a philosophical debate about build vs buy — it was a portfolio allocation decision with measurable ROI implications. I had three weeks to model the tradeoffs quantitatively and make a clear recommendation.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Learning Agendas: Bringing Research Rigor to Product Decisions</title>
-      <link>http://localhost:1313/case-studies/learning-agenda-framework-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/learning-agenda-framework-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By 2025, Montai ran multiple concurrent R&amp;amp;D experiments — AI model iterations, assay validations, Anthrolog generation improvements. Each experiment had implicit goals but lacked explicit success criteria. The result: debates about &amp;ldquo;when to pivot&amp;rdquo; and &amp;ldquo;when to scale&amp;rdquo; became opinion-driven rather than evidence-backed.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;By 2025: Multiple concurrent experiments (AI models, assays, Anthrolog generations)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Unclear success criteria per experiment (when to pivot? when to scale?)&lt;/li&gt;&#xA;&lt;li&gt;Example confusion: &amp;ldquo;AI model improved accuracy&amp;rdquo; but didn&amp;rsquo;t translate to better compound selection&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Wasted months on meandering experiments without clear learning goals&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The core issue traced back to a fundamental principle from my PhD training: experiments without pre-defined hypotheses produce data, not learning. In academic research, you write your aims before running experiments. In biotech R&amp;amp;D, we were running experiments and retroactively deciding whether results &amp;ldquo;felt good enough.&amp;rdquo; This had to change.&lt;/p&gt;</description>
     </item>
     <item>
       <title>From Data Crisis to Data Culture: The STAT6 Incident</title>
-      <link>http://localhost:1313/case-studies/stat6-data-crisis-response-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/stat6-data-crisis-response-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Mid-2025 was a period of rapid growth at Montai — more programs, more models, more data flowing through pipelines built for smaller scale. Technical debt had accumulated in migration work from earlier systems, creating latent risks that hadn&amp;rsquo;t yet manifested. Until STAT6.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mid-2025: STAT6 program discovered predictions missing from warehouse&lt;/li&gt;&#xA;&lt;li&gt;Impact: Could not evaluate nominations for critical program ($M+ at stake)&lt;/li&gt;&#xA;&lt;li&gt;Symptom: Dashboard DR-3098 failed, analysis queries returned incomplete results&lt;/li&gt;&#xA;&lt;li&gt;Urgency: Program decisions on hold, stakeholder trust eroding&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The stakes extended beyond the immediate technical bug. This was organizational credibility on the line — scientists needed confidence that data infrastructure wouldn&amp;rsquo;t become a bottleneck to discovery. A 6-week delay on a critical program signaled deeper quality issues, and stakeholders rightfully questioned whether other datasets harbored similar problems.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Standardizing Montai&#39;s App Ecosystem with R Shiny</title>
-      <link>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
       <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By mid-2024, Montai&amp;rsquo;s internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;2024: Growing need for internal web apps (compound selection, data visualization, report generation)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Different engineers using different frameworks (Python Streamlit/Dash, R Shiny, Jupyter notebooks)&lt;/li&gt;&#xA;&lt;li&gt;Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Small team (~5-6 people) needed velocity + consistency&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of &amp;ldquo;one size fits all&amp;rdquo; dogma that ignores practical constraints.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds</title>
-      <link>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Early 2023 presented a defining challenge: Montai&amp;rsquo;s AI models could predict activity across millions of compounds, but manual library creation processes were bottlenecked at ~250 compounds per program. The central question wasn&amp;rsquo;t whether AI could generate predictions — it was whether we could build a scalable system that maintained scientific rigor while expanding the search space 20×.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Baseline: 100’s of compounds, chosen manually for screening from within existing library&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Scale 10× to 100× per program to enabled by bioactivity ML models&lt;/li&gt;&#xA;&lt;li&gt;Environment: Early-stage biotech, unproven concept&lt;/li&gt;&#xA;&lt;li&gt;My role: First data science/product hire, architected pipeline&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;the-challenge&#34;&gt;The challenge&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;How do you architect a multi-objective decision system, that provides an optimal starting point for drug discovery funnels, is understandable by all the key decision-makers at the organization?&lt;/p&gt;</description>
     </item>
   </channel>

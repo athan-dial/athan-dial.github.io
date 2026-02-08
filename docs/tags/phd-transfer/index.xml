@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Phd-Transfer on Athan Dial - Portfolio</title>
-    <link>http://localhost:1313/tags/phd-transfer/</link>
+    <link>https://athan-dial.github.io/tags/phd-transfer/</link>
     <description>Recent content in Phd-Transfer on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/phd-transfer/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://athan-dial.github.io/tags/phd-transfer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning Agendas: Bringing Research Rigor to Product Decisions</title>
-      <link>http://localhost:1313/case-studies/learning-agenda-framework-montai/</link>
+      <link>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-studies/learning-agenda-framework-montai/</guid>
+      <guid>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</guid>
       <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;By 2025, Montai ran multiple concurrent R&amp;amp;D experiments — AI model iterations, assay validations, Anthrolog generation improvements. Each experiment had implicit goals but lacked explicit success criteria. The result: debates about &amp;ldquo;when to pivot&amp;rdquo; and &amp;ldquo;when to scale&amp;rdquo; became opinion-driven rather than evidence-backed.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Facts:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;By 2025: Multiple concurrent experiments (AI models, assays, Anthrolog generations)&lt;/li&gt;&#xA;&lt;li&gt;Problem: Unclear success criteria per experiment (when to pivot? when to scale?)&lt;/li&gt;&#xA;&lt;li&gt;Example confusion: &amp;ldquo;AI model improved accuracy&amp;rdquo; but didn&amp;rsquo;t translate to better compound selection&lt;/li&gt;&#xA;&lt;li&gt;Stakes: Wasted months on meandering experiments without clear learning goals&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The core issue traced back to a fundamental principle from my PhD training: experiments without pre-defined hypotheses produce data, not learning. In academic research, you write your aims before running experiments. In biotech R&amp;amp;D, we were running experiments and retroactively deciding whether results &amp;ldquo;felt good enough.&amp;rdquo; This had to change.&lt;/p&gt;</description>
     </item>
   </channel>

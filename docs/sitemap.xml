@@ -2,187 +2,187 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://athan-dial.github.io/about/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/advisory/</loc>
+    <loc>https://athan-dial.github.io/advisory/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://athan-dial.github.io/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/consulting/</loc>
+    <loc>https://athan-dial.github.io/consulting/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/resume/</loc>
+    <loc>https://athan-dial.github.io/resume/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/writing/</loc>
+    <loc>https://athan-dial.github.io/writing/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/data-pipelines/</loc>
+    <loc>https://athan-dial.github.io/tags/data-pipelines/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/platform-thinking/</loc>
+    <loc>https://athan-dial.github.io/tags/platform-thinking/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/</loc>
+    <loc>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/stakeholder-alignment/</loc>
+    <loc>https://athan-dial.github.io/tags/stakeholder-alignment/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://athan-dial.github.io/tags/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/technical-architecture/</loc>
+    <loc>https://athan-dial.github.io/tags/technical-architecture/</loc>
     <lastmod>2026-01-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/</loc>
+    <loc>https://athan-dial.github.io/case-studies/</loc>
     <lastmod>2026-01-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/evaluation-frameworks/</loc>
+    <loc>https://athan-dial.github.io/tags/evaluation-frameworks/</loc>
     <lastmod>2026-01-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/ml-systems/</loc>
+    <loc>https://athan-dial.github.io/tags/ml-systems/</loc>
     <lastmod>2026-01-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/preventing-metric-theater-drug-discovery-ml/</loc>
+    <loc>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</loc>
     <lastmod>2026-01-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/product-strategy/</loc>
+    <loc>https://athan-dial.github.io/tags/product-strategy/</loc>
     <lastmod>2026-01-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/xtalpi-build-vs-buy-analysis-montai/</loc>
+    <loc>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</loc>
     <lastmod>2025-11-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/build-vs-buy/</loc>
+    <loc>https://athan-dial.github.io/tags/build-vs-buy/</loc>
     <lastmod>2025-11-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/executive-communication/</loc>
+    <loc>https://athan-dial.github.io/tags/executive-communication/</loc>
     <lastmod>2025-11-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/roi-modeling/</loc>
+    <loc>https://athan-dial.github.io/tags/roi-modeling/</loc>
     <lastmod>2025-11-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/strategic-analysis/</loc>
+    <loc>https://athan-dial.github.io/tags/strategic-analysis/</loc>
     <lastmod>2025-11-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/cross-functional/</loc>
+    <loc>https://athan-dial.github.io/tags/cross-functional/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/decision-frameworks/</loc>
+    <loc>https://athan-dial.github.io/tags/decision-frameworks/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/learning-agenda-framework-montai/</loc>
+    <loc>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/phd-transfer/</loc>
+    <loc>https://athan-dial.github.io/tags/phd-transfer/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/data-quality/</loc>
+    <loc>https://athan-dial.github.io/tags/data-quality/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/stat6-data-crisis-response-montai/</loc>
+    <loc>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/incident-response/</loc>
+    <loc>https://athan-dial.github.io/tags/incident-response/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/postmortem/</loc>
+    <loc>https://athan-dial.github.io/tags/postmortem/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/team-leadership/</loc>
+    <loc>https://athan-dial.github.io/tags/team-leadership/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/developer-experience/</loc>
+    <loc>https://athan-dial.github.io/tags/developer-experience/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/shiny-framework-standardization-montai/</loc>
+    <loc>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/team-velocity/</loc>
+    <loc>https://athan-dial.github.io/tags/team-velocity/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/tool-selection/</loc>
+    <loc>https://athan-dial.github.io/tags/tool-selection/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/case-studies/scaling-ai-nominations-montai/</loc>
+    <loc>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</loc>
     <lastmod>2023-06-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://athan-dial.github.io/categories/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
