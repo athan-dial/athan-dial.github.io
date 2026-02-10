@@ -335,6 +335,26 @@ Plans:
 - Vault-native search/tagging UI
 - Quartz preview before publish
 
+### Phase 10: Content ingestion from various locations into the central Model Citizen vault
+
+**Goal:** [To be planned]
+**Depends on:** Phase 9
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 10 to break down)
+
+### Phase 11: Model Citizen UI/UX: theming, vault integration, and viewer experience
+
+**Goal:** Quartz site visually matches portfolio brand (executive blue, Apple-inspired typography) with optimized reader experience and filtered navigation
+**Depends on:** Phase 10
+**Plans:** 3 plans
+
+Plans:
+- [ ] 11-01-PLAN.md — Theme colors and typography (quartz.config.ts + custom.scss)
+- [ ] 11-02-PLAN.md — Layout components, Explorer filtering, and content pages
+- [ ] 11-03-PLAN.md — Build, deploy, and visual verification checkpoint
+
 ---
 
 *Roadmap created: 2026-02-04*
