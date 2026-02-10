@@ -329,7 +329,6 @@ Plans:
 
 **Deferred to v2:**
 - n8n orchestration for YouTube ingestion (webhook trigger, file watcher, or scheduled batch)
-- Email/web link ingestion (Phases 10+)
 - Podcast ingestion
 - Automated backlinking
 - Vault-native search/tagging UI
@@ -337,12 +336,14 @@ Plans:
 
 ### Phase 10: Content ingestion from various locations into the central Model Citizen vault
 
-**Goal:** [To be planned]
+**Goal:** Multi-source content ingestion system captures web articles, Slack saved items/DMs, and Outlook emails into the vault with deduplication, context preservation, and daily automated scanning
 **Depends on:** Phase 9
-**Plans:** 0 plans
+**Plans:** 3 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 10 to break down)
+- [ ] 10-01-PLAN.md — Shared infrastructure (queue, dedup, normalize) + web article capture
+- [ ] 10-02-PLAN.md — Slack scanner + Outlook scanner + API credential setup
+- [ ] 10-03-PLAN.md — Scan orchestrator, Claude /scan command, launchd scheduling, YouTube alignment
 
 ### Phase 11: Model Citizen UI/UX: theming, vault integration, and viewer experience
 
@@ -358,4 +359,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-08*
+*Last updated: 2026-02-10*
