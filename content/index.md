@@ -1,14 +1,7 @@
-# Welcome to Atlas
-
-I turn coffee into code that turns info into insights. ☕️ + 💻 = 🎨
-
-## Recent Notes
-
-- [[notes/knowledge-framework|Knowledge Framework: Bridging Philosophy and Systems Thinking]]
-
-## About
-
-This is a digital garden where I cultivate ideas at the intersection of technology, philosophy, and systems thinking.
-
 ---
-*Last updated: January 2024*
+title: "Model Citizen"
+---
+
+This is a digital garden of working notes and published thinking by Athan Dial. It's a companion to the [portfolio site](https://athan-dial.github.io/).
+
+The system captures ideas from various sources, enriches them through synthesis and connection, and publishes the most developed ones here. Browse the [notes](/notes) to explore.
