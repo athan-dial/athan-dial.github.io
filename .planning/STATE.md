@@ -69,6 +69,7 @@ Phase 3: Production Deployment    [██████████] 2/2 requireme
 - Phase 10 Plan 01 (Content Ingestion): Complete (2 min, 2/2 tasks) ✓
 - Phase 10 Plan 02 (Content Ingestion): Complete (3 min, 2/2 tasks) ✓
 - Phase 10 Plan 03 (Content Ingestion): Complete (3 min, 3/3 tasks) ✓ PHASE COMPLETE
+- Phase 11 Plan 01 (Model Citizen UI/UX): Complete (4 min, 2/2 tasks) ✓
 - Phase 11 Plan 02 (Model Citizen UI/UX): Complete (4.1 min, 2/2 tasks) ✓
 
 ---
@@ -149,6 +150,10 @@ Phase 3: Production Deployment    [██████████] 2/2 requireme
 | Incremental scanning via timestamp tracking | Reduces API calls and avoids duplicate captures | 2026-02-13 | 10-03 |
 | Continue-on-failure pattern in scan-all.sh | One source failure doesn't block others, resilient automation | 2026-02-13 | 10-03 |
 | Daily 7 AM launchd schedule | Native macOS scheduling with PATH and logging configured | 2026-02-13 | 10-03 |
+| Executive blue (#1E3A5F) as primary brand color | Match portfolio site for brand consistency across main and Model Citizen subsites | 2026-02-13 | 11-01 |
+| Brightened blue (#4A90E2) for dark mode | Ensures WCAG AA contrast on dark backgrounds; lightened ~30% from primary | 2026-02-13 | 11-01 |
+| 65ch line length constraint | Optimal reading line length per UX research (50-75 char range) | 2026-02-13 | 11-01 |
+| CSS variable overrides for dark mode | Defensive CSS specificity layer to guarantee brand colors always apply | 2026-02-13 | 11-01 |
 | Explorer filterFn for privacy | Vault public on GitHub, Quartz hides private folders via rendering-layer filter | 2026-02-13 | 11-02 |
 | Folder-first sorting in Explorer | Logical hierarchy with folders at top, alphabetical within each group | 2026-02-13 | 11-02 |
 | Link-based folder navigation | Click folders to navigate to index pages rather than inline expansion | 2026-02-13 | 11-02 |
@@ -203,13 +208,18 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
+- Phase 11 Plan 01 COMPLETE (2026-02-13):
+  - Applied portfolio's executive blue color palette (#1E3A5F) to Quartz
+  - Configured reader-optimized typography (65ch line width, 1rem/1.6 body)
+  - Set up dark mode with contrast-safe brightened blues (#4A90E2)
+  - Removed gradient effects for clean Apple-inspired aesthetic
 - Phase 11 Plan 02 COMPLETE (2026-02-13):
   - Configured Quartz Explorer with privacy filtering and portfolio footer links
   - Created folder index pages for meaningful navigation labels
   - Updated homepage with Model Citizen branding and purpose
 - Phase 10 COMPLETE (2026-02-13): Content ingestion pipeline (3/3 plans)
 - Hugo Resume Milestone: COMPLETE ✓ (3/3 phases)
-- Model Citizen Milestone: Extended to 19 plans (Phase 11 in progress)
+- Model Citizen Milestone: Extended to 19+ plans (Phase 11 in progress)
 
 **What's Next:**
 - Phase 11: Continue Model Citizen UI/UX (theming, vault integration, viewer experience)
@@ -234,7 +244,7 @@ None currently.
   - Publishing: Vault-to-Quartz sync with hash-based idempotency
 
 **Last session:** 2026-02-13T16:43:14Z
-**Stopped at:** Completed 11-02-PLAN.md
+**Stopped at:** Completed 11-01-PLAN.md
 **Resume file:** None
 
 ---
