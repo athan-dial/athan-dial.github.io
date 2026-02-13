@@ -1,6 +1,6 @@
 # Project State: Athan Dial Portfolio Site
 
-**Last Updated:** 2026-02-09
+**Last Updated:** 2026-02-13
 **Project:** Hugo Resume Theme Migration + Model Citizen Automation
 
 ---
@@ -17,14 +17,14 @@
 
 ## Current Position
 
-**Phase:** 10 - Content Ingestion
-**Plan:** 3 of 3
-**Status:** Complete
-**Last Activity:** 2026-02-13 - Phase 10 Plan 03 complete: Slack/Outlook scanners, /scan command, daily automation
+**Phase:** 11 - Model Citizen UI/UX
+**Plan:** 2 of TBD
+**Status:** In Progress
+**Last Activity:** 2026-02-13 - Phase 11 Plan 02 complete: Quartz layout components, Explorer filtering, navigation
 
 **Progress:**
-[█████████░] 88%
-Model Citizen Milestone: [██████████████████████████] 100% (17/17 plans)
+[█████████░] 90%
+Model Citizen Milestone: [██████████████████████████░] 95% (18/19 plans)
 
 Phase 04: Quartz & Vault Schema           [██████████] 3/3 plans ✓
 Phase 05: YouTube Ingestion               [██████████] 2/2 plans ✓
@@ -33,6 +33,7 @@ Phase 07: Enrichment Pipeline             [██████████] 4/4 p
 Phase 08: Review & Approval               [██████████] 1/1 plans ✓ COMPLETE
 Phase 09: Publish Sync                    [██████████] 2/2 plans ✓ COMPLETE
 Phase 10: Content Ingestion               [██████████] 3/3 plans ✓ COMPLETE
+Phase 11: Model Citizen UI/UX             [█████████░] 2/TBD plans
 
 Hugo Resume Milestone: [██████████████████████] 100% (13/13 requirements) ✓
 Phase 1: Theme Foundation         [██████████] 3/3 requirements ✓
@@ -44,7 +45,7 @@ Phase 3: Production Deployment    [██████████] 2/2 requireme
 
 ## Performance Metrics
 
-**Velocity:** 21 plans total (17 Model Citizen + 4 Hugo Resume)
+**Velocity:** 22 plans total (18 Model Citizen + 4 Hugo Resume)
 **Quality:** 100% verification pass rate
 **Efficiency:** ~3.7 min per task delivered
 
@@ -68,6 +69,7 @@ Phase 3: Production Deployment    [██████████] 2/2 requireme
 - Phase 10 Plan 01 (Content Ingestion): Complete (2 min, 2/2 tasks) ✓
 - Phase 10 Plan 02 (Content Ingestion): Complete (3 min, 2/2 tasks) ✓
 - Phase 10 Plan 03 (Content Ingestion): Complete (3 min, 3/3 tasks) ✓ PHASE COMPLETE
+- Phase 11 Plan 02 (Model Citizen UI/UX): Complete (4.1 min, 2/2 tasks) ✓
 
 ---
 
@@ -147,6 +149,9 @@ Phase 3: Production Deployment    [██████████] 2/2 requireme
 | Incremental scanning via timestamp tracking | Reduces API calls and avoids duplicate captures | 2026-02-13 | 10-03 |
 | Continue-on-failure pattern in scan-all.sh | One source failure doesn't block others, resilient automation | 2026-02-13 | 10-03 |
 | Daily 7 AM launchd schedule | Native macOS scheduling with PATH and logging configured | 2026-02-13 | 10-03 |
+| Explorer filterFn for privacy | Vault public on GitHub, Quartz hides private folders via rendering-layer filter | 2026-02-13 | 11-02 |
+| Folder-first sorting in Explorer | Logical hierarchy with folders at top, alphabetical within each group | 2026-02-13 | 11-02 |
+| Link-based folder navigation | Click folders to navigate to index pages rather than inline expansion | 2026-02-13 | 11-02 |
 
 ### Open Questions
 
@@ -198,33 +203,38 @@ None currently.
 ## Session Continuity
 
 **What Just Happened:**
-- Phase 10 COMPLETE (2026-02-13):
-  - Plan 01: Vault structure with 5 content sections and tag-based routing ✓
-  - Plan 02: Web article capture tool with readability extraction and queue system ✓
-  - Plan 03: Slack/Outlook scanners with /scan command and daily automation ✓
+- Phase 11 Plan 02 COMPLETE (2026-02-13):
+  - Configured Quartz Explorer with privacy filtering and portfolio footer links
+  - Created folder index pages for meaningful navigation labels
+  - Updated homepage with Model Citizen branding and purpose
+- Phase 10 COMPLETE (2026-02-13): Content ingestion pipeline (3/3 plans)
 - Hugo Resume Milestone: COMPLETE ✓ (3/3 phases)
-- Model Citizen Milestone: Extended to 17 plans (Phase 10 added)
-- Phase 10: Content Ingestion - COMPLETE ✓ (3/3 plans)
+- Model Citizen Milestone: Extended to 19 plans (Phase 11 in progress)
 
 **What's Next:**
-- Phase 11: Model Citizen UI/UX (theming, vault integration, viewer experience)
-- Complete ingestion pipeline ready for production use
-- User setup required: Slack API credentials, Microsoft Graph credentials, launchd agent
+- Phase 11: Continue Model Citizen UI/UX (theming, vault integration, viewer experience)
+- Additional plans TBD for custom styling, theme refinements
+- Full site deployment and testing
 
 **Context for Next Session:**
 - Hugo Resume: 100% complete (13/13 requirements delivered)
-- Model Citizen: 88% complete (17/19 total plans, Phase 10 & partial Phase 11 delivered)
+- Model Citizen: 90% complete (18/19+ total plans, Phase 10 complete, Phase 11 in progress)
 - Live sites:
   - Portfolio: https://athan-dial.github.io/
   - Model Citizen: (deployment TBD - Phase 11)
+- Quartz layout configured:
+  - Explorer filtering (hides inbox, drafts, publish_queue, .templates, .obsidian, attachments)
+  - Footer links to portfolio and GitHub
+  - Folder index pages for meaningful navigation labels
+  - Homepage with Model Citizen branding
 - Full content ingestion pipeline operational:
   - Manual: capture-web.sh CLI and share sheet queue
   - Automated: Slack/Outlook scanners via /scan or daily 7 AM launchd
-  - Curation: Tag-based routing to 700 Model Citizen/ sections
+  - Curation: Tag-based routing to Model Citizen/ sections
   - Publishing: Vault-to-Quartz sync with hash-based idempotency
 
-**Last session:** 2026-02-13T10:23:53Z
-**Stopped at:** Completed 10-03-PLAN.md
+**Last session:** 2026-02-13T16:43:14Z
+**Stopped at:** Completed 11-02-PLAN.md
 **Resume file:** None
 
 ---
