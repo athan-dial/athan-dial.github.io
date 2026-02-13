@@ -334,16 +334,16 @@ Plans:
 - Vault-native search/tagging UI
 - Quartz preview before publish
 
-### Phase 10: Content ingestion from various locations into the central Model Citizen vault
+### Phase 10: Single-vault Model Citizen integration + multi-source ingestion
 
-**Goal:** Multi-source content ingestion system captures web articles, Slack saved items/DMs, and Outlook emails into the vault with deduplication, context preservation, and daily automated scanning
+**Goal:** Consolidate Model Citizen into 2B-new vault (700 Model Citizen/ JD category), set up tag-based curation with Auto Note Mover, create Obsidian templates, build ingestion tools (web/Slack/Outlook) targeting vault inbox, and sync subfolder to Quartz
 **Depends on:** Phase 9
 **Plans:** 3 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Shared infrastructure (queue, dedup, normalize) + web article capture
-- [ ] 10-02-PLAN.md — Slack scanner + Outlook scanner + API credential setup
-- [ ] 10-03-PLAN.md — Scan orchestrator, Claude /scan command, launchd scheduling, YouTube alignment
+- [ ] 10-01-PLAN.md — Vault structure, templates, Auto Note Mover config, and Quartz sync script
+- [ ] 10-02-PLAN.md — Web article capture tool with share sheet queue
+- [ ] 10-03-PLAN.md — Slack + Outlook scanners, /scan command, and daily schedule
 
 ### Phase 11: Model Citizen UI/UX: theming, vault integration, and viewer experience
 
@@ -359,4 +359,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-10*
+*Last updated: 2026-02-13*
