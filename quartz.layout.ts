@@ -8,8 +8,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      Portfolio: "https://athan-dial.github.io/",
+      GitHub: "https://github.com/athan-dial",
     },
   }),
 }
@@ -27,7 +27,26 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.Explorer({
+      title: "Content",
+      folderClickBehavior: "link",
+      folderDefaultState: "collapsed",
+      useSavedState: true,
+      filterFn: (node) => {
+        const hiddenFolders = ["inbox", "drafts", "publish_queue", ".templates", ".obsidian", "attachments"]
+        return !hiddenFolders.some(folder => node.file?.slug?.includes(folder))
+      },
+      sortFn: (a, b) => {
+        // Folders first, then alphabetical
+        if ((!a.file && b.file) || (a.file?.slug === "index" && b.file?.slug !== "index")) {
+          return -1
+        }
+        if ((a.file && !b.file) || (a.file?.slug !== "index" && b.file?.slug === "index")) {
+          return 1
+        }
+        return a.displayName.localeCompare(b.displayName)
+      }
+    })),
   ],
   right: [
     Component.Graph(),
@@ -44,7 +63,26 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.Explorer({
+      title: "Content",
+      folderClickBehavior: "link",
+      folderDefaultState: "collapsed",
+      useSavedState: true,
+      filterFn: (node) => {
+        const hiddenFolders = ["inbox", "drafts", "publish_queue", ".templates", ".obsidian", "attachments"]
+        return !hiddenFolders.some(folder => node.file?.slug?.includes(folder))
+      },
+      sortFn: (a, b) => {
+        // Folders first, then alphabetical
+        if ((!a.file && b.file) || (a.file?.slug === "index" && b.file?.slug !== "index")) {
+          return -1
+        }
+        if ((a.file && !b.file) || (a.file?.slug !== "index" && b.file?.slug === "index")) {
+          return 1
+        }
+        return a.displayName.localeCompare(b.displayName)
+      }
+    })),
   ],
   right: [],
 }
