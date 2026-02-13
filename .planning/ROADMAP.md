@@ -314,8 +314,9 @@ Plans:
 | 7 - Enrichment Pipeline | ✓ Complete | MC-11, MC-12, MC-13, MC-14 | 100% |
 | 8 - Review & Approval | ✓ Complete | MC-15, MC-16, MC-17 | 100% |
 | 9 - Publish Sync | ✓ Complete | MC-18, MC-19, MC-20, MC-21 | 100% |
+| 10 - Content Ingestion | ✓ Complete | 3/3 plans | 100% |
 
-**Overall:** 21/21 requirements complete (100%)
+**Overall:** 21/21 requirements + 3/3 ingestion plans complete
 
 ---
 
@@ -341,9 +342,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Vault structure, templates, Auto Note Mover config, and Quartz sync script
-- [ ] 10-02-PLAN.md — Web article capture tool with share sheet queue
-- [ ] 10-03-PLAN.md — Slack + Outlook scanners, /scan command, and daily schedule
+- [x] 10-01-PLAN.md — Vault structure, templates, Auto Note Mover config, and Quartz sync script ✓
+- [x] 10-02-PLAN.md — Web article capture tool with share sheet queue ✓
+- [x] 10-03-PLAN.md — Slack + Outlook scanners, /scan command, and daily schedule ✓
 
 ### Phase 11: Model Citizen UI/UX: theming, vault integration, and viewer experience
 
@@ -359,4 +360,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-13*
+*Last updated: 2026-02-13 (Phase 10 complete)*
