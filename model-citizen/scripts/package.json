@@ -1,0 +1,14 @@
+{
+  "name": "model-citizen-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Content ingestion scripts for Model Citizen vault",
+  "scripts": {
+    "capture": "node extract-article.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "linkedom": "^0.18.0",
+    "turndown": "^7.2.0"
+  }
+}
