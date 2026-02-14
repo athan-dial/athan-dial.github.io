@@ -2,98 +2,81 @@
 
 ## What This Is
 
-Personal/professional portfolio website for Athan Dial — a landing page for future employers and networking contacts. Built with Hugo, deployed to GitHub Pages. Targeting senior tech roles at the intersection of data science and product management.
+Personal/professional portfolio website and automated content publishing system for Athan Dial. Two interconnected sites: a Hugo Resume portfolio at athan-dial.github.io and a Quartz digital garden (Model Citizen) at athan-dial.github.io/model-citizen/. Content flows from multiple sources through an AI enrichment pipeline into a curated knowledge base.
 
 ## Core Value
 
-**Demonstrate strategic credibility through the site itself.** The site is not just a container for a resume — it's evidence of communication quality, strategic thinking, and decision science rigor. Every element should signal "this person operates at a senior level."
+**Demonstrate strategic credibility through the site itself.** The portfolio signals senior-level communication quality and decision science rigor. Model Citizen demonstrates AI-native thinking by actually building an automated knowledge system.
 
 ## Requirements
 
 ### Validated
 
-- ✓ Hugo static site generator configured — existing
-- ✓ GitHub Pages deployment (docs/ directory) — existing
-- ✓ Basic content structure (pages, case studies scaffolded) — existing
-- ✓ Git version control on gh-pages branch — existing
+- ✓ Hugo Resume theme installed, configured, deployed — v1.0
+- ✓ Complete professional profile (experience, skills, education, bio, contact) — v1.0
+- ✓ Executive blue color system with dark mode — v1.0
+- ✓ GitHub Pages deployment verified — v1.0
+- ✓ Mobile responsive validated — v1.0
+- ✓ Quartz site scaffolded and deployed at /model-citizen/ — v1.1
+- ✓ YouTube transcript ingestion pipeline — v1.1
+- ✓ Claude Code SSH agent integration — v1.1
+- ✓ Enrichment pipeline (summaries, tags, ideas, drafts) — v1.1
+- ✓ Obsidian review/approval workflow — v1.1
+- ✓ Publish sync with idempotency — v1.1
+- ✓ Multi-source ingestion (web, Slack, Outlook) — v1.1
+- ✓ Brand-consistent Quartz theming — v1.1
 
-### Active (v1)
+### Active
 
-- [ ] Theme migration from Blowfish to Hugo Resume
-- [ ] Resume content migrated and structured for new theme
-- [ ] Basic about/profile section populated
-- [ ] Contact information and social links configured
-- [ ] Site builds and deploys successfully with new theme
-
-### v2 (Deferred)
-
-- [ ] Voice and positioning documentation (brand guide)
-- [ ] 2-3 polished case studies demonstrating decision science
-- [ ] Thought leadership / writing section
-- [ ] Skills inventory with appropriate depth
-- [ ] Portfolio/projects showcase
+(None — define in next milestone via `/gsd:new-milestone`)
 
 ### Out of Scope
 
 - Blog/frequent posting — Focus is portfolio, not content marketing
-- Complex JavaScript interactions — Static site, minimal dependencies
-- Custom theme development — Using Hugo Resume as-is with configuration
-- Case study rewrites in v1 — Deferred to v2 after theme is stable
+- Custom theme development — Using Hugo Resume with configuration
+- Case study rewrites — Need voice/positioning research first (ChatGPT Deep Research)
+- n8n full orchestration — Host scripts for v1; n8n workflow orchestration deferred
+- Podcast ingestion — YouTube only for now
+- Semantic search/embeddings — Grep-based for v1
 
 ## Context
 
+**Current State (v1.1 shipped 2026-02-14):**
+- Portfolio: Hugo Resume, 13 requirements delivered, live at athan-dial.github.io
+- Model Citizen: Quartz + Obsidian vault + enrichment pipeline, 21 requirements delivered
+- Tech stack: Hugo, Quartz, n8n (Docker), Claude Code (SSH), bash scripts, Python helpers
+- Two GitHub repos: athan-dial.github.io (portfolio) and model-citizen (Quartz site)
+- Vault: iCloud Obsidian directory (2B-new/700 Model Citizen/)
+
 **Target Audience:**
-- Hiring managers and recruiters for senior PM/DS roles
-- Peers and potential collaborators for networking
+- Hiring managers/recruiters for senior PM/DS roles
+- Peers and collaborators
 - Anyone evaluating professional credibility
 
 **Target Positioning:**
 - PhD → Product leader (technical credibility + business sense)
-- Decision science framing (systematic approach to high-stakes choices, not intuition)
-- AI-native practitioner (actually building agentic systems, not just talking about AI)
-- Translator-strategist-decision architect (generalist strength, multi-faceted view)
-
-**Current Role:**
-- Head of Decision Science & Product (Associate Director) at Montai Therapeutics
-- Looking for steps up in strategy, impact, demonstrating strategic foresight
-
-**Voice Anti-Patterns (what NOT to sound like):**
-- Generic PM speak: "Drove cross-functional alignment to deliver value"
-- Academic/dry: Inaccessible to business readers
-- Hype-driven AI bro: Buzzwords without substance
-
-**Voice Target:**
-- Substantive but accessible
-- Shows work without overwhelming
-- Confident without arrogant
-- Technical depth that serves the reader, not signals the author
-
-**New Theme:**
-- Hugo Resume (https://github.com/eddiewebb/hugo-resume)
-- StartBootstrap port, professional portfolio layout
-- Integrated Netlify CMS (optional), social handles, skills inventory, work history, portfolio sections
-
-**Existing Assets:**
-- Resume PDF at external path (source of truth for work history)
-- 7 case study drafts (to be rewritten in v2)
-- Codebase documentation in .planning/codebase/
+- Decision science framing (systematic approach, not intuition)
+- AI-native practitioner (actually building agentic systems)
 
 ## Constraints
 
-- **Platform**: Hugo static site generator (already configured, stay with Hugo)
-- **Hosting**: GitHub Pages from docs/ directory on gh-pages branch
-- **Theme**: Hugo Resume — use as primary theme, migrate away from Blowfish
-- **Timeline**: v1 focused on working theme + resume (not full content)
-- **Content**: Case studies and thought leadership deferred to v2
+- **Platform**: Hugo (portfolio) + Quartz (Model Citizen)
+- **Hosting**: GitHub Pages from two repos
+- **Content**: Case studies deferred until ChatGPT Deep Research outputs available
+- **Employer Safety**: Cannot appear to run active consulting (use "Advisory" language)
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Hugo Resume over custom theme | Purpose-built for professional portfolios; faster than building from scratch | — Pending |
-| v1 = theme + resume only | Ship working site fast, iterate on content with stable foundation | — Pending |
-| Full case study rewrite in v2 | Existing drafts are placeholders; need proper voice/positioning work first | — Pending |
-| Defer voice/branding to v2 | Theme migration is prerequisite; can't polish content without stable structure | — Pending |
+| Hugo Resume over custom theme | Purpose-built for professional portfolios | ✓ Good — clean single-page layout works |
+| Executive blue (#1E3A5F) palette | Professional executive positioning, Apple aesthetic | ✓ Good — consistent across both sites |
+| Separate repos (portfolio + model-citizen) | Cleaner separation, independent deployment | ✓ Good — avoids cross-contamination |
+| Host-side yt-dlp (not container) | Hardened n8n image lacks Python | ✓ Good — simpler architecture |
+| Claude Code SSH agent pattern | Automation with AI synthesis | ✓ Good — reliable with timeout/idempotency |
+| Tag-based content curation | More flexible than folder-based routing | ✓ Good — works with Obsidian Auto Note Mover |
+| Explicit publish gate | Safety — daily runs never auto-publish | ✓ Good — non-negotiable design principle |
+| Public vault strategy | Entire vault public; Quartz gates rendering | ⚠️ Revisit — consider if sensitive content enters pipeline |
 
 ---
-*Last updated: 2026-02-04 after initialization*
+*Last updated: 2026-02-14 after v1.1 milestone*
