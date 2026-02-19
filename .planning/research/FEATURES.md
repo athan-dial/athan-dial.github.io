@@ -1,256 +1,159 @@
-# Feature Research: Hugo Resume Theme
+# Feature Research
 
-**Domain:** Professional portfolio website for senior tech leader
-**Researched:** 2026-02-04
-**Confidence:** HIGH
+**Domain:** GoodLinks-to-Obsidian ingestion pipeline (subsequent milestone to Model Citizen)
+**Researched:** 2026-02-19
+**Confidence:** HIGH (GoodLinks data access method confirmed via open-source tooling and direct SQLite schema)
+
+---
+
+## How GoodLinks Works (Access Patterns)
+
+Before features, this context is essential for implementation decisions.
+
+**Three available access methods (in order of preference for automation):**
+
+1. **SQLite direct read** — GoodLinks stores data at `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`. The `link` table contains all fields. This is the most reliable, scriptable, and automation-friendly method. Confirmed by open-source tooling (cychong47/goodlinks on GitHub). No app dependency at runtime.
+
+2. **JSON export file** — GoodLinks has a built-in export (File > Export on Mac) that produces a JSON array. Each object contains: `id`, `url`, `originalURL`, `title`, `summary`, `author`, `preview`, `tags` (array), `starred` (bool), `readAt` (Unix timestamp or null), `addedAt` (Unix timestamp), `modifiedAt` (Unix timestamp), `fetchStatus`, `status`. Export is manual, not automatable without Shortcuts.
+
+3. **Apple Shortcuts** — GoodLinks exposes a "Find Links" Shortcuts action with rich filtering (unread, tagged, date range, etc.) and returns link objects with full metadata including article content in HTML, plain text, or Markdown. Automatable via `shortcuts run` from shell. Requires GoodLinks app to be running/available. More fragile for headless/launchd use.
+
+**Recommendation:** Use SQLite direct read as primary access method. It requires no app interaction, works in launchd context, and gives full field access without going through the Shortcuts API surface.
+
+---
 
 ## Feature Landscape
 
 ### Table Stakes (Users Expect These)
 
-Features that senior tech hiring managers and networking contacts assume exist. Missing these = portfolio lacks professional credibility.
+Features the pipeline must have to be useful at all. Missing these = the integration is broken.
 
 | Feature | Why Expected | Complexity | Notes |
 |---------|--------------|------------|-------|
-| Single-page resume layout | Industry standard for quick scanning | LOW | Hugo Resume provides auto-scrolling navigation |
-| Work experience timeline | Essential for career progression narrative | LOW | Driven by `data/experience.json` |
-| Skills inventory | Hiring managers screen by tech stack | LOW | Driven by `data/skills.json` with dev icons |
-| Education background | Credential verification (especially PhD) | LOW | Driven by `data/education.json` |
-| Contact information | Must be easy to reach you | LOW | Email, phone, social handles configurable |
-| Social media links | Expected: LinkedIn, GitHub at minimum | LOW | Hugo Resume supports 5+ social platforms |
-| Mobile responsive design | 60%+ of traffic is mobile | LOW | Bootstrap-based, handles responsively |
-| Professional photo | Humanizes portfolio, builds trust | LOW | Profile image parameter in config |
-| Custom domain | yourname.com signals professionalism | LOW | Hugo deploys to any domain |
-| Dark mode support | Standard UX expectation in 2026 | MEDIUM | NOT included in Hugo Resume (gap) |
-| Fast load times | Slow site = high bounce rate | LOW | Static site generation handles this |
-| Clean navigation | Must be intuitive within 3 seconds | LOW | Fixed left-nav with auto-scroll |
+| SQLite scanner script (`scan-goodlinks.sh`) | All other sources (Slack, Outlook, YouTube) have a dedicated scanner script — GoodLinks needs the same pattern | LOW | Read from `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`, query `link` table |
+| URL-based deduplication | Same URL may be in GoodLinks and already captured via `capture-web.sh` or another source — duplicates pollute inbox | LOW | Check existing vault notes for matching `url:` in frontmatter before creating new note |
+| YAML frontmatter matching pipeline schema | Output notes must have `title`, `url`, `source: goodlinks`, `date`, `tags`, `status: inbox` to flow into enrichment | LOW | Map GoodLinks `addedAt` → `date`, `tags[]` → `tags`, generate filename from title/date |
+| Incremental scan (new-only) | Daily 7AM job must not re-ingest already-processed links on every run | LOW | Store last-seen `addedAt` timestamp in a state file (e.g., `.goodlinks-last-scan`) OR query SQLite with `WHERE addedAt > {last_run_epoch}` |
+| Integration with existing daily launchd job | GoodLinks scanner must run as part of the 7AM automation, not as a separate manual step | LOW | Add `scan-goodlinks.sh` call to the existing orchestrator script |
 
-### Differentiators (Competitive Advantage)
+### Differentiators (Valuable but Not Required for V1)
 
-Features that support unique positioning as PhD→Product leader with decision science focus.
+Features that make the integration smarter. The pipeline works without these, but they add meaningful signal.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| Detailed project pages | Demonstrates depth over breadth | LOW | Hugo Resume has dedicated `/creations/` and `/contributions/` |
-| Publications section | Showcases academic→industry bridge | LOW | Separate `/publications/` archetype |
-| Blog/writing section | Thought leadership, decision frameworks | LOW | `/blog/` folder supported |
-| Client-side search | Visitors can find specific topics | LOW | fuse.js powers `/search` endpoint |
-| Downloadable resume PDF | Enables ATS submission and printing | MEDIUM | Requires PDF generation (not built-in) |
-| Case study format | Shows decision-making process | MEDIUM | Requires custom layout/archetype |
-| Metrics/outcomes display | Quantifies impact ("decision velocity") | MEDIUM | Requires custom data structure |
-| Portfolio categories | Separates original work vs contributions | LOW | Built-in: `/creations/` vs `/contributions/` |
-| Multi-language support | Signals global experience | MEDIUM | Hugo Resume supports EN/FR, extensible |
-| Content tagging system | Enables filtering by topic/skill | LOW | Taxonomy built into Hugo |
-| QR code for vCard | Easy contact add at conferences | LOW | Optional parameter in config |
-| Netlify CMS integration | Non-technical editing capability | MEDIUM | Built-in admin endpoint with auth |
+| Read-status routing | Links marked as `readAt IS NOT NULL` in GoodLinks can be routed differently than unread — e.g., unread → inbox for enrichment, already-read → direct to enriched queue | LOW | Single `WHERE` filter variation; aligns with how GoodLinks users actually organize reading |
+| Starred flag passthrough | GoodLinks `starred = 1` maps to high-priority content — surface this in frontmatter as a tag or priority field so enrichment can weight it | LOW | Add `starred: true` to frontmatter when flag is set |
+| Tag inheritance | GoodLinks tags (already applied by user) should flow into Obsidian note tags — avoids Claude re-inventing tags the user already assigned | LOW | Map `tags[]` array from SQLite directly into frontmatter `tags:` list |
+| Article content extraction on capture | GoodLinks stores a `preview` field (excerpt), but not full article text. Run the URL through existing readability extraction (already built in `capture-web.sh`) when importing an unread GoodLinks link to get full content for enrichment | MEDIUM | Reuse existing readability logic rather than building new; skip for already-read items to avoid re-fetching stale content |
+| Source metadata in note | Include `goodlinks_id`, `added_at`, `read_at` in frontmatter for traceability and potential round-trip debugging | LOW | Useful for troubleshooting; no downstream dependency in current pipeline |
 
-### Anti-Features (Commonly Requested, Often Problematic)
-
-Features that seem valuable but undermine professional credibility or create maintenance burden.
+### Anti-Features (Avoid These)
 
 | Feature | Why Requested | Why Problematic | Alternative |
 |---------|---------------|-----------------|-------------|
-| Animated hero sections | "Looks modern and engaging" | Distracts from content, feels junior | Clean, text-focused hero with strong positioning statement |
-| Skills rating bars | "Shows proficiency levels" | Subjective, often inflated, looks amateurish | List tech stack by category (current/familiar/exploring) without ratings |
-| Every project ever built | "Shows breadth of experience" | Dilutes portfolio with weak work, overwhelming | Curate 3-5 best projects that align with target roles |
-| Testimonials carousel | "Social proof is important" | Common on junior portfolios, feels sales-y | Let work speak for itself; mention notable collaborators in context |
-| Buzzword clouds | "Highlights key skills visually" | Dated design pattern (circa 2010) | Structured skills taxonomy with context |
-| Auto-playing video background | "Creates immersive experience" | Accessibility nightmare, slow load, unprofessional | High-quality static imagery or clean backgrounds |
-| Multiple CTA buttons | "More ways to connect = more leads" | Decision paralysis, looks like you're job hunting | Single clear contact method, professional LinkedIn link |
-| Blog with infrequent posts | "Shows thought leadership" | Stale content (last post 2023) signals neglect | Either commit to regular writing or skip blog section |
-| Kitchen sink integrations | "Show I know many tools" | Over-engineered for a resume site | Use Hugo + GitHub Pages, keep it simple |
-| Real-time visitor counter | "Shows site popularity" | Irrelevant for portfolio, looks insecure | Skip analytics displays entirely |
+| Apple Shortcuts-based access | Looks clean, avoids direct DB access, "official" API surface | Requires GoodLinks app available at runtime, fragile in headless launchd context, Shortcuts runner adds latency and failure modes | Use SQLite direct read — it's what the app itself writes to, it's stable, and it's already used by open-source GoodLinks tooling |
+| Full re-scan on every run | Simple to implement — just pull everything every time | Re-creates thousands of notes on every daily run, floods inbox, defeats deduplication | Timestamp-based incremental scan with state file |
+| Bi-directional sync (write back to GoodLinks) | Appealing if you want to mark items read in GoodLinks from Obsidian | GoodLinks SQLite is app-owned storage — writes could corrupt app state or be overwritten on next iCloud sync | One-directional only: GoodLinks → Obsidian. Use the app itself to manage GoodLinks state |
+| Polling for GoodLinks changes in real-time | "Instant" capture when you save a link | launchd daily schedule is sufficient; real-time polling adds always-on process complexity with minimal value | Stick to daily 7AM schedule |
+| Separate enrichment pass for GoodLinks vs other sources | GoodLinks content might seem "different" from web captures | The existing Claude enrichment pipeline already handles any source with proper frontmatter — adding a separate pass fragments the pipeline | Route GoodLinks notes through the same inbox enrichment flow everything else uses |
+
+---
 
 ## Feature Dependencies
 
 ```
-[Single-page layout]
-    └──requires──> [Navigation menu]
-                       └──requires──> [Section anchors]
+[SQLite scanner script]
+    └──requires──> [SQLite access to GoodLinks DB file]
+    └──requires──> [State file for last-scan timestamp]
+    └──produces──> [Inbox notes with YAML frontmatter]
 
-[Project detail pages] ──enhances──> [Portfolio section]
-[Publications pages] ──enhances──> [Academic credibility]
-[Blog section] ──enhances──> [Thought leadership positioning]
+[Incremental scan]
+    └──requires──> [State file (.goodlinks-last-scan)]
+    └──enhances──> [SQLite scanner script]
 
-[Search functionality] ──requires──> [fuse.js library]
-                                 └──requires──> [JSON content index]
+[URL deduplication]
+    └──requires──> [Vault index or grep of existing note URLs]
+    └──enhances──> [SQLite scanner script]
 
-[Netlify CMS] ──requires──> [Admin authentication]
-                       └──requires──> [Git integration]
+[Article content extraction]
+    └──requires──> [Existing readability extraction (capture-web.sh logic)]
+    └──enhances──> [SQLite scanner script]
+    └──optional──> not needed for basic pipeline to work
 
-[Case studies] ──conflicts──> [Brief project cards] (different content depth)
+[Tag inheritance]
+    └──requires──> [SQLite scanner script]  (tags come from DB query)
+    └──feeds into──> [Existing Claude enrichment] (fewer redundant tag suggestions)
+
+[Daily launchd integration]
+    └──requires──> [SQLite scanner script working correctly]
+    └──wraps──> [All above features]
 ```
 
 ### Dependency Notes
 
-- **Single-page layout requires navigation menu:** Auto-scrolling nav is core UX pattern
-- **Project detail pages enhance portfolio section:** Allows brief cards on homepage, detailed pages for depth
-- **Search requires fuse.js + JSON index:** Hugo Resume has this built-in, low maintenance
-- **Netlify CMS requires admin auth + git:** Optional feature, adds complexity without clear value for personal site
-- **Case studies conflict with brief project cards:** Decision needed - emphasize depth (case studies) or breadth (many projects)
+- **SQLite scanner is the load-bearing feature:** Everything else (deduplication, incremental scan, tag inheritance) builds on it. Ship the scanner first, then layer in the rest.
+- **Article content extraction is optional at launch:** The enrichment pipeline can work with just title + URL + tags + summary from GoodLinks. Full-text extraction is an enhancement, not a requirement.
+- **Deduplication requires a decision on scope:** Simple approach = grep vault for matching URL in frontmatter. More robust = maintain a seen-URLs file. The simple approach is sufficient for V1.
+
+---
 
 ## MVP Definition
 
 ### Launch With (v1)
 
-Minimum viable portfolio to support hiring conversations and networking.
+Minimum needed to make GoodLinks a functioning pipeline source.
 
-- [x] **Single-page resume layout** — Table stakes for quick scanning
-- [x] **Work experience timeline** — Essential for career narrative (Montai 2023-2026, Stanford Data Science, PhD)
-- [x] **Skills taxonomy** — Hiring managers screen by tech stack (R/Shiny, Python, Product Strategy)
-- [x] **Education section** — PhD credential is key differentiator
-- [x] **Contact info + social links** — LinkedIn and GitHub minimum
-- [x] **Mobile responsive** — 60%+ mobile traffic
-- [x] **Custom domain** — athan-dial.github.io → athandial.com (if available)
-- [x] **Professional photo** — Humanizes portfolio
-- [ ] **3-5 curated projects** — Defer to post-launch (requires ChatGPT Deep Research outputs)
+- [ ] `scan-goodlinks.sh` — reads SQLite, outputs markdown notes to inbox with correct frontmatter schema
+- [ ] Incremental scan — only new links since last run (state file or timestamp query)
+- [ ] URL deduplication — skip if URL already in vault
+- [ ] Tag inheritance — pass GoodLinks user tags through to note frontmatter
+- [ ] launchd integration — scanner runs as part of daily 7AM job
 
 ### Add After Validation (v1.x)
 
-Features to add once theme migration is working and basic content is live.
+Add once V1 is confirmed working and notes are flowing correctly.
 
-- [ ] **Case studies section** — Decision evidence format (requires custom archetype)
-- [ ] **Publications page** — Academic→industry bridge (requires content curation)
-- [ ] **Blog section** — Thought leadership on decision systems (requires authentic voice research)
-- [ ] **Search functionality** — Enable once content volume justifies it
-- [ ] **Downloadable resume PDF** — Enable ATS submission and printing
-- [ ] **Dark mode** — Standard UX feature, missing from Hugo Resume
+- [ ] Read-status routing — separate handling for unread vs already-read GoodLinks items
+- [ ] Starred flag passthrough — surface `starred: true` in frontmatter for enrichment prioritization
+- [ ] Article content extraction — reuse readability logic for unread items to improve enrichment quality
 
 ### Future Consideration (v2+)
 
-Features to defer until portfolio is established and strategy is validated.
+- [ ] `goodlinks_id` round-trip metadata — only needed if you want to query back to GoodLinks by internal ID; no current use case
 
-- [ ] **Multi-language support** — Only if targeting global roles
-- [ ] **Tag-based filtering** — Only if 10+ projects/articles exist
-- [ ] **Netlify CMS integration** — Unnecessary for personal site maintained by owner
-- [ ] **QR code vCard** — Nice-to-have for conference networking
-- [ ] **Advisory/consulting page** — Requires employer safety review
+---
 
 ## Feature Prioritization Matrix
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| Single-page resume layout | HIGH | LOW (built-in) | P1 |
-| Work experience timeline | HIGH | LOW (data-driven) | P1 |
-| Skills inventory | HIGH | LOW (data-driven) | P1 |
-| Education background | HIGH | LOW (data-driven) | P1 |
-| Contact + social links | HIGH | LOW (config params) | P1 |
-| Mobile responsive | HIGH | LOW (Bootstrap) | P1 |
-| Professional photo | HIGH | LOW (image + config) | P1 |
-| Custom domain | MEDIUM | LOW (DNS setup) | P1 |
-| Case studies section | HIGH | MEDIUM (custom archetype) | P2 |
-| Publications page | MEDIUM | LOW (built-in archetype) | P2 |
-| Blog/writing section | MEDIUM | LOW (built-in archetype) | P2 |
-| Search functionality | MEDIUM | LOW (built-in fuse.js) | P2 |
-| Downloadable resume PDF | MEDIUM | MEDIUM (PDF generation) | P2 |
-| Dark mode | MEDIUM | MEDIUM (CSS overrides) | P2 |
-| Project detail pages | MEDIUM | LOW (built-in archetype) | P2 |
-| Tag-based filtering | LOW | LOW (Hugo taxonomy) | P3 |
-| Multi-language support | LOW | MEDIUM (i18n setup) | P3 |
-| Netlify CMS | LOW | MEDIUM (auth + config) | P3 |
-| QR code vCard | LOW | LOW (built-in toggle) | P3 |
+| SQLite scanner script | HIGH | LOW | P1 |
+| Incremental scan (state file) | HIGH | LOW | P1 |
+| URL deduplication | HIGH | LOW | P1 |
+| Tag inheritance | HIGH | LOW | P1 |
+| launchd integration | HIGH | LOW | P1 |
+| Read-status routing | MEDIUM | LOW | P2 |
+| Starred flag passthrough | MEDIUM | LOW | P2 |
+| Article content extraction | MEDIUM | MEDIUM | P2 |
+| Source traceability metadata | LOW | LOW | P3 |
 
 **Priority key:**
-- P1: Must have for launch (professional credibility threshold)
-- P2: Should have, add when content is ready (differentiation features)
-- P3: Nice to have, future consideration (low ROI, niche use cases)
+- P1: Must have for launch — pipeline does not work without it
+- P2: Should have, add when P1 is stable
+- P3: Nice to have, add opportunistically
 
-## Competitor Feature Analysis
-
-Based on professional portfolio research for senior tech roles in 2026.
-
-| Feature | Industry Standard | Hugo Resume | Our Approach |
-|---------|-------------------|-------------|--------------|
-| Single-page layout | ✅ Auto-scrolling nav | ✅ Built-in | Use as-is |
-| Work experience | ✅ Timeline format | ✅ JSON-driven | Use data/experience.json |
-| Skills display | ✅ Categorized list | ✅ JSON + dev icons | Avoid rating bars, use categories |
-| Projects showcase | ✅ 3-5 curated with detail | ✅ Archetype + detail pages | Use creations/ for original work |
-| GitHub integration | ✅ Link to repos | ✅ Social handle | Link to top repos |
-| LinkedIn presence | ✅ Profile link | ✅ Social handle | Ensure profile is updated |
-| Custom domain | ✅ yourname.com | ✅ Any domain | Secure athandial.com if available |
-| Dark mode | ✅ Standard UX | ❌ Not built-in | Implement via custom CSS |
-| Search | ⚠️ Nice-to-have | ✅ Built-in fuse.js | Enable once content volume justifies |
-| Blog | ⚠️ Optional | ✅ Built-in archetype | Defer until authentic voice research complete |
-| Downloadable PDF | ⚠️ Common | ❌ Not built-in | Implement for ATS compatibility |
-| Case studies | ⚠️ Rare, differentiating | ❌ Requires custom archetype | High priority for positioning |
-| Publications | ⚠️ Academic portfolios | ✅ Built-in archetype | Use for PhD→Product narrative |
-| Testimonials | ❌ Anti-pattern | ❌ Not built-in | Skip entirely |
-| Skill rating bars | ❌ Anti-pattern | ⚠️ Optional in JSON | Skip, use categories instead |
-| CMS integration | ❌ Over-engineered | ✅ Optional Netlify CMS | Skip, markdown editing sufficient |
-
-## Hugo Resume Theme Feature Coverage
-
-### Built-In Features (No Custom Work)
-
-**Content Structure:**
-- Single-page resume with auto-scroll navigation
-- Work experience timeline (JSON-driven)
-- Skills inventory with dev icons (JSON-driven)
-- Education background (JSON-driven)
-- Project showcases with detail pages (`/creations/` and `/contributions/`)
-- Publications section with detail pages
-- Blog/writing section (`/blog/` folder)
-- Contact information display
-- Social media handles (LinkedIn, GitHub, Stack Overflow, Keybase, Bluesky)
-
-**Interactive Features:**
-- Client-side search powered by fuse.js at `/search`
-- Tag-based content taxonomy
-- JSON output format (alongside HTML)
-- vCard download for contact info
-- QR code display (optional toggle)
-
-**Technical Features:**
-- Mobile responsive (Bootstrap-based)
-- Multi-language support (EN/FR built-in, extensible)
-- Google Analytics integration
-- Code syntax highlighting
-- Static site generation (fast, secure, low-cost hosting)
-
-**CMS Features (Optional):**
-- Netlify CMS integration at `/admin` endpoint
-- WYSIWYG editor with markdown commit capability
-- Authentication for authorized editing
-
-### Missing Features (Custom Work Required)
-
-**Essential Gaps:**
-- Dark mode support (standard UX expectation in 2026)
-- Downloadable resume PDF (ATS compatibility)
-- Case study archetype (decision evidence format)
-- Metrics/outcomes display structure
-
-**Nice-to-Have Gaps:**
-- Advanced filtering by tags/categories
-- Print-friendly CSS (separate from PDF)
-- Image optimization pipeline
-- Custom social share cards
+---
 
 ## Sources
 
-**Hugo Resume Theme (Official):**
-- [Hugo Resume on Hugo Themes](https://themes.gohugo.io/themes/hugo-resume/)
-- [Hugo Resume GitHub Repository](https://github.com/eddiewebb/hugo-resume)
-- [Hugo Resume README](https://github.com/eddiewebb/hugo-resume/blob/master/README.md)
-
-**Professional Portfolio Best Practices (2026):**
-- [How to Create a Software Engineer Portfolio in 2026](https://zencoder.ai/blog/how-to-create-software-engineer-portfolio)
-- [UX Portfolio Guide: How Senior Designers Get Hired in 2026](https://uxplaybook.org/articles/senior-ux-designer-portfolio-get-hired-2026)
-- [Building a Portfolio That Gets Hired: 2026 Developer Guide](https://www.hakia.com/skills/building-portfolio/)
-- [What Recruiters Look for in Developer Portfolios](https://pesto.tech/resources/what-recruiters-look-for-in-developer-portfolios)
-- [Best Web Developer Portfolio Examples from Top Developers in 2026](https://elementor.com/blog/best-web-developer-portfolio-examples/)
-
-**Portfolio Anti-Patterns:**
-- [Common mistakes when creating a portfolio (and how to avoid them)](https://www.wix.com/blog/common-portfolio-mistakes)
-- [5 Common Mistakes in Portfolio Website Content to Avoid](https://www.strikingly.com/blog/posts/5-common-mistakes-portfolio-website-content)
-- [12 Things You Should Remove From Your Portfolio Website Immediately](https://mattolpinski.com/articles/fix-your-portfolio/)
-- [Five development portfolio anti-patterns and how to avoid them](https://nitor.com/en/articles/five-development-portfolio-anti-patterns-and-how-to-avoid-them)
-
-**Resume Website Credibility (2026):**
-- [15 Current Resume Trends for 2026 + Examples](https://www.resume-now.com/job-resources/resumes/resume-trends)
-- [11 Resume Trends in 2026 That Hiring Managers Can't Resist](https://novoresume.com/career-blog/resume-trends)
+- [cychong47/goodlinks — SQLite access confirmed](https://github.com/cychong47/goodlinks) — DB path `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`, fields confirmed from PRAGMA query in source code
+- [tdhooten/goodlinks-exporter — JSON export field structure](https://github.com/tdhooten/goodlinks-exporter/blob/master/goodlinks-exporter.py) — confirms `url`, `addedAt`, `readAt`, `tags` fields in export
+- [MacStories GoodLinks 2.0 review — Shortcuts depth](https://www.macstories.net/reviews/goodlinks-2-0-the-automation-focused-read-later-app-ive-always-wanted/) — confirms article content return in plain text/Markdown via Shortcuts, but fragile for headless use
+- [GoodLinks URL scheme documentation](https://goodlinks.app/url-scheme/) — confirms no bulk query/export via URL scheme; only single-link operations
+- [GoodLinks export format incompatibility note](https://micro.blog/jayeless/11534638) — user confirms JSON is the native export format (not CSV/OPML)
 
 ---
-*Feature research for: Hugo Resume theme migration for PhD→Product leader portfolio*
-*Researched: 2026-02-04*
-*Confidence: HIGH (official theme docs + verified portfolio best practices)*
+
+*Feature research for: GoodLinks ingestion pipeline (Model Citizen subsequent milestone)*
+*Researched: 2026-02-19*
