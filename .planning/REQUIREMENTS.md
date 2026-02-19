@@ -49,22 +49,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| DATA-03 | — | Pending |
-| INGS-01 | — | Pending |
-| INGS-02 | — | Pending |
-| INGS-03 | — | Pending |
-| INGS-04 | — | Pending |
-| INTG-01 | — | Pending |
-| INTG-02 | — | Pending |
-| INTG-03 | — | Pending |
+| DATA-01 | Phase 12 | Pending |
+| DATA-02 | Phase 12 | Pending |
+| DATA-03 | Phase 12 | Pending |
+| INGS-01 | Phase 12 | Pending |
+| INGS-02 | Phase 12 | Pending |
+| INGS-03 | Phase 12 | Pending |
+| INGS-04 | Phase 12 | Pending |
+| INTG-01 | Phase 13 | Pending |
+| INTG-02 | Phase 13 | Pending |
+| INTG-03 | Phase 13 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 10 total
-- Mapped to phases: 0
-- Unmapped: 10 ⚠️
+- Mapped to phases: 10
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-19*
-*Last updated: 2026-02-19 after initial definition*
+*Last updated: 2026-02-19 after roadmap creation (traceability complete)*
