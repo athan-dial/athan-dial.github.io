@@ -9,16 +9,16 @@ Requirements for GoodLinks Ingestion milestone. Each maps to roadmap phases.
 
 ### Data Access
 
-- [ ] **DATA-01**: Scanner can read GoodLinks SQLite database in read-only mode
-- [ ] **DATA-02**: Scanner tracks last-scan timestamp for incremental processing
-- [ ] **DATA-03**: Scanner uses lookback buffer to handle iCloud sync lag
+- [x] **DATA-01**: Scanner can read GoodLinks SQLite database in read-only mode
+- [x] **DATA-02**: Scanner tracks last-scan timestamp for incremental processing
+- [x] **DATA-03**: Scanner uses lookback buffer to handle iCloud sync lag
 
 ### Ingestion
 
-- [ ] **INGS-01**: Scanner creates vault notes with standard frontmatter (title, url, source, date, tags, status)
-- [ ] **INGS-02**: Scanner passes GoodLinks tags through as initial note tags
-- [ ] **INGS-03**: Scanner extracts pre-stored article content from GoodLinks content table
-- [ ] **INGS-04**: Scanner falls back to web fetch for links without pre-extracted content
+- [x] **INGS-01**: Scanner creates vault notes with standard frontmatter (title, url, source, date, tags, status)
+- [x] **INGS-02**: Scanner passes GoodLinks tags through as initial note tags
+- [x] **INGS-03**: Scanner extracts pre-stored article content from GoodLinks content table
+- [x] **INGS-04**: Scanner falls back to web fetch for links without pre-extracted content
 
 ### Integration
 
@@ -49,13 +49,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 12 | Pending |
-| DATA-02 | Phase 12 | Pending |
-| DATA-03 | Phase 12 | Pending |
-| INGS-01 | Phase 12 | Pending |
-| INGS-02 | Phase 12 | Pending |
-| INGS-03 | Phase 12 | Pending |
-| INGS-04 | Phase 12 | Pending |
+| DATA-01 | Phase 12 | Complete |
+| DATA-02 | Phase 12 | Complete |
+| DATA-03 | Phase 12 | Complete |
+| INGS-01 | Phase 12 | Complete |
+| INGS-02 | Phase 12 | Complete |
+| INGS-03 | Phase 12 | Complete |
+| INGS-04 | Phase 12 | Complete |
 | INTG-01 | Phase 13 | Pending |
 | INTG-02 | Phase 13 | Pending |
 | INTG-03 | Phase 13 | Pending |

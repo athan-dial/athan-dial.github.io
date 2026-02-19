@@ -17,9 +17,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 12 of 13 (GoodLinks Scanner)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-02-19 — v1.2 roadmap created; phases 12-13 defined
+Plan: 1 of 1 in current phase — COMPLETE
+Status: Phase 12 complete; ready for Phase 13
+Last activity: 2026-02-19 — Phase 12 Plan 01 complete: GoodLinks scanner operational, 42 vault notes created
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
@@ -32,9 +32,9 @@ Progress: [████████░░] v1.0 + v1.1 complete; v1.2 starting
 
 ## Performance Metrics
 
-**Velocity:** 25 plans total (v1.0: 5, v1.1: 20)
+**Velocity:** 26 plans total (v1.0: 5, v1.1: 20, v1.2: 1)
 **Quality:** 100% verification pass rate
-**Efficiency:** ~3.7 min per task delivered
+**Efficiency:** ~3.7 min per task delivered; 12-01 completed in 2 min 14 sec (2 tasks)
 
 *Updated after each plan completion*
 
@@ -50,6 +50,7 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 - Two-phase structure: scanner first (manual correctness), then integration (automated). Broken scanner wired into daily automation is harder to debug.
 - URL normalization in Phase 13 (integration), not Phase 12 (scanner) — it is shared cross-source infrastructure.
 - First-run `since_timestamp` = now - 30 days to avoid flooding enrichment queue with all 92 historical links.
+- GoodLinks stores deletedAt=0.0 (not NULL) for active items — filter uses `(deletedAt IS NULL OR deletedAt = 0)` in SQLite query.
 
 **v1.1 decisions (relevant to v1.2):**
 - Continue-on-failure pattern in scan-all.sh (one source failure doesn't block others)
@@ -72,8 +73,8 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
 ## Session Continuity
 
-**Last session:** 2026-02-19
-**Stopped at:** v1.2 roadmap created (phases 12-13); ready to plan Phase 12
+**Last session:** 2026-02-19T22:16:02.467Z
+**Stopped at:** Completed 12-01-PLAN.md: GoodLinks Scanner
 **Resume file:** None
 
 ---
