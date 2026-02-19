@@ -16,8 +16,10 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 
 ## Current Position
 
-**Status:** v1.0 + v1.1 milestones complete
-**Last Activity:** 2026-02-14 — Both milestones archived
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-19 — Milestone v1.2 started
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)

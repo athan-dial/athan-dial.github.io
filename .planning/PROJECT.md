@@ -28,7 +28,15 @@ Personal/professional portfolio website and automated content publishing system 
 
 ### Active
 
-(None — define in next milestone via `/gsd:new-milestone`)
+## Current Milestone: v1.2 GoodLinks Ingestion
+
+**Goal:** Add GoodLinks as an automated content source feeding the Model Citizen enrichment pipeline, turning saved articles into blog fodder.
+
+**Target features:**
+- GoodLinks data extraction (discover export/sync format, build parser)
+- Article content fetching and vault note creation
+- Integration with existing enrichment pipeline (summaries, tags, ideas)
+- Automated daily scanning alongside Slack/Outlook sources
 
 ### Out of Scope
 
@@ -79,4 +87,4 @@ Personal/professional portfolio website and automated content publishing system 
 | Public vault strategy | Entire vault public; Quartz gates rendering | ⚠️ Revisit — consider if sensitive content enters pipeline |
 
 ---
-*Last updated: 2026-02-14 after v1.1 milestone*
+*Last updated: 2026-02-19 after v1.2 milestone start*
