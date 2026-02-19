@@ -18,7 +18,7 @@ Requirements for GoodLinks Ingestion milestone. Each maps to roadmap phases.
 - [x] **INGS-01**: Scanner creates vault notes with standard frontmatter (title, url, source, date, tags, status)
 - [x] **INGS-02**: Scanner passes GoodLinks tags through as initial note tags
 - [x] **INGS-03**: Scanner extracts pre-stored article content from GoodLinks content table
-- [x] **INGS-04**: Scanner falls back to web fetch for links without pre-extracted content
+- [x] **INGS-04**: Scanner marks links without pre-extracted content with `content_status: pending` for downstream enrichment
 
 ### Integration
 
