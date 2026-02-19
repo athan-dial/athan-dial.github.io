@@ -1,60 +1,42 @@
 # Project State: Athan Dial Portfolio Site
 
-**Last Updated:** 2026-02-14
+**Last Updated:** 2026-02-19
 **Project:** Athan Dial Portfolio + Model Citizen
 
 ---
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-14)
+See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Demonstrate strategic credibility through the site itself
-**Current focus:** Both milestones shipped. Planning next milestone.
+**Current focus:** Phase 12 — GoodLinks Scanner (v1.2 milestone start)
 
 ---
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-19 — Milestone v1.2 started
+Phase: 12 of 13 (GoodLinks Scanner)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-19 — v1.2 roadmap created; phases 12-13 defined
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
 - ✅ v1.1 Model Citizen: 8 phases, 20 plans (shipped 2026-02-14)
+- 🚧 v1.2 GoodLinks Ingestion: 2 phases planned (phases 12-13)
+
+Progress: [████████░░] v1.0 + v1.1 complete; v1.2 starting
 
 ---
 
 ## Performance Metrics
 
-**Velocity:** 22 plans total (18 Model Citizen + 4 Hugo Resume)
+**Velocity:** 25 plans total (v1.0: 5, v1.1: 20)
 **Quality:** 100% verification pass rate
 **Efficiency:** ~3.7 min per task delivered
 
-**Phase History:**
-- Phase 01 (Hugo): Complete (15 min, 3/3 requirements) ✓
-- Phase 02 Plan 01 (Hugo): Complete (2 min, 2/2 tasks) ✓
-- Phase 02 Plan 02 (Hugo): Complete (1.6 min, 2/2 tasks) ✓
-- Phase 02 Plan 03 (Hugo): Complete — human verification with refinements ✓
-- Phase 04 (Model Citizen): Complete (10 min, 3/3 plans) ✓
-- Phase 05 (Model Citizen): Complete (YouTube ingestion) ✓
-- Phase 06 Plan 01 (Model Citizen): Complete (2 min, 5/5 tasks) ✓
-- Phase 06 Plan 02 (Model Citizen): Complete (11 min, 3/3 tasks) ✓
-- Phase 07 Plan 01 (Model Citizen): Complete (14 min, 3/3 tasks) ✓
-- Phase 07 Plan 02 (Model Citizen): Complete (4 min, 2/2 tasks) ✓
-- Phase 07 Plan 03 (Model Citizen): Complete (4 min, 3/3 tasks) ✓ GAP CLOSURE
-- Phase 07 Plan 04 (Model Citizen): Complete (5 min, 1/1 tasks) ✓ GAP CLOSURE
-- Phase 08 Plan 01 (Model Citizen): Complete (12 min, 3/3 tasks) ✓ with human checkpoint
-- Phase 09 Plan 01 (Model Citizen): Complete (4 min, 2/2 tasks) ✓
-- Phase 09 Plan 02 (Model Citizen): Complete (1 min, 2/2 tasks + human checkpoint) ✓
-- Phase 03 Plan 01 (Hugo): Complete (1.6 min + verification, 2/2 tasks) ✓ MILESTONE COMPLETE
-- Phase 10 Plan 01 (Content Ingestion): Complete (2 min, 2/2 tasks) ✓
-- Phase 10 Plan 02 (Content Ingestion): Complete (3 min, 2/2 tasks) ✓
-- Phase 10 Plan 03 (Content Ingestion): Complete (3 min, 3/3 tasks) ✓ PHASE COMPLETE
-- Phase 11 Plan 01 (Model Citizen UI/UX): Complete (4 min, 2/2 tasks) ✓
-- Phase 11 Plan 02 (Model Citizen UI/UX): Complete (4.1 min, 2/2 tasks) ✓
+*Updated after each plan completion*
 
 ---
 
@@ -62,173 +44,36 @@ Last activity: 2026-02-19 — Milestone v1.2 started
 
 ### Key Decisions
 
-| Decision | Rationale | Date | Phase |
-|----------|-----------|------|-------|
-| 3-phase roadmap (vs 4-phase from research) | Quick depth setting; compress content + styling into single phase | 2026-02-04 | Planning |
-| Phase 1 validation gate required | Single-page layout may not fit decision portfolio positioning; validate before investing in Phase 2 | 2026-02-04 | Planning |
-| Defer case studies to v2 | Requires architectural fit validation; not critical for v1 working site | 2026-02-04 | Planning |
-| Minimal CSS approach for v1 | Avoid porting 1200+ lines immediately; validate theme fit first | 2026-02-04 | Planning |
-| Preserved critical GitHub Pages settings | Avoid deployment breakage by manually porting config rather than wholesale replacement | 2026-02-05 | 01-01 |
-| Backed up layouts/ before theme change | Custom Blowfish partials may contain design patterns worth referencing later | 2026-02-05 | 01-01 |
-| Used hugo mod tidy for clean removal | Ensure valid checksums and no ghost references vs manual go.mod editing | 2026-02-05 | 01-01 |
-| Workflow-based folder taxonomy | 7 workflow folders (inbox → published) instead of topic categories | 2026-02-05 | 04-02 |
-| Public vault strategy | Entire vault public on GitHub; Quartz ignorePatterns + ExplicitPublish plugin gate rendering | 2026-02-05 | 04-02 |
-| .gitkeep files for empty folders | Ensures folder structure exists in git for fresh clones | 2026-02-05 | 04-02 |
-| Rename repository to model-citizen | GitHub Pages project site path must match repository name for /model-citizen/ URL | 2026-02-05 | 04-01 |
-| Separate repository approach (not monorepo) | Cleaner separation between vault and site; independent cloning; aligns with research | 2026-02-05 | 04-01 |
-| Deploy on v4 branch (not main) | Quartz upstream uses v4 as default; minimizes deviation from upstream conventions | 2026-02-05 | 04-01 |
-| Comprehensive hello-world sample note | Dual-purpose: validates schema AND explains Model Citizen vision to visitors | 2026-02-05 | 04-03 |
-| Placeholder content strategy | Use generic company names and metrics until ChatGPT Deep Research outputs available | 2026-02-05 | 02-01 |
-| PhD dual-listing approach | PhD appears in both experience (skills transfer) and education (credentials) sections | 2026-02-05 | 02-01 |
-| Paragraph summaries (not bullets) | Structure: scope → outcomes → approach; reads like executive positioning | 2026-02-05 | 02-01 |
-| System font stack for v1 | Achieves minimal/elegant aesthetic without font file complexity; defer custom fonts to v2 | 2026-02-05 | 02-02 |
-| Bootstrap data-bs-theme for dark mode | Hugo Resume uses Bootstrap 5.3+ convention; cleaner than class-based toggling | 2026-02-05 | 02-02 |
-| Executive blue (#1E3A5F) as primary accent | Professional executive positioning, near-monochromatic Apple aesthetic | 2026-02-05 | 02-02 |
-| Host-side yt-dlp (not in container) | Hardened n8n image lacks Python; brew provides auto-updates | 2026-02-05 | 05-01 |
-| Supersede 05-02 with host script | Simpler architecture; n8n orchestration deferred to v2 | 2026-02-05 | 05-02 |
-| CSS via static/css/resume-override.css | Theme baseof.html already references this file; assets/css/custom.css was NOT in pipeline | 2026-02-05 | 02-03 |
-| Separate Skills vs Tools sections | Executive signal (capabilities) distinct from named technologies (tech stack) | 2026-02-05 | 02-03 |
-| Anchor nav instead of page links | Hugo Resume is single-page; Blowfish-era page links caused 404s | 2026-02-05 | 02-03 |
-| Disable Contact nav link | No /contact page exists; social links in header serve as contact | 2026-02-05 | 02-03 |
-| ed25519 SSH key without passphrase | Automated n8n-to-host SSH requires passwordless authentication | 2026-02-06 | 06-01 |
-| Idempotency via output file check | Wrapper skips processing if output exists to prevent duplicate work on n8n retries | 2026-02-06 | 06-01 |
-| Restricted tools for automation safety | Limit Claude to Read/Grep/Glob/WebFetch only to prevent accidental file modifications | 2026-02-06 | 06-01 |
-| Atomic file writes with temp + rename | Prevents partial output if Claude crashes mid-execution | 2026-02-06 | 06-01 |
-| Timeout with 600s default | Prevents hung processes from blocking pipeline; overridable per-task in frontmatter | 2026-02-06 | 06-01 |
-| JSON validation non-blocking | Attempt validation but save output regardless to preserve debugging info | 2026-02-06 | 06-01 |
-| Use gtimeout from coreutils | macOS lacks GNU timeout; coreutils provides gtimeout command | 2026-02-06 | 06-02 |
-| Strip markdown code fences from Claude output | Claude Code wraps JSON in ```json fences; sed strips before validation | 2026-02-06 | 06-02 |
-| Full paths for SSH reliability | SSH sessions don't inherit user PATH; use /opt/homebrew/bin/gtimeout and ~/.local/bin/claude | 2026-02-06 | 06-02 |
-| Document setup-token requirement | SSH sessions can't access macOS Keychain; setup-token creates persistent auth | 2026-02-06 | 06-02 |
-| Prompt chaining over mega-prompts | Separate prompts per enrichment task gets Claude's full attention; prevents dropped steps | 2026-02-06 | 07-01 |
-| Hybrid orchestration (summary first, then parallel) | Balances dependencies (ideas need summary) with performance (parallel where possible) | 2026-02-06 | 07-01 |
-| Flexible extraction (JSON + YAML) | Support both formats gracefully; wrapper may return either structure | 2026-02-06 | 07-01 |
-| Vault-aware synthesis via keyword search | Simple grep-based for v1; semantic embeddings deferred to later phase | 2026-02-06 | 07-01 |
-| Light validation with quality flags | Set needs_review flag but don't block pipeline; partial enrichment acceptable | 2026-02-06 | 07-01 |
-| State-based YAML parsing | AWK with flags (in_tags, in_quotes) handles nested structures robustly | 2026-02-06 | 07-01 |
-| n8n as orchestration layer | Visual workflow management, easy param modification, future automation integration | 2026-02-06 | 07-02 |
-| Status pre-check via SSH grep | Simple idempotency check without database or state file needed | 2026-02-06 | 07-02 |
-| 15min timeout for enrichment | Accommodates multiple Claude invocations (summarization → tagging → ideas) | 2026-02-06 | 07-02 |
-| Daily log append pattern | Human-readable audit trail without database complexity for v1 | 2026-02-06 | 07-02 |
-| Nested metadata extraction order | Check .metadata.tags before root .tags for wrapper format compatibility | 2026-02-06 | 07-03 |
-| File descriptor parsing for ideas | Use bash fd 3 for multi-line markdown over AWK state machine | 2026-02-06 | 07-03 |
-| Deferred temp file cleanup | Keep temp files until dependent operations complete | 2026-02-06 | 07-03 |
-| Log both skipped and enriched sources | Complete audit trail requires capturing all script invocations | 2026-02-06 | 07-04 |
-| Early-exit logging pattern | Scripts often exit early; log outcome before any early exits | 2026-02-06 | 07-04 |
-| Obsidian Bases over Dataview DQL | Native core plugin, no community plugin dependency | 2026-02-06 | 08-01 |
-| Vault repos moved to iCloud Obsidian dir | Seamless vault access in Obsidian without manual vault addition | 2026-02-06 | 08-01 |
-| Dual approval: folder OR frontmatter | Folder-based for simplicity, frontmatter for programmatic filtering | 2026-02-06 | 08-01 |
-| Scripts in repo at model-citizen/vault/ | Vault infrastructure not deployed yet; scripts are implementation-ready | 2026-02-08 | 09-01 |
-| Hash-based idempotency for publish sync | CSV tracking file prevents re-publishing unchanged notes | 2026-02-08 | 09-01 |
-| Missing assets log warnings only | Resilient pipeline continues with partial assets rather than failing | 2026-02-08 | 09-01 |
-| Reuse existing hello-world.md for e2e test | Already in publish_queue with status: publish; no need to create new test note | 2026-02-08 | 09-02 |
-| PIL placeholder OG image | No existing profile photo; ImageMagick unavailable; PIL generates 1200x630 executive blue placeholder | 2026-02-08 | 03-01 |
-| Leave orphaned Blowfish content | Old theme pages (consulting/, advisory/, case-studies/) exist but aren't linked from Hugo Resume; non-blocking for v1 | 2026-02-08 | 03-01 |
-| Change Pages source from GitHub Actions to branch | Quartz workflow was overriding gh-pages branch deployment; switched to "Deploy from a branch" mode | 2026-02-09 | 03-01 |
-| Tag-based routing for content curation | More flexible - users can tag from anywhere without moving notes manually | 2026-02-13 | 10-01 |
-| Five content sections instead of seven workflow stages | Simpler taxonomy focused on content type rather than workflow state | 2026-02-13 | 10-01 |
-| rsync --delete for vault-to-quartz sync | True mirror - removes deleted content from Quartz automatically | 2026-02-13 | 10-01 |
-| Web capture tool with readability extraction | CLI and share sheet queue for manual and mobile URL capture | 2026-02-13 | 10-02 |
-| Queue-based capture system | Allows share sheet integration without blocking mobile workflow | 2026-02-13 | 10-02 |
-| OAuth client credentials flow for Microsoft Graph | Requires admin consent but no interactive login for automation | 2026-02-13 | 10-03 |
-| Incremental scanning via timestamp tracking | Reduces API calls and avoids duplicate captures | 2026-02-13 | 10-03 |
-| Continue-on-failure pattern in scan-all.sh | One source failure doesn't block others, resilient automation | 2026-02-13 | 10-03 |
-| Daily 7 AM launchd schedule | Native macOS scheduling with PATH and logging configured | 2026-02-13 | 10-03 |
-| Executive blue (#1E3A5F) as primary brand color | Match portfolio site for brand consistency across main and Model Citizen subsites | 2026-02-13 | 11-01 |
-| Brightened blue (#4A90E2) for dark mode | Ensures WCAG AA contrast on dark backgrounds; lightened ~30% from primary | 2026-02-13 | 11-01 |
-| 65ch line length constraint | Optimal reading line length per UX research (50-75 char range) | 2026-02-13 | 11-01 |
-| CSS variable overrides for dark mode | Defensive CSS specificity layer to guarantee brand colors always apply | 2026-02-13 | 11-01 |
-| Explorer filterFn for privacy | Vault public on GitHub, Quartz hides private folders via rendering-layer filter | 2026-02-13 | 11-02 |
-| Folder-first sorting in Explorer | Logical hierarchy with folders at top, alphabetical within each group | 2026-02-13 | 11-02 |
-| Link-based folder navigation | Click folders to navigate to index pages rather than inline expansion | 2026-02-13 | 11-02 |
+See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
-### Open Questions
+**v1.2 decisions:**
+- Two-phase structure: scanner first (manual correctness), then integration (automated). Broken scanner wired into daily automation is harder to debug.
+- URL normalization in Phase 13 (integration), not Phase 12 (scanner) — it is shared cross-source infrastructure.
+- First-run `since_timestamp` = now - 30 days to avoid flooding enrichment queue with all 92 historical links.
 
-- ~~Does Hugo Resume's single-page layout support decision portfolio positioning?~~ **RESOLVED:** User approved in Phase 1 Go/No-Go checkpoint
-- ~~What typeface best achieves minimal/elegant aesthetic?~~ **RESOLVED:** System fonts for v1
-- ~~What color palette replaces orange accent while maintaining Apple aesthetic?~~ **RESOLVED:** Executive blue (#1E3A5F)
-- Will minimal CSS overrides suffice or is full design port needed? (Defer to v2 scope discussion)
-- Should case studies migrate to `/projects/creations/` or stay in separate section? (Defer to v2)
+**v1.1 decisions (relevant to v1.2):**
+- Continue-on-failure pattern in scan-all.sh (one source failure doesn't block others)
+- Daily 7 AM launchd schedule (native macOS, PATH and logging configured)
+- Tag-based routing for content curation
+- Explicit publish gate — daily runs never auto-publish (non-negotiable)
 
-### Roadmap Evolution
+### Blockers/Concerns
 
-- Phase 10 added: Content ingestion from various locations into the central Model Citizen vault
-- Phase 11 added: Model Citizen UI/UX: theming, vault integration, and viewer experience
+- Phase 13 (URL normalization): Sample 10-15 real GoodLinks URLs from live DB before writing normalization list. Five-minute task; prevents over/under-engineering tracking param strip list.
+- Phase 12 (content availability): ~6% of links have no content table row. Decision: write stub note with `content_status: pending`; skip enrichment until content arrives via web fetch fallback (INGS-04).
 
 ### Active Todos
 
-**Hugo Resume Milestone:** ✓ COMPLETE
-- [x] Create plan for Phase 1 (complete: 01-01-PLAN.md)
-- [x] Backup existing `layouts/` directory before Blowfish removal
-- [x] Document Blowfish config settings before consolidation
-- [x] Plan Phase 2: Content & Styling (complete: 3 plans)
-- [x] Populate professional profile data (02-01 complete)
-- [x] Apply visual branding (02-02 complete)
-- [x] Human verification with refinements (02-03 complete)
-- [x] Plan Phase 3: Production Deployment (complete: 03-01-PLAN.md)
-- [x] Deploy to GitHub Pages (live at https://athan-dial.github.io/)
-
-**Model Citizen Milestone:**
-- [x] Phase 04: Quartz & Vault Schema (3/3 plans) ✓
-- [x] Phase 05: YouTube Ingestion (2/2 plans) ✓
-- [x] Phase 06: Claude Code Integration (2/2 plans) ✓
-- [x] Phase 07: Enrichment Pipeline (2/2 plans) ✓ COMPLETE
-- [x] Phase 08: Review & Approval (1/1 plans) ✓ COMPLETE
-- [x] Phase 09: Publish Sync (2/2 plans) ✓ COMPLETE (pending live site human verification)
-
-### Blockers
-
-None currently.
-
-### Quick Tasks Completed
-
-| # | Description | Date | Commit | Directory |
-|---|-------------|------|--------|-----------|
-| 1 | Delete upstream Quartz template workflows from model-citizen repo (ci.yaml, docker-build-push.yaml, build-preview.yaml, deploy-preview.yaml) | 2026-02-08 | c0c25d5 | [1-delete-upstream-quartz-template-workflow](./quick/1-delete-upstream-quartz-template-workflow/) |
-| 2 | Run Phase 3 Task 2 production verification using Playwright | 2026-02-08 | pending | [2-run-phase-3-task-2-production-verificati](./quick/2-run-phase-3-task-2-production-verificati/) |
+**v1.2 GoodLinks Ingestion:**
+- [ ] Plan Phase 12: GoodLinks Scanner
+- [ ] Plan Phase 13: Pipeline Integration
 
 ---
 
 ## Session Continuity
 
-**What Just Happened:**
-- Phase 11 Plan 01 COMPLETE (2026-02-13):
-  - Applied portfolio's executive blue color palette (#1E3A5F) to Quartz
-  - Configured reader-optimized typography (65ch line width, 1rem/1.6 body)
-  - Set up dark mode with contrast-safe brightened blues (#4A90E2)
-  - Removed gradient effects for clean Apple-inspired aesthetic
-- Phase 11 Plan 02 COMPLETE (2026-02-13):
-  - Configured Quartz Explorer with privacy filtering and portfolio footer links
-  - Created folder index pages for meaningful navigation labels
-  - Updated homepage with Model Citizen branding and purpose
-- Phase 10 COMPLETE (2026-02-13): Content ingestion pipeline (3/3 plans)
-- Hugo Resume Milestone: COMPLETE ✓ (3/3 phases)
-- Model Citizen Milestone: Extended to 19+ plans (Phase 11 in progress)
-
-**What's Next:**
-- Phase 11: Continue Model Citizen UI/UX (theming, vault integration, viewer experience)
-- Additional plans TBD for custom styling, theme refinements
-- Full site deployment and testing
-
-**Context for Next Session:**
-- Hugo Resume: 100% complete (13/13 requirements delivered)
-- Model Citizen: 90% complete (18/19+ total plans, Phase 10 complete, Phase 11 in progress)
-- Live sites:
-  - Portfolio: https://athan-dial.github.io/
-  - Model Citizen: (deployment TBD - Phase 11)
-- Quartz layout configured:
-  - Explorer filtering (hides inbox, drafts, publish_queue, .templates, .obsidian, attachments)
-  - Footer links to portfolio and GitHub
-  - Folder index pages for meaningful navigation labels
-  - Homepage with Model Citizen branding
-- Full content ingestion pipeline operational:
-  - Manual: capture-web.sh CLI and share sheet queue
-  - Automated: Slack/Outlook scanners via /scan or daily 7 AM launchd
-  - Curation: Tag-based routing to Model Citizen/ sections
-  - Publishing: Vault-to-Quartz sync with hash-based idempotency
-
-**Last session:** 2026-02-13T16:43:14Z
-**Stopped at:** Completed 11-01-PLAN.md
+**Last session:** 2026-02-19
+**Stopped at:** v1.2 roadmap created (phases 12-13); ready to plan Phase 12
 **Resume file:** None
 
 ---
