@@ -52,10 +52,10 @@
   3. GoodLinks user-applied tags appear in the note's frontmatter tag list
   4. Re-running the scanner does not create duplicate notes for already-seen items (state file tracks last-seen timestamp)
   5. Items saved on iPhone that appear in the DB after a delay are captured on the next scan run (lookback buffer prevents misses)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 12-01: TBD
+- [ ] 12-01-PLAN.md — GoodLinks SQLite scanner + vault note emission
 
 ### Phase 13: Pipeline Integration
 **Goal**: GoodLinks scanner runs automatically as part of daily 7AM job, notes flow through enrichment, and cross-source duplicates are prevented via URL normalization
@@ -85,7 +85,7 @@ Plans:
 | 9. Publish Sync | v1.1 | 2/2 | Complete | 2026-02-08 |
 | 10. Content Ingestion | v1.1 | 3/3 | Complete | 2026-02-13 |
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
-| 12. GoodLinks Scanner | v1.2 | 0/TBD | Not started | - |
+| 12. GoodLinks Scanner | v1.2 | 0/1 | Planning | - |
 | 13. Pipeline Integration | v1.2 | 0/TBD | Not started | - |
 
 ---
