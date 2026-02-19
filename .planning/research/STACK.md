@@ -1,238 +1,278 @@
-# Technology Stack Research: Hugo Resume Theme Migration
+# Stack Research
 
-**Project:** Hugo Resume Theme Migration
-**Researched:** 2026-02-04
-**Confidence:** MEDIUM
+**Domain:** GoodLinks ingestion pipeline (macOS read-later app to existing bash enrichment pipeline)
+**Researched:** 2026-02-19
+**Confidence:** HIGH — database structure verified by direct inspection of live GoodLinks installation on this machine
+
+---
+
+## What Was Verified Directly
+
+The following was confirmed by reading the actual GoodLinks container on this machine (not inferred from documentation).
+
+**Primary database — confirmed exists and is readable:**
+```
+~/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite
+```
+
+**`link` table schema (confirmed, GoodLinks v3.1.1):**
+```
+id (TEXT)           UUID, matches article directory names in the Containers path
+url (TEXT)          canonical URL
+originalURL (TEXT)  pre-redirect URL if different from url
+title (TEXT)        article title
+summary (TEXT)      short description (often null)
+author (TEXT)       author name (often null)
+preview (TEXT)      thumbnail image URL
+tags (TEXT)         comma-separated string, e.g. "product,metrics" — or NULL if untagged
+starred (BOOLEAN)   1 if starred
+readAt (DOUBLE)     Unix timestamp float, null if unread
+addedAt (DOUBLE)    Unix timestamp float when saved — use as ingestion cursor
+modifiedAt (DOUBLE)
+fetchStatus (INTEGER)
+status (INTEGER)    0 = active; non-zero = deleted/trash — always filter WHERE status = 0
+publishedAt (DOUBLE)
+deletedAt (DOUBLE)  non-null means soft-deleted — filter WHERE deletedAt IS NULL
+folderID (TEXT)
+```
+
+**`content` table schema (confirmed):**
+```
+id (TEXT)           same UUID as link.id
+content (TEXT)      PLAIN TEXT already extracted by GoodLinks — no HTML parsing needed
+wordCount (INTEGER)
+videoDuration (INTEGER)
+```
+
+**`highlight` table schema (confirmed, useful for enriched notes):**
+```
+id (TEXT)
+linkID (TEXT)       foreign key to link.id
+content (TEXT)      highlighted text excerpt
+note (TEXT)         user annotation on the highlight
+color (INTEGER)
+time (DOUBLE)       timestamp of highlight
+```
+
+**Live data on this machine at time of research:**
+- 92 total links in `link` table
+- 87 have rows in `content` table (5 pending fetch — network fetch not yet complete)
+- Status distribution: all 92 have status = 0 (active)
+- Tags observed: `app, bjj, frameworks, manual, metrics, product, scrum, strudel, templates`
+
+**Key insight:** `content.content` is already-extracted plain text. The article HTML at
+`~/Library/Containers/com.ngocluu.goodlinks/Data/Library/Application Support/articles/{id}/index.html`
+is the formatted reader view (~32KB per file). Use the `content` table instead — same text, no parsing.
+
+---
 
 ## Recommended Stack
 
-### Core Framework
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| Hugo | 0.154.3+extended (current) → 0.154.5+ (target) | Static site generator | Already in use; Hugo Resume requires minimum 0.62, so current version 0.154.3 is compatible. Extended version required for SCSS processing. |
-| Hugo Resume Theme | master branch (no releases) | Single-page resume theme | Provides data-driven resume structure with JSON-based content management. Ported from Start Bootstrap Resume template. |
+### Core Technologies
 
-### Theme Installation Method
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| Hugo Modules | Go 1.12+ | Theme dependency management | **RECOMMENDED**: Preferred modern approach. Clean removal/switching, simple updates via `hugo mod get -u`. Requires Go installed. |
-| Git Submodules | N/A | Alternative theme management | **FALLBACK**: Traditional approach. Simpler if Go not installed, but leaves traces across repository, harder to iterate/experiment. |
+| Technology | Version | Purpose | Why Recommended |
+|------------|---------|---------|-----------------|
+| Python 3.12 (Homebrew) | 3.12.11 at `/opt/homebrew/bin/python3.12` | Query SQLite, emit Markdown source notes | `sqlite3` is stdlib — zero new dependencies. Already installed. 3.12 preferred over system 3.9 for match_text and walrus operator support, but 3.9 also works. |
+| SQLite 3 (system) | 3.51.0 at `/usr/bin/sqlite3` | GoodLinks data store | GoodLinks stores all link metadata in a standard SQLite file at a stable, documented path. Direct read is safe (read-only), fast, and requires no API or sandbox workaround. |
+| bash | system zsh-compat | Orchestration, idempotency state file, pipeline hand-off | Every other capture script in the pipeline is bash (`ingest-youtube.sh`, `enrich-source.sh`). Consistency matters for a headless launchd job. |
 
-### Data File Structure
-| Format | Location | Purpose | Schema |
-|--------|----------|---------|--------|
-| JSON | `data/experience.json` | Work history | Array of `{role, company, summary, range}` objects |
-| JSON | `data/education.json` | Education background | Array of `{school, degree, major, notes?, range}` objects |
-| JSON | `data/skills.json` | Skills inventory | Array of `{grouping, skills[]}` objects; skills can be strings or `{name, icon}` or `{name, link}` objects |
+### Supporting Libraries
 
-### Content Organization
-| Location | Purpose | Format |
-|----------|---------|--------|
-| `content/_index.md` | Bio/summary section | Markdown |
-| `content/projects/creations/` | Original projects | Markdown (use `hugo add` command) |
-| `content/projects/contributions/` | Contributions to other projects | Markdown (use `hugo add` command) |
-| `content/publications/` | Publications list | Markdown |
-| `content/blog/` | Blog posts | Markdown (NOT `posts/` folder) |
+| Library | Version | Purpose | When to Use |
+|---------|---------|---------|-------------|
+| `sqlite3` (Python stdlib) | included | Query `data.sqlite` | Always — it is the only access method needed |
+| `datetime` (Python stdlib) | included | Convert GoodLinks Unix timestamp floats to ISO-8601 dates | Always — `addedAt` is a float epoch (e.g. `1740017877.438`) |
+| `json` (Python stdlib) | included | Read/write `.seen-goodlinks-ids.json` state file for idempotency | Always |
+| `hashlib` (Python stdlib) | included | Optional: hash the link UUID for shorter state keys | Only if state file format requires it |
+| `jq` | 1.7.1 (already installed at `/usr/bin/jq`) | Inspect JSON state file from bash orchestration script | Only if the bash wrapper needs to read the seen-IDs file |
 
-### Frontend Dependencies (Vendored in Theme)
-| Library | Version | Purpose | Notes |
-|---------|---------|---------|-------|
-| Bootstrap | ~4.x | CSS framework | Ported from Start Bootstrap template; vendored in theme |
-| jQuery | ~3.3.1 | JavaScript utilities | Required for search functionality |
-| Fuse.js | ~3.2.0 | Client-side search | Powers `/search` endpoint |
-| Mark.js | ~8.11.1 | Text highlighting | Used in search results |
+**No third-party Python packages are needed. All required libraries are Python stdlib.**
 
-### Configuration Requirements
-| Parameter | Type | Required | Purpose |
-|-----------|------|----------|---------|
-| `baseURL` | string | Yes | Site base URL |
-| `theme` | string | Yes | Set to `"hugo-resume"` |
-| `defaultContentLanguage` | string | No | Language code (default: "en"; supports "en", "fr") |
-| `params.firstName` | string | Yes | Personal information |
-| `params.lastName` | string | Yes | Personal information |
-| `params.address` | string | Yes | Location |
-| `params.email` | string | Yes | Contact email |
-| `params.phone` | string | No | Contact phone |
-| `params.profileImage` | string | Yes | Path to profile photo (e.g., `img/profile.png`) |
-| `params.showQr` | bool | No | Display QR code on page |
-| `params.showContact` | bool | No | Display contact section |
-| `params.sections` | array | Yes | Ordered list of sections: `["skills", "experience", "education", "projects", "publications", "blog"]` |
+### Development Tools
 
-### Output Formats (Built-in)
-| Format | Extension | Purpose |
-|--------|-----------|---------|
-| HTML | .html | Standard site pages |
-| JSON | .json | Search index for Fuse.js |
-| vCard | .vcf | Downloadable contact card |
+| Tool | Purpose | Notes |
+|------|---------|-------|
+| `sqlite3` CLI at `/usr/bin/sqlite3` | Manual schema inspection during development | `sqlite3 "$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite"` |
+| `plutil` | Inspect GoodLinks preferences plist | Tags list is also cached in `com.ngocluu.goodlinks.plist` preferences |
 
-## Installation Commands
+---
 
-### Option A: Hugo Modules (Recommended)
+## Installation
+
+No new installations required. Everything is already on this machine.
+
+Sanity-check command to run once before implementation:
+
 ```bash
-# Initialize Hugo modules (requires Go 1.12+)
-hugo mod init github.com/yourusername/yoursite
-
-# Add theme as module in config.toml
-# [module]
-#   [[module.imports]]
-#     path = "github.com/eddiewebb/hugo-resume"
-
-# Download module
-hugo mod get github.com/eddiewebb/hugo-resume
-
-# Update module later
-hugo mod get -u github.com/eddiewebb/hugo-resume
-
-# Vendor for local inspection (optional)
-hugo mod vendor
+/opt/homebrew/bin/python3.12 - <<'EOF'
+import sqlite3, os
+db = os.path.expanduser(
+    "~/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite"
+)
+conn = sqlite3.connect(db)
+count = conn.execute("SELECT COUNT(*) FROM link WHERE status = 0").fetchone()[0]
+content_count = conn.execute("SELECT COUNT(*) FROM content").fetchone()[0]
+print(f"Active links: {count}")
+print(f"Links with content: {content_count}")
+conn.close()
+EOF
 ```
 
-### Option B: Git Submodule (Fallback)
-```bash
-# Add theme as submodule
-git submodule add https://github.com/eddiewebb/hugo-resume.git themes/hugo-resume
+---
 
-# Initialize submodules when cloning
-git submodule update --init --recursive
+## Integration Point With Existing Pipeline
 
-# Update theme later
-cd themes/hugo-resume
-git pull origin master
-cd ../..
-git add themes/hugo-resume
-git commit -m "Update hugo-resume theme"
+The new script follows the same pattern as `ingest-youtube.sh`:
+
+```
+ingest-goodlinks.sh (new bash script)
+    calls: goodlinks-query.py (new Python script — queries SQLite, emits Markdown)
+    outputs to: sources/goodlinks/   (new subfolder, same schema as sources/youtube/)
+    feeds into: enrich-source.sh (existing — unchanged)
 ```
 
-### Configuration Migration from Blowfish
-```bash
-# 1. Backup current config
-cp -r config/ config.backup/
+**Frontmatter the new script must emit** (from vault `SCHEMA.md`):
 
-# 2. Copy exampleSite config as starting point
-# (after installing theme)
+```yaml
+---
+title: "Article Title"
+date: 2026-02-19
+status: "inbox"
+tags: []                        # GoodLinks tags become initial tags; enrichment adds more
+source: "GoodLinks"
+source_url: "https://..."
+goodlinks_id: "uuid-here"       # Store for idempotency and traceability
+starred: false
+author: "Author Name"           # from link.author, may be empty string
+---
 
-# 3. Create data files
-mkdir -p data/
-touch data/experience.json data/education.json data/skills.json
-
-# 4. Reorganize content structure
-# Move/restructure content/ to match Hugo Resume expectations
+Article body here (from content.content plain text)
 ```
+
+**Idempotency mechanism:** maintain a state file at
+`~/.model-citizen/seen-goodlinks-ids.json` (same directory as other pipeline state).
+On each run: load seen IDs, query only links where `addedAt > last_run_timestamp`,
+write new source notes, append new IDs and update timestamp.
+
+**Cursor field:** use `addedAt` (Unix float). Store the max `addedAt` seen in state file.
+This handles the common case of incremental daily runs.
+
+---
+
+## Data Access Pattern (Concrete)
+
+```python
+#!/usr/bin/env /opt/homebrew/bin/python3.12
+"""
+goodlinks-query.py — emit new GoodLinks links as Markdown source notes
+
+Usage: python3 goodlinks-query.py --since <unix-timestamp> --output-dir <path>
+"""
+import sqlite3, os, datetime, json, sys
+
+DB_PATH = os.path.expanduser(
+    "~/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite"
+)
+
+def get_new_links(since_timestamp: float = 0.0):
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute("""
+        SELECT
+            l.id, l.url, l.title, l.summary, l.author,
+            l.tags, l.starred, l.addedAt, l.publishedAt,
+            c.content, c.wordCount
+        FROM link l
+        LEFT JOIN content c ON l.id = c.id
+        WHERE l.status = 0
+          AND l.deletedAt IS NULL
+          AND l.addedAt > ?
+        ORDER BY l.addedAt ASC
+    """, (since_timestamp,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+def tags_from_string(raw: str | None) -> list[str]:
+    if not raw:
+        return []
+    return [t.strip() for t in raw.split(",") if t.strip()]
+
+def added_at_to_date(ts: float) -> str:
+    return datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
+```
+
+**Tags field format:** comma-separated string (e.g. `"product,metrics,frameworks"`) or `NULL`.
+Split with `tags.split(",")` when non-null.
+
+**Content availability:** ~94% of links have content. For the ~6% without content (fetch pending),
+write the source note with URL + title only, no body. The enrichment pipeline already handles
+minimal-content notes via the readability-based web capture fallback.
+
+---
 
 ## Alternatives Considered
 
-| Category | Recommended | Alternative | Why Not Alternative |
-|----------|-------------|-------------|---------------------|
-| Theme installation | Hugo Modules | Git Submodules | Modules cleaner for switching themes, easier updates, no repository traces |
-| Data format | JSON files in `data/` | Markdown frontmatter | Theme designed around JSON data files; changing would require theme modification |
-| Content structure | Theme's prescribed folders | Custom layout | Breaking theme conventions requires extensive layout overrides |
+| Recommended | Alternative | When to Use Alternative |
+|-------------|-------------|-------------------------|
+| Direct SQLite read (`group.com.ngocluu.goodlinks`) | GoodLinks JSON export (File > Export) | Only if macOS App Sandbox permissions ever block Group Containers access. Export requires manual trigger — not automatable from launchd. |
+| Direct SQLite read | GoodLinks URL scheme (`goodlinks://x-callback-url/`) | URL scheme is designed for iOS/Shortcuts, not shell scripts. Cannot enumerate all links — only open/save individual ones. Not useful for bulk ingestion. |
+| Plain text from `content` table | Parse `articles/{id}/index.html` | Use HTML only if you need article images or structured HTML output. For text enrichment, plain text is sufficient and avoids a parser dependency. |
+| Python stdlib `sqlite3` | Third-party ORM (`dataset`, `sqlalchemy`) | Schema is read-only and simple. An ORM adds an install requirement that will cause `import` failures in launchd's minimal PATH environment. |
+
+---
 
 ## What NOT to Use
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| `posts/` folder for blog | Theme expects `blog/` folder specifically | `content/blog/` |
-| YAML/TOML for resume data | Theme only supports JSON in `data/` directory | JSON files (`experience.json`, etc.) |
-| Direct theme modification | Breaks upgrade path | Override via `layouts/` directory in project root |
-| Hugo < 0.62 | Theme minimum requirement | Hugo 0.154.3+extended (current version) |
+| GoodLinks public API | Does not exist. GoodLinks has no REST or GraphQL API. | Direct SQLite read |
+| CloudKit database at `~/Library/Containers/com.ngocluu.goodlinks/Data/CloudKit/cloudd_db/db` | Payloads are NSKeyedArchiver BLOBs, not readable SQL. RecordCache table was empty (0 rows) at time of inspection. | `group.com.ngocluu.goodlinks/Data/data.sqlite` |
+| `articles/{id}/index.html` as content source | 32KB formatted HTML per file, requires HTML parsing, and the same text is already extracted to `content.content` as plain string. | `content.content` column in SQLite |
+| n8n for this ingestion | No GoodLinks node exists. Would require a custom HTTP node calling a local Flask server, adding infrastructure for a task a 50-line Python script handles. | Direct SQLite via Python |
+| AppleScript | GoodLinks has no AppleScript dictionary. | Direct SQLite read |
+| `~/Library/Containers/com.ngocluu.goodlinks` (app sandbox container, NOT group container) | Contains article HTML files only. No metadata: no URL, no title, no tags. | `~/Library/Group Containers/group.com.ngocluu.goodlinks` for the SQLite DB |
 
-## Migration-Specific Considerations
+---
 
-### From Blowfish to Hugo Resume
+## Stack Patterns by Variant
 
-**Breaking changes:**
-1. **Data structure**: Blowfish uses markdown frontmatter; Hugo Resume uses JSON data files
-2. **Content organization**: Different folder structure and naming conventions
-3. **Configuration format**: Hugo Resume uses flat `config.toml` vs Blowfish's `config/_default/` directory structure
-4. **Styling approach**: Bootstrap-based vs Tailwind CSS (Blowfish)
-5. **Module system**: Both support Hugo Modules, but import paths differ
+**If GoodLinks adds more articles than expected (batch >500/day):**
+- Add `LIMIT 100` clause with pagination loop by `addedAt` cursor
+- Pattern matches YouTube ingest script's batch handling
 
-**Compatibility preserved:**
-- Hugo version: Current 0.154.3 works with both themes
-- Deployment target: Both can publish to `docs/` directory
-- Markdown content: Standard markdown files portable between themes
+**If tags need normalization (pipeline convention is kebab-case):**
+- Add normalization: `tag.lower().replace(" ", "-")`
+- Tags observed on this machine are already lowercase bare words, no spaces
 
-### GitHub Pages Deployment
+**If content is missing for a link (`content` table has no row for that ID):**
+- Write source note with URL + title only, set `content_status: pending` in frontmatter
+- Optionally invoke existing readability-based web capture as fallback (already in pipeline)
 
-No changes required from current setup:
-```toml
-publishDir = "docs"
-```
+**If highlights should be included:**
+- Join `highlight` on `linkID = link.id` and append them as a `## Highlights` section
+- Fields: `content` (text), `note` (user annotation), `color` (int 0-4 representing color)
 
-Both Blowfish and Hugo Resume respect `publishDir` configuration.
+---
 
-## Version Compatibility Matrix
+## Version Compatibility
 
-| Hugo Resume Minimum | Current Project | Compatibility |
-|---------------------|-----------------|---------------|
-| Hugo 0.62 | Hugo 0.154.3+extended | ✅ Compatible |
-| Go N/A (if using git submodules) | N/A | ✅ No Go required for submodule approach |
-| Go 1.12+ (if using Hugo Modules) | Unknown | ⚠️ Verify Go version if choosing modules |
+| Component | Version | Compatibility Notes |
+|-----------|---------|---------------------|
+| Python 3.12 (`/opt/homebrew/bin/python3.12`) | 3.12.11 | Fully compatible — stdlib `sqlite3` available |
+| Python 3.9 (system `/usr/bin/python3`) | 3.9.6 | Also compatible — use if Homebrew Python causes launchd PATH issues |
+| SQLite 3 (system) | 3.51.0 | GoodLinks DB uses SQLite 3.x — no WAL complications observed (WAL files present but 0 bytes) |
+| GoodLinks app | 3.1.1 | Schema verified at this version. The `link` and `content` tables have been stable across all v3.x versions per community scripts going back to 2021. |
 
-## Known Issues & Limitations
-
-### Theme Maintenance Status
-- **Last activity**: Theme has 308 stars, 263 forks, but no official releases published
-- **Active development**: Unclear; 8 open issues, 3 pull requests
-- **Risk**: Theme may not receive updates for new Hugo versions or bug fixes
-- **Mitigation**: Fork theme if customizations needed; be prepared to maintain locally
-
-### Documented Issues
-1. **Template rendering errors** (Issue #69): Some users report build failures with missing template parameters
-   - **Prevention**: Ensure all required config parameters set
-2. **Email obfuscation** (Issue #26): `-remove-` text appears in mailto links as spam defense
-   - **Expected behavior**: By design
-3. **Posts folder confusion** (Issue #30): Theme requires `blog/` not `posts/` folder
-   - **Prevention**: Use correct folder naming
-
-### Search Functionality Dependencies
-- Requires jQuery, Fuse.js, Mark.js loaded in correct order
-- Client-side only; no server-side search
-- JSON output format must be configured for search index
-
-## Stack Patterns by Use Case
-
-**If prioritizing ease of switching/experimentation:**
-- Use Hugo Modules
-- Keep theme customizations minimal
-- Override layouts in project `layouts/` directory only
-
-**If avoiding Go dependency:**
-- Use Git Submodules
-- Accept more complex theme switching process
-- Document submodule management in README
-
-**If heavy customization needed:**
-- Fork hugo-resume theme to own repository
-- Use forked version as module/submodule
-- Maintain customizations in fork, not project
-
-## Development Dependencies
-
-None required beyond Hugo itself. Theme includes all frontend assets.
-
-**Optional:**
-- Go 1.12+ (for Hugo Modules approach)
-- Git (for submodule approach)
+---
 
 ## Sources
 
-**HIGH confidence:**
-- [Hugo Resume GitHub Repository](https://github.com/eddiewebb/hugo-resume) - Official theme source
-- [Hugo Resume theme.toml](https://github.com/eddiewebb/hugo-resume/blob/master/theme.toml) - Minimum Hugo version (0.62)
-- [Hugo Resume exampleSite config](https://github.com/eddiewebb/hugo-resume/blob/master/exampleSite/config.toml) - Configuration parameters
-- [Hugo Resume data files](https://github.com/eddiewebb/hugo-resume/tree/master/exampleSite/data) - JSON schema examples
-
-**MEDIUM confidence:**
-- [Hugo Modules vs Git Submodules comparison](https://drmowinckels.io/blog/2025/submodules/) - Installation method tradeoffs (2026-01-12)
-- [Managing Hugo Dependencies guide](https://bruce-willis.github.io/posts/hugo-modules-guide/) - Hugo Modules best practices
-- [Hugo discourse: Theme as module vs submodule](https://discourse.gohugo.io/t/theme-as-a-hugo-module-or-theme-as-a-git-submodule/54388) - Community recommendations
-
-**LOW confidence (unverified WebSearch only):**
-- Frontend library versions (jQuery 3.3.1, Fuse.js 3.2.0, Mark.js 8.11.1) - Mentioned in search results but not confirmed in official docs
-- Theme maintenance status - No recent release dates visible; inferred from repository statistics
+- Direct filesystem inspection of `~/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite` — HIGH confidence (ground truth, primary database read on this machine)
+- [cychong47/goodlinks GitHub](https://github.com/cychong47/goodlinks) — Python script independently confirms DB path `~/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite` and schema field names
+- [GoodLinks JSON export gist (vascobrown)](https://gist.github.com/vascobrown/479bb47d3f0138a3f595143d93afa658) — confirms JSON export fields (url, tags, addedAt, starred) match DB schema
+- [GoodLinks URL Scheme docs](https://goodlinks.app/url-scheme/) — confirmed no enumerate/export capability via URL scheme; only open/save individual links
+- Model Citizen vault `SCHEMA.md` and `scripts/ingest-youtube.sh` — direct read for integration pattern and frontmatter requirements
 
 ---
-*Stack research for: Hugo Resume Theme Migration*
-*Researched: 2026-02-04*
-*Overall confidence: MEDIUM - Core requirements verified from official sources; frontend dependency versions and maintenance status need validation*
+*Stack research for: GoodLinks ingestion pipeline addition to Model Citizen*
+*Researched: 2026-02-19*
