@@ -10,16 +10,16 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Demonstrate strategic credibility through the site itself
-**Current focus:** Phase 12 — GoodLinks Scanner (v1.2 milestone start)
+**Current focus:** Phase 13 — Pipeline Integration (v1.2)
 
 ---
 
 ## Current Position
 
-Phase: 12 of 13 (GoodLinks Scanner)
-Plan: 1 of 1 in current phase — COMPLETE
-Status: Phase 12 complete; ready for Phase 13
-Last activity: 2026-02-19 — Phase 12 Plan 01 complete: GoodLinks scanner operational, 42 vault notes created
+Phase: 13 of 13 (Pipeline Integration)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-19 — Phase 12 complete; GoodLinks scanner operational with 42 vault notes
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
@@ -66,15 +66,15 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 ### Active Todos
 
 **v1.2 GoodLinks Ingestion:**
-- [ ] Plan Phase 12: GoodLinks Scanner
+- [x] Plan Phase 12: GoodLinks Scanner — DONE
 - [ ] Plan Phase 13: Pipeline Integration
 
 ---
 
 ## Session Continuity
 
-**Last session:** 2026-02-19T22:16:02.467Z
-**Stopped at:** Completed 12-01-PLAN.md: GoodLinks Scanner
+**Last session:** 2026-02-19
+**Stopped at:** Phase 12 complete; ready to plan Phase 13
 **Resume file:** None
 
 ---
