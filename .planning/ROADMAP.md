@@ -87,7 +87,7 @@ Plans:
 | 10. Content Ingestion | v1.1 | 3/3 | Complete | 2026-02-13 |
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
 | 12. GoodLinks Scanner | 1/1 | Complete    | 2026-02-19 | - |
-| 13. Pipeline Integration | v1.2 | 0/2 | Planning complete | - |
+| 13. Pipeline Integration | 1/2 | In Progress|  | - |
 
 ---
 
