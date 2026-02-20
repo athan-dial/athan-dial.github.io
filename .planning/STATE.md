@@ -17,9 +17,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 13 of 13 (Pipeline Integration)
-Plan: 0 of 2 in current phase
-Status: Plans ready — execute next
-Last activity: 2026-02-19 — Phase 12 complete; GoodLinks scanner operational with 42 vault notes
+Plan: 1 of 2 in current phase
+Status: Plan 01 complete — execute Plan 02 next
+Last activity: 2026-02-20 — Phase 13 Plan 01 complete; URL normalization + dedup infrastructure built, 46 source notes migrated
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
@@ -46,7 +46,12 @@ Progress: [████████░░] v1.0 + v1.1 complete; v1.2 starting
 
 See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
-**v1.2 decisions:**
+**v1.2 decisions (Plan 01):**
+- Used importlib.util for sibling script import — normalize-url.py filename has hyphen (not valid Python module name)
+- dedup-check.py exits 0 on duplicate, exits 1 for new URL (shell-friendly)
+- Retained perma and lid as additional tracking params found in real GoodLinks URLs
+
+**v1.2 decisions (planning):**
 - Two-phase structure: scanner first (manual correctness), then integration (automated). Broken scanner wired into daily automation is harder to debug.
 - URL normalization in Phase 13 (integration), not Phase 12 (scanner) — it is shared cross-source infrastructure.
 - First-run `since_timestamp` = now - 30 days to avoid flooding enrichment queue with all 92 historical links.
@@ -74,9 +79,9 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
 ## Session Continuity
 
-**Last session:** 2026-02-20T15:35:59.836Z
-**Stopped at:** Phase 13 context gathered
-**Resume file:** .planning/phases/13-pipeline-integration/13-CONTEXT.md
+**Last session:** 2026-02-20T16:00:00.000Z
+**Stopped at:** Completed 13-01-PLAN.md
+**Resume file:** .planning/phases/13-pipeline-integration/13-02-PLAN.md
 
 ---
 *State initialized: 2026-02-04*
