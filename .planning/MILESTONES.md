@@ -32,3 +32,20 @@
 **Delivered:** Automated content generation and publishing system — captures knowledge from YouTube/web/Slack/Outlook, enriches via Claude Code, curates in Obsidian vault, publishes to Quartz site with explicit human approval gate.
 
 ---
+
+## v1.2 GoodLinks Ingestion (Shipped: 2026-02-20)
+
+**Phases:** 12-13 | **Plans:** 3 | **Timeline:** 2026-02-19 → 2026-02-20
+
+**Key accomplishments:**
+- GoodLinks SQLite scanner reads saved articles read-only with incremental state tracking and iCloud sync lookback buffer
+- 42 vault notes created on first run with correct frontmatter, tags, and extracted article content
+- URL normalization infrastructure prevents cross-source duplicates across GoodLinks, Slack, Outlook, and web capture
+- GoodLinks wired into scan-all.sh with retry, failure notifications, and enrichment trigger
+
+**Delivered:** GoodLinks as fourth automated content source — saved articles flow through the Model Citizen enrichment pipeline (summaries, tags, ideas) within one daily scan cycle, with URL normalization preventing cross-source duplicates.
+
+**Tech Debt:** 4 items (tag parsing needs human verification, INGS-04 requirement softened, pending-content notes enriched prematurely, find -mmin -5 enrichment proxy). See v1.2-MILESTONE-AUDIT.md.
+
+---
+

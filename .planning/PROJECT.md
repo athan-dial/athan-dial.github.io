@@ -26,17 +26,14 @@ Personal/professional portfolio website and automated content publishing system 
 - ✓ Multi-source ingestion (web, Slack, Outlook) — v1.1
 - ✓ Brand-consistent Quartz theming — v1.1
 
+- ✓ GoodLinks SQLite scanner with incremental state and iCloud sync buffer — v1.2
+- ✓ Vault notes with frontmatter, tags, and extracted article content — v1.2
+- ✓ URL normalization prevents cross-source duplicates — v1.2
+- ✓ GoodLinks wired into daily automation with enrichment pipeline — v1.2
+
 ### Active
 
-## Current Milestone: v1.2 GoodLinks Ingestion
-
-**Goal:** Add GoodLinks as an automated content source feeding the Model Citizen enrichment pipeline, turning saved articles into blog fodder.
-
-**Target features:**
-- GoodLinks data extraction (discover export/sync format, build parser)
-- Article content fetching and vault note creation
-- Integration with existing enrichment pipeline (summaries, tags, ideas)
-- Automated daily scanning alongside Slack/Outlook sources
+(No active milestone — run `/gsd:new-milestone` to start next)
 
 ### Out of Scope
 
@@ -49,12 +46,13 @@ Personal/professional portfolio website and automated content publishing system 
 
 ## Context
 
-**Current State (v1.1 shipped 2026-02-14):**
-- Portfolio: Hugo Resume, 13 requirements delivered, live at athan-dial.github.io
-- Model Citizen: Quartz + Obsidian vault + enrichment pipeline, 21 requirements delivered
-- Tech stack: Hugo, Quartz, n8n (Docker), Claude Code (SSH), bash scripts, Python helpers
+**Current State (v1.2 shipped 2026-02-20):**
+- Portfolio: Hugo Resume, live at athan-dial.github.io
+- Model Citizen: Quartz + Obsidian vault + enrichment pipeline, 4 content sources (YouTube, web, Slack/Outlook, GoodLinks)
+- Tech stack: Hugo, Quartz, Claude Code (SSH), bash scripts, Python helpers
 - Two GitHub repos: athan-dial.github.io (portfolio) and model-citizen (Quartz site)
 - Vault: iCloud Obsidian directory (2B-new/700 Model Citizen/)
+- 3 milestones shipped, 13 phases, 28 plans delivered
 
 **Target Audience:**
 - Hiring managers/recruiters for senior PM/DS roles
@@ -85,6 +83,9 @@ Personal/professional portfolio website and automated content publishing system 
 | Tag-based content curation | More flexible than folder-based routing | ✓ Good — works with Obsidian Auto Note Mover |
 | Explicit publish gate | Safety — daily runs never auto-publish | ✓ Good — non-negotiable design principle |
 | Public vault strategy | Entire vault public; Quartz gates rendering | ⚠️ Revisit — consider if sensitive content enters pipeline |
+| Two-phase GoodLinks approach | Scanner first (manual), then integration (automated) | ✓ Good — bugs caught before automation wiring |
+| URL normalization as shared infra | Phase 13 not 12; cross-source utility | ✓ Good — retroactive migration covered all 46 existing notes |
+| Stub notes for missing content | content_status: pending instead of web fetch fallback | ⚠️ Revisit — premature enrichment tech debt |
 
 ---
-*Last updated: 2026-02-19 after v1.2 milestone start*
+*Last updated: 2026-02-20 after v1.2 milestone*
