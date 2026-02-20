@@ -17,8 +17,8 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 13 of 13 (Pipeline Integration)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
+Plan: 0 of 2 in current phase
+Status: Plans ready — execute next
 Last activity: 2026-02-19 — Phase 12 complete; GoodLinks scanner operational with 42 vault notes
 
 **Milestones:**
@@ -67,7 +67,8 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
 **v1.2 GoodLinks Ingestion:**
 - [x] Plan Phase 12: GoodLinks Scanner — DONE
-- [ ] Plan Phase 13: Pipeline Integration
+- [x] Plan Phase 13: Pipeline Integration — 2 plans in 2 waves
+- [ ] Execute Phase 13: Pipeline Integration
 
 ---
 

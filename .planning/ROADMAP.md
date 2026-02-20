@@ -65,10 +65,11 @@ Plans:
   1. Saving an article in GoodLinks results in an enriched vault note (summary, tags, ideas) appearing in Obsidian within one daily scan cycle without manual intervention
   2. An article already captured via Slack or Outlook does not produce a duplicate vault note when later saved in GoodLinks (URL normalization strips tracking params before deduplication hash)
   3. GoodLinks notes that pass the approval gate publish to Model Citizen via the existing publish sync workflow
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 13-01: TBD
+- [ ] 13-01-PLAN.md — URL normalization utility, dedup checker, retroactive migration
+- [ ] 13-02-PLAN.md — scan-all.sh integration, enrichment wiring, failure notifications
 
 ## Progress
 
@@ -86,7 +87,7 @@ Plans:
 | 10. Content Ingestion | v1.1 | 3/3 | Complete | 2026-02-13 |
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
 | 12. GoodLinks Scanner | 1/1 | Complete    | 2026-02-19 | - |
-| 13. Pipeline Integration | v1.2 | 0/TBD | Not started | - |
+| 13. Pipeline Integration | v1.2 | 0/2 | Planning complete | - |
 
 ---
 
