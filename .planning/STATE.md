@@ -1,6 +1,6 @@
 # Project State: Athan Dial Portfolio Site
 
-**Last Updated:** 2026-02-19
+**Last Updated:** 2026-02-20
 **Project:** Athan Dial Portfolio + Model Citizen
 
 ---
@@ -17,24 +17,24 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 13 of 13 (Pipeline Integration)
-Plan: 1 of 2 in current phase
-Status: Plan 01 complete — execute Plan 02 next
-Last activity: 2026-02-20 — Phase 13 Plan 01 complete; URL normalization + dedup infrastructure built, 46 source notes migrated
+Plan: 2 of 2 in current phase
+Status: Phase 13 COMPLETE — all plans executed; v1.2 GoodLinks Ingestion milestone shipped
+Last activity: 2026-02-20 — Phase 13 Plan 02 complete; GoodLinks wired into scan-all.sh with dedup, enrichment trigger, notifications, and run summary
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
 - ✅ v1.1 Model Citizen: 8 phases, 20 plans (shipped 2026-02-14)
-- 🚧 v1.2 GoodLinks Ingestion: 2 phases planned (phases 12-13)
+- ✅ v1.2 GoodLinks Ingestion: 2 phases (phases 12-13) — shipped 2026-02-20
 
-Progress: [████████░░] v1.0 + v1.1 complete; v1.2 starting
+Progress: [██████████] v1.0 + v1.1 + v1.2 complete
 
 ---
 
 ## Performance Metrics
 
-**Velocity:** 26 plans total (v1.0: 5, v1.1: 20, v1.2: 1)
+**Velocity:** 27 plans total (v1.0: 5, v1.1: 20, v1.2: 2 [phases 12+13])
 **Quality:** 100% verification pass rate
-**Efficiency:** ~3.7 min per task delivered; 12-01 completed in 2 min 14 sec (2 tasks)
+**Efficiency:** ~3.7 min per task delivered; 13-02 completed in ~8 min (2 tasks)
 
 *Updated after each plan completion*
 
@@ -45,6 +45,11 @@ Progress: [████████░░] v1.0 + v1.1 complete; v1.2 starting
 ### Key Decisions
 
 See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
+
+**v1.2 decisions (Plan 02):**
+- sources_dir derived as output_dir.parent so dedup check scans all vault sources (not just goodlinks/)
+- find -mmin -5 used as proxy for notes created in current run — simpler than parsing script output
+- run_with_retry added as shared helper applied to GoodLinks scanner (1 retry, 3s delay)
 
 **v1.2 decisions (Plan 01):**
 - Used importlib.util for sibling script import — normalize-url.py filename has hyphen (not valid Python module name)
@@ -73,15 +78,15 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 **v1.2 GoodLinks Ingestion:**
 - [x] Plan Phase 12: GoodLinks Scanner — DONE
 - [x] Plan Phase 13: Pipeline Integration — 2 plans in 2 waves
-- [ ] Execute Phase 13: Pipeline Integration
+- [x] Execute Phase 13: Pipeline Integration — DONE
 
 ---
 
 ## Session Continuity
 
-**Last session:** 2026-02-20T16:00:00.000Z
-**Stopped at:** Completed 13-01-PLAN.md
-**Resume file:** .planning/phases/13-pipeline-integration/13-02-PLAN.md
+**Last session:** 2026-02-20T15:52:38Z
+**Stopped at:** Completed 13-02-PLAN.md — Phase 13 complete, v1.2 shipped
+**Resume file:** N/A — all phases complete
 
 ---
 *State initialized: 2026-02-04*

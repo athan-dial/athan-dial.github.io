@@ -22,9 +22,9 @@ Requirements for GoodLinks Ingestion milestone. Each maps to roadmap phases.
 
 ### Integration
 
-- [ ] **INTG-01**: GoodLinks scanner is wired into scan-all.sh orchestrator
+- [x] **INTG-01**: GoodLinks scanner is wired into scan-all.sh orchestrator
 - [x] **INTG-02**: URL normalization prevents duplicates across GoodLinks, web capture, Slack, and Outlook sources
-- [ ] **INTG-03**: GoodLinks notes flow through existing Claude enrichment pipeline (summaries, tags, ideas)
+- [x] **INTG-03**: GoodLinks notes flow through existing Claude enrichment pipeline (summaries, tags, ideas)
 
 ## Future Requirements
 
@@ -56,9 +56,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INGS-02 | Phase 12 | Complete |
 | INGS-03 | Phase 12 | Complete |
 | INGS-04 | Phase 12 | Complete |
-| INTG-01 | Phase 13 | Pending |
+| INTG-01 | Phase 13 | Complete |
 | INTG-02 | Phase 13 | Complete |
-| INTG-03 | Phase 13 | Pending |
+| INTG-03 | Phase 13 | Complete |
 
 **Coverage:**
 - v1.2 requirements: 10 total
