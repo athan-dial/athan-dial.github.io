@@ -6,8 +6,11 @@
 # 1. Slack (saved items + boss DMs)
 # 2. Outlook (boss emails)
 # 3. Web capture queue (process pending items)
+# 4. GoodLinks (saved articles)
 #
 # Continues on individual scanner failures to maximize capture.
+# Retries each scanner once before declaring failure.
+# Sends macOS notification if any scanner fails.
 #
 # Installation: launchctl load ~/Library/LaunchAgents/com.model-citizen.daily-scan.plist
 # Uninstall: launchctl unload ~/Library/LaunchAgents/com.model-citizen.daily-scan.plist
@@ -18,6 +21,16 @@
 #   scan-all.sh --dry-run
 
 set -euo pipefail
+
+# Retry helper: run command once, retry once after 3s on failure
+run_with_retry() {
+  if "$@" 2>&1; then
+    return 0
+  fi
+  echo -e "${YELLOW}  Retrying in 3 seconds...${NC}"
+  sleep 3
+  "$@" 2>&1
+}
 
 # Color output
 RED='\033[0;31m'
@@ -58,9 +71,12 @@ fi
 SLACK_URLS=0
 OUTLOOK_URLS=0
 QUEUE_URLS=0
+GOODLINKS_URLS=0
+GOODLINKS_DEDUP=0
 SLACK_STATUS="SKIPPED"
 OUTLOOK_STATUS="SKIPPED"
 QUEUE_STATUS="SKIPPED"
+GOODLINKS_STATUS="SKIPPED"
 
 # 1. Slack Scanner
 echo -e "${BLUE}▶ Running Slack scanner...${NC}"
@@ -124,6 +140,42 @@ fi
 
 echo ""
 
+# 4. GoodLinks Scanner
+echo -e "${BLUE}▶ Running GoodLinks scanner...${NC}"
+echo ""
+
+GOODLINKS_DB="$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite"
+VAULT_SCRIPTS="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-vault/scripts"
+
+if [[ ! -f "$GOODLINKS_DB" ]]; then
+  echo -e "${YELLOW}⚠ GoodLinks database not found${NC}"
+  echo -e "${YELLOW}  Skipping GoodLinks scan${NC}"
+  GOODLINKS_STATUS="SKIPPED"
+else
+  if run_with_retry "$VAULT_SCRIPTS/ingest-goodlinks.sh" $DRY_RUN 2>&1 | tee /tmp/scan-goodlinks.log; then
+    GOODLINKS_URLS=$(grep -o '[0-9]* notes created' /tmp/scan-goodlinks.log | grep -o '[0-9]*' || echo "0")
+    GOODLINKS_DEDUP=$(grep -o '[0-9]* duplicates skipped' /tmp/scan-goodlinks.log | grep -o '[0-9]*' || echo "0")
+    GOODLINKS_STATUS="SUCCESS"
+    echo -e "${GREEN}✓ GoodLinks scan complete${NC}"
+  else
+    GOODLINKS_STATUS="FAILED"
+    echo -e "${RED}✗ GoodLinks scan failed${NC}"
+  fi
+fi
+
+echo ""
+
+# Notify on failures
+FAILURES=""
+[[ "$SLACK_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Slack "
+[[ "$OUTLOOK_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Outlook "
+[[ "$QUEUE_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Queue "
+[[ "$GOODLINKS_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}GoodLinks "
+
+if [[ -n "$FAILURES" ]]; then
+  osascript -e "display notification \"Failed: ${FAILURES}\" with title \"Model Citizen Scanner\" sound name \"Basso\"" 2>/dev/null || true
+fi
+
 # Summary
 echo -e "${CYAN}═══════════════════════════════════════════════${NC}"
 echo -e "${CYAN}              SCAN SUMMARY${NC}"
@@ -131,7 +183,7 @@ echo -e "${CYAN}═════════════════════�
 echo ""
 
 # Calculate totals
-TOTAL_URLS=$((SLACK_URLS + OUTLOOK_URLS + QUEUE_URLS))
+TOTAL_URLS=$((SLACK_URLS + OUTLOOK_URLS + QUEUE_URLS + GOODLINKS_URLS))
 
 # Format status with colors
 format_status() {
@@ -151,21 +203,22 @@ format_status() {
   esac
 }
 
-echo "Slack:   $(format_status "$SLACK_STATUS")   (${SLACK_URLS} URLs)"
-echo "Outlook: $(format_status "$OUTLOOK_STATUS")   (${OUTLOOK_URLS} URLs)"
-echo "Queue:   $(format_status "$QUEUE_STATUS")   (${QUEUE_URLS} items)"
+echo "Slack:     $(format_status "$SLACK_STATUS")   (${SLACK_URLS} URLs)"
+echo "Outlook:   $(format_status "$OUTLOOK_STATUS")   (${OUTLOOK_URLS} URLs)"
+echo "Queue:     $(format_status "$QUEUE_STATUS")   (${QUEUE_URLS} items)"
+echo "GoodLinks: $(format_status "$GOODLINKS_STATUS")   (${GOODLINKS_URLS} notes, ${GOODLINKS_DEDUP} dedup)"
 echo ""
 echo -e "${CYAN}Total: ${TOTAL_URLS} URLs captured${NC}"
 echo ""
 
 # Exit with error if all scanners failed
-if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" ]]; then
+if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" && "$GOODLINKS_STATUS" == "FAILED" ]]; then
   echo -e "${RED}All scanners failed${NC}"
   exit 1
 fi
 
 # Clean up temp logs
-rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log
+rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log /tmp/scan-goodlinks.log
 
 echo -e "${GREEN}✓ Scan complete${NC}"
 echo ""
