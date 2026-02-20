@@ -73,9 +73,9 @@ See full decision log in STATE.md (decisions from v1.0/v1.1 preserved below)
 
 ## Session Continuity
 
-**Last session:** 2026-02-19
-**Stopped at:** Phase 12 complete; ready to plan Phase 13
-**Resume file:** None
+**Last session:** 2026-02-20T15:35:59.836Z
+**Stopped at:** Phase 13 context gathered
+**Resume file:** .planning/phases/13-pipeline-integration/13-CONTEXT.md
 
 ---
 *State initialized: 2026-02-04*
