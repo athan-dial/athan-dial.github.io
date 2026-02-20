@@ -6,7 +6,7 @@
 
 - ✅ **v1.0 Hugo Resume** — Phases 1-3 (shipped 2026-02-09)
 - ✅ **v1.1 Model Citizen** — Phases 4-11 (shipped 2026-02-14)
-- 🚧 **v1.2 GoodLinks Ingestion** — Phases 12-13 (in progress)
+- ✅ **v1.2 GoodLinks Ingestion** — Phases 12-13 (shipped 2026-02-20)
 
 ## Phases
 
@@ -33,43 +33,13 @@
 
 </details>
 
-### 🚧 v1.2 GoodLinks Ingestion (In Progress)
+<details>
+<summary>✅ v1.2 GoodLinks Ingestion (Phases 12-13) — SHIPPED 2026-02-20</summary>
 
-**Milestone Goal:** Add GoodLinks as an automated content source feeding the Model Citizen enrichment pipeline, turning saved articles into vault notes.
+- [x] Phase 12: GoodLinks Scanner (1/1 plans) — SQLite reader, incremental scan, vault note creation with tags and content
+- [x] Phase 13: Pipeline Integration (2/2 plans) — URL normalization, scan-all.sh integration, enrichment wiring, failure notifications
 
-- [x] **Phase 12: GoodLinks Scanner** — SQLite reader, incremental scan, vault note creation with tags and content (completed 2026-02-19)
-- [x] **Phase 13: Pipeline Integration** — Wire into daily automation, URL normalization, end-to-end validation (completed 2026-02-20)
-
-## Phase Details
-
-### Phase 12: GoodLinks Scanner
-**Goal**: A working scanner that reads GoodLinks SQLite, applies incremental filtering, and creates correctly-formed vault notes — runnable manually before any automation
-**Depends on**: Nothing (first phase of v1.2)
-**Requirements**: DATA-01, DATA-02, DATA-03, INGS-01, INGS-02, INGS-03, INGS-04
-**Success Criteria** (what must be TRUE):
-  1. Running `ingest-goodlinks.sh` manually creates Markdown vault notes in `sources/goodlinks/` for recently saved GoodLinks items
-  2. Each generated note has correct YAML frontmatter (title, url, source, date, tags, status) drawn from GoodLinks data
-  3. GoodLinks user-applied tags appear in the note's frontmatter tag list
-  4. Re-running the scanner does not create duplicate notes for already-seen items (state file tracks last-seen timestamp)
-  5. Items saved on iPhone that appear in the DB after a delay are captured on the next scan run (lookback buffer prevents misses)
-**Plans**: 1 plan
-
-Plans:
-- [ ] 12-01-PLAN.md — GoodLinks SQLite scanner + vault note emission
-
-### Phase 13: Pipeline Integration
-**Goal**: GoodLinks scanner runs automatically as part of daily 7AM job, notes flow through enrichment, and cross-source duplicates are prevented via URL normalization
-**Depends on**: Phase 12
-**Requirements**: INTG-01, INTG-02, INTG-03
-**Success Criteria** (what must be TRUE):
-  1. Saving an article in GoodLinks results in an enriched vault note (summary, tags, ideas) appearing in Obsidian within one daily scan cycle without manual intervention
-  2. An article already captured via Slack or Outlook does not produce a duplicate vault note when later saved in GoodLinks (URL normalization strips tracking params before deduplication hash)
-  3. GoodLinks notes that pass the approval gate publish to Model Citizen via the existing publish sync workflow
-**Plans**: 2 plans
-
-Plans:
-- [ ] 13-01-PLAN.md — URL normalization utility, dedup checker, retroactive migration
-- [ ] 13-02-PLAN.md — scan-all.sh integration, enrichment wiring, failure notifications
+</details>
 
 ## Progress
 
@@ -86,10 +56,10 @@ Plans:
 | 9. Publish Sync | v1.1 | 2/2 | Complete | 2026-02-08 |
 | 10. Content Ingestion | v1.1 | 3/3 | Complete | 2026-02-13 |
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
-| 12. GoodLinks Scanner | 1/1 | Complete    | 2026-02-19 | - |
-| 13. Pipeline Integration | 2/2 | Complete    | 2026-02-20 | - |
+| 12. GoodLinks Scanner | v1.2 | 1/1 | Complete | 2026-02-19 |
+| 13. Pipeline Integration | v1.2 | 2/2 | Complete | 2026-02-20 |
 
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-19 (v1.2 roadmap added)*
+*Last updated: 2026-02-20 (v1.2 shipped)*
