@@ -33,7 +33,13 @@ Personal/professional portfolio website and automated content publishing system 
 
 ### Active
 
-(No active milestone — run `/gsd:new-milestone` to start next)
+**v1.3 Content Intelligence Pipeline:**
+- [ ] Claude Code skills for Slack scanning (via MCP tools) and Outlook scanning (via Graph API)
+- [ ] Scheduled daily scans + on-demand invocation
+- [ ] Intelligent splitting of source content into atomic concept notes
+- [ ] Theme-matching: connecting new atoms to existing vault content
+- [ ] Synthesis workflow: clustering related atoms into draft blog posts with source citations
+- [ ] Content strategist mode: conversational co-creation of crystallized insights
 
 ### Out of Scope
 
@@ -44,6 +50,17 @@ Personal/professional portfolio website and automated content publishing system 
 - Podcast ingestion — YouTube only for now
 - Semantic search/embeddings — Grep-based for v1
 
+## Current Milestone: v1.3 Content Intelligence Pipeline
+
+**Goal:** Replace bash-script URL scrapers with Claude Code-powered content intelligence — scanning Slack/Email, splitting into atomic notes, connecting to vault themes, and synthesizing draft blog posts.
+
+**Target features:**
+- Claude Code skills for Slack (MCP) and Outlook (Graph API) scanning
+- Three-layer content model: source captures → atomic concept notes → synthesized drafts
+- Content strategist workflow: Claude connects new content to existing themes and co-creates writing
+- Scheduled daily automation + interactive on-demand processing
+- Draft blog posts as the terminal output, with citations back to source notes
+
 ## Context
 
 **Current State (v1.2 shipped 2026-02-20):**
@@ -53,6 +70,7 @@ Personal/professional portfolio website and automated content publishing system 
 - Two GitHub repos: athan-dial.github.io (portfolio) and model-citizen (Quartz site)
 - Vault: iCloud Obsidian directory (2B-new/700 Model Citizen/)
 - 3 milestones shipped, 13 phases, 28 plans delivered
+- Existing Slack/Outlook scanners are bash scripts that extract URLs only — no content analysis, no MCP integration
 
 **Target Audience:**
 - Hiring managers/recruiters for senior PM/DS roles
@@ -88,4 +106,4 @@ Personal/professional portfolio website and automated content publishing system 
 | Stub notes for missing content | content_status: pending instead of web fetch fallback | ⚠️ Revisit — premature enrichment tech debt |
 
 ---
-*Last updated: 2026-02-20 after v1.2 milestone*
+*Last updated: 2026-02-22 after v1.3 milestone started*
