@@ -66,9 +66,9 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-02-22
-**Stopped at:** Roadmap created; ready to plan Phase 14
-**Resume file:** N/A
+**Last session:** 2026-02-23T01:31:31.549Z
+**Stopped at:** Phase 14 context gathered
+**Resume file:** .planning/phases/14-vault-schema/14-CONTEXT.md
 
 ---
 *State initialized: 2026-02-04*
