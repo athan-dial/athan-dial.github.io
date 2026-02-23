@@ -13,13 +13,13 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 - [ ] **SCAN-02**: Slack scanner preserves conversational context (sender, channel, thread replies, reason for starring)
 - [ ] **SCAN-03**: Outlook scanner extracts email subject and body content (not just URLs) via Graph API
 - [ ] **SCAN-04**: Both scanners perform incremental scanning (only new content since last run)
-- [ ] **SCAN-05**: Scanned content creates source-layer vault notes with provenance frontmatter
+- [x] **SCAN-05**: Scanned content creates source-layer vault notes with provenance frontmatter
 
 ### Atomic Notes
 
 - [ ] **ATOM-01**: Splitting skill decomposes source notes into single-concept atomic notes
-- [ ] **ATOM-02**: Each atomic note includes provenance metadata (source_type, source_channel, source_sender, source_timestamp)
-- [ ] **ATOM-03**: Atomic notes include content_status tracking for pipeline progression
+- [x] **ATOM-02**: Each atomic note includes provenance metadata (source_type, source_channel, source_sender, source_timestamp)
+- [x] **ATOM-03**: Atomic notes include content_status tracking for pipeline progression
 - [ ] **ATOM-04**: Splitting preserves why-it-matters context from the original source
 
 ### Theme Matching
@@ -33,7 +33,7 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 - [ ] **SYNTH-01**: Synthesis workflow clusters related atomic notes by theme
 - [ ] **SYNTH-02**: Produces draft blog posts with inline citations to source atomic notes
 - [ ] **SYNTH-03**: Drafts do not introduce claims beyond what source notes support
-- [ ] **SYNTH-04**: Human approval gate required before any draft is published
+- [x] **SYNTH-04**: Human approval gate required before any draft is published
 
 ### Orchestration
 
@@ -73,10 +73,10 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 | SCAN-02 | Phase 15 | Pending |
 | SCAN-03 | Phase 15 | Pending |
 | SCAN-04 | Phase 15 | Pending |
-| SCAN-05 | Phase 14 | Pending |
+| SCAN-05 | Phase 14 | Complete |
 | ATOM-01 | Phase 16 | Pending |
-| ATOM-02 | Phase 16 | Pending |
-| ATOM-03 | Phase 14 | Pending |
+| ATOM-02 | Phase 16 | Complete |
+| ATOM-03 | Phase 14 | Complete |
 | ATOM-04 | Phase 16 | Pending |
 | THEME-01 | Phase 16 | Pending |
 | THEME-02 | Phase 16 | Pending |
@@ -84,7 +84,7 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 | SYNTH-01 | Phase 17 | Pending |
 | SYNTH-02 | Phase 17 | Pending |
 | SYNTH-03 | Phase 17 | Pending |
-| SYNTH-04 | Phase 14 | Pending |
+| SYNTH-04 | Phase 14 | Complete |
 | ORCH-01 | Phase 17 | Pending |
 | ORCH-02 | Phase 17 | Pending |
 | ORCH-03 | Phase 17 | Pending |

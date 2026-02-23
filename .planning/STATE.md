@@ -17,9 +17,9 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 ## Current Position
 
 Phase: 14 — Vault Schema
-Plan: —
-Status: Ready to plan
-Last activity: 2026-02-22 — v1.3 roadmap created (phases 14-17)
+Plan: 01 complete
+Status: In progress
+Last activity: 2026-02-23 — 14-01 vault schema contract + ANM routing rules
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
@@ -53,6 +53,13 @@ See PROJECT.md Key Decisions table for full log.
 - Outlook scanner (Phase 15) before Slack MCP — lower risk entry point; Slack MCP parameters are MEDIUM confidence
 - Content strategist mode co-located with synthesis orchestration (Phase 17) — both require atoms to exist before they are useful
 
+**14-01 decisions:**
+- Nested provenance: YAML object for Slack (6 fields) and Outlook (3 fields) — Dataview dot-notation queryable
+- split_index on atoms for reconstruction ordering across multi-atom source splits
+- source_type on atoms satisfies ATOM-02 without copying full provenance (backlink pattern)
+- ANM rules prepended: specific source/slack before generic #model-citizen/source rule
+- themes/ = pipeline aggregation hubs; concepts/ = manual frameworks (distinct, both preserved)
+
 ### Blockers/Concerns
 
 - Slack MCP tool parameter names are MEDIUM confidence — plan an interactive debugging session before writing the subagent system prompt in Phase 15
@@ -66,9 +73,9 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-02-23T01:39:48.628Z
-**Stopped at:** Phase 14 planned and verified
-**Resume file:** .planning/phases/14-vault-schema/14-01-PLAN.md
+**Last session:** 2026-02-23
+**Stopped at:** Completed 14-01-PLAN.md — vault schema contract + ANM routing
+**Resume file:** .planning/phases/14-vault-schema/
 
 ---
 *State initialized: 2026-02-04*
