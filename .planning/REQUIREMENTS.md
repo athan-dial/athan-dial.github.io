@@ -69,32 +69,32 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCAN-01 | — | Pending |
-| SCAN-02 | — | Pending |
-| SCAN-03 | — | Pending |
-| SCAN-04 | — | Pending |
-| SCAN-05 | — | Pending |
-| ATOM-01 | — | Pending |
-| ATOM-02 | — | Pending |
-| ATOM-03 | — | Pending |
-| ATOM-04 | — | Pending |
-| THEME-01 | — | Pending |
-| THEME-02 | — | Pending |
-| THEME-03 | — | Pending |
-| SYNTH-01 | — | Pending |
-| SYNTH-02 | — | Pending |
-| SYNTH-03 | — | Pending |
-| SYNTH-04 | — | Pending |
-| ORCH-01 | — | Pending |
-| ORCH-02 | — | Pending |
-| ORCH-03 | — | Pending |
-| ORCH-04 | — | Pending |
+| SCAN-01 | Phase 15 | Pending |
+| SCAN-02 | Phase 15 | Pending |
+| SCAN-03 | Phase 15 | Pending |
+| SCAN-04 | Phase 15 | Pending |
+| SCAN-05 | Phase 14 | Pending |
+| ATOM-01 | Phase 16 | Pending |
+| ATOM-02 | Phase 16 | Pending |
+| ATOM-03 | Phase 14 | Pending |
+| ATOM-04 | Phase 16 | Pending |
+| THEME-01 | Phase 16 | Pending |
+| THEME-02 | Phase 16 | Pending |
+| THEME-03 | Phase 16 | Pending |
+| SYNTH-01 | Phase 17 | Pending |
+| SYNTH-02 | Phase 17 | Pending |
+| SYNTH-03 | Phase 17 | Pending |
+| SYNTH-04 | Phase 14 | Pending |
+| ORCH-01 | Phase 17 | Pending |
+| ORCH-02 | Phase 17 | Pending |
+| ORCH-03 | Phase 17 | Pending |
+| ORCH-04 | Phase 17 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 20 total
-- Mapped to phases: 0
-- Unmapped: 20 ⚠️
+- Mapped to phases: 20
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-22*
-*Last updated: 2026-02-22 after initial definition*
+*Last updated: 2026-02-22 — traceability mapped to phases 14-17*
