@@ -66,9 +66,9 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-02-23T01:31:31.549Z
-**Stopped at:** Phase 14 context gathered
-**Resume file:** .planning/phases/14-vault-schema/14-CONTEXT.md
+**Last session:** 2026-02-23T01:39:48.628Z
+**Stopped at:** Phase 14 planned and verified
+**Resume file:** .planning/phases/14-vault-schema/14-01-PLAN.md
 
 ---
 *State initialized: 2026-02-04*
