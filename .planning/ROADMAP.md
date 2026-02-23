@@ -60,7 +60,9 @@
   2. `vault/atoms/` and `vault/themes/` folders exist and Obsidian Auto Note Mover routes notes typed `atom` correctly
   3. A manually created test atom note contains all required provenance fields and routes to the correct folder
   4. The `publishability` field (public/private) is defined with clear default rules for Slack-sourced content
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 14-01-PLAN.md — Schema contract, vault folders, ANM routing, test atom note
 
 ### Phase 15: Content Scanners
 **Goal**: Slack and Outlook produce content-rich source notes in the vault — not just URLs — with full message context and incremental state
