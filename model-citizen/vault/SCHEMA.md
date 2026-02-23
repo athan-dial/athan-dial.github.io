@@ -20,7 +20,7 @@ The pipeline has four note types, distinguished by the `type` field in frontmatt
 | `theme` | `themes/` | Structural aggregation hubs linking related atoms |
 | `draft` | `drafts/` | Publishable content evolved from atoms |
 
-Routing to folders is automatic via Auto Note Mover (ANM) pattern matching on the `type` field.
+Routing to folders is automatic via Auto Note Mover (ANM) tag matching. Notes require a routing tag (e.g., `#type/atom`) in addition to the `type:` frontmatter field — ANM matches Obsidian tags, not YAML key-value pairs.
 
 ---
 
@@ -44,7 +44,7 @@ provenance:
   thread_ts: "1708579100.000000"
   permalink: "https://montai.slack.com/archives/C123/p1708579200000000"
   starred_reason: "Good framing of the adoption curve problem — want to use this in planning"
-tags: []
+tags: [type/source/slack]
 ---
 
 [Message text captured verbatim]
@@ -65,7 +65,7 @@ tags: []
 | `provenance.thread_ts` | string | no | — | Thread root timestamp if threaded |
 | `provenance.permalink` | string | yes | — | Full Slack permalink URL |
 | `provenance.starred_reason` | string | yes | — | Why the message was starred (intent capture) |
-| `tags` | array | yes | `[]` | Topic tags added manually or by pipeline |
+| `tags` | array | yes | `[type/source/slack]` | Must include routing tag `type/source/slack`; add topic tags manually |
 
 ### type: source/outlook
 
@@ -80,7 +80,7 @@ provenance:
   sender: boss@montai.com
   subject: "Re: Q1 OKR check-in"
   date: "2026-02-20"
-tags: []
+tags: [type/source/outlook]
 ---
 
 [Email body captured verbatim]
@@ -98,7 +98,7 @@ tags: []
 | `provenance.sender` | string | yes | — | Sender email address |
 | `provenance.subject` | string | yes | — | Original subject line |
 | `provenance.date` | string | yes | — | Email date (YYYY-MM-DD) |
-| `tags` | array | yes | `[]` | Topic tags |
+| `tags` | array | yes | `[type/source/outlook]` | Must include routing tag `type/source/outlook`; add topic tags manually |
 
 **Note on provenance format:** Slack uses a nested `provenance:` YAML object (5+ fields) for readability and Dataview queryability (`WHERE provenance.channel = "general"`). Outlook uses the same nested format with 3 fields for consistency.
 
@@ -118,7 +118,7 @@ publishability: private
 atom_of: "[[Slack: Good framing of the adoption curve problem]]"
 split_index: 2
 source_type: slack
-tags: []
+tags: [type/atom]
 ---
 
 [Single concept, 1-3 sentences, no cross-references]
@@ -136,7 +136,7 @@ tags: []
 | `atom_of` | wikilink | yes | — | Parent source note (backlink for provenance) |
 | `split_index` | integer | yes | — | Position in split sequence (1-based). Enables reconstruction ordering of atoms from the same source |
 | `source_type` | string | yes | — | Origin: `slack`, `outlook`, `goodlinks`, `youtube`. Lightweight provenance for Dataview queries without traversing the backlink |
-| `tags` | array | yes | `[]` | Topic tags |
+| `tags` | array | yes | `[type/atom]` | Must include routing tag `type/atom`; add topic tags manually |
 
 **Provenance design:** Atoms do NOT copy the full provenance object from the source note. They carry `atom_of` (wikilink to parent) and `source_type` (origin label). Full provenance (channel, sender, timestamp, permalink) lives on the source note — follow the backlink to retrieve it. This avoids two sources of truth that diverge.
 
@@ -154,7 +154,7 @@ title: "User adoption psychology"
 type: theme
 created: 2026-02-22
 publishability: private
-tags: []
+tags: [type/theme]
 ---
 
 # User adoption psychology
@@ -173,7 +173,7 @@ tags: []
 | `type` | string | yes | — | Always `theme` |
 | `created` | date | yes | — | ISO 8601 (YYYY-MM-DD) |
 | `publishability` | string | yes | `private` | Default private; flip manually |
-| `tags` | array | yes | `[]` | Topic tags |
+| `tags` | array | yes | `[type/theme]` | Must include routing tag `type/theme`; add topic tags manually |
 
 **Note:** Themes deliberately omit `content_status` and `provenance` — they are structural aggregation hubs, not pipeline content. The "## Related atoms" section in the body contains wikilinks to constituent atoms.
 
@@ -196,7 +196,7 @@ publishability: private
 source_atoms:
   - "[[Adoption curves have a predictable plateau at ~40% active users]]"
   - "[[Users anchor to first-seen UX patterns]]"
-tags: []
+tags: [type/draft]
 ---
 
 [Draft content with inline citations]
@@ -213,7 +213,7 @@ tags: []
 | `content_status` | string | yes | `draft` | See content_status values |
 | `publishability` | string | yes | `private` | **Human approval gate** — must be manually flipped to `public` (SYNTH-04) |
 | `source_atoms` | array | yes | `[]` | Wikilinks to source atoms used in this draft |
-| `tags` | array | yes | `[]` | Topic tags |
+| `tags` | array | yes | `[type/draft]` | Must include routing tag `type/draft`; add topic tags manually |
 
 ---
 
@@ -251,17 +251,21 @@ tags: []
 
 ## Folder Routing
 
-Notes are routed to folders automatically by Auto Note Mover (ANM) using regex pattern matching against the frontmatter `type` field.
+Notes are routed to folders automatically by Auto Note Mover (ANM) using **Obsidian tag matching**. ANM matches the `tag` field in its rules against `#hashtag` style tags in note frontmatter — it does not read YAML key-value pairs like `type: atom`.
 
-| Folder | Type pattern | Note type |
+Each note type requires a dedicated routing tag in its `tags:` array:
+
+| Folder | Routing tag | Note type |
 |--------|-------------|-----------|
-| `sources/slack/` | `^type: source/slack$` | source/slack notes |
-| `sources/outlook/` | `^type: source/outlook$` | source/outlook notes |
-| `atoms/` | `^type: atom$` | atom notes |
-| `themes/` | `^type: theme$` | theme notes |
-| `drafts/` | `^type: draft$` | draft notes |
+| `sources/slack/` | `#type/source/slack` | source/slack notes |
+| `sources/outlook/` | `#type/source/outlook` | source/outlook notes |
+| `atoms/` | `#type/atom` | atom notes |
+| `themes/` | `#type/theme` | theme notes |
+| `drafts/` | `#type/draft` | draft notes |
 
-**ANM configuration:** Rules are prepended to the `folder_tag_pattern` array so specific source sub-type rules match before any generic rules. Pattern regex is anchored (`^` and `$`) to prevent matching `type` strings in note body text.
+**Dual-field pattern:** `type: atom` (frontmatter YAML field) enables Dataview queries. `tags: [type/atom]` (Obsidian tag) enables ANM routing. Both are required.
+
+**ANM configuration:** Rules are prepended to the `folder_tag_pattern` array at positions 0–4 so specific source sub-type rules match before any generic `#model-citizen/source` rule.
 
 **Existing folders unchanged:** `concepts/`, `writing/`, `explorations/`, `ideas/` remain with their existing tag-based routing rules. The new pipeline folders are additive.
 
