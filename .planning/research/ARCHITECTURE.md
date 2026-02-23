@@ -1,903 +1,528 @@
-# Architecture Research: Hugo Resume Theme Migration
+# Architecture Research
 
-**Domain:** Static site theme migration (Blowfish → Hugo Resume)
-**Researched:** 2026-02-04
-**Confidence:** HIGH
+**Domain:** Content Intelligence Pipeline — v1.3 upgrade adding Claude Code skills, Slack MCP, Outlook content scanning, atomic note creation, theme matching, and draft synthesis
+**Researched:** 2026-02-22
+**Confidence:** HIGH (based on verified codebase + confirmed stack research in STACK.md)
 
-## Executive Summary
-
-Migrating from Blowfish to Hugo Resume requires fundamental architectural changes. Blowfish is a flexible, Tailwind-based general-purpose theme with `content/` markdown pages. Hugo Resume is a Bootstrap-based single-page resume theme that uses JSON data files (`data/`) + minimal markdown for structured sections.
-
-**Critical insight:** This is not a simple theme swap. Content must be restructured from markdown pages → JSON data files for core resume sections (skills, experience, education). Custom layouts and 1200+ lines of CSS will need complete adaptation to Hugo Resume's Bootstrap foundation.
-
-## Architectural Comparison
-
-### Current: Blowfish Theme
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    BLOWFISH ARCHITECTURE                     │
-├─────────────────────────────────────────────────────────────┤
-│  Content Layer (Markdown-Driven)                            │
-│  ┌────────────┐  ┌────────────┐  ┌────────────┐            │
-│  │ _index.md  │  │ resume.md  │  │ case-      │            │
-│  │ (homepage) │  │            │  │ studies/   │            │
-│  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘            │
-│        │               │               │                    │
-├────────┴───────────────┴───────────────┴────────────────────┤
-│  Configuration Layer (TOML)                                 │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │ config/_default/                                     │    │
-│  │ ├── hugo.toml (site settings)                        │    │
-│  │ ├── params.toml (theme options, 180+ lines)          │    │
-│  │ ├── languages.en.toml (metadata)                     │    │
-│  │ └── menus.en.toml (navigation)                       │    │
-│  └─────────────────────────────────────────────────────┘    │
-├─────────────────────────────────────────────────────────────┤
-│  Theme Layer (Tailwind CSS + Hugo Modules)                  │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │ - Flexible layouts for any content type              │    │
-│  │ - Taxonomy support (tags, categories, series)        │    │
-│  │ - Multiple homepage layouts (profile, hero, card)    │    │
-│  │ - Article/list views with advanced features          │    │
-│  └─────────────────────────────────────────────────────┘    │
-├─────────────────────────────────────────────────────────────┤
-│  Customization Layer                                        │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │ assets/css/custom.css (1216 lines)                   │    │
-│  │ - Apple-inspired design system                        │    │
-│  │ - Custom CSS variables                                │    │
-│  │ - Heavy !important overrides                          │    │
-│  │                                                       │    │
-│  │ layouts/ (custom partials)                            │    │
-│  │ - case-study-card.html                                │    │
-│  │ - case-study-section.html                             │    │
-│  │ - proof-tile.html                                     │    │
-│  │ - case-studies/list.html                              │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Target: Hugo Resume Theme
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   HUGO RESUME ARCHITECTURE                   │
-├─────────────────────────────────────────────────────────────┤
-│  Single-Page Navigation Layer                               │
-│  ┌────────────────────────────────────────────────────┐     │
-│  │ Auto-scrolling sections with left-hand nav         │     │
-│  │ - #about → #skills → #experience → #education      │     │
-│  │ - #projects → #publications → #blog                │     │
-│  └────────────────────────────────────────────────────┘     │
-├─────────────────────────────────────────────────────────────┤
-│  Data-Driven Content Layer (JSON)                           │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ skills.json  │  │experience.json│  │education.json│      │
-│  │              │  │               │  │              │      │
-│  │ [{           │  │ [{            │  │ [{           │      │
-│  │  "grouping": │  │  "role": "",  │  │  "degree": "",│     │
-│  │  "skills": []│  │  "company":"",│  │  "school": "",│     │
-│  │ }]           │  │  "summary":"",│  │  "range": "" │      │
-│  │              │  │  "range": ""  │  │ }]           │      │
-│  │              │  │ }]            │  │              │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-├─────────────────────────────────────────────────────────────┤
-│  Markdown Content Layer (Detail Pages)                      │
-│  ┌───────────────────────────────────────────────────┐      │
-│  │ content/                                           │      │
-│  │ ├── _index.md (main bio/summary)                  │      │
-│  │ ├── projects/                                      │      │
-│  │ │   ├── creations/ (originator role)              │      │
-│  │ │   └── contributions/ (collaborator role)        │      │
-│  │ ├── publications/ (papers, speaking, articles)    │      │
-│  │ └── blog/ (NOT posts/)                            │      │
-│  └───────────────────────────────────────────────────┘      │
-├─────────────────────────────────────────────────────────────┤
-│  Configuration Layer (Single config.toml)                   │
-│  ┌───────────────────────────────────────────────────┐      │
-│  │ [params]                                           │      │
-│  │ - firstName, lastName, email, phone, address       │      │
-│  │ - profileImage, favicon                            │      │
-│  │ - sections = ["skills", "experience", etc]         │      │
-│  │ - showQr, showContact, showBoards, etc             │      │
-│  │ - [[params.handles]] (social links)                │      │
-│  │ - vcardfields (contact export)                     │      │
-│  └───────────────────────────────────────────────────┘      │
-├─────────────────────────────────────────────────────────────┤
-│  Theme Layer (Bootstrap 4 + StartBootstrap Resume)          │
-│  ┌───────────────────────────────────────────────────┐      │
-│  │ - Fixed single-page layout                         │      │
-│  │ - Left navigation with auto-scroll                 │      │
-│  │ - Client-side search (fuse.js at /search)          │      │
-│  │ - Optional Netlify CMS (/admin endpoint)           │      │
-│  │ - vCard export (.vcf format)                       │      │
-│  └───────────────────────────────────────────────────┘      │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Key Architectural Differences
-
-| Aspect | Blowfish (Current) | Hugo Resume (Target) | Migration Impact |
-|--------|-------------------|---------------------|-----------------|
-| **Content Model** | Markdown pages (`content/*.md`) | JSON data files (`data/*.json`) + minimal markdown | **CRITICAL**: Requires content restructuring |
-| **Layout Philosophy** | Multi-page site with flexible layouts | Single-page with auto-scroll sections | **HIGH**: Entire site structure changes |
-| **Configuration** | Split across 4 TOML files in `config/_default/` | Single `config.toml` with `[params]` section | **MEDIUM**: Config consolidation needed |
-| **CSS Framework** | Tailwind CSS 3.0 (utility-first) | Bootstrap 4 (component-based) | **HIGH**: 1216 lines custom CSS needs rewrite |
-| **Theme Customization** | Hugo Modules (go.mod) | Git submodule, Hugo Module, or manual | **LOW**: Different install method |
-| **Navigation** | Menu defined in `menus.en.toml` | Auto-generated from sections array | **MEDIUM**: Nav logic changes |
-| **Content Types** | Flexible (any content type) | Fixed (skills, experience, education, projects, publications, blog) | **HIGH**: Constrained content model |
-| **Custom Layouts** | 4 custom partials + 1 list layout | Must override Bootstrap layouts | **HIGH**: All custom layouts incompatible |
-| **Case Studies** | First-class content type with grid view | Not a native concept (would use projects or publications) | **CRITICAL**: Feature gap |
-| **Homepage** | Markdown with HTML (proof tiles) | Bio from `_index.md` + data-driven sections | **HIGH**: Homepage rewrite required |
-
-## Content Structure Migration Map
-
-### Phase 1: Core Resume Sections (V1 Scope)
-
-#### Skills Migration
-
-**Current (Blowfish):**
-```markdown
-content/resume.md:
----
-title: "Resume"
 ---
 
-## Skills
-- Python, R, SQL
-- Machine learning frameworks
-- Data visualization
+## Standard Architecture
+
+### System Overview: v1.3 Intelligence Tier on Top of v1.2
+
+The existing system has three layers (scan → vault → Quartz publish). v1.3 inserts an **intelligence tier** between the scan layer and the vault. Bash scanners remain as URL-capture fallbacks. Claude Code agents run alongside them, doing content-level work rather than URL extraction.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      PUBLIC (Quartz Site)                        │
+│              https://athan-dial.github.io/model-citizen/         │
+│  publish-sync.sh syncs approved vault notes → GitHub → Pages     │
+└───────────────────────────────▲─────────────────────────────────┘
+                                │ approved notes only (dual gate)
+┌───────────────────────────────┴─────────────────────────────────┐
+│                    PRIVATE (Obsidian Vault)                       │
+│  inbox/         → raw captures                                    │
+│  sources/       → normalized source notes (URL + content)        │
+│  atoms/         → atomic concept notes (ONE idea per note) [NEW] │
+│  themes/        → theme index + backlink clusters          [NEW] │
+│  enriched/      → AI-enriched sources (existing)                 │
+│  ideas/         → blog angles (existing)                         │
+│  drafts/        → synthesized blog post drafts             [NEW] │
+│  publish_queue/ → approved for publication (existing)            │
+└───────────────────────────────▲─────────────────────────────────┘
+                                │ writes notes
+┌───────────────────────────────┴─────────────────────────────────┐
+│          INTELLIGENCE TIER (Claude Code)                [NEW]    │
+│                                                                   │
+│  ┌──────────────────┐   ┌────────────────────────────────────┐  │
+│  │  slack-scanner   │   │  scan-outlook-content.py           │  │
+│  │  subagent        │   │  (msgraph-sdk, Python)             │  │
+│  │  (Slack MCP)     │   │  → full email body, not URLs only  │  │
+│  └────────┬─────────┘   └────────────────┬───────────────────┘  │
+│           └──────────────────┬───────────┘                       │
+│                              ▼                                    │
+│              vault/sources/*.md  (content-rich notes)            │
+│                              │                                    │
+│                              ▼                                    │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │   split-atomic skill  (claude -p per note)                │  │
+│  │   → splits multi-concept sources into vault/atoms/*.md    │  │
+│  └───────────────────────────┬───────────────────────────────┘  │
+│                              ▼                                    │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │   match-themes skill  (claude -p per atom)                │  │
+│  │   → finds related atoms, updates vault/themes/*.md        │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│                                                                   │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │   content-strategist subagent  (interactive only)         │  │
+│  │   → clusters atoms → draft blog posts with citations      │  │
+│  └───────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+                                │ URL stubs (unchanged)
+┌───────────────────────────────┴─────────────────────────────────┐
+│                SCAN LAYER (Bash Scripts — unchanged)             │
+│  scan-all.sh  → orchestrator (launchd daily)                     │
+│  scan-slack.sh  → Slack REST API → URLs → capture-web.sh        │
+│  scan-outlook.sh → Graph API → URLs → capture-web.sh            │
+│  ingest-goodlinks.sh → SQLite → notes                            │
+│  capture-queue.sh → manual web clips                             │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-**Target (Hugo Resume):**
-```json
-data/skills.json:
-[
-  {
-    "grouping": "Programming Languages",
-    "skills": [
-      {"name": "Python", "icon": "python", "link": "https://python.org"},
-      {"name": "R", "icon": "r"},
-      "SQL"
-    ]
-  },
-  {
-    "grouping": "Machine Learning",
-    "skills": [
-      "PyTorch",
-      "Scikit-learn",
-      "TensorFlow"
-    ]
-  }
-]
-```
+**Critical design principle:** v1.3 does not replace the bash layer. Bash scanners continue running as the URL-capture fallback. The intelligence tier adds a parallel path producing richer content. Both paths write to the vault. The vault is the integration point. URL normalization (v1.2) prevents the same URL from creating two notes.
 
-**Migration complexity:** MEDIUM
-- Requires manual restructuring from prose → structured JSON
-- Skills can be simple strings or objects with icon/link
-- Grouping provides logical organization
-
-#### Experience Migration
-
-**Current (Blowfish):**
-```markdown
-content/resume.md:
----
-title: "Resume"
----
-
-## Experience
-
-### Senior Data Scientist, Montai
-February 2023 - Present
-
-- Led development of ML systems
-- Reduced pipeline latency by 40%
-```
-
-**Target (Hugo Resume):**
-```json
-data/experience.json:
-[
-  {
-    "role": "Senior Data Scientist",
-    "company": "Montai",
-    "summary": "Led development of ML systems.\n- Reduced pipeline latency by 40%\n- Established evaluation frameworks",
-    "range": "February 2023 - Present"
-  }
-]
-```
-
-**Migration complexity:** LOW
-- Straightforward mapping from markdown sections → JSON objects
-- Summary field supports `\n` for line breaks
-- Bullet lists can be preserved with `\n-` formatting
-
-#### Education Migration
-
-**Current (Blowfish):**
-```markdown
-content/resume.md:
-
-## Education
-
-### PhD in Bioinformatics
-University of Example, 2015-2020
-```
-
-**Target (Hugo Resume):**
-```json
-data/education.json:
-[
-  {
-    "degree": "PhD in Bioinformatics",
-    "school": "University of Example",
-    "range": "2015 - 2020"
-  }
-]
-```
-
-**Migration complexity:** LOW
-- Simple 3-field structure
-- Direct mapping from markdown content
-
-#### About/Bio Migration
-
-**Current (Blowfish):**
-```markdown
-content/_index.md:
----
-title: "Athan Dial, PhD"
 ---
 
-# Athan Dial, PhD
+## Component Responsibilities
 
-**PhD-trained in multi-omics analysis...**
-```
+| Component | Responsibility | Type | New / Modified / Unchanged |
+|-----------|----------------|------|---------------------------|
+| `scan-all.sh` | Orchestrates daily scan, all sources | Bash | Modified — add step to call `run-intelligence.sh` |
+| `scan-slack.sh` | Extracts URLs from Slack saved items + boss DMs | Bash | Unchanged (URL-only fallback) |
+| `scan-outlook.sh` | Extracts URLs from Outlook emails | Bash | Unchanged (URL-only fallback) |
+| `ingest-goodlinks.sh` | Scans GoodLinks SQLite → full content notes | Bash | Unchanged |
+| `capture-queue.sh` | Processes manual web clips | Bash | Unchanged |
+| `slack-scanner` subagent | Scans Slack via MCP, writes source notes with full message content | Claude Code subagent | New |
+| `scan-outlook-content.py` | Fetches email bodies via msgraph-sdk, writes source notes | Python | New |
+| `run-intelligence.sh` | Bash orchestrator: invokes intelligence tier steps in sequence | Bash | New |
+| `split-atomic` skill | Splits multi-concept source notes into one-idea atoms | Claude Code skill | New |
+| `match-themes` skill | Finds related vault atoms, adds backlinks to theme index | Claude Code skill | New |
+| `content-strategist` subagent | Interactive: clusters atoms, writes draft blog posts with citations | Claude Code subagent | New |
+| `enrich-vault.sh` | Runs enrichment (summaries, tags, quotes) | Bash + `claude -p` | Modified — trigger `split-atomic` after enrichment |
+| Vault `atoms/` folder | One-idea atomic concept notes | Obsidian folder | New |
+| Vault `themes/` folder | Theme index files, backlink clusters | Obsidian folder | New |
+| `vault/SCHEMA.md` | Canonical frontmatter schema for all note types | Markdown doc | New |
+| `~/.claude/settings.json` | Global Claude Code config | JSON | Modified — add Slack MCP server |
+| Vault frontmatter schema | Frontmatter YAML conventions | Schema | Extended — add `type: atom`, `atom_of`, `theme` |
 
-**Target (Hugo Resume):**
-```markdown
-content/_index.md:
 ---
-title: "Athan Dial, PhD"
+
+## Recommended Project Structure
+
+New files v1.3 adds, relative to existing repo layout:
+
+```
+model-citizen/                         # git repo
+├── scripts/
+│   ├── scan-all.sh                    # existing — minor: add intelligence step
+│   ├── scan-slack.sh                  # existing — unchanged
+│   ├── scan-outlook.sh                # existing — unchanged
+│   ├── scan-outlook-content.py        # NEW — Python Graph API content scanner
+│   └── run-intelligence.sh            # NEW — invokes Claude Code skills in sequence
+│
+└── .claude/
+    ├── agents/
+    │   ├── slack-scanner.md           # NEW — subagent + Slack MCP config
+    │   └── content-strategist.md      # NEW — interactive synthesis subagent
+    └── skills/
+        ├── split-atomic/
+        │   └── SKILL.md               # NEW — atomic splitting instructions
+        └── match-themes/
+            └── SKILL.md               # NEW — theme matching instructions
+
+vault/                                 # Obsidian vault, iCloud-synced
+├── inbox/                             # existing — raw captures
+├── sources/                           # existing — normalized source notes
+├── atoms/                             # NEW — atomic concept notes
+├── themes/                            # NEW — theme index notes
+├── enriched/                          # existing — AI-enriched sources
+├── ideas/                             # existing — blog angles
+├── drafts/                            # existing — blog post drafts
+├── publish_queue/                     # existing — approved for publication
+└── SCHEMA.md                          # NEW — canonical frontmatter schema
+```
+
+### Structure Rationale
+
+- **`atoms/`**: Kept separate from `sources/` because atoms are derivative — they are split from sources. Co-location would blur the three-layer model. Obsidian Auto Note Mover can route notes tagged `#atom` here automatically.
+- **`themes/`**: Index-style notes (one per recurring theme) that aggregate backlinks. These are the theme-matching target. Quartz renders backlinks visually, so theme notes double as knowledge graph entry points.
+- **`.claude/agents/` and `.claude/skills/`**: Committed to the `model-citizen` repo so skills and subagents are version-controlled and reproducible. Not just in `~/.claude/` user-level config.
+- **`vault/SCHEMA.md`**: Subagents need to know the vault's frontmatter conventions. A committed schema file is more reliable than embedding the schema inline in every agent prompt.
+
 ---
-
-PhD-trained in multi-omics analysis. Product-tested in drug discovery ML.
-
-I combine product judgment with technical depth to turn ambiguous
-problems into decision systems...
-```
-
-**Migration complexity:** LOW
-- Same file location, simplified content
-- Remove custom HTML (proof tiles) for V1
-- Focus on concise bio text
-
-#### Contact Information
-
-**Current (Blowfish):**
-```toml
-config/_default/languages.en.toml:
-[author]
-  name = "Athan Dial"
-  email = "athan@example.com"
-```
-
-**Target (Hugo Resume):**
-```toml
-config.toml:
-[params]
-  firstName = "Athan"
-  lastName = "Dial"
-  email = "athan@example.com"
-  phone = "555-555-5555"
-  address = "City, State"
-  profileImage = "img/profile.jpg"
-```
-
-**Migration complexity:** LOW
-- Config consolidation
-- More granular contact fields
-
-### Phase 2: Deferred Features (V2 Scope)
-
-#### Case Studies → Projects
-
-**Current (Blowfish):**
-```
-content/case-studies/
-├── preventing-metric-theater.md
-├── reducing-pipeline-latency.md
-└── scaling-ai-nominations.md
-
-Custom layouts:
-layouts/case-studies/list.html (grid view)
-layouts/partials/case-study-card.html
-layouts/partials/case-study-section.html
-```
-
-**Target (Hugo Resume):**
-```
-content/projects/
-├── creations/ (originator role)
-│   └── decision-velocity-framework.md
-└── contributions/ (collaborator role)
-    └── ml-evaluation-system.md
-```
-
-**Migration complexity:** HIGH
-- Case studies map to either "creations" or "contributions" projects
-- Must rewrite frontmatter to Hugo Resume archetype format
-- Custom grid layout incompatible (Hugo Resume uses list view)
-- Lose case study-specific metadata (problem_type, scope, complexity)
-- Content structure (Context → Ownership → Decision Frame → Outcome → Reflection) can be preserved in markdown body
-
-**Decision:** DEFER to V2
-- V1 focuses on resume content only
-- Case studies require design decisions about how to adapt custom UI
-
-## Data Flow Comparison
-
-### Current (Blowfish) Content Rendering Flow
-
-```
-User Request
-    ↓
-Hugo Router → content/resume.md (frontmatter + markdown)
-    ↓
-Blowfish Theme Layouts
-    ↓
-├── layouts/_default/single.html
-├── assets/css/compiled.css (Tailwind)
-└── assets/css/custom.css (1216 lines, loaded after)
-    ↓
-HTML Output (multi-page site)
-```
-
-### Target (Hugo Resume) Content Rendering Flow
-
-```
-User Request
-    ↓
-Hugo Router → content/_index.md (bio only)
-    ↓
-Hugo Resume Theme Layouts
-    ↓
-├── layouts/index.html (single-page template)
-│   ├── Sections loop: {{ range .Site.Params.sections }}
-│   │   ├── "skills" → reads data/skills.json
-│   │   ├── "experience" → reads data/experience.json
-│   │   └── "education" → reads data/education.json
-│   ├── Projects: range where "Type" "eq" "projects"
-│   └── Publications: range where "Type" "eq" "publications"
-└── assets/css/bootstrap.min.css + resume.css
-    ↓
-HTML Output (single-page with anchor sections)
-```
-
-**Key difference:** Hugo Resume templates directly reference `.Site.Data.*` for structured content, while Blowfish renders markdown content through flexible layouts.
 
 ## Architectural Patterns
 
-### Pattern 1: Data-Driven Content Sections
+### Pattern 1: Dual-Path Scanning
 
-**What:** Hugo Resume uses JSON files in `data/` to populate homepage sections (skills, experience, education). Templates access via `.Site.Data.skills`, `.Site.Data.experience`, etc.
+**What:** Bash URL scanners and Claude Code content scanners run independently. Bash produces URL-stub notes; Claude Code produces content-rich notes. URL normalization (v1.2) prevents duplicate notes for the same URL.
 
-**When to use:** For structured, repeating content that benefits from schema validation and separation of data from presentation.
+**When to use:** Always in v1.3. Bash runs reliably even when Claude Code invocation fails. Claude Code runs for richer output when available.
 
-**Trade-offs:**
-- ✅ Pro: Clean separation of content (data) and presentation (templates)
-- ✅ Pro: JSON schema makes content structure explicit
-- ✅ Pro: CMS integration easier with structured data
-- ❌ Con: Less flexible than markdown (can't easily add custom sections)
-- ❌ Con: Requires JSON editing (no prose/markdown richness)
-- ❌ Con: Hard to version control narrative changes (diffs show JSON structure noise)
+**Trade-offs:** Two parallel paths create two note schemas initially. The existing `content_status: pending` stub handling is the reconciliation mechanism — Claude Code notes overwrite stubs if the URL was already captured by bash.
 
-**Example:**
-```go-html-template
-{{ range .Site.Data.experience }}
-  <div class="resume-item">
-    <h3 class="resume-title">{{ .role }}</h3>
-    <div class="resume-company">{{ .company }}</div>
-    <div class="resume-date">{{ .range }}</div>
-    <div class="resume-summary">{{ .summary | markdownify }}</div>
-  </div>
-{{ end }}
-```
-
-**Migration application:** V1 requires converting `content/resume.md` prose sections → `data/*.json` structured data.
-
-### Pattern 2: Archetype-Based Content Creation
-
-**What:** Hugo Resume provides archetypes (templates) for projects and publications. Use `hugo new projects/creations/name.md` to scaffold with correct frontmatter structure.
-
-**When to use:** When creating new project or publication entries to ensure consistent metadata.
-
-**Trade-offs:**
-- ✅ Pro: Enforces frontmatter consistency
-- ✅ Pro: Faster content creation (no need to remember required fields)
-- ❌ Con: Less flexible than freeform markdown
-- ❌ Con: Must learn archetype conventions
-
-**Example:**
 ```bash
-# Create new project
-hugo new projects/creations/ml-pipeline.md
-
-# Generates:
----
-title: "ML Pipeline"
-date: 2026-02-04
-draft: true
-image: ""
-alt: ""
-color: ""
-link: ""
-description: ""
----
+# scan-all.sh ordering: bash scan first (always), intelligence tier after
+./scan-slack.sh              # produces URL stubs → sources/
+./scan-outlook.sh            # produces URL stubs → sources/
+./ingest-goodlinks.sh        # produces full notes → sources/
+./capture-queue.sh           # processes web clips → sources/
+./run-intelligence.sh        # enriches stubs, creates atoms via Claude Code
 ```
 
-**Migration application:** V2 case studies migration would use project archetypes. Current case study frontmatter must be mapped to project archetype fields.
+### Pattern 2: Pipeline as Skill Chain
 
-### Pattern 3: Section-Based Navigation
+**What:** Each transformation step (source → atom → theme match) is an independent Claude Code skill invoked sequentially via bash. Each step reads from one vault folder and writes to the next.
 
-**What:** Hugo Resume auto-generates left-hand navigation from `params.sections` array. Each section corresponds to either a data file (skills, experience, education) or a content type (projects, publications, blog).
+**When to use:** Single-person vault with no concurrent writers. Sequential pipeline is simpler and debuggable — any single step can be re-run without re-running the full pipeline.
 
-**When to use:** For single-page layouts where sections should be accessible via anchor links (#skills, #experience).
+**Trade-offs:** No parallelism across steps. Acceptable for one person's vault volume (estimated <50 new notes/day).
 
-**Trade-offs:**
-- ✅ Pro: No manual menu configuration (DRY principle)
-- ✅ Pro: Auto-scrolling navigation enhances UX
-- ❌ Con: Fixed section types (can't easily add custom sections)
-- ❌ Con: Single-page layout limits content organization flexibility
-
-**Example:**
-```toml
-[params]
-sections = ["skills", "experience", "education", "projects", "publications"]
-
-# Auto-generates nav:
-# <nav>
-#   <a href="#skills">Skills</a>
-#   <a href="#experience">Experience</a>
-#   <a href="#education">Education</a>
-#   <a href="#projects">Projects</a>
-#   <a href="#publications">Publications</a>
-# </nav>
-```
-
-**Migration application:** Replaces Blowfish's `menus.en.toml` explicit menu configuration. Requires consolidating multi-page site → single-page sections.
-
-### Pattern 4: Hugo's Template Lookup Order for Overrides
-
-**What:** Hugo resolves templates by checking project-level `layouts/` before falling back to theme `themes/hugo-resume/layouts/`. This allows selective theme customization without modifying theme files.
-
-**When to use:** To override specific theme templates (e.g., navbar, footer, section layouts) while preserving theme upgrade path.
-
-**Trade-offs:**
-- ✅ Pro: Theme can be updated independently of customizations
-- ✅ Pro: Explicit override locations (easy to audit customizations)
-- ✅ Pro: Partial overrides supported (override one template, keep rest)
-- ❌ Con: Must understand theme's template structure to know what to override
-- ❌ Con: Breaking changes in theme updates may require updating overrides
-
-**Example:**
-```
-layouts/
-├── _default/
-│   └── single.html        # Overrides theme's single.html for all content
-├── projects/
-│   └── single.html        # Overrides only for projects
-└── partials/
-    └── head.html          # Overrides <head> content (e.g., for custom CSS)
-```
-
-**Migration application:**
-- Custom CSS: Create `layouts/partials/head.html` to inject `<link>` to custom stylesheet
-- Case studies (V2): Override `layouts/projects/list.html` and `layouts/projects/single.html` for custom grid/card layouts
-
-## Anti-Patterns to Avoid
-
-### Anti-Pattern 1: Modifying Theme Files Directly
-
-**What people do:** Clone Hugo Resume into `themes/hugo-resume/` and edit files directly (e.g., `themes/hugo-resume/layouts/index.html`, `themes/hugo-resume/static/css/resume.css`).
-
-**Why it's wrong:**
-- Breaks theme upgrade path (git pull conflicts)
-- Mixes customizations with theme code (hard to audit what was changed)
-- No clear ownership boundary (which changes are "yours" vs theme's)
-
-**Do this instead:**
-1. Install theme as Hugo Module or git submodule (never edit theme directory)
-2. Override specific files in project-level `layouts/` or `static/`
-3. Document overrides in `.planning/` or comments
-
-**Example:**
 ```bash
-# ❌ WRONG
-vim themes/hugo-resume/layouts/index.html
+# run-intelligence.sh pattern (simplified)
+# Step 1: Slack content scan
+claude --agent slack-scanner "scan Slack since $SINCE_ISO, write to vault/sources/"
 
-# ✅ CORRECT
-# Copy theme template to project layouts/
-mkdir -p layouts
-cp themes/hugo-resume/layouts/index.html layouts/index.html
-vim layouts/index.html  # Edit project copy, not theme file
+# Step 2: Outlook content scan
+python3 scan-outlook-content.py --since "$SINCE_ISO"
+
+# Step 3: Split new sources into atoms
+for note in vault/sources/slack-*.md vault/sources/email-*.md; do
+  claude -p "/split-atomic $note"
+done
+
+# Step 4: Match themes for new atoms
+for atom in vault/atoms/$(date +%Y-%m-%d)-*.md; do
+  claude -p "/match-themes $atom"
+done
 ```
 
-### Anti-Pattern 2: Mixing Markdown and JSON for Same Content Type
+### Pattern 3: Stateful Subagent for Interactive Synthesis
 
-**What people do:** Keep some experience entries in `data/experience.json` and others in `content/experience/*.md` markdown files.
+**What:** The `content-strategist` subagent uses `memory: local` to accumulate knowledge about the vault's recurring themes and which atoms have been drafted. Interactive sessions build on this persistent context.
 
-**Why it's wrong:**
-- Hugo Resume templates expect consistent data sources (either JSON *or* markdown, not both)
-- Creates maintenance burden (two places to update experience)
-- Templates may not render mixed sources correctly
+**When to use:** Weekly synthesis sessions — propose blog post clusters, write drafts. Not for automated daily runs; requires human direction.
 
-**Do this instead:**
-- Choose one content model per section:
-  - **Structured sections** (skills, experience, education) → JSON in `data/`
-  - **Narrative sections** (projects, publications, blog) → Markdown in `content/`
-- If JSON schema feels limiting, consider whether Hugo Resume is the right theme (Blowfish offers more flexibility)
+**Trade-offs:** Local memory is machine-specific. If you switch machines, the strategist loses memory. Acceptable for macOS-primary workflow.
 
-### Anti-Pattern 3: Excessive !important in Custom CSS
-
-**What people do:** Override Bootstrap styles with `!important` everywhere to force custom design.
-
-**Why it's wrong:**
-- Creates specificity wars (next override needs more !important)
-- Breaks Bootstrap's responsive utilities (may need to override every breakpoint)
-- Hard to debug (can't tell which rule is winning)
-- Makes future Bootstrap updates risky
-
-**Do this instead:**
-1. **Override variables:** Hugo Resume may expose Bootstrap SCSS variables (check theme docs). Recompile with custom values.
-2. **Add custom classes:** Instead of overriding `.resume-item`, create `.resume-item--custom` with your styles.
-3. **Use higher specificity selectively:** `.resume-section .resume-item { }` is more specific without `!important`.
-4. **Load custom CSS last:** Ensure `layouts/partials/head.html` loads custom stylesheet *after* Bootstrap/theme CSS.
-
-**Example:**
-```css
-/* ❌ WRONG */
-.resume-item { color: red !important; }
-h3 { font-size: 24px !important; }
-
-/* ✅ CORRECT */
-.resume-item { color: var(--text-primary); }  /* Use CSS variables */
-.resume-item h3 { font-size: 1.5rem; }        /* Scope overrides */
+```
+User: "What are the 3 most clusterable themes in atoms/ from the last 2 weeks?"
+Strategist: [reads atoms/, compares to theme index, proposes clusters]
+User: "Draft a post on Decision Velocity, cite 5 atoms."
+Strategist: [writes vault/drafts/decision-velocity-draft.md with [[backlinks]]]
 ```
 
-**Migration concern:** Current `custom.css` uses 1216 lines with heavy `!important` usage to override Tailwind/Blowfish. This approach will be even more problematic with Bootstrap's component classes. Consider clean-slate CSS rewrite for Hugo Resume.
+### Pattern 4: Vault as Integration Point
 
-### Anti-Pattern 4: Storing Resume Content in config.toml
+**What:** All components write markdown files to the vault. No direct component-to-component calls. The vault's folder structure and frontmatter schema is the contract.
 
-**What people do:** Put entire job descriptions, skill lists, education details in `[params]` within `config.toml`.
+**When to use:** Always — this is the existing system's core design decision. The intelligence tier follows the same pattern rather than introducing direct pipes.
 
-**Why it's wrong:**
-- Config file becomes huge and unmanageable
-- No content versioning (config changes trigger full site rebuild)
-- Violates separation of concerns (config = settings, content = data)
-- Can't leverage Hugo's content management features (drafts, dates, taxonomies)
+**Trade-offs:** Everything must be file-based. No streaming, no webhooks. Appropriate for a local personal system; would not scale to multi-user use.
 
-**Do this instead:**
-- Use `data/*.json` for structured resume content (skills, experience, education)
-- Use `content/*.md` for narrative content (projects, publications, blog)
-- Reserve `config.toml` `[params]` for settings only (display options, contact info, feature flags)
+---
 
-**Example:**
-```toml
-# ❌ WRONG
-[params]
-experience = """
-Senior Data Scientist at Montai
-February 2023 - Present
-Led development of ML systems.
-Reduced pipeline latency by 40%.
-"""
+## Data Flow
 
-# ✅ CORRECT
-# config.toml:
-[params]
-firstName = "Athan"
-lastName = "Dial"
-sections = ["skills", "experience", "education"]
+### Daily Automated Flow (Unattended, launchd at 08:00)
 
-# data/experience.json:
-[
-  {
-    "role": "Senior Data Scientist",
-    "company": "Montai",
-    "summary": "Led development of ML systems.\n- Reduced pipeline latency by 40%",
-    "range": "February 2023 - Present"
-  }
-]
+```
+launchd → scan-all.sh
+  → scan-slack.sh       → vault/sources/slack-*.md     (URL stubs)
+  → scan-outlook.sh     → vault/sources/email-*.md     (URL stubs)
+  → ingest-goodlinks.sh → vault/sources/gl-*.md        (full content)
+  → capture-queue.sh    → vault/sources/web-*.md       (web clips)
+  → run-intelligence.sh
+      → slack-scanner subagent [Slack MCP]
+          reads Slack channels since last-scan timestamp
+          writes vault/sources/slack-content-*.md     (full message context)
+      → scan-outlook-content.py [msgraph-sdk]
+          reads Outlook emails since last-scan timestamp
+          writes vault/sources/email-content-*.md     (full email body)
+      → split-atomic skill [claude -p, per new source]
+          reads vault/sources/*content*.md
+          writes vault/atoms/YYYY-MM-DD-concept-*.md  (one idea each)
+          updates source note: atom_count: N
+      → match-themes skill [claude -p, per new atom]
+          reads vault/atoms/ (new atoms), vault/themes/ (existing index)
+          updates vault/themes/theme-name.md          (adds backlinks)
+          creates new theme file if theme is novel
 ```
 
-## Migration Strategy
+### Weekly Interactive Flow (Human-Directed)
 
-### V1: Core Resume (MVP)
+```
+User opens Claude Code
+  → invokes content-strategist subagent
+      reads vault/atoms/ (last 30 days)
+      reads vault/themes/ (all theme index notes)
+      proposes 2-3 blog post cluster options
 
-**Goal:** Launch functional resume site with Hugo Resume theme.
+User approves cluster
+  → strategist writes vault/drafts/post-slug.md
+      includes [[atom-note]] citations throughout
+      includes sources frontmatter listing source notes
 
-**Scope:**
-- Skills, experience, education (data-driven)
-- About/bio (markdown)
-- Contact information (config)
-- Basic styling (minimal CSS overrides)
+User reviews in Obsidian
+  → edits draft as needed
+  → moves to vault/publish_queue/ OR adds status: publish
 
-**Migration sequence:**
-
-1. **Install Hugo Resume theme** (Hugo Module or git submodule)
-   - Add to `go.mod`: `require github.com/eddiewebb/hugo-resume v1.0.0`
-   - Or: `git submodule add https://github.com/eddiewebb/hugo-resume.git themes/hugo-resume`
-
-2. **Create data files** (content transformation)
-   - Extract skills from `content/resume.md` → `data/skills.json`
-   - Extract experience from `content/resume.md` → `data/experience.json`
-   - Extract education from `content/resume.md` → `data/education.json`
-
-3. **Simplify content/_index.md** (bio only)
-   - Remove proof tiles HTML
-   - Keep concise bio paragraph
-   - Add professional summary
-
-4. **Consolidate config.toml** (settings migration)
-   - Merge `config/_default/*.toml` → single `config.toml`
-   - Map `languages.en.toml` author info → `[params]` firstName/lastName/email
-   - Convert `menus.en.toml` items → `params.sections` array
-   - Remove Blowfish-specific params (colorScheme, homepage.layout, etc.)
-
-5. **Create basic custom.css override** (styling foundation)
-   - Create `layouts/partials/head.html` to inject custom stylesheet
-   - Create `static/css/custom.css` with minimal overrides (colors, fonts, spacing)
-   - Start clean (don't port 1216-line Blowfish overrides wholesale)
-
-6. **Test and validate**
-   - `hugo server` and verify all sections render
-   - Check responsive behavior (mobile, tablet, desktop)
-   - Validate vCard export works (.vcf download)
-   - Test search functionality (/search)
-
-**Preservation strategy:**
-- Keep `content/case-studies/` folder intact (inactive, not linked in nav)
-- Keep `layouts/case-studies/` custom layouts (for V2 reference)
-- Archive Blowfish config: `mv config/_default config/_default.bak`
-
-**Dependencies:**
-- Skills JSON schema understanding (see Sources below)
-- Experience JSON schema (4 required fields: role, company, summary, range)
-- Education JSON schema (3 required fields: degree, school, range)
-
-### V2: Case Studies & Advanced Features
-
-**Goal:** Add decision portfolio (case studies) with custom design.
-
-**Scope:**
-- Migrate case studies → projects (creations or contributions)
-- Reimplement custom card/grid layouts
-- Add proof tiles or equivalent homepage feature
-- Restore full custom CSS design system
-
-**Migration sequence:**
-
-1. **Map case studies to projects**
-   - Decision: Classify each case study as "creation" or "contribution"
-   - Use `hugo new projects/creations/name.md` archetype
-   - Map frontmatter: `problem_type` → custom field, `scope` → custom field
-   - Preserve content structure (Context → Ownership → Decision Frame → Outcome → Reflection)
-
-2. **Override project layouts**
-   - Create `layouts/projects/list.html` (case study grid)
-   - Create `layouts/projects/single.html` (case study detail page)
-   - Create `layouts/partials/case-study-card.html` (reuse existing)
-
-3. **Restore homepage proof tiles**
-   - Create `layouts/index.html` (override Hugo Resume homepage)
-   - Integrate proof tiles HTML from `content/_index.md` (Blowfish version)
-   - Style with custom CSS
-
-4. **Reimplement custom design system**
-   - Port CSS variables from Blowfish `custom.css` (1216 lines)
-   - Adapt to Bootstrap 4 classes (not Tailwind utilities)
-   - Test light/dark mode (if desired)
-
-**Risks:**
-- Hugo Resume's single-page layout may conflict with multi-page case studies
-- Bootstrap 4 component classes may require extensive overrides
-- Auto-scroll navigation may feel constrained for portfolio use case
-
-**Alternative consideration:** If V2 proves too complex, consider sticking with Blowfish or exploring hybrid approach (Hugo Resume for resume, Blowfish for case studies as subdomain/subdirectory).
-
-## Styling Strategy
-
-### Blowfish → Hugo Resume CSS Migration
-
-**Challenge:** Migrating 1216 lines of Tailwind-overriding CSS to Bootstrap-based theme.
-
-**Current approach (Blowfish):**
-- Custom CSS loaded *after* Tailwind via Hugo's asset pipeline
-- Heavy use of `!important` to override Tailwind utilities
-- CSS variables defined in `:root` (115 variables: colors, typography, spacing)
-- Apple-inspired design system (Inter font, subtle grays, generous spacing)
-
-**Target approach (Hugo Resume):**
-- Hugo Resume uses Bootstrap 4 with `static/css/resume.css`
-- Custom CSS must override Bootstrap component classes (`.resume-item`, `.resume-section`)
-- Bootstrap's responsive breakpoints differ from Tailwind's
-
-**Migration options:**
-
-#### Option A: Clean Slate (RECOMMENDED for V1)
-
-Start with minimal CSS overrides, add selectively.
-
-**Pros:**
-- Avoids porting unnecessary Blowfish-specific styles
-- Opportunity to embrace Bootstrap's design system
-- Easier to maintain (less CSS = less bugs)
-
-**Cons:**
-- Loses current visual brand (Apple-inspired design)
-- May require re-establishing design system from scratch
-
-**Implementation:**
-1. Create `static/css/custom.css` with core variables only (colors, fonts)
-2. Override Bootstrap sparingly (typography, spacing, colors)
-3. Test at each step (ensure responsive behavior intact)
-
-**Example:**
-```css
-/* custom.css (V1: minimal overrides) */
-:root {
-  --primary-color: #007AFF;
-  --text-primary: #1D1D1F;
-  --font-sans: 'Inter', -apple-system, sans-serif;
-}
-
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-}
-
-.resume-section h2 {
-  color: var(--primary-color);
-}
+User runs publish-sync.sh
+  → Quartz repo updated → GitHub Actions → Pages live
 ```
 
-#### Option B: Full Port (Deferred to V2)
+### Frontmatter Schema: New Fields for v1.3
 
-Port all 1216 lines of Blowfish CSS to Hugo Resume, adapting Tailwind overrides → Bootstrap overrides.
+Existing vault frontmatter is extended with new fields:
 
-**Pros:**
-- Preserves exact visual brand
-- Maintains design system consistency
-- Less rework if V2 adds more pages
-
-**Cons:**
-- HIGH effort (must audit every rule for Bootstrap compatibility)
-- Risk of breaking Bootstrap responsive utilities
-- May introduce bugs (CSS specificity conflicts)
-
-**Implementation:**
-1. Copy `assets/css/custom.css` → `static/css/custom-full.css`
-2. Replace Tailwind utility selectors → Bootstrap component selectors
-3. Test extensively (all breakpoints, light/dark mode)
-
-**Example:**
-```css
-/* Tailwind utility override (Blowfish) */
-.prose { font-family: var(--font-serif) !important; }
-
-/* Bootstrap component override (Hugo Resume) */
-.resume-item-description { font-family: var(--font-serif); }
+```yaml
+---
+title: "One Concept Title"
+created: 2026-02-22
+modified: 2026-02-22
+type: "atom"                          # NEW: atom | source | draft | theme-index
+atom_of: "[[source-note-title]]"      # NEW: backlink to source note this split from
+atom_count: 3                         # NEW: on source notes — how many atoms derived
+theme: ["decision-velocity", "measurement"]   # NEW: which themes this atom belongs to
+source: "Slack"                       # existing
+tags: [decision-velocity, metrics]    # existing
+status: "draft"                       # existing
+---
 ```
 
-#### Option C: Hybrid (CSS Variables + Selective Overrides)
+**`vault/SCHEMA.md`**: Committed to vault root. Subagent system prompts reference it as a single source of truth. This avoids embedding the schema inline in every agent file and keeps it in sync automatically.
 
-Define CSS variables in custom stylesheet, use Bootstrap's classes but override variable values.
-
-**Pros:**
-- Lightweight (define variables, let Bootstrap use them)
-- Easy to adjust brand colors/fonts/spacing
-- Minimal specificity conflicts
-
-**Cons:**
-- Hugo Resume may not expose Bootstrap variables in customizable way
-- Requires theme code inspection (which variables are used where)
-
-**Implementation:**
-1. Inspect `themes/hugo-resume/static/css/resume.css` for variable usage
-2. Define custom variables in `static/css/custom.css`
-3. Override Bootstrap variables if theme supports it
-
-**Feasibility:** UNKNOWN (requires inspecting Hugo Resume's CSS architecture). If theme doesn't use CSS variables, this approach won't work.
-
-### Recommendation
-
-**V1:** Use **Option A (Clean Slate)** to launch quickly with minimal CSS. Focus on content correctness, not pixel-perfect design.
-
-**V2:** Evaluate **Option C (Hybrid)** first. If not feasible, use **Option B (Full Port)** for brand consistency.
+---
 
 ## Integration Points
 
 ### External Services
 
-| Service | Blowfish Support | Hugo Resume Support | Migration Notes |
-|---------|-----------------|-------------------|-----------------|
-| **Google Analytics** | ✅ `googleAnalytics` in `hugo.toml` | ✅ `[params.google.analytics]` in `config.toml` | Move tracker ID to params section |
-| **Search** | ❌ Not built-in | ✅ Fuse.js at `/search` | Hugo Resume provides client-side search automatically |
-| **CMS** | ❌ Not built-in | ✅ Netlify CMS at `/admin` | Optional feature, requires configuration |
-| **vCard Export** | ❌ Not built-in | ✅ `.vcf` download | Hugo Resume outputs vCard format for contact sharing |
-| **Social Handles** | ✅ `[author.social]` in `languages.en.toml` | ✅ `[[params.handles]]` in `config.toml` | Migrate to params.handles array with name/link/icon |
-| **RSS Feeds** | ✅ Built-in Hugo RSS | ✅ Built-in Hugo RSS | No changes needed |
+| Service | Integration Pattern | Connection Point | Notes |
+|---------|---------------------|-----------------|-------|
+| Slack (MCP) | `@slack/mcp-server` via `npx`, in `~/.claude/settings.json` | `slack-scanner` subagent's `mcpServers: ["slack"]` frontmatter field | Requires existing `SLACK_BOT_TOKEN` in `~/.model-citizen/env`. MCP server auto-started by Claude Code when subagent is invoked. |
+| Microsoft Graph | `msgraph-sdk` Python OAuth client credentials | `scan-outlook-content.py` | Reuses `MS_GRAPH_*` credentials from `~/.model-citizen/env`. Python script called from `run-intelligence.sh`. |
+| Claude Code headless | `claude -p "/skill-name args"` subprocess | `run-intelligence.sh` bash script | Existing pattern from `enrich-vault.sh`. Each skill invocation is a separate process. |
+| Obsidian iCloud sync | iCloud Drive folder at known path | All scripts write to iCloud path | No change from v1.2. Vault path constant. |
 
 ### Internal Boundaries
 
-| Boundary | Communication | Notes |
-|----------|---------------|-------|
-| **Data → Templates** | `.Site.Data.*` access | Templates directly read JSON files from `data/` |
-| **Content → Templates** | `.Pages` iteration | Templates iterate over `content/` markdown files |
-| **Config → Templates** | `.Site.Params.*` access | Templates read settings from `[params]` section |
-| **Partials → Layouts** | `{{ partial "name" . }}` | Layouts compose partials (navbar, footer, head, etc.) |
-| **Custom CSS → Theme CSS** | Cascading order | Custom CSS loaded after theme CSS (override via specificity) |
+| Boundary | Communication Pattern | Notes |
+|----------|-----------------------|-------|
+| Bash scanners → vault | File writes to `vault/sources/` | Unchanged from v1.2 |
+| `slack-scanner` subagent → vault | File writes to `vault/sources/` | Same frontmatter schema as bash scanner output |
+| `scan-outlook-content.py` → vault | File writes to `vault/sources/` | Schema-compatible with existing source notes |
+| `split-atomic` skill → `vault/atoms/` | File writes; does NOT delete or modify source | Source note gets `atom_count: N` field updated |
+| `match-themes` skill → `vault/themes/` | Appends backlinks to existing theme index; creates new theme file if novel | Non-destructive |
+| `content-strategist` → `vault/drafts/` | File writes with `[[wiki-link]]` citations to atom notes | Obsidian wiki-link syntax for backlinks |
+| `run-intelligence.sh` → Claude Code | `claude -p` subprocess, blocking, sequential | Exit codes propagate to `scan-all.sh` for failure tracking |
 
-**Migration boundary risk:** Blowfish custom partials (`case-study-card.html`, `proof-tile.html`) won't work in Hugo Resume without layout overrides. Must reimplement using Hugo Resume's partial structure.
+### Slack MCP State Management
 
-## Confidence Assessment
+The MCP server does not maintain scan state. State stays in bash:
 
-| Area | Confidence | Sources |
-|------|-----------|---------|
-| Hugo Resume architecture | HIGH | Official GitHub repo, exampleSite, JSON schemas inspected |
-| Content migration path | HIGH | Clear mapping: markdown → JSON for data, markdown preserved for narrative |
-| Config consolidation | HIGH | `config.toml` structure documented, params clear |
-| Custom CSS migration | MEDIUM | No Hugo Resume CSS variable documentation found; requires code inspection |
-| Case study migration (V2) | MEDIUM | Projects archetype exists, but custom layouts require overrides |
-| Single-page layout fit | LOW | Uncertainty whether single-page navigation suits portfolio use case |
+```bash
+# run-intelligence.sh: read state, pass as argument to subagent
+LAST_SCAN=$(cat ~/.model-citizen/slack-last-scan 2>/dev/null || date -v-24H +%s)
+SINCE_ISO=$(date -u -r "$LAST_SCAN" +"%Y-%m-%dT%H:%M:%SZ")
 
-## Open Questions
+claude --agent slack-scanner \
+  "Scan Slack for messages since $SINCE_ISO. Write source notes to vault/sources/. \
+   Focus on: links shared, substantive threads, recommendations from boss."
 
-1. **Does Hugo Resume expose Bootstrap SCSS variables for customization?**
-   - Impact: Determines CSS migration strategy (Option C feasibility)
-   - Mitigation: Inspect `themes/hugo-resume/assets/` or `static/css/` for SCSS source files
+# Update timestamp after successful scan
+date +%s > ~/.model-citizen/slack-last-scan
+```
 
-2. **Can Hugo Resume's single-page layout support multi-page "detail" sections?**
-   - Impact: Case studies (V2) may need to break single-page paradigm
-   - Mitigation: Test creating `layouts/projects/single.html` as full-page layout (not anchor section)
-
-3. **How to preserve proof tiles on homepage with Hugo Resume's auto-generated sections?**
-   - Impact: Homepage branding (key differentiator in current Blowfish site)
-   - Mitigation: Override `layouts/index.html` entirely with custom implementation
-
-4. **Is the single-page resume layout optimal for a "decision portfolio" positioning?**
-   - Impact: May feel constrained vs. current multi-page Blowfish site
-   - Mitigation: Consider whether Hugo Resume is the right theme choice, or if Blowfish should be retained
-
-## Sources
-
-### HIGH Confidence (Official Documentation)
-
-- [Hugo Resume GitHub Repository](https://github.com/eddiewebb/hugo-resume) - Theme architecture, features, installation
-- [Hugo Resume exampleSite](https://github.com/eddiewebb/hugo-resume/tree/master/exampleSite) - Directory structure reference
-- [experience.json Schema](https://github.com/eddiewebb/hugo-resume/blob/master/exampleSite/data/experience.json) - JSON structure for experience data
-- [skills.json Schema](https://github.com/eddiewebb/hugo-resume/blob/master/exampleSite/data/skills.json) - JSON structure for skills data
-- [config.toml Example](https://github.com/eddiewebb/hugo-resume/blob/master/exampleSite/config.toml) - Configuration parameters
-- [Hugo Resume README](https://github.com/eddiewebb/hugo-resume/blob/master/README.md) - Content structure, archetypes, migration tips
-
-### MEDIUM Confidence (Community Resources)
-
-- [Hugo Theme Customization Guide](https://bwaycer.github.io/hugo_tutorial.hugo/themes/customizing/) - Template override patterns
-- [How to override CSS in Hugo](https://discourse.gohugo.io/t/how-to-override-css-classes-with-hugo/3033) - CSS override strategies
-- [Hugo Data Files Documentation](https://bwaycer.github.io/hugo_tutorial.hugo/extras/datafiles/) - Using YAML/JSON data in Hugo
-- [Using Hugo Structured Data to Build a Resume Page](https://aldra.co/blog/hugo_structured_data/) - Data-driven resume approach
-- [Overriding theme partials](https://discourse.gohugo.io/t/how-to-override-a-themes-partials/47227) - Partial override best practices
-
-### LOW Confidence (Inferred from Theme Code)
-
-- CSS customization approach (requires inspecting theme source for SCSS variables)
-- Case study layout compatibility (requires testing project overrides)
+Bash remains the state authority. The subagent is stateless per invocation.
 
 ---
 
-**Architecture Research for:** Hugo Resume Theme Migration
-**Researched:** 2026-02-04
-**Confidence:** HIGH (core architecture), MEDIUM (CSS migration), LOW (single-page fit)
+## New vs Modified Components
+
+### New Components
+
+| Component | File Path | What It Does |
+|-----------|-----------|--------------|
+| Slack scanner subagent | `.claude/agents/slack-scanner.md` | System prompt + Slack MCP config for content-level scanning |
+| Outlook content scanner | `model-citizen/scripts/scan-outlook-content.py` | Python msgraph-sdk caller extracting full email bodies |
+| Atomic split skill | `.claude/skills/split-atomic/SKILL.md` | Instructions for splitting multi-concept sources into atomic notes |
+| Theme match skill | `.claude/skills/match-themes/SKILL.md` | Instructions for finding related vault content and adding backlinks |
+| Content strategist subagent | `.claude/agents/content-strategist.md` | Interactive synthesis agent with persistent vault memory |
+| Intelligence orchestrator | `model-citizen/scripts/run-intelligence.sh` | Bash wrapper invoking Claude Code skills in order |
+| Vault schema doc | `vault/SCHEMA.md` | Canonical frontmatter schema for subagent reference |
+| `atoms/` vault folder | Obsidian vault | Landing zone for atomic concept notes |
+| `themes/` vault folder | Obsidian vault | Landing zone for theme index notes |
+
+### Modified Components
+
+| Component | File Path | What Changes |
+|-----------|-----------|-------------|
+| `scan-all.sh` | `model-citizen/scripts/scan-all.sh` | Add step 5: call `run-intelligence.sh` after bash scans complete |
+| `~/.claude/settings.json` | Global Claude Code config | Add `slack` MCP server entry under `mcpServers` |
+| Vault frontmatter schema | Used by all scripts and subagents | Add `type: atom`, `atom_of`, `atom_count`, `theme` fields |
+| `enrich-vault.sh` | Enrichment script | After enrichment, trigger `split-atomic` on the enriched note |
+
+### Unchanged Components
+
+- `scan-slack.sh` — URL extraction fallback remains
+- `scan-outlook.sh` — URL extraction fallback remains
+- `ingest-goodlinks.sh` — working, no changes needed
+- `capture-queue.sh` — working, no changes needed
+- `publish-sync.sh` — working, no changes needed
+- Quartz site configuration — no changes needed
+- Hugo portfolio site — completely separate, no changes
+
+---
+
+## Build Order (Dependency-Driven)
+
+Dependencies flow: vault schema → content scanners → splitting → matching → orchestration → synthesis. Each phase is independently testable before the next begins.
+
+### Phase 1: Foundation — Vault Folders + Schema
+
+**Build:**
+- Create `vault/atoms/` folder
+- Create `vault/themes/` folder
+- Write `vault/SCHEMA.md` with all frontmatter field definitions (existing + new fields)
+- Update Obsidian Auto Note Mover rules: notes tagged `#atom` → `atoms/`, tagged `#theme-index` → `themes/`
+
+**Why first:** Every subsequent component references the schema and writes to these folders. Build the landing zones and the contract before the components that use them.
+
+**Test:** Create a manual test atom note, verify Auto Note Mover routes it correctly.
+
+### Phase 2: Outlook Content Scanner
+
+**Build:** `scan-outlook-content.py`
+
+- Python script using `msgraph-sdk` to fetch full email bodies (not URL scraping)
+- Writes `vault/sources/email-content-YYYYMMDD-*.md` with full content
+- Uses existing `MS_GRAPH_*` credentials from `~/.model-citizen/env`
+- Standalone test: `python3 scan-outlook-content.py --since 2026-02-20 --dry-run`
+
+**Why second:** No Claude Code dependency. Tests that Graph API content extraction works before building intelligence layer on top. Known credentials, known API — lower risk than Slack MCP.
+
+**Test:** Run against one week of emails, verify output note format matches vault schema.
+
+### Phase 3: Slack Scanner Subagent
+
+**Build:** `.claude/agents/slack-scanner.md` + Slack MCP config in `~/.claude/settings.json`
+
+- Configure `@slack/mcp-server` in global Claude Code settings
+- Write subagent system prompt defining scanning behavior and output note format
+- Test interactively: `claude --agent slack-scanner "scan yesterday's messages"`
+- Verify output notes match vault schema
+
+**Why third:** Slack MCP is the newer, less-proven component. Isolating it lets you validate MCP connectivity and Slack permissions before wiring into automation.
+
+**Test:** Invoke subagent interactively, inspect one output note for schema compliance.
+
+### Phase 4: Atomic Split Skill
+
+**Build:** `.claude/skills/split-atomic/SKILL.md`
+
+- Write skill instructions for splitting multi-concept sources into one-idea atoms
+- Define output schema for atom notes (`type: atom`, `atom_of`, `theme`, `tags`)
+- Test on an existing enriched source note: `claude -p "/split-atomic vault/sources/some-note.md"`
+- Validate output notes appear in `vault/atoms/`
+
+**Why fourth:** Depends on Phase 1 (atoms/ folder exists + schema defined). Build after Phases 2-3 so realistic source notes exist to test splitting against.
+
+**Test:** Split one real source note, verify: (1) atoms appear in `vault/atoms/`, (2) `atom_of` backlink is correct, (3) source note gets `atom_count` updated.
+
+### Phase 5: Theme Match Skill
+
+**Build:** `.claude/skills/match-themes/SKILL.md`
+
+- Write skill instructions for finding related atoms and updating theme index
+- Define behavior: update existing theme note vs. create new theme note
+- Test on output from Phase 4: `claude -p "/match-themes vault/atoms/some-atom.md"`
+- Validate backlinks appear in `vault/themes/`
+
+**Why fifth:** Requires atoms to exist (Phase 4 output). The theme matcher reads `atoms/` and `themes/` — both must contain real content to verify matching logic is meaningful.
+
+**Test:** Run on 5 atoms from same topic, verify a coherent theme note is created or updated.
+
+### Phase 6: Intelligence Orchestrator
+
+**Build:** `model-citizen/scripts/run-intelligence.sh` + integration into `scan-all.sh`
+
+- Write bash script invoking Phases 2-5 in sequence with error handling
+- Continue on individual step failure (same pattern as `scan-all.sh` existing scanners)
+- Log to `~/.model-citizen/intelligence.log`
+- Test standalone: `./run-intelligence.sh --dry-run`
+- Add as final step in `scan-all.sh`
+
+**Why sixth:** Integration step — wires everything from Phases 2-5 into existing daily automation. Building last avoids integrating components that aren't working yet.
+
+**Test:** Run full daily scan with intelligence tier enabled, check log for each step completing.
+
+### Phase 7: Content Strategist Subagent
+
+**Build:** `.claude/agents/content-strategist.md`
+
+- Write subagent system prompt for interactive synthesis
+- Reference `vault/SCHEMA.md` and key vault folders
+- Configure `memory: local` so vault pattern knowledge persists across sessions
+- Test interactively: open Claude Code, invoke strategist, verify atom clustering and draft output
+
+**Why last:** The strategist is the interactive capstone. It requires all prior components producing quality input. Validating it last confirms the full three-layer model works end-to-end.
+
+**Test:** Ask strategist to propose blog post clusters from atoms created in Phases 4-5, then draft one. Verify draft has valid backlinks and matches vault schema.
+
+---
+
+## Anti-Patterns
+
+### Anti-Pattern 1: Replacing Bash Scanners with Intelligence Tier
+
+**What people do:** Replace `scan-slack.sh` with the MCP scanner; delete the bash script.
+
+**Why it's wrong:** Bash is a reliable URL-capture fallback. If MCP connectivity fails (Slack token expired, `npx` not in PATH in launchd environment), you lose all Slack scanning. Dual-path ensures capture always happens regardless of Claude Code availability.
+
+**Do this instead:** Keep both. MCP scanner produces rich notes; bash scanner produces URL stubs. URL normalization prevents duplicates. The bash layer is the reliability layer.
+
+### Anti-Pattern 2: Stateful Skills
+
+**What people do:** Build last-scan tracking (timestamps, seen-atom IDs) inside Claude Code skill prompts.
+
+**Why it's wrong:** Skills run as ephemeral `claude -p` processes. They don't persist state between invocations. State written to a file in one run may not be read reliably in the next.
+
+**Do this instead:** Keep all state in bash-managed files under `~/.model-citizen/` (existing pattern). Pass state as arguments to skills: `claude -p "/split-atomic --since 2026-02-21 vault/sources/note.md"`.
+
+### Anti-Pattern 3: Atomic Notes Without Source Backlinks
+
+**What people do:** `split-atomic` creates atoms but doesn't add `atom_of: [[source]]` backlinks.
+
+**Why it's wrong:** Without backlinks, you can't trace a claim in an atom back to its source. The synthesis workflow relies on citation chains: draft → atom → source. Broken chains undermine the "decision evidence, not achievements" brand positioning.
+
+**Do this instead:** Enforce `atom_of` as a required field in `vault/SCHEMA.md`. The `split-atomic` skill system prompt should treat missing `atom_of` as invalid output and retry.
+
+### Anti-Pattern 4: Running Content Strategist in Automation
+
+**What people do:** Add content-strategist to `run-intelligence.sh` so it runs daily unattended.
+
+**Why it's wrong:** The strategist produces draft blog posts — content requiring editorial judgment. Automating it means drafts appear without human review, violating the system's explicit publish gate principle.
+
+**Do this instead:** The strategist is interactive-only. Daily automation stops at theme matching. Draft creation requires explicit human invocation.
+
+---
+
+## Scaling Considerations
+
+This is a single-person system. Scaling concerns are about content volume, not user volume.
+
+| Scale | Architecture Adjustment |
+|-------|------------------------|
+| < 50 source notes/month | Sequential pipeline; `claude -p` per note — no changes needed |
+| 50-200 notes/month | Batch split-atomic: pass a folder path to skill instead of per-note invocation |
+| 200+ notes/month | `claude -p` startup overhead (2-5s/invocation) becomes significant; add sleep/throttle in orchestrator or switch to batch mode |
+| Multiple machines | `.claude/agents/` and `.claude/skills/` are git-tracked and portable; `~/.claude/settings.json` needs manual sync |
+
+**First bottleneck:** Serial `claude -p` invocations. At high volume, startup overhead accumulates. Mitigation: modify skills to accept a list of file paths and process them in a single Claude invocation rather than one invocation per file.
+
+---
+
+## Sources
+
+- Verified codebase: `scan-slack.sh`, `scan-outlook.sh`, `scan-all.sh` — confirmed URL-only extraction, state file patterns, bash orchestration (HIGH confidence)
+- `model-citizen/ARCHITECTURE.md` — verified vault folder structure, dual-gate approval, existing data flows (HIGH confidence)
+- `.planning/research/STACK.md` (same milestone) — Claude Code subagent/skill frontmatter fields, Slack MCP config, msgraph-sdk (HIGH confidence)
+- `.planning/PROJECT.md` — confirmed v1.3 feature list, explicit out-of-scope decisions (n8n deferred, embeddings deferred) (HIGH confidence)
+- `~/.model-citizen/env.example` — confirmed existing credential structure, state file location patterns (HIGH confidence)
+
+---
+
+*Architecture research for: v1.3 Content Intelligence Pipeline — Claude Code skills + Slack MCP + Outlook content scanning + atomic notes + theme matching + synthesis*
+*Researched: 2026-02-22*

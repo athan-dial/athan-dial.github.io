@@ -1,126 +1,162 @@
 # Feature Research
 
-**Domain:** GoodLinks-to-Obsidian ingestion pipeline (subsequent milestone to Model Citizen)
-**Researched:** 2026-02-19
-**Confidence:** HIGH (GoodLinks data access method confirmed via open-source tooling and direct SQLite schema)
+**Domain:** Content Intelligence Pipeline — Slack/Email scanning, atomic notes, theme matching, draft synthesis
+**Researched:** 2026-02-22
+**Confidence:** HIGH (existing codebase examined, MCP ecosystem verified via official Slack docs and Anthropic docs)
 
 ---
 
-## How GoodLinks Works (Access Patterns)
+## Context: What Already Exists
 
-Before features, this context is essential for implementation decisions.
+Before features, this context shapes every decision. The v1.3 milestone adds intelligence on top of a working pipeline.
 
-**Three available access methods (in order of preference for automation):**
+**Existing pipeline (shipped, do not rebuild):**
+- `scan-slack.sh` — Slack REST API, extracts URLs from starred items + boss DMs, calls `capture-web.sh`
+- `scan-outlook.sh` — Graph API, extracts URLs from boss emails, calls `capture-web.sh`
+- `capture-web.sh` — readability extraction, URL deduplication, YAML frontmatter output
+- Enrichment pipeline — Claude Code via SSH: summaries, tags, idea cards, draft outlines
+- Obsidian review gate — explicit human approval before publish
+- Publish sync — Quartz deployment
 
-1. **SQLite direct read** — GoodLinks stores data at `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`. The `link` table contains all fields. This is the most reliable, scriptable, and automation-friendly method. Confirmed by open-source tooling (cychong47/goodlinks on GitHub). No app dependency at runtime.
+**What the existing scanners lack:**
+- No content analysis — only URL extraction
+- No MCP integration — raw REST API bash scripts with fragile grep/sed JSON parsing
+- No atomic splitting — source notes stay as monolithic captures
+- No theme matching — no connection to existing vault content
+- No synthesis — no draft blog post generation from clustered content
 
-2. **JSON export file** — GoodLinks has a built-in export (File > Export on Mac) that produces a JSON array. Each object contains: `id`, `url`, `originalURL`, `title`, `summary`, `author`, `preview`, `tags` (array), `starred` (bool), `readAt` (Unix timestamp or null), `addedAt` (Unix timestamp), `modifiedAt` (Unix timestamp), `fetchStatus`, `status`. Export is manual, not automatable without Shortcuts.
-
-3. **Apple Shortcuts** — GoodLinks exposes a "Find Links" Shortcuts action with rich filtering (unread, tagged, date range, etc.) and returns link objects with full metadata including article content in HTML, plain text, or Markdown. Automatable via `shortcuts run` from shell. Requires GoodLinks app to be running/available. More fragile for headless/launchd use.
-
-**Recommendation:** Use SQLite direct read as primary access method. It requires no app interaction, works in launchd context, and gives full field access without going through the Shortcuts API surface.
+**The gap v1.3 fills:** Replace URL-extraction-only scanners with content-intelligent ones that understand what they're reading and connect it to what's already in the vault.
 
 ---
 
 ## Feature Landscape
 
-### Table Stakes (Users Expect These)
+### Table Stakes (Must Have for v1.3 to Work at All)
 
-Features the pipeline must have to be useful at all. Missing these = the integration is broken.
+Features missing from this list = the new milestone produces no value over v1.2.
 
 | Feature | Why Expected | Complexity | Notes |
 |---------|--------------|------------|-------|
-| SQLite scanner script (`scan-goodlinks.sh`) | All other sources (Slack, Outlook, YouTube) have a dedicated scanner script — GoodLinks needs the same pattern | LOW | Read from `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`, query `link` table |
-| URL-based deduplication | Same URL may be in GoodLinks and already captured via `capture-web.sh` or another source — duplicates pollute inbox | LOW | Check existing vault notes for matching `url:` in frontmatter before creating new note |
-| YAML frontmatter matching pipeline schema | Output notes must have `title`, `url`, `source: goodlinks`, `date`, `tags`, `status: inbox` to flow into enrichment | LOW | Map GoodLinks `addedAt` → `date`, `tags[]` → `tags`, generate filename from title/date |
-| Incremental scan (new-only) | Daily 7AM job must not re-ingest already-processed links on every run | LOW | Store last-seen `addedAt` timestamp in a state file (e.g., `.goodlinks-last-scan`) OR query SQLite with `WHERE addedAt > {last_run_epoch}` |
-| Integration with existing daily launchd job | GoodLinks scanner must run as part of the 7AM automation, not as a separate manual step | LOW | Add `scan-goodlinks.sh` call to the existing orchestrator script |
+| Slack content extraction (not just URLs) | Current scanner sees "message has a URL, go get it" — v1.3 must read the message itself as content worth analyzing | MEDIUM | Use Slack MCP server (`conversations.history`, `conversations.replies`) instead of raw REST bash; message text, thread context, sender preserved |
+| Email body extraction (not just URLs) | Current Outlook scanner is broken for multi-message context — it grabs all URLs from the entire API response body, not per-email | MEDIUM | Graph API `/messages?$select=subject,bodyPreview,body` with HTML-to-text stripping; per-message context preserved |
+| Atomic concept note creation | Long source captures (a Slack thread, an email) must be split into 1-idea-per-note format before enrichment | HIGH | Claude reads source note, identifies discrete concepts, creates separate markdown files with wikilinks back to source; this is the core new capability |
+| Source note → atom link registry | Each atom note must link back to its source note; source note must list its atoms | LOW | Wikilinks in frontmatter (`source_note`, `atoms` fields); enables navigation and prevents orphan notes |
+| Vault theme matching | New atoms must connect to existing notes in the vault — a new atom about "decision velocity" should link to existing notes on that theme | HIGH | Requires grep-based tag/title scan of vault; Claude identifies overlapping concepts and adds wikilinks + shared tags |
+| Incremental scan (content-based) | Daily runs must not re-process already-extracted content | LOW | Per-source state files already exist for slack/outlook; extend with message IDs or timestamps for new content extraction |
+| Existing pipeline integration | New atoms must flow into the existing enrichment pipeline (same frontmatter schema, same inbox folder, same Claude enrichment step) | LOW | Output format identical to `capture-web.sh` output; no pipeline changes needed downstream |
 
-### Differentiators (Valuable but Not Required for V1)
+### Differentiators (What Makes v1.3 Worth Building)
 
-Features that make the integration smarter. The pipeline works without these, but they add meaningful signal.
+These are the features that justify the milestone. The pipeline technically works without them, but they're the point of v1.3.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| Read-status routing | Links marked as `readAt IS NOT NULL` in GoodLinks can be routed differently than unread — e.g., unread → inbox for enrichment, already-read → direct to enriched queue | LOW | Single `WHERE` filter variation; aligns with how GoodLinks users actually organize reading |
-| Starred flag passthrough | GoodLinks `starred = 1` maps to high-priority content — surface this in frontmatter as a tag or priority field so enrichment can weight it | LOW | Add `starred: true` to frontmatter when flag is set |
-| Tag inheritance | GoodLinks tags (already applied by user) should flow into Obsidian note tags — avoids Claude re-inventing tags the user already assigned | LOW | Map `tags[]` array from SQLite directly into frontmatter `tags:` list |
-| Article content extraction on capture | GoodLinks stores a `preview` field (excerpt), but not full article text. Run the URL through existing readability extraction (already built in `capture-web.sh`) when importing an unread GoodLinks link to get full content for enrichment | MEDIUM | Reuse existing readability logic rather than building new; skip for already-read items to avoid re-fetching stale content |
-| Source metadata in note | Include `goodlinks_id`, `added_at`, `read_at` in frontmatter for traceability and potential round-trip debugging | LOW | Useful for troubleshooting; no downstream dependency in current pipeline |
+| Draft blog post synthesis | Claude clusters related atoms from multiple sources (Slack + email + GoodLinks) around a theme, then writes a full draft with inline citations back to source notes | HIGH | Terminal output of the entire pipeline; justifies "Content Intelligence Pipeline" name; requires atomic splitting and theme matching to be complete first |
+| Content strategist mode (conversational co-creation) | Interactive mode where Claude surfaces clusters and asks "should I write this up?" — keeps human in the loop for synthesis decisions | MEDIUM | Claude Code interactive session using `--continue` flag; presents clusters with topic summaries, awaits direction; not fully automated |
+| Message-level context preservation | Slack thread structure preserved in atom notes — who said what, in what channel, in response to what — provides richer citation context | MEDIUM | Slack MCP `conversations.replies` for thread context; `users.info` for display names; stored as note metadata |
+| On-demand invocation | `claude /synthesize-drafts` and `claude /scan-slack` as slash commands callable anytime, not just daily cron | LOW | Claude Code slash commands + skills; composable with existing launchd daily job |
+| Cross-source theme clustering | Atoms from Slack + email + GoodLinks + YouTube that share themes get clustered together before draft synthesis | HIGH | Requires shared tag vocabulary and grep-based vault scan; Claude identifies theme clusters, not a vector DB (grep-based for v1 per PROJECT.md scope decision) |
 
-### Anti-Features (Avoid These)
+### Anti-Features (Commonly Tempting, Reliably Problematic)
 
-| Feature | Why Requested | Why Problematic | Alternative |
-|---------|---------------|-----------------|-------------|
-| Apple Shortcuts-based access | Looks clean, avoids direct DB access, "official" API surface | Requires GoodLinks app available at runtime, fragile in headless launchd context, Shortcuts runner adds latency and failure modes | Use SQLite direct read — it's what the app itself writes to, it's stable, and it's already used by open-source GoodLinks tooling |
-| Full re-scan on every run | Simple to implement — just pull everything every time | Re-creates thousands of notes on every daily run, floods inbox, defeats deduplication | Timestamp-based incremental scan with state file |
-| Bi-directional sync (write back to GoodLinks) | Appealing if you want to mark items read in GoodLinks from Obsidian | GoodLinks SQLite is app-owned storage — writes could corrupt app state or be overwritten on next iCloud sync | One-directional only: GoodLinks → Obsidian. Use the app itself to manage GoodLinks state |
-| Polling for GoodLinks changes in real-time | "Instant" capture when you save a link | launchd daily schedule is sufficient; real-time polling adds always-on process complexity with minimal value | Stick to daily 7AM schedule |
-| Separate enrichment pass for GoodLinks vs other sources | GoodLinks content might seem "different" from web captures | The existing Claude enrichment pipeline already handles any source with proper frontmatter — adding a separate pass fragments the pipeline | Route GoodLinks notes through the same inbox enrichment flow everything else uses |
+| Feature | Why Tempting | Why Problematic | Alternative |
+|---------|--------------|-----------------|-------------|
+| Semantic search / embeddings for theme matching | "The right way" to find related notes by meaning, not just keywords | PROJECT.md explicitly defers this: "Semantic search/embeddings — Grep-based for v1"; adds infrastructure complexity (vector DB, embedding model, index maintenance) with unclear value over grep-based matching at current vault scale (< 200 notes) | Grep vault for shared tags, title keywords, and explicit wikilinks — sufficient for v1 |
+| Fully automated draft publishing | "Just ship it" — skip the human review gate | Breaks the core design principle: "Nothing goes public without explicit human approval"; AI-synthesized drafts need human voice layer before publication | Always output to `drafts/` folder with `status: draft`; human moves to publish queue |
+| Per-message atom creation | Every Slack message becomes an atom note | Creates hundreds of low-signal notes; most messages are not worth preserving as independent concepts | Atomic splitting at the concept level, not the message level; a 10-message thread might yield 2-3 atoms |
+| Real-time Slack scanning | "Capture ideas instantly" | Adds always-on process complexity; daily scan at 7AM is functionally equivalent for this use case | Stay on launchd schedule; on-demand invocation via Claude Code slash command covers urgent needs |
+| Rewriting existing bash scanners from scratch | "Clean slate" — replace `scan-slack.sh` with a Claude Code skill entirely | Existing scripts handle OAuth, rate limits, error handling, and state management correctly; MCP adds a transport layer, not a replacement | Layer MCP tools on top of existing scan patterns; keep bash for auth/scheduling, use MCP for content extraction |
+| Global Slack channel scanning | "More data" — scan all channels | Rate limits (15 messages/min for non-marketplace apps per Slack 2025 policy), privacy concerns, signal-to-noise collapse | Maintain current scope: starred items + boss DMs only |
+| Separate enrichment pass for atoms | "Atoms might need different prompts" | Fragments the pipeline; existing Claude enrichment handles any note with proper frontmatter | Atoms use the same frontmatter schema and flow through the same enrichment pipeline |
 
 ---
 
 ## Feature Dependencies
 
 ```
-[SQLite scanner script]
-    └──requires──> [SQLite access to GoodLinks DB file]
-    └──requires──> [State file for last-scan timestamp]
-    └──produces──> [Inbox notes with YAML frontmatter]
+[Slack content extraction via MCP]
+    └──requires──> [Slack MCP server configured, bot token with channels:history scope]
+    └──produces──> [Source note: full message text + thread context + sender]
+    └──feeds──> [Atomic note creation]
 
-[Incremental scan]
-    └──requires──> [State file (.goodlinks-last-scan)]
-    └──enhances──> [SQLite scanner script]
+[Email body extraction via Graph API]
+    └──requires──> [Existing MS Graph auth (already working)]
+    └──produces──> [Source note: subject + body + sender per email]
+    └──feeds──> [Atomic note creation]
 
-[URL deduplication]
-    └──requires──> [Vault index or grep of existing note URLs]
-    └──enhances──> [SQLite scanner script]
+[Atomic note creation]
+    └──requires──> [Source note with extractable content (not just URL)]
+    └──requires──> [Claude Code skill: split-to-atoms]
+    └──produces──> [Atom notes in inbox/ with source_note wikilink]
+    └──feeds──> [Vault theme matching]
+    └──feeds──> [Existing enrichment pipeline]
 
-[Article content extraction]
-    └──requires──> [Existing readability extraction (capture-web.sh logic)]
-    └──enhances──> [SQLite scanner script]
-    └──optional──> not needed for basic pipeline to work
+[Vault theme matching]
+    └──requires──> [Atomic notes exist]
+    └──requires──> [Vault grep index (tag list, title index)]
+    └──produces──> [Wikilinks added to atom notes, shared tags applied]
+    └──feeds──> [Cross-source theme clustering]
 
-[Tag inheritance]
-    └──requires──> [SQLite scanner script]  (tags come from DB query)
-    └──feeds into──> [Existing Claude enrichment] (fewer redundant tag suggestions)
+[Cross-source theme clustering]
+    └──requires──> [Vault theme matching complete on new atoms]
+    └──requires──> [Shared tag vocabulary consistent across sources]
+    └──produces──> [Cluster manifest: theme → [atom notes] mapping]
+    └──feeds──> [Draft blog post synthesis]
 
-[Daily launchd integration]
-    └──requires──> [SQLite scanner script working correctly]
-    └──wraps──> [All above features]
+[Draft blog post synthesis]
+    └──requires──> [Cross-source theme clustering]
+    └──requires──> [Claude Code skill: synthesize-draft]
+    └──produces──> [Draft markdown in drafts/ with citations]
+    └──feeds──> [Existing publish pipeline (human approval gate)]
+
+[Content strategist mode]
+    └──requires──> [Cross-source theme clustering]
+    └──enhances──> [Draft blog post synthesis]
+    └──note──> [Optional interaction layer; synthesis works without it]
+
+[On-demand slash commands]
+    └──requires──> [Claude Code skills installed]
+    └──enhances──> [All above features]
+    └──note──> [Independent of launchd; complementary]
 ```
 
 ### Dependency Notes
 
-- **SQLite scanner is the load-bearing feature:** Everything else (deduplication, incremental scan, tag inheritance) builds on it. Ship the scanner first, then layer in the rest.
-- **Article content extraction is optional at launch:** The enrichment pipeline can work with just title + URL + tags + summary from GoodLinks. Full-text extraction is an enhancement, not a requirement.
-- **Deduplication requires a decision on scope:** Simple approach = grep vault for matching URL in frontmatter. More robust = maintain a seen-URLs file. The simple approach is sufficient for V1.
+- **Atomic splitting is the load-bearing feature:** All downstream features (theme matching, clustering, synthesis) require it. If atoms aren't created, the pipeline produces nothing new.
+- **Theme matching must precede clustering:** Clustering requires shared vocabulary and wikilinks; theme matching creates that shared vocabulary.
+- **Draft synthesis is the terminal output, not a foundation:** Build it last; it depends on everything else working correctly.
+- **Content extraction (Slack/Email) must produce full text, not URLs:** This is the critical break from v1.2; the MCP-based Slack scan produces message content, not just embedded URLs.
+- **Existing enrichment pipeline is unchanged:** Atom notes use identical frontmatter to `capture-web.sh` output; nothing downstream changes.
 
 ---
 
 ## MVP Definition
 
-### Launch With (v1)
+### v1.3 Launch With
 
-Minimum needed to make GoodLinks a functioning pipeline source.
+Minimum needed for the Content Intelligence Pipeline to produce materially different output than v1.2.
 
-- [ ] `scan-goodlinks.sh` — reads SQLite, outputs markdown notes to inbox with correct frontmatter schema
-- [ ] Incremental scan — only new links since last run (state file or timestamp query)
-- [ ] URL deduplication — skip if URL already in vault
-- [ ] Tag inheritance — pass GoodLinks user tags through to note frontmatter
-- [ ] launchd integration — scanner runs as part of daily 7AM job
+- [ ] **Slack content extraction via MCP** — Claude Code skill reads Slack message content (not just URLs) from starred items + boss DMs using Slack MCP server; produces source notes with full text
+- [ ] **Email body extraction per-message** — Fix existing Outlook scanner to extract per-email body text with subject/sender context; source notes include readable email content
+- [ ] **Atomic note creation skill** — Claude Code skill `split-to-atoms`: reads source note, identifies discrete concepts, creates atom notes with source wikilinks; respects 1-idea-per-note constraint
+- [ ] **Vault theme matching** — Grep-based vault scan; Claude identifies overlapping tags/titles in existing notes and adds wikilinks; no vector DB required
+- [ ] **Draft blog post synthesis** — Claude Code skill `synthesize-draft`: clusters atoms by shared tags, writes draft markdown to `drafts/` folder with citations; human approval gate unchanged
+- [ ] **Daily automation integration** — New skills callable from existing launchd daily job; no new scheduling infrastructure
 
-### Add After Validation (v1.x)
+### Add After Validation (v1.3.x)
 
-Add once V1 is confirmed working and notes are flowing correctly.
+Features to add once atoms are flowing and synthesis is producing useful drafts.
 
-- [ ] Read-status routing — separate handling for unread vs already-read GoodLinks items
-- [ ] Starred flag passthrough — surface `starred: true` in frontmatter for enrichment prioritization
-- [ ] Article content extraction — reuse readability logic for unread items to improve enrichment quality
+- [ ] **Content strategist mode** — Interactive Claude session that surfaces clusters and asks for direction before synthesizing; add when draft quality validates the pipeline
+- [ ] **On-demand slash commands** — `/scan-slack`, `/split-atoms`, `/synthesize-drafts` as Claude Code slash commands; add when daily automation is stable and on-demand need emerges
+- [ ] **Thread context preservation** — Full Slack thread structure (replies, reactions, sender display names) in source notes; add when message-level context proves valuable in drafts
+- [ ] **Cross-source cluster manifest** — Explicit cluster → source mapping file for debugging and traceability; add if cluster quality is hard to diagnose
 
-### Future Consideration (v2+)
+### Defer to v2+
 
-- [ ] `goodlinks_id` round-trip metadata — only needed if you want to query back to GoodLinks by internal ID; no current use case
+- [ ] **Semantic/embedding-based theme matching** — Only when vault exceeds ~500 notes and grep-based matching produces too many false positives/negatives
+- [ ] **Automated draft publishing** — Non-negotiable defer; human approval gate is a core design principle, not a convenience
+- [ ] **Broader Slack scope (additional channels)** — Only if starred + boss DMs consistently produce low signal; requires re-evaluating privacy/rate limit constraints
 
 ---
 
@@ -128,32 +164,81 @@ Add once V1 is confirmed working and notes are flowing correctly.
 
 | Feature | User Value | Implementation Cost | Priority |
 |---------|------------|---------------------|----------|
-| SQLite scanner script | HIGH | LOW | P1 |
-| Incremental scan (state file) | HIGH | LOW | P1 |
-| URL deduplication | HIGH | LOW | P1 |
-| Tag inheritance | HIGH | LOW | P1 |
-| launchd integration | HIGH | LOW | P1 |
-| Read-status routing | MEDIUM | LOW | P2 |
-| Starred flag passthrough | MEDIUM | LOW | P2 |
-| Article content extraction | MEDIUM | MEDIUM | P2 |
-| Source traceability metadata | LOW | LOW | P3 |
+| Slack content extraction via MCP | HIGH | MEDIUM | P1 |
+| Email body extraction (per-message fix) | HIGH | LOW | P1 |
+| Atomic note creation (split-to-atoms skill) | HIGH | HIGH | P1 |
+| Vault theme matching (grep-based) | HIGH | MEDIUM | P1 |
+| Draft blog post synthesis | HIGH | HIGH | P1 |
+| Daily automation integration | HIGH | LOW | P1 |
+| Content strategist mode (interactive) | MEDIUM | MEDIUM | P2 |
+| On-demand slash commands | MEDIUM | LOW | P2 |
+| Thread context preservation | MEDIUM | MEDIUM | P2 |
+| Cross-source cluster manifest | LOW | LOW | P2 |
+| Semantic search / embeddings | LOW | HIGH | P3 (deferred) |
 
 **Priority key:**
-- P1: Must have for launch — pipeline does not work without it
-- P2: Should have, add when P1 is stable
-- P3: Nice to have, add opportunistically
+- P1: Must have for v1.3 to deliver value
+- P2: Add after P1 is stable and producing useful drafts
+- P3: Deferred; reconsider at v2
+
+---
+
+## Implementation Notes by Feature
+
+### Slack MCP vs Raw REST API
+
+The existing `scan-slack.sh` uses raw REST API with bash grep/sed JSON parsing — this is fragile and does not extract message content reliably. The Slack MCP server (official: `docs.slack.dev/ai/slack-mcp-server`) provides structured tool calls:
+
+- `conversations_history` — fetches messages as structured objects, not raw JSON to parse
+- `conversations_replies` — thread context without ad-hoc grep
+- MCP rate limits (2025): 15 messages/request, 1 req/min for non-marketplace apps — workable for daily starred scan
+
+A Claude Code skill wraps the MCP calls and produces source notes. The existing bash script can be kept for auth/scheduling; the Claude skill replaces the content extraction logic.
+
+### Atomic Note Creation Heuristics
+
+"Atomic" = one claim, one concept, one transferable idea. Not every sentence. A 10-message Slack thread should produce 2-4 atoms, not 10.
+
+Claude splitting heuristics:
+1. Each H2/H3 heading in a source → candidate atom
+2. Each distinct argument, framework, or decision → atom
+3. Each named tool, method, or concept referenced → atom if non-trivial
+4. Filler (pleasantries, logistics, scheduling) → discard
+
+Atom note frontmatter should add: `source_note: [[original-source-filename]]`, `atom_of: [source title]`.
+
+### Vault Theme Matching Approach (Grep-Based)
+
+No vector DB. Matching strategy:
+1. Extract tags from new atom note
+2. Grep vault for existing notes with overlapping tags
+3. Grep vault for notes whose titles contain keywords from atom title
+4. Claude reviews candidate matches, confirms relevance, adds wikilinks
+
+At current vault scale (< 200 notes), grep completes in < 1 second. Sufficient for v1.
+
+### Draft Synthesis Output Contract
+
+Draft note must include:
+- `status: draft` (never auto-publish)
+- `synthesis_sources: [list of atom note filenames]` for traceability
+- Inline wikilinks to source atoms within body text
+- Standard section structure: introduction → body → implications → questions raised
 
 ---
 
 ## Sources
 
-- [cychong47/goodlinks — SQLite access confirmed](https://github.com/cychong47/goodlinks) — DB path `$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite`, fields confirmed from PRAGMA query in source code
-- [tdhooten/goodlinks-exporter — JSON export field structure](https://github.com/tdhooten/goodlinks-exporter/blob/master/goodlinks-exporter.py) — confirms `url`, `addedAt`, `readAt`, `tags` fields in export
-- [MacStories GoodLinks 2.0 review — Shortcuts depth](https://www.macstories.net/reviews/goodlinks-2-0-the-automation-focused-read-later-app-ive-always-wanted/) — confirms article content return in plain text/Markdown via Shortcuts, but fragile for headless use
-- [GoodLinks URL scheme documentation](https://goodlinks.app/url-scheme/) — confirms no bulk query/export via URL scheme; only single-link operations
-- [GoodLinks export format incompatibility note](https://micro.blog/jayeless/11534638) — user confirms JSON is the native export format (not CSV/OPML)
+- [Slack MCP Server — Official Slack Developer Docs](https://docs.slack.dev/ai/slack-mcp-server/) — Confirmed tool capabilities: `conversations.history`, `conversations.replies`, rate limits
+- [Slack conversations.history method](https://docs.slack.dev/reference/methods/conversations.history/) — API details; 2025 rate limits for non-marketplace apps
+- [Claude Code Skills — Anthropic](https://www.anthropic.com/news/skills) — Skills folder structure, `SKILL.md` format, `--continue --print` for non-interactive automation
+- [Claude Code Common Workflows](https://code.claude.com/docs/en/common-workflows) — Slash commands, hooks, non-interactive invocation patterns
+- [Atomizer Obsidian Plugin](https://www.obsidianstats.com/plugins/note-atomizer) — Community pattern for AI-driven atomic splitting; confirms concept viability and expected output structure
+- [dsebastien.net — How to Split Long Notes into Atomic Notes](https://www.dsebastien.net/how-to-split-long-notes-into-atomic-notes-a-comprehensive-guide/) — Heuristics for what makes an atomic note; "one idea, linkable, titlable as a claim"
+- [korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server) — Community MCP implementation with smart history pagination, DM support, no-admin-approval path
+- [blog.lmorchard.com — Topic clustering with gen AI](https://blog.lmorchard.com/2024/04/27/topic-clustering-gen-ai/) — Practical pattern: extract cluster representatives, synthesize with LLM; confirms grep-then-LLM approach is standard for this scale
 
 ---
 
-*Feature research for: GoodLinks ingestion pipeline (Model Citizen subsequent milestone)*
-*Researched: 2026-02-19*
+*Feature research for: Content Intelligence Pipeline (v1.3 milestone — atomic notes, theme matching, draft synthesis)*
+*Researched: 2026-02-22*
