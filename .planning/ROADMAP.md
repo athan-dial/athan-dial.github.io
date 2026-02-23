@@ -44,7 +44,7 @@
 
 **v1.3 Content Intelligence Pipeline:**
 
-- [ ] **Phase 14: Vault Schema** — Extended frontmatter contract and new vault folders for intelligence tier
+- [x] **Phase 14: Vault Schema** — Extended frontmatter contract and new vault folders for intelligence tier (completed 2026-02-23)
 - [ ] **Phase 15: Content Scanners** — Outlook full-body extraction and Slack MCP content scanner
 - [ ] **Phase 16: Intelligence Skills** — Atomic splitting and theme matching as Claude Code skills
 - [ ] **Phase 17: Synthesis and Orchestration** — Draft blog post synthesis, daily automation wiring, lockfile, content strategist mode
@@ -115,7 +115,7 @@ Plans:
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
 | 12. GoodLinks Scanner | v1.2 | 1/1 | Complete | 2026-02-19 |
 | 13. Pipeline Integration | v1.2 | 2/2 | Complete | 2026-02-20 |
-| 14. Vault Schema | v1.3 | 0/? | Not started | — |
+| 14. Vault Schema | 1/1 | Complete   | 2026-02-23 | — |
 | 15. Content Scanners | v1.3 | 0/? | Not started | — |
 | 16. Intelligence Skills | v1.3 | 0/? | Not started | — |
 | 17. Synthesis and Orchestration | v1.3 | 0/? | Not started | — |
