@@ -77,6 +77,8 @@ SLACK_STATUS="SKIPPED"
 OUTLOOK_STATUS="SKIPPED"
 QUEUE_STATUS="SKIPPED"
 GOODLINKS_STATUS="SKIPPED"
+INTEL_STATUS="SKIPPED"
+INTEL_NOTES=0
 
 # 1. Slack Scanner
 echo -e "${BLUE}▶ Running Slack scanner...${NC}"
@@ -165,12 +167,90 @@ fi
 
 echo ""
 
+# 5. Intelligence Pipeline (scan → split → match)
+echo -e "${BLUE}▶ Running intelligence pipeline...${NC}"
+echo ""
+
+LOCK_DIR="${MC_DIR}/pipeline.lock"
+
+# Stale lock check: remove if older than 2 hours
+if [[ -d "$LOCK_DIR" ]]; then
+  LOCK_AGE=$(( $(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo "0") ))
+  if (( LOCK_AGE > 7200 )); then
+    echo -e "${YELLOW}⚠ Stale lock (${LOCK_AGE}s old). Removing.${NC}"
+    rm -rf "$LOCK_DIR"
+  fi
+fi
+
+# Acquire lock
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  echo -e "${YELLOW}⚠ Pipeline lock held by interactive session. Skipping intelligence run.${NC}"
+  INTEL_STATUS="LOCKED"
+else
+  trap 'rm -rf "$LOCK_DIR"' EXIT INT TERM
+
+  if [[ -z "${SLACK_BOT_TOKEN:-}" && -z "${MS_GRAPH_CLIENT_ID:-}" ]]; then
+    echo -e "${YELLOW}⚠ No intelligence scanner credentials configured. Skipping.${NC}"
+    INTEL_STATUS="SKIPPED"
+    rm -rf "$LOCK_DIR"
+  else
+    # Run intelligence scanners
+    SCAN_OK=true
+
+    if [[ -n "${SLACK_BOT_TOKEN:-}" ]]; then
+      if run_with_retry "$SCRIPT_DIR/scan-slack-intelligence.sh" 2>&1 | tee /tmp/scan-slack-intel.log; then
+        echo -e "${GREEN}  ✓ Slack intelligence scan complete${NC}"
+      else
+        echo -e "${RED}  ✗ Slack intelligence scan failed${NC}"
+        SCAN_OK=false
+      fi
+    fi
+
+    if [[ -n "${MS_GRAPH_CLIENT_ID:-}" ]]; then
+      if run_with_retry "$SCRIPT_DIR/scan-outlook-intelligence.sh" 2>&1 | tee /tmp/scan-outlook-intel.log; then
+        echo -e "${GREEN}  ✓ Outlook intelligence scan complete${NC}"
+      else
+        echo -e "${RED}  ✗ Outlook intelligence scan failed${NC}"
+        SCAN_OK=false
+      fi
+    fi
+
+    # Auto split+match: process unprocessed source notes
+    VAULT_SOURCES="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/2B-new/700 Model Citizen/sources"
+    UNPROCESSED_COUNT=0
+    if [[ -d "$VAULT_SOURCES" ]]; then
+      while IFS= read -r -d '' note; do
+        if ! grep -q "content_status: processed" "$note" 2>/dev/null; then
+          echo "  Processing: $(basename "$note")"
+          claude --command split-source "$note" 2>&1 || true
+          claude --command match-themes "$note" 2>&1 || true
+          UNPROCESSED_COUNT=$((UNPROCESSED_COUNT + 1))
+        fi
+      done < <(find "$VAULT_SOURCES" -name "*.md" -print0 2>/dev/null)
+    fi
+    INTEL_NOTES=$UNPROCESSED_COUNT
+
+    if [[ "$SCAN_OK" == "true" ]]; then
+      INTEL_STATUS="SUCCESS"
+      echo -e "${GREEN}✓ Intelligence pipeline complete (${INTEL_NOTES} notes processed)${NC}"
+    else
+      INTEL_STATUS="FAILED"
+      echo -e "${RED}✗ Intelligence pipeline completed with errors${NC}"
+    fi
+
+    rm -rf "$LOCK_DIR"
+  fi
+fi
+
+echo ""
+
 # Notify on failures
 FAILURES=""
 [[ "$SLACK_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Slack "
 [[ "$OUTLOOK_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Outlook "
 [[ "$QUEUE_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Queue "
 [[ "$GOODLINKS_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}GoodLinks "
+[[ "$INTEL_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Intelligence "
 
 if [[ -n "$FAILURES" ]]; then
   osascript -e "display notification \"Failed: ${FAILURES}\" with title \"Model Citizen Scanner\" sound name \"Basso\"" 2>/dev/null || true
@@ -197,6 +277,9 @@ format_status() {
     SKIPPED)
       echo -e "${YELLOW}⊘ $1${NC}"
       ;;
+    LOCKED)
+      echo -e "${YELLOW}⊘ $1${NC}"
+      ;;
     *)
       echo "$1"
       ;;
@@ -207,18 +290,19 @@ echo "Slack:     $(format_status "$SLACK_STATUS")   (${SLACK_URLS} URLs)"
 echo "Outlook:   $(format_status "$OUTLOOK_STATUS")   (${OUTLOOK_URLS} URLs)"
 echo "Queue:     $(format_status "$QUEUE_STATUS")   (${QUEUE_URLS} items)"
 echo "GoodLinks: $(format_status "$GOODLINKS_STATUS")   (${GOODLINKS_URLS} notes, ${GOODLINKS_DEDUP} dedup)"
+echo "Intel:     $(format_status "$INTEL_STATUS")   (${INTEL_NOTES} notes processed)"
 echo ""
 echo -e "${CYAN}Total: ${TOTAL_URLS} URLs captured${NC}"
 echo ""
 
 # Exit with error if all scanners failed
-if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" && "$GOODLINKS_STATUS" == "FAILED" ]]; then
+if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" && "$GOODLINKS_STATUS" == "FAILED" && "$INTEL_STATUS" == "FAILED" ]]; then
   echo -e "${RED}All scanners failed${NC}"
   exit 1
 fi
 
 # Clean up temp logs
-rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log /tmp/scan-goodlinks.log
+rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log /tmp/scan-goodlinks.log /tmp/scan-slack-intel.log /tmp/scan-outlook-intel.log
 
 echo -e "${GREEN}✓ Scan complete${NC}"
 echo ""
