@@ -75,7 +75,13 @@ Plans:
   4. Atomic splitting skill decomposes a source note into single-concept atoms in `vault/atoms/` with why-it-matters context preserved
   5. Theme matching skill adds at most 3 wikilinks per atom with written justification for each connection
   6. Synthesis skill produces a draft blog post in `vault/drafts/` with inline citations to source atom IDs
-**Plans**: TBD (parallel: Slack scanner, Outlook scanner, splitting skill, theme matching skill, synthesis skill)
+**Plans**: 5 plans
+Plans:
+- [ ] 15-01-PLAN.md — Slack intelligence scanner (MCP debugging + command + shell wrapper)
+- [ ] 15-02-PLAN.md — Outlook intelligence scanner (Graph API full body + command + shell wrapper)
+- [ ] 15-03-PLAN.md — Atomic splitting skill (split-source command)
+- [ ] 15-04-PLAN.md — Theme matching skill (match-themes command)
+- [ ] 15-05-PLAN.md — Synthesis skill (synthesize-draft command with voice TODO flag)
 
 ### Phase 16: E2E Wiring + Verification
 **Goal**: All skills are wired into daily automation and verified end-to-end — real content flows from sources through splitting → matching → synthesis in a single unattended run
@@ -112,4 +118,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-04*
-*Last updated: 2026-02-22 (v1.3 phases 14-17 added)*
+*Last updated: 2026-03-01 (phase 15 plans defined — 5 plans, wave 1 parallel)*
