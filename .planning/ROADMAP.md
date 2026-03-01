@@ -45,7 +45,7 @@
 **v1.3 Content Intelligence Pipeline:**
 
 - [x] **Phase 14: Vault Schema** — Extended frontmatter contract and new vault folders for intelligence tier (completed 2026-02-23)
-- [ ] **Phase 15: Intelligence Skills** — All skills built in parallel: Slack scanner, Outlook scanner, atomic splitting, theme matching, synthesis (fully parallelizable)
+- [x] **Phase 15: Intelligence Skills** — All skills built in parallel: Slack scanner, Outlook scanner, atomic splitting, theme matching, synthesis (fully parallelizable) (completed 2026-03-01)
 - [ ] **Phase 16: E2E Wiring + Verification** — Wire all skills into daily automation, lockfile, content strategist mode, end-to-end smoke test
 
 ## Phase Details
@@ -112,7 +112,7 @@ Plans:
 | 12. GoodLinks Scanner | v1.2 | 1/1 | Complete | 2026-02-19 |
 | 13. Pipeline Integration | v1.2 | 2/2 | Complete | 2026-02-20 |
 | 14. Vault Schema | v1.3 | 1/1 | Complete | 2026-02-23 |
-| 15. Intelligence Skills | v1.3 | 0/5 | Not started | — |
+| 15. Intelligence Skills | 5/5 | Complete   | 2026-03-01 | — |
 | 16. E2E Wiring + Verification | v1.3 | 0/? | Not started | — |
 
 ---
