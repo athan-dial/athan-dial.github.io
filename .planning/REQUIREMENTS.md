@@ -74,21 +74,21 @@ Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap p
 | SCAN-03 | Phase 15 | Pending |
 | SCAN-04 | Phase 15 | Pending |
 | SCAN-05 | Phase 14 | Complete |
-| ATOM-01 | Phase 16 | Pending |
-| ATOM-02 | Phase 16 | Complete |
+| ATOM-01 | Phase 15 | Pending |
+| ATOM-02 | Phase 14 | Complete |
 | ATOM-03 | Phase 14 | Complete |
-| ATOM-04 | Phase 16 | Pending |
-| THEME-01 | Phase 16 | Pending |
-| THEME-02 | Phase 16 | Pending |
-| THEME-03 | Phase 16 | Pending |
-| SYNTH-01 | Phase 17 | Pending |
-| SYNTH-02 | Phase 17 | Pending |
-| SYNTH-03 | Phase 17 | Pending |
+| ATOM-04 | Phase 15 | Pending |
+| THEME-01 | Phase 15 | Pending |
+| THEME-02 | Phase 15 | Pending |
+| THEME-03 | Phase 15 | Pending |
+| SYNTH-01 | Phase 15 | Pending |
+| SYNTH-02 | Phase 15 | Pending |
+| SYNTH-03 | Phase 15 | Pending |
 | SYNTH-04 | Phase 14 | Complete |
-| ORCH-01 | Phase 17 | Pending |
-| ORCH-02 | Phase 17 | Pending |
-| ORCH-03 | Phase 17 | Pending |
-| ORCH-04 | Phase 17 | Pending |
+| ORCH-01 | Phase 16 | Pending |
+| ORCH-02 | Phase 16 | Pending |
+| ORCH-03 | Phase 16 | Pending |
+| ORCH-04 | Phase 16 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 20 total

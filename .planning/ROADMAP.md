@@ -45,9 +45,8 @@
 **v1.3 Content Intelligence Pipeline:**
 
 - [x] **Phase 14: Vault Schema** — Extended frontmatter contract and new vault folders for intelligence tier (completed 2026-02-23)
-- [ ] **Phase 15: Content Scanners** — Outlook full-body extraction and Slack MCP content scanner
-- [ ] **Phase 16: Intelligence Skills** — Atomic splitting and theme matching as Claude Code skills
-- [ ] **Phase 17: Synthesis and Orchestration** — Draft blog post synthesis, daily automation wiring, lockfile, content strategist mode
+- [ ] **Phase 15: Intelligence Skills** — All skills built in parallel: Slack scanner, Outlook scanner, atomic splitting, theme matching, synthesis (fully parallelizable)
+- [ ] **Phase 16: E2E Wiring + Verification** — Wire all skills into daily automation, lockfile, content strategist mode, end-to-end smoke test
 
 ## Phase Details
 
@@ -64,38 +63,29 @@
 Plans:
 - [ ] 14-01-PLAN.md — Schema contract, vault folders, ANM routing, test atom note
 
-### Phase 15: Content Scanners
-**Goal**: Slack and Outlook produce content-rich source notes in the vault — not just URLs — with full message context and incremental state
+### Phase 15: Intelligence Skills
+**Goal**: All intelligence tier skills exist as tested, standalone Claude Code skills — scanners produce content-rich source notes, splitting produces atomic notes, matching connects themes, synthesis produces draft posts
 **Depends on**: Phase 14 (vault schema)
-**Requirements**: SCAN-01, SCAN-02, SCAN-03, SCAN-04
+**Requirements**: SCAN-01, SCAN-02, SCAN-03, SCAN-04, ATOM-01, ATOM-04, THEME-01, THEME-02, THEME-03, SYNTH-01, SYNTH-02, SYNTH-03
+**Parallelization**: All plans run in a single parallel wave — no inter-skill dependencies during development
 **Success Criteria** (what must be TRUE):
-  1. Running the Slack scanner subagent creates vault source notes that include full message text and conversational context (sender, channel, thread context, reason for starring)
-  2. Running the Outlook scanner creates vault source notes with full email body and subject, not just extracted URLs
-  3. Running either scanner a second time without new content creates no new notes (incremental state working)
-  4. A `429` rate-limit error from Slack does not advance the last-scan timestamp (scan state remains safe)
-**Plans**: TBD
+  1. Slack scanner skill creates vault source notes with full message text, sender, channel, thread context (not just URLs)
+  2. Outlook scanner skill creates vault source notes with full email subject and body (not just URLs)
+  3. Running either scanner a second time without new content creates no new notes (incremental state)
+  4. Atomic splitting skill decomposes a source note into single-concept atoms in `vault/atoms/` with why-it-matters context preserved
+  5. Theme matching skill adds at most 3 wikilinks per atom with written justification for each connection
+  6. Synthesis skill produces a draft blog post in `vault/drafts/` with inline citations to source atom IDs
+**Plans**: TBD (parallel: Slack scanner, Outlook scanner, splitting skill, theme matching skill, synthesis skill)
 
-### Phase 16: Intelligence Skills
-**Goal**: New atomic notes exist in the vault from real source content, with provenance metadata and theme connections to existing vault content
-**Depends on**: Phase 15 (real source notes exist)
-**Requirements**: ATOM-01, ATOM-02, ATOM-03, ATOM-04, THEME-01, THEME-02, THEME-03
+### Phase 16: E2E Wiring + Verification
+**Goal**: All skills are wired into daily automation and verified end-to-end — real content flows from sources through splitting → matching → synthesis in a single unattended run
+**Depends on**: Phase 15 (all skills exist and individually tested)
+**Requirements**: ORCH-01, ORCH-02, ORCH-03, ORCH-04
 **Success Criteria** (what must be TRUE):
-  1. Invoking `split-atomic` on a source note produces atomic notes in `vault/atoms/` where each note contains exactly one concept plus the original conversational context that explains why it was captured
-  2. Each atomic note has `provenance` frontmatter (`source_type`, `source_channel`, `source_sender`, `source_timestamp`) and `atom_of` backlink to the parent source note
-  3. Invoking `match-themes` on a set of atoms adds at most 3 wikilinks per note and each link includes a written sentence explaining why the connection exists (not just vocabulary overlap)
-  4. Theme notes in `vault/themes/` aggregate related atoms with back-links
-**Plans**: TBD
-
-### Phase 17: Synthesis and Orchestration
-**Goal**: Draft blog posts exist in the vault from real atomic content; the intelligence tier runs automatically in the daily scan and can be invoked interactively on demand
-**Depends on**: Phase 16 (atomic notes and theme connections exist)
-**Requirements**: SYNTH-01, SYNTH-02, SYNTH-03, SYNTH-04, ORCH-01, ORCH-02, ORCH-03, ORCH-04
-**Success Criteria** (what must be TRUE):
-  1. A draft blog post in `vault/drafts/` contains inline citations to specific atomic note IDs; every factual claim in the draft traces to a source atom
-  2. The draft cannot be published automatically — a human must explicitly approve it through the existing Obsidian approval workflow
-  3. Running `scan-all.sh` triggers the full intelligence pipeline (split → match → synthesis) after the existing scanners without any manual intervention
-  4. A `pipeline.lock` file prevents a scheduled scan from writing to the vault while an interactive content strategist session is active
-  5. Typing a content strategist slash command in Claude Code surfaces a cluster proposal and requests direction before generating any draft
+  1. Running `scan-all.sh` triggers the full intelligence pipeline (scan → split → match → synthesis) automatically after existing scanners
+  2. A `pipeline.lock` file prevents a scheduled scan from writing to the vault while an interactive content strategist session is active
+  3. Content strategist slash command surfaces a cluster proposal and requests direction before generating any draft
+  4. End-to-end smoke test: real Slack/Outlook content enters pipeline and a draft appears in `vault/drafts/` within one `scan-all.sh` run — no manual steps
 **Plans**: TBD
 
 ## Progress
@@ -115,10 +105,9 @@ Plans:
 | 11. Model Citizen UI/UX | v1.1 | 3/3 | Complete | 2026-02-14 |
 | 12. GoodLinks Scanner | v1.2 | 1/1 | Complete | 2026-02-19 |
 | 13. Pipeline Integration | v1.2 | 2/2 | Complete | 2026-02-20 |
-| 14. Vault Schema | 1/1 | Complete   | 2026-02-23 | — |
-| 15. Content Scanners | v1.3 | 0/? | Not started | — |
-| 16. Intelligence Skills | v1.3 | 0/? | Not started | — |
-| 17. Synthesis and Orchestration | v1.3 | 0/? | Not started | — |
+| 14. Vault Schema | v1.3 | 1/1 | Complete | 2026-02-23 |
+| 15. Intelligence Skills | v1.3 | 0/5 | Not started | — |
+| 16. E2E Wiring + Verification | v1.3 | 0/? | Not started | — |
 
 ---
 

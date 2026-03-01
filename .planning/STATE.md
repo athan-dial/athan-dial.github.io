@@ -10,22 +10,22 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Demonstrate strategic credibility through the site itself
-**Current focus:** v1.3 Content Intelligence Pipeline — Phase 14: Vault Schema
+**Current focus:** v1.3 Content Intelligence Pipeline — Phase 15: Intelligence Skills
 
 ---
 
 ## Current Position
 
-Phase: 14 — Vault Schema
-Plan: 01 complete
-Status: In progress
-Last activity: 2026-02-23 — 14-01 vault schema contract + ANM routing rules
+Phase: 15 — Intelligence Skills
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-03-01 — Restructured roadmap: phases 15-17 → 15 (parallel skills) + 16 (E2E wiring)
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
 - ✅ v1.1 Model Citizen: 8 phases, 20 plans (shipped 2026-02-14)
 - ✅ v1.2 GoodLinks Ingestion: 2 phases, 3 plans (shipped 2026-02-20)
-- ◆ v1.3 Content Intelligence Pipeline: 4 phases (14-17), 0 plans complete
+- ◆ v1.3 Content Intelligence Pipeline: 3 phases (14-16), phase 14 complete
 
 **Progress bar:** [░░░░░░░░░░░░░░░░░░░░] 0% (Phase 14 of 17, 0 plans)
 
