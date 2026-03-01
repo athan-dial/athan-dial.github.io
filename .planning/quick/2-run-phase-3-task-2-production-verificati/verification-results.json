@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-02-09T20:06:01.536Z",
+  "url": "https://athan-dial.github.io/",
+  "checks": [
+    {
+      "name": "Site loads without errors",
+      "status": "PASS",
+      "details": "Status code: 200",
+      "expected": "200",
+      "actual": "200"
+    },
+    {
+      "name": "Page content loads",
+      "status": "PASS",
+      "details": "Content length: 14816 chars, No error messages: true",
+      "expected": "Content present, no error messages",
+      "actual": "Content present"
+    },
+    {
+      "name": "No 404 errors for assets",
+      "status": "PASS",
+      "details": "Total requests: 18, Errors (>=400): 0",
+      "expected": "0 error requests",
+      "actual": "0 error requests",
+      "errorRequests": []
+    },
+    {
+      "name": "OG meta tags present",
+      "status": "PASS",
+      "details": "og:image: true, og:title: true, og:description: true",
+      "expected": "All required OG tags present",
+      "actual": "og:image=true, og:title=true, og:description=true",
+      "ogTags": {
+        "og:image": "https://athan-dial.github.io/img/profile.jpg",
+        "og:title": "Athan Dial - Portfolio | Athan Dial",
+        "og:description": "Data science + product leader who turns ambiguous, high-stakes problems into decision systems that ship measurable outcomes."
+      }
+    },
+    {
+      "name": "Mobile responsive at 375px",
+      "status": "PASS",
+      "details": "No horizontal overflow: true, Content renders: true",
+      "expected": "Layout adapts without horizontal overflow",
+      "actual": "Layout renders correctly"
+    },
+    {
+      "name": "Dark mode toggle functional",
+      "status": "N/A",
+      "details": "No dark mode toggle found on page",
+      "expected": "Toggle present or confirmed not implemented",
+      "actual": "Toggle not found"
+    },
+    {
+      "name": "No JavaScript console errors",
+      "status": "PASS",
+      "details": "Errors: 0, Warnings: 0",
+      "expected": "0 console errors",
+      "actual": "0 errors, 0 warnings",
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 6,
+    "failed": 0,
+    "na": 1,
+    "allPassed": true
+  }
+}

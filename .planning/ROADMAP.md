@@ -113,7 +113,7 @@ Plans:
 | 13. Pipeline Integration | v1.2 | 2/2 | Complete | 2026-02-20 |
 | 14. Vault Schema | v1.3 | 1/1 | Complete | 2026-02-23 |
 | 15. Intelligence Skills | 5/5 | Complete    | 2026-03-01 | — |
-| 16. E2E Wiring + Verification | v1.3 | 0/? | Not started | — |
+| 16. E2E Wiring + Verification | 2/3 | In Progress|  | — |
 
 ---
 

@@ -1,0 +1,16 @@
+{
+  "name": "2-run-phase-3-task-2-production-verificati",
+  "version": "1.0.0",
+  "description": "",
+  "main": "verify-deployment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}
