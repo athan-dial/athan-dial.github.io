@@ -50,16 +50,17 @@ Personal/professional portfolio website and automated content publishing system 
 - Podcast ingestion — YouTube only for now
 - Semantic search/embeddings — Grep-based for v1
 
-## Current Milestone: v1.3 Content Intelligence Pipeline
+## Current Milestone: v1.4 Vault Seeding & Pipeline Validation
 
-**Goal:** Replace bash-script URL scrapers with Claude Code-powered content intelligence — scanning Slack/Email, splitting into atomic notes, connecting to vault themes, and synthesizing draft blog posts.
+**Goal:** Get real content flowing through the v1.3 intelligence pipeline, debug what breaks, and produce the first real draft blog post via `/content-strategist`.
 
 **Target features:**
-- Claude Code skills for Slack (MCP) and Outlook (Graph API) scanning
-- Three-layer content model: source captures → atomic concept notes → synthesized drafts
-- Content strategist workflow: Claude connects new content to existing themes and co-creates writing
-- Scheduled daily automation + interactive on-demand processing
-- Draft blog posts as the terminal output, with citations back to source notes
+- Slack scanner validated against real channel data (MCP parameter debugging)
+- GoodLinks source notes with real extracted article body text
+- YouTube ingestion running cleanly
+- Full enrichment path validated: source → atoms → theme matching
+- First real draft blog post generated from vault atoms
+- `/content-strategist` end-to-end session producing editable output
 
 ## Context
 
@@ -106,4 +107,4 @@ Personal/professional portfolio website and automated content publishing system 
 | Stub notes for missing content | content_status: pending instead of web fetch fallback | ⚠️ Revisit — premature enrichment tech debt |
 
 ---
-*Last updated: 2026-02-22 after v1.3 milestone started*
+*Last updated: 2026-03-02 after v1.4 milestone started*
