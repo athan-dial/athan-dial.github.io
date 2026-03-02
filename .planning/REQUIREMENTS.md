@@ -1,100 +1,63 @@
 # Requirements: Athan Dial Portfolio Site
 
-**Defined:** 2026-02-22
+**Defined:** 2026-03-02
 **Core Value:** Demonstrate strategic credibility through the site itself
 
-## v1.3 Requirements
+## v1.4 Requirements
 
-Requirements for Content Intelligence Pipeline milestone. Each maps to roadmap phases.
+### Ingestion
 
-### Scanning
+- [ ] **INGEST-01**: Slack scanner runs successfully against at least one real channel and creates source notes with full message text (not stubs)
+- [ ] **INGEST-02**: GoodLinks source notes contain extracted article body text (not empty/stub content)
+- [ ] **INGEST-03**: Running any scanner a second time without new content creates no duplicate notes (incremental state validated with real data)
+- [ ] **INGEST-04**: YouTube ingestion runs cleanly with no silent failures
 
-- [ ] **SCAN-01**: Slack scanner skill extracts full message content from starred items and specified channels via MCP tools
-- [ ] **SCAN-02**: Slack scanner preserves conversational context (sender, channel, thread replies, reason for starring)
-- [ ] **SCAN-03**: Outlook scanner extracts email subject and body content (not just URLs) via Graph API
-- [ ] **SCAN-04**: Both scanners perform incremental scanning (only new content since last run)
-- [x] **SCAN-05**: Scanned content creates source-layer vault notes with provenance frontmatter
+### Enrichment
 
-### Atomic Notes
+- [ ] **ENRICH-01**: At least 10 source notes pass through enrichment and produce summaries + tags
+- [ ] **ENRICH-02**: Atomic splitting produces single-concept atoms in `vault/atoms/` for at least 5 source notes
+- [ ] **ENRICH-03**: Theme matching connects at least 3 atoms to existing vault themes with written justifications
 
-- [ ] **ATOM-01**: Splitting skill decomposes source notes into single-concept atomic notes
-- [x] **ATOM-02**: Each atomic note includes provenance metadata (source_type, source_channel, source_sender, source_timestamp)
-- [x] **ATOM-03**: Atomic notes include content_status tracking for pipeline progression
-- [ ] **ATOM-04**: Splitting preserves why-it-matters context from the original source
+### Drafting
 
-### Theme Matching
+- [ ] **DRAFT-01**: At least one draft blog post exists in `vault/drafts/` generated from real atom content
+- [ ] **DRAFT-02**: Draft post contains inline citations linking back to source atom IDs
 
-- [ ] **THEME-01**: Matching skill connects new atomic notes to existing vault content via tags and titles (grep-based)
-- [ ] **THEME-02**: Each connection includes written justification for why the link exists
-- [ ] **THEME-03**: Maximum 3 theme connections per atomic note to prevent hub-and-spoke sprawl
+### Interactive
 
-### Synthesis
-
-- [ ] **SYNTH-01**: Synthesis workflow clusters related atomic notes by theme
-- [ ] **SYNTH-02**: Produces draft blog posts with inline citations to source atomic notes
-- [ ] **SYNTH-03**: Drafts do not introduce claims beyond what source notes support
-- [x] **SYNTH-04**: Human approval gate required before any draft is published
-
-### Orchestration
-
-- [ ] **ORCH-01**: Scanning skills can be invoked on-demand via Claude Code commands
-- [ ] **ORCH-02**: Scanning integrates into existing scan-all.sh daily automation
-- [ ] **ORCH-03**: Lockfile prevents concurrent vault writes between scheduled and interactive sessions
-- [ ] **ORCH-04**: Content strategist mode enables interactive co-creation of synthesis and connections
-
-## Future Requirements
-
-### Voice & Style
-
-- **VOICE-01**: Synthesis drafts match Athan's authentic voice (pending ChatGPT Deep Research Voice & Style Guide)
-- **VOICE-02**: Anti-pattern detection for generic AI writing patterns
-
-### Advanced Matching
-
-- **MATCH-01**: Semantic search via embeddings for theme matching (deferred per PROJECT.md scope)
-- **MATCH-02**: Cross-vault link suggestions beyond tag/title grep
+- [ ] **STRAT-01**: `/content-strategist` command runs end-to-end without crashing and discovers real unmatched atoms
+- [ ] **STRAT-02**: A complete `/content-strategist` session produces a draft worth editing (human judgment)
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Semantic search / embeddings | PROJECT.md explicitly defers; grep sufficient at current vault scale |
-| Auto-publish without approval | Non-negotiable design principle — explicit publish gate |
-| Personal email scanning | Scoped to work Slack + work Outlook only |
-| Real-time Slack monitoring | Batch scanning is sufficient; real-time adds complexity |
-| Podcast/audio ingestion | YouTube only for audio content per existing scope |
-| n8n orchestration | Bash scripts + launchd for v1; n8n deferred |
+| Outlook scanner validation | Deferred to v1.5 — Slack is higher priority source |
+| Portfolio case studies | Blocked on ChatGPT Deep Research voice/archaeology outputs |
+| Publishing to Quartz site | Drafts stay in vault — publish gate is separate concern |
+| New ingestion sources | YouTube/Slack/GoodLinks only for v1.4 |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCAN-01 | Phase 15 | Pending |
-| SCAN-02 | Phase 15 | Pending |
-| SCAN-03 | Phase 15 | Pending |
-| SCAN-04 | Phase 15 | Pending |
-| SCAN-05 | Phase 14 | Complete |
-| ATOM-01 | Phase 15 | Pending |
-| ATOM-02 | Phase 14 | Complete |
-| ATOM-03 | Phase 14 | Complete |
-| ATOM-04 | Phase 15 | Pending |
-| THEME-01 | Phase 15 | Pending |
-| THEME-02 | Phase 15 | Pending |
-| THEME-03 | Phase 15 | Pending |
-| SYNTH-01 | Phase 15 | Pending |
-| SYNTH-02 | Phase 15 | Pending |
-| SYNTH-03 | Phase 15 | Pending |
-| SYNTH-04 | Phase 14 | Complete |
-| ORCH-01 | Phase 16 | Pending |
-| ORCH-02 | Phase 16 | Pending |
-| ORCH-03 | Phase 16 | Pending |
-| ORCH-04 | Phase 16 | Pending |
+| INGEST-01 | TBD | Pending |
+| INGEST-02 | TBD | Pending |
+| INGEST-03 | TBD | Pending |
+| INGEST-04 | TBD | Pending |
+| ENRICH-01 | TBD | Pending |
+| ENRICH-02 | TBD | Pending |
+| ENRICH-03 | TBD | Pending |
+| DRAFT-01 | TBD | Pending |
+| DRAFT-02 | TBD | Pending |
+| STRAT-01 | TBD | Pending |
+| STRAT-02 | TBD | Pending |
 
 **Coverage:**
-- v1.3 requirements: 20 total
-- Mapped to phases: 20
-- Unmapped: 0 ✓
+- v1.4 requirements: 11 total
+- Mapped to phases: 0 (pending roadmap)
+- Unmapped: 11 ⚠️
 
 ---
-*Requirements defined: 2026-02-22*
-*Last updated: 2026-02-22 — traceability mapped to phases 14-17*
+*Requirements defined: 2026-03-02*
+*Last updated: 2026-03-02 after initial v1.4 definition*
