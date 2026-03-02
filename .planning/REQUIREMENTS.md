@@ -41,23 +41,23 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INGEST-01 | TBD | Pending |
-| INGEST-02 | TBD | Pending |
-| INGEST-03 | TBD | Pending |
-| INGEST-04 | TBD | Pending |
-| ENRICH-01 | TBD | Pending |
-| ENRICH-02 | TBD | Pending |
-| ENRICH-03 | TBD | Pending |
-| DRAFT-01 | TBD | Pending |
-| DRAFT-02 | TBD | Pending |
-| STRAT-01 | TBD | Pending |
-| STRAT-02 | TBD | Pending |
+| INGEST-01 | Phase 17 | Pending |
+| INGEST-02 | Phase 17 | Pending |
+| INGEST-03 | Phase 17 | Pending |
+| INGEST-04 | Phase 17 | Pending |
+| ENRICH-01 | Phase 18 | Pending |
+| ENRICH-02 | Phase 18 | Pending |
+| ENRICH-03 | Phase 18 | Pending |
+| DRAFT-01 | Phase 19 | Pending |
+| DRAFT-02 | Phase 19 | Pending |
+| STRAT-01 | Phase 19 | Pending |
+| STRAT-02 | Phase 19 | Pending |
 
 **Coverage:**
 - v1.4 requirements: 11 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 11 ⚠️
+- Mapped to phases: 11
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-02*
-*Last updated: 2026-03-02 after initial v1.4 definition*
+*Last updated: 2026-03-02 — traceability mapped after roadmap creation*

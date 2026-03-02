@@ -1,53 +1,54 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: unknown
-stopped_at: Completed 14-01-PLAN.md — vault schema contract + ANM routing
-last_updated: "2026-03-01T14:14:28.410Z"
+milestone: v1.4
+milestone_name: Vault Seeding & Pipeline Validation
+status: not_started
+stopped_at: Roadmap created for v1.4 — ready to plan Phase 17
+last_updated: "2026-03-02T00:00:00.000Z"
 progress:
-  total_phases: 15
-  completed_phases: 14
-  total_plans: 34
-  completed_plans: 34
+  total_phases: 19
+  completed_phases: 16
+  total_plans: 37
+  completed_plans: 37
 ---
 
 # Project State: Athan Dial Portfolio Site
 
-**Last Updated:** 2026-03-01
+**Last Updated:** 2026-03-02
 **Project:** Athan Dial Portfolio + Model Citizen
 
 ---
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-22)
+See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Demonstrate strategic credibility through the site itself
-**Current focus:** v1.3 Content Intelligence Pipeline — Phase 15: Intelligence Skills
+**Current focus:** v1.4 Vault Seeding & Pipeline Validation — Phase 17: Ingestion Debugging
 
 ---
 
 ## Current Position
 
-Phase: 15 — Intelligence Skills
-Plan: All 5 complete
-Status: Phase complete — ready for verification
-Last activity: 2026-03-02 - Session ended
+Phase: 17 — Ingestion Debugging
+Plan: None started
+Status: Not started — roadmap defined, ready to plan
+Last activity: 2026-03-02 - v1.4 roadmap created
 
 **Milestones:**
 - ✅ v1.0 Hugo Resume: 3 phases, 5 plans (shipped 2026-02-09)
 - ✅ v1.1 Model Citizen: 8 phases, 20 plans (shipped 2026-02-14)
 - ✅ v1.2 GoodLinks Ingestion: 2 phases, 3 plans (shipped 2026-02-20)
-- ◆ v1.3 Content Intelligence Pipeline: 3 phases (14-16), phase 14 complete
+- ✅ v1.3 Content Intelligence Pipeline: 3 phases, 9 plans (shipped 2026-03-01)
+- ◆ v1.4 Vault Seeding & Pipeline Validation: 3 phases (17-19), not started
 
-**Progress bar:** [░░░░░░░░░░░░░░░░░░░░] 0% (Phase 14 of 17, 0 plans)
+**Progress bar:** [░░░░░░░░░░░░░░░░░░░░] 0% (Phase 17 of 19, 0 plans complete)
 
 ---
 
 ## Performance Metrics
 
-**Velocity:** 28 plans total (v1.0: 5, v1.1: 20, v1.2: 3)
+**Velocity:** 37 plans total (v1.0: 5, v1.1: 20, v1.2: 3, v1.3: 9)
 **Quality:** 100% verification pass rate
 **Efficiency:** ~3.7 min per task delivered
 
@@ -74,10 +75,18 @@ See PROJECT.md Key Decisions table for full log.
 - ANM rules prepended: specific source/slack before generic #model-citizen/source rule
 - themes/ = pipeline aggregation hubs; concepts/ = manual frameworks (distinct, both preserved)
 
+**v1.4 decisions:**
+- 3 phases at depth=quick: Ingestion Debugging → Enrichment Validation → Drafting & Strategist
+- Phase 17 focused entirely on real-data debugging — nothing counts until real notes exist with real content
+- Phase 18 gates on Phase 17: enrichment validation requires content-rich notes as input
+- Phase 19 gates on Phase 18: drafting requires enriched atoms; strategist requires those atoms plus theme connections
+- Outlook scanner validation deferred to v1.5 — Slack is higher priority source for v1.4
+
 ### Blockers/Concerns
 
-- Slack MCP tool parameter names are MEDIUM confidence — plan an interactive debugging session before writing the subagent system prompt in Phase 15
-- Voice consistency for synthesis drafts requires ChatGPT Deep Research Voice & Style Guide (not yet available) — Phase 17 synthesis prompt should carry a TODO flag until that research delivers
+- Slack MCP tool parameter names are MEDIUM confidence — Phase 17 plan must include interactive parameter debugging before assuming the scanner command works
+- GoodLinks stub notes (content_status: pending) are a known tech debt item — Phase 17 plan must specifically address whether existing stubs need retroactive content extraction
+- Voice consistency for synthesis drafts still requires ChatGPT Deep Research Voice & Style Guide (not yet available) — drafts in Phase 19 will carry quality limitation until that research delivers
 
 ### Active Todos
 
@@ -87,10 +96,10 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-02-23
-**Stopped at:** Completed 14-01-PLAN.md — vault schema contract + ANM routing
-**Resume file:** .planning/phases/14-vault-schema/
+**Last session:** 2026-03-02
+**Stopped at:** v1.4 roadmap created — Phases 17-19 defined
+**Resume file:** .planning/phases/ (Phase 17 plan not yet created)
 
 ---
 *State initialized: 2026-02-04*
-*v1.3 position updated: 2026-02-22*
+*v1.4 position updated: 2026-03-02*
