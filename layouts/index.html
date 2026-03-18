@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="resume-section" id="about">
+  <div class="resume-section-content">
+    <h1 class="mb-0">
+      {{ .Site.Params.firstName }}
+      <span class="text-primary">{{ .Site.Params.lastName }}</span>
+    </h1>
+    <p class="lead mb-5">{{ .Content }}</p>
+
+    {{ $caseStudies := where .Site.RegularPages "Section" "case-studies" }}
+    {{ if $caseStudies }}
+    <div class="proof-tiles-section">
+      <h2 class="proof-tiles-section__heading">Decision Evidence</h2>
+      <div class="proof-tiles-grid">
+        {{ range first 5 $caseStudies }}
+          {{ partial "case-study-card.html" . }}
+        {{ end }}
+      </div>
+      {{ if gt (len $caseStudies) 5 }}
+      <div class="proof-tiles-section__cta">
+        <a href="/case-studies/" class="proof-tiles-section__link">View all case studies →</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
