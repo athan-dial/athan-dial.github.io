@@ -1,17 +1,17 @@
 # -- Main Menu --
-# Hugo Resume uses anchor-based single-page navigation
+# Blowfish theme navigation
 
 [[main]]
-  name = "Skills"
-  url = "/#skills"
+  name = "About"
+  url = "/about/"
   weight = 1
 
 [[main]]
-  name = "Experience"
-  url = "/#experience"
+  name = "Case Studies"
+  url = "/case-studies/"
   weight = 2
 
 [[main]]
-  name = "Education"
-  url = "/#education"
+  name = "Advisory"
+  url = "/advisory/"
   weight = 3
