@@ -73,10 +73,12 @@ OUTLOOK_URLS=0
 QUEUE_URLS=0
 GOODLINKS_URLS=0
 GOODLINKS_DEDUP=0
+YOUTUBE_NOTES=0
 SLACK_STATUS="SKIPPED"
 OUTLOOK_STATUS="SKIPPED"
 QUEUE_STATUS="SKIPPED"
 GOODLINKS_STATUS="SKIPPED"
+YOUTUBE_STATUS="SKIPPED"
 INTEL_STATUS="SKIPPED"
 INTEL_NOTES=0
 
@@ -147,14 +149,13 @@ echo -e "${BLUE}▶ Running GoodLinks scanner...${NC}"
 echo ""
 
 GOODLINKS_DB="$HOME/Library/Group Containers/group.com.ngocluu.goodlinks/Data/data.sqlite"
-VAULT_SCRIPTS="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/model-citizen-vault/scripts"
 
 if [[ ! -f "$GOODLINKS_DB" ]]; then
   echo -e "${YELLOW}⚠ GoodLinks database not found${NC}"
   echo -e "${YELLOW}  Skipping GoodLinks scan${NC}"
   GOODLINKS_STATUS="SKIPPED"
 else
-  if run_with_retry "$VAULT_SCRIPTS/ingest-goodlinks.sh" $DRY_RUN 2>&1 | tee /tmp/scan-goodlinks.log; then
+  if run_with_retry "$SCRIPT_DIR/scan-goodlinks.sh" $DRY_RUN 2>&1 | tee /tmp/scan-goodlinks.log; then
     GOODLINKS_URLS=$(grep -o '[0-9]* notes created' /tmp/scan-goodlinks.log | grep -o '[0-9]*' || echo "0")
     GOODLINKS_DEDUP=$(grep -o '[0-9]* duplicates skipped' /tmp/scan-goodlinks.log | grep -o '[0-9]*' || echo "0")
     GOODLINKS_STATUS="SUCCESS"
@@ -162,6 +163,31 @@ else
   else
     GOODLINKS_STATUS="FAILED"
     echo -e "${RED}✗ GoodLinks scan failed${NC}"
+  fi
+fi
+
+echo ""
+
+# 4b. YouTube Scanner
+echo -e "${BLUE}▶ Running YouTube scanner...${NC}"
+echo ""
+
+YOUTUBE_NOTES=0
+YOUTUBE_STATUS="SKIPPED"
+MACWHISPER_DB="$HOME/Library/Application Support/MacWhisper/Database/main.sqlite"
+
+if [[ ! -f "$MACWHISPER_DB" ]]; then
+  echo -e "${YELLOW}⚠ MacWhisper database not found${NC}"
+  echo -e "${YELLOW}  Skipping YouTube scan${NC}"
+  YOUTUBE_STATUS="SKIPPED"
+else
+  if run_with_retry "$SCRIPT_DIR/scan-youtube.sh" $DRY_RUN 2>&1 | tee /tmp/scan-youtube.log; then
+    YOUTUBE_NOTES=$(grep -o 'Done. Ingested: [0-9]*' /tmp/scan-youtube.log | grep -o '[0-9]*' || echo "0")
+    YOUTUBE_STATUS="SUCCESS"
+    echo -e "${GREEN}✓ YouTube scan complete${NC}"
+  else
+    YOUTUBE_STATUS="FAILED"
+    echo -e "${RED}✗ YouTube scan failed${NC}"
   fi
 fi
 
@@ -189,30 +215,21 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 else
   trap 'rm -rf "$LOCK_DIR"' EXIT INT TERM
 
-  if [[ -z "${SLACK_BOT_TOKEN:-}" && -z "${MS_GRAPH_CLIENT_ID:-}" ]]; then
-    echo -e "${YELLOW}⚠ No intelligence scanner credentials configured. Skipping.${NC}"
-    INTEL_STATUS="SKIPPED"
-    rm -rf "$LOCK_DIR"
-  else
-    # Run intelligence scanners
-    SCAN_OK=true
+  # Run intelligence scanners via MCP (no credentials required)
+  SCAN_OK=true
 
-    if [[ -n "${SLACK_BOT_TOKEN:-}" ]]; then
-      if run_with_retry "$SCRIPT_DIR/scan-slack-intelligence.sh" 2>&1 | tee /tmp/scan-slack-intel.log; then
-        echo -e "${GREEN}  ✓ Slack intelligence scan complete${NC}"
-      else
-        echo -e "${RED}  ✗ Slack intelligence scan failed${NC}"
-        SCAN_OK=false
-      fi
+    if run_with_retry "$SCRIPT_DIR/scan-slack-intelligence.sh" 2>&1 | tee /tmp/scan-slack-intel.log; then
+      echo -e "${GREEN}  ✓ Slack intelligence scan complete${NC}"
+    else
+      echo -e "${RED}  ✗ Slack intelligence scan failed${NC}"
+      SCAN_OK=false
     fi
 
-    if [[ -n "${MS_GRAPH_CLIENT_ID:-}" ]]; then
-      if run_with_retry "$SCRIPT_DIR/scan-outlook-intelligence.sh" 2>&1 | tee /tmp/scan-outlook-intel.log; then
-        echo -e "${GREEN}  ✓ Outlook intelligence scan complete${NC}"
-      else
-        echo -e "${RED}  ✗ Outlook intelligence scan failed${NC}"
-        SCAN_OK=false
-      fi
+    if run_with_retry "$SCRIPT_DIR/scan-outlook-intelligence.sh" 2>&1 | tee /tmp/scan-outlook-intel.log; then
+      echo -e "${GREEN}  ✓ Outlook intelligence scan complete${NC}"
+    else
+      echo -e "${RED}  ✗ Outlook intelligence scan failed${NC}"
+      SCAN_OK=false
     fi
 
     # Auto split+match: process unprocessed source notes
@@ -239,7 +256,6 @@ else
     fi
 
     rm -rf "$LOCK_DIR"
-  fi
 fi
 
 echo ""
@@ -250,6 +266,7 @@ FAILURES=""
 [[ "$OUTLOOK_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Outlook "
 [[ "$QUEUE_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Queue "
 [[ "$GOODLINKS_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}GoodLinks "
+[[ "$YOUTUBE_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}YouTube "
 [[ "$INTEL_STATUS" == "FAILED" ]] && FAILURES="${FAILURES}Intelligence "
 
 if [[ -n "$FAILURES" ]]; then
@@ -290,19 +307,20 @@ echo "Slack:     $(format_status "$SLACK_STATUS")   (${SLACK_URLS} URLs)"
 echo "Outlook:   $(format_status "$OUTLOOK_STATUS")   (${OUTLOOK_URLS} URLs)"
 echo "Queue:     $(format_status "$QUEUE_STATUS")   (${QUEUE_URLS} items)"
 echo "GoodLinks: $(format_status "$GOODLINKS_STATUS")   (${GOODLINKS_URLS} notes, ${GOODLINKS_DEDUP} dedup)"
+echo "YouTube:   $(format_status "$YOUTUBE_STATUS")   (${YOUTUBE_NOTES} notes)"
 echo "Intel:     $(format_status "$INTEL_STATUS")   (${INTEL_NOTES} notes processed)"
 echo ""
 echo -e "${CYAN}Total: ${TOTAL_URLS} URLs captured${NC}"
 echo ""
 
 # Exit with error if all scanners failed
-if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" && "$GOODLINKS_STATUS" == "FAILED" && "$INTEL_STATUS" == "FAILED" ]]; then
+if [[ "$SLACK_STATUS" == "FAILED" && "$OUTLOOK_STATUS" == "FAILED" && "$QUEUE_STATUS" == "FAILED" && "$GOODLINKS_STATUS" == "FAILED" && "$YOUTUBE_STATUS" == "FAILED" && "$INTEL_STATUS" == "FAILED" ]]; then
   echo -e "${RED}All scanners failed${NC}"
   exit 1
 fi
 
 # Clean up temp logs
-rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log /tmp/scan-goodlinks.log /tmp/scan-slack-intel.log /tmp/scan-outlook-intel.log
+rm -f /tmp/scan-slack.log /tmp/scan-outlook.log /tmp/scan-queue.log /tmp/scan-goodlinks.log /tmp/scan-youtube.log /tmp/scan-slack-intel.log /tmp/scan-outlook-intel.log
 
 echo -e "${GREEN}✓ Scan complete${NC}"
 echo ""
