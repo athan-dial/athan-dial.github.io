@@ -2,6 +2,7 @@
 title: "Advisory & Thought Partnership"
 date: 2026-01-20
 description: "Conversations about decision systems, evaluation frameworks, and analytics strategy"
+aliases: ["/consulting"]
 ---
 
 # Let's Talk
