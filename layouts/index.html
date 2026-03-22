@@ -1,28 +1,44 @@
 {{ define "main" }}
-<section class="resume-section" id="about">
-  <div class="resume-section-content">
-    <h1 class="mb-0">
-      {{ .Site.Params.firstName }}
-      <span class="text-primary">{{ .Site.Params.lastName }}</span>
-    </h1>
-    <p class="lead mb-5">{{ .Content }}</p>
+<section class="hero container">
+  <div class="hero__grid">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span class="hero__badge-text">Executive Leadership — Data Science</span>
+      </div>
+      <h1 class="hero__name">{{ .Site.Params.firstName }} Dial,<br><span>PhD</span></h1>
+      <div class="hero__intro">{{ .Content }}</div>
+      <div class="hero__actions">
+        <a href="/case-studies/" class="btn-primary">Review Portfolio</a>
+        <a href="/resume.pdf" class="btn-secondary">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero__portrait">
+      <div class="hero__portrait-bg"></div>
+      <div class="hero__portrait-frame">
+        <img src="/img/portrait.jpg" alt="Dr. Athan Dial" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
 
-    {{ $caseStudies := where .Site.RegularPages "Section" "case-studies" }}
-    {{ if $caseStudies }}
-    <div class="proof-tiles-section">
-      <h2 class="proof-tiles-section__heading">Decision Evidence</h2>
-      <div class="proof-tiles-grid">
-        {{ range first 5 $caseStudies }}
-          {{ partial "case-study-card.html" . }}
-        {{ end }}
-      </div>
-      {{ if gt (len $caseStudies) 5 }}
-      <div class="proof-tiles-section__cta">
-        <a href="/case-studies/" class="proof-tiles-section__link">View all case studies →</a>
-      </div>
+{{ $caseStudies := where .Site.RegularPages "Section" "case-studies" }}
+{{ if $caseStudies }}
+<section class="section">
+  <div class="container">
+    <span class="section__label">02 // Select Work Artifacts</span>
+    <h2 class="section__heading">Decision Evidence</h2>
+    <div class="case-studies-grid">
+      {{ range first 5 $caseStudies }}
+        {{ partial "case-study-card.html" . }}
       {{ end }}
+    </div>
+    {{ if gt (len $caseStudies) 5 }}
+    <div class="section-cta">
+      <a href="/case-studies/">View All Case Studies &rarr;</a>
     </div>
     {{ end }}
   </div>
 </section>
+{{ end }}
 {{ end }}

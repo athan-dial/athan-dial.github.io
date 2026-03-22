@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="container">
+  <article>
+    <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+    <header class="case-study-header">
+      <h1 class="case-study-header__title">{{ .Title }}</h1>
+      <div class="case-study-header__meta">
+        {{ with .Params.problem_type }}<span class="case-study-card__tag">{{ replace . "-" " " }}</span>{{ end }}
+        {{ with .Params.scope }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
+        {{ with .Params.complexity }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
+      </div>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </header>
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+{{ end }}

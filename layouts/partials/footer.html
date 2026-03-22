@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; {{ now.Year }} {{ .Site.Params.firstName }} {{ .Site.Params.lastName }} &middot; {{ .Site.Params.address }}</span>
+    <ul class="site-footer__links">
+      {{ range .Site.Params.handles }}
+        <li><a href="{{ .link }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</footer>
