@@ -1,1 +1,97 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Playbooks on The Agency</title><link>https://athan-dial.github.io/agency/playbooks/</link><description>Recent content in Playbooks on The Agency</description><generator>Hugo</generator><language>en</language><copyright>© 2026 Athan Dial</copyright><lastBuildDate>Tue, 07 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://athan-dial.github.io/agency/playbooks/index.xml" rel="self" type="application/rss+xml"/><item><title>Build an ingest pipeline</title><link>https://athan-dial.github.io/agency/playbooks/build-an-ingest-pipeline/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/build-an-ingest-pipeline/</guid><description>Helps you run ingest → stage → process → publish across Slack, Confluence, bookmarks, and video—deduped knowledge atoms, provenance, one orchestration command.</description></item><item><title>Jira and Confluence from Claude Code</title><link>https://athan-dial.github.io/agency/playbooks/jira-and-confluence-from-claude-code/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/jira-and-confluence-from-claude-code/</guid><description>Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.</description></item><item><title>Query your data warehouse with Athena</title><link>https://athan-dial.github.io/agency/playbooks/query-your-data-warehouse-with-athena/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/query-your-data-warehouse-with-athena/</guid><description>Helps you answer lakehouse questions with Athena by matching intent to tables, fetching schemas on demand, then running SQL without memorizing the whole catalog.</description></item><item><title>Read replica forensics from Claude Code</title><link>https://athan-dial.github.io/agency/playbooks/read-replica-forensics-from-claude-code/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/read-replica-forensics-from-claude-code/</guid><description>Helps you slice operational Postgres via a read replica—staleness, soft deletes, join paths—with saved SQL, logged commands, and CSVs while the admin UI is still loading.</description></item><item><title>A daily workflow with Claude Desktop</title><link>https://athan-dial.github.io/agency/playbooks/claude-desktop-daily-workflow/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/claude-desktop-daily-workflow/</guid><description>Helps you run a full workday in Claude Desktop: overnight brief, mail triage, meeting prep, Cowork passes on what&amp;rsquo;s on screen, evening carry-over—connectors carry the context.</description></item><item><title>Build your first Claude Code skill</title><link>https://athan-dial.github.io/agency/playbooks/build-your-first-skill/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/build-your-first-skill/</guid><description>Helps you freeze a repeated workaround as SKILL.md: specific trigger, runnable procedure, verification, and the failure modes you already paid for.</description></item><item><title>Hooks that run themselves</title><link>https://athan-dial.github.io/agency/playbooks/hooks-that-run-themselves/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/hooks-that-run-themselves/</guid><description>Helps you wire shell commands to Claude Code events—session start, after edit, before risky tools—so formatters, tests, and context loads run without anyone typing them.</description></item><item><title>MCP servers connect everything</title><link>https://athan-dial.github.io/agency/playbooks/mcp-servers-connect-everything/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/mcp-servers-connect-everything/</guid><description>Helps you query Slack, Confluence, Jira, and mail through MCP instead of pasting exports—one config stanza per system.</description></item><item><title>Parallel research with subagents</title><link>https://athan-dial.github.io/agency/playbooks/parallel-research-with-subagents/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/parallel-research-with-subagents/</guid><description>Helps you send 3–4 researcher subagents at one question in parallel, merge overlaps and gaps, and land a single citable brief instead of serial chat.</description></item><item><title>Run a full project with GSD</title><link>https://athan-dial.github.io/agency/playbooks/run-a-project-with-gsd/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/run-a-project-with-gsd/</guid><description>Helps you run a multi-phase project in Claude Code with GSD: &lt;code&gt;/gsd:new-project&lt;/code&gt; through ship, atomic commits, verification gates, and &lt;code&gt;.planning/&lt;/code&gt; you can resume after a reset.</description></item><item><title>Run a literature review from your desk</title><link>https://athan-dial.github.io/agency/playbooks/literature-review-from-your-desk/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/literature-review-from-your-desk/</guid><description>Helps you produce a defendable brief by searching PubMed, preprints, and trials in parallel, then locking claims to verifiable DOIs and NCT IDs.</description></item><item><title>Teach Claude your writing voice</title><link>https://athan-dial.github.io/agency/playbooks/teach-claude-your-writing-voice/</link><pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/agency/playbooks/teach-claude-your-writing-voice/</guid><description>Helps you mine Slack and email for patterns, save them as a style profile, and steer drafts toward your phrasing, pacing, and sign-offs.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Playbooks on The Agency</title>
+    <link>//localhost:1315/playbooks/</link>
+    <description>Recent content in Playbooks on The Agency</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>© 2026 Athan Dial</copyright>
+    <lastBuildDate>Tue, 07 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1315/playbooks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Build an ingest pipeline</title>
+      <link>//localhost:1315/playbooks/build-an-ingest-pipeline/</link>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/build-an-ingest-pipeline/</guid>
+      <description>Helps you run ingest → stage → process → publish across Slack, Confluence, bookmarks, and video—deduped knowledge atoms, provenance, one orchestration command.</description>
+    </item>
+    <item>
+      <title>Jira and Confluence from Claude Code</title>
+      <link>//localhost:1315/playbooks/jira-and-confluence-from-claude-code/</link>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/jira-and-confluence-from-claude-code/</guid>
+      <description>Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.</description>
+    </item>
+    <item>
+      <title>Query your data warehouse with Athena</title>
+      <link>//localhost:1315/playbooks/query-your-data-warehouse-with-athena/</link>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/query-your-data-warehouse-with-athena/</guid>
+      <description>Helps you answer lakehouse questions with Athena by matching intent to tables, fetching schemas on demand, then running SQL without memorizing the whole catalog.</description>
+    </item>
+    <item>
+      <title>Read replica forensics from Claude Code</title>
+      <link>//localhost:1315/playbooks/read-replica-forensics-from-claude-code/</link>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/read-replica-forensics-from-claude-code/</guid>
+      <description>Helps you slice operational Postgres via a read replica—staleness, soft deletes, join paths—with saved SQL, logged commands, and CSVs while the admin UI is still loading.</description>
+    </item>
+    <item>
+      <title>A daily workflow with Claude Desktop</title>
+      <link>//localhost:1315/playbooks/claude-desktop-daily-workflow/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/claude-desktop-daily-workflow/</guid>
+      <description>Helps you run a full workday in Claude Desktop: overnight brief, mail triage, meeting prep, Cowork passes on what&amp;rsquo;s on screen, evening carry-over—connectors carry the context.</description>
+    </item>
+    <item>
+      <title>Build your first Claude Code skill</title>
+      <link>//localhost:1315/playbooks/build-your-first-skill/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/build-your-first-skill/</guid>
+      <description>Helps you freeze a repeated workaround as SKILL.md: specific trigger, runnable procedure, verification, and the failure modes you already paid for.</description>
+    </item>
+    <item>
+      <title>Hooks that run themselves</title>
+      <link>//localhost:1315/playbooks/hooks-that-run-themselves/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/hooks-that-run-themselves/</guid>
+      <description>Helps you wire shell commands to Claude Code events—session start, after edit, before risky tools—so formatters, tests, and context loads run without anyone typing them.</description>
+    </item>
+    <item>
+      <title>MCP servers connect everything</title>
+      <link>//localhost:1315/playbooks/mcp-servers-connect-everything/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/mcp-servers-connect-everything/</guid>
+      <description>Helps you wire Slack, Confluence, Jira, and mail into Claude through MCP—one config stanza per system—so the model calls live APIs instead of recycling pasted excerpts.</description>
+    </item>
+    <item>
+      <title>Parallel research with subagents</title>
+      <link>//localhost:1315/playbooks/parallel-research-with-subagents/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/parallel-research-with-subagents/</guid>
+      <description>Helps you send 3–4 researcher subagents at one question in parallel, merge overlaps and gaps, and land a single citable brief instead of serial chat.</description>
+    </item>
+    <item>
+      <title>Run a full project with GSD</title>
+      <link>//localhost:1315/playbooks/run-a-project-with-gsd/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/run-a-project-with-gsd/</guid>
+      <description>Helps you run a multi-phase project in Claude Code with GSD: &lt;code&gt;/gsd:new-project&lt;/code&gt; through ship, atomic commits, verification gates, and &lt;code&gt;.planning/&lt;/code&gt; you can resume after a reset.</description>
+    </item>
+    <item>
+      <title>Run a literature review from your desk</title>
+      <link>//localhost:1315/playbooks/literature-review-from-your-desk/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/literature-review-from-your-desk/</guid>
+      <description>Helps you produce a defendable brief by searching PubMed, preprints, and trials in parallel, then locking claims to verifiable DOIs and NCT IDs.</description>
+    </item>
+    <item>
+      <title>Teach Claude your writing voice</title>
+      <link>//localhost:1315/playbooks/teach-claude-your-writing-voice/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1315/playbooks/teach-claude-your-writing-voice/</guid>
+      <description>Helps you mine Slack and email for patterns, save them as a style profile, and steer drafts toward your phrasing, pacing, and sign-offs.</description>
+    </item>
+  </channel>
+</rss>
