@@ -10,7 +10,7 @@
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.22"/>
     </filter>
     <filter id="accent-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#7dd3fc" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#ECCE00" flood-opacity="0.45"/>
     </filter>
   </defs>
 
@@ -18,45 +18,48 @@
   <rect x="0" y="0" width="800" height="700" fill="#0A0E1A"/>
 
   <!-- Title -->
-  <text x="40" y="54" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">Skills encode what you learned the hard way</text>
-  <text x="40" y="78" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">Hard-won knowledge flywheel</text>
+  <text x="40" y="54" fill="#ECCE00" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">Skills encode what you learned the hard way</text>
+  <text x="40" y="78" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-weight="300" font-size="13">Hard-won knowledge flywheel</text>
+
+  <!-- Loop guide behind cards (was last in paint order and stroked over node labels) -->
+  <circle cx="400" cy="370" r="220" fill="none" stroke="#334155" stroke-width="2" opacity="0.35"/>
 
   <!-- Central flywheel -->
-  <circle cx="400" cy="370" r="86" fill="#0A0E1A" stroke="#0ea5e9" stroke-width="2" filter="url(#accent-glow)"/>
+  <circle cx="400" cy="370" r="86" fill="#0A0E1A" stroke="#b09a00" stroke-width="2" filter="url(#accent-glow)"/>
   <circle cx="400" cy="370" r="70" fill="#111827" stroke="#334155" stroke-width="2" filter="url(#shadow-sm)"/>
-  <text x="400" y="366" text-anchor="middle" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Compounding</text>
-  <text x="400" y="388" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">capture ? reuse ? delegate ? refresh</text>
+  <text x="400" y="366" text-anchor="middle" fill="#ECCE00" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Compounding</text>
+  <text x="400" y="388" text-anchor="middle" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11">capture ? reuse ? delegate ? refresh</text>
 
   <!-- Nodes -->
   <!-- Node 1 (top) -->
   <rect x="270" y="120" width="260" height="110" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2" filter="url(#shadow)"/>
   <text x="284" y="154" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Hit friction / discover fix</text>
-  <text x="284" y="178" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">A painful edge case forces clarity</text>
-  <text x="284" y="198" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">You learn the true constraint</text>
+  <text x="284" y="178" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">A painful edge case forces clarity</text>
+  <text x="284" y="198" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">You learn the true constraint</text>
 
   <!-- Node 2 (upper-right) -->
   <rect x="520" y="250" width="250" height="110" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2" filter="url(#shadow)"/>
   <text x="534" y="284" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Encode SKILL.md</text>
-  <text x="534" y="308" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">trigger · commands · failure mode</text>
-  <text x="534" y="328" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">verification so it stays true</text>
+  <text x="534" y="308" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">trigger · commands · failure mode</text>
+  <text x="534" y="328" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">verification so it stays true</text>
 
   <!-- Node 3 (lower-right) -->
   <rect x="470" y="440" width="280" height="110" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2" filter="url(#shadow)"/>
   <text x="484" y="474" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Future sessions start at correct baseline</text>
-  <text x="484" y="498" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">No rediscovery; less backtracking</text>
-  <text x="484" y="518" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">Fewer footguns, faster progress</text>
+  <text x="484" y="498" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">No rediscovery; less backtracking</text>
+  <text x="484" y="518" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">Fewer footguns, faster progress</text>
 
   <!-- Node 4 (lower-left) -->
   <rect x="50" y="440" width="280" height="110" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow)"/>
   <text x="64" y="474" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Delegation + shared knowledge</text>
-  <text x="64" y="498" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">Others pick it up with confidence</text>
-  <text x="64" y="518" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.88">One fix scales across the team</text>
+  <text x="64" y="498" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">Others pick it up with confidence</text>
+  <text x="64" y="518" fill="#ffffff" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.88">One fix scales across the team</text>
 
   <!-- Node 5 (upper-left) -->
   <rect x="30" y="250" width="250" height="110" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="2" filter="url(#shadow)"/>
   <text x="44" y="284" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Maintain / update skill</text>
-  <text x="44" y="308" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.80">Reality changes: tools, APIs, patterns</text>
-  <text x="44" y="328" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.80">Refresh verification, keep it sharp</text>
+  <text x="44" y="308" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.80">Reality changes: tools, APIs, patterns</text>
+  <text x="44" y="328" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.80">Refresh verification, keep it sharp</text>
 
   <!-- Arrows (clockwise) -->
   <!-- Arrow 1: Node 1 -> Node 2 -->
@@ -78,7 +81,4 @@
   <!-- Arrow 5: Node 5 -> Node 1 -->
   <line x1="280" y1="292" x2="320" y2="230" stroke="#0f6b52" stroke-width="2"/>
   <polygon points="322,226 324,240 312,234" fill="#0f6b52"/>
-
-  <!-- Optional subtle loop guide -->
-  <circle cx="400" cy="370" r="220" fill="none" stroke="#334155" stroke-width="2" opacity="0.35"/>
 </svg>
