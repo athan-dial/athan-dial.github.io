@@ -12,7 +12,7 @@
   {{ with .Site.Params.profileImage }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
   <meta name="author" content="{{ .Site.Params.firstName }} {{ .Site.Params.lastName }}">
   <link rel="canonical" href="{{ .Permalink }}">
-  {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . }}">{{ end }}
+  {{ partialCached "favicons.html" . site.BaseURL }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">

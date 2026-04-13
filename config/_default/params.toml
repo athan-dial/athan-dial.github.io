@@ -6,7 +6,6 @@ address = "Boston, MA"
 phone = "[redacted-phone]"
 email = "athandial@gmail.com"
 profileImage = "img/profile.jpg"
-favicon = "/favicon.ico"
 showQr = false
 showContact = false
 
