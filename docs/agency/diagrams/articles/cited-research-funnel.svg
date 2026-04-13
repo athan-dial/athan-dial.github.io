@@ -15,10 +15,10 @@
   <rect x="0" y="0" width="960" height="650" fill="#0A0E1A"/>
 
   <!-- Title -->
-  <text x="480" y="54" text-anchor="middle" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">
+  <text x="480" y="54" text-anchor="middle" fill="#ECCE00" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">
     AI research that actually cites sources
   </text>
-  <text x="480" y="82" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">
+  <text x="480" y="82" text-anchor="middle" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-weight="300" font-size="13">
     parallel intake → strict orchestration → structured, citable evidence packet
   </text>
 
@@ -49,8 +49,8 @@
   <text x="64" y="248" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">CONVERGENCE</text>
   <rect x="260" y="270" width="440" height="92" rx="10" ry="10" fill="#c4b820" filter="url(#shadow)"/>
   <text x="480" y="302" text-anchor="middle" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="15">/research orchestrator</text>
-  <text x="480" y="324" text-anchor="middle" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.8">demands DOIs, notes conflicts</text>
-  <text x="480" y="344" text-anchor="middle" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.8">dedupes claims → reconciles population + sample size</text>
+  <text x="480" y="324" text-anchor="middle" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.8">demands DOIs, notes conflicts</text>
+  <text x="480" y="344" text-anchor="middle" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.8">dedupes claims → reconciles population + sample size</text>
 
   <!-- Arrows to orchestrator (explicit line + polygon, color-matched to destination) -->
   <line x1="165" y1="222" x2="350" y2="266" stroke="#c4b820" stroke-width="2"/>
@@ -66,21 +66,21 @@
   <polygon points="606,267 618,262 615,273" fill="#c4b820"/>
 
   <!-- Funnel rails (many → one) -->
-  <line x1="300" y1="370" x2="220" y2="408" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
-  <line x1="660" y1="370" x2="740" y2="408" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
-  <line x1="220" y1="408" x2="220" y2="430" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
-  <line x1="740" y1="408" x2="740" y2="430" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
+  <line x1="300" y1="370" x2="220" y2="408" stroke="#b09a00" stroke-width="2" opacity="0.85"/>
+  <line x1="660" y1="370" x2="740" y2="408" stroke="#b09a00" stroke-width="2" opacity="0.85"/>
+  <line x1="220" y1="408" x2="220" y2="430" stroke="#b09a00" stroke-width="2" opacity="0.85"/>
+  <line x1="740" y1="408" x2="740" y2="430" stroke="#b09a00" stroke-width="2" opacity="0.85"/>
 
   <!-- Arrow from orchestrator to output (color-matched to destination) -->
-  <line x1="480" y1="370" x2="480" y2="420" stroke="#7dd3fc" stroke-width="2"/>
-  <polygon points="480,430 474,420 486,420" fill="#7dd3fc"/>
+  <line x1="480" y1="370" x2="480" y2="420" stroke="#ECCE00" stroke-width="2"/>
+  <polygon points="480,430 474,420 486,420" fill="#ECCE00"/>
 
   <!-- Output -->
-  <text x="64" y="428" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">DELIVERABLE</text>
+  <text x="64" y="416" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">DELIVERABLE</text>
 
-  <rect x="120" y="430" width="720" height="240" rx="10" ry="10" fill="#7dd3fc" filter="url(#shadow)"/>
+  <rect x="120" y="430" width="720" height="240" rx="10" ry="10" fill="#ECCE00" filter="url(#shadow)"/>
   <text x="144" y="462" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="15">Structured findings table</text>
-  <text x="144" y="482" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">every row is traceable to a DOI (or explicitly marked otherwise)</text>
+  <text x="144" y="482" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.75">every row is traceable to a DOI (or explicitly marked otherwise)</text>
 
   <!-- Table grid -->
   <rect x="144" y="496" width="672" height="152" rx="8" ry="8" fill="#ffffff" opacity="0.08"/>
@@ -101,35 +101,35 @@
   <text x="718" y="518" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">DOI</text>
 
   <!-- Rows (example placeholders) -->
-  <text x="156" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">effect direction + magnitude</text>
-  <text x="456" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">cohort + inclusion criteria</text>
-  <text x="606" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">n = 000</text>
+  <text x="156" y="556" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.85">effect direction + magnitude</text>
+  <text x="456" y="556" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.85">cohort + inclusion criteria</text>
+  <text x="606" y="556" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.85">n = 000</text>
   <text x="718" y="556" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.85">10.xxxx/xxxx</text>
 
-  <text x="156" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">subgroup caveat / heterogeneity</text>
-  <text x="456" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">site / country / setting</text>
-  <text x="606" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">n = 000</text>
+  <text x="156" y="596" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.75">subgroup caveat / heterogeneity</text>
+  <text x="456" y="596" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.75">site / country / setting</text>
+  <text x="606" y="596" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.75">n = 000</text>
   <text x="718" y="596" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.75">10.xxxx/xxxx</text>
 
-  <text x="156" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">replication / null or mixed result</text>
-  <text x="456" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">matched comparator group</text>
-  <text x="606" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">n = 000</text>
+  <text x="156" y="636" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.65">replication / null or mixed result</text>
+  <text x="456" y="636" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.65">matched comparator group</text>
+  <text x="606" y="636" fill="#0A0E1A" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11" opacity="0.65">n = 000</text>
   <text x="718" y="636" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.65">10.xxxx/xxxx</text>
 
   <!-- Side badge: conflict notes + verification links -->
-  <rect x="856" y="458" width="88" height="132" rx="10" ry="10" fill="#1e293b" stroke="#0ea5e9" stroke-width="2" filter="url(#shadow-sm)"/>
+  <rect x="856" y="458" width="88" height="132" rx="10" ry="10" fill="#1e293b" stroke="#b09a00" stroke-width="2" filter="url(#shadow-sm)"/>
   <text x="900" y="486" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11">Conflict</text>
   <text x="900" y="504" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11">notes</text>
-  <text x="900" y="530" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">+ verification</text>
-  <text x="900" y="548" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">links</text>
+  <text x="900" y="530" text-anchor="middle" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11">+ verification</text>
+  <text x="900" y="548" text-anchor="middle" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-weight="400" font-size="11">links</text>
   <text x="900" y="574" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">source trail</text>
 
   <!-- Badge connector (attached) -->
-  <line x1="840" y1="524" x2="856" y2="524" stroke="#0ea5e9" stroke-width="2"/>
-  <polygon points="856,524 846,518 846,530" fill="#0ea5e9"/>
+  <line x1="840" y1="524" x2="856" y2="524" stroke="#b09a00" stroke-width="2"/>
+  <polygon points="856,524 846,518 846,530" fill="#b09a00"/>
 
   <!-- Footer note -->
-  <text x="480" y="628" text-anchor="middle" fill="#64748b" font-family="Manrope, sans-serif" font-weight="300" font-size="11">
+  <text x="480" y="628" text-anchor="middle" fill="#64748b" font-family="IBM Plex Sans, sans-serif" font-weight="300" font-size="11">
     funnel pressure = fewer claims, stronger citations, explicit uncertainty
   </text>
 </svg>
