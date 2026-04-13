@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="480" viewBox="0 0 1060 480">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="480" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="54" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">Teach Claude your writing voice</text>
+  <text x="40" y="78" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="13">Sequential flow: real samples - style profile - consistent drafts</text>
+
+  <!-- Nodes -->
+  <!-- Node geometry: width=168, height=126. Text padding=15. Line-height=22. -->
+
+  <!-- Node 1 -->
+  <rect x="20" y="110" width="168" height="126" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2" filter="url(#shadow)"/>
+  <text x="35" y="149" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">1) Gather samples</text>
+  <text x="35" y="171" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Authentic Slack +</text>
+  <text x="35" y="193" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">email writing.</text>
+
+  <!-- Node 2 -->
+  <rect x="208" y="274" width="168" height="126" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2" filter="url(#shadow)"/>
+  <text x="223" y="313" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">2) Extract patterns</text>
+  <text x="223" y="335" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Run <tspan font-family="JetBrains Mono, monospace" font-weight="500">/writing-style</tspan></text>
+  <text x="223" y="357" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">+ anti-patterns.</text>
+
+  <!-- Node 3 -->
+  <rect x="396" y="110" width="168" height="126" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2" filter="url(#shadow)"/>
+  <text x="411" y="149" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">3) Edit profile</text>
+  <text x="411" y="171" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Shape into</text>
+  <text x="411" y="193" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11"><tspan font-family="JetBrains Mono, monospace" font-weight="500">my-style.md</tspan> sections.</text>
+
+  <!-- Node 4 -->
+  <rect x="584" y="274" width="168" height="126" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow)"/>
+  <text x="599" y="313" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">4) Wire into drafts</text>
+  <text x="599" y="335" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Include in each</text>
+  <text x="599" y="357" fill="#ffffff" font-family="Manrope, sans-serif" font-weight="400" font-size="11"><tspan font-family="JetBrains Mono, monospace" font-weight="500">briefs/CLAUDE.md</tspan>.</text>
+
+  <!-- Node 5 -->
+  <rect x="750" y="110" width="210" height="126" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="2" filter="url(#shadow)"/>
+  <text x="765" y="149" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">5) Refresh quarterly</text>
+  <text x="787" y="171" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Update as voice</text>
+  <text x="787" y="193" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11">drifts over time.</text>
+
+  <!-- Arrows (line + polygon only; no markers) -->
+  <!-- 1 -> 2 -->
+  <line x1="196" y1="173" x2="240" y2="173" stroke="#1a7a52" stroke-width="2"/>
+  <line x1="240" y1="173" x2="240" y2="337" stroke="#1a7a52" stroke-width="2"/>
+  <line x1="240" y1="337" x2="200" y2="337" stroke="#1a7a52" stroke-width="2"/>
+  <polygon points="208,337 218,331 218,343" fill="#1a7a52"/>
+
+  <!-- 2 -> 3 -->
+  <line x1="384" y1="337" x2="428" y2="337" stroke="#2d8040" stroke-width="2"/>
+  <line x1="428" y1="337" x2="428" y2="173" stroke="#2d8040" stroke-width="2"/>
+  <line x1="428" y1="173" x2="388" y2="173" stroke="#2d8040" stroke-width="2"/>
+  <polygon points="396,173 406,167 406,179" fill="#2d8040"/>
+
+  <!-- 3 -> 4 -->
+  <line x1="572" y1="173" x2="616" y2="173" stroke="#5a8a20" stroke-width="2"/>
+  <line x1="616" y1="173" x2="616" y2="337" stroke="#5a8a20" stroke-width="2"/>
+  <line x1="616" y1="337" x2="576" y2="337" stroke="#5a8a20" stroke-width="2"/>
+  <polygon points="584,337 594,331 594,343" fill="#5a8a20"/>
+
+  <!-- 4 -> 5 -->
+  <line x1="760" y1="337" x2="804" y2="337" stroke="#9a9010" stroke-width="2"/>
+  <line x1="804" y1="337" x2="804" y2="173" stroke="#9a9010" stroke-width="2"/>
+  <line x1="804" y1="173" x2="764" y2="173" stroke="#9a9010" stroke-width="2"/>
+  <polygon points="772,173 782,167 782,179" fill="#9a9010"/>
+</svg>

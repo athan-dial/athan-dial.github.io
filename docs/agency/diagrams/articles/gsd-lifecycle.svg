@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 490" width="1520" height="490">
+  <defs>
+    <style>
+      .phase-label { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 16px; fill: #ffffff; }
+      .phase-cmd { font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 12px; fill: rgba(255,255,255,0.75); }
+      .phase-label-dark { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 16px; fill: #0A0E1A; }
+      .phase-cmd-dark { font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 12px; fill: rgba(10,14,26,0.65); }
+      .annotation { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 12px; fill: #94a3b8; }
+      .title { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 26px; fill: #7dd3fc; }
+      .section-title { font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 16px; fill: #64748b; }
+      .card-title { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; }
+      .card-body { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 12px; fill: #94a3b8; }
+      .loop-label { font-family: 'Manrope', sans-serif; font-weight: 400; font-size: 13px; fill: #7dd3fc; opacity: 0.6; }
+      .gate-label { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 11px; fill: #0A0E1A; }
+      .gate-ann { font-family: 'Manrope', sans-serif; font-weight: 400; font-size: 12px; fill: #7dd3fc; }
+    </style>
+    <marker id="tri-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#22a86e"/>
+    </marker>
+    <marker id="tri-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3cb856"/>
+    </marker>
+    <marker id="tri-lime" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7ab830"/>
+    </marker>
+    <marker id="tri-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7dd3fc"/>
+    </marker>
+    <marker id="tri-olive" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c4b820"/>
+    </marker>
+    <marker id="tri-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7dd3fc" opacity="0.5"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="760" y="42" text-anchor="middle" class="title">GSD Project Lifecycle</text>
+
+  <!-- Loop arrow: SHIP → DISCUSS -->
+  <path d="M 1382,120 L 1382,68 Q 1382,58 1372,58 L 288,58 Q 278,58 278,68 L 278,120"
+        fill="none" stroke="#7dd3fc" stroke-width="1.5" opacity="0.45" marker-end="url(#tri-loop)"/>
+  <text x="760" y="54" text-anchor="middle" class="loop-label">Next phase</text>
+
+  <!-- ═══ PHASE BOXES ═══ -->
+
+  <!-- INIT (low row y=185) -->
+  <rect x="40" y="185" width="168" height="68" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="1" filter="url(#shadow)"/>
+  <text x="124" y="214" text-anchor="middle" class="phase-label">INIT</text>
+  <text x="124" y="234" text-anchor="middle" class="phase-cmd">/gsd:new-project</text>
+  <text x="124" y="272" text-anchor="middle" class="annotation">What are we building?</text>
+
+  <!-- DISCUSS (high row y=125) -->
+  <rect x="268" y="125" width="168" height="68" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="1" filter="url(#shadow)"/>
+  <text x="352" y="154" text-anchor="middle" class="phase-label">DISCUSS</text>
+  <text x="352" y="174" text-anchor="middle" class="phase-cmd">/gsd:discuss-phase</text>
+  <text x="352" y="212" text-anchor="middle" class="annotation">Surface assumptions</text>
+
+  <!-- PLAN (low row y=185) -->
+  <rect x="496" y="185" width="168" height="68" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="1" filter="url(#shadow)"/>
+  <text x="580" y="214" text-anchor="middle" class="phase-label">PLAN</text>
+  <text x="580" y="234" text-anchor="middle" class="phase-cmd">/gsd:plan-phase</text>
+  <text x="580" y="272" text-anchor="middle" class="annotation">Tasks + criteria</text>
+
+  <!-- EXECUTE (high row y=125) -->
+  <rect x="724" y="125" width="168" height="68" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="1" filter="url(#shadow)"/>
+  <text x="808" y="154" text-anchor="middle" class="phase-label">EXECUTE</text>
+  <text x="808" y="174" text-anchor="middle" class="phase-cmd">/gsd:execute-phase</text>
+  <text x="808" y="212" text-anchor="middle" class="annotation">Atomic commits</text>
+
+  <!-- GATE diamond -->
+  <polygon points="982,127 1015,160 982,193 949,160" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="1" filter="url(#shadow)"/>
+  <text x="982" y="164" text-anchor="middle" class="gate-label">GATE</text>
+  <text x="982" y="212" text-anchor="middle" class="gate-ann">checkpoint</text>
+
+  <!-- VERIFY (low row y=185) -->
+  <rect x="1068" y="185" width="168" height="68" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="1" filter="url(#shadow)"/>
+  <text x="1152" y="214" text-anchor="middle" class="phase-label">VERIFY</text>
+  <text x="1152" y="234" text-anchor="middle" class="phase-cmd">/gsd:verify-work</text>
+  <text x="1152" y="272" text-anchor="middle" class="annotation">Goal-backward check</text>
+
+  <!-- SHIP (high row y=125) -->
+  <rect x="1296" y="125" width="168" height="68" rx="10" ry="10" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="1" filter="url(#shadow)"/>
+  <text x="1380" y="154" text-anchor="middle" class="phase-label-dark">SHIP</text>
+  <text x="1380" y="174" text-anchor="middle" class="phase-cmd-dark">/gsd:ship</text>
+  <text x="1380" y="212" text-anchor="middle" class="annotation">PR, review, merge</text>
+
+  <!-- ═══ ARROWS (rounded elbows) ═══ -->
+
+  <!-- INIT → DISCUSS -->
+  <path d="M 208,219 L 230,219 Q 238,219 238,211 L 238,167 Q 238,159 246,159 L 268,159"
+        fill="none" stroke="#22a86e" stroke-width="1.5" marker-end="url(#tri-teal)"/>
+
+  <!-- DISCUSS → PLAN -->
+  <path d="M 436,159 L 458,159 Q 466,159 466,167 L 466,211 Q 466,219 474,219 L 496,219"
+        fill="none" stroke="#3cb856" stroke-width="1.5" marker-end="url(#tri-green)"/>
+
+  <!-- PLAN → EXECUTE -->
+  <path d="M 664,219 L 686,219 Q 694,219 694,211 L 694,167 Q 694,159 702,159 L 724,159"
+        fill="none" stroke="#7ab830" stroke-width="1.5" marker-end="url(#tri-lime)"/>
+
+  <!-- EXECUTE → GATE -->
+  <path d="M 892,159 L 949,159"
+        fill="none" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#tri-yellow)"/>
+
+  <!-- GATE → VERIFY -->
+  <path d="M 1015,160 L 1032,160 Q 1040,160 1040,168 L 1040,211 Q 1040,219 1048,219 L 1068,219"
+        fill="none" stroke="#c4b820" stroke-width="1.5" marker-end="url(#tri-olive)"/>
+
+  <!-- VERIFY → SHIP -->
+  <path d="M 1236,219 L 1258,219 Q 1266,219 1266,211 L 1266,167 Q 1266,159 1274,159 L 1296,159"
+        fill="none" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#tri-yellow)"/>
+
+  <!-- ═══ DIVIDER ═══ -->
+  <line x1="40" y1="305" x2="1464" y2="305" stroke="#334155" stroke-width="1" opacity="0.25"/>
+
+  <!-- ═══ AUTONOMY SPECTRUM ═══ -->
+  <text x="752" y="332" text-anchor="middle" class="section-title">Autonomy Spectrum</text>
+
+  <!-- GUIDED -->
+  <rect x="40" y="350" width="460" height="90" rx="8" ry="8" fill="#1e293b" stroke="#1AA684" stroke-width="1" filter="url(#shadow-sm)"/>
+  <text x="60" y="375" class="card-title" fill="#1AA684">GUIDED</text>
+  <text x="60" y="398" class="card-body">You discuss, review the plan,</text>
+  <text x="60" y="416" class="card-body">watch execution, verify manually</text>
+
+  <!-- QUICK -->
+  <rect x="520" y="350" width="460" height="90" rx="8" ry="8" fill="#1e293b" stroke="#4ade80" stroke-width="1" filter="url(#shadow-sm)"/>
+  <text x="540" y="375" class="card-title" fill="#4ade80">QUICK</text>
+  <text x="540" y="398" class="card-body">Skip optional agents, atomic commits,</text>
+  <text x="540" y="416" class="card-body">trust the pattern</text>
+
+  <!-- AUTONOMOUS -->
+  <rect x="1000" y="350" width="464" height="90" rx="8" ry="8" fill="#1e293b" stroke="#7dd3fc" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="1020" y="375" class="card-title" fill="#7dd3fc">AUTONOMOUS</text>
+  <text x="1020" y="398" class="card-body">All phases end-to-end, verify catches</text>
+  <text x="1020" y="416" class="card-body">drift, review output after</text>
+</svg>

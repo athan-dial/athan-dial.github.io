@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560">
+  <defs>
+    <style>
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect x="0" y="0" width="960" height="560" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="20" y="48" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Read replica forensics</text>
+
+  <!-- Bento grid -->
+  <!-- Geometry: margin=20, gap=20, tileH=214, colW=215 -->
+
+  <!-- Hero (top-left, 2x width) -->
+  <g>
+    <rect x="20" y="80" width="450" height="214" rx="10" ry="10" fill="#7dd3fc" stroke="#7dd3fc" stroke-width="2"/>
+    <text x="35" y="114" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Treat replica as console</text>
+    <text x="35" y="136" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Open a REPL mindset: query, inspect, adjust.</text>
+    <text x="35" y="158" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Keep env + credentials explicit and reproducible.</text>
+    <text x="35" y="180" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">export READONLY_PG_URL="postgres://..."</text>
+    <text x="35" y="202" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">export PGROLE="readonly"</text>
+    <text x="35" y="224" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Assume every result needs a follow-up query.</text>
+  </g>
+
+  <!-- Tile: SQL lives in files -->
+  <g>
+    <rect x="490" y="80" width="215" height="214" rx="10" ry="10" fill="#1e293b" stroke="#1AA684" stroke-width="2"/>
+    <text x="505" y="114" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">SQL lives in files</text>
+    <text x="505" y="136" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Make every query a named artifact.</text>
+    <text x="505" y="158" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Prefer small, composable snippets.</text>
+    <text x="505" y="180" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">tmp/db-forensics/stale_entities.sql</text>
+    <text x="505" y="202" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">tmp/db-forensics/v001_joins.sql</text>
+    <text x="505" y="224" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Commit "known-good" patterns as versions.</text>
+  </g>
+
+  <!-- Tile: Mandatory is_deleted joins via parent row -->
+  <g>
+    <rect x="725" y="80" width="215" height="214" rx="10" ry="10" fill="#1e293b" stroke="#22a86e" stroke-width="2"/>
+    <text x="740" y="114" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Deletion-proof joins</text>
+    <text x="740" y="136" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Assume soft-deletes exist everywhere.</text>
+    <text x="740" y="158" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Join child row through parent before entity.</text>
+    <text x="740" y="180" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">... JOIN parent_row pr ON ...</text>
+    <text x="740" y="202" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">WHERE pr.is_deleted = false</text>
+    <text x="740" y="224" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Make it a default, not a checklist item.</text>
+  </g>
+
+  <!-- Tile: Timestamp choice -->
+  <g>
+    <rect x="20" y="314" width="215" height="214" rx="10" ry="10" fill="#1e293b" stroke="#3cb856" stroke-width="2"/>
+    <text x="35" y="348" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Pick the timestamp</text>
+    <text x="35" y="370" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Two clocks answer different questions.</text>
+    <text x="35" y="392" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">occurred_at</text>
+    <text x="35" y="414" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">"When did the job actually run?"</text>
+    <text x="35" y="436" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">modified_at</text>
+    <text x="35" y="458" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">"When did data last change?"</text>
+  </g>
+
+  <!-- Tile: Execution command -->
+  <g>
+    <rect x="255" y="314" width="215" height="214" rx="10" ry="10" fill="#1e293b" stroke="#7ab830" stroke-width="2"/>
+    <text x="270" y="348" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Run the query</text>
+    <text x="270" y="370" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Keep execution standardized.</text>
+    <text x="270" y="392" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">python run_query.py \</text>
+    <text x="270" y="414" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">  --sql-file tmp/db-forensics/q.sql \</text>
+    <text x="270" y="436" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">  --csv out/results.csv</text>
+    <text x="270" y="458" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Treat CSV as the "receipt" for analysis.</text>
+  </g>
+
+  <!-- Tile: Iteration workflow (spans 2 cols) -->
+  <g>
+    <rect x="490" y="314" width="450" height="214" rx="10" ry="10" fill="#1e293b" stroke="#c4b820" stroke-width="2"/>
+    <text x="505" y="348" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Iterate: tweak ? rerun ? diff</text>
+    <text x="505" y="370" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Change one assumption at a time.</text>
+    <text x="505" y="392" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Save outputs with timestamps or run IDs.</text>
+    <text x="505" y="414" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">out/v1.csv  ?  out/v2.csv</text>
+    <text x="505" y="436" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">csvdiff out/v1.csv out/v2.csv</text>
+    <text x="505" y="458" fill="#e2e8f0" font-family="Manrope, sans-serif" font-size="13" font-weight="400">Turn surprises into a new "snippet" file.</text>
+  </g>
+</svg>

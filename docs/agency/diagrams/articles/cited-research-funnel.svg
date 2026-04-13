@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 650" width="960" height="650">
+  <defs>
+    <style>
+    </style>
+    <!-- Filters -->
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="650" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="480" y="54" text-anchor="middle" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">
+    AI research that actually cites sources
+  </text>
+  <text x="480" y="82" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">
+    parallel intake → strict orchestration → structured, citable evidence packet
+  </text>
+
+  <!-- Intake nodes -->
+  <text x="64" y="128" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">INTAKE</text>
+
+  <!-- PubMed worker -->
+  <rect x="70" y="150" width="190" height="64" rx="10" ry="10" fill="#1AA684" filter="url(#shadow)"/>
+  <text x="165" y="178" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">PubMed worker</text>
+  <text x="165" y="198" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.9">extracts DOI + cohort</text>
+
+  <!-- bioRxiv worker -->
+  <rect x="280" y="150" width="190" height="64" rx="10" ry="10" fill="#22a86e" filter="url(#shadow)"/>
+  <text x="375" y="178" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">bioRxiv worker</text>
+  <text x="375" y="198" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.9">flags preprint status</text>
+
+  <!-- ClinicalTrials.gov worker -->
+  <rect x="490" y="150" width="190" height="64" rx="10" ry="10" fill="#3cb856" filter="url(#shadow)"/>
+  <text x="585" y="178" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">ClinicalTrials.gov worker</text>
+  <text x="585" y="198" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.9">checks NCT + outcomes</text>
+
+  <!-- Mechanistic review scout -->
+  <rect x="700" y="150" width="190" height="64" rx="10" ry="10" fill="#7ab830" filter="url(#shadow)"/>
+  <text x="795" y="178" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">Mechanistic review scout</text>
+  <text x="795" y="198" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.9">maps pathways + caveats</text>
+
+  <!-- Orchestrator -->
+  <text x="64" y="248" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">CONVERGENCE</text>
+  <rect x="260" y="270" width="440" height="92" rx="10" ry="10" fill="#c4b820" filter="url(#shadow)"/>
+  <text x="480" y="302" text-anchor="middle" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="15">/research orchestrator</text>
+  <text x="480" y="324" text-anchor="middle" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.8">demands DOIs, notes conflicts</text>
+  <text x="480" y="344" text-anchor="middle" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.8">dedupes claims → reconciles population + sample size</text>
+
+  <!-- Arrows to orchestrator (explicit line + polygon, color-matched to destination) -->
+  <line x1="165" y1="222" x2="350" y2="266" stroke="#c4b820" stroke-width="2"/>
+  <polygon points="354,267 342,262 345,273" fill="#c4b820"/>
+
+  <line x1="375" y1="222" x2="430" y2="266" stroke="#c4b820" stroke-width="2"/>
+  <polygon points="434,269 422,263 426,275" fill="#c4b820"/>
+
+  <line x1="585" y1="222" x2="530" y2="266" stroke="#c4b820" stroke-width="2"/>
+  <polygon points="526,269 538,263 534,275" fill="#c4b820"/>
+
+  <line x1="795" y1="222" x2="610" y2="266" stroke="#c4b820" stroke-width="2"/>
+  <polygon points="606,267 618,262 615,273" fill="#c4b820"/>
+
+  <!-- Funnel rails (many → one) -->
+  <line x1="300" y1="370" x2="220" y2="408" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
+  <line x1="660" y1="370" x2="740" y2="408" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
+  <line x1="220" y1="408" x2="220" y2="430" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
+  <line x1="740" y1="408" x2="740" y2="430" stroke="#0ea5e9" stroke-width="2" opacity="0.85"/>
+
+  <!-- Arrow from orchestrator to output (color-matched to destination) -->
+  <line x1="480" y1="370" x2="480" y2="420" stroke="#7dd3fc" stroke-width="2"/>
+  <polygon points="480,430 474,420 486,420" fill="#7dd3fc"/>
+
+  <!-- Output -->
+  <text x="64" y="428" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">DELIVERABLE</text>
+
+  <rect x="120" y="430" width="720" height="240" rx="10" ry="10" fill="#7dd3fc" filter="url(#shadow)"/>
+  <text x="144" y="462" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="15">Structured findings table</text>
+  <text x="144" y="482" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">every row is traceable to a DOI (or explicitly marked otherwise)</text>
+
+  <!-- Table grid -->
+  <rect x="144" y="496" width="672" height="152" rx="8" ry="8" fill="#ffffff" opacity="0.08"/>
+  <line x1="144" y1="528" x2="816" y2="528" stroke="#0A0E1A" stroke-width="1" opacity="0.25"/>
+  <line x1="144" y1="568" x2="816" y2="568" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+  <line x1="144" y1="608" x2="816" y2="608" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+  <line x1="144" y1="648" x2="816" y2="648" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+
+  <!-- Column dividers -->
+  <line x1="444" y1="496" x2="444" y2="648" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+  <line x1="594" y1="496" x2="594" y2="648" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+  <line x1="706" y1="496" x2="706" y2="648" stroke="#0A0E1A" stroke-width="1" opacity="0.18"/>
+
+  <!-- Header row -->
+  <text x="156" y="518" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">Finding</text>
+  <text x="456" y="518" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">Population</text>
+  <text x="606" y="518" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">Sample Size</text>
+  <text x="718" y="518" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">DOI</text>
+
+  <!-- Rows (example placeholders) -->
+  <text x="156" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">effect direction + magnitude</text>
+  <text x="456" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">cohort + inclusion criteria</text>
+  <text x="606" y="556" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.85">n = 000</text>
+  <text x="718" y="556" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.85">10.xxxx/xxxx</text>
+
+  <text x="156" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">subgroup caveat / heterogeneity</text>
+  <text x="456" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">site / country / setting</text>
+  <text x="606" y="596" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.75">n = 000</text>
+  <text x="718" y="596" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.75">10.xxxx/xxxx</text>
+
+  <text x="156" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">replication / null or mixed result</text>
+  <text x="456" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">matched comparator group</text>
+  <text x="606" y="636" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="400" font-size="11" opacity="0.65">n = 000</text>
+  <text x="718" y="636" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.65">10.xxxx/xxxx</text>
+
+  <!-- Side badge: conflict notes + verification links -->
+  <rect x="856" y="458" width="88" height="132" rx="10" ry="10" fill="#1e293b" stroke="#0ea5e9" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="900" y="486" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11">Conflict</text>
+  <text x="900" y="504" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11">notes</text>
+  <text x="900" y="530" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">+ verification</text>
+  <text x="900" y="548" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">links</text>
+  <text x="900" y="574" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">source trail</text>
+
+  <!-- Badge connector (attached) -->
+  <line x1="840" y1="524" x2="856" y2="524" stroke="#0ea5e9" stroke-width="2"/>
+  <polygon points="856,524 846,518 846,530" fill="#0ea5e9"/>
+
+  <!-- Footer note -->
+  <text x="480" y="628" text-anchor="middle" fill="#64748b" font-family="Manrope, sans-serif" font-weight="300" font-size="11">
+    funnel pressure = fewer claims, stronger citations, explicit uncertainty
+  </text>
+</svg>

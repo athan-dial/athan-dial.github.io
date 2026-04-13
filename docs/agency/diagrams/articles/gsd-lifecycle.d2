@@ -1,0 +1,220 @@
+direction: right
+
+title: {
+  label: GSD Project Lifecycle
+  near: top-center
+  style: {
+    font-size: 28
+    font-color: "#7dd3fc"
+    bold: true
+  }
+}
+
+# ── Phase nodes ──────────────────────────────────────────
+
+init: {
+  label: |md
+    **INIT**
+    /gsd:new-project
+  |
+  style: {
+    fill: "#1AA684"
+    stroke: "#0f6b52"
+    font-color: "#ffffff"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+discuss: {
+  label: |md
+    **DISCUSS**
+    /gsd:discuss-phase
+  |
+  style: {
+    fill: "#22a86e"
+    stroke: "#1a7a52"
+    font-color: "#ffffff"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+plan: {
+  label: |md
+    **PLAN**
+    /gsd:plan-phase
+  |
+  style: {
+    fill: "#3cb856"
+    stroke: "#2d8040"
+    font-color: "#ffffff"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+execute: {
+  label: |md
+    **EXECUTE**
+    /gsd:execute-phase
+  |
+  style: {
+    fill: "#7ab830"
+    stroke: "#5a8a20"
+    font-color: "#ffffff"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+gate: {
+  label: GATE
+  shape: diamond
+  style: {
+    fill: "#7dd3fc"
+    stroke: "#0ea5e9"
+    font-color: "#0A0E1A"
+    font-size: 13
+    bold: true
+  }
+}
+
+verify: {
+  label: |md
+    **VERIFY**
+    /gsd:verify-work
+  |
+  style: {
+    fill: "#c4b820"
+    stroke: "#9a9010"
+    font-color: "#ffffff"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+ship: {
+  label: |md
+    **SHIP**
+    /gsd:ship
+  |
+  style: {
+    fill: "#7dd3fc"
+    stroke: "#0ea5e9"
+    font-color: "#0A0E1A"
+    border-radius: 8
+    font-size: 15
+  }
+}
+
+# ── Flow arrows ──────────────────────────────────────────
+
+init -> discuss: {
+  style: {
+    stroke: "#22a86e"
+    stroke-width: 2
+  }
+}
+discuss -> plan: {
+  style: {
+    stroke: "#3cb856"
+    stroke-width: 2
+  }
+}
+plan -> execute: {
+  style: {
+    stroke: "#7ab830"
+    stroke-width: 2
+  }
+}
+execute -> gate: {
+  label: checkpoint
+  style: {
+    stroke: "#7dd3fc"
+    stroke-width: 2
+    font-color: "#7dd3fc"
+    font-size: 12
+  }
+}
+gate -> verify: {
+  style: {
+    stroke: "#c4b820"
+    stroke-width: 2
+  }
+}
+verify -> ship: {
+  style: {
+    stroke: "#7dd3fc"
+    stroke-width: 2
+  }
+}
+
+ship -> discuss: "Next phase" {
+  style: {
+    stroke: "#7dd3fc"
+    stroke-width: 1
+    opacity: 0.5
+    font-color: "#7dd3fc"
+    font-size: 13
+  }
+}
+
+# ── Autonomy spectrum ────────────────────────────────────
+
+spectrum: {
+  label: ""
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+
+  guided: {
+    label: |md
+      **GUIDED**
+      You discuss, review the plan,
+      watch execution, verify manually
+    |
+    style: {
+      fill: "#1e293b"
+      stroke: "#1AA684"
+      font-color: "#94a3b8"
+      border-radius: 8
+      font-size: 13
+    }
+  }
+
+  quick: {
+    label: |md
+      **QUICK**
+      Skip optional agents, atomic commits,
+      trust the pattern
+    |
+    style: {
+      fill: "#1e293b"
+      stroke: "#4ade80"
+      font-color: "#94a3b8"
+      border-radius: 8
+      font-size: 13
+    }
+  }
+
+  autonomous: {
+    label: |md
+      **AUTONOMOUS**
+      All phases end-to-end, verify catches
+      drift, review output after
+    |
+    style: {
+      fill: "#1e293b"
+      stroke: "#7dd3fc"
+      stroke-width: 2
+      font-color: "#94a3b8"
+      border-radius: 8
+      font-size: 13
+    }
+  }
+
+  guided -> quick: {style: {stroke: "#334155"; stroke-width: 1}}
+  quick -> autonomous: {style: {stroke: "#334155"; stroke-width: 1}}
+}

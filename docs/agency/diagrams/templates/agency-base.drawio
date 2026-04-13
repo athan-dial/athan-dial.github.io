@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" modified="2026-04-01T00:00:00.000Z" agent="the-agency" version="22.1.0" type="device">
+  <diagram id="agency-template" name="Agency">
+    <mxGraphModel dx="1100" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="meta_title" value="&lt;b&gt;Diagram title&lt;/b&gt;" style="text;html=1;fontFamily=Segoe UI;fontSize=16;fontStyle=1;align=left;verticalAlign=top;fontColor=#EEEEF4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="520" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="meta_sub" value="Scope: … | Audience: builders | The Agency" style="text;html=1;fontFamily=Segoe UI;fontSize=10;fontColor=#A0A0B0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="20" y="48" width="700" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="canvas_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0A0E1A;strokeColor=#1B134D;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="800" height="520" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="Legend" style="swimlane;startSize=24;fillColor=#111827;strokeColor=#585864;fontStyle=1;fontSize=12;fontFamily=Segoe UI;fontColor=#EEEEF4;" vertex="1" parent="1">
+          <mxGeometry x="620" y="400" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_note" value="Add color meanings here" style="text;html=1;fontFamily=Segoe UI;fontSize=10;align=left;fontColor=#A0A0B0;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="32" width="160" height="72" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

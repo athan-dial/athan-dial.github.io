@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460">
+  <defs>
+    <style type="text/css">
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="460" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="20" y="62" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Hooks that run themselves</text>
+  <text x="20" y="86" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="13" font-weight="300">Three hook moments that keep automation invisible and reliable.</text>
+
+  <!-- Comparison cards (row) -->
+  <!-- Card A -->
+  <g>
+    <rect x="20" y="112" width="293" height="170" rx="8" ry="8" fill="#1e293b" filter="url(#shadow)"/>
+    <rect x="20" y="112" width="293" height="6" rx="8" ry="8" fill="#1AA684"/>
+    <text x="35" y="158" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Session start hook</text>
+    <text x="35" y="180" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• print project brief</text>
+    <text x="35" y="202" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• export env hints</text>
+    <text x="35" y="224" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="300">Best for cold starts + context.</text>
+    <text x="35" y="246" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">runs once, stays quiet</text>
+  </g>
+
+  <!-- Card B -->
+  <g>
+    <rect x="333" y="112" width="293" height="170" rx="8" ry="8" fill="#1e293b" filter="url(#shadow)"/>
+    <rect x="333" y="112" width="293" height="6" rx="8" ry="8" fill="#3cb856"/>
+    <text x="348" y="158" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">After edit hook</text>
+    <text x="348" y="180" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• run formatter on touched paths</text>
+    <text x="348" y="202" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• run linter on touched paths</text>
+    <text x="348" y="224" fill="#7dd3fc" font-family="Manrope, sans-serif" font-size="11" font-weight="600">Warning: keep fast</text>
+    <text x="348" y="246" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">don't block flow</text>
+  </g>
+
+  <!-- Card C -->
+  <g>
+    <rect x="646" y="112" width="293" height="170" rx="8" ry="8" fill="#1e293b" filter="url(#shadow)"/>
+    <rect x="646" y="112" width="293" height="6" rx="8" ry="8" fill="#7ab830"/>
+    <text x="661" y="158" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Before risky tool hook</text>
+    <text x="661" y="180" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• tests</text>
+    <text x="661" y="202" fill="#ffffff" font-family="Manrope, sans-serif" font-size="12" font-weight="400">• scanners</text>
+    <text x="661" y="224" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="300">Before commits or commands.</text>
+    <text x="661" y="246" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">guardrails first</text>
+  </g>
+
+  <!-- Footer annotation (spans all cards) -->
+  <g>
+    <rect x="20" y="314" width="920" height="104" rx="8" ry="8" fill="#0f172a" filter="url(#shadow-sm)"/>
+    <rect x="20" y="314" width="920" height="4" rx="8" ry="8" fill="#7dd3fc"/>
+    <text x="35" y="362" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Log + test + scope narrowly</text>
+    <text x="35" y="384" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="300">Make hooks cheap, predictable, and limited to the files they touched.</text>
+  </g>
+</svg>

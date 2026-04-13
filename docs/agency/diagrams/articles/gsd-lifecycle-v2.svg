@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 820" width="960" height="820">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24" fill="#7dd3fc">GSD Project Lifecycle</text>
+  <text x="480" y="62" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="300" font-size="13" fill="#94a3b8">Each phase narrows ambiguity into shipped, verified code</text>
+
+  <!-- ═══ FUNNEL ═══ -->
+
+  <!-- Chaos zone -->
+  <rect x="80" y="88" width="800" height="44" rx="4" ry="4" fill="#111827" stroke="#334155" stroke-width="1" stroke-dasharray="4,3" opacity="0.7"/>
+  <text x="140" y="115" font-family="Manrope, sans-serif" font-weight="300" font-size="11" fill="#64748b">scattered files</text>
+  <text x="340" y="115" font-family="Manrope, sans-serif" font-weight="300" font-size="11" fill="#64748b">uncommitted ideas</text>
+  <text x="560" y="115" font-family="Manrope, sans-serif" font-weight="300" font-size="11" fill="#64748b">no structure</text>
+  <text x="740" y="115" font-family="Manrope, sans-serif" font-weight="300" font-size="11" fill="#64748b">useless git log</text>
+
+  <!-- Converging lines -->
+  <line x1="80" y1="132" x2="310" y2="780" stroke="#334155" stroke-width="1" opacity="0.15"/>
+  <line x1="880" y1="132" x2="650" y2="780" stroke="#334155" stroke-width="1" opacity="0.15"/>
+
+  <!-- INIT -->
+  <rect x="120" y="152" width="720" height="56" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="1" filter="url(#shadow)"/>
+  <text x="200" y="185" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#ffffff">INIT</text>
+  <text x="260" y="185" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#ffffff">/gsd:new-project</text>
+  <text x="620" y="185" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="400" font-size="11" fill="#ffffff" opacity="0.85">What are we building? Who is it for?</text>
+  <text x="850" y="185" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">PROJECT.md</text>
+
+  <!-- Arrow INIT → DISCUSS -->
+  <line x1="480" y1="212" x2="480" y2="248" stroke="#22a86e" stroke-width="2"/>
+  <polygon points="480,252 474,242 486,242" fill="#22a86e"/>
+
+  <!-- DISCUSS -->
+  <rect x="155" y="252" width="650" height="56" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="1" filter="url(#shadow)"/>
+  <text x="230" y="285" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#ffffff">DISCUSS</text>
+  <text x="325" y="285" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#ffffff">/gsd:discuss-phase</text>
+  <text x="600" y="285" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="400" font-size="11" fill="#ffffff" opacity="0.85">Surface assumptions before code</text>
+  <text x="815" y="285" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">CONTEXT</text>
+
+  <!-- Arrow DISCUSS → PLAN -->
+  <line x1="480" y1="312" x2="480" y2="348" stroke="#3cb856" stroke-width="2"/>
+  <polygon points="480,352 474,342 486,342" fill="#3cb856"/>
+
+  <!-- PLAN -->
+  <rect x="190" y="352" width="580" height="56" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="1" filter="url(#shadow)"/>
+  <text x="260" y="385" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#ffffff">PLAN</text>
+  <text x="320" y="385" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#ffffff">/gsd:plan-phase</text>
+  <text x="570" y="385" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="400" font-size="11" fill="#ffffff" opacity="0.85">Tasks, criteria, dependencies</text>
+  <text x="780" y="385" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">PLAN.md</text>
+
+  <!-- Arrow PLAN → EXECUTE -->
+  <line x1="480" y1="412" x2="480" y2="448" stroke="#7ab830" stroke-width="2"/>
+  <polygon points="480,452 474,442 486,442" fill="#7ab830"/>
+
+  <!-- EXECUTE -->
+  <rect x="225" y="452" width="510" height="56" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="1" filter="url(#shadow)"/>
+  <text x="295" y="485" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#ffffff">EXECUTE</text>
+  <text x="395" y="485" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#ffffff">/gsd:execute-phase</text>
+  <text x="600" y="485" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="400" font-size="11" fill="#ffffff" opacity="0.85">Atomic commits per task</text>
+  <text x="745" y="485" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">COMMITS</text>
+
+  <!-- Arrow EXECUTE → GATE -->
+  <line x1="480" y1="512" x2="480" y2="540" stroke="#7dd3fc" stroke-width="2"/>
+  <polygon points="480,544 474,534 486,534" fill="#7dd3fc"/>
+
+  <!-- GATE diamond -->
+  <polygon points="480,544 520,572 480,600 440,572" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="1" filter="url(#shadow)"/>
+  <text x="480" y="576" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="12" fill="#0A0E1A">GATE</text>
+
+  <!-- Arrow GATE → VERIFY -->
+  <line x1="480" y1="604" x2="480" y2="636" stroke="#c4b820" stroke-width="2"/>
+  <polygon points="480,640 474,630 486,630" fill="#c4b820"/>
+
+  <!-- VERIFY (yellow-toned bg → dark text) -->
+  <rect x="265" y="640" width="430" height="56" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="1" filter="url(#shadow)"/>
+  <text x="330" y="673" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#0A0E1A">VERIFY</text>
+  <text x="415" y="673" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#0A0E1A" opacity="0.7">/gsd:verify-work</text>
+  <text x="580" y="673" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="400" font-size="11" fill="#0A0E1A" opacity="0.65">Goal-backward check</text>
+  <text x="705" y="673" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">REPORT</text>
+
+  <!-- Arrow VERIFY → SHIP -->
+  <line x1="480" y1="700" x2="480" y2="732" stroke="#7dd3fc" stroke-width="2"/>
+  <polygon points="480,736 474,726 486,726" fill="#7dd3fc"/>
+
+  <!-- SHIP (accent bg → dark text) -->
+  <rect x="330" y="736" width="300" height="48" rx="10" ry="10" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="1" filter="url(#shadow)"/>
+  <text x="410" y="765" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#0A0E1A">SHIP</text>
+  <text x="468" y="765" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#0A0E1A" opacity="0.7">/gsd:ship</text>
+  <text x="705" y="765" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" fill="#64748b">PR + MERGE</text>
+
+  <!-- ═══ SIDE ANNOTATION ═══ -->
+  <text x="38" y="470" font-family="Manrope, sans-serif" font-weight="400" font-size="12" fill="#7dd3fc" opacity="0.55" transform="rotate(-90 38 470)">degrees of freedom</text>
+  <path d="M 48,152 L 56,152 L 56,784 L 48,784" fill="none" stroke="#7dd3fc" stroke-width="1" opacity="0.25"/>
+  <line x1="48" y1="152" x2="64" y2="152" stroke="#7dd3fc" stroke-width="1" opacity="0.25"/>
+  <line x1="48" y1="784" x2="64" y2="784" stroke="#7dd3fc" stroke-width="1" opacity="0.25"/>
+</svg>

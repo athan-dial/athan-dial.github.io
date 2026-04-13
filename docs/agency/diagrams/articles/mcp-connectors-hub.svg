@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 650" width="960" height="650">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="600" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="52" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">MCP servers connect everything</text>
+  <text x="40" y="78" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">One config line per connector</text>
+
+  <!-- Connectors (color-matched, stroke-width 2) -->
+  <line x1="400" y1="300" x2="400" y2="80" stroke="#1AA684" stroke-width="2" opacity="0.95"/>
+  <line x1="400" y1="300" x2="609" y2="232" stroke="#22a86e" stroke-width="2" opacity="0.95"/>
+  <line x1="400" y1="300" x2="529" y2="480" stroke="#3cb856" stroke-width="2" opacity="0.95"/>
+  <line x1="400" y1="300" x2="271" y2="480" stroke="#7ab830" stroke-width="2" opacity="0.95"/>
+  <line x1="400" y1="300" x2="191" y2="232" stroke="#c4b820" stroke-width="2" opacity="0.95"/>
+
+  <!-- Spoke nodes -->
+  <!-- Spoke 1: Slack MCP -->
+  <rect x="290" y="28" width="220" height="104" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2" filter="url(#shadow)"/>
+  <text x="305" y="58" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">Slack MCP</text>
+  <text x="305" y="80" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.95" dominant-baseline="hanging">chat search/post</text>
+
+  <!-- Spoke 2: Confluence MCP -->
+  <rect x="499" y="180" width="220" height="104" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2" filter="url(#shadow)"/>
+  <text x="514" y="210" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">Confluence MCP</text>
+  <text x="514" y="232" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.95" dominant-baseline="hanging">docs search</text>
+
+  <!-- Spoke 3: Jira MCP -->
+  <rect x="419" y="428" width="220" height="104" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2" filter="url(#shadow)"/>
+  <text x="434" y="458" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">Jira MCP</text>
+  <text x="434" y="480" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.95" dominant-baseline="hanging">issues</text>
+
+  <!-- Spoke 4: Outlook MCP -->
+  <rect x="161" y="428" width="220" height="104" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow)"/>
+  <text x="176" y="458" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">Outlook MCP</text>
+  <text x="176" y="480" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.95" dominant-baseline="hanging">mail/meetings</text>
+
+  <!-- Spoke 5: NotebookLM MCP -->
+  <rect x="81" y="180" width="220" height="104" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="2" filter="url(#shadow)"/>
+  <text x="96" y="210" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">NotebookLM MCP</text>
+  <text x="96" y="232" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.85" dominant-baseline="hanging">notes</text>
+
+  <!-- Central hub -->
+  <rect x="270" y="248" width="260" height="104" rx="10" ry="10" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="285" y="278" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" dominant-baseline="hanging">Claude session</text>
+  <text x="285" y="300" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" opacity="0.80" dominant-baseline="hanging">ops console</text>
+</svg>

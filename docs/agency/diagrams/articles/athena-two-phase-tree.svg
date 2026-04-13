@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 740" width="960" height="740">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="740" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="50" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Query your data warehouse with Athena</text>
+
+  <!-- Root node -->
+  <rect x="220" y="80" width="520" height="70" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="280" y="122" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Stakeholder question (intent first)</text>
+
+  <!-- Arrow root → phase1 -->
+  <line x1="480" y1="154" x2="480" y2="188" stroke="#22a86e" stroke-width="2"/>
+  <polygon points="480,194 474,184 486,184" fill="#22a86e"/>
+
+  <!-- Phase 1 -->
+  <rect x="200" y="198" width="520" height="90" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="230" y="238" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Phase 1: table candidates from catalog index</text>
+  <text x="230" y="260" fill="#ffffff" opacity="0.9" font-family="Manrope, sans-serif" font-size="11" font-weight="400">pick right grain</text>
+
+  <!-- Caution tag -->
+  <rect x="740" y="198" width="200" height="90" rx="10" ry="10" fill="#1e293b" stroke="#7dd3fc" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="760" y="238" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600">Always LIMIT +</text>
+  <text x="760" y="260" fill="#ffffff" opacity="0.85" font-family="Manrope, sans-serif" font-size="11" font-weight="400">filter heavy tables</text>
+
+  <!-- Arrow phase1 → phase2 -->
+  <line x1="480" y1="292" x2="480" y2="326" stroke="#3cb856" stroke-width="2"/>
+  <polygon points="480,332 474,322 486,322" fill="#3cb856"/>
+
+  <!-- Phase 2 -->
+  <rect x="200" y="336" width="520" height="90" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="230" y="376" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Phase 2: on-demand schema fetch</text>
+  <rect x="540" y="362" width="160" height="28" rx="8" ry="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="555" y="381" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">lazy SHOW COLUMNS</text>
+
+  <!-- Branch arrows: phase2 → 3 leaves -->
+  <line x1="480" y1="430" x2="480" y2="458" stroke="#5a8a20" stroke-width="2"/>
+  <line x1="155" y1="458" x2="805" y2="458" stroke="#5a8a20" stroke-width="1.5" opacity="0.5"/>
+
+  <line x1="155" y1="458" x2="155" y2="480" stroke="#5a8a20" stroke-width="2"/>
+  <polygon points="155,486 149,476 161,476" fill="#5a8a20"/>
+
+  <line x1="480" y1="458" x2="480" y2="480" stroke="#5a8a20" stroke-width="2"/>
+  <polygon points="480,486 474,476 486,476" fill="#5a8a20"/>
+
+  <line x1="805" y1="458" x2="805" y2="480" stroke="#5a8a20" stroke-width="2"/>
+  <polygon points="805,486 799,476 811,476" fill="#5a8a20"/>
+
+  <!-- 3 Branch leaves -->
+  <rect x="50" y="490" width="210" height="80" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="75" y="525" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Script runner</text>
+  <text x="75" y="547" fill="#ffffff" opacity="0.9" font-family="Manrope, sans-serif" font-size="11" font-weight="400">run_query.py → CSV</text>
+
+  <rect x="375" y="490" width="210" height="80" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="400" y="525" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Inline helper</text>
+  <text x="400" y="547" fill="#ffffff" opacity="0.9" font-family="Manrope, sans-serif" font-size="11" font-weight="400">import + call</text>
+
+  <rect x="700" y="490" width="210" height="80" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="725" y="525" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Direct boto3</text>
+  <text x="725" y="547" fill="#ffffff" opacity="0.9" font-family="Manrope, sans-serif" font-size="11" font-weight="400">fallback</text>
+
+  <!-- Arrows: all 3 leaves → terminal -->
+  <line x1="155" y1="574" x2="155" y2="612" stroke="#0ea5e9" stroke-width="1.5" opacity="0.5"/>
+  <line x1="480" y1="574" x2="480" y2="612" stroke="#0ea5e9" stroke-width="1.5" opacity="0.5"/>
+  <line x1="805" y1="574" x2="805" y2="612" stroke="#0ea5e9" stroke-width="1.5" opacity="0.5"/>
+  <line x1="155" y1="612" x2="805" y2="612" stroke="#0ea5e9" stroke-width="1.5" opacity="0.5"/>
+  <line x1="480" y1="612" x2="480" y2="640" stroke="#7dd3fc" stroke-width="2"/>
+  <polygon points="480,646 474,636 486,636" fill="#7dd3fc"/>
+
+  <!-- Terminal: Log SQL -->
+  <rect x="310" y="650" width="340" height="68" rx="10" ry="10" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="370" y="682" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Log SQL + results</text>
+  <text x="370" y="704" fill="#0A0E1A" opacity="0.7" font-family="Manrope, sans-serif" font-size="11" font-weight="400">scratch/notes</text>
+</svg>

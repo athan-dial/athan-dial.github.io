@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="480" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="56" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Build your first Claude Code skill</text>
+
+  <!-- Nodes -->
+  <!-- Rect height = 30 + (lines x 22) + 30; here lines=4 => 30 + 88 + 30 = 148 -->
+  <!-- All text stays within 15px padding -->
+  <g>
+    <!-- Step 1 (top) -->
+    <rect x="20" y="110" width="168" height="148" rx="10" ry="10" fill="#1e293b" stroke="#1AA684" stroke-width="2" filter="url(#shadow)"/>
+    <text x="35" y="142" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">Step 1</text>
+    <text x="35" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">Spot friction</text>
+    <text x="35" y="192" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">Same workaround</text>
+    <text x="35" y="214" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">sent 3×</text>
+
+    <!-- Step 2 (bottom) -->
+    <rect x="208" y="300" width="168" height="148" rx="10" ry="10" fill="#1e293b" stroke="#22a86e" stroke-width="2" filter="url(#shadow)"/>
+    <text x="223" y="332" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">Step 2</text>
+    <text x="223" y="358" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">Scaffold</text>
+    <text x="223" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">Skill dir +</text>
+    <text x="223" y="404" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">SKILL.md</text>
+
+    <!-- Step 3 (top) -->
+    <rect x="396" y="110" width="168" height="148" rx="10" ry="10" fill="#1e293b" stroke="#3cb856" stroke-width="2" filter="url(#shadow)"/>
+    <text x="411" y="142" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">Step 3</text>
+    <text x="411" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">Document</text>
+    <text x="411" y="192" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">Trigger +</text>
+    <text x="411" y="214" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">verification</text>
+
+    <!-- Step 4 (bottom) -->
+    <rect x="584" y="300" width="168" height="148" rx="10" ry="10" fill="#1e293b" stroke="#7ab830" stroke-width="2" filter="url(#shadow)"/>
+    <text x="599" y="332" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">Step 4</text>
+    <text x="599" y="358" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">Test it</text>
+    <text x="599" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">Fresh session</text>
+    <text x="599" y="404" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">fix gaps</text>
+
+    <!-- Step 5 (top) -->
+    <rect x="772" y="110" width="168" height="148" rx="10" ry="10" fill="#1e293b" stroke="#c4b820" stroke-width="2" filter="url(#shadow)"/>
+    <text x="787" y="142" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500">Step 5</text>
+    <text x="787" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">Maintain</text>
+    <text x="787" y="192" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">Iterate as</text>
+    <text x="787" y="214" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="11" font-weight="400">tools change</text>
+  </g>
+
+  <!-- Arrows (elbows, destination-colored; line + polygon only) -->
+  <g>
+    <!-- 1 -> 2 (dest: #22a86e) -->
+    <line x1="196" y1="184" x2="160" y2="184" stroke="#22a86e" stroke-width="2"/>
+    <line x1="160" y1="184" x2="160" y2="374" stroke="#22a86e" stroke-width="2"/>
+    <line x1="160" y1="374" x2="190" y2="374" stroke="#22a86e" stroke-width="2"/>
+    <polygon points="200,374 190,368 190,380" fill="#22a86e"/>
+
+    <!-- 2 -> 3 (dest: #3cb856) -->
+    <line x1="384" y1="374" x2="340" y2="374" stroke="#3cb856" stroke-width="2"/>
+    <line x1="340" y1="374" x2="340" y2="184" stroke="#3cb856" stroke-width="2"/>
+    <line x1="340" y1="184" x2="378" y2="184" stroke="#3cb856" stroke-width="2"/>
+    <polygon points="388,184 378,178 378,190" fill="#3cb856"/>
+
+    <!-- 3 -> 4 (dest: #7ab830) -->
+    <line x1="572" y1="184" x2="540" y2="184" stroke="#7ab830" stroke-width="2"/>
+    <line x1="540" y1="184" x2="540" y2="374" stroke="#7ab830" stroke-width="2"/>
+    <line x1="540" y1="374" x2="566" y2="374" stroke="#7ab830" stroke-width="2"/>
+    <polygon points="576,374 566,368 566,380" fill="#7ab830"/>
+
+    <!-- 4 -> 5 (dest: #c4b820) -->
+    <line x1="760" y1="374" x2="720" y2="374" stroke="#c4b820" stroke-width="2"/>
+    <line x1="720" y1="374" x2="720" y2="184" stroke="#c4b820" stroke-width="2"/>
+    <line x1="720" y1="184" x2="754" y2="184" stroke="#c4b820" stroke-width="2"/>
+    <polygon points="764,184 754,178 754,190" fill="#c4b820"/>
+  </g>
+</svg>

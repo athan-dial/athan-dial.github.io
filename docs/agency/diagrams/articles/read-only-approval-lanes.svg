@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480">
+  <defs>
+    <style>
+    </style>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="480" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="54" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">Read-only automation is a feature</text>
+
+  <!-- Lane panels -->
+  <g>
+    <!-- Upper lane -->
+    <rect x="40" y="96" width="880" height="160" rx="12" ry="12" fill="#1e293b" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="40" y="96" width="10" height="160" rx="12" ry="12" fill="#1AA684"/>
+    <text x="60" y="122" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">Automation (read-only)</text>
+
+    <!-- Lower lane -->
+    <rect x="40" y="288" width="880" height="160" rx="12" ry="12" fill="#1e293b" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="40" y="288" width="10" height="160" rx="12" ry="12" fill="#3cb856"/>
+    <text x="60" y="314" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11">Human dispatch</text>
+  </g>
+
+  <!-- Upper lane nodes -->
+  <g>
+    <rect x="110" y="140" width="220" height="72" rx="10" ry="10" fill="#0f172a" stroke="#1AA684" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="120" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">observe thread</text>
+    <text x="120" y="190" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">capture context only</text>
+
+    <rect x="370" y="140" width="220" height="72" rx="10" ry="10" fill="#0f172a" stroke="#1AA684" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="380" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">prepare draft</text>
+    <text x="380" y="190" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">reply / command</text>
+
+    <rect x="630" y="140" width="220" height="72" rx="10" ry="10" fill="#0f172a" stroke="#1AA684" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="640" y="168" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">flag intent</text>
+    <text x="640" y="190" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">ask for approval</text>
+  </g>
+
+  <!-- Lower lane nodes -->
+  <g>
+    <rect x="225" y="332" width="150" height="72" rx="10" ry="10" fill="#0f172a" stroke="#3cb856" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="235" y="360" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">review</text>
+    <text x="235" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">draft</text>
+
+    <rect x="405" y="332" width="150" height="72" rx="10" ry="10" fill="#0f172a" stroke="#3cb856" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="415" y="360" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">check</text>
+    <text x="415" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">live state</text>
+
+    <rect x="585" y="332" width="150" height="72" rx="10" ry="10" fill="#0f172a" stroke="#3cb856" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="595" y="360" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">send</text>
+    <text x="595" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">or edit</text>
+
+    <rect x="765" y="332" width="150" height="72" rx="10" ry="10" fill="#0f172a" stroke="#3cb856" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="775" y="360" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15">feed back</text>
+    <text x="775" y="382" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">corrections</text>
+  </g>
+
+  <!-- Gate callouts -->
+  <g>
+    <rect x="120" y="244" width="250" height="52" rx="10" ry="10" fill="#0f172a" stroke="#334155" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="130" y="275" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">contains tail risk</text>
+
+    <rect x="620" y="244" width="260" height="52" rx="10" ry="10" fill="#0f172a" stroke="#334155" stroke-width="2" filter="url(#shadow-sm)"/>
+    <text x="630" y="275" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">preserves accountability</text>
+  </g>
+
+  <!-- Manual approval gate -->
+  <g>
+    <polygon points="480,232 530,272 480,312 430,272" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="3" filter="url(#shadow)"/>
+    <text x="480" y="270" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13" text-anchor="middle">
+      <tspan x="480" dy="0">Manual</tspan>
+      <tspan x="480" dy="16">approval</tspan>
+    </text>
+  </g>
+
+  <!-- Arrows -->
+  <g>
+    <!-- Upper lane: node 1 -> node 2 -->
+    <line x1="340" y1="176" x2="362" y2="176" stroke="#1AA684" stroke-width="2"/>
+    <polygon points="370,176 360,170 360,182" fill="#1AA684"/>
+
+    <!-- Upper lane: node 2 -> node 3 -->
+    <line x1="600" y1="176" x2="622" y2="176" stroke="#1AA684" stroke-width="2"/>
+    <polygon points="630,176 620,170 620,182" fill="#1AA684"/>
+
+    <!-- Upper lane -> gate -->
+    <line x1="480" y1="220" x2="480" y2="228" stroke="#7dd3fc" stroke-width="2"/>
+    <polygon points="480,232 474,222 486,222" fill="#7dd3fc"/>
+
+    <!-- Gate -> lower lane -->
+    <line x1="480" y1="316" x2="480" y2="328" stroke="#7dd3fc" stroke-width="2"/>
+    <polygon points="480,332 474,322 486,322" fill="#7dd3fc"/>
+
+    <!-- Lower lane: node 1 -> node 2 -->
+    <line x1="385" y1="368" x2="397" y2="368" stroke="#3cb856" stroke-width="2"/>
+    <polygon points="405,368 395,362 395,374" fill="#3cb856"/>
+
+    <!-- Lower lane: node 2 -> node 3 -->
+    <line x1="565" y1="368" x2="577" y2="368" stroke="#3cb856" stroke-width="2"/>
+    <polygon points="585,368 575,362 575,374" fill="#3cb856"/>
+
+    <!-- Lower lane: node 3 -> node 4 -->
+    <line x1="745" y1="368" x2="757" y2="368" stroke="#3cb856" stroke-width="2"/>
+    <polygon points="765,368 755,362 755,374" fill="#3cb856"/>
+  </g>
+
+  <!-- Footer note -->
+  <text x="40" y="456" fill="#64748b" font-family="Manrope, sans-serif" font-weight="300" font-size="11">Drafts can be fast; shipping stays deliberate.</text>
+</svg>
