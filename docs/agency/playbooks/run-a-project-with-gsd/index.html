@@ -1,21 +1,573 @@
-<!doctype html><html lang=en dir=ltr class=scroll-smooth data-default-appearance=dark data-auto-appearance=false><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#020617"><title>Run a full project with GSD &#183; The Agency</title><meta name=title content="Run a full project with GSD &#183; The Agency"><script type=text/javascript src=../../js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="></script><link type=text/css rel=stylesheet href=../../css/main.bundle.min.905eeaa85507c3889eb1188fbbcbc3e787f969a9060b2b9b242ea3bdaff60fa1.css integrity="sha256-kF7qqFUHw4iesRiPu8vD54f5aakGCyubJC6jva/2D6E="><script defer type=text/javascript id=script-bundle src=../../js/main.bundle.min.167efd96c29259046e711c52c0db66536f497aad73a774cd6f28fc408f2d2688.js integrity="sha256-Fn79lsKSWQRucRxSwNtmU29Jeq1zp3TNbyj8QI8tJog=" data-copy=Copy data-copied=Copied></script><link rel=canonical href=https://athan-dial.github.io/agency/playbooks/run-a-project-with-gsd/><link rel=icon type=image/svg+xml href=../../favicon.svg><link rel=icon type=image/x-icon href=../../favicon.ico><link rel=icon type=image/png sizes=32x32 href=../../favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=../../favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=../../apple-touch-icon.png><meta property="og:url" content="https://athan-dial.github.io/agency/playbooks/run-a-project-with-gsd/"><meta property="og:site_name" content="The Agency"><meta property="og:title" content="Run a full project with GSD"><meta property="og:description" content="Helps you run a multi-phase project in Claude Code with GSD: /gsd:new-project through ship, atomic commits, verification gates, and .planning/ you can resume after a reset."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="playbooks"><meta property="article:published_time" content="2026-04-06T00:00:00+00:00"><meta property="article:modified_time" content="2026-04-06T00:00:00+00:00"><meta property="article:tag" content="Claude-Code"><meta property="article:tag" content="Orchestration"><meta property="article:tag" content="Builder"><meta name=twitter:card content="summary"><meta name=twitter:title content="Run a full project with GSD"><meta name=twitter:description content="Helps you run a multi-phase project in Claude Code with GSD: /gsd:new-project through ship, atomic commits, verification gates, and .planning/ you can resume after a reset."><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","articleSection":"Playbooks","name":"Run a full project with GSD","headline":"Run a full project with GSD","abstract":"Helps you run a multi-phase project in Claude Code with GSD: \u003ccode\u003e\/gsd:new-project\u003c\/code\u003e through ship, atomic commits, verification gates, and \u003ccode\u003e.planning\/\u003c\/code\u003e you can resume after a reset.","inLanguage":"en","url":"https:\/\/athan-dial.github.io\/agency\/playbooks\/run-a-project-with-gsd\/","author":{"@type":"Person","name":"Athan Dial"},"copyrightYear":"2026","dateCreated":"2026-04-06T00:00:00\u002b00:00","datePublished":"2026-04-06T00:00:00\u002b00:00","dateModified":"2026-04-06T00:00:00\u002b00:00","keywords":["claude-code","orchestration","builder"],"mainEntityOfPage":"true","wordCount":"685"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://athan-dial.github.io/agency/","name":"The Agency","position":1},{"@type":"ListItem","item":"https://athan-dial.github.io/agency/playbooks/","name":"Playbooks","position":2},{"@type":"ListItem","name":"Run a Full Project With Gsd","position":3}]}</script><meta name=author content="Athan Dial"><meta name=description content="Helps you run a multi-phase project in Claude Code with GSD: `/gsd:new-project` through ship, atomic commits, verification gates, and `.planning/` you can resume after a reset."><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@200..800&display=swap"></head><body class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"><div id=the-top class="absolute flex self-center"><a class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600" href=#main-content><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span>Skip to main content</a></div><header class="masthead print:hidden"><nav class=masthead__nav><div class=masthead__identity><a href=../../../index.html class=masthead__back>Portfolio</a>
-<span class=masthead__sep>/</span>
-<a href=../../ class=masthead__wordmark>The Agency</a></div><ul class=masthead__links><li><a href=../../dispatches class=masthead__link>Dispatches</a></li><li><a href=../../playbooks class="masthead__link masthead__link--active">Playbooks</a></li><li><a href=../../about class=masthead__link>About</a></li><li><button type=button id=search-button-masthead class=masthead__search-btn title="Search (/)" aria-label="Search (/)">
-<span class=masthead__search-btn__icon aria-hidden=true><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span></span><span class=masthead__search-btn__label>Search</span></button></li></ul></nav></header><div class="relative flex grow flex-col"><main id=main-content class=grow><main><article><header class=max-w-prose><h1 class="mb-8 mt-0">Run a full project with GSD</h1><div class="article-meta-row mb-10 print:hidden"><span class="content-type-badge content-type-badge--playbook badge--standalone">Playbook</span><div class="flex flex-row flex-wrap items-center"><time datetime="2026-04-06 00:00:00 +0000 UTC">6 April 2026</time><span class="px-2 text-primary-500">&#183;</span><span title="Reading time">4 mins</span></div></div><figure class="mb-6 not-prose print:hidden"><img src=../../diagrams/articles/gsd-lifecycle.png alt="GSD project lifecycle: Init, Discuss, Plan, Execute, Gate checkpoint, Verify, Ship — with autonomy spectrum from Guided to Autonomous." class="w-full max-w-4xl rounded-md border border-neutral-200 dark:border-neutral-700" loading=lazy decoding=async></figure></header><section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row"><div class="min-h-0 min-w-0 max-w-prose grow"><p>First big Claude Code project without scaffolding: working demo, week of cleanup—wandering files, deferred edge cases, git log that didn&rsquo;t tell the story. I wanted guardrails that sped me up without ceremony for its own sake.</p><p>GSD (Get Stuff Done) is the plugin that wraps requirements → roadmap → per-phase discuss, plan, execute, verify, ship. I start at <code>/gsd:new-project</code>; the numbered phases and <code>.planning/</code> markdown are the contract with the agent. Here&rsquo;s the loop.</p><h2 id=when-i-reach-for-this class="relative group">When I reach for this <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#when-i-reach-for-this aria-label=Anchor>#</a></span></h2><p>Any project that will take more than a single session or involves more than one phase of work. If it fits in one prompt, GSD is overhead. If it has distinct milestones, dependencies between features, or needs to survive a context reset — GSD pays for itself.</p><h2 id=what-i-do class="relative group">What I do <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#what-i-do aria-label=Anchor>#</a></span></h2><h3 id=1-initialize-the-project class="relative group">1. Initialize the project <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#1-initialize-the-project aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:new-project
-</code></pre><p>Claude asks structured questions about what I&rsquo;m building, who it&rsquo;s for, and what success looks like. The answers become <code>PROJECT.md</code> — a single-source-of-truth document that every subsequent phase references.</p><p>This step also produces a <strong>roadmap</strong>: numbered phases, each with a goal, requirements, and success criteria. The roadmap is the contract between me and the agent.</p><h3 id=2-discuss-the-first-phase class="relative group">2. Discuss the first phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#2-discuss-the-first-phase aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:discuss-phase
-</code></pre><p>No code until this finishes. Claude asks scoped questions; typical themes:</p><ul><li>Data: new database vs existing schema vs external API only</li><li>API shape: REST vs match legacy patterns in repo</li><li>Deploy: feature flags, migrations, backward compatibility</li></ul><p>I answer in full sentences—shortcuts here become wrong assumptions in <code>PLAN.md</code>.</p><p><code>--auto</code> skips the interview when the phase is boring and I trust the defaults.</p><h3 id=3-plan-the-phase class="relative group">3. Plan the phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#3-plan-the-phase aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:plan-phase
-</code></pre><p>Output is <code>PLAN.md</code>:</p><ul><li>Tasks with acceptance criteria</li><li>Dependency order</li><li>Files touched</li><li>How we’ll verify</li></ul><p>A plan-review pass runs before I see it. If the plan can’t hit the phase goal, it revises before I spend time on an off-target plan.</p><h3 id=4-execute class="relative group">4. Execute <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#4-execute aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:execute-phase
-</code></pre><p>One task → one atomic commit → descriptive message. Drift from plan gets flagged instead of silently patched.</p><p>I either watch live or review the commit stream afterward. Revert granularity stays at the task level.</p><h3 id=5-verify class="relative group">5. Verify <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#5-verify aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:verify-work
-</code></pre><p>Verification asks whether the <strong>artifact</strong> matches what the phase promised; green checkboxes without the promised artifact still count as a gap.</p><p>Failure output is a concrete gap list. I fix, then rerun verify.</p><h3 id=6-ship class="relative group">6. Ship <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#6-ship aria-label=Anchor>#</a></span></h3><pre tabindex=0><code>/gsd:ship
-</code></pre><p>Opens PR, runs review agent, drafts description from plan + verification.</p><h3 id=7-repeat-for-the-next-phase class="relative group">7. Repeat for the next phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#7-repeat-for-the-next-phase aria-label=Anchor>#</a></span></h3><p>Advance the roadmap only on verified output. Next phase inherits a known-good base.</p><h2 id=the-autonomous-mode class="relative group">The autonomous mode <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#the-autonomous-mode aria-label=Anchor>#</a></span></h2><p>For mechanical work I batch the loop:</p><pre tabindex=0><code>/gsd:autonomous
-</code></pre><p>Discuss → plan → execute → verify runs per phase without pausing for me. I still read verification summaries and skim commits when stakes aren’t trivial—autonomy here means the loop runs unattended, not that I skip the read-back.</p><p><code>/gsd:autonomous-multi-agent</code> adds Codex or Cursor workers under the same orchestration when tasks parallelize cleanly.</p><h2 id=what-goes-wrong class="relative group">What goes wrong <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#what-goes-wrong aria-label=Anchor>#</a></span></h2><ul><li><strong>Skipping discuss</strong> — the agent makes assumptions about the approach. Those assumptions compound across tasks. The thirty seconds of answering questions saves hours of rework</li><li><strong>Plans that are too coarse</strong> — a task like &ldquo;implement the API&rdquo; hides ten decisions. Break it down until each task is one commit&rsquo;s worth of work</li><li><strong>Ignoring verification failures</strong> — marking a phase complete when verification flags gaps means the next phase builds on an unstable foundation. Fix the gaps first</li><li><strong>Autonomous without checkpoints</strong> — <code>/gsd:autonomous</code> can burn phases if you never read verification output or skim the commit stream. I still spot-check mid-run when the domain is new</li><li><strong>Stale or corrupted <code>.planning/</code></strong> — merges, manual edits, or a crashed session can leave roadmap files out of sync with the repo. If <code>/gsd:resume-work</code> feels wrong, I diff <code>.planning/</code> against git and realign before continuing</li><li><strong>PR noise</strong> — atomic commits are the point, but twenty tiny commits on one feature can swamp reviewers. I batch or squash when the story is coherent enough to read as one narrative</li></ul><h2 id=notes class="relative group">Notes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#notes aria-label=Anchor>#</a></span></h2><p>GSD stores all its state in <code>.planning/</code> at the project root. The roadmap, phase plans, and verification reports are all readable markdown. If a session crashes or context resets, <code>/gsd:resume-work</code> picks up from the last checkpoint.</p></div></section><footer class="max-w-prose pt-8 print:hidden"><div class=flex><div class=place-self-center><div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">Author</div><div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">Athan Dial</div><div class="text-2xl sm:text-lg"></div></div></div><div class=pt-8><hr class="border-dotted border-neutral-300 dark:border-neutral-600"><div class="flex justify-between pt-3"><span><a class="group flex" href=https://athan-dial.github.io/agency/playbooks/literature-review-from-your-desk/><span class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"><span class="ltr:inline rtl:hidden">&larr;</span><span class="ltr:hidden rtl:inline">&rarr;</span></span>
-<span class="flex flex-col"><span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Run a literature review from your desk</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400"><time datetime="2026-04-06 00:00:00 +0000 UTC">6 April 2026</time>
-</span></span></a></span><span><a class="group flex text-right" href=https://athan-dial.github.io/agency/playbooks/parallel-research-with-subagents/><span class="flex flex-col"><span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Parallel research with subagents</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400"><time datetime="2026-04-06 00:00:00 +0000 UTC">6 April 2026</time>
-</span></span><span class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"><span class="ltr:inline rtl:hidden">&rarr;</span><span class="ltr:hidden rtl:inline">&larr;</span></span></a></span></div></div></footer></article></main></main><div class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12" id=to-top hidden=true><a href=#the-top class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" aria-label="Scroll to top" title="Scroll to top">&uarr;</a></div><footer class="py-10 print:hidden"><div class="flex items-center justify-between"><div><p class="text-sm text-neutral-500 dark:text-neutral-400">© 2026 Athan Dial</p></div><div class="flex flex-row items-center"></div></div><div class=site-footer><nav class=site-footer__nav><a href=/agency/dispatches/>Dispatches</a>
-<a href=/agency/playbooks/>Playbooks</a>
-<a href=/agency/tags/>Tags</a></nav><div class=site-footer__inner><span class=site-footer__brand>The Agency</span>
-<span class=site-footer__copyright>&copy; 2026 Athan Dial &mdash; Personal publication — views and writeups are my own.</span></div></div></footer><div id=search-wrapper class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url=https://athan-dial.github.io/agency/><div id=search-modal class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"><header class="relative z-10 flex flex-none items-center justify-between px-2"><form class="flex min-w-0 flex-auto items-center"><div class="flex h-8 w-8 items-center justify-center text-neutral-400"><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg></span></div><input type=search id=search-query class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent" placeholder=Search tabindex=0></form><button id=close-search-button class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" title="Close (Esc)">
-<span class="icon relative inline-block px-1 align-text-bottom"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></button></header><section class="flex-auto overflow-auto px-2"><ul id=search-results></ul></section></div></div></div></body></html>
+
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="false"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1315&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020617" />
+  
+  <title>Run a full project with GSD &middot; The Agency</title>
+    <meta name="title" content="Run a full project with GSD &middot; The Agency" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="../../js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="../../css/main.bundle.min.905eeaa85507c3889eb1188fbbcbc3e787f969a9060b2b9b242ea3bdaff60fa1.css"
+    integrity="sha256-kF7qqFUHw4iesRiPu8vD54f5aakGCyubJC6jva/2D6E="
+  />
+  
+    
+    
+    
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="../../js/main.bundle.min.167efd96c29259046e711c52c0db66536f497aad73a774cd6f28fc408f2d2688.js"
+      integrity="sha256-Fn79lsKSWQRucRxSwNtmU29Jeq1zp3TNbyj8QI8tJog="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  
+  
+  
+  
+    <link rel="canonical" href="//localhost:1315/playbooks/run-a-project-with-gsd/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="//localhost:1315/playbooks/run-a-project-with-gsd/">
+  <meta property="og:site_name" content="The Agency">
+  <meta property="og:title" content="Run a full project with GSD">
+  <meta property="og:description" content="Helps you run a multi-phase project in Claude Code with GSD: /gsd:new-project through ship, atomic commits, verification gates, and .planning/ you can resume after a reset.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="playbooks">
+    <meta property="article:published_time" content="2026-04-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-06T00:00:00+00:00">
+    <meta property="article:tag" content="Claude-Code">
+    <meta property="article:tag" content="Orchestration">
+    <meta property="article:tag" content="Builder">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Run a full project with GSD">
+  <meta name="twitter:description" content="Helps you run a multi-phase project in Claude Code with GSD: /gsd:new-project through ship, atomic commits, verification gates, and .planning/ you can resume after a reset.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Playbooks",
+    "name": "Run a full project with GSD",
+    "headline": "Run a full project with GSD",
+    
+    "abstract": "Helps you run a multi-phase project in Claude Code with GSD: \u003ccode\u003e\/gsd:new-project\u003c\/code\u003e through ship, atomic commits, verification gates, and \u003ccode\u003e.planning\/\u003c\/code\u003e you can resume after a reset.",
+    "inLanguage": "en",
+    "url" : "\/\/localhost:1315\/playbooks\/run-a-project-with-gsd\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Athan Dial"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-04-06T00:00:00\u002b00:00",
+    "datePublished": "2026-04-06T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-04-06T00:00:00\u002b00:00",
+    
+    "keywords": ["claude-code","orchestration","builder"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "685"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "//localhost:1315/",
+       "name": "The Agency",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "//localhost:1315/playbooks/",
+       "name": "Playbooks",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Run a Full Project With Gsd",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Athan Dial" />
+  
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    
+<meta name="description" content="Helps you run a multi-phase project in Claude Code with GSD: `/gsd:new-project` through ship, atomic commits, verification gates, and `.planning/` you can resume after a reset.">
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@200..800&display=swap">
+
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      
+
+
+<header class="masthead print:hidden">
+  <nav class="masthead__nav">
+
+    
+    <div class="masthead__identity">
+      <a href="../../../index.html" class="masthead__back">Portfolio</a>
+      <span class="masthead__sep">/</span>
+      <a href="../../" class="masthead__wordmark">The Agency</a>
+    </div>
+
+    
+    <ul class="masthead__links">
+          <li>
+            <a href="../../dispatches"
+               class="masthead__link">
+              Dispatches
+            </a>
+          </li>
+          <li>
+            <a href="../../playbooks"
+               class="masthead__link masthead__link--active">
+              Playbooks
+            </a>
+          </li>
+          <li>
+            <a href="../../about"
+               class="masthead__link">
+              About
+            </a>
+          </li>
+      <li>
+        <button
+          type="button"
+          id="search-button-masthead"
+          class="masthead__search-btn"
+          title="Search (/)"
+          aria-label="Search (/)"
+        >
+          <span class="masthead__search-btn__icon" aria-hidden="true"><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span></span>
+          <span class="masthead__search-btn__label">Search</span>
+        </button>
+      </li>
+    </ul>
+
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <main>
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mb-8 mt-0">
+        Run a full project with GSD
+      </h1>
+      
+        <div class="article-meta-row mb-10 print:hidden">
+          
+
+
+
+
+  
+  
+
+
+
+  
+  
+    
+      <span class="content-type-badge content-type-badge--playbook badge--standalone">Playbook</span>
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+      <time datetime="2026-04-06 00:00:00 &#43;0000 UTC">6 April 2026</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">4 mins</span>
+    
+
+    
+  </div>
+
+  
+
+
+        </div>
+      
+      
+        <figure class="mb-6 not-prose print:hidden">
+  <img
+    src="../../diagrams/articles/gsd-lifecycle.png"
+    alt="GSD project lifecycle: Init, Discuss, Plan, Execute, Gate checkpoint, Verify, Ship — with autonomy spectrum from Guided to Autonomous."
+    class="w-full max-w-4xl rounded-md border border-neutral-200 dark:border-neutral-700"
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
+
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>First big Claude Code project without scaffolding: working demo, week of cleanup—wandering files, deferred edge cases, git log that didn&rsquo;t tell the story. I wanted guardrails that sped me up without ceremony for its own sake.</p>
+<p>GSD (Get Stuff Done) is the plugin that wraps requirements → roadmap → per-phase discuss, plan, execute, verify, ship. I start at <code>/gsd:new-project</code>; the numbered phases and <code>.planning/</code> markdown are the contract with the agent. Here&rsquo;s the loop.</p>
+<h2 id="when-i-reach-for-this" class="relative group">When I reach for this <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#when-i-reach-for-this" aria-label="Anchor">#</a></span></h2><p>Any project that will take more than a single session or involves more than one phase of work. If it fits in one prompt, GSD is overhead. If it has distinct milestones, dependencies between features, or needs to survive a context reset — GSD pays for itself.</p>
+<h2 id="what-i-do" class="relative group">What I do <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-i-do" aria-label="Anchor">#</a></span></h2><h3 id="1-initialize-the-project" class="relative group">1. Initialize the project <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#1-initialize-the-project" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:new-project
+</code></pre><p>Claude asks structured questions about what I&rsquo;m building, who it&rsquo;s for, and what success looks like. The answers become <code>PROJECT.md</code> — a single-source-of-truth document that every subsequent phase references.</p>
+<p>This step also produces a <strong>roadmap</strong>: numbered phases, each with a goal, requirements, and success criteria. The roadmap is the contract between me and the agent.</p>
+<h3 id="2-discuss-the-first-phase" class="relative group">2. Discuss the first phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#2-discuss-the-first-phase" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:discuss-phase
+</code></pre><p>No code until this finishes. Claude asks scoped questions; typical themes:</p>
+<ul>
+<li>Data: new database vs existing schema vs external API only</li>
+<li>API shape: REST vs match legacy patterns in repo</li>
+<li>Deploy: feature flags, migrations, backward compatibility</li>
+</ul>
+<p>I answer in full sentences—shortcuts here become wrong assumptions in <code>PLAN.md</code>.</p>
+<p><code>--auto</code> skips the interview when the phase is boring and I trust the defaults.</p>
+<h3 id="3-plan-the-phase" class="relative group">3. Plan the phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#3-plan-the-phase" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:plan-phase
+</code></pre><p>Output is <code>PLAN.md</code>:</p>
+<ul>
+<li>Tasks with acceptance criteria</li>
+<li>Dependency order</li>
+<li>Files touched</li>
+<li>How we’ll verify</li>
+</ul>
+<p>A plan-review pass runs before I see it. If the plan can’t hit the phase goal, it revises before I spend time on an off-target plan.</p>
+<h3 id="4-execute" class="relative group">4. Execute <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#4-execute" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:execute-phase
+</code></pre><p>One task → one atomic commit → descriptive message. Drift from plan gets flagged instead of silently patched.</p>
+<p>I either watch live or review the commit stream afterward. Revert granularity stays at the task level.</p>
+<h3 id="5-verify" class="relative group">5. Verify <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#5-verify" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:verify-work
+</code></pre><p>Verification asks whether the <strong>artifact</strong> matches what the phase promised; green checkboxes without the promised artifact still count as a gap.</p>
+<p>Failure output is a concrete gap list. I fix, then rerun verify.</p>
+<h3 id="6-ship" class="relative group">6. Ship <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#6-ship" aria-label="Anchor">#</a></span></h3><pre tabindex="0"><code>/gsd:ship
+</code></pre><p>Opens PR, runs review agent, drafts description from plan + verification.</p>
+<h3 id="7-repeat-for-the-next-phase" class="relative group">7. Repeat for the next phase <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#7-repeat-for-the-next-phase" aria-label="Anchor">#</a></span></h3><p>Advance the roadmap only on verified output. Next phase inherits a known-good base.</p>
+<h2 id="the-autonomous-mode" class="relative group">The autonomous mode <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#the-autonomous-mode" aria-label="Anchor">#</a></span></h2><p>For mechanical work I batch the loop:</p>
+<pre tabindex="0"><code>/gsd:autonomous
+</code></pre><p>Discuss → plan → execute → verify runs per phase without pausing for me. I still read verification summaries and skim commits when stakes aren’t trivial—autonomy here means the loop runs unattended, not that I skip the read-back.</p>
+<p><code>/gsd:autonomous-multi-agent</code> adds Codex or Cursor workers under the same orchestration when tasks parallelize cleanly.</p>
+<h2 id="what-goes-wrong" class="relative group">What goes wrong <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-goes-wrong" aria-label="Anchor">#</a></span></h2><ul>
+<li><strong>Skipping discuss</strong> — the agent makes assumptions about the approach. Those assumptions compound across tasks. The thirty seconds of answering questions saves hours of rework</li>
+<li><strong>Plans that are too coarse</strong> — a task like &ldquo;implement the API&rdquo; hides ten decisions. Break it down until each task is one commit&rsquo;s worth of work</li>
+<li><strong>Ignoring verification failures</strong> — marking a phase complete when verification flags gaps means the next phase builds on an unstable foundation. Fix the gaps first</li>
+<li><strong>Autonomous without checkpoints</strong> — <code>/gsd:autonomous</code> can burn phases if you never read verification output or skim the commit stream. I still spot-check mid-run when the domain is new</li>
+<li><strong>Stale or corrupted <code>.planning/</code></strong> — merges, manual edits, or a crashed session can leave roadmap files out of sync with the repo. If <code>/gsd:resume-work</code> feels wrong, I diff <code>.planning/</code> against git and realign before continuing</li>
+<li><strong>PR noise</strong> — atomic commits are the point, but twenty tiny commits on one feature can swamp reviewers. I batch or squash when the story is coherent enough to read as one narrative</li>
+</ul>
+<h2 id="notes" class="relative group">Notes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#notes" aria-label="Anchor">#</a></span></h2><p>GSD stores all its state in <code>.planning/</code> at the project root. The roadmap, phase plans, and verification reports are all readable markdown. If a session crashes or context resets, <code>/gsd:resume-work</code> picks up from the last checkpoint.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+  <div class="flex">
+    
+    
+    
+    <div class="place-self-center">
+      
+        <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+          Author
+        </div>
+        <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+          Athan Dial
+        </div>
+      
+      
+      <div class="text-2xl sm:text-lg">
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="//localhost:1315/playbooks/literature-review-from-your-desk/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Run a literature review from your desk</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2026-04-06 00:00:00 &#43;0000 UTC">6 April 2026</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="//localhost:1315/playbooks/parallel-research-with-subagents/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Parallel research with subagents</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2026-04-06 00:00:00 &#43;0000 UTC">6 April 2026</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+  </main>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            © 2026 Athan Dial
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    
+
+<div class="site-footer">
+  <nav class="site-footer__nav">
+    <a href="/dispatches/">Dispatches</a>
+    <a href="/playbooks/">Playbooks</a>
+    <a href="/tags/">Tags</a>
+    
+  </nav>
+  <div class="site-footer__inner">
+    <span class="site-footer__brand">The Agency</span>
+    <span class="site-footer__copyright">
+      &copy; 2026 Athan Dial &mdash; Personal publication — views and writeups are my own.
+    </span>
+  </div>
+</div>
+
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="//localhost:1315/"
+>
+  <div
+    id="search-modal"
+    class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex flex-none items-center justify-between px-2">
+      <form class="flex min-w-0 flex-auto items-center">
+        <div class="flex h-8 w-8 items-center justify-center text-neutral-400">
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto overflow-auto px-2">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>

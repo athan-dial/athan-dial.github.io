@@ -1,19 +1,571 @@
-<!doctype html><html lang=en dir=ltr class=scroll-smooth data-default-appearance=dark data-auto-appearance=false><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#020617"><title>Jira and Confluence from Claude Code &#183; The Agency</title><meta name=title content="Jira and Confluence from Claude Code &#183; The Agency"><script type=text/javascript src=../../js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="></script><link type=text/css rel=stylesheet href=../../css/main.bundle.min.905eeaa85507c3889eb1188fbbcbc3e787f969a9060b2b9b242ea3bdaff60fa1.css integrity="sha256-kF7qqFUHw4iesRiPu8vD54f5aakGCyubJC6jva/2D6E="><script defer type=text/javascript id=script-bundle src=../../js/main.bundle.min.167efd96c29259046e711c52c0db66536f497aad73a774cd6f28fc408f2d2688.js integrity="sha256-Fn79lsKSWQRucRxSwNtmU29Jeq1zp3TNbyj8QI8tJog=" data-copy=Copy data-copied=Copied></script><link rel=canonical href=https://athan-dial.github.io/agency/playbooks/jira-and-confluence-from-claude-code/><link rel=icon type=image/svg+xml href=../../favicon.svg><link rel=icon type=image/x-icon href=../../favicon.ico><link rel=icon type=image/png sizes=32x32 href=../../favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=../../favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=../../apple-touch-icon.png><meta property="og:url" content="https://athan-dial.github.io/agency/playbooks/jira-and-confluence-from-claude-code/"><meta property="og:site_name" content="The Agency"><meta property="og:title" content="Jira and Confluence from Claude Code"><meta property="og:description" content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="playbooks"><meta property="article:published_time" content="2026-04-07T00:00:00+00:00"><meta property="article:modified_time" content="2026-04-07T00:00:00+00:00"><meta property="article:tag" content="Claude-Code"><meta property="article:tag" content="Workflows"><meta property="article:tag" content="Builder"><meta name=twitter:card content="summary"><meta name=twitter:title content="Jira and Confluence from Claude Code"><meta name=twitter:description content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away."><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","articleSection":"Playbooks","name":"Jira and Confluence from Claude Code","headline":"Jira and Confluence from Claude Code","abstract":"Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.","inLanguage":"en","url":"https:\/\/athan-dial.github.io\/agency\/playbooks\/jira-and-confluence-from-claude-code\/","author":{"@type":"Person","name":"Athan Dial"},"copyrightYear":"2026","dateCreated":"2026-04-07T00:00:00\u002b00:00","datePublished":"2026-04-07T00:00:00\u002b00:00","dateModified":"2026-04-07T00:00:00\u002b00:00","keywords":["claude-code","workflows","builder"],"mainEntityOfPage":"true","wordCount":"732"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://athan-dial.github.io/agency/","name":"The Agency","position":1},{"@type":"ListItem","item":"https://athan-dial.github.io/agency/playbooks/","name":"Playbooks","position":2},{"@type":"ListItem","name":"Jira and Confluence From Claude Code","position":3}]}</script><meta name=author content="Athan Dial"><meta name=description content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away."><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@200..800&display=swap"></head><body class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"><div id=the-top class="absolute flex self-center"><a class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600" href=#main-content><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span>Skip to main content</a></div><header class="masthead print:hidden"><nav class=masthead__nav><div class=masthead__identity><a href=../../../index.html class=masthead__back>Portfolio</a>
-<span class=masthead__sep>/</span>
-<a href=../../ class=masthead__wordmark>The Agency</a></div><ul class=masthead__links><li><a href=../../dispatches class=masthead__link>Dispatches</a></li><li><a href=../../playbooks class="masthead__link masthead__link--active">Playbooks</a></li><li><a href=../../about class=masthead__link>About</a></li><li><button type=button id=search-button-masthead class=masthead__search-btn title="Search (/)" aria-label="Search (/)">
-<span class=masthead__search-btn__icon aria-hidden=true><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span></span><span class=masthead__search-btn__label>Search</span></button></li></ul></nav></header><div class="relative flex grow flex-col"><main id=main-content class=grow><main><article><header class=max-w-prose><h1 class="mb-8 mt-0">Jira and Confluence from Claude Code</h1><div class="article-meta-row mb-10 print:hidden"><span class="content-type-badge content-type-badge--playbook badge--standalone">Playbook</span><div class="flex flex-row flex-wrap items-center"><time datetime="2026-04-07 00:00:00 +0000 UTC">7 April 2026</time><span class="px-2 text-primary-500">&#183;</span><span title="Reading time">4 mins</span></div></div><figure class="mb-6 not-prose print:hidden"><img src=../../diagrams/articles/jira-confluence-flow.svg alt="Phase-by-phase view of using Claude Code to triage Jira blockers and log decisions in Confluence without touching the browser." class="w-full max-w-4xl rounded-md border border-neutral-200 dark:border-neutral-700" loading=lazy decoding=async></figure></header><section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row"><div class="min-h-0 min-w-0 max-w-prose grow"><p>Mid-sprint, every <code>release-blocker</code> ticket still read “Selected for Development,” while the triage call lived only in Slack. Five issues plus the wiki page meant twenty minutes of tabs. In one Claude Code session I run <code>ops:jira</code> with JQL, transition those keys, then <code>ops:confluence</code> with GET-version-and-PUT on the decision page. Under a minute; the transcript holds the receipts.</p><h2 id=when-i-reach-for-this class="relative group">When I reach for this <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#when-i-reach-for-this aria-label=Anchor>#</a></span></h2><p>When I owe triage updates faster than a browser page loads. When sprint reviews demand precise Jira state changes plus Confluence breadcrumbs.</p><h2 id=what-i-need-before-starting class="relative group">What I need before starting <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#what-i-need-before-starting aria-label=Anchor>#</a></span></h2><ul><li>Atlassian credentials with API tokens stored in env vars (<code>ATLASSIAN_USERNAME</code>, <code>ATLASSIAN_API_TOKEN</code>) — never inline</li><li>Access to your Atlassian site (e.g. <code>your-company.atlassian.net</code>) with rights in the Jira project and linked Confluence space you care about</li><li>Claude Code configured with the <code>ops:jira</code> skill (acli + helper scripts) and <code>ops:confluence</code> skill (curl workflow)</li><li>Working acli install plus the bundled <code>jira_rest.py</code> script for epics, sprints, and custom fields</li><li>Familiarity with the JQL and CQL snippets you run most often (assignee filters, status buckets, date windows)</li></ul><h2 id=what-i-do class="relative group">What I do <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#what-i-do aria-label=Anchor>#</a></span></h2><h3 id=1-wake-the-skills-and-set-the-guardrails class="relative group">1. Wake the skills and set the guardrails <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#1-wake-the-skills-and-set-the-guardrails aria-label=Anchor>#</a></span></h3><p>Early in the session I run <code>ops:jira --help</code> and <code>ops:confluence --help</code> so Claude caches binary paths.</p><p><strong>Jira:</strong> <code>acli</code> must already target the right tenant (<code>https://your-company.atlassian.net</code>).<br><strong>Tokens:</strong> I load <code>ATLASSIAN_*</code> from 1Password CLI (or equivalent)—never paste into chat.</p><p><strong>Confluence:</strong> <code>ops:confluence</code> is curl + JSON; the skill template carries Basic Auth wiring so each call is signed the same way.</p><h3 id=2-draft-the-jql-before-touching-data class="relative group">2. Draft the JQL before touching data <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#2-draft-the-jql-before-touching-data aria-label=Anchor>#</a></span></h3><p>Explicit JQL first—always search before mutate:</p><pre tabindex=0><code>ops:jira search --jql &#34;project = PROJ AND labels = release-blocker AND status in (&#39;Selected for Development&#39;,&#39;In Progress&#39;)&#34; --limit 50
-</code></pre><ul><li>Default output: human table for eyeballing.</li><li>Add <code>--json</code> or <code>--csv</code> only when a script consumes it.</li></ul><p>Before bulk transitions I rerun the same JQL with <code>--preview</code> so the log shows the exact keys I’m about to touch. Then I drop those keys into <code>$ISSUES</code> for the next command.</p><h3 id=3-apply-edits-with-the-right-tool class="relative group">3. Apply edits with the right tool <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#3-apply-edits-with-the-right-tool aria-label=Anchor>#</a></span></h3><p><strong>Day-to-day Jira</strong> (transition, comment, watcher, link) stays in acli:</p><pre tabindex=0><code>ops:jira transition --issues &#34;$ISSUES&#34; --state &#34;In Progress&#34; --comment &#34;Pulled during mid-sprint triage&#34;
-</code></pre><p><strong>REST-only fields</strong> (story points, sprint placement, epic wiring) go through the bundled script:</p><pre tabindex=0><code>ops:jira rest --script jira_rest.py --action set_story_points --issue PROJ-1234 --points 5
-</code></pre><p>Same env vars as search—no new secret surfaces. I repeat site host + project key on every call so a typo doesn’t hit the wrong tenant.</p><h3 id=4-mirror-decisions-into-confluence class="relative group">4. Mirror decisions into Confluence <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#4-mirror-decisions-into-confluence aria-label=Anchor>#</a></span></h3><p><code>ops:confluence</code> exists because headless <code>acli confluence</code> + OAuth is brittle. Pattern: <strong>GET version → edit → PUT</strong>.</p><p>Fetch current page + version:</p><pre tabindex=0><code>ops:confluence get --page-id 123456 --output decision.json
-</code></pre><p>Note <code>version.number</code>. Bump it in the payload, then update:</p><pre tabindex=0><code>ops:confluence update --page-id 123456 --body-file update.json --version 47
-</code></pre><p>Keep the <code>storage</code> block clean so Claude can patch text without breaking macros.</p><p><strong>Search:</strong> CQL when I need discovery, e.g. <code>type = page AND space = TEAMDOCS AND text ~ "release-blocker"</code>. Add <code>--json</code> when I’ll diff bodies locally.</p><h3 id=5-package-artifacts-for-reviews class="relative group">5. Package artifacts for reviews <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#5-package-artifacts-for-reviews aria-label=Anchor>#</a></span></h3><ul><li><strong>Jira:</strong> <code>--csv > blockers.csv</code> for spreadsheets, or <code>--json</code> into <code>jq</code> inside the same session.</li><li><strong>Confluence:</strong> turn on the skill’s <code>--log</code> flag so every REST call is timestamped—when someone asks where a paragraph came from, I paste the exact command from the log.</li></ul><h2 id=what-goes-wrong class="relative group">What goes wrong <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#what-goes-wrong aria-label=Anchor>#</a></span></h2><ul><li><strong>Forgetting to fetch the Confluence version first.</strong> The API rejects the update as a conflict, or worse, you unknowingly overwrite someone else’s edit. Fix: always run <code>ops:confluence get</code> and bump <code>version.number</code> in your payload before <code>update</code>.</li><li><strong>Running destructive commands on untested JQL.</strong> One missing clause and you transition half the board. Fix: pipe every new query through <code>ops:jira search --limit 5</code> or <code>--preview</code> before chaining edits.</li><li><strong>Leaking secrets by pasting tokens inline.</strong> They land in Claude transcripts and shell history. Fix: set env vars outside Claude, or source them from 1Password/Bitwarden CLI, and ensure skills read from those names.</li><li><strong>Trying to use <code>acli</code> for Confluence.</strong> It silently fails because of OAuth quirks and you think your script succeeded. Fix: stick to the REST-based <code>ops:confluence</code> workflow until Atlassian fixes acli auth.</li></ul><h2 id=notes class="relative group">Notes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style=text-decoration-line:none!important href=#notes aria-label=Anchor>#</a></span></h2><p>Keep a personal snippet file of JQL and CQL templates — top priorities for your default project, “updated within the last 3 days,” “comments by me.” Drop them into the playbook repo next to your skills so future-you doesn’t retype. Once Jira and Confluence live inside Claude Code, sprint cadence depends on how crisp your queries are, not how fast you can click tabs.</p></div></section><footer class="max-w-prose pt-8 print:hidden"><div class=flex><div class=place-self-center><div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">Author</div><div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">Athan Dial</div><div class="text-2xl sm:text-lg"></div></div></div><div class=pt-8><hr class="border-dotted border-neutral-300 dark:border-neutral-600"><div class="flex justify-between pt-3"><span><a class="group flex" href=https://athan-dial.github.io/agency/playbooks/query-your-data-warehouse-with-athena/><span class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"><span class="ltr:inline rtl:hidden">&larr;</span><span class="ltr:hidden rtl:inline">&rarr;</span></span>
-<span class="flex flex-col"><span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Query your data warehouse with Athena</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400"><time datetime="2026-04-07 00:00:00 +0000 UTC">7 April 2026</time>
-</span></span></a></span><span><a class="group flex text-right" href=https://athan-dial.github.io/agency/playbooks/build-an-ingest-pipeline/><span class="flex flex-col"><span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Build an ingest pipeline</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400"><time datetime="2026-04-07 00:00:00 +0000 UTC">7 April 2026</time>
-</span></span><span class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"><span class="ltr:inline rtl:hidden">&rarr;</span><span class="ltr:hidden rtl:inline">&larr;</span></span></a></span></div></div></footer></article></main></main><div class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12" id=to-top hidden=true><a href=#the-top class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" aria-label="Scroll to top" title="Scroll to top">&uarr;</a></div><footer class="py-10 print:hidden"><div class="flex items-center justify-between"><div><p class="text-sm text-neutral-500 dark:text-neutral-400">© 2026 Athan Dial</p></div><div class="flex flex-row items-center"></div></div><div class=site-footer><nav class=site-footer__nav><a href=/agency/dispatches/>Dispatches</a>
-<a href=/agency/playbooks/>Playbooks</a>
-<a href=/agency/tags/>Tags</a></nav><div class=site-footer__inner><span class=site-footer__brand>The Agency</span>
-<span class=site-footer__copyright>&copy; 2026 Athan Dial &mdash; Personal publication — views and writeups are my own.</span></div></div></footer><div id=search-wrapper class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url=https://athan-dial.github.io/agency/><div id=search-modal class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"><header class="relative z-10 flex flex-none items-center justify-between px-2"><form class="flex min-w-0 flex-auto items-center"><div class="flex h-8 w-8 items-center justify-center text-neutral-400"><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg></span></div><input type=search id=search-query class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent" placeholder=Search tabindex=0></form><button id=close-search-button class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" title="Close (Esc)">
-<span class="icon relative inline-block px-1 align-text-bottom"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></button></header><section class="flex-auto overflow-auto px-2"><ul id=search-results></ul></section></div></div></div></body></html>
+
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="false"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1315&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020617" />
+  
+  <title>Jira and Confluence from Claude Code &middot; The Agency</title>
+    <meta name="title" content="Jira and Confluence from Claude Code &middot; The Agency" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="../../js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="../../css/main.bundle.min.905eeaa85507c3889eb1188fbbcbc3e787f969a9060b2b9b242ea3bdaff60fa1.css"
+    integrity="sha256-kF7qqFUHw4iesRiPu8vD54f5aakGCyubJC6jva/2D6E="
+  />
+  
+    
+    
+    
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="../../js/main.bundle.min.167efd96c29259046e711c52c0db66536f497aad73a774cd6f28fc408f2d2688.js"
+      integrity="sha256-Fn79lsKSWQRucRxSwNtmU29Jeq1zp3TNbyj8QI8tJog="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  
+  
+  
+  
+    <link rel="canonical" href="//localhost:1315/playbooks/jira-and-confluence-from-claude-code/" />
+  
+  
+  
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="//localhost:1315/playbooks/jira-and-confluence-from-claude-code/">
+  <meta property="og:site_name" content="The Agency">
+  <meta property="og:title" content="Jira and Confluence from Claude Code">
+  <meta property="og:description" content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="playbooks">
+    <meta property="article:published_time" content="2026-04-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-07T00:00:00+00:00">
+    <meta property="article:tag" content="Claude-Code">
+    <meta property="article:tag" content="Workflows">
+    <meta property="article:tag" content="Builder">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jira and Confluence from Claude Code">
+  <meta name="twitter:description" content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Playbooks",
+    "name": "Jira and Confluence from Claude Code",
+    "headline": "Jira and Confluence from Claude Code",
+    
+    "abstract": "Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.",
+    "inLanguage": "en",
+    "url" : "\/\/localhost:1315\/playbooks\/jira-and-confluence-from-claude-code\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Athan Dial"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-04-07T00:00:00\u002b00:00",
+    "datePublished": "2026-04-07T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-04-07T00:00:00\u002b00:00",
+    
+    "keywords": ["claude-code","workflows","builder"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "741"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "//localhost:1315/",
+       "name": "The Agency",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "//localhost:1315/playbooks/",
+       "name": "Playbooks",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Jira and Confluence From Claude Code",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Athan Dial" />
+  
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    
+<meta name="description" content="Helps you move Jira state and Confluence pages from the terminal—JQL previews, acli transitions, version-fetched REST updates—when the web UI is too many clicks away.">
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@200..800&display=swap">
+
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      
+
+
+<header class="masthead print:hidden">
+  <nav class="masthead__nav">
+
+    
+    <div class="masthead__identity">
+      <a href="../../../index.html" class="masthead__back">Portfolio</a>
+      <span class="masthead__sep">/</span>
+      <a href="../../" class="masthead__wordmark">The Agency</a>
+    </div>
+
+    
+    <ul class="masthead__links">
+          <li>
+            <a href="../../dispatches"
+               class="masthead__link">
+              Dispatches
+            </a>
+          </li>
+          <li>
+            <a href="../../playbooks"
+               class="masthead__link masthead__link--active">
+              Playbooks
+            </a>
+          </li>
+          <li>
+            <a href="../../about"
+               class="masthead__link">
+              About
+            </a>
+          </li>
+      <li>
+        <button
+          type="button"
+          id="search-button-masthead"
+          class="masthead__search-btn"
+          title="Search (/)"
+          aria-label="Search (/)"
+        >
+          <span class="masthead__search-btn__icon" aria-hidden="true"><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span></span>
+          <span class="masthead__search-btn__label">Search</span>
+        </button>
+      </li>
+    </ul>
+
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <main>
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mb-8 mt-0">
+        Jira and Confluence from Claude Code
+      </h1>
+      
+        <div class="article-meta-row mb-10 print:hidden">
+          
+
+
+
+
+  
+  
+
+
+
+  
+  
+    
+      <span class="content-type-badge content-type-badge--playbook badge--standalone">Playbook</span>
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+      <time datetime="2026-04-07 00:00:00 &#43;0000 UTC">7 April 2026</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">4 mins</span>
+    
+
+    
+  </div>
+
+  
+
+
+        </div>
+      
+      
+        <figure class="mb-6 not-prose print:hidden">
+  <img
+    src="../../diagrams/articles/jira-confluence-flow.svg"
+    alt="Phase-by-phase triage in Claude Code—Jira state, Confluence decision pages, transcript receipts—faster than tab-hopping the Atlassian UI."
+    class="w-full max-w-4xl rounded-md border border-neutral-200 dark:border-neutral-700"
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
+
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>Mid-sprint, every <code>release-blocker</code> ticket still read “Selected for Development,” while the triage call lived only in Slack. Five issues plus the wiki page meant twenty minutes of tabs. In one Claude Code session I run <code>ops:jira</code> with JQL, transition those keys, then <code>ops:confluence</code> with GET-version-and-PUT on the decision page. Under a minute; the transcript holds the receipts.</p>
+<h2 id="when-i-reach-for-this" class="relative group">When I reach for this <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#when-i-reach-for-this" aria-label="Anchor">#</a></span></h2><p>When I owe triage updates faster than a browser page loads. When sprint reviews demand precise Jira state changes plus Confluence breadcrumbs.</p>
+<h2 id="what-i-need-before-starting" class="relative group">What I need before starting <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-i-need-before-starting" aria-label="Anchor">#</a></span></h2><ul>
+<li>Atlassian credentials with API tokens stored in env vars (<code>ATLASSIAN_USERNAME</code>, <code>ATLASSIAN_API_TOKEN</code>) — never inline</li>
+<li>Access to your Atlassian site (e.g. <code>your-company.atlassian.net</code>) with rights in the Jira project and linked Confluence space you care about</li>
+<li>Claude Code configured with the <code>ops:jira</code> skill (acli + helper scripts) and <code>ops:confluence</code> skill (curl workflow)</li>
+<li>Working acli install plus the bundled <code>jira_rest.py</code> script for epics, sprints, and custom fields</li>
+<li>Familiarity with the JQL and CQL snippets you run most often (assignee filters, status buckets, date windows)</li>
+</ul>
+<h2 id="what-i-do" class="relative group">What I do <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-i-do" aria-label="Anchor">#</a></span></h2><h3 id="1-wake-the-skills-and-set-the-guardrails" class="relative group">1. Wake the skills and set the guardrails <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#1-wake-the-skills-and-set-the-guardrails" aria-label="Anchor">#</a></span></h3><p>Early in the session I run <code>ops:jira --help</code> and <code>ops:confluence --help</code> so Claude caches binary paths.</p>
+<p><strong>Jira:</strong> <code>acli</code> must already target the right tenant (<code>https://your-company.atlassian.net</code>).<br>
+<strong>Tokens:</strong> I load <code>ATLASSIAN_*</code> from 1Password CLI (or equivalent)—never paste into chat.</p>
+<p><strong>Confluence:</strong> <code>ops:confluence</code> is curl + JSON; the skill template carries Basic Auth wiring so each call is signed the same way.</p>
+<h3 id="2-draft-the-jql-before-touching-data" class="relative group">2. Draft the JQL before touching data <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#2-draft-the-jql-before-touching-data" aria-label="Anchor">#</a></span></h3><p>Explicit JQL first—always search before mutate:</p>
+<pre tabindex="0"><code>ops:jira search --jql &#34;project = PROJ AND labels = release-blocker AND status in (&#39;Selected for Development&#39;,&#39;In Progress&#39;)&#34; --limit 50
+</code></pre><ul>
+<li>Default output: human table for eyeballing.</li>
+<li>Add <code>--json</code> or <code>--csv</code> only when a script consumes it.</li>
+</ul>
+<p>Before bulk transitions I rerun the same JQL with <code>--preview</code> so the log shows the exact keys I’m about to touch. Then I drop those keys into <code>$ISSUES</code> for the next command.</p>
+<h3 id="3-apply-edits-with-the-right-tool" class="relative group">3. Apply edits with the right tool <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#3-apply-edits-with-the-right-tool" aria-label="Anchor">#</a></span></h3><p><strong>Day-to-day Jira</strong> (transition, comment, watcher, link) stays in acli:</p>
+<pre tabindex="0"><code>ops:jira transition --issues &#34;$ISSUES&#34; --state &#34;In Progress&#34; --comment &#34;Pulled during mid-sprint triage&#34;
+</code></pre><p><strong>REST-only fields</strong> (story points, sprint placement, epic wiring) go through the bundled script:</p>
+<pre tabindex="0"><code>ops:jira rest --script jira_rest.py --action set_story_points --issue PROJ-1234 --points 5
+</code></pre><p>Same env vars as search—no new secret surfaces. I repeat site host + project key on every call so a typo doesn’t hit the wrong tenant.</p>
+<h3 id="4-mirror-decisions-into-confluence" class="relative group">4. Mirror decisions into Confluence <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#4-mirror-decisions-into-confluence" aria-label="Anchor">#</a></span></h3><p><code>ops:confluence</code> exists because headless <code>acli confluence</code> + OAuth is brittle. Pattern: <strong>GET version → edit → PUT</strong>.</p>
+<p>Fetch current page + version:</p>
+<pre tabindex="0"><code>ops:confluence get --page-id 123456 --output decision.json
+</code></pre><p>Note <code>version.number</code>. Bump it in the payload, then update:</p>
+<pre tabindex="0"><code>ops:confluence update --page-id 123456 --body-file update.json --version 47
+</code></pre><p>Keep the <code>storage</code> block clean so Claude can patch text without breaking macros.</p>
+<p><strong>Search:</strong> CQL when I need discovery, e.g. <code>type = page AND space = TEAMDOCS AND text ~ &quot;release-blocker&quot;</code>. Add <code>--json</code> when I’ll diff bodies locally.</p>
+<h3 id="5-package-artifacts-for-reviews" class="relative group">5. Package artifacts for reviews <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#5-package-artifacts-for-reviews" aria-label="Anchor">#</a></span></h3><ul>
+<li><strong>Jira:</strong> <code>--csv &gt; blockers.csv</code> for spreadsheets, or <code>--json</code> into <code>jq</code> inside the same session.</li>
+<li><strong>Confluence:</strong> turn on the skill’s <code>--log</code> flag so every REST call is timestamped—when someone asks where a paragraph came from, I paste the exact command from the log.</li>
+</ul>
+<h2 id="what-goes-wrong" class="relative group">What goes wrong <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-goes-wrong" aria-label="Anchor">#</a></span></h2><ul>
+<li><strong>Forgetting to fetch the Confluence version first.</strong> The API rejects the update as a conflict, or worse, you unknowingly overwrite someone else’s edit. Fix: always run <code>ops:confluence get</code> and bump <code>version.number</code> in your payload before <code>update</code>.</li>
+<li><strong>Running destructive commands on untested JQL.</strong> One missing clause and you transition half the board. Fix: pipe every new query through <code>ops:jira search --limit 5</code> or <code>--preview</code> before chaining edits.</li>
+<li><strong>Leaking secrets by pasting tokens inline.</strong> They land in Claude transcripts and shell history. Fix: set env vars outside Claude, or source them from 1Password/Bitwarden CLI, and ensure skills read from those names.</li>
+<li><strong>Trying to use <code>acli</code> for Confluence.</strong> It silently fails because of OAuth quirks and you think your script succeeded. Fix: stick to the REST-based <code>ops:confluence</code> workflow until Atlassian fixes acli auth.</li>
+</ul>
+<h2 id="notes" class="relative group">Notes <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#notes" aria-label="Anchor">#</a></span></h2><p><strong>Snippet library</strong> — keep a personal file of JQL and CQL templates: top priorities for your default project, “updated within the last 3 days,” “comments by me.” I drop it next to my skills in the playbook repo so I’m not retyping under pressure.</p>
+<p><strong>Cadence</strong> — once Jira and Confluence live inside Claude Code, sprint rhythm tracks how crisp the queries are. Sharp JQL/CQL beats fast clicking through the same filters every week.</p>
+
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+  <div class="flex">
+    
+    
+    
+    <div class="place-self-center">
+      
+        <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+          Author
+        </div>
+        <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+          Athan Dial
+        </div>
+      
+      
+      <div class="text-2xl sm:text-lg">
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="//localhost:1315/playbooks/query-your-data-warehouse-with-athena/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Query your data warehouse with Athena</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2026-04-07 00:00:00 &#43;0000 UTC">7 April 2026</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="//localhost:1315/playbooks/build-an-ingest-pipeline/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Build an ingest pipeline</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2026-04-07 00:00:00 &#43;0000 UTC">7 April 2026</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+  </main>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            © 2026 Athan Dial
+        </p>
+      
+      
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  
+    
+
+<div class="site-footer">
+  <nav class="site-footer__nav">
+    <a href="/dispatches/">Dispatches</a>
+    <a href="/playbooks/">Playbooks</a>
+    <a href="/tags/">Tags</a>
+    
+  </nav>
+  <div class="site-footer__inner">
+    <span class="site-footer__brand">The Agency</span>
+    <span class="site-footer__copyright">
+      &copy; 2026 Athan Dial &mdash; Personal publication — views and writeups are my own.
+    </span>
+  </div>
+</div>
+
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="//localhost:1315/"
+>
+  <div
+    id="search-modal"
+    class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex flex-none items-center justify-between px-2">
+      <form class="flex min-w-0 flex-auto items-center">
+        <div class="flex h-8 w-8 items-center justify-center text-neutral-400">
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto overflow-auto px-2">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>
