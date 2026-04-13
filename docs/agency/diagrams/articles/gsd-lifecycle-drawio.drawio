@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram name="GSD Lifecycle" id="gsd-lifecycle">
+    <mxGraphModel dx="1520" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1520" pageHeight="500" background="#0A0E1A" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;font style=&quot;font-size: 26px;&quot;&gt;GSD Project Lifecycle&lt;/font&gt;" style="text;html=1;fontFamily=JetBrains Mono;fontSize=26;fontColor=#7dd3fc;fontStyle=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="460" y="10" width="400" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ PHASE BOXES ═══ -->
+
+        <!-- INIT (low row y=180) -->
+        <mxCell id="init" value="&lt;b&gt;INIT&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.7;&quot;&gt;/gsd:new-project&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#1AA684;strokeColor=#0f6b52;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#ffffff;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_init" value="What are we building?" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="256" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- DISCUSS (high row y=120) -->
+        <mxCell id="discuss" value="&lt;b&gt;DISCUSS&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.7;&quot;&gt;/gsd:discuss-phase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#22a86e;strokeColor=#1a7a52;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#ffffff;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="268" y="120" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_discuss" value="Surface assumptions" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="268" y="196" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- PLAN (low row y=180) -->
+        <mxCell id="plan" value="&lt;b&gt;PLAN&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.7;&quot;&gt;/gsd:plan-phase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#3cb856;strokeColor=#2d8040;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#ffffff;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="496" y="180" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_plan" value="Tasks + criteria" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="496" y="256" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- EXECUTE (high row y=120) -->
+        <mxCell id="execute" value="&lt;b&gt;EXECUTE&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.7;&quot;&gt;/gsd:execute-phase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#7ab830;strokeColor=#5a8a20;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#ffffff;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="724" y="120" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_execute" value="Atomic commits" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="724" y="196" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- GATE diamond -->
+        <mxCell id="gate" value="&lt;b&gt;GATE&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#7dd3fc;strokeColor=#0ea5e9;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=11;fontColor=#0A0E1A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="948" y="126" width="66" height="66" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_gate" value="checkpoint" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#7dd3fc;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="941" y="200" width="80" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- VERIFY (low row y=180) -->
+        <mxCell id="verify" value="&lt;b&gt;VERIFY&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.7;&quot;&gt;/gsd:verify-work&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#c4b820;strokeColor=#9a9010;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#ffffff;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1068" y="180" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_verify" value="Goal-backward check" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1068" y="256" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- SHIP (high row y=120) -->
+        <mxCell id="ship" value="&lt;b&gt;SHIP&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; opacity: 0.65;&quot;&gt;/gsd:ship&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#7dd3fc;strokeColor=#0ea5e9;strokeWidth=1;fontFamily=JetBrains Mono;fontSize=14;fontColor=#0A0E1A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1296" y="120" width="168" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="ann_ship" value="PR, review, merge" style="text;html=1;fontFamily=Manrope;fontSize=12;fontColor=#94a3b8;align=center;verticalAlign=top;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1296" y="196" width="168" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ ARROWS ═══ -->
+
+        <!-- INIT → DISCUSS (elbow up) -->
+        <mxCell id="a12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22a86e;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="init" target="discuss" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- DISCUSS → PLAN (elbow down) -->
+        <mxCell id="a23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3cb856;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="discuss" target="plan" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- PLAN → EXECUTE (elbow up) -->
+        <mxCell id="a34" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7ab830;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="plan" target="execute" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- EXECUTE → GATE -->
+        <mxCell id="a4g" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7dd3fc;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="execute" target="gate" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- GATE → VERIFY (elbow down) -->
+        <mxCell id="ag5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#c4b820;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="gate" target="verify" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- VERIFY → SHIP (elbow up) -->
+        <mxCell id="a56" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7dd3fc;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="verify" target="ship" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Loop: SHIP → DISCUSS -->
+        <mxCell id="aloop" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Next phase&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#7dd3fc;strokeWidth=1;opacity=45;endArrow=blockThin;endFill=1;fontFamily=Manrope;fontSize=12;fontColor=#7dd3fc;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=none;" edge="1" source="ship" target="discuss" parent="1">
+          <mxGeometry x="-0.02" y="-10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1380" y="60"/>
+              <mxPoint x="352" y="60"/>
+            </Array>
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ═══ DIVIDER ═══ -->
+        <mxCell id="divider" value="" style="line;strokeColor=#334155;strokeWidth=1;opacity=25;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="296" width="1424" height="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Section title -->
+        <mxCell id="spectrum_title" value="Autonomy Spectrum" style="text;html=1;fontFamily=Manrope;fontSize=16;fontColor=#64748b;fontStyle=0;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="560" y="306" width="200" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══ AUTONOMY CARDS ═══ -->
+
+        <!-- GUIDED -->
+        <mxCell id="card_guided" value="&lt;font color=&quot;#1AA684&quot; style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;GUIDED&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#94a3b8&quot; style=&quot;font-size: 12px;&quot;&gt;You discuss, review the plan,&lt;br&gt;watch execution, verify manually&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1e293b;strokeColor=#1AA684;strokeWidth=1;fontFamily=Manrope;fontSize=12;align=left;verticalAlign=top;spacingLeft=16;spacingTop=12;spacingRight=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="344" width="460" height="92" as="geometry"/>
+        </mxCell>
+
+        <!-- QUICK -->
+        <mxCell id="card_quick" value="&lt;font color=&quot;#4ade80&quot; style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;QUICK&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#94a3b8&quot; style=&quot;font-size: 12px;&quot;&gt;Skip optional agents, atomic commits,&lt;br&gt;trust the pattern&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1e293b;strokeColor=#4ade80;strokeWidth=1;fontFamily=Manrope;fontSize=12;align=left;verticalAlign=top;spacingLeft=16;spacingTop=12;spacingRight=12;" vertex="1" parent="1">
+          <mxGeometry x="520" y="344" width="460" height="92" as="geometry"/>
+        </mxCell>
+
+        <!-- AUTONOMOUS -->
+        <mxCell id="card_auto" value="&lt;font color=&quot;#7dd3fc&quot; style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;AUTONOMOUS&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#94a3b8&quot; style=&quot;font-size: 12px;&quot;&gt;All phases end-to-end, verify catches&lt;br&gt;drift, review output after&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1e293b;strokeColor=#7dd3fc;strokeWidth=2;fontFamily=Manrope;fontSize=12;align=left;verticalAlign=top;spacingLeft=16;spacingTop=12;spacingRight=12;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="344" width="464" height="92" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

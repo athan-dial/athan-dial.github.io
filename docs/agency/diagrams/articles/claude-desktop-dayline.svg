@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow" x="0" y="0" width="960" height="400" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="400" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="60" y="54" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">A daily workflow with Claude Desktop</text>
+
+  <!-- Timeline axis -->
+  <line x1="60" y1="190" x2="900" y2="190" stroke="#334155" stroke-width="2"/>
+  <polygon points="908,190 896,184 896,196" fill="#334155"/>
+
+  <!-- Time labels -->
+  <text x="120" y="152" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" text-anchor="middle">8:30 AM</text>
+  <text x="300" y="152" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" text-anchor="middle">10:00 AM</text>
+  <text x="480" y="152" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" text-anchor="middle">Midday</text>
+  <text x="660" y="152" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" text-anchor="middle">3:00 PM</text>
+  <text x="840" y="152" fill="#64748b" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" text-anchor="middle">5:30 PM</text>
+
+  <!-- Nodes -->
+  <circle cx="120" cy="190" r="12" fill="#1AA684" stroke="#0f6b52" stroke-width="2"/>
+  <circle cx="300" cy="190" r="12" fill="#22a86e" stroke="#1a7a52" stroke-width="2"/>
+  <circle cx="480" cy="190" r="12" fill="#3cb856" stroke="#2d8040" stroke-width="2"/>
+  <circle cx="660" cy="190" r="12" fill="#7ab830" stroke="#5a8a20" stroke-width="2"/>
+  <circle cx="840" cy="190" r="12" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="2"/>
+
+  <!-- Connectors -->
+  <line x1="120" y1="202" x2="120" y2="248" stroke="#334155" stroke-width="2"/>
+  <line x1="300" y1="202" x2="300" y2="248" stroke="#334155" stroke-width="2"/>
+  <line x1="480" y1="202" x2="480" y2="248" stroke="#334155" stroke-width="2"/>
+  <line x1="660" y1="202" x2="660" y2="248" stroke="#334155" stroke-width="2"/>
+  <line x1="840" y1="202" x2="840" y2="248" stroke="#334155" stroke-width="2"/>
+
+  <!-- Description cards (height = 30 + 2*22 + 30 = 104) -->
+  <rect x="40" y="248" width="160" height="104" rx="8" ry="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="55" y="282" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13">Overnight briefing</text>
+  <text x="55" y="304" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Triage urgent email fast.</text>
+
+  <rect x="220" y="248" width="160" height="104" rx="8" ry="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="235" y="282" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13">Prep packet</text>
+  <text x="235" y="304" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Slack + Confluence pulls.</text>
+
+  <rect x="400" y="248" width="160" height="104" rx="8" ry="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="415" y="282" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13">Quick asks</text>
+  <text x="415" y="304" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">While reading + drafting.</text>
+
+  <rect x="580" y="248" width="160" height="104" rx="8" ry="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="595" y="282" fill="#ffffff" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13">Draft review</text>
+  <text x="595" y="304" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="400" font-size="11">Adapt to the audience.</text>
+
+  <rect x="760" y="248" width="160" height="104" rx="8" ry="8" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="775" y="282" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-weight="600" font-size="13">Wrap-up</text>
+  <text x="775" y="304" fill="#0A0E1A" font-family="Manrope, sans-serif" font-weight="500" font-size="11" opacity="0.82">Commitments for tomorrow.</text>
+</svg>

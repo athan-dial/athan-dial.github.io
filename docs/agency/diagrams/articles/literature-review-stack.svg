@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" width="960" height="580">
+  <defs>
+    <style>
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect x="0" y="0" width="960" height="580" fill="#0A0E1A"/>
+
+  <!-- Layer bands (top -> bottom) -->
+  <!-- Layer 5 (top): Shareable brief (2 lines => 104px) -->
+  <rect x="20" y="20" width="920" height="104" rx="10" ry="10" fill="#7dd3fc" stroke="#0ea5e9" stroke-width="2"/>
+  <rect x="35" y="35" width="890" height="44" rx="8" ry="8" fill="#0A0E1A" opacity="0.92"/>
+  <text x="50" y="65" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Run a literature review from your desk</text>
+  <text x="35" y="102" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.8">Shareable brief (Quarto / Markdown) + follow-up workflow</text>
+
+  <!-- Layer 4: Summary + gaps + limitations -->
+  <rect x="20" y="129" width="920" height="82" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2"/>
+  <text x="35" y="167" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Summary + gaps + limitations (bias, coverage, recency, endpoints)</text>
+
+  <!-- Layer 3: Evidence table -->
+  <rect x="20" y="216" width="920" height="126" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2"/>
+  <text x="35" y="254" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Evidence table</text>
+  <text x="35" y="276" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.85">DOIs + relevance ratings + inclusion/exclusion notes</text>
+  <text x="35" y="298" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.85">Peer-review flags + methods quality checks</text>
+
+  <!-- Layer 2: Parallel searches -->
+  <rect x="20" y="347" width="920" height="104" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2"/>
+  <text x="35" y="385" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Parallel searches</text>
+  <text x="35" y="407" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.85">PubMed | bioRxiv | ClinicalTrials.gov | Semantic Scholar</text>
+
+  <!-- Layer 1 (bottom): Scoped question + connector health -->
+  <rect x="20" y="456" width="920" height="104" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2"/>
+  <text x="35" y="494" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">Scoped question</text>
+  <text x="35" y="516" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.85">PICO framing + connector health (coverage, drift, missing terms)</text>
+
+  <!-- Arrows (bottom -&gt; top) -->
+  <!-- Between Layer 1 and Layer 2 -->
+  <line x1="480" y1="466" x2="480" y2="440" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="480,432 474,442 486,442" fill="#94a3b8"/>
+
+  <!-- Between Layer 2 and Layer 3 -->
+  <line x1="480" y1="357" x2="480" y2="332" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="480,324 474,334 486,334" fill="#94a3b8"/>
+
+  <!-- Between Layer 3 and Layer 4 -->
+  <line x1="480" y1="226" x2="480" y2="201" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="480,193 474,203 486,203" fill="#94a3b8"/>
+
+  <!-- Between Layer 4 and Layer 5 -->
+  <line x1="480" y1="139" x2="480" y2="114" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="480,106 474,116 486,116" fill="#94a3b8"/>
+</svg>

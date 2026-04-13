@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 650" width="960" height="650">
+  <defs>
+    <style>
+    </style>
+    <!-- Filters -->
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="650" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="480" y="54" text-anchor="middle" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-weight="600" font-size="24">
+    AI research that actually cites sources
+  </text>
+  <text x="480" y="82" text-anchor="middle" fill="#94a3b8" font-family="Manrope, sans-serif" font-weight="300" font-size="13">

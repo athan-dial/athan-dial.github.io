@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480">
+  <defs>
+    <style>
+    </style>
+    <filter id="shadow-sm" x="-2%" y="-4%" width="104%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="480" fill="#0A0E1A"/>
+
+  <!-- Title -->
+  <text x="40" y="54" fill="#7dd3fc" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">Jira and Confluence from Claude Code</text>
+  <text x="40" y="78" fill="#94a3b8" font-family="Manrope, sans-serif" font-size="13" font-weight="300">Zigzag phase flow: five moves that turn tooling into a control room</text>
+
+  <!-- Phase boxes -->
+  <!-- Geometry: rect height = 30 + (3 lines x 22) + 30 = 126 -->
+
+  <!-- Node 1 -->
+  <rect x="20" y="110" width="160" height="126" rx="10" ry="10" fill="#1AA684" stroke="#0f6b52" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="35" y="156" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">1. Wake ops</text>
+  <text x="35" y="178" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">Token sourcing +</text>
+  <text x="35" y="200" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">help commands</text>
+
+  <!-- Node 2 -->
+  <rect x="210" y="270" width="160" height="126" rx="10" ry="10" fill="#22a86e" stroke="#1a7a52" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="225" y="316" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">2. Draft JQL</text>
+  <text x="225" y="338" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">Preview searches</text>
+  <text x="225" y="360" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">before running</text>
+
+  <!-- Node 3 -->
+  <rect x="400" y="110" width="160" height="126" rx="10" ry="10" fill="#3cb856" stroke="#2d8040" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="415" y="156" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">3. Apply edits</text>
+  <text x="415" y="178" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">Transitions via</text>
+  <text x="415" y="200" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">acli / jira_rest.py</text>
+
+  <!-- Node 4 -->
+  <rect x="590" y="270" width="160" height="126" rx="10" ry="10" fill="#7ab830" stroke="#5a8a20" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="605" y="316" fill="#ffffff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">4. Mirror to</text>
+  <text x="605" y="338" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">Confluence with</text>
+  <text x="605" y="360" fill="#ffffff" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.92">version safeguards</text>
+
+  <!-- Node 5 -->
+  <rect x="780" y="110" width="160" height="126" rx="10" ry="10" fill="#c4b820" stroke="#9a9010" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="795" y="156" fill="#0A0E1A" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">5. Package</text>
+  <text x="795" y="178" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.82">CSV/JSON artifacts</text>
+  <text x="795" y="200" fill="#0A0E1A" font-family="Manrope, sans-serif" font-size="11" font-weight="400" opacity="0.82">+ command logs</text>
+
+  <!-- Arrows (elbow: lines + polygon only) -->
+  <!-- Arrow 1 -> 2 (destination stroke #1a7a52) -->
+  <line x1="180" y1="173" x2="195" y2="173" stroke="#1a7a52" stroke-width="2"/>
+  <line x1="195" y1="173" x2="195" y2="333" stroke="#1a7a52" stroke-width="2"/>
+  <line x1="195" y1="333" x2="206" y2="333" stroke="#1a7a52" stroke-width="2"/>
+  <polygon points="210,333 200,327 200,339" fill="#1a7a52"/>
+
+  <!-- Arrow 2 -> 3 (destination stroke #2d8040) -->
+  <line x1="370" y1="333" x2="385" y2="333" stroke="#2d8040" stroke-width="2"/>
+  <line x1="385" y1="333" x2="385" y2="173" stroke="#2d8040" stroke-width="2"/>
+  <line x1="385" y1="173" x2="396" y2="173" stroke="#2d8040" stroke-width="2"/>
+  <polygon points="400,173 390,167 390,179" fill="#2d8040"/>
+
+  <!-- Arrow 3 -> 4 (destination stroke #5a8a20) -->
+  <line x1="560" y1="173" x2="575" y2="173" stroke="#5a8a20" stroke-width="2"/>
+  <line x1="575" y1="173" x2="575" y2="333" stroke="#5a8a20" stroke-width="2"/>
+  <line x1="575" y1="333" x2="586" y2="333" stroke="#5a8a20" stroke-width="2"/>
+  <polygon points="590,333 580,327 580,339" fill="#5a8a20"/>
+
+  <!-- Arrow 4 -> 5 (destination stroke #9a9010) -->
+  <line x1="750" y1="333" x2="765" y2="333" stroke="#9a9010" stroke-width="2"/>
+  <line x1="765" y1="333" x2="765" y2="173" stroke="#9a9010" stroke-width="2"/>
+  <line x1="765" y1="173" x2="776" y2="173" stroke="#9a9010" stroke-width="2"/>
+  <polygon points="780,173 770,167 770,179" fill="#9a9010"/>
+</svg>
