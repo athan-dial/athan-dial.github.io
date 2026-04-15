@@ -1,0 +1,19 @@
+name: Rebuild on skills update
+
+on:
+  repository_dispatch:
+    types: [skills-updated]
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch skills + build
+        run: |
+          bash scripts/fetch-skills.sh
+          # Existing Hugo build steps would go here; this workflow
+          # just ensures fetch runs. Main deploy workflow can be retriggered separately.
+          echo "Skills fetched. Commit the regenerated content/skills/ if desired:"
+          git status --short content/skills/ || true
