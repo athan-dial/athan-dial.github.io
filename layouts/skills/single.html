@@ -1,0 +1,9 @@
+{{ define "main" }}
+<article class="skill-detail">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.source }}<p><a href="{{ . }}">Source on GitHub →</a></p>{{ end }}
+  </header>
+  {{ .Content }}
+</article>
+{{ end }}
