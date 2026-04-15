@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Skills on Athan Dial - Portfolio</title><link>https://athan-dial.github.io/skills/</link><description>Recent content in Skills on Athan Dial - Portfolio</description><generator>Hugo</generator><language>en</language><atom:link href="https://athan-dial.github.io/skills/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Skills on Athan Dial - Portfolio</title><link>https://athan-dial.github.io/skills/</link><description>Recent content in Skills on Athan Dial - Portfolio</description><generator>Hugo</generator><language>en</language><atom:link href="https://athan-dial.github.io/skills/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://athan-dial.github.io/skills/folio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/skills/folio/</guid><description>&lt;h1 id="folio"&gt;Folio&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Folio&lt;/strong&gt; is a Claude Code skill pack for end-to-end research manuscript orchestration. It converts a research idea and a folder of materials into a validated, reviewable, exportable manuscript — through a structured pipeline of artifact-driven stages, deterministic quality gates, and human approval checkpoints.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="what-folio-does"&gt;What Folio does&lt;/h2&gt;
+&lt;p&gt;Folio runs inside Claude Code and manages the full lifecycle of a research paper:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Normalizes&lt;/strong&gt; loose notes, PDFs, experiment logs, and figures into canonical input artifacts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plans&lt;/strong&gt; an outline, claim ledger, figure plan, and literature map&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Drafts&lt;/strong&gt; an integrated manuscript (Markdown or LaTeX, depending on mode)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reviews&lt;/strong&gt; the draft critically, runs IP safety scanning, and reverts regressions automatically&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exports&lt;/strong&gt; a clean final bundle with bibliography, figures, and an optional compiled PDF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.&lt;/p&gt;</description></item></channel></rss>
