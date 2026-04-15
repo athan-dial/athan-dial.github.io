@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article class="skills-list">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lead">{{ . }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+
+  {{ $plugins := where .Pages "Params.plugin" "!=" nil }}
+  {{ if $plugins }}
+  <section class="plugin-grid">
+    <h2>Plugins</h2>
+    <ul>
+    {{ range $plugins }}
+      <li>
+        <a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong></a>
+        <span>{{ .Description }}</span>
+      </li>
+    {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  {{ $cases := .GetPage "case-studies" }}
+  {{ if and $cases $cases.Pages }}
+  <section class="case-studies">
+    <h2>Case Studies</h2>
+    <ul>
+    {{ range $cases.Pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> — {{ .Description }}</li>
+    {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+</article>
+{{ end }}
