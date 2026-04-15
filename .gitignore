@@ -3,6 +3,12 @@
 /resources/_gen/
 .hugo_build.lock
 
+# Plugin docs fetched at build time by scripts/fetch-skills.sh.
+# The hub page (_index.md) and case studies are checked in; per-plugin
+# bundles are regenerated from athan-dial/skills on every build.
+/content/skills/*/
+!/content/skills/case-studies/
+
 # OS
 .DS_Store
 Thumbs.db
