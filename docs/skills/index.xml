@@ -10,4 +10,15 @@
 &lt;li&gt;&lt;strong&gt;Reviews&lt;/strong&gt; the draft critically, runs IP safety scanning, and reverts regressions automatically&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Exports&lt;/strong&gt; a clean final bundle with bibliography, figures, and an optional compiled PDF&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.&lt;/p&gt;</description></item><item><title>{{PLUGIN_NAME}}</title><link>https://athan-dial.github.io/skills/_template/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/skills/_template/</guid><description>&lt;p&gt;{{PLUGIN_TAGLINE}}&lt;/p&gt;
+&lt;h2 id="what-plugin_name-does"&gt;What {{PLUGIN_NAME}} does&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Replace this paragraph with a 2–3 sentence plain-language overview of what the plugin accomplishes and who it&amp;rsquo;s for.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Replace this paragraph with the &amp;ldquo;why&amp;rdquo; — what problem exists, why this solves it better than the status quo.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="quickstart"&gt;Quickstart&lt;/h2&gt;
+&lt;p&gt;See &lt;a href=""&gt;Quickstart&lt;/a&gt; for a 5-minute walkthrough.&lt;/p&gt;
+&lt;h2 id="next"&gt;Next&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=""&gt;Architecture&lt;/a&gt; — how {{PLUGIN_NAME}} works under the hood&lt;/li&gt;
+&lt;li&gt;&lt;a href="reference/commands.md"&gt;Commands&lt;/a&gt; — full reference&lt;/li&gt;
+&lt;li&gt;&lt;a href="changelog.md"&gt;Changelog&lt;/a&gt; — release history&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
