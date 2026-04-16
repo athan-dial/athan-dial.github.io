@@ -62,8 +62,13 @@
 &lt;p&gt;All notable changes to the &lt;code&gt;orc&lt;/code&gt; plugin are documented here. Format follows &lt;a href="https://keepachangelog.com/en/1.1.0/"&gt;Keep a Changelog&lt;/a&gt;; versions follow &lt;a href="https://semver.org/spec/v2.0.0.html"&gt;Semantic Versioning&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Pre-1.0 policy:&lt;/strong&gt; breaking changes ship as MINOR bumps (and are called out under &lt;strong&gt;Breaking&lt;/strong&gt; below). Post-1.0, breaking changes will require a MAJOR bump.&lt;/p&gt;
 &lt;h2 id="unreleased"&gt;[Unreleased]&lt;/h2&gt;
-&lt;h2 id="031--2026-04-15"&gt;[0.3.1] — 2026-04-15&lt;/h2&gt;
+&lt;h2 id="040--2026-04-15"&gt;[0.4.0] — 2026-04-15&lt;/h2&gt;
 &lt;h3 id="changed"&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Monorepo milestone (no orc code changes). Shipped the plugin-subsite template system at &lt;code&gt;plugins/_template/&lt;/code&gt; + shared cohesion artifacts at &lt;code&gt;shared/&lt;/code&gt; (tokens.css, header-strip.html), matrix CI workflow at &lt;code&gt;.github/workflows/build-plugin-sites.yml&lt;/code&gt;, and three generators at &lt;code&gt;bin/&lt;/code&gt; (&lt;code&gt;new-plugin&lt;/code&gt;, &lt;code&gt;build-plugin-site&lt;/code&gt;, &lt;code&gt;gen-commands-doc&lt;/code&gt;). Site repo rewired to consume release-asset tarballs instead of Hugo bundles. Next (stage 3): instantiate the template for orc and cut over the transitional Hugo bundles for &lt;code&gt;athandial.com/skills/orc/&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="031--2026-04-15"&gt;[0.3.1] — 2026-04-15&lt;/h2&gt;
+&lt;h3 id="changed-1"&gt;Changed&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Internal: unified handoff state directory on &lt;code&gt;.orc/&lt;/code&gt; (was &lt;code&gt;.orchestrate/&lt;/code&gt;). All handoff artifacts (&lt;code&gt;HANDOFF.md&lt;/code&gt;, &lt;code&gt;state.json&lt;/code&gt;, &lt;code&gt;AUTO-RESUME.txt&lt;/code&gt;, &lt;code&gt;tasks.json&lt;/code&gt;) now live alongside &lt;code&gt;.orc/backlog/&lt;/code&gt; and &lt;code&gt;.orc/plans/&lt;/code&gt; in a single per-repo state dir. Updated &lt;code&gt;handoff/&lt;/code&gt; scripts and &lt;code&gt;SKILL.md&lt;/code&gt; accordingly. Existing &lt;code&gt;.orchestrate/&lt;/code&gt; dirs in user repos are not auto-migrated — &lt;code&gt;checkpoint.sh&lt;/code&gt; will simply start writing to &lt;code&gt;.orc/&lt;/code&gt; next run.&lt;/li&gt;
 &lt;li&gt;Refreshed stale &lt;code&gt;orc:plan&lt;/code&gt; references to &lt;code&gt;orc:orchestrate&lt;/code&gt; across SKILL.md frontmatter descriptions (all seven skills), &lt;code&gt;install.sh&lt;/code&gt; banner, &lt;code&gt;CLAUDE.md&lt;/code&gt;, and the &lt;code&gt;orchestrate/&lt;/code&gt; prose that still pointed at the pre-0.2 command name. Also corrected &lt;code&gt;orchestrate/SKILL.md&lt;/code&gt;&amp;rsquo;s &amp;ldquo;Part of the orc system&amp;rdquo; line which still listed the pre-consolidation names &lt;code&gt;orc:add / orc:list / orc:pick&lt;/code&gt; (rolled into &lt;code&gt;orc:backlog&lt;/code&gt; in 0.1.0).&lt;/li&gt;
@@ -73,7 +78,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;plugins/orc/docs/&lt;/code&gt; — source for the public docs surface at &lt;a href="https://athandial.com/skills/orc/"&gt;https://athandial.com/skills/orc/&lt;/a&gt;. Page bundle with &lt;code&gt;_index.md&lt;/code&gt;, &lt;code&gt;quickstart.md&lt;/code&gt;, &lt;code&gt;architecture.md&lt;/code&gt;. The companion site auto-generates &lt;code&gt;commands.md&lt;/code&gt; (from &lt;code&gt;commands/*.md&lt;/code&gt; frontmatter) and &lt;code&gt;changelog.md&lt;/code&gt; (from this file) at build time.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="changed-1"&gt;Changed&lt;/h3&gt;
+&lt;h3 id="changed-2"&gt;Changed&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;README.md&lt;/code&gt; rewritten to reflect the current &lt;code&gt;/orc:*&lt;/code&gt; command surface (was still referencing the pre-0.2 names like &lt;code&gt;orc:plan&lt;/code&gt;, &lt;code&gt;orc:add&lt;/code&gt;, &lt;code&gt;orc:list&lt;/code&gt;). Now points to the docs site as the source of truth for everything beyond install + command list.&lt;/li&gt;
 &lt;/ul&gt;
@@ -82,7 +87,7 @@
 &lt;ul&gt;
 &lt;li&gt;Seven &lt;code&gt;/orc:*&lt;/code&gt; slash command wrappers in &lt;code&gt;plugins/orc/commands/&lt;/code&gt; — &lt;code&gt;orchestrate&lt;/code&gt;, &lt;code&gt;backlog&lt;/code&gt;, &lt;code&gt;status&lt;/code&gt;, &lt;code&gt;scope&lt;/code&gt;, &lt;code&gt;recap&lt;/code&gt;, &lt;code&gt;handoff&lt;/code&gt;, &lt;code&gt;autoresearch&lt;/code&gt;. Makes orc skills tab-completable as first-class slash commands instead of Skill-tool-only.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="changed-2"&gt;Changed&lt;/h3&gt;
+&lt;h3 id="changed-3"&gt;Changed&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Breaking:&lt;/strong&gt; renamed the &lt;code&gt;plan&lt;/code&gt; skill → &lt;code&gt;orchestrate&lt;/code&gt; (and its dir &lt;code&gt;plugins/orc/skills/plan/&lt;/code&gt; → &lt;code&gt;plugins/orc/skills/orchestrate/&lt;/code&gt;). Invoke as &lt;code&gt;/orc:orchestrate&lt;/code&gt; instead of &lt;code&gt;/orc:plan&lt;/code&gt;. Rationale: &amp;ldquo;plan&amp;rdquo; collides semantically with Claude-native plan mode (Shift+Tab) and reads as planning rather than multi-agent execution.&lt;/li&gt;
 &lt;/ul&gt;
@@ -239,4 +244,15 @@
 &lt;li&gt;&lt;strong&gt;Reviews&lt;/strong&gt; the draft critically, runs IP safety scanning, and reverts regressions automatically&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Exports&lt;/strong&gt; a clean final bundle with bibliography, figures, and an optional compiled PDF&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.&lt;/p&gt;</description></item><item><title>{{PLUGIN_NAME}}</title><link>https://athan-dial.github.io/skills/_template/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://athan-dial.github.io/skills/_template/</guid><description>&lt;p&gt;{{PLUGIN_TAGLINE}}&lt;/p&gt;
+&lt;h2 id="what-plugin_name-does"&gt;What {{PLUGIN_NAME}} does&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Replace this paragraph with a 2–3 sentence plain-language overview of what the plugin accomplishes and who it&amp;rsquo;s for.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Replace this paragraph with the &amp;ldquo;why&amp;rdquo; — what problem exists, why this solves it better than the status quo.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="quickstart"&gt;Quickstart&lt;/h2&gt;
+&lt;p&gt;See &lt;a href=""&gt;Quickstart&lt;/a&gt; for a 5-minute walkthrough.&lt;/p&gt;
+&lt;h2 id="next"&gt;Next&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=""&gt;Architecture&lt;/a&gt; — how {{PLUGIN_NAME}} works under the hood&lt;/li&gt;
+&lt;li&gt;&lt;a href="reference/commands.md"&gt;Commands&lt;/a&gt; — full reference&lt;/li&gt;
+&lt;li&gt;&lt;a href="changelog.md"&gt;Changelog&lt;/a&gt; — release history&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
