@@ -1,157 +1,167 @@
 #!/usr/bin/env bash
-# Pull plugin docs from athan-dial/skills and emit Hugo page bundles under
-# content/skills/<plugin>/. Idempotent: safe to run at build time.
+# Download pre-built plugin subsites from athan-dial/skills releases and extract
+# them into docs/skills/<plugin>/ for Hugo to serve as static trees (index.html +
+# docs/). No content/ writes.
 #
-# Per plugin, the bundle contains:
-#   _index.md       ← from plugins/<p>/docs/_index.md if present, else generated from README.md
-#   <topic>.md      ← every other plugins/<p>/docs/*.md, copied verbatim
-#   commands.md     ← generated from plugins/<p>/commands/*.md frontmatter
-#   changelog.md    ← generated from plugins/<p>/CHANGELOG.md
-#
-# Legacy flat content/skills/<plugin>.md files are deleted so Hugo doesn't
-# serve both. content/skills/_index.md (the hub page) is preserved.
+# Env:
+#   SKILLS_REPO      — default: athan-dial/skills
+#   SKILLS_LOCAL_DIR — if set, skip gh release download; use local marketplace.json
+#                      and dist/<plugin>-site-*.tar.gz or bin/build-plugin-site.
 
 set -euo pipefail
 
 SITE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SKILLS_REPO="${SKILLS_REPO:-athan-dial/skills}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-REPO="${SKILLS_REPO:-athan-dial/skills}"
-REF="${SKILLS_REF:-main}"
+DOCS_SKILLS="$SITE_DIR/docs/skills"
 
-# SKILLS_LOCAL_DIR overrides the git clone for local development / dry runs.
-if [ -n "${SKILLS_LOCAL_DIR:-}" ]; then
-  echo "→ Using local skills dir: $SKILLS_LOCAL_DIR"
-  ln -s "$(cd "$SKILLS_LOCAL_DIR" && pwd)" "$TMP/skills"
-else
-  echo "→ Fetching $REPO@$REF"
-  git clone --depth 1 --branch "$REF" "https://github.com/$REPO.git" "$TMP/skills" 2>&1 | tail -2
-fi
+die() { echo "error: $*" >&2; exit 1; }
 
-OUT="$SITE_DIR/content/skills"
-mkdir -p "$OUT"
-
-# Extract a single string field from a tiny JSON file. Tolerates whitespace.
-json_field() {
-  local file="$1" key="$2"
-  grep -oE "\"$key\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" "$file" | head -1 \
-    | sed -E "s/\"$key\"[[:space:]]*:[[:space:]]*\"([^\"]*)\"/\1/"
+require_cmd() {
+  command -v "$1" >/dev/null 2>&1 || die "$1 is required but not installed."
 }
 
-# Pull a YAML frontmatter scalar from a markdown file. Strips surrounding
-# single/double quotes if present. Uses sed for portability (macOS awk
-# lacks 3-arg match).
-fm_field() {
-  local file="$1" key="$2"
-  awk -v k="$key" '
-    /^---[[:space:]]*$/ { fm++; next }
-    fm == 1 && index($0, k ":") == 1 { print; exit }
-  ' "$file" \
-    | sed -E "s/^${key}[[:space:]]*:[[:space:]]*//; s/^['\"]//; s/['\"]$//"
+require_gh() {
+  command -v gh >/dev/null 2>&1 || die \
+    "gh (GitHub CLI) is required when SKILLS_LOCAL_DIR is unset. Install: https://cli.github.com/"
 }
 
-# Delete legacy flat plugin pages (preserve _index.md and any non-plugin dirs).
-for legacy in "$OUT"/*.md; do
-  [ -e "$legacy" ] || continue
-  case "$(basename "$legacy")" in
-    _index.md) ;;
-    *) echo "  ✗ removing legacy $(basename "$legacy")"; rm -f "$legacy" ;;
-  esac
-done
-
-for plugin_dir in "$TMP/skills/plugins"/*/; do
-  [ -d "$plugin_dir" ] || continue
-  name="$(basename "$plugin_dir")"
-  readme="$plugin_dir/README.md"
-  changelog="$plugin_dir/CHANGELOG.md"
-  docs_dir="$plugin_dir/docs"
-  cmds_dir="$plugin_dir/commands"
-  plugin_json="$plugin_dir/.claude-plugin/plugin.json"
-
-  bundle="$OUT/$name"
-  rm -rf "$bundle"
-  mkdir -p "$bundle"
-
-  desc=""
-  version=""
-  if [ -f "$plugin_json" ]; then
-    desc="$(json_field "$plugin_json" description)"
-    version="$(json_field "$plugin_json" version)"
-  fi
-
-  # 1. _index.md — prefer docs/_index.md, else synthesize from README.md
-  if [ -f "$docs_dir/_index.md" ]; then
-    cp "$docs_dir/_index.md" "$bundle/_index.md"
-  elif [ -f "$readme" ]; then
-    {
-      echo "---"
-      echo "title: \"$name\""
-      echo "description: \"${desc:-Claude Code plugin}\""
-      echo "plugin: \"$name\""
-      echo "source: \"https://github.com/$REPO/tree/$REF/plugins/$name\""
-      echo "---"
-      echo ""
-      echo "> Install: \`claude plugin install $REPO:$name\`"
-      echo ""
-      cat "$readme"
-    } > "$bundle/_index.md"
+read_marketplace_json() {
+  if [ -n "${SKILLS_LOCAL_DIR:-}" ]; then
+    local mp="$SKILLS_LOCAL_DIR/.claude-plugin/marketplace.json"
+    [ -f "$mp" ] || die "SKILLS_LOCAL_DIR marketplace missing: $mp"
+    cat "$mp"
   else
-    echo "  ⚠ $name: no README.md or docs/_index.md, skipping"
-    rm -rf "$bundle"
-    continue
+    require_gh
+    gh api "repos/${SKILLS_REPO}/contents/.claude-plugin/marketplace.json" --jq '.content' | base64 -d
+  fi
+}
+
+# Prefer tags like plugin-v* (first match in list order), else latest plugin-site-* by version sort.
+resolve_release_tag() {
+  local p="$1"
+  local list_json
+  list_json="$(gh release list --repo "$SKILLS_REPO" --json tagName --limit 100)"
+  local tag
+  tag="$(jq -r --arg p "$p" '[.[] | select(.tagName | startswith($p + "-v")) | .tagName] | .[0] // empty' <<<"$list_json")"
+  if [ -z "$tag" ]; then
+    tag="$(jq -r --arg p "$p" '.[] | select(.tagName | startswith($p + "-site-")) | .tagName' <<<"$list_json" | sort -V | tail -n 1)"
+  fi
+  printf '%s' "$tag"
+}
+
+version_label_from_tag() {
+  local p="$1" tag="$2"
+  if [ -z "$tag" ]; then
+    printf '?'
+    return
+  fi
+  if [[ "$tag" == "$p"-v* ]]; then
+    printf '%s' "${tag#"$p"-}"
+    return
+  fi
+  if [[ "$tag" == "$p"-site-* ]]; then
+    printf '%s' "${tag#"$p"-site-}"
+    return
+  fi
+  printf '%s' "$tag"
+}
+
+pick_local_tarball() {
+  local p="$1" dir="$2"
+  shopt -s nullglob
+  local -a files=( "$dir/${p}-site-"*.tar.gz )
+  shopt -u nullglob
+  if [ "${#files[@]}" -eq 0 ]; then
+    return 1
+  fi
+  if [ "${#files[@]}" -eq 1 ]; then
+    printf '%s' "${files[0]}"
+    return 0
+  fi
+  # Latest semver-ish sort
+  printf '%s\n' "${files[@]}" | sort -V | tail -n 1
+}
+
+extract_tarball() {
+  local p="$1" tb="$2"
+  rm -rf "$DOCS_SKILLS/$p"
+  mkdir -p "$DOCS_SKILLS/$p"
+  if ! tar -xzf "$tb" -C "$DOCS_SKILLS/$p" --strip-components=1; then
+    rm -rf "$DOCS_SKILLS/$p"
+    die "tar extraction failed for $p (removed partial $DOCS_SKILLS/$p/)"
+  fi
+}
+
+require_cmd jq
+
+mkdir -p "$DOCS_SKILLS"
+
+MARKETPLACE_JSON="$(read_marketplace_json)"
+COUNT=0
+
+while IFS= read -r p; do
+  [ -n "$p" ] || continue
+
+  tb=""
+  ver_display=""
+
+  if [ -n "${SKILLS_LOCAL_DIR:-}" ]; then
+    local_root="$(cd "$SKILLS_LOCAL_DIR" && pwd)"
+    dist_dir="$local_root/dist"
+    mkdir -p "$dist_dir"
+
+    tb="$(pick_local_tarball "$p" "$dist_dir" || true)"
+    if [ -z "${tb:-}" ]; then
+      # Skip plugins that don't have a site/ dir yet (e.g. new plugins mid-build-out).
+      if [ ! -d "$local_root/plugins/$p/site" ]; then
+        echo "  ⚠ $p: no plugins/$p/site/ yet, skipping"
+        continue
+      fi
+      build_script="$local_root/bin/build-plugin-site"
+      if [ ! -f "$build_script" ]; then
+        die "No tarball at $dist_dir/${p}-site-*.tar.gz and missing build script: $build_script"
+      fi
+      echo "  … $p: building local site (bin/build-plugin-site)…"
+      bash "$build_script" "$p"
+      tb="$(pick_local_tarball "$p" "$dist_dir" || true)"
+      [ -n "${tb:-}" ] || die "After build, still no $dist_dir/${p}-site-*.tar.gz"
+    fi
+    vbase="$(basename "$tb" .tar.gz)"
+    _pfx="${p}-site-"
+    ver_display="${vbase#"$_pfx"}"
+    extract_tarball "$p" "$tb"
+  else
+    require_gh
+    tag="$(resolve_release_tag "$p")"
+    if [ -z "$tag" ]; then
+      echo "  ⚠ $p: no release assets yet, skipping"
+      continue
+    fi
+    shopt -s nullglob
+    rm -f "$TMP/${p}-site-"*.tar.gz
+    shopt -u nullglob
+    if ! gh release download "$tag" --repo "$SKILLS_REPO" --pattern "${p}-site-*.tar.gz" --dir "$TMP" --clobber; then
+      echo "  ⚠ $p: no ${p}-site-*.tar.gz on release $tag, skipping"
+      continue
+    fi
+    shopt -s nullglob
+    matches=( "$TMP/${p}-site-"*.tar.gz )
+    shopt -u nullglob
+    if [ "${#matches[@]}" -eq 0 ]; then
+      echo "  ⚠ $p: download produced no matching tarball, skipping"
+      continue
+    fi
+    tb="$(printf '%s\n' "${matches[@]}" | sort -V | tail -n 1)"
+    ver_display="$(version_label_from_tag "$p" "$tag")"
+    extract_tarball "$p" "$tb"
+    rm -f "${matches[@]}"
   fi
 
-  # 2. Mirror other docs/*.md verbatim (preserves their own frontmatter)
-  if [ -d "$docs_dir" ]; then
-    for doc in "$docs_dir"/*.md; do
-      [ -e "$doc" ] || continue
-      base="$(basename "$doc")"
-      [ "$base" = "_index.md" ] && continue
-      cp "$doc" "$bundle/$base"
-    done
-  fi
+  COUNT=$((COUNT + 1))
+  echo "  ✓ $p → docs/skills/$p/ ($ver_display)"
+done < <(jq -r '.plugins[].name' <<<"$MARKETPLACE_JSON")
 
-  # 3. commands.md — generated from commands/*.md frontmatter
-  if [ -d "$cmds_dir" ] && compgen -G "$cmds_dir/*.md" > /dev/null; then
-    {
-      echo "---"
-      echo "title: \"Commands\""
-      echo "description: \"All /$name:* slash commands.\""
-      echo "weight: 40"
-      echo "---"
-      echo ""
-      echo "Auto-generated from \`plugins/$name/commands/*.md\` frontmatter. Do not edit by hand."
-      echo ""
-      echo "| Command | Arguments | Description |"
-      echo "|---|---|---|"
-      for cmd_file in "$cmds_dir"/*.md; do
-        cmd_name="$(basename "$cmd_file" .md)"
-        cmd_desc="$(fm_field "$cmd_file" description)"
-        cmd_args="$(fm_field "$cmd_file" argument-hint)"
-        # Pipe-escape any literal pipes in description/args
-        cmd_desc="${cmd_desc//|/\\|}"
-        cmd_args="${cmd_args//|/\\|}"
-        printf "| \`/%s:%s\` | %s | %s |\n" "$name" "$cmd_name" "${cmd_args:-—}" "${cmd_desc:-—}"
-      done
-    } > "$bundle/commands.md"
-  fi
-
-  # 4. changelog.md — copy CHANGELOG.md with a Hugo frontmatter header
-  if [ -f "$changelog" ]; then
-    {
-      echo "---"
-      echo "title: \"Changelog\""
-      echo "description: \"Release history for the $name plugin${version:+ (current: $version)}.\""
-      echo "weight: 50"
-      echo "---"
-      echo ""
-      cat "$changelog"
-    } > "$bundle/changelog.md"
-  fi
-
-  echo "  ✓ $name → content/skills/$name/ (v${version:-?})"
-done
-
-count="$(find "$OUT" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')"
-echo "→ Done. $count plugin bundle(s) generated under content/skills/."
+echo "→ Done. $COUNT plugin subsites slotted in."
