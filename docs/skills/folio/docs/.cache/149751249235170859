@@ -1,0 +1,224 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"workflow-overview\">Workflow Overview<a class=\"headerlink\" href=\"#workflow-overview\" title=\"Permanent link\">&para;</a></h1>\n<p>Folio runs a shared spine of stages (0–1 and final export) that are common to all modes, with mode-specific stages in between. Mode branching happens at the routing checkpoint after Stage 1.</p>\n<hr />\n<h2 id=\"stage-map\">Stage map<a class=\"headerlink\" href=\"#stage-map\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Stage</th>\n<th>All modes</th>\n<th>White paper</th>\n<th>Research paper</th>\n<th>Hybrid</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>0</td>\n<td>Initialize</td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>1</td>\n<td>Prep + Normalize</td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>RC</td>\n<td>Routing checkpoint</td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>2</td>\n<td></td>\n<td>W2: Perspectives</td>\n<td>D2: Global Planning</td>\n<td>H2: Conceptual Framing</td>\n</tr>\n<tr>\n<td>3</td>\n<td></td>\n<td>W3: Argument Structure</td>\n<td>D3: Support Artifacts</td>\n<td>H3: Evidence Support</td>\n</tr>\n<tr>\n<td>4</td>\n<td></td>\n<td>W4: Outline + Draft</td>\n<td>D4: Draft Composition</td>\n<td>H4: Merged Draft</td>\n</tr>\n<tr>\n<td>5</td>\n<td></td>\n<td>W5: Review + IP</td>\n<td>D5: Review + Repair</td>\n<td>H5: Dual Review</td>\n</tr>\n<tr>\n<td>6</td>\n<td></td>\n<td>W6: Executive Outputs</td>\n<td>D6: Finalize</td>\n<td>H6: Combined Export</td>\n</tr>\n<tr>\n<td>Exit</td>\n<td>Package + Export</td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<p><strong>RC</strong> = Routing checkpoint (after Checkpoint 1 approval).</p>\n<hr />\n<h2 id=\"stage-0-initialize-folioinit\">Stage 0: Initialize (<code>/folio:init</code>)<a class=\"headerlink\" href=\"#stage-0-initialize-folioinit\" title=\"Permanent link\">&para;</a></h2>\n<p>Folio collects your idea, audience, thesis, constraints, venue, and preferred mode (or defers to automatic routing). It runs:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/init_workspace.py<span class=\"w\"> </span><span class=\"s2\">&quot;&lt;workspace_path&gt;&quot;</span>\n</span></code></pre></div>\n<p>This creates the canonical workspace layout under <code>workspace/</code> and seeds <code>intent.json</code>. Your raw materials are copied into <code>inputs/raw_materials/</code>.</p>\n<p><strong>Exit condition:</strong> <code>workspace/</code> exists with all subdirectories; <code>intent.json</code> populated.</p>\n<hr />\n<h2 id=\"stage-1-prep-and-normalization-folioprep\">Stage 1: Prep and Normalization (<code>/folio:prep</code>)<a class=\"headerlink\" href=\"#stage-1-prep-and-normalization-folioprep\" title=\"Permanent link\">&para;</a></h2>\n<p>Raw materials are scanned, classified, and normalized into structured canonical inputs:</p>\n<ul>\n<li><code>inputs/idea.md</code> — Core contribution and research questions</li>\n<li><code>inputs/experimental_log.md</code> — Experiments, results, observations</li>\n<li><code>inputs/materials_manifest.json</code> — Per-file inventory with relevance signals</li>\n<li><code>inputs/venue_profile.md</code> — Target outlet, format, audience, evaluation criteria</li>\n<li><code>inputs/figures_manifest.json</code> — Existing and planned figures</li>\n</ul>\n<p>The prep pipeline runs four scripts in order:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/prep_materials.py<span class=\"w\"> </span>workspace/\n</span><span id=\"__span-1-2\"><a id=\"__codelineno-1-2\" name=\"__codelineno-1-2\" href=\"#__codelineno-1-2\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/classify_materials.py<span class=\"w\"> </span>workspace/\n</span><span id=\"__span-1-3\"><a id=\"__codelineno-1-3\" name=\"__codelineno-1-3\" href=\"#__codelineno-1-3\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/route_mode.py<span class=\"w\"> </span>workspace/\n</span><span id=\"__span-1-4\"><a id=\"__codelineno-1-4\" name=\"__codelineno-1-4\" href=\"#__codelineno-1-4\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/validate_inputs.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Gaps in materials are marked with <code>&lt;!-- GAP: description --&gt;</code> rather than blocked. Only gaps that block the next gate require user input.</p>\n<p><strong>Gate A — Input completeness:</strong> <code>validate_inputs.py</code> must exit 0 before leaving Stage 1. Errors block; warnings are informational.</p>\n<h3 id=\"human-checkpoint-1\">Human Checkpoint 1<a class=\"headerlink\" href=\"#human-checkpoint-1\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio presents what was synthesized, what was copied verbatim, identified gaps, and the mode recommendation. <strong>Explicit approval required before routing.</strong></p>\n<hr />\n<h2 id=\"routing-checkpoint\">Routing checkpoint<a class=\"headerlink\" href=\"#routing-checkpoint\" title=\"Permanent link\">&para;</a></h2>\n<p>After Checkpoint 1 approval, Folio reads <code>route.json</code> and presents:</p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a>Recommended mode: &lt;white_paper | research_paper | hybrid&gt; (confidence: X.XX)\n</span><span id=\"__span-2-2\"><a id=\"__codelineno-2-2\" name=\"__codelineno-2-2\" href=\"#__codelineno-2-2\"></a>Reasons: [bullet list]\n</span></code></pre></div>\n<p>You can accept the recommendation or override it. The selected mode is logged in <code>logs/checkpoints.md</code>. <strong>Folio does not proceed into mode-specific stages until you confirm.</strong></p>\n<div class=\"admonition tip\">\n<p class=\"admonition-title\">Low-confidence routing</p>\n<p>If <code>route_mode.py</code> reports confidence below 0.5, the materials are ambiguous. Folio will ask you to choose a mode explicitly rather than guessing.</p>\n</div>\n<hr />\n<h2 id=\"mode-specific-stages-25-folioplan-foliosupport-foliodraft-folioreview\">Mode-specific stages (2–5) (<code>/folio:plan</code>, <code>/folio:support</code>, <code>/folio:draft</code>, <code>/folio:review</code>)<a class=\"headerlink\" href=\"#mode-specific-stages-25-folioplan-foliosupport-foliodraft-folioreview\" title=\"Permanent link\">&para;</a></h2>\n<p>After routing confirmation, Folio follows one of three branches. See the mode guides for full detail:</p>\n<ul>\n<li><a href=\"../modes/white-paper/\">White Paper Mode</a> — Perspectives, argument structure, Markdown draft, executive outputs</li>\n<li><a href=\"../modes/research-paper/\">Research Paper Mode</a> — Global planning, support artifacts, LaTeX draft, finalize</li>\n<li><a href=\"../modes/hybrid/\">Hybrid Mode</a> — Conceptual framing + evidence support, merged draft, dual review</li>\n</ul>\n<p>All three branches share the same quality gates (G: review non-regression) and the IP gate before review is considered complete.</p>\n<hr />\n<h2 id=\"human-checkpoint-2\">Human Checkpoint 2<a class=\"headerlink\" href=\"#human-checkpoint-2\" title=\"Permanent link\">&para;</a></h2>\n<p>Checkpoint 2 occurs after planning in research paper and hybrid modes, or at the planning approval point in white paper mode. Folio presents:</p>\n<ul>\n<li>Outline and narrative arc</li>\n<li>Claim ledger summary (highlights weak and unsupported claims)</li>\n<li>Figure and literature plans</li>\n</ul>\n<p><strong>Explicit approval required before drafting.</strong></p>\n<hr />\n<h2 id=\"ip-scanning-all-modes\">IP scanning (all modes)<a class=\"headerlink\" href=\"#ip-scanning-all-modes\" title=\"Permanent link\">&para;</a></h2>\n<p>Before any mode marks its review stage complete, Folio runs:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-3-1\"><a id=\"__codelineno-3-1\" name=\"__codelineno-3-1\" href=\"#__codelineno-3-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/scan_redlines.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>This checks all draft content against <code>ip_policy.json</code>. If violations are found, <strong>the IP Gate blocks shipping</strong> until you redact, rewrite, or explicitly acknowledge the risk (which is logged).</p>\n<p>See <a href=\"../../reference/ip-policy/\">IP Policy</a> for configuration.</p>\n<hr />\n<h2 id=\"human-checkpoint-3\">Human Checkpoint 3<a class=\"headerlink\" href=\"#human-checkpoint-3\" title=\"Permanent link\">&para;</a></h2>\n<p>Before final packaging, Folio presents the final scorecard, deferred issues, and softened claims. <strong>Explicit approval required before export.</strong></p>\n<hr />\n<h2 id=\"final-packaging-folioexport\">Final Packaging (<code>/folio:export</code>)<a class=\"headerlink\" href=\"#final-packaging-folioexport\" title=\"Permanent link\">&para;</a></h2>\n<p>After Checkpoint 3:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-4-1\"><a id=\"__codelineno-4-1\" name=\"__codelineno-4-1\" href=\"#__codelineno-4-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/package_exports.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>This assembles a mode-appropriate bundle under <code>final/</code> (and/or <code>exports/</code>). Folio reports:</p>\n<ul>\n<li>Absolute workspace path</li>\n<li>All artifacts produced, organized by directory</li>\n<li>Final review score (<code>overall</code> from latest scorecard)</li>\n<li>Known issues and deferred items</li>\n<li>Recommended next steps</li>\n</ul>\n<hr />\n<h2 id=\"resuming-a-workspace\">Resuming a workspace<a class=\"headerlink\" href=\"#resuming-a-workspace\" title=\"Permanent link\">&para;</a></h2>\n<p>Re-invoke <code>/folio</code> on an existing workspace path. Folio reads <code>logs/checkpoints.md</code> to detect the last completed stage and offers to resume from the next one.</p>\n<p>You can also run a specific stage directly with its standalone command:</p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-5-1\"><a id=\"__codelineno-5-1\" name=\"__codelineno-5-1\" href=\"#__codelineno-5-1\"></a>/folio:review workspace/\n</span></code></pre></div>\n<p>Use <code>/folio:status workspace/</code> to see which stages are complete before jumping in.</p>\n<p>To change mode on an existing workspace, ask Folio to update <code>route.json</code> with a <code>user_override</code> — the change is logged.</p>\n<hr />\n<h2 id=\"logging\">Logging<a class=\"headerlink\" href=\"#logging\" title=\"Permanent link\">&para;</a></h2>\n<p>Every session appends to two log files in <code>workspace/logs/</code>:</p>\n<ul>\n<li><code>run_log.md</code> — Decisions, overrides, tool failures, user waivers</li>\n<li><code>checkpoints.md</code> — Table of stage completions and human approvals</li>\n</ul>\n<p>These logs enable deterministic resume and provide an audit trail for \"why did we ship this draft?\"</p>\n<hr />\n<h2 id=\"workspace-layout\">Workspace layout<a class=\"headerlink\" href=\"#workspace-layout\" title=\"Permanent link\">&para;</a></h2>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-6-1\"><a id=\"__codelineno-6-1\" name=\"__codelineno-6-1\" href=\"#__codelineno-6-1\"></a>workspace/\n</span><span id=\"__span-6-2\"><a id=\"__codelineno-6-2\" name=\"__codelineno-6-2\" href=\"#__codelineno-6-2\"></a>  intent.json\n</span><span id=\"__span-6-3\"><a id=\"__codelineno-6-3\" name=\"__codelineno-6-3\" href=\"#__codelineno-6-3\"></a>  route.json\n</span><span id=\"__span-6-4\"><a id=\"__codelineno-6-4\" name=\"__codelineno-6-4\" href=\"#__codelineno-6-4\"></a>  ip_policy.json\n</span><span id=\"__span-6-5\"><a id=\"__codelineno-6-5\" name=\"__codelineno-6-5\" href=\"#__codelineno-6-5\"></a>  inputs/\n</span><span id=\"__span-6-6\"><a id=\"__codelineno-6-6\" name=\"__codelineno-6-6\" href=\"#__codelineno-6-6\"></a>    raw_materials/\n</span><span id=\"__span-6-7\"><a id=\"__codelineno-6-7\" name=\"__codelineno-6-7\" href=\"#__codelineno-6-7\"></a>    idea.md\n</span><span id=\"__span-6-8\"><a id=\"__codelineno-6-8\" name=\"__codelineno-6-8\" href=\"#__codelineno-6-8\"></a>    experimental_log.md\n</span><span id=\"__span-6-9\"><a id=\"__codelineno-6-9\" name=\"__codelineno-6-9\" href=\"#__codelineno-6-9\"></a>    venue_profile.md\n</span><span id=\"__span-6-10\"><a id=\"__codelineno-6-10\" name=\"__codelineno-6-10\" href=\"#__codelineno-6-10\"></a>    materials_manifest.json\n</span><span id=\"__span-6-11\"><a id=\"__codelineno-6-11\" name=\"__codelineno-6-11\" href=\"#__codelineno-6-11\"></a>    figures_manifest.json\n</span><span id=\"__span-6-12\"><a id=\"__codelineno-6-12\" name=\"__codelineno-6-12\" href=\"#__codelineno-6-12\"></a>  planning/\n</span><span id=\"__span-6-13\"><a id=\"__codelineno-6-13\" name=\"__codelineno-6-13\" href=\"#__codelineno-6-13\"></a>    outline.json\n</span><span id=\"__span-6-14\"><a id=\"__codelineno-6-14\" name=\"__codelineno-6-14\" href=\"#__codelineno-6-14\"></a>    claim_ledger.json\n</span><span id=\"__span-6-15\"><a id=\"__codelineno-6-15\" name=\"__codelineno-6-15\" href=\"#__codelineno-6-15\"></a>    figure_plan.json\n</span><span id=\"__span-6-16\"><a id=\"__codelineno-6-16\" name=\"__codelineno-6-16\" href=\"#__codelineno-6-16\"></a>    literature_plan.json\n</span><span id=\"__span-6-17\"><a id=\"__codelineno-6-17\" name=\"__codelineno-6-17\" href=\"#__codelineno-6-17\"></a>    results_inventory.json\n</span><span id=\"__span-6-18\"><a id=\"__codelineno-6-18\" name=\"__codelineno-6-18\" href=\"#__codelineno-6-18\"></a>    perspectives.json        (white paper / hybrid)\n</span><span id=\"__span-6-19\"><a id=\"__codelineno-6-19\" name=\"__codelineno-6-19\" href=\"#__codelineno-6-19\"></a>    question_tree.json       (white paper / hybrid)\n</span><span id=\"__span-6-20\"><a id=\"__codelineno-6-20\" name=\"__codelineno-6-20\" href=\"#__codelineno-6-20\"></a>    argument_graph.md        (white paper / hybrid)\n</span><span id=\"__span-6-21\"><a id=\"__codelineno-6-21\" name=\"__codelineno-6-21\" href=\"#__codelineno-6-21\"></a>  citations/\n</span><span id=\"__span-6-22\"><a id=\"__codelineno-6-22\" name=\"__codelineno-6-22\" href=\"#__codelineno-6-22\"></a>    citation_pool.json\n</span><span id=\"__span-6-23\"><a id=\"__codelineno-6-23\" name=\"__codelineno-6-23\" href=\"#__codelineno-6-23\"></a>    refs.bib\n</span><span id=\"__span-6-24\"><a id=\"__codelineno-6-24\" name=\"__codelineno-6-24\" href=\"#__codelineno-6-24\"></a>  figures/\n</span><span id=\"__span-6-25\"><a id=\"__codelineno-6-25\" name=\"__codelineno-6-25\" href=\"#__codelineno-6-25\"></a>    generated/\n</span><span id=\"__span-6-26\"><a id=\"__codelineno-6-26\" name=\"__codelineno-6-26\" href=\"#__codelineno-6-26\"></a>    supplied/\n</span><span id=\"__span-6-27\"><a id=\"__codelineno-6-27\" name=\"__codelineno-6-27\" href=\"#__codelineno-6-27\"></a>    captions.json\n</span><span id=\"__span-6-28\"><a id=\"__codelineno-6-28\" name=\"__codelineno-6-28\" href=\"#__codelineno-6-28\"></a>  tables/\n</span><span id=\"__span-6-29\"><a id=\"__codelineno-6-29\" name=\"__codelineno-6-29\" href=\"#__codelineno-6-29\"></a>    generated/\n</span><span id=\"__span-6-30\"><a id=\"__codelineno-6-30\" name=\"__codelineno-6-30\" href=\"#__codelineno-6-30\"></a>  drafts/\n</span><span id=\"__span-6-31\"><a id=\"__codelineno-6-31\" name=\"__codelineno-6-31\" href=\"#__codelineno-6-31\"></a>    paper.tex                (research paper / hybrid LaTeX)\n</span><span id=\"__span-6-32\"><a id=\"__codelineno-6-32\" name=\"__codelineno-6-32\" href=\"#__codelineno-6-32\"></a>    paper.md                 (white paper / hybrid Markdown)\n</span><span id=\"__span-6-33\"><a id=\"__codelineno-6-33\" name=\"__codelineno-6-33\" href=\"#__codelineno-6-33\"></a>    sections/\n</span><span id=\"__span-6-34\"><a id=\"__codelineno-6-34\" name=\"__codelineno-6-34\" href=\"#__codelineno-6-34\"></a>  reviews/\n</span><span id=\"__span-6-35\"><a id=\"__codelineno-6-35\" name=\"__codelineno-6-35\" href=\"#__codelineno-6-35\"></a>    review_round_N.md\n</span><span id=\"__span-6-36\"><a id=\"__codelineno-6-36\" name=\"__codelineno-6-36\" href=\"#__codelineno-6-36\"></a>    scorecard.json\n</span><span id=\"__span-6-37\"><a id=\"__codelineno-6-37\" name=\"__codelineno-6-37\" href=\"#__codelineno-6-37\"></a>    ip_safety_report.md\n</span><span id=\"__span-6-38\"><a id=\"__codelineno-6-38\" name=\"__codelineno-6-38\" href=\"#__codelineno-6-38\"></a>  final/\n</span><span id=\"__span-6-39\"><a id=\"__codelineno-6-39\" name=\"__codelineno-6-39\" href=\"#__codelineno-6-39\"></a>    paper.tex\n</span><span id=\"__span-6-40\"><a id=\"__codelineno-6-40\" name=\"__codelineno-6-40\" href=\"#__codelineno-6-40\"></a>    paper.pdf\n</span><span id=\"__span-6-41\"><a id=\"__codelineno-6-41\" name=\"__codelineno-6-41\" href=\"#__codelineno-6-41\"></a>    refs.bib\n</span><span id=\"__span-6-42\"><a id=\"__codelineno-6-42\" name=\"__codelineno-6-42\" href=\"#__codelineno-6-42\"></a>    figures/\n</span><span id=\"__span-6-43\"><a id=\"__codelineno-6-43\" name=\"__codelineno-6-43\" href=\"#__codelineno-6-43\"></a>  exports/\n</span><span id=\"__span-6-44\"><a id=\"__codelineno-6-44\" name=\"__codelineno-6-44\" href=\"#__codelineno-6-44\"></a>    executive_summary.md     (white paper / hybrid)\n</span><span id=\"__span-6-45\"><a id=\"__codelineno-6-45\" name=\"__codelineno-6-45\" href=\"#__codelineno-6-45\"></a>    bd_talking_points.md     (white paper / hybrid)\n</span><span id=\"__span-6-46\"><a id=\"__codelineno-6-46\" name=\"__codelineno-6-46\" href=\"#__codelineno-6-46\"></a>  logs/\n</span><span id=\"__span-6-47\"><a id=\"__codelineno-6-47\" name=\"__codelineno-6-47\" href=\"#__codelineno-6-47\"></a>    run_log.md\n</span><span id=\"__span-6-48\"><a id=\"__codelineno-6-48\" name=\"__codelineno-6-48\" href=\"#__codelineno-6-48\"></a>    checkpoints.md\n</span></code></pre></div>\n<p>See <a href=\"../../reference/artifacts/\">Artifacts</a> for a stage-by-stage breakdown of what each artifact is and when it is created.</p>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Workflow Overview",
+        "text": "<p>Folio runs a shared spine of stages (0–1 and final export) that are common to all modes, with mode-specific stages in between. Mode branching happens at the routing checkpoint after Stage 1.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-map",
+        "level": 2,
+        "title": "Stage map",
+        "text": "Stage All modes White paper Research paper Hybrid 0 Initialize 1 Prep + Normalize RC Routing checkpoint 2 W2: Perspectives D2: Global Planning H2: Conceptual Framing 3 W3: Argument Structure D3: Support Artifacts H3: Evidence Support 4 W4: Outline + Draft D4: Draft Composition H4: Merged Draft 5 W5: Review + IP D5: Review + Repair H5: Dual Review 6 W6: Executive Outputs D6: Finalize H6: Combined Export Exit Package + Export <p>RC = Routing checkpoint (after Checkpoint 1 approval).</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-0-initialize-folioinit",
+        "level": 2,
+        "title": "Stage 0: Initialize (<code>/folio:init</code>)",
+        "text": "<p>Folio collects your idea, audience, thesis, constraints, venue, and preferred mode (or defers to automatic routing). It runs:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/init_workspace.py \"&lt;workspace_path&gt;\"\n</code></pre> <p>This creates the canonical workspace layout under <code>workspace/</code> and seeds <code>intent.json</code>. Your raw materials are copied into <code>inputs/raw_materials/</code>.</p> <p>Exit condition: <code>workspace/</code> exists with all subdirectories; <code>intent.json</code> populated.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-1-prep-and-normalization-folioprep",
+        "level": 2,
+        "title": "Stage 1: Prep and Normalization (<code>/folio:prep</code>)",
+        "text": "<p>Raw materials are scanned, classified, and normalized into structured canonical inputs:</p> <ul> <li><code>inputs/idea.md</code> — Core contribution and research questions</li> <li><code>inputs/experimental_log.md</code> — Experiments, results, observations</li> <li><code>inputs/materials_manifest.json</code> — Per-file inventory with relevance signals</li> <li><code>inputs/venue_profile.md</code> — Target outlet, format, audience, evaluation criteria</li> <li><code>inputs/figures_manifest.json</code> — Existing and planned figures</li> </ul> <p>The prep pipeline runs four scripts in order:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/prep_materials.py workspace/\ncd plugins/folio &amp;&amp; python scripts/classify_materials.py workspace/\ncd plugins/folio &amp;&amp; python scripts/route_mode.py workspace/\ncd plugins/folio &amp;&amp; python scripts/validate_inputs.py workspace/\n</code></pre> <p>Gaps in materials are marked with <code>&lt;!-- GAP: description --&gt;</code> rather than blocked. Only gaps that block the next gate require user input.</p> <p>Gate A — Input completeness: <code>validate_inputs.py</code> must exit 0 before leaving Stage 1. Errors block; warnings are informational.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "human-checkpoint-1",
+        "level": 3,
+        "title": "Human Checkpoint 1",
+        "text": "<p>Folio presents what was synthesized, what was copied verbatim, identified gaps, and the mode recommendation. Explicit approval required before routing.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "routing-checkpoint",
+        "level": 2,
+        "title": "Routing checkpoint",
+        "text": "<p>After Checkpoint 1 approval, Folio reads <code>route.json</code> and presents:</p> <pre><code>Recommended mode: &lt;white_paper | research_paper | hybrid&gt; (confidence: X.XX)\nReasons: [bullet list]\n</code></pre> <p>You can accept the recommendation or override it. The selected mode is logged in <code>logs/checkpoints.md</code>. Folio does not proceed into mode-specific stages until you confirm.</p> <p>Low-confidence routing</p> <p>If <code>route_mode.py</code> reports confidence below 0.5, the materials are ambiguous. Folio will ask you to choose a mode explicitly rather than guessing.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "mode-specific-stages-25-folioplan-foliosupport-foliodraft-folioreview",
+        "level": 2,
+        "title": "Mode-specific stages (2–5) (<code>/folio:plan</code>, <code>/folio:support</code>, <code>/folio:draft</code>, <code>/folio:review</code>)",
+        "text": "<p>After routing confirmation, Folio follows one of three branches. See the mode guides for full detail:</p> <ul> <li>White Paper Mode — Perspectives, argument structure, Markdown draft, executive outputs</li> <li>Research Paper Mode — Global planning, support artifacts, LaTeX draft, finalize</li> <li>Hybrid Mode — Conceptual framing + evidence support, merged draft, dual review</li> </ul> <p>All three branches share the same quality gates (G: review non-regression) and the IP gate before review is considered complete.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "human-checkpoint-2",
+        "level": 2,
+        "title": "Human Checkpoint 2",
+        "text": "<p>Checkpoint 2 occurs after planning in research paper and hybrid modes, or at the planning approval point in white paper mode. Folio presents:</p> <ul> <li>Outline and narrative arc</li> <li>Claim ledger summary (highlights weak and unsupported claims)</li> <li>Figure and literature plans</li> </ul> <p>Explicit approval required before drafting.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "ip-scanning-all-modes",
+        "level": 2,
+        "title": "IP scanning (all modes)",
+        "text": "<p>Before any mode marks its review stage complete, Folio runs:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/scan_redlines.py workspace/\n</code></pre> <p>This checks all draft content against <code>ip_policy.json</code>. If violations are found, the IP Gate blocks shipping until you redact, rewrite, or explicitly acknowledge the risk (which is logged).</p> <p>See IP Policy for configuration.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "human-checkpoint-3",
+        "level": 2,
+        "title": "Human Checkpoint 3",
+        "text": "<p>Before final packaging, Folio presents the final scorecard, deferred issues, and softened claims. Explicit approval required before export.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "final-packaging-folioexport",
+        "level": 2,
+        "title": "Final Packaging (<code>/folio:export</code>)",
+        "text": "<p>After Checkpoint 3:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/package_exports.py workspace/\n</code></pre> <p>This assembles a mode-appropriate bundle under <code>final/</code> (and/or <code>exports/</code>). Folio reports:</p> <ul> <li>Absolute workspace path</li> <li>All artifacts produced, organized by directory</li> <li>Final review score (<code>overall</code> from latest scorecard)</li> <li>Known issues and deferred items</li> <li>Recommended next steps</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "resuming-a-workspace",
+        "level": 2,
+        "title": "Resuming a workspace",
+        "text": "<p>Re-invoke <code>/folio</code> on an existing workspace path. Folio reads <code>logs/checkpoints.md</code> to detect the last completed stage and offers to resume from the next one.</p> <p>You can also run a specific stage directly with its standalone command:</p> <pre><code>/folio:review workspace/\n</code></pre> <p>Use <code>/folio:status workspace/</code> to see which stages are complete before jumping in.</p> <p>To change mode on an existing workspace, ask Folio to update <code>route.json</code> with a <code>user_override</code> — the change is logged.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "logging",
+        "level": 2,
+        "title": "Logging",
+        "text": "<p>Every session appends to two log files in <code>workspace/logs/</code>:</p> <ul> <li><code>run_log.md</code> — Decisions, overrides, tool failures, user waivers</li> <li><code>checkpoints.md</code> — Table of stage completions and human approvals</li> </ul> <p>These logs enable deterministic resume and provide an audit trail for \"why did we ship this draft?\"</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "workspace-layout",
+        "level": 2,
+        "title": "Workspace layout",
+        "text": "<pre><code>workspace/\n  intent.json\n  route.json\n  ip_policy.json\n  inputs/\n    raw_materials/\n    idea.md\n    experimental_log.md\n    venue_profile.md\n    materials_manifest.json\n    figures_manifest.json\n  planning/\n    outline.json\n    claim_ledger.json\n    figure_plan.json\n    literature_plan.json\n    results_inventory.json\n    perspectives.json        (white paper / hybrid)\n    question_tree.json       (white paper / hybrid)\n    argument_graph.md        (white paper / hybrid)\n  citations/\n    citation_pool.json\n    refs.bib\n  figures/\n    generated/\n    supplied/\n    captions.json\n  tables/\n    generated/\n  drafts/\n    paper.tex                (research paper / hybrid LaTeX)\n    paper.md                 (white paper / hybrid Markdown)\n    sections/\n  reviews/\n    review_round_N.md\n    scorecard.json\n    ip_safety_report.md\n  final/\n    paper.tex\n    paper.pdf\n    refs.bib\n    figures/\n  exports/\n    executive_summary.md     (white paper / hybrid)\n    bd_talking_points.md     (white paper / hybrid)\n  logs/\n    run_log.md\n    checkpoints.md\n</code></pre> <p>See Artifacts for a stage-by-stage breakdown of what each artifact is and when it is created.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Workflow Overview",
+    "toc": [
+      {
+        "title": "Workflow Overview",
+        "id": "workflow-overview",
+        "url": "#workflow-overview",
+        "children": [
+          {
+            "title": "Stage map",
+            "id": "stage-map",
+            "url": "#stage-map",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage 0: Initialize (/folio:init)",
+            "id": "stage-0-initialize-folioinit",
+            "url": "#stage-0-initialize-folioinit",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage 1: Prep and Normalization (/folio:prep)",
+            "id": "stage-1-prep-and-normalization-folioprep",
+            "url": "#stage-1-prep-and-normalization-folioprep",
+            "children": [
+              {
+                "title": "Human Checkpoint 1",
+                "id": "human-checkpoint-1",
+                "url": "#human-checkpoint-1",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Routing checkpoint",
+            "id": "routing-checkpoint",
+            "url": "#routing-checkpoint",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Mode-specific stages (2–5) (/folio:plan, /folio:support, /folio:draft, /folio:review)",
+            "id": "mode-specific-stages-25-folioplan-foliosupport-foliodraft-folioreview",
+            "url": "#mode-specific-stages-25-folioplan-foliosupport-foliodraft-folioreview",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Human Checkpoint 2",
+            "id": "human-checkpoint-2",
+            "url": "#human-checkpoint-2",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "IP scanning (all modes)",
+            "id": "ip-scanning-all-modes",
+            "url": "#ip-scanning-all-modes",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Human Checkpoint 3",
+            "id": "human-checkpoint-3",
+            "url": "#human-checkpoint-3",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Final Packaging (/folio:export)",
+            "id": "final-packaging-folioexport",
+            "url": "#final-packaging-folioexport",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Resuming a workspace",
+            "id": "resuming-a-workspace",
+            "url": "#resuming-a-workspace",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Logging",
+            "id": "logging",
+            "url": "#logging",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Workspace layout",
+            "id": "workspace-layout",
+            "url": "#workspace-layout",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 11814737183529700986
+}

@@ -1,0 +1,1769 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://athandial.com/skills/folio/docs/reference/schemas/">
+      
+      
+        <link rel="prev" href="../ip-policy/">
+      
+      
+        <link rel="next" href="../scripts/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.33">
+    
+    
+      
+        <title>Schemas Reference - Folio</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.53a7feaf.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Libre Baskerville";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/folio.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#schemas-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Folio" class="md-header__button md-logo" aria-label="Folio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Folio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Schemas Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Folio" class="md-nav__button md-logo" aria-label="Folio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Folio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Folio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/workflow-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/research-paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research Paper Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/white-paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    White Paper Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../artifacts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artifacts Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../failure-modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failure Modes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Policy and Redline Scanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intentschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        intent.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routeschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        route.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materials_manifestschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        materials_manifest.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materials_passportschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        materials_passport.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#claim_ledgerschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        claim_ledger.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figures_manifestschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        figures_manifest.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation_poolschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        citation_pool.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ip_policyschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ip_policy.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scorecardschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scorecard.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intentschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        intent.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routeschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        route.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materials_manifestschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        materials_manifest.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materials_passportschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        materials_passport.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#claim_ledgerschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        claim_ledger.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figures_manifestschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        figures_manifest.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation_poolschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        citation_pool.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ip_policyschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ip_policy.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scorecardschemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scorecard.schema.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Folio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../artifacts/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Reference
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="schemas-reference">Schemas Reference<a class="headerlink" href="#schemas-reference" title="Permanent link">&para;</a></h1>
+<p>All JSON manifest schemas live under <code>templates/manifests/</code>. Folio validates artifacts against these schemas during gate checks — scripts enforce validation, so artifacts must conform before gates pass.</p>
+<div class="admonition tip">
+<p class="admonition-title">Don't paste schemas into chat</p>
+<p>Folio's internal instruction is to validate against these schemas, not to reproduce them in full during a session. Use this reference to understand expected shapes when debugging gate failures.</p>
+</div>
+<hr />
+<h2 id="intentschemajson"><code>intent.schema.json</code><a class="headerlink" href="#intentschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Authoring intent and constraints for a paper workflow run.</p>
+<p><strong>Written by:</strong> <code>init_workspace.py</code> from user responses at Stage 0.</p>
+<p><strong>Location:</strong> <code>workspace/intent.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>paper_id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier for the run</td>
+</tr>
+<tr>
+<td><code>audience</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Who must understand the output (e.g., executives, specialists, mixed)</td>
+</tr>
+<tr>
+<td><code>doc_type</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>white_paper</code>, <code>research_paper</code>, or <code>hybrid</code></td>
+</tr>
+<tr>
+<td><code>thesis</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Central claim or promise (one or two sentences)</td>
+</tr>
+<tr>
+<td><code>constraints</code></td>
+<td>string</td>
+<td>No</td>
+<td>Length, tone, confidentiality, deadlines, tooling</td>
+</tr>
+<tr>
+<td><code>forbidden_topics</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>Topics or claims to avoid</td>
+</tr>
+<tr>
+<td><code>preferred_mode</code></td>
+<td>enum / null</td>
+<td>No</td>
+<td>User's preferred mode, or null for automatic routing</td>
+</tr>
+<tr>
+<td><code>output_bundle</code></td>
+<td>string</td>
+<td>No</td>
+<td>Output packaging preference</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="routeschemajson"><code>route.schema.json</code><a class="headerlink" href="#routeschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Selected document mode and routing rationale from <code>route_mode.py</code>.</p>
+<p><strong>Written by:</strong> <code>route_mode.py</code> at Stage 1.</p>
+<p><strong>Location:</strong> <code>workspace/route.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selected_mode</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>white_paper</code>, <code>research_paper</code>, or <code>hybrid</code></td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>number (0–1)</td>
+<td>Yes</td>
+<td>Routing confidence score</td>
+</tr>
+<tr>
+<td><code>reasons</code></td>
+<td>string[]</td>
+<td>Yes</td>
+<td>Bullet explanations for the recommendation</td>
+</tr>
+<tr>
+<td><code>user_override</code></td>
+<td>enum / null</td>
+<td>No</td>
+<td>Explicit user override of selected mode</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Confidence below 0.5</p>
+<p>Routing confidence below 0.5 means materials are ambiguous. Folio asks for explicit mode selection rather than proceeding automatically.</p>
+</div>
+<hr />
+<h2 id="materials_manifestschemajson"><code>materials_manifest.schema.json</code><a class="headerlink" href="#materials_manifestschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Inventory of raw materials provided for the workflow.</p>
+<p><strong>Written by:</strong> <code>prep_materials.py</code> at Stage 1.</p>
+<p><strong>Location:</strong> <code>workspace/inputs/materials_manifest.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>files[].path</code></td>
+<td>string</td>
+<td>Relative path from workspace root</td>
+</tr>
+<tr>
+<td><code>files[].type</code></td>
+<td>enum</td>
+<td><code>markdown</code>, <code>text</code>, <code>pdf</code>, <code>latex</code>, <code>bibtex</code>, <code>data</code>, <code>code</code>, <code>notebook</code>, <code>image</code>, <code>other</code></td>
+</tr>
+<tr>
+<td><code>files[].extension</code></td>
+<td>string</td>
+<td>File extension</td>
+</tr>
+<tr>
+<td><code>files[].size_bytes</code></td>
+<td>integer</td>
+<td>File size</td>
+</tr>
+<tr>
+<td><code>files[].description</code></td>
+<td>string</td>
+<td>Human-readable description</td>
+</tr>
+<tr>
+<td><code>files[].relevance</code></td>
+<td>enum</td>
+<td><code>high</code>, <code>medium</code>, <code>low</code>, <code>unknown</code></td>
+</tr>
+<tr>
+<td><code>summary.total_files</code></td>
+<td>integer</td>
+<td>Total file count</td>
+</tr>
+<tr>
+<td><code>summary.by_type</code></td>
+<td>object</td>
+<td>Count per file type</td>
+</tr>
+<tr>
+<td><code>gaps</code></td>
+<td>string[]</td>
+<td>Identified material gaps</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="materials_passportschemajson"><code>materials_passport.schema.json</code><a class="headerlink" href="#materials_passportschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Per-material provenance, classification, and allowed-use policy.</p>
+<p><strong>Written by:</strong> <code>classify_materials.py</code> at Stage 1.</p>
+<p><strong>Location:</strong> <code>workspace/inputs/materials_passport.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>materials[].material_id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique material identifier</td>
+</tr>
+<tr>
+<td><code>materials[].source_type</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>internal_data</code>, <code>public_data</code>, <code>literature</code>, <code>proprietary_doc</code>, <code>code</code></td>
+</tr>
+<tr>
+<td><code>materials[].classification</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>public</code>, <code>internal</code>, <code>confidential</code></td>
+</tr>
+<tr>
+<td><code>materials[].allowed_use</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>cite</code>, <code>reference</code>, <code>embed</code>, <code>redact_and_reference</code></td>
+</tr>
+<tr>
+<td><code>materials[].summary</code></td>
+<td>string</td>
+<td>No</td>
+<td>Human-readable description</td>
+</tr>
+<tr>
+<td><code>materials[].redaction_required</code></td>
+<td>boolean</td>
+<td>No</td>
+<td>Whether content must be redacted before use (default: false)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="claim_ledgerschemajson"><code>claim_ledger.schema.json</code><a class="headerlink" href="#claim_ledgerschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Maps paper claims to evidence sources and support levels.</p>
+<p><strong>Written by:</strong> Folio during planning stages (W3, D2, H2); validated by <code>build_claim_ledger.py</code>.</p>
+<p><strong>Location:</strong> <code>workspace/planning/claim_ledger.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claims[].id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Pattern <code>C\d+</code> (e.g., <code>C1</code>, <code>C12</code>)</td>
+</tr>
+<tr>
+<td><code>claims[].statement</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The claim text</td>
+</tr>
+<tr>
+<td><code>claims[].type</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>quantitative</code>, <code>qualitative</code>, <code>methodological</code>, <code>fact</code>, <code>interpretation</code>, <code>opinion</code>, <code>forecast</code></td>
+</tr>
+<tr>
+<td><code>claims[].evidence_source</code></td>
+<td>string</td>
+<td>No</td>
+<td>Reference to evidence (file path, result id, citation key)</td>
+</tr>
+<tr>
+<td><code>claims[].support_level</code></td>
+<td>enum</td>
+<td>Yes</td>
+<td><code>strong</code>, <code>moderate</code>, <code>weak</code>, <code>unsupported</code></td>
+</tr>
+<tr>
+<td><code>claims[].depends_on_figures</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>Figure ids this claim requires</td>
+</tr>
+<tr>
+<td><code>claims[].depends_on_citations</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>BibTeX keys this claim requires</td>
+</tr>
+<tr>
+<td><code>claims[].notes</code></td>
+<td>string</td>
+<td>No</td>
+<td>Free-text notes</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Claim types by mode</p>
+<p>White paper and hybrid modes use <code>fact</code>, <code>interpretation</code>, <code>opinion</code>, <code>forecast</code>. Research paper mode uses <code>quantitative</code>, <code>qualitative</code>, <code>methodological</code>. All types are valid in all modes.</p>
+</div>
+<hr />
+<h2 id="figures_manifestschemajson"><code>figures_manifest.schema.json</code><a class="headerlink" href="#figures_manifestschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Inventory of figures and tables available or planned.</p>
+<p><strong>Written by:</strong> Folio during Stage 1 synthesis from raw materials.</p>
+<p><strong>Location:</strong> <code>workspace/inputs/figures_manifest.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>figures[].path</code></td>
+<td>string</td>
+<td>Relative path to figure file</td>
+</tr>
+<tr>
+<td><code>figures[].description</code></td>
+<td>string</td>
+<td>Figure description</td>
+</tr>
+<tr>
+<td><code>figures[].type</code></td>
+<td>enum</td>
+<td><code>chart</code>, <code>diagram</code>, <code>table</code>, <code>photo</code>, <code>screenshot</code>, <code>other</code></td>
+</tr>
+<tr>
+<td><code>figures[].format</code></td>
+<td>string</td>
+<td>File format (e.g., <code>png</code>, <code>pdf</code>, <code>svg</code>)</td>
+</tr>
+<tr>
+<td><code>figures[].needs_regeneration</code></td>
+<td>boolean</td>
+<td>Whether the figure needs to be remade</td>
+</tr>
+<tr>
+<td><code>planned[].description</code></td>
+<td>string</td>
+<td>Description of a planned figure</td>
+</tr>
+<tr>
+<td><code>planned[].type</code></td>
+<td>string</td>
+<td>Figure type</td>
+</tr>
+<tr>
+<td><code>planned[].data_source</code></td>
+<td>string</td>
+<td>Where the data for this figure comes from</td>
+</tr>
+<tr>
+<td><code>planned[].priority</code></td>
+<td>enum</td>
+<td><code>required</code> or <code>nice-to-have</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="citation_poolschemajson"><code>citation_pool.schema.json</code><a class="headerlink" href="#citation_poolschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Verified citation metadata for the manuscript.</p>
+<p><strong>Written by:</strong> Folio during Stage D3-3B literature discovery; validated by <code>verify_citations.py</code>.</p>
+<p><strong>Location:</strong> <code>workspace/citations/citation_pool.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>citations[].key</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>BibTeX citation key</td>
+</tr>
+<tr>
+<td><code>citations[].title</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Paper title</td>
+</tr>
+<tr>
+<td><code>citations[].authors</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>Author list</td>
+</tr>
+<tr>
+<td><code>citations[].year</code></td>
+<td>integer</td>
+<td>No</td>
+<td>Publication year</td>
+</tr>
+<tr>
+<td><code>citations[].venue</code></td>
+<td>string</td>
+<td>No</td>
+<td>Journal or conference</td>
+</tr>
+<tr>
+<td><code>citations[].doi</code></td>
+<td>string</td>
+<td>No</td>
+<td>DOI</td>
+</tr>
+<tr>
+<td><code>citations[].url</code></td>
+<td>string</td>
+<td>No</td>
+<td>URL</td>
+</tr>
+<tr>
+<td><code>citations[].verified</code></td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Whether the citation's existence was confirmed</td>
+</tr>
+<tr>
+<td><code>citations[].relevance_area</code></td>
+<td>string</td>
+<td>No</td>
+<td>Which coverage area this citation serves</td>
+</tr>
+<tr>
+<td><code>citations[].relevance_score</code></td>
+<td>number (0–1)</td>
+<td>No</td>
+<td>Relevance score</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Unverified citations</p>
+<p>Only citations with <code>verified: true</code> enter <code>refs.bib</code>. Gate D blocks on unverified pool entries.</p>
+</div>
+<hr />
+<h2 id="ip_policyschemajson"><code>ip_policy.schema.json</code><a class="headerlink" href="#ip_policyschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Terms, patterns, and exceptions for IP-safe output.</p>
+<p><strong>Read by:</strong> <code>scan_redlines.py</code> during review stages.</p>
+<p><strong>Location:</strong> <code>workspace/ip_policy.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forbidden_terms</code></td>
+<td>string[]</td>
+<td>Exact strings that must not appear in drafts or exports</td>
+</tr>
+<tr>
+<td><code>code_names</code></td>
+<td>string[]</td>
+<td>Approved public stand-in names for internal projects</td>
+</tr>
+<tr>
+<td><code>sensitive_metric_patterns</code></td>
+<td>string[]</td>
+<td>Regex patterns for quantitative claims needing human review</td>
+</tr>
+<tr>
+<td><code>redline_exceptions</code></td>
+<td>string[]</td>
+<td>Terms allowed even when they resemble forbidden patterns</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="../ip-policy/">IP Policy</a> for full configuration guidance.</p>
+<hr />
+<h2 id="scorecardschemajson"><code>scorecard.schema.json</code><a class="headerlink" href="#scorecardschemajson" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Quality scores from a review round.</p>
+<p><strong>Written by:</strong> Folio during review stages (W5, D5, H5).</p>
+<p><strong>Location:</strong> <code>workspace/reviews/scorecard.json</code></p>
+<p><strong>Key fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>round</code></td>
+<td>integer</td>
+<td>Yes</td>
+<td>Review round number (1–3)</td>
+</tr>
+<tr>
+<td><code>scores.argument_coherence</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Argument flow and logical consistency</td>
+</tr>
+<tr>
+<td><code>scores.evidence_support</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Claim-to-evidence traceability</td>
+</tr>
+<tr>
+<td><code>scores.citation_quality</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Citation accuracy and coverage</td>
+</tr>
+<tr>
+<td><code>scores.writing_clarity</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Prose clarity and precision</td>
+</tr>
+<tr>
+<td><code>scores.venue_fit</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Alignment with target venue requirements</td>
+</tr>
+<tr>
+<td><code>scores.overall</code></td>
+<td>number (1–10)</td>
+<td>Yes</td>
+<td>Aggregate score (Gate G watches this across rounds)</td>
+</tr>
+<tr>
+<td><code>blocking_issues</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>Issues that must be resolved before export</td>
+</tr>
+<tr>
+<td><code>suggestions</code></td>
+<td>string[]</td>
+<td>No</td>
+<td>Non-blocking improvement suggestions</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Gate G</p>
+<p>If <code>overall</code> drops between rounds, Folio automatically reverts to the higher-scoring draft. Scores must be comparable across rounds on the same scale.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ip-policy/" class="md-footer__link md-footer__link--prev" aria-label="Previous: IP Policy and Redline Scanning">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                IP Policy and Redline Scanning
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../scripts/" class="md-footer__link md-footer__link--next" aria-label="Next: Scripts Reference">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Scripts Reference
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","content.code.copy","content.code.annotate","search.highlight"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.63456bd9.min.js"></script>
+      
+    
+  </body>
+</html>

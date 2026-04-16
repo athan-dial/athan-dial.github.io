@@ -1,0 +1,224 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"scripts-reference\">Scripts Reference<a class=\"headerlink\" href=\"#scripts-reference\" title=\"Permanent link\">&para;</a></h1>\n<p>All Folio helper scripts live under <code>scripts/</code>. They are invoked by the skill via the <code>Bash</code> tool — not imported as libraries. Every script accepts a workspace path as its only argument and exits non-zero on failure with a human-readable error message.</p>\n<p><strong>Python scripts target 3.10+ with no external dependencies beyond stdlib.</strong></p>\n<hr />\n<h2 id=\"usage-pattern\">Usage pattern<a class=\"headerlink\" href=\"#usage-pattern\" title=\"Permanent link\">&para;</a></h2>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/&lt;script_name&gt;.py<span class=\"w\"> </span>&lt;workspace_path&gt;\n</span></code></pre></div>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>bash<span class=\"w\"> </span>scripts/compile_package.sh<span class=\"w\"> </span>&lt;workspace_path&gt;\n</span></code></pre></div>\n<p>All workspace paths below are relative to your chosen workspace root unless stated otherwise. Run scripts from the <code>skills/</code> repo root by prefixing commands with <code>cd plugins/folio &amp;&amp; ...</code>.</p>\n<hr />\n<h2 id=\"script-inventory\">Script inventory<a class=\"headerlink\" href=\"#script-inventory\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"init_workspacepy\"><code>init_workspace.py</code><a class=\"headerlink\" href=\"#init_workspacepy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Create the canonical workspace directory tree and seed initial metadata files.</p>\n<p><strong>Invoked at:</strong> Stage 0 (Initialize)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/init_workspace.py<span class=\"w\"> </span><span class=\"s2\">&quot;&lt;workspace_path&gt;&quot;</span>\n</span></code></pre></div>\n<p><strong>Creates:</strong>\n- All workspace subdirectories (<code>inputs/raw_materials/</code>, <code>planning/</code>, <code>citations/</code>, <code>figures/generated/</code>, <code>figures/supplied/</code>, <code>tables/generated/</code>, <code>drafts/sections/</code>, <code>reviews/</code>, <code>final/figures/</code>, <code>final/tables/</code>, <code>logs/</code>, <code>exports/</code>)\n- Seeds <code>logs/run_log.md</code> with a timestamped session line</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Workspace created (or already exists with valid layout)\n- Non-zero — Write permission error or invalid path</p>\n<hr />\n<h3 id=\"prep_materialspy\"><code>prep_materials.py</code><a class=\"headerlink\" href=\"#prep_materialspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Scan <code>inputs/raw_materials/</code> and produce a file-type inventory for downstream classification.</p>\n<p><strong>Invoked at:</strong> Stage 1 (Prep), substage 1</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-3-1\"><a id=\"__codelineno-3-1\" name=\"__codelineno-3-1\" href=\"#__codelineno-3-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/prep_materials.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Maps file extensions to material types (<code>markdown</code>, <code>text</code>, <code>pdf</code>, <code>latex</code>, <code>bibtex</code>, <code>data</code>, <code>code</code>, etc.) and refreshes inventory signals used by <code>classify_materials.py</code>.</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Inventory complete\n- Non-zero — Workspace path invalid or <code>inputs/raw_materials/</code> missing</p>\n<hr />\n<h3 id=\"classify_materialspy\"><code>classify_materials.py</code><a class=\"headerlink\" href=\"#classify_materialspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Classify materials from the inventory and write <code>inputs/materials_passport.json</code>.</p>\n<p><strong>Invoked at:</strong> Stage 1 (Prep), substage 2</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-4-1\"><a id=\"__codelineno-4-1\" name=\"__codelineno-4-1\" href=\"#__codelineno-4-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/classify_materials.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Assigns each material a <code>source_type</code> (<code>internal_data</code>, <code>public_data</code>, <code>literature</code>, <code>proprietary_doc</code>, <code>code</code>), <code>classification</code> (<code>public</code>, <code>internal</code>, <code>confidential</code>), and <code>allowed_use</code> policy. Uses path/filename hints (e.g., <code>arxiv</code>, <code>references</code>, <code>experiment</code>) to infer classification.</p>\n<p><strong>Output:</strong> <code>inputs/materials_passport.json</code> (schema: <code>templates/manifests/materials_passport.schema.json</code>)</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Passport written\n- Non-zero — Missing manifest input or schema validation failure</p>\n<hr />\n<h3 id=\"route_modepy\"><code>route_mode.py</code><a class=\"headerlink\" href=\"#route_modepy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Infer document mode from <code>intent.json</code> and <code>materials_passport.json</code>; write <code>route.json</code>.</p>\n<p><strong>Invoked at:</strong> Stage 1 (Prep), substage 3</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-5-1\"><a id=\"__codelineno-5-1\" name=\"__codelineno-5-1\" href=\"#__codelineno-5-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/route_mode.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Scores materials for empirical signals (data files, code, notebooks, experiment-hint strings) and narrative/strategic signals to recommend <code>white_paper</code>, <code>research_paper</code>, or <code>hybrid</code>. Reports a <code>confidence</code> score between 0 and 1.</p>\n<p><strong>Output:</strong> <code>route.json</code> with <code>selected_mode</code>, <code>confidence</code>, <code>reasons</code>, and <code>user_override</code> (null by default)</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Route written (even for low-confidence cases — low confidence is reported in <code>route.json</code>, not as a failure)\n- Non-zero — Missing inputs or write error</p>\n<div class=\"admonition warning\">\n<p class=\"admonition-title\">Low confidence</p>\n<p>Confidence below 0.5 means the materials are ambiguous. Folio will ask for an explicit mode override rather than proceeding automatically.</p>\n</div>\n<hr />\n<h3 id=\"validate_inputspy\"><code>validate_inputs.py</code><a class=\"headerlink\" href=\"#validate_inputspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Validate canonical inputs in the workspace (Gate A: Input completeness).</p>\n<p><strong>Invoked at:</strong> Stage 1 (Prep), substage 4; re-run after editing any <code>inputs/*</code> file</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-6-1\"><a id=\"__codelineno-6-1\" name=\"__codelineno-6-1\" href=\"#__codelineno-6-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/validate_inputs.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Checks that required files exist (<code>inputs/idea.md</code>, <code>inputs/experimental_log.md</code>, <code>inputs/venue_profile.md</code>, <code>inputs/materials_manifest.json</code>, <code>inputs/figures_manifest.json</code>) and are not placeholder stubs (minimum ~50 characters of content).</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — All required inputs valid (warnings may still appear)\n- Non-zero — Missing files or placeholder content detected (errors block Stage 1 exit)</p>\n<div class=\"admonition tip\">\n<p class=\"admonition-title\">When to re-run</p>\n<p>Re-run <code>validate_inputs.py</code> after editing any canonical <code>inputs/*</code> file, after <code>classify_materials.py</code> or <code>route_mode.py</code> if inputs change, and always before leaving Stage 1.</p>\n</div>\n<hr />\n<h3 id=\"build_claim_ledgerpy\"><code>build_claim_ledger.py</code><a class=\"headerlink\" href=\"#build_claim_ledgerpy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Validate claim ledger integrity (Gate C: Evidence integrity).</p>\n<p><strong>Invoked at:</strong> Stage W3 (white paper), Stage D3-3A (research paper), Stage H2/H3 (hybrid)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-7-1\"><a id=\"__codelineno-7-1\" name=\"__codelineno-7-1\" href=\"#__codelineno-7-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/build_claim_ledger.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Checks that:\n- All claims have recognized types (<code>quantitative</code>, <code>qualitative</code>, <code>methodological</code>, <code>fact</code>, <code>interpretation</code>, <code>opinion</code>, <code>forecast</code>)\n- All claims have a <code>support_level</code>\n- No claims are <code>unsupported</code> without explicit user acknowledgment\n- Numerical claims have traceable <code>evidence_source</code> values</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Claim ledger valid\n- Non-zero — Unrecognized types, missing support levels, or unsupported claims without acknowledgment</p>\n<hr />\n<h3 id=\"check_artifactspy\"><code>check_artifacts.py</code><a class=\"headerlink\" href=\"#check_artifactspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Validate draft artifact references (Gates E + F: Artifact and rendering integrity).</p>\n<p><strong>Invoked at:</strong> Stage D4 (research paper draft), before D5/D6; any LaTeX portions in hybrid H4/H5/H6</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-8-1\"><a id=\"__codelineno-8-1\" name=\"__codelineno-8-1\" href=\"#__codelineno-8-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/check_artifacts.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Reads <code>route.json</code> to determine mode. For LaTeX drafts, checks:\n- All <code>\\cite{key}</code> references exist in <code>refs.bib</code>\n- All <code>\\ref{}</code> targets exist in <code>captions.json</code> or figure plan\n- Basic LaTeX structural validity (document class, <code>\\begin{document}</code>, balanced environments)</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — No broken references or structural errors\n- Non-zero — Missing citations, broken refs, or LaTeX structural errors (Gate F failure)</p>\n<div class=\"admonition tip\">\n<p class=\"admonition-title\">When to re-run</p>\n<p>Re-run <code>check_artifacts.py</code> after every substantive edit to <code>drafts/paper.tex</code> and before Stages D5/D6 or hybrid H5/H6.</p>\n</div>\n<hr />\n<h3 id=\"scan_redlinespy\"><code>scan_redlines.py</code><a class=\"headerlink\" href=\"#scan_redlinespy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> IP/redline safety scanner — checks draft content against <code>ip_policy.json</code>.</p>\n<p><strong>Invoked at:</strong> Stage W5 (white paper review), D5 (research paper review), H5 (hybrid review)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-9-1\"><a id=\"__codelineno-9-1\" name=\"__codelineno-9-1\" href=\"#__codelineno-9-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/scan_redlines.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Reads <code>ip_policy.json</code> (if present) and scans all draft files for:\n- Exact <code>forbidden_terms</code> matches\n- <code>sensitive_metric_patterns</code> regex matches\n- <code>code_names</code> appearances where they should not appear</p>\n<p>Writes <code>reviews/ip_safety_report.md</code> with file paths, line numbers, and matched patterns.</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — No violations (or no <code>ip_policy.json</code> present)\n- Non-zero — Violations found (IP Gate: blocks shipping until resolved or acknowledged)</p>\n<p>See <a href=\"../ip-policy/\">IP Policy</a> for <code>ip_policy.json</code> configuration.</p>\n<hr />\n<h3 id=\"verify_citationspy\"><code>verify_citations.py</code><a class=\"headerlink\" href=\"#verify_citationspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Validate citation pool and <code>refs.bib</code> integrity (Gate D: Citation integrity).</p>\n<p><strong>Invoked at:</strong> Stage D3-3B (literature verification)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-10-1\"><a id=\"__codelineno-10-1\" name=\"__codelineno-10-1\" href=\"#__codelineno-10-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/verify_citations.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Checks that:\n- All citations in <code>citation_pool.json</code> have <code>verified: true</code> or are explicitly acknowledged as unverified\n- No duplicate BibTeX keys in <code>refs.bib</code>\n- All keys in <code>refs.bib</code> exist in <code>citation_pool.json</code></p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Citation pool and BibTeX valid\n- Non-zero — Unverified entries, duplicate keys, or pool/BibTeX mismatch</p>\n<hr />\n<h3 id=\"compile_packagesh\"><code>compile_package.sh</code><a class=\"headerlink\" href=\"#compile_packagesh\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Compile LaTeX source into a PDF package using <code>pdflatex</code> and <code>bibtex</code>.</p>\n<p><strong>Invoked at:</strong> Stage D6 (research paper finalize), H6 (hybrid export)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-11-1\"><a id=\"__codelineno-11-1\" name=\"__codelineno-11-1\" href=\"#__codelineno-11-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>bash<span class=\"w\"> </span>scripts/compile_package.sh<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Runs from the Folio plugin root with the workspace path argument (i.e. <code>cd plugins/folio &amp;&amp; ...</code>). Expects <code>final/paper.tex</code> and <code>final/refs.bib</code>.</p>\n<ul>\n<li><strong>Success:</strong> Reports path to <code>final/paper.pdf</code></li>\n<li><strong>Failure:</strong> Retains <code>.tex</code>/<code>.bib</code>/figures; documents missing PDF in user report</li>\n</ul>\n<p>This script requires <code>pdflatex</code> and <code>bibtex</code> on PATH. Folio degrades gracefully if they are absent — the source bundle is still delivered.</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — PDF compiled successfully\n- Non-zero — Compilation error (source bundle still delivered; error is documented)</p>\n<hr />\n<h3 id=\"package_exportspy\"><code>package_exports.py</code><a class=\"headerlink\" href=\"#package_exportspy\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>Purpose:</strong> Mode-aware export packager — assembles the final bundle under <code>final/</code> and <code>exports/</code>.</p>\n<p><strong>Invoked at:</strong> Shared Exit (all modes, after Human Checkpoint 3)</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-12-1\"><a id=\"__codelineno-12-1\" name=\"__codelineno-12-1\" href=\"#__codelineno-12-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/package_exports.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Reads <code>route.json</code> to determine the effective mode (respects <code>user_override</code>) and assembles:\n- <strong>White paper:</strong> <code>paper.md</code>, <code>executive_summary.md</code>, <code>bd_talking_points.md</code>, reviews, logs\n- <strong>Research paper:</strong> <code>paper.tex</code>, <code>refs.bib</code>, figures, tables, <code>paper.pdf</code> if compiled\n- <strong>Hybrid:</strong> Combined bundle with all applicable artifacts</p>\n<p>Prints the output directory to stdout. Creates <code>submission_bundle.zip</code> if applicable.</p>\n<p><strong>Exit codes:</strong>\n- <code>0</code> — Bundle assembled; output directory printed to stdout\n- Non-zero — Packaging gate failure (treat same as any gate failure per Error Handling)</p>\n<div class=\"admonition warning\">\n<p class=\"admonition-title\">Non-zero exit</p>\n<p>If <code>package_exports.py</code> returns non-zero, treat it as a packaging gate failure — same error handling as Gates B–G.</p>\n</div>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Scripts Reference",
+        "text": "<p>All Folio helper scripts live under <code>scripts/</code>. They are invoked by the skill via the <code>Bash</code> tool — not imported as libraries. Every script accepts a workspace path as its only argument and exits non-zero on failure with a human-readable error message.</p> <p>Python scripts target 3.10+ with no external dependencies beyond stdlib.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "usage-pattern",
+        "level": 2,
+        "title": "Usage pattern",
+        "text": "<pre><code>cd plugins/folio &amp;&amp; python scripts/&lt;script_name&gt;.py &lt;workspace_path&gt;\n</code></pre> <pre><code>cd plugins/folio &amp;&amp; bash scripts/compile_package.sh &lt;workspace_path&gt;\n</code></pre> <p>All workspace paths below are relative to your chosen workspace root unless stated otherwise. Run scripts from the <code>skills/</code> repo root by prefixing commands with <code>cd plugins/folio &amp;&amp; ...</code>.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "script-inventory",
+        "level": 2,
+        "title": "Script inventory",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "init_workspacepy",
+        "level": 3,
+        "title": "<code>init_workspace.py</code>",
+        "text": "<p>Purpose: Create the canonical workspace directory tree and seed initial metadata files.</p> <p>Invoked at: Stage 0 (Initialize)</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/init_workspace.py \"&lt;workspace_path&gt;\"\n</code></pre> <p>Creates: - All workspace subdirectories (<code>inputs/raw_materials/</code>, <code>planning/</code>, <code>citations/</code>, <code>figures/generated/</code>, <code>figures/supplied/</code>, <code>tables/generated/</code>, <code>drafts/sections/</code>, <code>reviews/</code>, <code>final/figures/</code>, <code>final/tables/</code>, <code>logs/</code>, <code>exports/</code>) - Seeds <code>logs/run_log.md</code> with a timestamped session line</p> <p>Exit codes: - <code>0</code> — Workspace created (or already exists with valid layout) - Non-zero — Write permission error or invalid path</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "prep_materialspy",
+        "level": 3,
+        "title": "<code>prep_materials.py</code>",
+        "text": "<p>Purpose: Scan <code>inputs/raw_materials/</code> and produce a file-type inventory for downstream classification.</p> <p>Invoked at: Stage 1 (Prep), substage 1</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/prep_materials.py workspace/\n</code></pre> <p>Maps file extensions to material types (<code>markdown</code>, <code>text</code>, <code>pdf</code>, <code>latex</code>, <code>bibtex</code>, <code>data</code>, <code>code</code>, etc.) and refreshes inventory signals used by <code>classify_materials.py</code>.</p> <p>Exit codes: - <code>0</code> — Inventory complete - Non-zero — Workspace path invalid or <code>inputs/raw_materials/</code> missing</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "classify_materialspy",
+        "level": 3,
+        "title": "<code>classify_materials.py</code>",
+        "text": "<p>Purpose: Classify materials from the inventory and write <code>inputs/materials_passport.json</code>.</p> <p>Invoked at: Stage 1 (Prep), substage 2</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/classify_materials.py workspace/\n</code></pre> <p>Assigns each material a <code>source_type</code> (<code>internal_data</code>, <code>public_data</code>, <code>literature</code>, <code>proprietary_doc</code>, <code>code</code>), <code>classification</code> (<code>public</code>, <code>internal</code>, <code>confidential</code>), and <code>allowed_use</code> policy. Uses path/filename hints (e.g., <code>arxiv</code>, <code>references</code>, <code>experiment</code>) to infer classification.</p> <p>Output: <code>inputs/materials_passport.json</code> (schema: <code>templates/manifests/materials_passport.schema.json</code>)</p> <p>Exit codes: - <code>0</code> — Passport written - Non-zero — Missing manifest input or schema validation failure</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "route_modepy",
+        "level": 3,
+        "title": "<code>route_mode.py</code>",
+        "text": "<p>Purpose: Infer document mode from <code>intent.json</code> and <code>materials_passport.json</code>; write <code>route.json</code>.</p> <p>Invoked at: Stage 1 (Prep), substage 3</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/route_mode.py workspace/\n</code></pre> <p>Scores materials for empirical signals (data files, code, notebooks, experiment-hint strings) and narrative/strategic signals to recommend <code>white_paper</code>, <code>research_paper</code>, or <code>hybrid</code>. Reports a <code>confidence</code> score between 0 and 1.</p> <p>Output: <code>route.json</code> with <code>selected_mode</code>, <code>confidence</code>, <code>reasons</code>, and <code>user_override</code> (null by default)</p> <p>Exit codes: - <code>0</code> — Route written (even for low-confidence cases — low confidence is reported in <code>route.json</code>, not as a failure) - Non-zero — Missing inputs or write error</p> <p>Low confidence</p> <p>Confidence below 0.5 means the materials are ambiguous. Folio will ask for an explicit mode override rather than proceeding automatically.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "validate_inputspy",
+        "level": 3,
+        "title": "<code>validate_inputs.py</code>",
+        "text": "<p>Purpose: Validate canonical inputs in the workspace (Gate A: Input completeness).</p> <p>Invoked at: Stage 1 (Prep), substage 4; re-run after editing any <code>inputs/*</code> file</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/validate_inputs.py workspace/\n</code></pre> <p>Checks that required files exist (<code>inputs/idea.md</code>, <code>inputs/experimental_log.md</code>, <code>inputs/venue_profile.md</code>, <code>inputs/materials_manifest.json</code>, <code>inputs/figures_manifest.json</code>) and are not placeholder stubs (minimum ~50 characters of content).</p> <p>Exit codes: - <code>0</code> — All required inputs valid (warnings may still appear) - Non-zero — Missing files or placeholder content detected (errors block Stage 1 exit)</p> <p>When to re-run</p> <p>Re-run <code>validate_inputs.py</code> after editing any canonical <code>inputs/*</code> file, after <code>classify_materials.py</code> or <code>route_mode.py</code> if inputs change, and always before leaving Stage 1.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "build_claim_ledgerpy",
+        "level": 3,
+        "title": "<code>build_claim_ledger.py</code>",
+        "text": "<p>Purpose: Validate claim ledger integrity (Gate C: Evidence integrity).</p> <p>Invoked at: Stage W3 (white paper), Stage D3-3A (research paper), Stage H2/H3 (hybrid)</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/build_claim_ledger.py workspace/\n</code></pre> <p>Checks that: - All claims have recognized types (<code>quantitative</code>, <code>qualitative</code>, <code>methodological</code>, <code>fact</code>, <code>interpretation</code>, <code>opinion</code>, <code>forecast</code>) - All claims have a <code>support_level</code> - No claims are <code>unsupported</code> without explicit user acknowledgment - Numerical claims have traceable <code>evidence_source</code> values</p> <p>Exit codes: - <code>0</code> — Claim ledger valid - Non-zero — Unrecognized types, missing support levels, or unsupported claims without acknowledgment</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "check_artifactspy",
+        "level": 3,
+        "title": "<code>check_artifacts.py</code>",
+        "text": "<p>Purpose: Validate draft artifact references (Gates E + F: Artifact and rendering integrity).</p> <p>Invoked at: Stage D4 (research paper draft), before D5/D6; any LaTeX portions in hybrid H4/H5/H6</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/check_artifacts.py workspace/\n</code></pre> <p>Reads <code>route.json</code> to determine mode. For LaTeX drafts, checks: - All <code>\\cite{key}</code> references exist in <code>refs.bib</code> - All <code>\\ref{}</code> targets exist in <code>captions.json</code> or figure plan - Basic LaTeX structural validity (document class, <code>\\begin{document}</code>, balanced environments)</p> <p>Exit codes: - <code>0</code> — No broken references or structural errors - Non-zero — Missing citations, broken refs, or LaTeX structural errors (Gate F failure)</p> <p>When to re-run</p> <p>Re-run <code>check_artifacts.py</code> after every substantive edit to <code>drafts/paper.tex</code> and before Stages D5/D6 or hybrid H5/H6.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "scan_redlinespy",
+        "level": 3,
+        "title": "<code>scan_redlines.py</code>",
+        "text": "<p>Purpose: IP/redline safety scanner — checks draft content against <code>ip_policy.json</code>.</p> <p>Invoked at: Stage W5 (white paper review), D5 (research paper review), H5 (hybrid review)</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/scan_redlines.py workspace/\n</code></pre> <p>Reads <code>ip_policy.json</code> (if present) and scans all draft files for: - Exact <code>forbidden_terms</code> matches - <code>sensitive_metric_patterns</code> regex matches - <code>code_names</code> appearances where they should not appear</p> <p>Writes <code>reviews/ip_safety_report.md</code> with file paths, line numbers, and matched patterns.</p> <p>Exit codes: - <code>0</code> — No violations (or no <code>ip_policy.json</code> present) - Non-zero — Violations found (IP Gate: blocks shipping until resolved or acknowledged)</p> <p>See IP Policy for <code>ip_policy.json</code> configuration.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "verify_citationspy",
+        "level": 3,
+        "title": "<code>verify_citations.py</code>",
+        "text": "<p>Purpose: Validate citation pool and <code>refs.bib</code> integrity (Gate D: Citation integrity).</p> <p>Invoked at: Stage D3-3B (literature verification)</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/verify_citations.py workspace/\n</code></pre> <p>Checks that: - All citations in <code>citation_pool.json</code> have <code>verified: true</code> or are explicitly acknowledged as unverified - No duplicate BibTeX keys in <code>refs.bib</code> - All keys in <code>refs.bib</code> exist in <code>citation_pool.json</code></p> <p>Exit codes: - <code>0</code> — Citation pool and BibTeX valid - Non-zero — Unverified entries, duplicate keys, or pool/BibTeX mismatch</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "compile_packagesh",
+        "level": 3,
+        "title": "<code>compile_package.sh</code>",
+        "text": "<p>Purpose: Compile LaTeX source into a PDF package using <code>pdflatex</code> and <code>bibtex</code>.</p> <p>Invoked at: Stage D6 (research paper finalize), H6 (hybrid export)</p> <pre><code>cd plugins/folio &amp;&amp; bash scripts/compile_package.sh workspace/\n</code></pre> <p>Runs from the Folio plugin root with the workspace path argument (i.e. <code>cd plugins/folio &amp;&amp; ...</code>). Expects <code>final/paper.tex</code> and <code>final/refs.bib</code>.</p> <ul> <li>Success: Reports path to <code>final/paper.pdf</code></li> <li>Failure: Retains <code>.tex</code>/<code>.bib</code>/figures; documents missing PDF in user report</li> </ul> <p>This script requires <code>pdflatex</code> and <code>bibtex</code> on PATH. Folio degrades gracefully if they are absent — the source bundle is still delivered.</p> <p>Exit codes: - <code>0</code> — PDF compiled successfully - Non-zero — Compilation error (source bundle still delivered; error is documented)</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "package_exportspy",
+        "level": 3,
+        "title": "<code>package_exports.py</code>",
+        "text": "<p>Purpose: Mode-aware export packager — assembles the final bundle under <code>final/</code> and <code>exports/</code>.</p> <p>Invoked at: Shared Exit (all modes, after Human Checkpoint 3)</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/package_exports.py workspace/\n</code></pre> <p>Reads <code>route.json</code> to determine the effective mode (respects <code>user_override</code>) and assembles: - White paper: <code>paper.md</code>, <code>executive_summary.md</code>, <code>bd_talking_points.md</code>, reviews, logs - Research paper: <code>paper.tex</code>, <code>refs.bib</code>, figures, tables, <code>paper.pdf</code> if compiled - Hybrid: Combined bundle with all applicable artifacts</p> <p>Prints the output directory to stdout. Creates <code>submission_bundle.zip</code> if applicable.</p> <p>Exit codes: - <code>0</code> — Bundle assembled; output directory printed to stdout - Non-zero — Packaging gate failure (treat same as any gate failure per Error Handling)</p> <p>Non-zero exit</p> <p>If <code>package_exports.py</code> returns non-zero, treat it as a packaging gate failure — same error handling as Gates B–G.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Scripts Reference",
+    "toc": [
+      {
+        "title": "Scripts Reference",
+        "id": "scripts-reference",
+        "url": "#scripts-reference",
+        "children": [
+          {
+            "title": "Usage pattern",
+            "id": "usage-pattern",
+            "url": "#usage-pattern",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Script inventory",
+            "id": "script-inventory",
+            "url": "#script-inventory",
+            "children": [
+              {
+                "title": "init_workspace.py",
+                "id": "init_workspacepy",
+                "url": "#init_workspacepy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "prep_materials.py",
+                "id": "prep_materialspy",
+                "url": "#prep_materialspy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "classify_materials.py",
+                "id": "classify_materialspy",
+                "url": "#classify_materialspy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "route_mode.py",
+                "id": "route_modepy",
+                "url": "#route_modepy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "validate_inputs.py",
+                "id": "validate_inputspy",
+                "url": "#validate_inputspy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "build_claim_ledger.py",
+                "id": "build_claim_ledgerpy",
+                "url": "#build_claim_ledgerpy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "check_artifacts.py",
+                "id": "check_artifactspy",
+                "url": "#check_artifactspy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "scan_redlines.py",
+                "id": "scan_redlinespy",
+                "url": "#scan_redlinespy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "verify_citations.py",
+                "id": "verify_citationspy",
+                "url": "#verify_citationspy",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "compile_package.sh",
+                "id": "compile_packagesh",
+                "url": "#compile_packagesh",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "package_exports.py",
+                "id": "package_exportspy",
+                "url": "#package_exportspy",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 1053756569269128695
+}
