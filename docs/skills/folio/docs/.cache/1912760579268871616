@@ -1,0 +1,180 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"getting-started\">Getting Started<a class=\"headerlink\" href=\"#getting-started\" title=\"Permanent link\">&para;</a></h1>\n<p>This guide covers installing Folio, verifying the install, and running your first manuscript workflow.</p>\n<hr />\n<h2 id=\"prerequisites\">Prerequisites<a class=\"headerlink\" href=\"#prerequisites\" title=\"Permanent link\">&para;</a></h2>\n<ul>\n<li><strong>Claude Code</strong> — Folio runs as a Claude Code skill pack</li>\n<li><strong>Python 3.10+</strong> — required for validation and prep scripts (stdlib only; no pip installs needed)</li>\n<li><strong>pdflatex + bibtex</strong> — optional, only needed for final PDF compilation</li>\n</ul>\n<h3 id=\"install-latex-optional\">Install LaTeX (optional)<a class=\"headerlink\" href=\"#install-latex-optional\" title=\"Permanent link\">&para;</a></h3>\n<p>If you want compiled PDF output, install a TeX distribution:</p>\n<p><strong>macOS:</strong>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a>brew<span class=\"w\"> </span>install<span class=\"w\"> </span>--cask<span class=\"w\"> </span>mactex-no-gui\n</span></code></pre></div></p>\n<p><strong>Ubuntu / Debian:</strong>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a>sudo<span class=\"w\"> </span>apt-get<span class=\"w\"> </span>install<span class=\"w\"> </span>texlive-full\n</span></code></pre></div></p>\n<p>If LaTeX is not available, Folio degrades gracefully — it delivers the LaTeX source bundle without compiling a PDF.</p>\n<hr />\n<h2 id=\"install-the-skill-pack\">Install the Skill Pack<a class=\"headerlink\" href=\"#install-the-skill-pack\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"option-a-symlink-recommended-for-development\">Option A: Symlink (recommended for development)<a class=\"headerlink\" href=\"#option-a-symlink-recommended-for-development\" title=\"Permanent link\">&para;</a></h3>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a>git<span class=\"w\"> </span>clone<span class=\"w\"> </span>https://github.com/athan-dial/folio.git\n</span><span id=\"__span-2-2\"><a id=\"__codelineno-2-2\" name=\"__codelineno-2-2\" href=\"#__codelineno-2-2\"></a>ln<span class=\"w\"> </span>-s<span class=\"w\"> </span><span class=\"s2\">&quot;</span><span class=\"k\">$(</span><span class=\"nb\">pwd</span><span class=\"k\">)</span><span class=\"s2\">/folio&quot;</span><span class=\"w\"> </span>~/.claude/skills/folio\n</span></code></pre></div>\n<p>Updates apply immediately after <code>git pull</code> — no re-copy needed.</p>\n<h3 id=\"option-b-copy-into-skills-directory\">Option B: Copy into skills directory<a class=\"headerlink\" href=\"#option-b-copy-into-skills-directory\" title=\"Permanent link\">&para;</a></h3>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-3-1\"><a id=\"__codelineno-3-1\" name=\"__codelineno-3-1\" href=\"#__codelineno-3-1\"></a>git<span class=\"w\"> </span>clone<span class=\"w\"> </span>https://github.com/athan-dial/folio.git\n</span><span id=\"__span-3-2\"><a id=\"__codelineno-3-2\" name=\"__codelineno-3-2\" href=\"#__codelineno-3-2\"></a>cp<span class=\"w\"> </span>-r<span class=\"w\"> </span>folio<span class=\"w\"> </span>~/.claude/skills/folio\n</span></code></pre></div>\n<p>After pulling updates, re-copy to apply changes.</p>\n<hr />\n<h2 id=\"verify-installation\">Verify Installation<a class=\"headerlink\" href=\"#verify-installation\" title=\"Permanent link\">&para;</a></h2>\n<p>Open Claude Code and run:</p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-4-1\"><a id=\"__codelineno-4-1\" name=\"__codelineno-4-1\" href=\"#__codelineno-4-1\"></a>/folio\n</span></code></pre></div>\n<p>Folio should prompt for your paper idea and materials path. If it doesn't respond, confirm the skills directory path in your Claude Code configuration.</p>\n<hr />\n<h2 id=\"updating\">Updating<a class=\"headerlink\" href=\"#updating\" title=\"Permanent link\">&para;</a></h2>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-5-1\"><a id=\"__codelineno-5-1\" name=\"__codelineno-5-1\" href=\"#__codelineno-5-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>/path/to/folio\n</span><span id=\"__span-5-2\"><a id=\"__codelineno-5-2\" name=\"__codelineno-5-2\" href=\"#__codelineno-5-2\"></a>git<span class=\"w\"> </span>pull\n</span></code></pre></div>\n<hr />\n<h2 id=\"first-invocation\">First Invocation<a class=\"headerlink\" href=\"#first-invocation\" title=\"Permanent link\">&para;</a></h2>\n<p>Folio accepts an optional idea and materials path as inline arguments:</p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-6-1\"><a id=\"__codelineno-6-1\" name=\"__codelineno-6-1\" href=\"#__codelineno-6-1\"></a>/folio [idea] [materials_path]\n</span></code></pre></div>\n<p>Both are optional — Folio will prompt interactively for anything not provided.</p>\n<p><strong>Examples:</strong></p>\n<p><div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-7-1\"><a id=\"__codelineno-7-1\" name=\"__codelineno-7-1\" href=\"#__codelineno-7-1\"></a>/folio\n</span></code></pre></div>\nStarts with interactive prompts for everything.</p>\n<p><div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-8-1\"><a id=\"__codelineno-8-1\" name=\"__codelineno-8-1\" href=\"#__codelineno-8-1\"></a>/folio &quot;Benchmarking LLM routing strategies for enterprise workloads&quot; ~/research/llm-routing/\n</span></code></pre></div>\nPasses the idea and materials path directly; Folio skips those prompts.</p>\n<hr />\n<h2 id=\"what-to-expect\">What to expect<a class=\"headerlink\" href=\"#what-to-expect\" title=\"Permanent link\">&para;</a></h2>\n<p>After invocation, Folio walks you through these stages:</p>\n<ol>\n<li>\n<p><strong>Stage 0 — Initialize:</strong> Folio collects your idea, audience, thesis, constraints, and optional venue. It creates a <code>workspace/</code> directory with canonical subdirectories and writes <code>intent.json</code>.</p>\n</li>\n<li>\n<p><strong>Stage 1 — Prep:</strong> Your raw materials are scanned, classified, and normalized into structured input artifacts (<code>idea.md</code>, <code>experimental_log.md</code>, <code>venue_profile.md</code>, etc.). Scripts run to classify materials and recommend a mode.</p>\n</li>\n<li>\n<p><strong>Checkpoint 1:</strong> Folio shows you what was synthesized versus copied verbatim, any gaps, and its mode recommendation. <strong>You confirm before proceeding.</strong></p>\n</li>\n<li>\n<p><strong>Routing checkpoint:</strong> Folio presents <code>route.json</code> — recommended mode and confidence. You accept or override.</p>\n</li>\n<li>\n<p><strong>Mode-specific stages (2–5):</strong> Planning, drafting, and review stages run on the branch you confirmed. See the <a href=\"../workflow-overview/\">Workflow Overview</a> for details.</p>\n</li>\n<li>\n<p><strong>Checkpoint 3 + Export:</strong> After review, Folio pauses for final approval, then packages and exports your manuscript.</p>\n</li>\n</ol>\n<hr />\n<h2 id=\"standalone-commands\">Standalone Commands<a class=\"headerlink\" href=\"#standalone-commands\" title=\"Permanent link\">&para;</a></h2>\n<p>You can run individual stages independently:</p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-9-1\"><a id=\"__codelineno-9-1\" name=\"__codelineno-9-1\" href=\"#__codelineno-9-1\"></a># Just initialize a workspace\n</span><span id=\"__span-9-2\"><a id=\"__codelineno-9-2\" name=\"__codelineno-9-2\" href=\"#__codelineno-9-2\"></a>/folio:init\n</span><span id=\"__span-9-3\"><a id=\"__codelineno-9-3\" name=\"__codelineno-9-3\" href=\"#__codelineno-9-3\"></a>\n</span><span id=\"__span-9-4\"><a id=\"__codelineno-9-4\" name=\"__codelineno-9-4\" href=\"#__codelineno-9-4\"></a># Run prep on an existing workspace\n</span><span id=\"__span-9-5\"><a id=\"__codelineno-9-5\" name=\"__codelineno-9-5\" href=\"#__codelineno-9-5\"></a>/folio:prep workspace/\n</span><span id=\"__span-9-6\"><a id=\"__codelineno-9-6\" name=\"__codelineno-9-6\" href=\"#__codelineno-9-6\"></a>\n</span><span id=\"__span-9-7\"><a id=\"__codelineno-9-7\" name=\"__codelineno-9-7\" href=\"#__codelineno-9-7\"></a># Check status\n</span><span id=\"__span-9-8\"><a id=\"__codelineno-9-8\" name=\"__codelineno-9-8\" href=\"#__codelineno-9-8\"></a>/folio:status workspace/\n</span></code></pre></div>\n<p>Each command picks up where the workspace left off. See the <a href=\"../../reference/commands/\">Command Reference</a> for the full list and entry conditions.</p>\n<hr />\n<div class=\"admonition tip\">\n<p class=\"admonition-title\">Resuming a workspace</p>\n<p>If a session is interrupted, re-invoke <code>/folio</code> with your workspace path. Folio reads <code>logs/checkpoints.md</code> and offers to resume from where you left off.</p>\n</div>\n<div class=\"admonition warning\">\n<p class=\"admonition-title\">IP policy</p>\n<p>If your organization has sensitive terms or internal code names, create an <code>ip_policy.json</code> in your workspace before drafting begins. See <a href=\"../../reference/ip-policy/\">IP Policy</a> for configuration details.</p>\n</div>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Getting Started",
+        "text": "<p>This guide covers installing Folio, verifying the install, and running your first manuscript workflow.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "prerequisites",
+        "level": 2,
+        "title": "Prerequisites",
+        "text": "<ul> <li>Claude Code — Folio runs as a Claude Code skill pack</li> <li>Python 3.10+ — required for validation and prep scripts (stdlib only; no pip installs needed)</li> <li>pdflatex + bibtex — optional, only needed for final PDF compilation</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "install-latex-optional",
+        "level": 3,
+        "title": "Install LaTeX (optional)",
+        "text": "<p>If you want compiled PDF output, install a TeX distribution:</p> <p>macOS: <pre><code>brew install --cask mactex-no-gui\n</code></pre></p> <p>Ubuntu / Debian: <pre><code>sudo apt-get install texlive-full\n</code></pre></p> <p>If LaTeX is not available, Folio degrades gracefully — it delivers the LaTeX source bundle without compiling a PDF.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "install-the-skill-pack",
+        "level": 2,
+        "title": "Install the Skill Pack",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "option-a-symlink-recommended-for-development",
+        "level": 3,
+        "title": "Option A: Symlink (recommended for development)",
+        "text": "<pre><code>git clone https://github.com/athan-dial/folio.git\nln -s \"$(pwd)/folio\" ~/.claude/skills/folio\n</code></pre> <p>Updates apply immediately after <code>git pull</code> — no re-copy needed.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "option-b-copy-into-skills-directory",
+        "level": 3,
+        "title": "Option B: Copy into skills directory",
+        "text": "<pre><code>git clone https://github.com/athan-dial/folio.git\ncp -r folio ~/.claude/skills/folio\n</code></pre> <p>After pulling updates, re-copy to apply changes.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "verify-installation",
+        "level": 2,
+        "title": "Verify Installation",
+        "text": "<p>Open Claude Code and run:</p> <pre><code>/folio\n</code></pre> <p>Folio should prompt for your paper idea and materials path. If it doesn't respond, confirm the skills directory path in your Claude Code configuration.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "updating",
+        "level": 2,
+        "title": "Updating",
+        "text": "<pre><code>cd /path/to/folio\ngit pull\n</code></pre>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "first-invocation",
+        "level": 2,
+        "title": "First Invocation",
+        "text": "<p>Folio accepts an optional idea and materials path as inline arguments:</p> <pre><code>/folio [idea] [materials_path]\n</code></pre> <p>Both are optional — Folio will prompt interactively for anything not provided.</p> <p>Examples:</p> <p><pre><code>/folio\n</code></pre> Starts with interactive prompts for everything.</p> <p><pre><code>/folio \"Benchmarking LLM routing strategies for enterprise workloads\" ~/research/llm-routing/\n</code></pre> Passes the idea and materials path directly; Folio skips those prompts.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "what-to-expect",
+        "level": 2,
+        "title": "What to expect",
+        "text": "<p>After invocation, Folio walks you through these stages:</p> <ol> <li> <p>Stage 0 — Initialize: Folio collects your idea, audience, thesis, constraints, and optional venue. It creates a <code>workspace/</code> directory with canonical subdirectories and writes <code>intent.json</code>.</p> </li> <li> <p>Stage 1 — Prep: Your raw materials are scanned, classified, and normalized into structured input artifacts (<code>idea.md</code>, <code>experimental_log.md</code>, <code>venue_profile.md</code>, etc.). Scripts run to classify materials and recommend a mode.</p> </li> <li> <p>Checkpoint 1: Folio shows you what was synthesized versus copied verbatim, any gaps, and its mode recommendation. You confirm before proceeding.</p> </li> <li> <p>Routing checkpoint: Folio presents <code>route.json</code> — recommended mode and confidence. You accept or override.</p> </li> <li> <p>Mode-specific stages (2–5): Planning, drafting, and review stages run on the branch you confirmed. See the Workflow Overview for details.</p> </li> <li> <p>Checkpoint 3 + Export: After review, Folio pauses for final approval, then packages and exports your manuscript.</p> </li> </ol>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "standalone-commands",
+        "level": 2,
+        "title": "Standalone Commands",
+        "text": "<p>You can run individual stages independently:</p> <pre><code># Just initialize a workspace\n/folio:init\n\n# Run prep on an existing workspace\n/folio:prep workspace/\n\n# Check status\n/folio:status workspace/\n</code></pre> <p>Each command picks up where the workspace left off. See the Command Reference for the full list and entry conditions.</p> <p>Resuming a workspace</p> <p>If a session is interrupted, re-invoke <code>/folio</code> with your workspace path. Folio reads <code>logs/checkpoints.md</code> and offers to resume from where you left off.</p> <p>IP policy</p> <p>If your organization has sensitive terms or internal code names, create an <code>ip_policy.json</code> in your workspace before drafting begins. See IP Policy for configuration details.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Getting Started",
+    "toc": [
+      {
+        "title": "Getting Started",
+        "id": "getting-started",
+        "url": "#getting-started",
+        "children": [
+          {
+            "title": "Prerequisites",
+            "id": "prerequisites",
+            "url": "#prerequisites",
+            "children": [
+              {
+                "title": "Install LaTeX (optional)",
+                "id": "install-latex-optional",
+                "url": "#install-latex-optional",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Install the Skill Pack",
+            "id": "install-the-skill-pack",
+            "url": "#install-the-skill-pack",
+            "children": [
+              {
+                "title": "Option A: Symlink (recommended for development)",
+                "id": "option-a-symlink-recommended-for-development",
+                "url": "#option-a-symlink-recommended-for-development",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Option B: Copy into skills directory",
+                "id": "option-b-copy-into-skills-directory",
+                "url": "#option-b-copy-into-skills-directory",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Verify Installation",
+            "id": "verify-installation",
+            "url": "#verify-installation",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Updating",
+            "id": "updating",
+            "url": "#updating",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "First Invocation",
+            "id": "first-invocation",
+            "url": "#first-invocation",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "What to expect",
+            "id": "what-to-expect",
+            "url": "#what-to-expect",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Standalone Commands",
+            "id": "standalone-commands",
+            "url": "#standalone-commands",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 12824195509428830300
+}

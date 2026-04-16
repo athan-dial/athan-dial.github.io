@@ -1,0 +1,118 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"folio\">Folio<a class=\"headerlink\" href=\"#folio\" title=\"Permanent link\">&para;</a></h1>\n<p><strong>Folio</strong> is a Claude Code skill pack for end-to-end research manuscript orchestration. It converts a research idea and a folder of materials into a validated, reviewable, exportable manuscript — through a structured pipeline of artifact-driven stages, deterministic quality gates, and human approval checkpoints.</p>\n<hr />\n<h2 id=\"what-folio-does\">What Folio does<a class=\"headerlink\" href=\"#what-folio-does\" title=\"Permanent link\">&para;</a></h2>\n<p>Folio runs inside Claude Code and manages the full lifecycle of a research paper:</p>\n<ul>\n<li><strong>Normalizes</strong> loose notes, PDFs, experiment logs, and figures into canonical input artifacts</li>\n<li><strong>Plans</strong> an outline, claim ledger, figure plan, and literature map</li>\n<li><strong>Drafts</strong> an integrated manuscript (Markdown or LaTeX, depending on mode)</li>\n<li><strong>Reviews</strong> the draft critically, runs IP safety scanning, and reverts regressions automatically</li>\n<li><strong>Exports</strong> a clean final bundle with bibliography, figures, and an optional compiled PDF</li>\n</ul>\n<p>Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.</p>\n<hr />\n<h2 id=\"modes\">Modes<a class=\"headerlink\" href=\"#modes\" title=\"Permanent link\">&para;</a></h2>\n<p>Folio branches into three modes after prep, based on what your materials look like:</p>\n<table>\n<thead>\n<tr>\n<th>Mode</th>\n<th>Best for</th>\n<th>Draft format</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"guides/modes/white-paper/\">White paper</a></td>\n<td>Conceptual framing, executive narrative, strategic positioning</td>\n<td>Markdown</td>\n</tr>\n<tr>\n<td><a href=\"guides/modes/research-paper/\">Research paper</a></td>\n<td>Evidence-heavy research, empirical results, traditional venue submission</td>\n<td>LaTeX</td>\n</tr>\n<tr>\n<td><a href=\"guides/modes/hybrid/\">Hybrid</a></td>\n<td>Combined framing and evidence, merged narrative + data sections</td>\n<td>Markdown + LaTeX</td>\n</tr>\n</tbody>\n</table>\n<p>Mode is recommended automatically by <code>route_mode.py</code> from your materials and intent. You confirm or override at the routing checkpoint.</p>\n<hr />\n<h2 id=\"commands\">Commands<a class=\"headerlink\" href=\"#commands\" title=\"Permanent link\">&para;</a></h2>\n<p>Folio can run as a full pipeline or stage-by-stage:</p>\n<table>\n<thead>\n<tr>\n<th>Command</th>\n<th>Purpose</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>/folio</code></td>\n<td>Run full pipeline or resume from checkpoint</td>\n</tr>\n<tr>\n<td><code>/folio:init</code></td>\n<td>Initialize workspace and collect intent</td>\n</tr>\n<tr>\n<td><code>/folio:prep</code></td>\n<td>Normalize, classify, route materials</td>\n</tr>\n<tr>\n<td><code>/folio:plan</code></td>\n<td>Mode-specific planning</td>\n</tr>\n<tr>\n<td><code>/folio:support</code></td>\n<td>Evidence, literature, figures</td>\n</tr>\n<tr>\n<td><code>/folio:draft</code></td>\n<td>Compose manuscript</td>\n</tr>\n<tr>\n<td><code>/folio:review</code></td>\n<td>IP scan, review, repair</td>\n</tr>\n<tr>\n<td><code>/folio:export</code></td>\n<td>Finalize and package</td>\n</tr>\n<tr>\n<td><code>/folio:status</code></td>\n<td>Show pipeline state</td>\n</tr>\n</tbody>\n</table>\n<p>See <a href=\"reference/commands/\">Command Reference</a> for full details.</p>\n<hr />\n<h2 id=\"guides\">Guides<a class=\"headerlink\" href=\"#guides\" title=\"Permanent link\">&para;</a></h2>\n<ul>\n<li><a href=\"guides/getting-started/\">Getting Started</a> — Install, first invocation, what to expect</li>\n<li><a href=\"guides/workflow-overview/\">Workflow Overview</a> — Stage-by-stage walkthrough (Stages 0–6)</li>\n<li><a href=\"guides/modes/white-paper/\">White Paper Mode</a></li>\n<li><a href=\"guides/modes/research-paper/\">Research Paper Mode</a></li>\n<li><a href=\"guides/modes/hybrid/\">Hybrid Mode</a></li>\n</ul>\n<hr />\n<h2 id=\"reference\">Reference<a class=\"headerlink\" href=\"#reference\" title=\"Permanent link\">&para;</a></h2>\n<ul>\n<li><a href=\"reference/scripts/\">Scripts</a> — All helper scripts: purpose, usage, exit codes</li>\n<li><a href=\"reference/schemas/\">Schemas</a> — JSON manifest schemas and their key fields</li>\n<li><a href=\"reference/artifacts/\">Artifacts</a> — Complete artifact list organized by stage</li>\n<li><a href=\"reference/ip-policy/\">IP Policy</a> — Redline scanning and <code>ip_policy.json</code> configuration</li>\n<li><a href=\"reference/failure-modes/\">Failure Modes</a> — Gate failures, common problems, and repairs</li>\n</ul>\n<hr />\n<h2 id=\"quick-start\">Quick start<a class=\"headerlink\" href=\"#quick-start\" title=\"Permanent link\">&para;</a></h2>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"c1\"># Install</span>\n</span><span id=\"__span-0-2\"><a id=\"__codelineno-0-2\" name=\"__codelineno-0-2\" href=\"#__codelineno-0-2\"></a>git<span class=\"w\"> </span>clone<span class=\"w\"> </span>https://github.com/athan-dial/folio.git\n</span><span id=\"__span-0-3\"><a id=\"__codelineno-0-3\" name=\"__codelineno-0-3\" href=\"#__codelineno-0-3\"></a>ln<span class=\"w\"> </span>-s<span class=\"w\"> </span><span class=\"s2\">&quot;</span><span class=\"k\">$(</span><span class=\"nb\">pwd</span><span class=\"k\">)</span><span class=\"s2\">/folio&quot;</span><span class=\"w\"> </span>~/.claude/skills/folio\n</span><span id=\"__span-0-4\"><a id=\"__codelineno-0-4\" name=\"__codelineno-0-4\" href=\"#__codelineno-0-4\"></a>\n</span><span id=\"__span-0-5\"><a id=\"__codelineno-0-5\" name=\"__codelineno-0-5\" href=\"#__codelineno-0-5\"></a><span class=\"c1\"># Invoke in Claude Code</span>\n</span><span id=\"__span-0-6\"><a id=\"__codelineno-0-6\" name=\"__codelineno-0-6\" href=\"#__codelineno-0-6\"></a>/folio<span class=\"w\"> </span><span class=\"s2\">&quot;My research idea&quot;</span><span class=\"w\"> </span>path/to/materials/\n</span></code></pre></div>\n<p>See <a href=\"guides/getting-started/\">Getting Started</a> for full installation and first-run instructions.</p>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Folio",
+        "text": "<p>Folio is a Claude Code skill pack for end-to-end research manuscript orchestration. It converts a research idea and a folder of materials into a validated, reviewable, exportable manuscript — through a structured pipeline of artifact-driven stages, deterministic quality gates, and human approval checkpoints.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "what-folio-does",
+        "level": 2,
+        "title": "What Folio does",
+        "text": "<p>Folio runs inside Claude Code and manages the full lifecycle of a research paper:</p> <ul> <li>Normalizes loose notes, PDFs, experiment logs, and figures into canonical input artifacts</li> <li>Plans an outline, claim ledger, figure plan, and literature map</li> <li>Drafts an integrated manuscript (Markdown or LaTeX, depending on mode)</li> <li>Reviews the draft critically, runs IP safety scanning, and reverts regressions automatically</li> <li>Exports a clean final bundle with bibliography, figures, and an optional compiled PDF</li> </ul> <p>Three human checkpoints pause the workflow at critical junctions — after prep, after planning, and before final export.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "modes",
+        "level": 2,
+        "title": "Modes",
+        "text": "<p>Folio branches into three modes after prep, based on what your materials look like:</p> Mode Best for Draft format White paper Conceptual framing, executive narrative, strategic positioning Markdown Research paper Evidence-heavy research, empirical results, traditional venue submission LaTeX Hybrid Combined framing and evidence, merged narrative + data sections Markdown + LaTeX <p>Mode is recommended automatically by <code>route_mode.py</code> from your materials and intent. You confirm or override at the routing checkpoint.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "commands",
+        "level": 2,
+        "title": "Commands",
+        "text": "<p>Folio can run as a full pipeline or stage-by-stage:</p> Command Purpose <code>/folio</code> Run full pipeline or resume from checkpoint <code>/folio:init</code> Initialize workspace and collect intent <code>/folio:prep</code> Normalize, classify, route materials <code>/folio:plan</code> Mode-specific planning <code>/folio:support</code> Evidence, literature, figures <code>/folio:draft</code> Compose manuscript <code>/folio:review</code> IP scan, review, repair <code>/folio:export</code> Finalize and package <code>/folio:status</code> Show pipeline state <p>See Command Reference for full details.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "guides",
+        "level": 2,
+        "title": "Guides",
+        "text": "<ul> <li>Getting Started — Install, first invocation, what to expect</li> <li>Workflow Overview — Stage-by-stage walkthrough (Stages 0–6)</li> <li>White Paper Mode</li> <li>Research Paper Mode</li> <li>Hybrid Mode</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "reference",
+        "level": 2,
+        "title": "Reference",
+        "text": "<ul> <li>Scripts — All helper scripts: purpose, usage, exit codes</li> <li>Schemas — JSON manifest schemas and their key fields</li> <li>Artifacts — Complete artifact list organized by stage</li> <li>IP Policy — Redline scanning and <code>ip_policy.json</code> configuration</li> <li>Failure Modes — Gate failures, common problems, and repairs</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "quick-start",
+        "level": 2,
+        "title": "Quick start",
+        "text": "<pre><code># Install\ngit clone https://github.com/athan-dial/folio.git\nln -s \"$(pwd)/folio\" ~/.claude/skills/folio\n\n# Invoke in Claude Code\n/folio \"My research idea\" path/to/materials/\n</code></pre> <p>See Getting Started for full installation and first-run instructions.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Folio",
+    "toc": [
+      {
+        "title": "Folio",
+        "id": "folio",
+        "url": "#folio",
+        "children": [
+          {
+            "title": "What Folio does",
+            "id": "what-folio-does",
+            "url": "#what-folio-does",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Modes",
+            "id": "modes",
+            "url": "#modes",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Commands",
+            "id": "commands",
+            "url": "#commands",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Guides",
+            "id": "guides",
+            "url": "#guides",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Reference",
+            "id": "reference",
+            "url": "#reference",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Quick start",
+            "id": "quick-start",
+            "url": "#quick-start",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 1045555170282724538
+}

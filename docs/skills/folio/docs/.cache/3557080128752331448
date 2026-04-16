@@ -1,0 +1,378 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"artifacts-reference\">Artifacts Reference<a class=\"headerlink\" href=\"#artifacts-reference\" title=\"Permanent link\">&para;</a></h1>\n<p>This page lists every artifact Folio produces, organized by stage. Mode columns indicate which modes produce each artifact: <strong>WP</strong> = white paper, <strong>DP</strong> = research paper, <strong>HY</strong> = hybrid.</p>\n<hr />\n<h2 id=\"stage-0-initialize\">Stage 0: Initialize<a class=\"headerlink\" href=\"#stage-0-initialize\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Modes</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace/</code> (directory tree)</td>\n<td>All</td>\n<td>Full canonical workspace layout created by <code>init_workspace.py</code></td>\n</tr>\n<tr>\n<td><code>intent.json</code></td>\n<td>All</td>\n<td>Declared goals, audience, thesis, constraints, forbidden topics, preferred mode</td>\n</tr>\n<tr>\n<td><code>logs/run_log.md</code></td>\n<td>All</td>\n<td>Session history; timestamped by <code>init_workspace.py</code></td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-1-prep-and-normalization\">Stage 1: Prep and Normalization<a class=\"headerlink\" href=\"#stage-1-prep-and-normalization\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Modes</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>inputs/idea.md</code></td>\n<td>All</td>\n<td>Core contribution, research questions, key claims, novelty framing</td>\n</tr>\n<tr>\n<td><code>inputs/experimental_log.md</code></td>\n<td>All</td>\n<td>Experiments, parameters, results summary, observations. Minimal or N/A for white paper</td>\n</tr>\n<tr>\n<td><code>inputs/materials_manifest.json</code></td>\n<td>All</td>\n<td>Per-file inventory of raw materials: path, type, description, relevance, gaps</td>\n</tr>\n<tr>\n<td><code>inputs/venue_profile.md</code></td>\n<td>All</td>\n<td>Target outlet, page limits, format, audience, evaluation criteria</td>\n</tr>\n<tr>\n<td><code>inputs/figures_manifest.json</code></td>\n<td>All</td>\n<td>Existing and planned figures/tables with paths, descriptions, regeneration needs</td>\n</tr>\n<tr>\n<td><code>inputs/materials_passport.json</code></td>\n<td>All</td>\n<td>Per-material provenance, classification, and allowed-use policy (from <code>classify_materials.py</code>)</td>\n</tr>\n<tr>\n<td><code>route.json</code></td>\n<td>All</td>\n<td>Recommended mode, confidence score, reasons, user override (from <code>route_mode.py</code>)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"routing-checkpoint\">Routing Checkpoint<a class=\"headerlink\" href=\"#routing-checkpoint\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Modes</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>logs/checkpoints.md</code></td>\n<td>All</td>\n<td>Routing decision logged: stage id, mode, timestamp, status</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-2-planning-framing\">Stage 2: Planning / Framing<a class=\"headerlink\" href=\"#stage-2-planning-framing\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"white-paper-w2w3\">White paper (W2–W3)<a class=\"headerlink\" href=\"#white-paper-w2w3\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/perspectives.json</code></td>\n<td>Array of perspectives: id, viewpoint, key arguments, source materials, relevance</td>\n</tr>\n<tr>\n<td><code>planning/question_tree.json</code></td>\n<td>Structured questions grouped by planned section</td>\n</tr>\n<tr>\n<td><code>planning/argument_graph.md</code></td>\n<td>Argument flow as text/ASCII: sections → claims → dependencies</td>\n</tr>\n<tr>\n<td><code>planning/claim_ledger.json</code></td>\n<td>Claims with extended types (fact, interpretation, opinion, forecast), perspective links</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"research-paper-d2\">Research paper (D2)<a class=\"headerlink\" href=\"#research-paper-d2\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/outline.json</code></td>\n<td>Working title, sections with ids, purposes, key points, length estimates, narrative arc</td>\n</tr>\n<tr>\n<td><code>planning/claim_ledger.json</code></td>\n<td>Claims with quantitative/qualitative/methodological types, evidence sources, support levels</td>\n</tr>\n<tr>\n<td><code>planning/figure_plan.json</code></td>\n<td>Per-figure: id, description, type, source, supported claims, caption draft</td>\n</tr>\n<tr>\n<td><code>planning/literature_plan.json</code></td>\n<td>Search queries, known references, coverage areas with minimum ref counts</td>\n</tr>\n<tr>\n<td><code>planning/results_inventory.json</code></td>\n<td>Results entries: id, description, value, source file, supported claims, verified flag</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"hybrid-h2\">Hybrid (H2)<a class=\"headerlink\" href=\"#hybrid-h2\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/perspectives.json</code></td>\n<td>Perspective map (conceptual track)</td>\n</tr>\n<tr>\n<td><code>planning/question_tree.json</code></td>\n<td>Section-linked question structure</td>\n</tr>\n<tr>\n<td><code>planning/argument_graph.md</code></td>\n<td>Argument flow (conceptual track)</td>\n</tr>\n<tr>\n<td><code>planning/claim_ledger.json</code></td>\n<td>Extended claim types (conceptual track; merged with evidence track in H3)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-3-support-artifacts\">Stage 3: Support Artifacts<a class=\"headerlink\" href=\"#stage-3-support-artifacts\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"research-paper-d3-and-hybrid-h3\">Research paper (D3) and Hybrid (H3)<a class=\"headerlink\" href=\"#research-paper-d3-and-hybrid-h3\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Stage</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/claim_ledger.json</code> (updated)</td>\n<td>D3-3A / H3</td>\n<td>Claim ledger updated with verified evidence mapping</td>\n</tr>\n<tr>\n<td><code>citations/citation_pool.json</code></td>\n<td>D3-3B / H3</td>\n<td>Verified citation metadata: key, title, authors, year, venue, DOI, verified flag, relevance</td>\n</tr>\n<tr>\n<td><code>citations/refs.bib</code></td>\n<td>D3-3B / H3</td>\n<td>BibTeX bibliography built from verified citations only</td>\n</tr>\n<tr>\n<td><code>figures/supplied/</code></td>\n<td>D3-3C / H3</td>\n<td>Existing figures copied from raw materials</td>\n</tr>\n<tr>\n<td><code>figures/generated/</code></td>\n<td>D3-3C / H3</td>\n<td>Figures produced during the workflow</td>\n</tr>\n<tr>\n<td><code>figures/captions.json</code></td>\n<td>D3-3C / H3</td>\n<td>Figure id, path, caption, existence flag</td>\n</tr>\n<tr>\n<td><code>tables/generated/</code></td>\n<td>D3-3C / H3</td>\n<td>LaTeX table snippets</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-4-draft-composition\">Stage 4: Draft Composition<a class=\"headerlink\" href=\"#stage-4-draft-composition\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"white-paper-w4\">White paper (W4)<a class=\"headerlink\" href=\"#white-paper-w4\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/outline.json</code></td>\n<td>Section structure with ids, purposes, key points</td>\n</tr>\n<tr>\n<td><code>drafts/paper.md</code></td>\n<td>Working Markdown draft</td>\n</tr>\n<tr>\n<td><code>drafts/reference_list.md</code></td>\n<td>Parallel reference list if full <code>refs.bib</code> not yet built (optional)</td>\n</tr>\n<tr>\n<td><code>drafts/sections/</code></td>\n<td>Optional section splits for long works</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"research-paper-d4\">Research paper (D4)<a class=\"headerlink\" href=\"#research-paper-d4\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>drafts/paper.tex</code></td>\n<td>Working LaTeX draft</td>\n</tr>\n<tr>\n<td><code>drafts/sections/</code></td>\n<td>Optional section intermediates</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"hybrid-h4\">Hybrid (H4)<a class=\"headerlink\" href=\"#hybrid-h4\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/outline.json</code></td>\n<td>Merged section structure (conceptual + evidence tracks)</td>\n</tr>\n<tr>\n<td><code>drafts/paper.md</code></td>\n<td>Conceptual sections (Option A) or full draft (Option B)</td>\n</tr>\n<tr>\n<td><code>drafts/paper.tex</code></td>\n<td>Evidence sections (Option A) or full LaTeX draft (Option B)</td>\n</tr>\n<tr>\n<td><code>drafts/README_hybrid.md</code></td>\n<td>Cross-reference guide explaining how sections stitch (Option A only)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-5-review\">Stage 5: Review<a class=\"headerlink\" href=\"#stage-5-review\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"all-modes\">All modes<a class=\"headerlink\" href=\"#all-modes\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Modes</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>reviews/ip_safety_report.md</code></td>\n<td>All</td>\n<td>IP/redline scan results: file paths, line numbers, matched patterns</td>\n</tr>\n<tr>\n<td><code>reviews/review_round_N.md</code></td>\n<td>All</td>\n<td>Review notes per round (argument flow, claim support, clarity, venue fit)</td>\n</tr>\n<tr>\n<td><code>reviews/scorecard.json</code></td>\n<td>All</td>\n<td>Quality scores: argument_coherence, evidence_support, citation_quality, writing_clarity, venue_fit, overall</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"white-paper-additional-w5\">White paper additional (W5)<a class=\"headerlink\" href=\"#white-paper-additional-w5\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>reviews/hostile_review.md</code></td>\n<td>External critic review: logical gaps, unsupported assertions, competitive risk</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"hybrid-additional-h5\">Hybrid additional (H5)<a class=\"headerlink\" href=\"#hybrid-additional-h5\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>reviews/hostile_review.md</code></td>\n<td>Hostile review of conceptual sections</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"stage-6-finalize-executive-outputs\">Stage 6: Finalize / Executive Outputs<a class=\"headerlink\" href=\"#stage-6-finalize-executive-outputs\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"white-paper-w6\">White paper (W6)<a class=\"headerlink\" href=\"#white-paper-w6\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>exports/executive_summary.md</code></td>\n<td>~1 page for leadership: thesis, why it matters, risks, asks</td>\n</tr>\n<tr>\n<td><code>exports/bd_talking_points.md</code></td>\n<td>Bullets for BD conversations: pain, differentiation, proof, objections</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"research-paper-d6\">Research paper (D6)<a class=\"headerlink\" href=\"#research-paper-d6\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>final/paper.tex</code></td>\n<td>Accepted final LaTeX manuscript</td>\n</tr>\n<tr>\n<td><code>final/refs.bib</code></td>\n<td>Final bibliography</td>\n</tr>\n<tr>\n<td><code>final/figures/</code></td>\n<td>Final figure assets</td>\n</tr>\n<tr>\n<td><code>final/tables/</code></td>\n<td>Final table files</td>\n</tr>\n<tr>\n<td><code>final/paper.pdf</code></td>\n<td>Compiled PDF (if <code>pdflatex</code> available)</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"hybrid-h6\">Hybrid (H6)<a class=\"headerlink\" href=\"#hybrid-h6\" title=\"Permanent link\">&para;</a></h3>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>final/paper.tex</code> and/or <code>final/paper.md</code></td>\n<td>Final manuscript (format per H4 choice)</td>\n</tr>\n<tr>\n<td><code>final/refs.bib</code></td>\n<td>Final bibliography</td>\n</tr>\n<tr>\n<td><code>final/figures/</code></td>\n<td>Final figure assets</td>\n</tr>\n<tr>\n<td><code>exports/executive_summary.md</code></td>\n<td>Leadership summary</td>\n</tr>\n<tr>\n<td><code>exports/bd_talking_points.md</code></td>\n<td>BD talking points</td>\n</tr>\n<tr>\n<td><code>final/paper.pdf</code></td>\n<td>Compiled PDF for LaTeX portions (if <code>pdflatex</code> available)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"final-packaging-all-modes\">Final Packaging (all modes)<a class=\"headerlink\" href=\"#final-packaging-all-modes\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Modes</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>final/</code> (assembled bundle)</td>\n<td>All</td>\n<td>Mode-appropriate final package assembled by <code>package_exports.py</code></td>\n</tr>\n<tr>\n<td><code>final/submission_bundle.zip</code></td>\n<td>All</td>\n<td>Zip of final deliverables (if produced by <code>package_exports.py</code>)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2 id=\"logs-all-modes-all-stages\">Logs (all modes, all stages)<a class=\"headerlink\" href=\"#logs-all-modes-all-stages\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>logs/run_log.md</code></td>\n<td>Session history: decisions, overrides, tool failures, user waivers</td>\n</tr>\n<tr>\n<td><code>logs/checkpoints.md</code></td>\n<td>Table of stage completions and human approvals: stage id, mode, timestamp, pass/fail</td>\n</tr>\n</tbody>\n</table>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Artifacts Reference",
+        "text": "<p>This page lists every artifact Folio produces, organized by stage. Mode columns indicate which modes produce each artifact: WP = white paper, DP = research paper, HY = hybrid.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-0-initialize",
+        "level": 2,
+        "title": "Stage 0: Initialize",
+        "text": "Artifact Modes Description <code>workspace/</code> (directory tree) All Full canonical workspace layout created by <code>init_workspace.py</code> <code>intent.json</code> All Declared goals, audience, thesis, constraints, forbidden topics, preferred mode <code>logs/run_log.md</code> All Session history; timestamped by <code>init_workspace.py</code>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-1-prep-and-normalization",
+        "level": 2,
+        "title": "Stage 1: Prep and Normalization",
+        "text": "Artifact Modes Description <code>inputs/idea.md</code> All Core contribution, research questions, key claims, novelty framing <code>inputs/experimental_log.md</code> All Experiments, parameters, results summary, observations. Minimal or N/A for white paper <code>inputs/materials_manifest.json</code> All Per-file inventory of raw materials: path, type, description, relevance, gaps <code>inputs/venue_profile.md</code> All Target outlet, page limits, format, audience, evaluation criteria <code>inputs/figures_manifest.json</code> All Existing and planned figures/tables with paths, descriptions, regeneration needs <code>inputs/materials_passport.json</code> All Per-material provenance, classification, and allowed-use policy (from <code>classify_materials.py</code>) <code>route.json</code> All Recommended mode, confidence score, reasons, user override (from <code>route_mode.py</code>)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "routing-checkpoint",
+        "level": 2,
+        "title": "Routing Checkpoint",
+        "text": "Artifact Modes Description <code>logs/checkpoints.md</code> All Routing decision logged: stage id, mode, timestamp, status",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-2-planning-framing",
+        "level": 2,
+        "title": "Stage 2: Planning / Framing",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "white-paper-w2w3",
+        "level": 3,
+        "title": "White paper (W2–W3)",
+        "text": "Artifact Description <code>planning/perspectives.json</code> Array of perspectives: id, viewpoint, key arguments, source materials, relevance <code>planning/question_tree.json</code> Structured questions grouped by planned section <code>planning/argument_graph.md</code> Argument flow as text/ASCII: sections → claims → dependencies <code>planning/claim_ledger.json</code> Claims with extended types (fact, interpretation, opinion, forecast), perspective links",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "research-paper-d2",
+        "level": 3,
+        "title": "Research paper (D2)",
+        "text": "Artifact Description <code>planning/outline.json</code> Working title, sections with ids, purposes, key points, length estimates, narrative arc <code>planning/claim_ledger.json</code> Claims with quantitative/qualitative/methodological types, evidence sources, support levels <code>planning/figure_plan.json</code> Per-figure: id, description, type, source, supported claims, caption draft <code>planning/literature_plan.json</code> Search queries, known references, coverage areas with minimum ref counts <code>planning/results_inventory.json</code> Results entries: id, description, value, source file, supported claims, verified flag",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "hybrid-h2",
+        "level": 3,
+        "title": "Hybrid (H2)",
+        "text": "Artifact Description <code>planning/perspectives.json</code> Perspective map (conceptual track) <code>planning/question_tree.json</code> Section-linked question structure <code>planning/argument_graph.md</code> Argument flow (conceptual track) <code>planning/claim_ledger.json</code> Extended claim types (conceptual track; merged with evidence track in H3)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-3-support-artifacts",
+        "level": 2,
+        "title": "Stage 3: Support Artifacts",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "research-paper-d3-and-hybrid-h3",
+        "level": 3,
+        "title": "Research paper (D3) and Hybrid (H3)",
+        "text": "Artifact Stage Description <code>planning/claim_ledger.json</code> (updated) D3-3A / H3 Claim ledger updated with verified evidence mapping <code>citations/citation_pool.json</code> D3-3B / H3 Verified citation metadata: key, title, authors, year, venue, DOI, verified flag, relevance <code>citations/refs.bib</code> D3-3B / H3 BibTeX bibliography built from verified citations only <code>figures/supplied/</code> D3-3C / H3 Existing figures copied from raw materials <code>figures/generated/</code> D3-3C / H3 Figures produced during the workflow <code>figures/captions.json</code> D3-3C / H3 Figure id, path, caption, existence flag <code>tables/generated/</code> D3-3C / H3 LaTeX table snippets",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-4-draft-composition",
+        "level": 2,
+        "title": "Stage 4: Draft Composition",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "white-paper-w4",
+        "level": 3,
+        "title": "White paper (W4)",
+        "text": "Artifact Description <code>planning/outline.json</code> Section structure with ids, purposes, key points <code>drafts/paper.md</code> Working Markdown draft <code>drafts/reference_list.md</code> Parallel reference list if full <code>refs.bib</code> not yet built (optional) <code>drafts/sections/</code> Optional section splits for long works",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "research-paper-d4",
+        "level": 3,
+        "title": "Research paper (D4)",
+        "text": "Artifact Description <code>drafts/paper.tex</code> Working LaTeX draft <code>drafts/sections/</code> Optional section intermediates",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "hybrid-h4",
+        "level": 3,
+        "title": "Hybrid (H4)",
+        "text": "Artifact Description <code>planning/outline.json</code> Merged section structure (conceptual + evidence tracks) <code>drafts/paper.md</code> Conceptual sections (Option A) or full draft (Option B) <code>drafts/paper.tex</code> Evidence sections (Option A) or full LaTeX draft (Option B) <code>drafts/README_hybrid.md</code> Cross-reference guide explaining how sections stitch (Option A only)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-5-review",
+        "level": 2,
+        "title": "Stage 5: Review",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "all-modes",
+        "level": 3,
+        "title": "All modes",
+        "text": "Artifact Modes Description <code>reviews/ip_safety_report.md</code> All IP/redline scan results: file paths, line numbers, matched patterns <code>reviews/review_round_N.md</code> All Review notes per round (argument flow, claim support, clarity, venue fit) <code>reviews/scorecard.json</code> All Quality scores: argument_coherence, evidence_support, citation_quality, writing_clarity, venue_fit, overall",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "white-paper-additional-w5",
+        "level": 3,
+        "title": "White paper additional (W5)",
+        "text": "Artifact Description <code>reviews/hostile_review.md</code> External critic review: logical gaps, unsupported assertions, competitive risk",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "hybrid-additional-h5",
+        "level": 3,
+        "title": "Hybrid additional (H5)",
+        "text": "Artifact Description <code>reviews/hostile_review.md</code> Hostile review of conceptual sections",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-6-finalize-executive-outputs",
+        "level": 2,
+        "title": "Stage 6: Finalize / Executive Outputs",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "white-paper-w6",
+        "level": 3,
+        "title": "White paper (W6)",
+        "text": "Artifact Description <code>exports/executive_summary.md</code> ~1 page for leadership: thesis, why it matters, risks, asks <code>exports/bd_talking_points.md</code> Bullets for BD conversations: pain, differentiation, proof, objections",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "research-paper-d6",
+        "level": 3,
+        "title": "Research paper (D6)",
+        "text": "Artifact Description <code>final/paper.tex</code> Accepted final LaTeX manuscript <code>final/refs.bib</code> Final bibliography <code>final/figures/</code> Final figure assets <code>final/tables/</code> Final table files <code>final/paper.pdf</code> Compiled PDF (if <code>pdflatex</code> available)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "hybrid-h6",
+        "level": 3,
+        "title": "Hybrid (H6)",
+        "text": "Artifact Description <code>final/paper.tex</code> and/or <code>final/paper.md</code> Final manuscript (format per H4 choice) <code>final/refs.bib</code> Final bibliography <code>final/figures/</code> Final figure assets <code>exports/executive_summary.md</code> Leadership summary <code>exports/bd_talking_points.md</code> BD talking points <code>final/paper.pdf</code> Compiled PDF for LaTeX portions (if <code>pdflatex</code> available)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "final-packaging-all-modes",
+        "level": 2,
+        "title": "Final Packaging (all modes)",
+        "text": "Artifact Modes Description <code>final/</code> (assembled bundle) All Mode-appropriate final package assembled by <code>package_exports.py</code> <code>final/submission_bundle.zip</code> All Zip of final deliverables (if produced by <code>package_exports.py</code>)",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "logs-all-modes-all-stages",
+        "level": 2,
+        "title": "Logs (all modes, all stages)",
+        "text": "Artifact Description <code>logs/run_log.md</code> Session history: decisions, overrides, tool failures, user waivers <code>logs/checkpoints.md</code> Table of stage completions and human approvals: stage id, mode, timestamp, pass/fail",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Artifacts Reference",
+    "toc": [
+      {
+        "title": "Artifacts Reference",
+        "id": "artifacts-reference",
+        "url": "#artifacts-reference",
+        "children": [
+          {
+            "title": "Stage 0: Initialize",
+            "id": "stage-0-initialize",
+            "url": "#stage-0-initialize",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage 1: Prep and Normalization",
+            "id": "stage-1-prep-and-normalization",
+            "url": "#stage-1-prep-and-normalization",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Routing Checkpoint",
+            "id": "routing-checkpoint",
+            "url": "#routing-checkpoint",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage 2: Planning / Framing",
+            "id": "stage-2-planning-framing",
+            "url": "#stage-2-planning-framing",
+            "children": [
+              {
+                "title": "White paper (W2–W3)",
+                "id": "white-paper-w2w3",
+                "url": "#white-paper-w2w3",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Research paper (D2)",
+                "id": "research-paper-d2",
+                "url": "#research-paper-d2",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Hybrid (H2)",
+                "id": "hybrid-h2",
+                "url": "#hybrid-h2",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Stage 3: Support Artifacts",
+            "id": "stage-3-support-artifacts",
+            "url": "#stage-3-support-artifacts",
+            "children": [
+              {
+                "title": "Research paper (D3) and Hybrid (H3)",
+                "id": "research-paper-d3-and-hybrid-h3",
+                "url": "#research-paper-d3-and-hybrid-h3",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Stage 4: Draft Composition",
+            "id": "stage-4-draft-composition",
+            "url": "#stage-4-draft-composition",
+            "children": [
+              {
+                "title": "White paper (W4)",
+                "id": "white-paper-w4",
+                "url": "#white-paper-w4",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Research paper (D4)",
+                "id": "research-paper-d4",
+                "url": "#research-paper-d4",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Hybrid (H4)",
+                "id": "hybrid-h4",
+                "url": "#hybrid-h4",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Stage 5: Review",
+            "id": "stage-5-review",
+            "url": "#stage-5-review",
+            "children": [
+              {
+                "title": "All modes",
+                "id": "all-modes",
+                "url": "#all-modes",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "White paper additional (W5)",
+                "id": "white-paper-additional-w5",
+                "url": "#white-paper-additional-w5",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Hybrid additional (H5)",
+                "id": "hybrid-additional-h5",
+                "url": "#hybrid-additional-h5",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Stage 6: Finalize / Executive Outputs",
+            "id": "stage-6-finalize-executive-outputs",
+            "url": "#stage-6-finalize-executive-outputs",
+            "children": [
+              {
+                "title": "White paper (W6)",
+                "id": "white-paper-w6",
+                "url": "#white-paper-w6",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Research paper (D6)",
+                "id": "research-paper-d6",
+                "url": "#research-paper-d6",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Hybrid (H6)",
+                "id": "hybrid-h6",
+                "url": "#hybrid-h6",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Final Packaging (all modes)",
+            "id": "final-packaging-all-modes",
+            "url": "#final-packaging-all-modes",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Logs (all modes, all stages)",
+            "id": "logs-all-modes-all-stages",
+            "url": "#logs-all-modes-all-stages",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 14550846554562828356
+}

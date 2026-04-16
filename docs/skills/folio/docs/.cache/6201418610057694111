@@ -1,0 +1,179 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"research-paper-mode\">Research Paper Mode<a class=\"headerlink\" href=\"#research-paper-mode\" title=\"Permanent link\">&para;</a></h1>\n<p>Research paper mode is the evidence-forward pipeline for traditional research manuscripts. It produces a LaTeX draft with a verified BibTeX bibliography, a figures and tables pipeline, and a structured finalize-and-package stage for venue submission.</p>\n<hr />\n<h2 id=\"when-to-use\">When to use<a class=\"headerlink\" href=\"#when-to-use\" title=\"Permanent link\">&para;</a></h2>\n<p>Choose research paper mode when your materials include:</p>\n<ul>\n<li>Experimental results, benchmarks, ablation studies, or statistical analyses</li>\n<li>Datasets and code</li>\n<li>A target venue with specific LaTeX formatting requirements</li>\n<li>A hypothesis-driven narrative that requires traceable quantitative claims</li>\n</ul>\n<p><code>route_mode.py</code> recommends this mode when materials show strong empirical signals: experimental logs, datasets, notebooks, or benchmark output. If routing is ambiguous, override at the routing checkpoint.</p>\n<hr />\n<h2 id=\"stage-d2-global-planning\">Stage D2: Global Planning<a class=\"headerlink\" href=\"#stage-d2-global-planning\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Entry condition:</strong> Checkpoint 1 and routing approved; canonical inputs available.</p>\n<p>Folio reads your canonical inputs and generates five planning artifacts:</p>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/outline.json</code></td>\n<td>Working title, sections with ids, purposes, key points, length estimates, figure and citation dependencies, narrative arc</td>\n</tr>\n<tr>\n<td><code>planning/claim_ledger.json</code></td>\n<td>Claims with <code>id</code>, <code>statement</code>, <code>type</code>, <code>evidence_source</code>, <code>support_level</code>, figure/citation dependencies, notes</td>\n</tr>\n<tr>\n<td><code>planning/figure_plan.json</code></td>\n<td>Per-figure: id, description, type, source (<code>existing</code> / <code>generate</code> / <code>collect</code>), supported claims, caption draft</td>\n</tr>\n<tr>\n<td><code>planning/literature_plan.json</code></td>\n<td>Search queries, known references, coverage areas with minimum ref counts</td>\n</tr>\n<tr>\n<td><code>planning/results_inventory.json</code></td>\n<td>Results entries: id, description, value, source file, supported claims, verified flag</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Gate B — Plan completeness:</strong>\n- Outline includes standard sections for the venue type\n- Every claim has a <code>support_level</code>; every <code>unsupported</code> claim is explicitly flagged\n- Figure plan covers all outline-referenced figures\n- Literature plan covers all citation needs</p>\n<p><strong>Human Checkpoint 2:</strong> Folio presents the outline, narrative arc, claim ledger summary (highlighting weak/unsupported claims), figure plan, and literature plan. <strong>Explicit approval required before Stage D3.</strong></p>\n<hr />\n<h2 id=\"stage-d3-support-artifact-generation\">Stage D3: Support Artifact Generation<a class=\"headerlink\" href=\"#stage-d3-support-artifact-generation\" title=\"Permanent link\">&para;</a></h2>\n<p>Three substages run in parallel (all must complete before drafting):</p>\n<h3 id=\"3a-evidence-accounting\">3A — Evidence accounting<a class=\"headerlink\" href=\"#3a-evidence-accounting\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio re-reads <code>experimental_log.md</code> and <code>results_inventory.json</code>, verifies each claim in <code>claim_ledger.json</code>, and updates <code>support_level</code> and notes.</p>\n<p><strong>Gate C — Evidence integrity:</strong> Blocks if any claim remains <code>unsupported</code> without user acknowledgment, or if numerical claims lack traceable sources.</p>\n<h3 id=\"3b-literature-discovery-and-verification\">3B — Literature discovery and verification<a class=\"headerlink\" href=\"#3b-literature-discovery-and-verification\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio searches using <code>literature_plan.json</code> queries (Semantic Scholar, Google Scholar, arXiv, PubMed as available), verifies each candidate via DOI or search, deduplicates, and produces:</p>\n<ul>\n<li><code>citations/citation_pool.json</code> — Verified metadata with relevance scores</li>\n<li><code>citations/refs.bib</code> — BibTeX bibliography built from verified citations only</li>\n</ul>\n<p><strong>Gate D — Citation integrity:</strong> Blocks on unverified pool entries or duplicate BibTeX keys. No fabricated citations enter the manuscript.</p>\n<h3 id=\"3c-figure-and-table-pipeline\">3C — Figure and table pipeline<a class=\"headerlink\" href=\"#3c-figure-and-table-pipeline\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio processes each <code>figure_plan.json</code> entry:</p>\n<ul>\n<li><code>existing</code> — Verifies file; copies to <code>figures/supplied/</code></li>\n<li><code>generate</code> — Produces asset under <code>figures/generated/</code></li>\n<li><code>collect</code> — Flags for user provision</li>\n</ul>\n<p>Produces:\n- <code>figures/captions.json</code> — Figure id, path, caption, existence flag\n- <code>tables/generated/</code> — LaTeX table snippets as needed</p>\n<p><strong>Gate E — Artifact integrity:</strong> Blocks if any outline-referenced figure or table is missing and not explicitly deferred; blocks if required captions are missing.</p>\n<hr />\n<h2 id=\"stage-d4-draft-composition\">Stage D4: Draft Composition<a class=\"headerlink\" href=\"#stage-d4-draft-composition\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Entry condition:</strong> Stage D3 complete; Gates C, D, E pass.</p>\n<p>Folio composes <code>drafts/paper.tex</code> section by section:</p>\n<ul>\n<li>Uses <code>\\cite{key}</code> only for keys in <code>refs.bib</code></li>\n<li><code>\\ref{}</code> labels consistent with <code>captions.json</code> and figure plan</li>\n<li>Quantitative claims grounded in claim ledger; <code>weak</code> support claims use softened language</li>\n<li>Uses <code>inputs/template.tex</code> as skeleton if present; otherwise standard article class</li>\n</ul>\n<p><strong>Gate F — Structural integrity:</strong></p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/check_artifacts.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>Broken cites and refs must be resolved before proceeding.</p>\n<div class=\"admonition warning\">\n<p class=\"admonition-title\">Forbidden in draft</p>\n<p>Invented citations, unverifiable numbers, missing figures, and venue constraint violations all block Gate F.</p>\n</div>\n<hr />\n<h2 id=\"stage-d5-review-and-repair\">Stage D5: Review and Repair<a class=\"headerlink\" href=\"#stage-d5-review-and-repair\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>IP scan (required):</strong></p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/scan_redlines.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p><strong>IP Gate:</strong> Violations block completion of review until addressed.</p>\n<p>Folio runs a review pass writing <code>reviews/review_round_1.md</code> (argument flow, claim support, citations, figures/tables, clarity, venue fit, line-level suggestions) and <code>reviews/scorecard.json</code> with six numeric dimensions:</p>\n<ul>\n<li><code>argument_coherence</code></li>\n<li><code>evidence_support</code></li>\n<li><code>citation_quality</code></li>\n<li><code>writing_clarity</code></li>\n<li><code>venue_fit</code></li>\n<li><code>overall</code></li>\n</ul>\n<p><strong>Gate G — Non-regression:</strong> If <code>overall</code> drops after a repair round, Folio reverts to the pre-revision draft. Maximum 3 rounds; best-scoring draft is retained.</p>\n<hr />\n<h2 id=\"stage-d6-finalize\">Stage D6: Finalize<a class=\"headerlink\" href=\"#stage-d6-finalize\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Human Checkpoint 3:</strong> Folio presents the final scorecard, deferred issues, and softened claims. <strong>Explicit approval required.</strong></p>\n<p>After approval:</p>\n<ol>\n<li>\n<p>Accepted draft copied to <code>final/paper.tex</code>; <code>final/refs.bib</code>; figures to <code>final/figures/</code>; tables to <code>final/tables/</code></p>\n</li>\n<li>\n<p>Compile:</p>\n</li>\n</ol>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>bash<span class=\"w\"> </span>scripts/compile_package.sh<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<ol>\n<li>\n<p>On compile failure: Folio reports errors, attempts minimal fixes, re-runs. If still failing, delivers the source bundle without PDF and documents why.</p>\n</li>\n<li>\n<p><code>logs/run_log.md</code> updated.</p>\n</li>\n</ol>\n<p><strong>Exit:</strong> Submission-ready package in <code>final/</code> or documented partial export.</p>\n<hr />\n<h2 id=\"artifacts-produced\">Artifacts produced<a class=\"headerlink\" href=\"#artifacts-produced\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Artifact</th>\n<th>Stage</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>planning/outline.json</code></td>\n<td>D2</td>\n<td>Section structure and narrative arc</td>\n</tr>\n<tr>\n<td><code>planning/claim_ledger.json</code></td>\n<td>D2 / D3</td>\n<td>Claims with evidence and support levels</td>\n</tr>\n<tr>\n<td><code>planning/figure_plan.json</code></td>\n<td>D2</td>\n<td>Figure sourcing and caption drafts</td>\n</tr>\n<tr>\n<td><code>planning/literature_plan.json</code></td>\n<td>D2</td>\n<td>Search queries and coverage areas</td>\n</tr>\n<tr>\n<td><code>planning/results_inventory.json</code></td>\n<td>D2</td>\n<td>Verified results mapped to claims</td>\n</tr>\n<tr>\n<td><code>citations/citation_pool.json</code></td>\n<td>D3</td>\n<td>Verified citation metadata</td>\n</tr>\n<tr>\n<td><code>citations/refs.bib</code></td>\n<td>D3</td>\n<td>BibTeX bibliography</td>\n</tr>\n<tr>\n<td><code>figures/captions.json</code></td>\n<td>D3</td>\n<td>Figure paths and captions</td>\n</tr>\n<tr>\n<td><code>figures/generated/</code></td>\n<td>D3</td>\n<td>Generated figure assets</td>\n</tr>\n<tr>\n<td><code>figures/supplied/</code></td>\n<td>D3</td>\n<td>User-supplied figure assets</td>\n</tr>\n<tr>\n<td><code>tables/generated/</code></td>\n<td>D3</td>\n<td>LaTeX table snippets</td>\n</tr>\n<tr>\n<td><code>drafts/paper.tex</code></td>\n<td>D4</td>\n<td>Working LaTeX draft</td>\n</tr>\n<tr>\n<td><code>reviews/ip_safety_report.md</code></td>\n<td>D5</td>\n<td>IP scan results</td>\n</tr>\n<tr>\n<td><code>reviews/review_round_N.md</code></td>\n<td>D5</td>\n<td>Review notes per round</td>\n</tr>\n<tr>\n<td><code>reviews/scorecard.json</code></td>\n<td>D5</td>\n<td>Quality scores</td>\n</tr>\n<tr>\n<td><code>final/paper.tex</code></td>\n<td>D6</td>\n<td>Accepted final manuscript</td>\n</tr>\n<tr>\n<td><code>final/paper.pdf</code></td>\n<td>D6</td>\n<td>Compiled PDF (if pdflatex available)</td>\n</tr>\n<tr>\n<td><code>final/refs.bib</code></td>\n<td>D6</td>\n<td>Final bibliography</td>\n</tr>\n</tbody>\n</table>\n<p>See <a href=\"../../../reference/artifacts/\">Artifacts</a> for the complete cross-mode artifact list.</p>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Research Paper Mode",
+        "text": "<p>Research paper mode is the evidence-forward pipeline for traditional research manuscripts. It produces a LaTeX draft with a verified BibTeX bibliography, a figures and tables pipeline, and a structured finalize-and-package stage for venue submission.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "when-to-use",
+        "level": 2,
+        "title": "When to use",
+        "text": "<p>Choose research paper mode when your materials include:</p> <ul> <li>Experimental results, benchmarks, ablation studies, or statistical analyses</li> <li>Datasets and code</li> <li>A target venue with specific LaTeX formatting requirements</li> <li>A hypothesis-driven narrative that requires traceable quantitative claims</li> </ul> <p><code>route_mode.py</code> recommends this mode when materials show strong empirical signals: experimental logs, datasets, notebooks, or benchmark output. If routing is ambiguous, override at the routing checkpoint.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-d2-global-planning",
+        "level": 2,
+        "title": "Stage D2: Global Planning",
+        "text": "<p>Entry condition: Checkpoint 1 and routing approved; canonical inputs available.</p> <p>Folio reads your canonical inputs and generates five planning artifacts:</p> Artifact Description <code>planning/outline.json</code> Working title, sections with ids, purposes, key points, length estimates, figure and citation dependencies, narrative arc <code>planning/claim_ledger.json</code> Claims with <code>id</code>, <code>statement</code>, <code>type</code>, <code>evidence_source</code>, <code>support_level</code>, figure/citation dependencies, notes <code>planning/figure_plan.json</code> Per-figure: id, description, type, source (<code>existing</code> / <code>generate</code> / <code>collect</code>), supported claims, caption draft <code>planning/literature_plan.json</code> Search queries, known references, coverage areas with minimum ref counts <code>planning/results_inventory.json</code> Results entries: id, description, value, source file, supported claims, verified flag <p>Gate B — Plan completeness: - Outline includes standard sections for the venue type - Every claim has a <code>support_level</code>; every <code>unsupported</code> claim is explicitly flagged - Figure plan covers all outline-referenced figures - Literature plan covers all citation needs</p> <p>Human Checkpoint 2: Folio presents the outline, narrative arc, claim ledger summary (highlighting weak/unsupported claims), figure plan, and literature plan. Explicit approval required before Stage D3.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-d3-support-artifact-generation",
+        "level": 2,
+        "title": "Stage D3: Support Artifact Generation",
+        "text": "<p>Three substages run in parallel (all must complete before drafting):</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "3a-evidence-accounting",
+        "level": 3,
+        "title": "3A — Evidence accounting",
+        "text": "<p>Folio re-reads <code>experimental_log.md</code> and <code>results_inventory.json</code>, verifies each claim in <code>claim_ledger.json</code>, and updates <code>support_level</code> and notes.</p> <p>Gate C — Evidence integrity: Blocks if any claim remains <code>unsupported</code> without user acknowledgment, or if numerical claims lack traceable sources.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "3b-literature-discovery-and-verification",
+        "level": 3,
+        "title": "3B — Literature discovery and verification",
+        "text": "<p>Folio searches using <code>literature_plan.json</code> queries (Semantic Scholar, Google Scholar, arXiv, PubMed as available), verifies each candidate via DOI or search, deduplicates, and produces:</p> <ul> <li><code>citations/citation_pool.json</code> — Verified metadata with relevance scores</li> <li><code>citations/refs.bib</code> — BibTeX bibliography built from verified citations only</li> </ul> <p>Gate D — Citation integrity: Blocks on unverified pool entries or duplicate BibTeX keys. No fabricated citations enter the manuscript.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "3c-figure-and-table-pipeline",
+        "level": 3,
+        "title": "3C — Figure and table pipeline",
+        "text": "<p>Folio processes each <code>figure_plan.json</code> entry:</p> <ul> <li><code>existing</code> — Verifies file; copies to <code>figures/supplied/</code></li> <li><code>generate</code> — Produces asset under <code>figures/generated/</code></li> <li><code>collect</code> — Flags for user provision</li> </ul> <p>Produces: - <code>figures/captions.json</code> — Figure id, path, caption, existence flag - <code>tables/generated/</code> — LaTeX table snippets as needed</p> <p>Gate E — Artifact integrity: Blocks if any outline-referenced figure or table is missing and not explicitly deferred; blocks if required captions are missing.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-d4-draft-composition",
+        "level": 2,
+        "title": "Stage D4: Draft Composition",
+        "text": "<p>Entry condition: Stage D3 complete; Gates C, D, E pass.</p> <p>Folio composes <code>drafts/paper.tex</code> section by section:</p> <ul> <li>Uses <code>\\cite{key}</code> only for keys in <code>refs.bib</code></li> <li><code>\\ref{}</code> labels consistent with <code>captions.json</code> and figure plan</li> <li>Quantitative claims grounded in claim ledger; <code>weak</code> support claims use softened language</li> <li>Uses <code>inputs/template.tex</code> as skeleton if present; otherwise standard article class</li> </ul> <p>Gate F — Structural integrity:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/check_artifacts.py workspace/\n</code></pre> <p>Broken cites and refs must be resolved before proceeding.</p> <p>Forbidden in draft</p> <p>Invented citations, unverifiable numbers, missing figures, and venue constraint violations all block Gate F.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-d5-review-and-repair",
+        "level": 2,
+        "title": "Stage D5: Review and Repair",
+        "text": "<p>IP scan (required):</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/scan_redlines.py workspace/\n</code></pre> <p>IP Gate: Violations block completion of review until addressed.</p> <p>Folio runs a review pass writing <code>reviews/review_round_1.md</code> (argument flow, claim support, citations, figures/tables, clarity, venue fit, line-level suggestions) and <code>reviews/scorecard.json</code> with six numeric dimensions:</p> <ul> <li><code>argument_coherence</code></li> <li><code>evidence_support</code></li> <li><code>citation_quality</code></li> <li><code>writing_clarity</code></li> <li><code>venue_fit</code></li> <li><code>overall</code></li> </ul> <p>Gate G — Non-regression: If <code>overall</code> drops after a repair round, Folio reverts to the pre-revision draft. Maximum 3 rounds; best-scoring draft is retained.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "stage-d6-finalize",
+        "level": 2,
+        "title": "Stage D6: Finalize",
+        "text": "<p>Human Checkpoint 3: Folio presents the final scorecard, deferred issues, and softened claims. Explicit approval required.</p> <p>After approval:</p> <ol> <li> <p>Accepted draft copied to <code>final/paper.tex</code>; <code>final/refs.bib</code>; figures to <code>final/figures/</code>; tables to <code>final/tables/</code></p> </li> <li> <p>Compile:</p> </li> </ol> <pre><code>cd plugins/folio &amp;&amp; bash scripts/compile_package.sh workspace/\n</code></pre> <ol> <li> <p>On compile failure: Folio reports errors, attempts minimal fixes, re-runs. If still failing, delivers the source bundle without PDF and documents why.</p> </li> <li> <p><code>logs/run_log.md</code> updated.</p> </li> </ol> <p>Exit: Submission-ready package in <code>final/</code> or documented partial export.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "artifacts-produced",
+        "level": 2,
+        "title": "Artifacts produced",
+        "text": "Artifact Stage Description <code>planning/outline.json</code> D2 Section structure and narrative arc <code>planning/claim_ledger.json</code> D2 / D3 Claims with evidence and support levels <code>planning/figure_plan.json</code> D2 Figure sourcing and caption drafts <code>planning/literature_plan.json</code> D2 Search queries and coverage areas <code>planning/results_inventory.json</code> D2 Verified results mapped to claims <code>citations/citation_pool.json</code> D3 Verified citation metadata <code>citations/refs.bib</code> D3 BibTeX bibliography <code>figures/captions.json</code> D3 Figure paths and captions <code>figures/generated/</code> D3 Generated figure assets <code>figures/supplied/</code> D3 User-supplied figure assets <code>tables/generated/</code> D3 LaTeX table snippets <code>drafts/paper.tex</code> D4 Working LaTeX draft <code>reviews/ip_safety_report.md</code> D5 IP scan results <code>reviews/review_round_N.md</code> D5 Review notes per round <code>reviews/scorecard.json</code> D5 Quality scores <code>final/paper.tex</code> D6 Accepted final manuscript <code>final/paper.pdf</code> D6 Compiled PDF (if pdflatex available) <code>final/refs.bib</code> D6 Final bibliography <p>See Artifacts for the complete cross-mode artifact list.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Research Paper Mode",
+    "toc": [
+      {
+        "title": "Research Paper Mode",
+        "id": "research-paper-mode",
+        "url": "#research-paper-mode",
+        "children": [
+          {
+            "title": "When to use",
+            "id": "when-to-use",
+            "url": "#when-to-use",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage D2: Global Planning",
+            "id": "stage-d2-global-planning",
+            "url": "#stage-d2-global-planning",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage D3: Support Artifact Generation",
+            "id": "stage-d3-support-artifact-generation",
+            "url": "#stage-d3-support-artifact-generation",
+            "children": [
+              {
+                "title": "3A — Evidence accounting",
+                "id": "3a-evidence-accounting",
+                "url": "#3a-evidence-accounting",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "3B — Literature discovery and verification",
+                "id": "3b-literature-discovery-and-verification",
+                "url": "#3b-literature-discovery-and-verification",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "3C — Figure and table pipeline",
+                "id": "3c-figure-and-table-pipeline",
+                "url": "#3c-figure-and-table-pipeline",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Stage D4: Draft Composition",
+            "id": "stage-d4-draft-composition",
+            "url": "#stage-d4-draft-composition",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage D5: Review and Repair",
+            "id": "stage-d5-review-and-repair",
+            "url": "#stage-d5-review-and-repair",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Stage D6: Finalize",
+            "id": "stage-d6-finalize",
+            "url": "#stage-d6-finalize",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Artifacts produced",
+            "id": "artifacts-produced",
+            "url": "#artifacts-produced",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 4154327261155850386
+}

@@ -1,0 +1,179 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"ip-policy-and-redline-scanning\">IP Policy and Redline Scanning<a class=\"headerlink\" href=\"#ip-policy-and-redline-scanning\" title=\"Permanent link\">&para;</a></h1>\n<p>Folio includes a mandatory IP safety layer that runs before any mode declares its review stage complete. This page explains how redline scanning works, how to configure <code>ip_policy.json</code>, and how to handle violations.</p>\n<hr />\n<h2 id=\"how-it-works\">How it works<a class=\"headerlink\" href=\"#how-it-works\" title=\"Permanent link\">&para;</a></h2>\n<p>Before marking review complete in any mode, Folio runs:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"nb\">cd</span><span class=\"w\"> </span>plugins/folio<span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span>python<span class=\"w\"> </span>scripts/scan_redlines.py<span class=\"w\"> </span>workspace/\n</span></code></pre></div>\n<p>This script reads <code>workspace/ip_policy.json</code> (if present) and scans all draft files for:</p>\n<ul>\n<li><strong>Forbidden terms</strong> — Exact string matches that must not appear in any draft or export</li>\n<li><strong>Sensitive metric patterns</strong> — Regex patterns matching quantitative claims that need human review</li>\n<li><strong>Code names</strong> — Internal project names that may not have been replaced with approved public names</li>\n</ul>\n<p>Scan results are written to <code>reviews/ip_safety_report.md</code> with file paths, line numbers, and matched content.</p>\n<p><strong>The IP Gate is non-negotiable.</strong> Folio will not mark a review stage complete with unaddressed violations. You must either:</p>\n<ol>\n<li>Redact or rewrite the flagged content</li>\n<li>Add the term to <code>redline_exceptions</code> if it is intentionally public</li>\n<li>Explicitly acknowledge the risk (must be logged in <code>logs/run_log.md</code>)</li>\n</ol>\n<p>If <code>ip_policy.json</code> does not exist, <code>scan_redlines.py</code> exits 0 (no violations). The scan still runs.</p>\n<hr />\n<h2 id=\"configuring-ip_policyjson\">Configuring <code>ip_policy.json</code><a class=\"headerlink\" href=\"#configuring-ip_policyjson\" title=\"Permanent link\">&para;</a></h2>\n<p>Create <code>workspace/ip_policy.json</code> before drafting begins. The schema is defined in <code>templates/manifests/ip_policy.schema.json</code>.</p>\n<p><strong>Example:</strong></p>\n<div class=\"language-json highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a><span class=\"p\">{</span>\n</span><span id=\"__span-1-2\"><a id=\"__codelineno-1-2\" name=\"__codelineno-1-2\" href=\"#__codelineno-1-2\"></a><span class=\"w\">  </span><span class=\"nt\">&quot;forbidden_terms&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Project Chimera&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;internal-metric-xyz&quot;</span><span class=\"p\">],</span>\n</span><span id=\"__span-1-3\"><a id=\"__codelineno-1-3\" name=\"__codelineno-1-3\" href=\"#__codelineno-1-3\"></a><span class=\"w\">  </span><span class=\"nt\">&quot;code_names&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Chimera&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;Phoenix&quot;</span><span class=\"p\">],</span>\n</span><span id=\"__span-1-4\"><a id=\"__codelineno-1-4\" name=\"__codelineno-1-4\" href=\"#__codelineno-1-4\"></a><span class=\"w\">  </span><span class=\"nt\">&quot;sensitive_metric_patterns&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;\\\\d+\\\\.\\\\d+% improvement over internal&quot;</span><span class=\"p\">],</span>\n</span><span id=\"__span-1-5\"><a id=\"__codelineno-1-5\" name=\"__codelineno-1-5\" href=\"#__codelineno-1-5\"></a><span class=\"w\">  </span><span class=\"nt\">&quot;redline_exceptions&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Folio&quot;</span><span class=\"p\">]</span>\n</span><span id=\"__span-1-6\"><a id=\"__codelineno-1-6\" name=\"__codelineno-1-6\" href=\"#__codelineno-1-6\"></a><span class=\"p\">}</span>\n</span></code></pre></div>\n<hr />\n<h2 id=\"fields\">Fields<a class=\"headerlink\" href=\"#fields\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"forbidden_terms\"><code>forbidden_terms</code><a class=\"headerlink\" href=\"#forbidden_terms\" title=\"Permanent link\">&para;</a></h3>\n<p>Exact strings that must not appear in drafts or exports. <code>scan_redlines.py</code> flags every occurrence for redaction or revision.</p>\n<p>Use this for:\n- Internal project names that must not appear in published material\n- Confidential identifiers or codenames\n- Legally restricted terms</p>\n<div class=\"language-json highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a><span class=\"nt\">&quot;forbidden_terms&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Project Chimera&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;internal-metric-xyz&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;Q3-roadmap-alpha&quot;</span><span class=\"p\">]</span>\n</span></code></pre></div>\n<hr />\n<h3 id=\"code_names\"><code>code_names</code><a class=\"headerlink\" href=\"#code_names\" title=\"Permanent link\">&para;</a></h3>\n<p>Approved public or stand-in names for internal projects or programs. Use when the narrative must refer to a concept without using its forbidden internal name.</p>\n<p>This field informs the scan context — <code>scan_redlines.py</code> uses it to detect where an internal name may have leaked instead of its approved substitute.</p>\n<div class=\"language-json highlight\"><pre><span></span><code><span id=\"__span-3-1\"><a id=\"__codelineno-3-1\" name=\"__codelineno-3-1\" href=\"#__codelineno-3-1\"></a><span class=\"nt\">&quot;code_names&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Chimera&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;Phoenix&quot;</span><span class=\"p\">]</span>\n</span></code></pre></div>\n<hr />\n<h3 id=\"sensitive_metric_patterns\"><code>sensitive_metric_patterns</code><a class=\"headerlink\" href=\"#sensitive_metric_patterns\" title=\"Permanent link\">&para;</a></h3>\n<p>Regular-expression patterns matching quantitative claims that need human review before publication. Use this for internal benchmarks, non-public comparators, or metric formats that reveal confidential performance data.</p>\n<div class=\"language-json highlight\"><pre><span></span><code><span id=\"__span-4-1\"><a id=\"__codelineno-4-1\" name=\"__codelineno-4-1\" href=\"#__codelineno-4-1\"></a><span class=\"nt\">&quot;sensitive_metric_patterns&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span>\n</span><span id=\"__span-4-2\"><a id=\"__codelineno-4-2\" name=\"__codelineno-4-2\" href=\"#__codelineno-4-2\"></a><span class=\"w\">  </span><span class=\"s2\">&quot;\\\\d+\\\\.\\\\d+% improvement over internal&quot;</span><span class=\"p\">,</span>\n</span><span id=\"__span-4-3\"><a id=\"__codelineno-4-3\" name=\"__codelineno-4-3\" href=\"#__codelineno-4-3\"></a><span class=\"w\">  </span><span class=\"s2\">&quot;\\\\d+x faster than [A-Z][a-z]+ v\\\\d&quot;</span>\n</span><span id=\"__span-4-4\"><a id=\"__codelineno-4-4\" name=\"__codelineno-4-4\" href=\"#__codelineno-4-4\"></a><span class=\"p\">]</span>\n</span></code></pre></div>\n<p>When a pattern matches, <code>scan_redlines.py</code> flags the line for review. Resolution options:\n- Restate the metric in absolute terms without the internal comparator\n- Remove the metric entirely\n- Get explicit sign-off and log the acknowledgment</p>\n<hr />\n<h3 id=\"redline_exceptions\"><code>redline_exceptions</code><a class=\"headerlink\" href=\"#redline_exceptions\" title=\"Permanent link\">&para;</a></h3>\n<p>Terms or phrases that are allowed even when they resemble forbidden patterns — for example, product names, framework names, or other intentional public strings that happen to match a <code>forbidden_terms</code> pattern.</p>\n<div class=\"language-json highlight\"><pre><span></span><code><span id=\"__span-5-1\"><a id=\"__codelineno-5-1\" name=\"__codelineno-5-1\" href=\"#__codelineno-5-1\"></a><span class=\"nt\">&quot;redline_exceptions&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"p\">[</span><span class=\"s2\">&quot;Folio&quot;</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"s2\">&quot;OpenAI&quot;</span><span class=\"p\">]</span>\n</span></code></pre></div>\n<hr />\n<h2 id=\"handling-violations\">Handling violations<a class=\"headerlink\" href=\"#handling-violations\" title=\"Permanent link\">&para;</a></h2>\n<p>When <code>scan_redlines.py</code> exits non-zero, Folio:</p>\n<ol>\n<li>Lists all forbidden terms or patterns found (from <code>reviews/ip_safety_report.md</code>)</li>\n<li>Suggests redactions or rephrasing per <code>ip_policy.json</code></li>\n<li>Asks you to choose: <strong>redact</strong>, <strong>rewrite</strong>, or <strong>acknowledge risk</strong></li>\n</ol>\n<p>If you choose to acknowledge risk, the decision must be explicit and logged in <code>logs/run_log.md</code>. Folio will not silently proceed past IP Gate failures.</p>\n<hr />\n<h2 id=\"ip-policy-and-the-workflow\">IP policy and the workflow<a class=\"headerlink\" href=\"#ip-policy-and-the-workflow\" title=\"Permanent link\">&para;</a></h2>\n<table>\n<thead>\n<tr>\n<th>Stage</th>\n<th>Mode</th>\n<th>When scan runs</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>W5</td>\n<td>White paper</td>\n<td>Before hostile review is complete</td>\n</tr>\n<tr>\n<td>D5</td>\n<td>Research paper</td>\n<td>Before review round 1 begins</td>\n</tr>\n<tr>\n<td>H5</td>\n<td>Hybrid</td>\n<td>Before either review track is complete</td>\n</tr>\n</tbody>\n</table>\n<p>The scan runs on all draft files — <code>drafts/paper.md</code>, <code>drafts/paper.tex</code>, and section intermediates. Export files are also scanned as part of final packaging.</p>\n<hr />\n<h2 id=\"security-notes\">Security notes<a class=\"headerlink\" href=\"#security-notes\" title=\"Permanent link\">&para;</a></h2>\n<ul>\n<li><code>ip_policy.json</code> should be created per-workspace, not committed to shared repositories unless terms are organization-wide defaults</li>\n<li><code>scan_redlines.py</code> uses Python's <code>re</code> module for pattern matching — test regex patterns before adding them to <code>sensitive_metric_patterns</code></li>\n<li>The <code>redline_exceptions</code> list bypasses checks selectively; keep it narrow</li>\n</ul>\n<p>See <a href=\"../failure-modes/#gate-ip-redline-safety\">Failure Modes — Gate IP</a> for troubleshooting violation reports.</p>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "IP Policy and Redline Scanning",
+        "text": "<p>Folio includes a mandatory IP safety layer that runs before any mode declares its review stage complete. This page explains how redline scanning works, how to configure <code>ip_policy.json</code>, and how to handle violations.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "how-it-works",
+        "level": 2,
+        "title": "How it works",
+        "text": "<p>Before marking review complete in any mode, Folio runs:</p> <pre><code>cd plugins/folio &amp;&amp; python scripts/scan_redlines.py workspace/\n</code></pre> <p>This script reads <code>workspace/ip_policy.json</code> (if present) and scans all draft files for:</p> <ul> <li>Forbidden terms — Exact string matches that must not appear in any draft or export</li> <li>Sensitive metric patterns — Regex patterns matching quantitative claims that need human review</li> <li>Code names — Internal project names that may not have been replaced with approved public names</li> </ul> <p>Scan results are written to <code>reviews/ip_safety_report.md</code> with file paths, line numbers, and matched content.</p> <p>The IP Gate is non-negotiable. Folio will not mark a review stage complete with unaddressed violations. You must either:</p> <ol> <li>Redact or rewrite the flagged content</li> <li>Add the term to <code>redline_exceptions</code> if it is intentionally public</li> <li>Explicitly acknowledge the risk (must be logged in <code>logs/run_log.md</code>)</li> </ol> <p>If <code>ip_policy.json</code> does not exist, <code>scan_redlines.py</code> exits 0 (no violations). The scan still runs.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "configuring-ip_policyjson",
+        "level": 2,
+        "title": "Configuring <code>ip_policy.json</code>",
+        "text": "<p>Create <code>workspace/ip_policy.json</code> before drafting begins. The schema is defined in <code>templates/manifests/ip_policy.schema.json</code>.</p> <p>Example:</p> <pre><code>{\n  \"forbidden_terms\": [\"Project Chimera\", \"internal-metric-xyz\"],\n  \"code_names\": [\"Chimera\", \"Phoenix\"],\n  \"sensitive_metric_patterns\": [\"\\\\d+\\\\.\\\\d+% improvement over internal\"],\n  \"redline_exceptions\": [\"Folio\"]\n}\n</code></pre>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "fields",
+        "level": 2,
+        "title": "Fields",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "forbidden_terms",
+        "level": 3,
+        "title": "<code>forbidden_terms</code>",
+        "text": "<p>Exact strings that must not appear in drafts or exports. <code>scan_redlines.py</code> flags every occurrence for redaction or revision.</p> <p>Use this for: - Internal project names that must not appear in published material - Confidential identifiers or codenames - Legally restricted terms</p> <pre><code>\"forbidden_terms\": [\"Project Chimera\", \"internal-metric-xyz\", \"Q3-roadmap-alpha\"]\n</code></pre>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "code_names",
+        "level": 3,
+        "title": "<code>code_names</code>",
+        "text": "<p>Approved public or stand-in names for internal projects or programs. Use when the narrative must refer to a concept without using its forbidden internal name.</p> <p>This field informs the scan context — <code>scan_redlines.py</code> uses it to detect where an internal name may have leaked instead of its approved substitute.</p> <pre><code>\"code_names\": [\"Chimera\", \"Phoenix\"]\n</code></pre>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "sensitive_metric_patterns",
+        "level": 3,
+        "title": "<code>sensitive_metric_patterns</code>",
+        "text": "<p>Regular-expression patterns matching quantitative claims that need human review before publication. Use this for internal benchmarks, non-public comparators, or metric formats that reveal confidential performance data.</p> <pre><code>\"sensitive_metric_patterns\": [\n  \"\\\\d+\\\\.\\\\d+% improvement over internal\",\n  \"\\\\d+x faster than [A-Z][a-z]+ v\\\\d\"\n]\n</code></pre> <p>When a pattern matches, <code>scan_redlines.py</code> flags the line for review. Resolution options: - Restate the metric in absolute terms without the internal comparator - Remove the metric entirely - Get explicit sign-off and log the acknowledgment</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "redline_exceptions",
+        "level": 3,
+        "title": "<code>redline_exceptions</code>",
+        "text": "<p>Terms or phrases that are allowed even when they resemble forbidden patterns — for example, product names, framework names, or other intentional public strings that happen to match a <code>forbidden_terms</code> pattern.</p> <pre><code>\"redline_exceptions\": [\"Folio\", \"OpenAI\"]\n</code></pre>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "handling-violations",
+        "level": 2,
+        "title": "Handling violations",
+        "text": "<p>When <code>scan_redlines.py</code> exits non-zero, Folio:</p> <ol> <li>Lists all forbidden terms or patterns found (from <code>reviews/ip_safety_report.md</code>)</li> <li>Suggests redactions or rephrasing per <code>ip_policy.json</code></li> <li>Asks you to choose: redact, rewrite, or acknowledge risk</li> </ol> <p>If you choose to acknowledge risk, the decision must be explicit and logged in <code>logs/run_log.md</code>. Folio will not silently proceed past IP Gate failures.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "ip-policy-and-the-workflow",
+        "level": 2,
+        "title": "IP policy and the workflow",
+        "text": "Stage Mode When scan runs W5 White paper Before hostile review is complete D5 Research paper Before review round 1 begins H5 Hybrid Before either review track is complete <p>The scan runs on all draft files — <code>drafts/paper.md</code>, <code>drafts/paper.tex</code>, and section intermediates. Export files are also scanned as part of final packaging.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "security-notes",
+        "level": 2,
+        "title": "Security notes",
+        "text": "<ul> <li><code>ip_policy.json</code> should be created per-workspace, not committed to shared repositories unless terms are organization-wide defaults</li> <li><code>scan_redlines.py</code> uses Python's <code>re</code> module for pattern matching — test regex patterns before adding them to <code>sensitive_metric_patterns</code></li> <li>The <code>redline_exceptions</code> list bypasses checks selectively; keep it narrow</li> </ul> <p>See Failure Modes — Gate IP for troubleshooting violation reports.</p>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "IP Policy and Redline Scanning",
+    "toc": [
+      {
+        "title": "IP Policy and Redline Scanning",
+        "id": "ip-policy-and-redline-scanning",
+        "url": "#ip-policy-and-redline-scanning",
+        "children": [
+          {
+            "title": "How it works",
+            "id": "how-it-works",
+            "url": "#how-it-works",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Configuring ip_policy.json",
+            "id": "configuring-ip_policyjson",
+            "url": "#configuring-ip_policyjson",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Fields",
+            "id": "fields",
+            "url": "#fields",
+            "children": [
+              {
+                "title": "forbidden_terms",
+                "id": "forbidden_terms",
+                "url": "#forbidden_terms",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "code_names",
+                "id": "code_names",
+                "url": "#code_names",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "sensitive_metric_patterns",
+                "id": "sensitive_metric_patterns",
+                "url": "#sensitive_metric_patterns",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "redline_exceptions",
+                "id": "redline_exceptions",
+                "url": "#redline_exceptions",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Handling violations",
+            "id": "handling-violations",
+            "url": "#handling-violations",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "IP policy and the workflow",
+            "id": "ip-policy-and-the-workflow",
+            "url": "#ip-policy-and-the-workflow",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Security notes",
+            "id": "security-notes",
+            "url": "#security-notes",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 1486378644271928751
+}

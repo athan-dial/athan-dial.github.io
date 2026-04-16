@@ -1,0 +1,193 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"command-reference\">Command Reference<a class=\"headerlink\" href=\"#command-reference\" title=\"Permanent link\">&para;</a></h1>\n<p>Folio exposes nine commands: one full-pipeline entry point and eight stage-specific sub-commands. Every sub-command can run standalone on an existing workspace.</p>\n<hr />\n<h2 id=\"folio\"><code>/folio</code><a class=\"headerlink\" href=\"#folio\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Run the full pipeline or resume from a checkpoint.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a>/folio [idea] [materials_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>idea</code></td>\n<td>No</td>\n<td>One-line research idea (prompted if omitted)</td>\n</tr>\n<tr>\n<td><code>materials_path</code></td>\n<td>No</td>\n<td>Path to raw materials folder (prompted if omitted)</td>\n</tr>\n</tbody>\n</table>\n<ul>\n<li>If no workspace exists, runs the full pipeline from Stage 0.</li>\n<li>If a workspace path is provided and <code>logs/checkpoints.md</code> exists, offers to resume from the last completed stage.</li>\n</ul>\n<hr />\n<h2 id=\"folioinit\"><code>/folio:init</code><a class=\"headerlink\" href=\"#folioinit\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Initialize a workspace and collect intent.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-1-1\"><a id=\"__codelineno-1-1\" name=\"__codelineno-1-1\" href=\"#__codelineno-1-1\"></a>/folio:init [idea] [materials_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>idea</code></td>\n<td>No</td>\n<td>Research idea</td>\n</tr>\n<tr>\n<td><code>materials_path</code></td>\n<td>No</td>\n<td>Path to raw materials</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> No existing workspace required.</p>\n<p><strong>Produces:</strong> <code>workspace/</code> directory with canonical layout, <code>intent.json</code>, raw materials copied into <code>inputs/raw_materials/</code>.</p>\n<p><strong>Scripts run:</strong> <code>init_workspace.py</code></p>\n<hr />\n<h2 id=\"folioprep\"><code>/folio:prep</code><a class=\"headerlink\" href=\"#folioprep\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Normalize, classify, and route materials.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-2-1\"><a id=\"__codelineno-2-1\" name=\"__codelineno-2-1\" href=\"#__codelineno-2-1\"></a>/folio:prep [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to an initialized workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 0 (init) complete. <code>intent.json</code> must exist.</p>\n<p><strong>Produces:</strong> Classified inputs (<code>idea.md</code>, <code>experimental_log.md</code>, <code>venue_profile.md</code>, manifests), <code>route.json</code> with mode recommendation.</p>\n<p><strong>Scripts run:</strong> <code>classify_materials.py</code>, <code>route_mode.py</code>, <code>validate_inputs.py</code></p>\n<p><strong>Gates:</strong> Gate A (input completeness) -- <code>validate_inputs.py</code> must exit 0.</p>\n<p><strong>Checkpoints:</strong> Human Checkpoint 1 (prep approval) and routing checkpoint (mode confirmation).</p>\n<hr />\n<h2 id=\"folioplan\"><code>/folio:plan</code><a class=\"headerlink\" href=\"#folioplan\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Mode-specific planning.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-3-1\"><a id=\"__codelineno-3-1\" name=\"__codelineno-3-1\" href=\"#__codelineno-3-1\"></a>/folio:plan [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to a prepped workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 1 (prep) complete. Mode confirmed in <code>route.json</code>.</p>\n<p><strong>Produces:</strong> <code>outline.json</code>, <code>claim_ledger.json</code>, <code>figure_plan.json</code>, <code>literature_plan.json</code>. White paper and hybrid modes also produce <code>perspectives.json</code>, <code>question_tree.json</code>, <code>argument_graph.md</code>.</p>\n<p><strong>Gates:</strong> Gate B (plan coherence) -- outline must cover all claims in the ledger.</p>\n<p><strong>Checkpoints:</strong> Human Checkpoint 2 (planning approval before drafting).</p>\n<hr />\n<h2 id=\"foliosupport\"><code>/folio:support</code><a class=\"headerlink\" href=\"#foliosupport\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Build evidence, literature, and figures.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-4-1\"><a id=\"__codelineno-4-1\" name=\"__codelineno-4-1\" href=\"#__codelineno-4-1\"></a>/folio:support [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to a planned workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 2 (plan) complete.</p>\n<p><strong>Produces:</strong> <code>citations/citation_pool.json</code>, <code>citations/refs.bib</code>, generated figures in <code>figures/generated/</code>, <code>figures/captions.json</code>, <code>tables/generated/</code>.</p>\n<p><strong>Gates:</strong> Gate C (support completeness) -- every claim in the ledger must have at least one supporting artifact or an explicit gap marker.</p>\n<hr />\n<h2 id=\"foliodraft\"><code>/folio:draft</code><a class=\"headerlink\" href=\"#foliodraft\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Compose the manuscript.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-5-1\"><a id=\"__codelineno-5-1\" name=\"__codelineno-5-1\" href=\"#__codelineno-5-1\"></a>/folio:draft [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to a supported workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 3 (support) complete.</p>\n<p><strong>Produces:</strong> <code>drafts/paper.tex</code> (research paper / hybrid) or <code>drafts/paper.md</code> (white paper / hybrid), section files in <code>drafts/sections/</code>.</p>\n<p><strong>Gates:</strong> Gate D (draft completeness) -- all outline sections present, no unresolved <code>&lt;!-- GAP --&gt;</code> markers in required sections.</p>\n<hr />\n<h2 id=\"folioreview\"><code>/folio:review</code><a class=\"headerlink\" href=\"#folioreview\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>IP scan, critical review, and repair.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-6-1\"><a id=\"__codelineno-6-1\" name=\"__codelineno-6-1\" href=\"#__codelineno-6-1\"></a>/folio:review [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to a drafted workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 4 (draft) complete.</p>\n<p><strong>Produces:</strong> <code>reviews/review_round_N.md</code>, <code>reviews/scorecard.json</code>, <code>reviews/ip_safety_report.md</code>. Regressions are repaired automatically; the draft is updated in place.</p>\n<p><strong>Scripts run:</strong> <code>scan_redlines.py</code></p>\n<p><strong>Gates:</strong> IP Gate -- <code>scan_redlines.py</code> must exit 0 (no unacknowledged violations). Review Gate -- scorecard <code>overall</code> must not regress between rounds.</p>\n<p><strong>Checkpoints:</strong> Human Checkpoint 3 (final approval before export).</p>\n<hr />\n<h2 id=\"folioexport\"><code>/folio:export</code><a class=\"headerlink\" href=\"#folioexport\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Finalize and package the manuscript.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-7-1\"><a id=\"__codelineno-7-1\" name=\"__codelineno-7-1\" href=\"#__codelineno-7-1\"></a>/folio:export [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to a reviewed workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Stage 5 (review) complete. Checkpoint 3 approved.</p>\n<p><strong>Produces:</strong> <code>final/</code> bundle (paper source, <code>refs.bib</code>, figures, optional compiled PDF). White paper and hybrid modes also produce <code>exports/executive_summary.md</code> and <code>exports/bd_talking_points.md</code>.</p>\n<p><strong>Scripts run:</strong> <code>package_exports.py</code>, <code>compile_package.sh</code> (if LaTeX toolchain available)</p>\n<hr />\n<h2 id=\"foliostatus\"><code>/folio:status</code><a class=\"headerlink\" href=\"#foliostatus\" title=\"Permanent link\">&para;</a></h2>\n<p><strong>Show pipeline state for a workspace.</strong></p>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-8-1\"><a id=\"__codelineno-8-1\" name=\"__codelineno-8-1\" href=\"#__codelineno-8-1\"></a>/folio:status [workspace_path]\n</span></code></pre></div>\n<table>\n<thead>\n<tr>\n<th>Argument</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>workspace_path</code></td>\n<td>Yes</td>\n<td>Path to any workspace</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Entry condition:</strong> Workspace directory must exist.</p>\n<p><strong>Produces:</strong> No artifacts. Prints a table of completed stages, pending checkpoints, active mode, and any blocking gate failures. Reads from <code>logs/checkpoints.md</code> and <code>logs/run_log.md</code>.</p>\n<hr />\n<h2 id=\"resume-behavior\">Resume behavior<a class=\"headerlink\" href=\"#resume-behavior\" title=\"Permanent link\">&para;</a></h2>\n<p>When invoked on a workspace that already has progress:</p>\n<ol>\n<li><code>/folio</code> reads <code>logs/checkpoints.md</code> and offers to resume from the next incomplete stage.</li>\n<li>Any stage command (e.g., <code>/folio:draft</code>) checks that its entry conditions are met. If prior stages are incomplete, it reports what is missing rather than silently failing.</li>\n<li>Re-running a completed stage overwrites its artifacts. The previous versions are logged in <code>logs/run_log.md</code>.</li>\n</ol>\n<hr />\n<h2 id=\"examples\">Examples<a class=\"headerlink\" href=\"#examples\" title=\"Permanent link\">&para;</a></h2>\n<div class=\"language-text highlight\"><pre><span></span><code><span id=\"__span-9-1\"><a id=\"__codelineno-9-1\" name=\"__codelineno-9-1\" href=\"#__codelineno-9-1\"></a># Full pipeline from scratch\n</span><span id=\"__span-9-2\"><a id=\"__codelineno-9-2\" name=\"__codelineno-9-2\" href=\"#__codelineno-9-2\"></a>/folio &quot;Benchmarking LLM routing strategies&quot; ~/research/llm-routing/\n</span><span id=\"__span-9-3\"><a id=\"__codelineno-9-3\" name=\"__codelineno-9-3\" href=\"#__codelineno-9-3\"></a>\n</span><span id=\"__span-9-4\"><a id=\"__codelineno-9-4\" name=\"__codelineno-9-4\" href=\"#__codelineno-9-4\"></a># Initialize only, then come back later\n</span><span id=\"__span-9-5\"><a id=\"__codelineno-9-5\" name=\"__codelineno-9-5\" href=\"#__codelineno-9-5\"></a>/folio:init &quot;Benchmarking LLM routing strategies&quot; ~/research/llm-routing/\n</span><span id=\"__span-9-6\"><a id=\"__codelineno-9-6\" name=\"__codelineno-9-6\" href=\"#__codelineno-9-6\"></a>\n</span><span id=\"__span-9-7\"><a id=\"__codelineno-9-7\" name=\"__codelineno-9-7\" href=\"#__codelineno-9-7\"></a># Check where a workspace stands\n</span><span id=\"__span-9-8\"><a id=\"__codelineno-9-8\" name=\"__codelineno-9-8\" href=\"#__codelineno-9-8\"></a>/folio:status workspace/\n</span><span id=\"__span-9-9\"><a id=\"__codelineno-9-9\" name=\"__codelineno-9-9\" href=\"#__codelineno-9-9\"></a>\n</span><span id=\"__span-9-10\"><a id=\"__codelineno-9-10\" name=\"__codelineno-9-10\" href=\"#__codelineno-9-10\"></a># Jump straight to review on a drafted workspace\n</span><span id=\"__span-9-11\"><a id=\"__codelineno-9-11\" name=\"__codelineno-9-11\" href=\"#__codelineno-9-11\"></a>/folio:review workspace/\n</span><span id=\"__span-9-12\"><a id=\"__codelineno-9-12\" name=\"__codelineno-9-12\" href=\"#__codelineno-9-12\"></a>\n</span><span id=\"__span-9-13\"><a id=\"__codelineno-9-13\" name=\"__codelineno-9-13\" href=\"#__codelineno-9-13\"></a># Re-export after manual edits to the draft\n</span><span id=\"__span-9-14\"><a id=\"__codelineno-9-14\" name=\"__codelineno-9-14\" href=\"#__codelineno-9-14\"></a>/folio:export workspace/\n</span></code></pre></div>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Command Reference",
+        "text": "<p>Folio exposes nine commands: one full-pipeline entry point and eight stage-specific sub-commands. Every sub-command can run standalone on an existing workspace.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folio",
+        "level": 2,
+        "title": "<code>/folio</code>",
+        "text": "<p>Run the full pipeline or resume from a checkpoint.</p> <pre><code>/folio [idea] [materials_path]\n</code></pre> Argument Required Description <code>idea</code> No One-line research idea (prompted if omitted) <code>materials_path</code> No Path to raw materials folder (prompted if omitted) <ul> <li>If no workspace exists, runs the full pipeline from Stage 0.</li> <li>If a workspace path is provided and <code>logs/checkpoints.md</code> exists, offers to resume from the last completed stage.</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folioinit",
+        "level": 2,
+        "title": "<code>/folio:init</code>",
+        "text": "<p>Initialize a workspace and collect intent.</p> <pre><code>/folio:init [idea] [materials_path]\n</code></pre> Argument Required Description <code>idea</code> No Research idea <code>materials_path</code> No Path to raw materials <p>Entry condition: No existing workspace required.</p> <p>Produces: <code>workspace/</code> directory with canonical layout, <code>intent.json</code>, raw materials copied into <code>inputs/raw_materials/</code>.</p> <p>Scripts run: <code>init_workspace.py</code></p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folioprep",
+        "level": 2,
+        "title": "<code>/folio:prep</code>",
+        "text": "<p>Normalize, classify, and route materials.</p> <pre><code>/folio:prep [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to an initialized workspace <p>Entry condition: Stage 0 (init) complete. <code>intent.json</code> must exist.</p> <p>Produces: Classified inputs (<code>idea.md</code>, <code>experimental_log.md</code>, <code>venue_profile.md</code>, manifests), <code>route.json</code> with mode recommendation.</p> <p>Scripts run: <code>classify_materials.py</code>, <code>route_mode.py</code>, <code>validate_inputs.py</code></p> <p>Gates: Gate A (input completeness) -- <code>validate_inputs.py</code> must exit 0.</p> <p>Checkpoints: Human Checkpoint 1 (prep approval) and routing checkpoint (mode confirmation).</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folioplan",
+        "level": 2,
+        "title": "<code>/folio:plan</code>",
+        "text": "<p>Mode-specific planning.</p> <pre><code>/folio:plan [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to a prepped workspace <p>Entry condition: Stage 1 (prep) complete. Mode confirmed in <code>route.json</code>.</p> <p>Produces: <code>outline.json</code>, <code>claim_ledger.json</code>, <code>figure_plan.json</code>, <code>literature_plan.json</code>. White paper and hybrid modes also produce <code>perspectives.json</code>, <code>question_tree.json</code>, <code>argument_graph.md</code>.</p> <p>Gates: Gate B (plan coherence) -- outline must cover all claims in the ledger.</p> <p>Checkpoints: Human Checkpoint 2 (planning approval before drafting).</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "foliosupport",
+        "level": 2,
+        "title": "<code>/folio:support</code>",
+        "text": "<p>Build evidence, literature, and figures.</p> <pre><code>/folio:support [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to a planned workspace <p>Entry condition: Stage 2 (plan) complete.</p> <p>Produces: <code>citations/citation_pool.json</code>, <code>citations/refs.bib</code>, generated figures in <code>figures/generated/</code>, <code>figures/captions.json</code>, <code>tables/generated/</code>.</p> <p>Gates: Gate C (support completeness) -- every claim in the ledger must have at least one supporting artifact or an explicit gap marker.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "foliodraft",
+        "level": 2,
+        "title": "<code>/folio:draft</code>",
+        "text": "<p>Compose the manuscript.</p> <pre><code>/folio:draft [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to a supported workspace <p>Entry condition: Stage 3 (support) complete.</p> <p>Produces: <code>drafts/paper.tex</code> (research paper / hybrid) or <code>drafts/paper.md</code> (white paper / hybrid), section files in <code>drafts/sections/</code>.</p> <p>Gates: Gate D (draft completeness) -- all outline sections present, no unresolved <code>&lt;!-- GAP --&gt;</code> markers in required sections.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folioreview",
+        "level": 2,
+        "title": "<code>/folio:review</code>",
+        "text": "<p>IP scan, critical review, and repair.</p> <pre><code>/folio:review [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to a drafted workspace <p>Entry condition: Stage 4 (draft) complete.</p> <p>Produces: <code>reviews/review_round_N.md</code>, <code>reviews/scorecard.json</code>, <code>reviews/ip_safety_report.md</code>. Regressions are repaired automatically; the draft is updated in place.</p> <p>Scripts run: <code>scan_redlines.py</code></p> <p>Gates: IP Gate -- <code>scan_redlines.py</code> must exit 0 (no unacknowledged violations). Review Gate -- scorecard <code>overall</code> must not regress between rounds.</p> <p>Checkpoints: Human Checkpoint 3 (final approval before export).</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "folioexport",
+        "level": 2,
+        "title": "<code>/folio:export</code>",
+        "text": "<p>Finalize and package the manuscript.</p> <pre><code>/folio:export [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to a reviewed workspace <p>Entry condition: Stage 5 (review) complete. Checkpoint 3 approved.</p> <p>Produces: <code>final/</code> bundle (paper source, <code>refs.bib</code>, figures, optional compiled PDF). White paper and hybrid modes also produce <code>exports/executive_summary.md</code> and <code>exports/bd_talking_points.md</code>.</p> <p>Scripts run: <code>package_exports.py</code>, <code>compile_package.sh</code> (if LaTeX toolchain available)</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "foliostatus",
+        "level": 2,
+        "title": "<code>/folio:status</code>",
+        "text": "<p>Show pipeline state for a workspace.</p> <pre><code>/folio:status [workspace_path]\n</code></pre> Argument Required Description <code>workspace_path</code> Yes Path to any workspace <p>Entry condition: Workspace directory must exist.</p> <p>Produces: No artifacts. Prints a table of completed stages, pending checkpoints, active mode, and any blocking gate failures. Reads from <code>logs/checkpoints.md</code> and <code>logs/run_log.md</code>.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "resume-behavior",
+        "level": 2,
+        "title": "Resume behavior",
+        "text": "<p>When invoked on a workspace that already has progress:</p> <ol> <li><code>/folio</code> reads <code>logs/checkpoints.md</code> and offers to resume from the next incomplete stage.</li> <li>Any stage command (e.g., <code>/folio:draft</code>) checks that its entry conditions are met. If prior stages are incomplete, it reports what is missing rather than silently failing.</li> <li>Re-running a completed stage overwrites its artifacts. The previous versions are logged in <code>logs/run_log.md</code>.</li> </ol>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "examples",
+        "level": 2,
+        "title": "Examples",
+        "text": "<pre><code># Full pipeline from scratch\n/folio \"Benchmarking LLM routing strategies\" ~/research/llm-routing/\n\n# Initialize only, then come back later\n/folio:init \"Benchmarking LLM routing strategies\" ~/research/llm-routing/\n\n# Check where a workspace stands\n/folio:status workspace/\n\n# Jump straight to review on a drafted workspace\n/folio:review workspace/\n\n# Re-export after manual edits to the draft\n/folio:export workspace/\n</code></pre>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Command Reference",
+    "toc": [
+      {
+        "title": "Command Reference",
+        "id": "command-reference",
+        "url": "#command-reference",
+        "children": [
+          {
+            "title": "/folio",
+            "id": "folio",
+            "url": "#folio",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:init",
+            "id": "folioinit",
+            "url": "#folioinit",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:prep",
+            "id": "folioprep",
+            "url": "#folioprep",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:plan",
+            "id": "folioplan",
+            "url": "#folioplan",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:support",
+            "id": "foliosupport",
+            "url": "#foliosupport",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:draft",
+            "id": "foliodraft",
+            "url": "#foliodraft",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:review",
+            "id": "folioreview",
+            "url": "#folioreview",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:export",
+            "id": "folioexport",
+            "url": "#folioexport",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "/folio:status",
+            "id": "foliostatus",
+            "url": "#foliostatus",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Resume behavior",
+            "id": "resume-behavior",
+            "url": "#resume-behavior",
+            "children": [],
+            "level": 2
+          },
+          {
+            "title": "Examples",
+            "id": "examples",
+            "url": "#examples",
+            "children": [],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 14153564326802672103
+}

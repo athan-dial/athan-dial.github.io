@@ -1,0 +1,1533 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://athandial.com/skills/folio/docs/reference/failure-modes/">
+      
+      
+        <link rel="prev" href="../commands/">
+      
+      
+        <link rel="next" href="../ip-policy/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.33">
+    
+    
+      
+        <title>Failure Modes - Folio</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.53a7feaf.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Libre Baskerville";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/folio.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#failure-modes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Folio" class="md-header__button md-logo" aria-label="Folio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Folio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Failure Modes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Folio" class="md-nav__button md-logo" aria-label="Folio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Folio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Folio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/workflow-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/research-paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research Paper Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/modes/white-paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    White Paper Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../artifacts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artifacts Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failure Modes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Failure Modes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gate-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate failures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gate failures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gate-a-input-completeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate A: Input Completeness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-b-plan-completeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate B: Plan Completeness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-c-evidence-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate C: Evidence Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-d-citation-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate D: Citation Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-e-artifact-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate E: Artifact Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-f-rendering-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate F: Rendering Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-g-refinement-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate G: Refinement Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-ip-redline-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate IP: Redline Safety
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-h-hostile-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate H: Hostile Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing Confidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pdflatex-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "pdflatex not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workspace-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Workspace already exists"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#citation-could-not-be-verified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Citation could not be verified"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-loop-exceeded-3-rounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review loop exceeded 3 rounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IP Policy and Redline Scanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gate-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate failures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gate failures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gate-a-input-completeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate A: Input Completeness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-b-plan-completeness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate B: Plan Completeness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-c-evidence-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate C: Evidence Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-d-citation-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate D: Citation Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-e-artifact-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate E: Artifact Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-f-rendering-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate F: Rendering Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-g-refinement-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate G: Refinement Integrity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-ip-redline-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate IP: Redline Safety
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-h-hostile-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate H: Hostile Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing Confidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pdflatex-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "pdflatex not found"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workspace-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Workspace already exists"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#citation-could-not-be-verified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Citation could not be verified"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-loop-exceeded-3-rounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review loop exceeded 3 rounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Folio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../artifacts/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Reference
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h1>
+<p>This reference covers every named gate failure in Folio, common runtime problems, and repair steps for each.</p>
+<hr />
+<h2 id="gate-failures">Gate failures<a class="headerlink" href="#gate-failures" title="Permanent link">&para;</a></h2>
+<p>Gates are deterministic quality checks that must pass before a stage exits. When a gate fails, Folio states which gate failed, lists the failing artifacts or checks, proposes concrete fixes, and asks whether to attempt auto-repair or pause for manual editing.</p>
+<p>Blockers are logged in <code>logs/run_log.md</code>. All artifacts produced so far are preserved.</p>
+<hr />
+<h3 id="gate-a-input-completeness">Gate A: Input Completeness<a class="headerlink" href="#gate-a-input-completeness" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> <code>validate_inputs.py</code> reports <code>MISSING</code> or <code>PLACEHOLDER</code> errors.</p>
+<p><strong>Typical symptoms:</strong>
+- Required input files are absent after prep
+- A file exists but contains only placeholder text (under ~50 characters)</p>
+<p><strong>Repair:</strong>
+1. Check whether raw materials were provided — if not, the user needs to supply more context
+2. Re-run the prep stage with additional guidance
+3. Manually edit the sparse input files (e.g., add content to <code>idea.md</code>) and re-run <code>validate_inputs.py</code></p>
+<hr />
+<h3 id="gate-b-plan-completeness">Gate B: Plan Completeness<a class="headerlink" href="#gate-b-plan-completeness" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> Planning artifacts are incomplete or structurally invalid after Stage D2.</p>
+<p><strong>Typical symptoms:</strong>
+- Missing outline sections for the venue type
+- Claims in the ledger with no <code>support_level</code> assigned
+- Empty <code>literature_plan.json</code> or <code>figure_plan.json</code></p>
+<p><strong>Repair:</strong>
+1. Re-run the planning stage
+2. If the idea is too vague, return to prep and strengthen <code>idea.md</code> before replanning</p>
+<hr />
+<h3 id="gate-c-evidence-integrity">Gate C: Evidence Integrity<a class="headerlink" href="#gate-c-evidence-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> <code>build_claim_ledger.py</code> reports unsupported or untraced claims.</p>
+<p><strong>Typical symptoms:</strong>
+- Claim <code>support_level</code> is <code>unsupported</code> without user acknowledgment
+- Numerical claims have no <code>evidence_source</code>
+- Unrecognized claim types</p>
+<p><strong>Repair:</strong>
+1. Remove or soften the unsupported claim
+2. Add evidence source to <code>experimental_log.md</code> and re-map the claim
+3. Downgrade the claim from <code>quantitative</code> to <code>qualitative</code>
+4. Explicitly acknowledge the unsupported claim and log the decision</p>
+<hr />
+<h3 id="gate-d-citation-integrity">Gate D: Citation Integrity<a class="headerlink" href="#gate-d-citation-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> <code>verify_citations.py</code> reports unverified, duplicate, or phantom citations.</p>
+<p><strong>Typical symptoms:</strong>
+- Citations in <code>citation_pool.json</code> have <code>verified: false</code>
+- Duplicate BibTeX keys in <code>refs.bib</code>
+- Citations appear in the draft that are not in <code>refs.bib</code></p>
+<p><strong>Repair:</strong>
+1. Verify the citation through DOI lookup or search
+2. Remove unverifiable citations from the pool
+3. Regenerate <code>refs.bib</code> from the cleaned pool</p>
+<div class="admonition warning">
+<p class="admonition-title">No fabricated citations</p>
+<p>Folio blocks unverified citations from entering the manuscript. Either find a DOI or URL confirming the paper exists, remove the citation and find an alternative, or mark it as unverified with explicit user acknowledgment.</p>
+</div>
+<hr />
+<h3 id="gate-e-artifact-integrity">Gate E: Artifact Integrity<a class="headerlink" href="#gate-e-artifact-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> Figures or tables referenced in the draft do not exist.</p>
+<p><strong>Typical symptoms:</strong>
+- <code>check_artifacts.py</code> reports missing figure files
+- Unmatched <code>\ref{}</code> targets in the LaTeX draft</p>
+<p><strong>Repair:</strong>
+1. Generate the missing figure
+2. Remove the <code>\ref{}</code> from the draft if the figure will not be provided
+3. Update <code>captions.json</code> to reflect the actual state</p>
+<hr />
+<h3 id="gate-f-rendering-integrity">Gate F: Rendering Integrity<a class="headerlink" href="#gate-f-rendering-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> LaTeX structural errors in <code>drafts/paper.tex</code>.</p>
+<p><strong>Typical symptoms:</strong>
+- Missing <code>\begin{document}</code> or <code>\end{document}</code>
+- Unbalanced LaTeX environments
+- Missing <code>\documentclass</code></p>
+<p><strong>Repair:</strong>
+1. Fix the specific LaTeX structural issue
+2. Re-run <code>check_artifacts.py</code> to verify
+3. If using a LaTeX template, ensure <code>inputs/template.tex</code> is present in the workspace</p>
+<hr />
+<h3 id="gate-g-refinement-integrity">Gate G: Refinement Integrity<a class="headerlink" href="#gate-g-refinement-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> The <code>overall</code> score in <code>scorecard.json</code> decreases after a revision.</p>
+<p><strong>Typical symptoms:</strong>
+- Post-revision <code>overall</code> score is lower than the pre-revision score</p>
+<p><strong>Repair:</strong>
+- <strong>Automatic:</strong> Folio reverts to the pre-revision draft
+- <strong>Manual:</strong> Review the revision diff to understand what degraded; address the root cause before attempting another round</p>
+<div class="admonition tip">
+<p class="admonition-title">Round limit</p>
+<p>Folio caps review-repair at 3 rounds and retains the best-scoring version. If quality is still unsatisfactory after 3 rounds, manually edit the draft and re-run the review stage.</p>
+</div>
+<hr />
+<h3 id="gate-ip-redline-safety">Gate IP: Redline Safety<a class="headerlink" href="#gate-ip-redline-safety" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> <code>scan_redlines.py</code> flags content against <code>ip_policy.json</code>.</p>
+<p><strong>Typical symptoms:</strong>
+- Forbidden terms appear in draft files
+- Sensitive metric patterns matched in prose</p>
+<p><strong>Repair:</strong>
+1. Review <code>reviews/ip_safety_report.md</code> for the full list of violations with file paths and line numbers
+2. Redact or rephrase the flagged terms
+3. Add terms to <code>redline_exceptions</code> in <code>ip_policy.json</code> if they are intentionally public
+4. Explicitly acknowledge the risk (must be logged in <code>logs/run_log.md</code>)</p>
+<p><strong>Folio will not mark any review stage complete with unaddressed IP violations.</strong></p>
+<p>See <a href="../ip-policy/">IP Policy</a> for <code>ip_policy.json</code> configuration.</p>
+<hr />
+<h3 id="gate-h-hostile-review">Gate H: Hostile Review<a class="headerlink" href="#gate-h-hostile-review" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> White paper or hybrid review reveals critical external-readiness issues.</p>
+<p><strong>Typical symptoms:</strong>
+- Logical gaps in the argument flow
+- Claims without adequate framing or caveats
+- Content that poses competitive or reputational risk if published</p>
+<p><strong>Repair:</strong>
+1. Address logical gaps in the draft
+2. Soften or caveat unsupported claims
+3. Add disclaimers where appropriate
+4. Re-run the review stage</p>
+<hr />
+<h3 id="routing-confidence">Routing Confidence<a class="headerlink" href="#routing-confidence" title="Permanent link">&para;</a></h3>
+<p><strong>When it triggers:</strong> <code>route_mode.py</code> reports confidence below 0.5.</p>
+<p><strong>Typical symptoms:</strong>
+- Materials mix is ambiguous (e.g., equal signals for narrative and empirical content)</p>
+<p><strong>Repair:</strong>
+- Select a mode explicitly via the user override at the routing checkpoint
+- Folio logs the override in <code>route.json</code> and <code>logs/checkpoints.md</code></p>
+<hr />
+<h2 id="common-problems">Common problems<a class="headerlink" href="#common-problems" title="Permanent link">&para;</a></h2>
+<h3 id="pdflatex-not-found">"pdflatex not found"<a class="headerlink" href="#pdflatex-not-found" title="Permanent link">&para;</a></h3>
+<p>Install a TeX distribution:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># macOS</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>mactex-no-gui
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Ubuntu / Debian</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>texlive-full
+</span></code></pre></div>
+<p>Folio degrades gracefully if LaTeX is absent — you still receive the full LaTeX source package.</p>
+<hr />
+<h3 id="workspace-already-exists">"Workspace already exists"<a class="headerlink" href="#workspace-already-exists" title="Permanent link">&para;</a></h3>
+<p>Folio detects existing workspaces and offers to resume from the last completed stage. If you want a fresh run, rename or remove the existing workspace directory before invoking Folio.</p>
+<hr />
+<h3 id="citation-could-not-be-verified">"Citation could not be verified"<a class="headerlink" href="#citation-could-not-be-verified" title="Permanent link">&para;</a></h3>
+<p>Folio blocks unverified citations. Options:</p>
+<ul>
+<li>Find a DOI or URL confirming the paper exists, update <code>citation_pool.json</code>, and re-run <code>verify_citations.py</code></li>
+<li>Remove the citation and find an alternative</li>
+<li>Mark it as unverified with explicit user acknowledgment (logged)</li>
+</ul>
+<hr />
+<h3 id="review-loop-exceeded-3-rounds">Review loop exceeded 3 rounds<a class="headerlink" href="#review-loop-exceeded-3-rounds" title="Permanent link">&para;</a></h3>
+<p>Folio caps review-repair at 3 rounds. After the cap, it selects the best-scoring version and documents residual issues. If the result is still unsatisfactory:</p>
+<ol>
+<li>Manually edit the draft outside the automated review loop</li>
+<li>Re-run the review stage once more to re-score the edited draft</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../commands/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Command Reference">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Command Reference
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ip-policy/" class="md-footer__link md-footer__link--next" aria-label="Next: IP Policy and Redline Scanning">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                IP Policy and Redline Scanning
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","content.code.copy","content.code.annotate","search.highlight"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.63456bd9.min.js"></script>
+      
+    
+  </body>
+</html>

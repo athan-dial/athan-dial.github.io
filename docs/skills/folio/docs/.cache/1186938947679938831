@@ -1,0 +1,270 @@
+{
+  "data": {
+    "meta": {},
+    "content": "<h1 id=\"failure-modes\">Failure Modes<a class=\"headerlink\" href=\"#failure-modes\" title=\"Permanent link\">&para;</a></h1>\n<p>This reference covers every named gate failure in Folio, common runtime problems, and repair steps for each.</p>\n<hr />\n<h2 id=\"gate-failures\">Gate failures<a class=\"headerlink\" href=\"#gate-failures\" title=\"Permanent link\">&para;</a></h2>\n<p>Gates are deterministic quality checks that must pass before a stage exits. When a gate fails, Folio states which gate failed, lists the failing artifacts or checks, proposes concrete fixes, and asks whether to attempt auto-repair or pause for manual editing.</p>\n<p>Blockers are logged in <code>logs/run_log.md</code>. All artifacts produced so far are preserved.</p>\n<hr />\n<h3 id=\"gate-a-input-completeness\">Gate A: Input Completeness<a class=\"headerlink\" href=\"#gate-a-input-completeness\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> <code>validate_inputs.py</code> reports <code>MISSING</code> or <code>PLACEHOLDER</code> errors.</p>\n<p><strong>Typical symptoms:</strong>\n- Required input files are absent after prep\n- A file exists but contains only placeholder text (under ~50 characters)</p>\n<p><strong>Repair:</strong>\n1. Check whether raw materials were provided — if not, the user needs to supply more context\n2. Re-run the prep stage with additional guidance\n3. Manually edit the sparse input files (e.g., add content to <code>idea.md</code>) and re-run <code>validate_inputs.py</code></p>\n<hr />\n<h3 id=\"gate-b-plan-completeness\">Gate B: Plan Completeness<a class=\"headerlink\" href=\"#gate-b-plan-completeness\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> Planning artifacts are incomplete or structurally invalid after Stage D2.</p>\n<p><strong>Typical symptoms:</strong>\n- Missing outline sections for the venue type\n- Claims in the ledger with no <code>support_level</code> assigned\n- Empty <code>literature_plan.json</code> or <code>figure_plan.json</code></p>\n<p><strong>Repair:</strong>\n1. Re-run the planning stage\n2. If the idea is too vague, return to prep and strengthen <code>idea.md</code> before replanning</p>\n<hr />\n<h3 id=\"gate-c-evidence-integrity\">Gate C: Evidence Integrity<a class=\"headerlink\" href=\"#gate-c-evidence-integrity\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> <code>build_claim_ledger.py</code> reports unsupported or untraced claims.</p>\n<p><strong>Typical symptoms:</strong>\n- Claim <code>support_level</code> is <code>unsupported</code> without user acknowledgment\n- Numerical claims have no <code>evidence_source</code>\n- Unrecognized claim types</p>\n<p><strong>Repair:</strong>\n1. Remove or soften the unsupported claim\n2. Add evidence source to <code>experimental_log.md</code> and re-map the claim\n3. Downgrade the claim from <code>quantitative</code> to <code>qualitative</code>\n4. Explicitly acknowledge the unsupported claim and log the decision</p>\n<hr />\n<h3 id=\"gate-d-citation-integrity\">Gate D: Citation Integrity<a class=\"headerlink\" href=\"#gate-d-citation-integrity\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> <code>verify_citations.py</code> reports unverified, duplicate, or phantom citations.</p>\n<p><strong>Typical symptoms:</strong>\n- Citations in <code>citation_pool.json</code> have <code>verified: false</code>\n- Duplicate BibTeX keys in <code>refs.bib</code>\n- Citations appear in the draft that are not in <code>refs.bib</code></p>\n<p><strong>Repair:</strong>\n1. Verify the citation through DOI lookup or search\n2. Remove unverifiable citations from the pool\n3. Regenerate <code>refs.bib</code> from the cleaned pool</p>\n<div class=\"admonition warning\">\n<p class=\"admonition-title\">No fabricated citations</p>\n<p>Folio blocks unverified citations from entering the manuscript. Either find a DOI or URL confirming the paper exists, remove the citation and find an alternative, or mark it as unverified with explicit user acknowledgment.</p>\n</div>\n<hr />\n<h3 id=\"gate-e-artifact-integrity\">Gate E: Artifact Integrity<a class=\"headerlink\" href=\"#gate-e-artifact-integrity\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> Figures or tables referenced in the draft do not exist.</p>\n<p><strong>Typical symptoms:</strong>\n- <code>check_artifacts.py</code> reports missing figure files\n- Unmatched <code>\\ref{}</code> targets in the LaTeX draft</p>\n<p><strong>Repair:</strong>\n1. Generate the missing figure\n2. Remove the <code>\\ref{}</code> from the draft if the figure will not be provided\n3. Update <code>captions.json</code> to reflect the actual state</p>\n<hr />\n<h3 id=\"gate-f-rendering-integrity\">Gate F: Rendering Integrity<a class=\"headerlink\" href=\"#gate-f-rendering-integrity\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> LaTeX structural errors in <code>drafts/paper.tex</code>.</p>\n<p><strong>Typical symptoms:</strong>\n- Missing <code>\\begin{document}</code> or <code>\\end{document}</code>\n- Unbalanced LaTeX environments\n- Missing <code>\\documentclass</code></p>\n<p><strong>Repair:</strong>\n1. Fix the specific LaTeX structural issue\n2. Re-run <code>check_artifacts.py</code> to verify\n3. If using a LaTeX template, ensure <code>inputs/template.tex</code> is present in the workspace</p>\n<hr />\n<h3 id=\"gate-g-refinement-integrity\">Gate G: Refinement Integrity<a class=\"headerlink\" href=\"#gate-g-refinement-integrity\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> The <code>overall</code> score in <code>scorecard.json</code> decreases after a revision.</p>\n<p><strong>Typical symptoms:</strong>\n- Post-revision <code>overall</code> score is lower than the pre-revision score</p>\n<p><strong>Repair:</strong>\n- <strong>Automatic:</strong> Folio reverts to the pre-revision draft\n- <strong>Manual:</strong> Review the revision diff to understand what degraded; address the root cause before attempting another round</p>\n<div class=\"admonition tip\">\n<p class=\"admonition-title\">Round limit</p>\n<p>Folio caps review-repair at 3 rounds and retains the best-scoring version. If quality is still unsatisfactory after 3 rounds, manually edit the draft and re-run the review stage.</p>\n</div>\n<hr />\n<h3 id=\"gate-ip-redline-safety\">Gate IP: Redline Safety<a class=\"headerlink\" href=\"#gate-ip-redline-safety\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> <code>scan_redlines.py</code> flags content against <code>ip_policy.json</code>.</p>\n<p><strong>Typical symptoms:</strong>\n- Forbidden terms appear in draft files\n- Sensitive metric patterns matched in prose</p>\n<p><strong>Repair:</strong>\n1. Review <code>reviews/ip_safety_report.md</code> for the full list of violations with file paths and line numbers\n2. Redact or rephrase the flagged terms\n3. Add terms to <code>redline_exceptions</code> in <code>ip_policy.json</code> if they are intentionally public\n4. Explicitly acknowledge the risk (must be logged in <code>logs/run_log.md</code>)</p>\n<p><strong>Folio will not mark any review stage complete with unaddressed IP violations.</strong></p>\n<p>See <a href=\"../ip-policy/\">IP Policy</a> for <code>ip_policy.json</code> configuration.</p>\n<hr />\n<h3 id=\"gate-h-hostile-review\">Gate H: Hostile Review<a class=\"headerlink\" href=\"#gate-h-hostile-review\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> White paper or hybrid review reveals critical external-readiness issues.</p>\n<p><strong>Typical symptoms:</strong>\n- Logical gaps in the argument flow\n- Claims without adequate framing or caveats\n- Content that poses competitive or reputational risk if published</p>\n<p><strong>Repair:</strong>\n1. Address logical gaps in the draft\n2. Soften or caveat unsupported claims\n3. Add disclaimers where appropriate\n4. Re-run the review stage</p>\n<hr />\n<h3 id=\"routing-confidence\">Routing Confidence<a class=\"headerlink\" href=\"#routing-confidence\" title=\"Permanent link\">&para;</a></h3>\n<p><strong>When it triggers:</strong> <code>route_mode.py</code> reports confidence below 0.5.</p>\n<p><strong>Typical symptoms:</strong>\n- Materials mix is ambiguous (e.g., equal signals for narrative and empirical content)</p>\n<p><strong>Repair:</strong>\n- Select a mode explicitly via the user override at the routing checkpoint\n- Folio logs the override in <code>route.json</code> and <code>logs/checkpoints.md</code></p>\n<hr />\n<h2 id=\"common-problems\">Common problems<a class=\"headerlink\" href=\"#common-problems\" title=\"Permanent link\">&para;</a></h2>\n<h3 id=\"pdflatex-not-found\">\"pdflatex not found\"<a class=\"headerlink\" href=\"#pdflatex-not-found\" title=\"Permanent link\">&para;</a></h3>\n<p>Install a TeX distribution:</p>\n<div class=\"language-bash highlight\"><pre><span></span><code><span id=\"__span-0-1\"><a id=\"__codelineno-0-1\" name=\"__codelineno-0-1\" href=\"#__codelineno-0-1\"></a><span class=\"c1\"># macOS</span>\n</span><span id=\"__span-0-2\"><a id=\"__codelineno-0-2\" name=\"__codelineno-0-2\" href=\"#__codelineno-0-2\"></a>brew<span class=\"w\"> </span>install<span class=\"w\"> </span>--cask<span class=\"w\"> </span>mactex-no-gui\n</span><span id=\"__span-0-3\"><a id=\"__codelineno-0-3\" name=\"__codelineno-0-3\" href=\"#__codelineno-0-3\"></a>\n</span><span id=\"__span-0-4\"><a id=\"__codelineno-0-4\" name=\"__codelineno-0-4\" href=\"#__codelineno-0-4\"></a><span class=\"c1\"># Ubuntu / Debian</span>\n</span><span id=\"__span-0-5\"><a id=\"__codelineno-0-5\" name=\"__codelineno-0-5\" href=\"#__codelineno-0-5\"></a>sudo<span class=\"w\"> </span>apt-get<span class=\"w\"> </span>install<span class=\"w\"> </span>texlive-full\n</span></code></pre></div>\n<p>Folio degrades gracefully if LaTeX is absent — you still receive the full LaTeX source package.</p>\n<hr />\n<h3 id=\"workspace-already-exists\">\"Workspace already exists\"<a class=\"headerlink\" href=\"#workspace-already-exists\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio detects existing workspaces and offers to resume from the last completed stage. If you want a fresh run, rename or remove the existing workspace directory before invoking Folio.</p>\n<hr />\n<h3 id=\"citation-could-not-be-verified\">\"Citation could not be verified\"<a class=\"headerlink\" href=\"#citation-could-not-be-verified\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio blocks unverified citations. Options:</p>\n<ul>\n<li>Find a DOI or URL confirming the paper exists, update <code>citation_pool.json</code>, and re-run <code>verify_citations.py</code></li>\n<li>Remove the citation and find an alternative</li>\n<li>Mark it as unverified with explicit user acknowledgment (logged)</li>\n</ul>\n<hr />\n<h3 id=\"review-loop-exceeded-3-rounds\">Review loop exceeded 3 rounds<a class=\"headerlink\" href=\"#review-loop-exceeded-3-rounds\" title=\"Permanent link\">&para;</a></h3>\n<p>Folio caps review-repair at 3 rounds. After the cap, it selects the best-scoring version and documents residual issues. If the result is still unsatisfactory:</p>\n<ol>\n<li>Manually edit the draft outside the automated review loop</li>\n<li>Re-run the review stage once more to re-score the edited draft</li>\n</ol>",
+    "search": [
+      {
+        "location": null,
+        "level": 1,
+        "title": "Failure Modes",
+        "text": "<p>This reference covers every named gate failure in Folio, common runtime problems, and repair steps for each.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-failures",
+        "level": 2,
+        "title": "Gate failures",
+        "text": "<p>Gates are deterministic quality checks that must pass before a stage exits. When a gate fails, Folio states which gate failed, lists the failing artifacts or checks, proposes concrete fixes, and asks whether to attempt auto-repair or pause for manual editing.</p> <p>Blockers are logged in <code>logs/run_log.md</code>. All artifacts produced so far are preserved.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-a-input-completeness",
+        "level": 3,
+        "title": "Gate A: Input Completeness",
+        "text": "<p>When it triggers: <code>validate_inputs.py</code> reports <code>MISSING</code> or <code>PLACEHOLDER</code> errors.</p> <p>Typical symptoms: - Required input files are absent after prep - A file exists but contains only placeholder text (under ~50 characters)</p> <p>Repair: 1. Check whether raw materials were provided — if not, the user needs to supply more context 2. Re-run the prep stage with additional guidance 3. Manually edit the sparse input files (e.g., add content to <code>idea.md</code>) and re-run <code>validate_inputs.py</code></p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-b-plan-completeness",
+        "level": 3,
+        "title": "Gate B: Plan Completeness",
+        "text": "<p>When it triggers: Planning artifacts are incomplete or structurally invalid after Stage D2.</p> <p>Typical symptoms: - Missing outline sections for the venue type - Claims in the ledger with no <code>support_level</code> assigned - Empty <code>literature_plan.json</code> or <code>figure_plan.json</code></p> <p>Repair: 1. Re-run the planning stage 2. If the idea is too vague, return to prep and strengthen <code>idea.md</code> before replanning</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-c-evidence-integrity",
+        "level": 3,
+        "title": "Gate C: Evidence Integrity",
+        "text": "<p>When it triggers: <code>build_claim_ledger.py</code> reports unsupported or untraced claims.</p> <p>Typical symptoms: - Claim <code>support_level</code> is <code>unsupported</code> without user acknowledgment - Numerical claims have no <code>evidence_source</code> - Unrecognized claim types</p> <p>Repair: 1. Remove or soften the unsupported claim 2. Add evidence source to <code>experimental_log.md</code> and re-map the claim 3. Downgrade the claim from <code>quantitative</code> to <code>qualitative</code> 4. Explicitly acknowledge the unsupported claim and log the decision</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-d-citation-integrity",
+        "level": 3,
+        "title": "Gate D: Citation Integrity",
+        "text": "<p>When it triggers: <code>verify_citations.py</code> reports unverified, duplicate, or phantom citations.</p> <p>Typical symptoms: - Citations in <code>citation_pool.json</code> have <code>verified: false</code> - Duplicate BibTeX keys in <code>refs.bib</code> - Citations appear in the draft that are not in <code>refs.bib</code></p> <p>Repair: 1. Verify the citation through DOI lookup or search 2. Remove unverifiable citations from the pool 3. Regenerate <code>refs.bib</code> from the cleaned pool</p> <p>No fabricated citations</p> <p>Folio blocks unverified citations from entering the manuscript. Either find a DOI or URL confirming the paper exists, remove the citation and find an alternative, or mark it as unverified with explicit user acknowledgment.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-e-artifact-integrity",
+        "level": 3,
+        "title": "Gate E: Artifact Integrity",
+        "text": "<p>When it triggers: Figures or tables referenced in the draft do not exist.</p> <p>Typical symptoms: - <code>check_artifacts.py</code> reports missing figure files - Unmatched <code>\\ref{}</code> targets in the LaTeX draft</p> <p>Repair: 1. Generate the missing figure 2. Remove the <code>\\ref{}</code> from the draft if the figure will not be provided 3. Update <code>captions.json</code> to reflect the actual state</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-f-rendering-integrity",
+        "level": 3,
+        "title": "Gate F: Rendering Integrity",
+        "text": "<p>When it triggers: LaTeX structural errors in <code>drafts/paper.tex</code>.</p> <p>Typical symptoms: - Missing <code>\\begin{document}</code> or <code>\\end{document}</code> - Unbalanced LaTeX environments - Missing <code>\\documentclass</code></p> <p>Repair: 1. Fix the specific LaTeX structural issue 2. Re-run <code>check_artifacts.py</code> to verify 3. If using a LaTeX template, ensure <code>inputs/template.tex</code> is present in the workspace</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-g-refinement-integrity",
+        "level": 3,
+        "title": "Gate G: Refinement Integrity",
+        "text": "<p>When it triggers: The <code>overall</code> score in <code>scorecard.json</code> decreases after a revision.</p> <p>Typical symptoms: - Post-revision <code>overall</code> score is lower than the pre-revision score</p> <p>Repair: - Automatic: Folio reverts to the pre-revision draft - Manual: Review the revision diff to understand what degraded; address the root cause before attempting another round</p> <p>Round limit</p> <p>Folio caps review-repair at 3 rounds and retains the best-scoring version. If quality is still unsatisfactory after 3 rounds, manually edit the draft and re-run the review stage.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-ip-redline-safety",
+        "level": 3,
+        "title": "Gate IP: Redline Safety",
+        "text": "<p>When it triggers: <code>scan_redlines.py</code> flags content against <code>ip_policy.json</code>.</p> <p>Typical symptoms: - Forbidden terms appear in draft files - Sensitive metric patterns matched in prose</p> <p>Repair: 1. Review <code>reviews/ip_safety_report.md</code> for the full list of violations with file paths and line numbers 2. Redact or rephrase the flagged terms 3. Add terms to <code>redline_exceptions</code> in <code>ip_policy.json</code> if they are intentionally public 4. Explicitly acknowledge the risk (must be logged in <code>logs/run_log.md</code>)</p> <p>Folio will not mark any review stage complete with unaddressed IP violations.</p> <p>See IP Policy for <code>ip_policy.json</code> configuration.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "gate-h-hostile-review",
+        "level": 3,
+        "title": "Gate H: Hostile Review",
+        "text": "<p>When it triggers: White paper or hybrid review reveals critical external-readiness issues.</p> <p>Typical symptoms: - Logical gaps in the argument flow - Claims without adequate framing or caveats - Content that poses competitive or reputational risk if published</p> <p>Repair: 1. Address logical gaps in the draft 2. Soften or caveat unsupported claims 3. Add disclaimers where appropriate 4. Re-run the review stage</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "routing-confidence",
+        "level": 3,
+        "title": "Routing Confidence",
+        "text": "<p>When it triggers: <code>route_mode.py</code> reports confidence below 0.5.</p> <p>Typical symptoms: - Materials mix is ambiguous (e.g., equal signals for narrative and empirical content)</p> <p>Repair: - Select a mode explicitly via the user override at the routing checkpoint - Folio logs the override in <code>route.json</code> and <code>logs/checkpoints.md</code></p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "common-problems",
+        "level": 2,
+        "title": "Common problems",
+        "text": "",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "pdflatex-not-found",
+        "level": 3,
+        "title": "\"pdflatex not found\"",
+        "text": "<p>Install a TeX distribution:</p> <pre><code># macOS\nbrew install --cask mactex-no-gui\n\n# Ubuntu / Debian\nsudo apt-get install texlive-full\n</code></pre> <p>Folio degrades gracefully if LaTeX is absent — you still receive the full LaTeX source package.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "workspace-already-exists",
+        "level": 3,
+        "title": "\"Workspace already exists\"",
+        "text": "<p>Folio detects existing workspaces and offers to resume from the last completed stage. If you want a fresh run, rename or remove the existing workspace directory before invoking Folio.</p>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "citation-could-not-be-verified",
+        "level": 3,
+        "title": "\"Citation could not be verified\"",
+        "text": "<p>Folio blocks unverified citations. Options:</p> <ul> <li>Find a DOI or URL confirming the paper exists, update <code>citation_pool.json</code>, and re-run <code>verify_citations.py</code></li> <li>Remove the citation and find an alternative</li> <li>Mark it as unverified with explicit user acknowledgment (logged)</li> </ul>",
+        "path": [],
+        "tags": []
+      },
+      {
+        "location": "review-loop-exceeded-3-rounds",
+        "level": 3,
+        "title": "Review loop exceeded 3 rounds",
+        "text": "<p>Folio caps review-repair at 3 rounds. After the cap, it selects the best-scoring version and documents residual issues. If the result is still unsatisfactory:</p> <ol> <li>Manually edit the draft outside the automated review loop</li> <li>Re-run the review stage once more to re-score the edited draft</li> </ol>",
+        "path": [],
+        "tags": []
+      }
+    ],
+    "title": "Failure Modes",
+    "toc": [
+      {
+        "title": "Failure Modes",
+        "id": "failure-modes",
+        "url": "#failure-modes",
+        "children": [
+          {
+            "title": "Gate failures",
+            "id": "gate-failures",
+            "url": "#gate-failures",
+            "children": [
+              {
+                "title": "Gate A: Input Completeness",
+                "id": "gate-a-input-completeness",
+                "url": "#gate-a-input-completeness",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate B: Plan Completeness",
+                "id": "gate-b-plan-completeness",
+                "url": "#gate-b-plan-completeness",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate C: Evidence Integrity",
+                "id": "gate-c-evidence-integrity",
+                "url": "#gate-c-evidence-integrity",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate D: Citation Integrity",
+                "id": "gate-d-citation-integrity",
+                "url": "#gate-d-citation-integrity",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate E: Artifact Integrity",
+                "id": "gate-e-artifact-integrity",
+                "url": "#gate-e-artifact-integrity",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate F: Rendering Integrity",
+                "id": "gate-f-rendering-integrity",
+                "url": "#gate-f-rendering-integrity",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate G: Refinement Integrity",
+                "id": "gate-g-refinement-integrity",
+                "url": "#gate-g-refinement-integrity",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate IP: Redline Safety",
+                "id": "gate-ip-redline-safety",
+                "url": "#gate-ip-redline-safety",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Gate H: Hostile Review",
+                "id": "gate-h-hostile-review",
+                "url": "#gate-h-hostile-review",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Routing Confidence",
+                "id": "routing-confidence",
+                "url": "#routing-confidence",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          },
+          {
+            "title": "Common problems",
+            "id": "common-problems",
+            "url": "#common-problems",
+            "children": [
+              {
+                "title": "\"pdflatex not found\"",
+                "id": "pdflatex-not-found",
+                "url": "#pdflatex-not-found",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "\"Workspace already exists\"",
+                "id": "workspace-already-exists",
+                "url": "#workspace-already-exists",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "\"Citation could not be verified\"",
+                "id": "citation-could-not-be-verified",
+                "url": "#citation-could-not-be-verified",
+                "children": [],
+                "level": 3
+              },
+              {
+                "title": "Review loop exceeded 3 rounds",
+                "id": "review-loop-exceeded-3-rounds",
+                "url": "#review-loop-exceeded-3-rounds",
+                "children": [],
+                "level": 3
+              }
+            ],
+            "level": 2
+          }
+        ],
+        "level": 1
+      }
+    ]
+  },
+  "hash": 1141803162139241106
+}
