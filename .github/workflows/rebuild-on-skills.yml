@@ -22,10 +22,19 @@ jobs:
           hugo-version: "0.154.3"
           extended: true
 
-      - name: Fetch skills + build site
+      - name: Setup gh auth
+        run: echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Fetch skills
+        run: bash scripts/fetch-skills.sh
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Sanity check plugin sites
         run: |
-          bash scripts/fetch-skills.sh
-          hugo --gc --minify
+          echo "Slotted plugin sites:"
+          find docs/skills -maxdepth 2 -name index.html -not -path '*/docs/*' | sort
 
       - name: Commit regenerated docs/
         run: |
@@ -35,6 +44,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "site: rebuild from athan-dial/skills@${GITHUB_SHA::7}"
+            git commit -m "site: rebuild from athan-dial/skills@$(echo $GITHUB_SHA | cut -c1-7) — $(find docs/skills -maxdepth 2 -name index.html -not -path '*/docs/*' | wc -l | tr -d ' ') plugin sites"
             git push
           fi
