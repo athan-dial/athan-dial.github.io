@@ -1,8 +1,214 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>orc | Athan Dial - Portfolio</title><meta name=description content="Multi-agent orchestration for Claude Code — wave-based parallel dispatch across Codex, Cursor, and Claude subagents."><meta property="og:title" content="orc | Athan Dial - Portfolio"><meta property="og:description" content="Multi-agent orchestration for Claude Code — wave-based parallel dispatch across Codex, Cursor, and Claude subagents."><meta property="og:type" content="article"><meta property="og:url" content="https://athan-dial.github.io/skills/orc/"><meta property="og:image" content="https://athan-dial.github.io/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=https://athan-dial.github.io/skills/orc/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.a5eefe2cd8e5b6ecbdfb6cbf9897ca6738b69bf3df8ab818f1ddd4a13cf42d0c.css integrity="sha256-pe7+LNjltuy9+2y/mJfKZzi2m/PfirgY8d3UoTz0LQw="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/case-studies/>Case Studies</a>
-<a href=/advisory/>Advisory</a>
-<a href=/skills/>Skills</a>
-<button id=theme-toggle aria-label="Toggle theme" title="Toggle theme">
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><article class=skills-list><header><h1>orc</h1><p class=lead>Multi-agent orchestration for Claude Code — wave-based parallel dispatch across Codex, Cursor, and Claude subagents.</p></header><p><code>orc</code> is a lightweight orchestration system for <a href=https://docs.anthropic.com/en/docs/claude-code>Claude Code</a> that manages the full dev session lifecycle: capture ideas, scope work, dispatch to parallel agents, run autonomous optimization loops, and hand off cleanly between sessions.</p><h2 id=install>Install</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>claude plugin install athan-dial/skills:orc
-</span></span></code></pre></div><p>This installs seven <code>/orc:*</code> slash commands plus the underlying skills. Start a new Claude Code session and type <code>/orc:</code> to tab-complete.</p><h2 id=whats-here>What&rsquo;s here</h2><ul><li><strong><a href=/skills/orc/quickstart/>Quickstart</a></strong> — paste-ready 5-minute walkthrough from cold start through your first orchestration.</li><li><strong><a href=/skills/orc/commands/>Commands</a></strong> — auto-generated reference for every <code>/orc:*</code> slash command.</li><li><strong><a href=/skills/orc/architecture/>Architecture</a></strong> — the wave-based parallel dispatch model, <code>.orc/state.json</code>, and how Claude / Cursor / Codex routing works.</li><li><strong><a href=/skills/orc/changelog/>Changelog</a></strong> — release history and semver policy.</li></ul><h2 id=why-it-exists>Why it exists</h2><p>Most Claude Code sessions die at the boundaries: ideas captured mid-flow get lost, complex work gets serialized when it could fan out, and crash recovery means re-explaining everything. <code>orc</code> makes those boundaries cheap — <code>backlog</code> for capture, <code>orchestrate</code> for fan-out, <code>handoff</code> and <code>recap</code> for resumption.</p><h2 id=source>Source</h2><p>Plugin source lives in the <a href=https://github.com/athan-dial/skills/tree/main/plugins/orc>athan-dial/skills</a> monorepo. Issues and PRs welcome there.</p><section class=case-studies><h2>Case Studies</h2><ul><li><a href=/case-studies/reducing-pipeline-latency-decision-velocity/>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</a> — Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to &lt;2 hours and enabling new decision workflows</li><li><a href=/case-studies/preventing-metric-theater-drug-discovery-ml/>Preventing Metric Theater in Drug Discovery ML</a> — Designed evaluation framework combining offline validation with online performance tracking to de-risk multimillion-dollar compound selection decisions</li><li><a href=/case-studies/xtalpi-build-vs-buy-analysis-montai/>Build vs Buy: Strategic Analysis for Analog Generation</a> — Quantitative analysis guiding $250k+ partnership decision — ROI modeling revealed internal model needed 50× improvement, recommended hybrid approach balancing near-term progress with long-term IP</li><li><a href=/case-studies/learning-agenda-framework-montai/>Learning Agendas: Bringing Research Rigor to Product Decisions</a> — Designed decision framework cutting R&amp;D cycle time 20% by pre-defining success criteria and pivot triggers — applied academic experimental design to product strategy</li><li><a href=/case-studies/stat6-data-crisis-response-montai/>From Data Crisis to Data Culture: The STAT6 Incident</a> — Led 6-week crisis response resolving data integrity failure — transformed incident into governance framework reducing future incidents from 3 to 0</li><li><a href=/case-studies/shiny-framework-standardization-montai/>Standardizing Montai's App Ecosystem with R Shiny</a> — Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity</li><li><a href=/case-studies/scaling-ai-nominations-montai/>Scaling AI-Driven Drug Nominations from 250 to 7,000 Compounds</a> — Built pipeline scaling compound nominations 26× while improving hit rates from 5% to 27% — phased rollout strategy balanced speed with quality gates</li></ul></section></article></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>orc &mdash; Multi-agent orchestration for Claude Code</title>
+  <meta name="description" content="Break complex work into parallel sub-tasks dispatched to Cursor, Codex, or Claude subagents. Wave-based execution, persistent state, clean handoff between sessions.">
+
+  <link rel="stylesheet" href="../../shared/tokens.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<!-- athan-dial/skills shared header strip
+     ======================================
+     Substituted into every plugin landing at the <!-- HEADER_STRIP --> marker by
+     bin/build-plugin-site at prod-build time. Renders a consistent top-of-page
+     breadcrumb + theme toggle across athandial.com/skills/<plugin>/ so subsites
+     feel like rooms in the same house.
+
+     Token resolution: relies on /Users/adial/Github/skills/shared/tokens.css
+     being imported upstream. Any plugin's styles.css can override .header-strip
+     for custom-branded variants.
+-->
+<header class="header-strip" role="banner">
+  <nav class="header-strip__crumbs" aria-label="Breadcrumb">
+    <a href="https://athandial.com/" class="header-strip__home">athandial.com</a>
+    <span class="header-strip__sep" aria-hidden="true">/</span>
+    <a href="https://athandial.com/skills/" class="header-strip__skills">skills</a>
+    <span class="header-strip__sep" aria-hidden="true">/</span>
+    <span class="header-strip__current" aria-current="page">orc</span>
+  </nav>
+  <button
+    type="button"
+    class="header-strip__theme-toggle"
+    aria-label="Toggle color theme"
+    data-theme-toggle
+  >
+    <span class="header-strip__theme-icon" aria-hidden="true">◐</span>
+  </button>
+</header>
+
+<style>
+  .header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    font-family: var(--font-sans);
+    font-size: var(--scale-sm);
+  }
+  .header-strip__crumbs { display: flex; align-items: center; gap: var(--space-2); }
+  .header-strip__home,
+  .header-strip__skills { color: var(--color-ink-muted); text-decoration: none; transition: color var(--transition); }
+  .header-strip__home:hover,
+  .header-strip__skills:hover { color: var(--color-ink); }
+  .header-strip__sep { color: var(--color-ink-faint); }
+  .header-strip__current { color: var(--color-ink); font-weight: 500; }
+  .header-strip__theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.75rem; height: 1.75rem;
+    background: transparent; border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-ink-muted);
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+  }
+  .header-strip__theme-toggle:hover { color: var(--color-ink); border-color: var(--color-ink-muted); }
+  .header-strip__theme-icon { font-size: var(--scale-base); line-height: 1; }
+</style>
+
+<script>
+  (function () {
+    var btn = document.querySelector('[data-theme-toggle]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var root = document.documentElement;
+      var current = root.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (_) {}
+    });
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    } catch (_) {}
+  })();
+</script>
+
+<button class="theme-toggle" aria-label="Toggle theme" type="button">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">orchestrate → dispatch → wait → merge</div>
+        <h1>orc</h1>
+        <p class="tagline">Multi-agent orchestration for Claude Code</p>
+        <p class="lede">Break complex work into parallel sub-tasks dispatched to Cursor, Codex, or Claude subagents. Wave-based execution, persistent state, clean handoff between sessions.</p>
+
+        <div class="install" role="group" aria-label="Install orc">
+          <div class="install-label">Install</div>
+          <code class="install-code">claude plugin install athan-dial/skills:orc</code>
+          <div class="install-hint">Then run <code>/orc:orchestrate</code> inside Claude Code.</div>
+        </div>
+
+        <div class="cta-row">
+          <a class="cta" href="docs/quickstart/">Read quickstart</a>
+          <a class="cta cta-ghost" href="docs/reference/commands/">Browse commands</a>
+        </div>
+      </div>
+
+      <div class="hero-ascii" aria-label="Wave-based parallel execution diagram">
+        <div class="ascii-title">waves</div>
+        <pre class="wave-diagram"><code><span class="wave-line l1">Wave 1  ┌─ task A ─┐   ┌─ task B ─┐   ┌─ task C ─┐</span>
+<span class="wave-line l2">        │  codex   │   │  cursor  │   │  claude  │</span>
+<span class="wave-line l3">        └──────────┘   └──────────┘   └──────────┘</span>
+<span class="wave-line l4">                    ↓ wait for all ↓</span>
+<span class="wave-line l5">Wave 2  ┌─ task D ─────────────┐   ┌─ task E ─┐</span>
+<span class="wave-line l6">        │  cursor              │   │  codex   │</span>
+<span class="wave-line l7">        └──────────────────────┘   └──────────┘</span></code></pre>
+        <div class="ascii-sub">One wave at a time. Parallel lanes within a wave. Advance when the whole wave resolves.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="container why-grid">
+      <div class="why-head">
+        <h2>Why orc</h2>
+        <p class="why-lede">Most sessions fail at the boundaries: ideas get lost, work gets serialized, and context rehydration is expensive. orc makes those boundaries cheap.</p>
+      </div>
+
+      <div class="why-cards">
+        <div class="why-card">
+          <div class="why-title">Wave-based execution</div>
+          <div class="why-body">Fan out within a wave, then advance only when the whole wave resolves. Simple enough to debug, powerful enough to parallelize real work.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-title">Persistent state</div>
+          <div class="why-body">State lives on disk under <code>.orc/</code>. If your session resets, you don’t start over — you resume.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-title">Clean handoff</div>
+          <div class="why-body">Checkpoint at the end of a session with <code>/orc:handoff</code>. Next time, <code>/orc:recap</code> gets you back to “what matters” fast.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="whats-here">
+    <div class="container">
+      <h2>What’s here</h2>
+      <div class="cards">
+        <a class="card" href="docs/quickstart/">
+          <div class="card-title">Quickstart</div>
+          <div class="card-body">From install → first wave → clean handoff, in minutes.</div>
+        </a>
+        <a class="card" href="docs/reference/commands/">
+          <div class="card-title">Commands</div>
+          <div class="card-body">The slash-command surface, generated from `commands/`.</div>
+        </a>
+        <a class="card" href="docs/architecture/">
+          <div class="card-title">Architecture</div>
+          <div class="card-body">Wave execution, state files, and how orc stays resumable.</div>
+        </a>
+        <a class="card" href="docs/changelog/">
+          <div class="card-title">Changelog</div>
+          <div class="card-body">Versioned notes and breaking-change policy.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <span class="footer-brand">orc</span>
+      <span class="footer-muted"> &mdash; Multi-agent orchestration for Claude Code</span>
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/athan-dial/skills/tree/main/plugins/orc">Source on GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var toggle = document.querySelector('.theme-toggle');
+  var html = document.documentElement;
+  var storageKey = 'orc-theme';
+
+  var saved = localStorage.getItem(storageKey);
+  if (saved) html.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', function() {
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem(storageKey, next);
+  });
+
+  // Keep default as dark unless user explicitly toggles.
+})();
+</script>
+</body>
+</html>
