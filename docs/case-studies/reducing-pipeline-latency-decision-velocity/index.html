@@ -1,8 +1,213 @@
-<!doctype html><html lang=en><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops | Athan Dial - Portfolio</title><meta name=description content="Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to <2 hours and enabling new decision workflows"><meta property="og:title" content="Reducing Data Pipeline Latency to Enable Real-Time Decision Loops | Athan Dial - Portfolio"><meta property="og:description" content="Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to <2 hours and enabling new decision workflows"><meta property="og:type" content="article"><meta property="og:url" content="http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/"><meta property="og:image" content="http://localhost:1313/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=http://localhost:1313/case-studies/reducing-pipeline-latency-decision-velocity/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/advisory/>Advisory</a>
-<a href=/agency/>The Agency</a>
-<button id=theme-toggle type=button aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed=false>
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><div class="container page-editorial page-editorial--case-study"><article class=case-study-article><div class=case-study-intro><a href=/case-studies/ class=case-study-back>&larr; All Case Studies</a><header class=case-study-header><h1 class=case-study-header__title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</h1><div class=case-study-header__meta><span class=case-study-card__tag>technical architecture</span>
-<span class=case-study-card__tag>&#183; team</span>
-<span class=case-study-card__tag>&#183; medium</span></div><p class=case-study-header__lead>Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to &lt;2 hours and enabling new decision workflows</p></header></div><div class=case-study-body><aside class=case-study-toc aria-label="On this page"><p class=case-study-toc__label>On this page</p><nav id=TableOfContents><ul><li><a href=#context>Context</a></li><li><a href=#ownership>Ownership</a></li><li><a href=#decision-frame>Decision Frame</a></li><li><a href=#outcome>Outcome</a></li><li><a href=#reflection>Reflection</a></li></ul></nav></aside><div class="prose prose--editorial prose--case-study case-study-body__prose"><h2 id=context>Context</h2><p>Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.</p><p>This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.</p><h2 id=ownership>Ownership</h2><p>I owned:</p><ul><li>Pipeline architecture design (streaming vs. batch tradeoffs)</li><li>Migration roadmap and sequencing decisions</li><li>Cross-functional alignment on success criteria and rollout phases</li></ul><p>I influenced:</p><ul><li>Infrastructure capacity planning (partnered with platform engineering)</li><li>Data quality validation frameworks (collaborated with data engineering)</li><li>Business process changes enabled by real-time data (advised operations teams)</li></ul><h2 id=decision-frame>Decision Frame</h2><p><strong>Problem statement:</strong> We needed to reduce data lag for critical business workflows because stale data caused missed opportunities and reactive decision-making, but we were constrained by existing batch infrastructure, limited engineering capacity for migration, and tight cost controls on streaming infrastructure.</p><p><strong>Options considered:</strong></p><p><strong>Option A: Optimize batch processing</strong></p><ul><li>Pros: Leverages existing infrastructure, lower risk, incremental cost increase</li><li>Cons: Still 8-12 hour lag minimum, doesn&rsquo;t enable new decision workflows</li><li>Risk: Marginal improvement doesn&rsquo;t solve root problem, wasted effort</li></ul><p><strong>Option B: Full streaming pipeline migration</strong></p><ul><li>Pros: Achieves target latency (&lt;2 hours), enables real-time decision loops</li><li>Cons: High migration cost, 6-month timeline, complex stakeholder coordination</li><li>Risk: Over-investment if business doesn&rsquo;t adopt new workflows</li></ul><p><strong>Option C: Hybrid approach (selective streaming)</strong></p><ul><li>Pros: Focus on highest-value data streams first, validate ROI before full migration</li><li>Cons: Maintains dual infrastructure temporarily, requires careful prioritization</li><li>Risk: Partial solution may not deliver enough value to justify cost</li></ul><p><strong>Decision:</strong> Chose Option C because:</p><ol><li>Business case required demonstrating value before committing to full migration</li><li>Not all data streams required real-time latency (80/20 rule applied)</li><li>Phased approach allowed us to validate streaming infrastructure reliability before scaling</li><li>Early wins would build organizational momentum for further investment</li></ol><p><strong>Constraints:</strong></p><ul><li>6-month timeline to show measurable business impact (executive commitment window)</li><li>Budget for streaming infrastructure limited to 30% increase over batch costs</li><li>Engineering capacity for migration work: 2 data engineers, 60% allocation</li></ul><h2 id=outcome>Outcome</h2><p><strong>Primary outcome:</strong> Reduced data lag from 2-3 days to &lt;2 hours for priority data streams, enabling new decision workflows that prevented $X in operational losses within first 3 months.</p><p><strong>Guardrails maintained:</strong></p><ul><li>Data quality: 99.9% consistency with batch baseline (no regressions)</li><li>Cost: Streaming infrastructure stayed within 25% cost increase target</li><li>Reliability: 99.5% uptime SLA maintained (same as batch processing)</li></ul><p><strong>Second-order effects:</strong></p><ul><li>Enabled 3 new business workflows that required near-real-time data</li><li>Reduced &ldquo;data freshness&rdquo; questions in stakeholder meetings by 70%</li><li>Created reusable streaming pipeline patterns adopted by 2 other data teams</li><li>Improved trust in data platform (measured via stakeholder survey)</li></ul><p><strong>Limitations acknowledged:</strong></p><ul><li>20% of data streams still on batch processing (lower-priority workflows)</li><li>Initial 2-3 weeks of migration had elevated monitoring alerts (resolved through tuning)</li><li>Streaming infrastructure requires ongoing operational expertise (training investment)</li><li>Not all business teams adapted processes to use real-time data immediately</li></ul><h2 id=reflection>Reflection</h2><p><strong>What I&rsquo;d do differently:</strong></p><ul><li>Start with smaller pilot (1-2 streams) before committing to broader migration roadmap</li><li>Involve operations teams earlier in workflow redesign (reduced adoption friction)</li><li>Build cost monitoring dashboards in parallel with infrastructure (avoided surprise costs)</li><li>Create more explicit &ldquo;definition of done&rdquo; for business workflow adoption (not just technical deployment)</li></ul><p><strong>What this taught me about decision-making:</strong></p><ul><li>Platform investments require both technical validation AND business process change</li><li>Hybrid approaches de-risk large architectural shifts while building organizational buy-in</li><li>Success metrics should include adoption, not just technical performance</li><li>Early wins matter more than perfect solutions for maintaining stakeholder commitment</li></ul><p><strong>How this informs future decisions:</strong></p><ul><li>Always phase platform investments with measurable checkpoints</li><li>Design migration roadmaps around business impact, not technical elegance</li><li>Establish decision forums before problems arise (prevent scope creep and priority conflicts)</li><li>Build reusable components from day one (platform thinking creates leverage)</li></ul></div></div></article></div></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script src=https://platform.linkedin.com/badges/js/profile.js async defer type=text/javascript></script><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reducing Data Pipeline Latency to Enable Real-Time Decision Loops | Athan Dial - Portfolio</title>
+  <meta name="description" content="Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to &lt;2 hours and enabling new decision workflows">
+  <meta property="og:title" content="Reducing Data Pipeline Latency to Enable Real-Time Decision Loops | Athan Dial - Portfolio">
+  <meta property="og:description" content="Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to &lt;2 hours and enabling new decision workflows">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/">
+  <meta property="og:image" content="https://athan-dial.github.io/img/profile.jpg">
+  <meta name="author" content="Athan Dial, PhD">
+  <link rel="canonical" href="https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css" integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU=">
+  <meta name="generator" content="Hugo 0.154.3">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
+    <nav class="site-nav">
+      
+        <a href="/about/">About</a>
+      
+        <a href="/advisory/">Advisory</a>
+      
+        <a href="/agency/">The Agency</a>
+      
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
+        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
+        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+    
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">Reducing Data Pipeline Latency to Enable Real-Time Decision Loops</h1>
+        <div class="case-study-header__meta">
+          <span class="case-study-card__tag">technical architecture</span>
+          <span class="case-study-card__tag">&middot; team</span>
+          <span class="case-study-card__tag">&middot; medium</span>
+        </div>
+        <p class="case-study-header__lead">Redesigned batch pipeline to streaming architecture, reducing data lag from 2-3 days to &lt;2 hours and enabling new decision workflows</p>
+      </header>
+    </div>
+    <div class="case-study-body">
+      
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#ownership">Ownership</a></li>
+    <li><a href="#decision-frame">Decision Frame</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+      </aside>
+      
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        <h2 id="context">Context</h2>
+<p>Business teams were making critical decisions on data that was 2-3 days old, causing them to miss market opportunities and react to problems rather than prevent them. The stakes were high: delayed insights meant lost revenue opportunities and increased operational costs, but the organization had invested heavily in batch processing infrastructure.</p>
+<p>This work lived in the core data platform that served analytics teams, operations teams, and executive dashboards across the organization. My role was to own the pipeline architecture redesign and establish the decision forum for prioritizing which data streams to migrate first.</p>
+<h2 id="ownership">Ownership</h2>
+<p>I owned:</p>
+<ul>
+<li>Pipeline architecture design (streaming vs. batch tradeoffs)</li>
+<li>Migration roadmap and sequencing decisions</li>
+<li>Cross-functional alignment on success criteria and rollout phases</li>
+</ul>
+<p>I influenced:</p>
+<ul>
+<li>Infrastructure capacity planning (partnered with platform engineering)</li>
+<li>Data quality validation frameworks (collaborated with data engineering)</li>
+<li>Business process changes enabled by real-time data (advised operations teams)</li>
+</ul>
+<h2 id="decision-frame">Decision Frame</h2>
+<p><strong>Problem statement:</strong> We needed to reduce data lag for critical business workflows because stale data caused missed opportunities and reactive decision-making, but we were constrained by existing batch infrastructure, limited engineering capacity for migration, and tight cost controls on streaming infrastructure.</p>
+<p><strong>Options considered:</strong></p>
+<p><strong>Option A: Optimize batch processing</strong></p>
+<ul>
+<li>Pros: Leverages existing infrastructure, lower risk, incremental cost increase</li>
+<li>Cons: Still 8-12 hour lag minimum, doesn&rsquo;t enable new decision workflows</li>
+<li>Risk: Marginal improvement doesn&rsquo;t solve root problem, wasted effort</li>
+</ul>
+<p><strong>Option B: Full streaming pipeline migration</strong></p>
+<ul>
+<li>Pros: Achieves target latency (&lt;2 hours), enables real-time decision loops</li>
+<li>Cons: High migration cost, 6-month timeline, complex stakeholder coordination</li>
+<li>Risk: Over-investment if business doesn&rsquo;t adopt new workflows</li>
+</ul>
+<p><strong>Option C: Hybrid approach (selective streaming)</strong></p>
+<ul>
+<li>Pros: Focus on highest-value data streams first, validate ROI before full migration</li>
+<li>Cons: Maintains dual infrastructure temporarily, requires careful prioritization</li>
+<li>Risk: Partial solution may not deliver enough value to justify cost</li>
+</ul>
+<p><strong>Decision:</strong> Chose Option C because:</p>
+<ol>
+<li>Business case required demonstrating value before committing to full migration</li>
+<li>Not all data streams required real-time latency (80/20 rule applied)</li>
+<li>Phased approach allowed us to validate streaming infrastructure reliability before scaling</li>
+<li>Early wins would build organizational momentum for further investment</li>
+</ol>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>6-month timeline to show measurable business impact (executive commitment window)</li>
+<li>Budget for streaming infrastructure limited to 30% increase over batch costs</li>
+<li>Engineering capacity for migration work: 2 data engineers, 60% allocation</li>
+</ul>
+<h2 id="outcome">Outcome</h2>
+<p><strong>Primary outcome:</strong> Reduced data lag from 2-3 days to &lt;2 hours for priority data streams, enabling new decision workflows that prevented $X in operational losses within first 3 months.</p>
+<p><strong>Guardrails maintained:</strong></p>
+<ul>
+<li>Data quality: 99.9% consistency with batch baseline (no regressions)</li>
+<li>Cost: Streaming infrastructure stayed within 25% cost increase target</li>
+<li>Reliability: 99.5% uptime SLA maintained (same as batch processing)</li>
+</ul>
+<p><strong>Second-order effects:</strong></p>
+<ul>
+<li>Enabled 3 new business workflows that required near-real-time data</li>
+<li>Reduced &ldquo;data freshness&rdquo; questions in stakeholder meetings by 70%</li>
+<li>Created reusable streaming pipeline patterns adopted by 2 other data teams</li>
+<li>Improved trust in data platform (measured via stakeholder survey)</li>
+</ul>
+<p><strong>Limitations acknowledged:</strong></p>
+<ul>
+<li>20% of data streams still on batch processing (lower-priority workflows)</li>
+<li>Initial 2-3 weeks of migration had elevated monitoring alerts (resolved through tuning)</li>
+<li>Streaming infrastructure requires ongoing operational expertise (training investment)</li>
+<li>Not all business teams adapted processes to use real-time data immediately</li>
+</ul>
+<h2 id="reflection">Reflection</h2>
+<p><strong>What I&rsquo;d do differently:</strong></p>
+<ul>
+<li>Start with smaller pilot (1-2 streams) before committing to broader migration roadmap</li>
+<li>Involve operations teams earlier in workflow redesign (reduced adoption friction)</li>
+<li>Build cost monitoring dashboards in parallel with infrastructure (avoided surprise costs)</li>
+<li>Create more explicit &ldquo;definition of done&rdquo; for business workflow adoption (not just technical deployment)</li>
+</ul>
+<p><strong>What this taught me about decision-making:</strong></p>
+<ul>
+<li>Platform investments require both technical validation AND business process change</li>
+<li>Hybrid approaches de-risk large architectural shifts while building organizational buy-in</li>
+<li>Success metrics should include adoption, not just technical performance</li>
+<li>Early wins matter more than perfect solutions for maintaining stakeholder commitment</li>
+</ul>
+<p><strong>How this informs future decisions:</strong></p>
+<ul>
+<li>Always phase platform investments with measurable checkpoints</li>
+<li>Design migration roadmaps around business impact, not technical elegance</li>
+<li>Establish decision forums before problems arise (prevent scope creep and priority conflicts)</li>
+<li>Build reusable components from day one (platform thinking creates leverage)</li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; 2026 Athan Dial, PhD &middot; Boston, MA</span>
+    <ul class="site-footer__links">
+      
+        <li><a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">LinkedIn</a></li>
+      
+        <li><a href="https://github.com/athan-dial" target="_blank" rel="noopener">GitHub</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

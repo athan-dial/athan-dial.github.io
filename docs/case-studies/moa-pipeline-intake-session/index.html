@@ -1,8 +1,146 @@
-<!doctype html><html lang=en><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>The Shadow Process Problem: Systematizing a Scientific Workflow | Athan Dial - Portfolio</title><meta name=description content="A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool."><meta property="og:title" content="The Shadow Process Problem: Systematizing a Scientific Workflow | Athan Dial - Portfolio"><meta property="og:description" content="A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool."><meta property="og:type" content="article"><meta property="og:url" content="http://localhost:1313/case-studies/moa-pipeline-intake-session/"><meta property="og:image" content="http://localhost:1313/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=http://localhost:1313/case-studies/moa-pipeline-intake-session/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/advisory/>Advisory</a>
-<a href=/agency/>The Agency</a>
-<button id=theme-toggle type=button aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed=false>
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><div class="container page-editorial page-editorial--case-study"><article class=case-study-article><div class=case-study-intro><a href=/case-studies/ class=case-study-back>&larr; All Case Studies</a><header class=case-study-header><h1 class=case-study-header__title>The Shadow Process Problem: Systematizing a Scientific Workflow</h1><div class=case-study-header__meta><span class=case-study-card__tag>decision systems</span>
-<span class=case-study-card__tag>&#183; team</span>
-<span class=case-study-card__tag>&#183; medium</span></div><p class=case-study-header__lead>A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool.</p></header></div><div class=case-study-body><aside class=case-study-toc aria-label="On this page"><p class=case-study-toc__label>On this page</p><nav id=TableOfContents><ul><li><a href=#context>Context</a></li><li><a href=#ownership>Ownership</a></li><li><a href=#decision-frame>Decision Frame</a></li><li><a href=#outcome>Outcome</a></li><li><a href=#reflection>Reflection</a></li></ul></nav></aside><div class="prose prose--editorial prose--case-study case-study-body__prose"><h2 id=context>Context</h2><p>A biology collaborator was doing mechanism-of-action analysis by pasting experimental data into ChatGPT sessions and manually curating outputs in Excel. She had real judgment about what mattered and what to filter. The process worked — for one person, on one dataset, with no audit trail.</p><p>A second collaboration was incoming. Different dataset, different scientists. The manual workflow had a clear ceiling, and we were about to hit it.</p><hr><h2 id=ownership>Ownership</h2><p>I co-designed the replacement workflow with the biologist. My role: run a structured intake session, document what she was already doing precisely enough to formalize it, and build a pipeline that produced output she could react to.</p><hr><h2 id=decision-frame>Decision Frame</h2><p>The easy path was to build a tool based on what we assumed the analysis needed. The right path was to understand the shadow process first.</p><p>When a scientist says &ldquo;I paste data into ChatGPT,&rdquo; what they usually mean is: I&rsquo;m running a multi-step curation process in my head, using the chat as a workspace, and I&rsquo;ve developed real judgment about what to keep and what to discard. That judgment is the thing you need to encode — not replace.</p><p>The intake session surfaced three inputs that weren&rsquo;t obvious from the raw data alone:</p><ol><li><strong>Phenotype description with specificity</strong> — including what the phenotype <em>doesn&rsquo;t</em> match. The negative case constrains the target space.</li><li><strong>Pathway context with known regulators.</strong> The curated prior knowledge of which pathways matter, not the raw experimental file.</li><li><strong>Differentially expressed proteins</strong> as the evidence set linking phenotype to candidate mechanisms.</li></ol><p>The raw file was the simpler default. What the session revealed was that the biologist&rsquo;s judgment was already selecting and contextualizing before the analysis started — and that judgment needed to be made explicit and reproducible, not assumed away.</p><p>Scope was bounded intentionally: start with molecular mechanism of action, expand later. A testbed that produces something concrete to react to, not a complete system.</p><hr><h2 id=outcome>Outcome</h2><p>A proof-of-concept pipeline shipped end-to-end. The output: a rank-ordered list of candidate targets with prescribed follow-up assays, published to a shared reporting environment for the biologist to review.</p><p>The design principle governing output format: scientists prescribe the follow-up assays. The pipeline surfaces candidates. Biology judgment decides what to test.</p><hr><h2 id=reflection>Reflection</h2><p>The hard part of systematizing scientific workflows is the intake, not the technology.</p><p>Knowledge lives in a system or in someone&rsquo;s head. This biologist&rsquo;s analytical judgment lived entirely in her head — effective, but with a bus factor of one and no reproducibility. The intake session was how we moved it from implicit expertise to explicit, encodable process.</p><p>The three inputs we canonicalized came from that session. Not from a requirements document. Not from prior literature. From documenting what she was already doing, precisely enough to formalize it. That&rsquo;s the discipline — understand the shadow process before you build anything.</p></div></div></article></div></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script src=https://platform.linkedin.com/badges/js/profile.js async defer type=text/javascript></script><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Shadow Process Problem: Systematizing a Scientific Workflow | Athan Dial - Portfolio</title>
+  <meta name="description" content="A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool.">
+  <meta property="og:title" content="The Shadow Process Problem: Systematizing a Scientific Workflow | Athan Dial - Portfolio">
+  <meta property="og:description" content="A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/case-studies/moa-pipeline-intake-session/">
+  <meta property="og:image" content="http://localhost:1313/img/profile.jpg">
+  <meta name="author" content="Athan Dial, PhD">
+  <link rel="canonical" href="http://localhost:1313/case-studies/moa-pipeline-intake-session/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css" integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU=">
+  <meta name="generator" content="Hugo 0.154.3">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
+    <nav class="site-nav">
+      
+        <a href="/about/">About</a>
+      
+        <a href="/advisory/">Advisory</a>
+      
+        <a href="/agency/">The Agency</a>
+      
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
+        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
+        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+    
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">The Shadow Process Problem: Systematizing a Scientific Workflow</h1>
+        <div class="case-study-header__meta">
+          <span class="case-study-card__tag">decision systems</span>
+          <span class="case-study-card__tag">&middot; team</span>
+          <span class="case-study-card__tag">&middot; medium</span>
+        </div>
+        <p class="case-study-header__lead">A biologist was running mechanism-of-action analysis through ChatGPT and Excel. The process worked. It was also unreproducible, unauditable, and about to break under a second collaboration. The fix started with an intake session, not a tool.</p>
+      </header>
+    </div>
+    <div class="case-study-body">
+      
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#ownership">Ownership</a></li>
+    <li><a href="#decision-frame">Decision Frame</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+      </aside>
+      
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        <h2 id="context">Context</h2>
+<p>A biology collaborator was doing mechanism-of-action analysis by pasting experimental data into ChatGPT sessions and manually curating outputs in Excel. She had real judgment about what mattered and what to filter. The process worked — for one person, on one dataset, with no audit trail.</p>
+<p>A second collaboration was incoming. Different dataset, different scientists. The manual workflow had a clear ceiling, and we were about to hit it.</p>
+<hr>
+<h2 id="ownership">Ownership</h2>
+<p>I co-designed the replacement workflow with the biologist. My role: run a structured intake session, document what she was already doing precisely enough to formalize it, and build a pipeline that produced output she could react to.</p>
+<hr>
+<h2 id="decision-frame">Decision Frame</h2>
+<p>The easy path was to build a tool based on what we assumed the analysis needed. The right path was to understand the shadow process first.</p>
+<p>When a scientist says &ldquo;I paste data into ChatGPT,&rdquo; what they usually mean is: I&rsquo;m running a multi-step curation process in my head, using the chat as a workspace, and I&rsquo;ve developed real judgment about what to keep and what to discard. That judgment is the thing you need to encode — not replace.</p>
+<p>The intake session surfaced three inputs that weren&rsquo;t obvious from the raw data alone:</p>
+<ol>
+<li><strong>Phenotype description with specificity</strong> — including what the phenotype <em>doesn&rsquo;t</em> match. The negative case constrains the target space.</li>
+<li><strong>Pathway context with known regulators.</strong> The curated prior knowledge of which pathways matter, not the raw experimental file.</li>
+<li><strong>Differentially expressed proteins</strong> as the evidence set linking phenotype to candidate mechanisms.</li>
+</ol>
+<p>The raw file was the simpler default. What the session revealed was that the biologist&rsquo;s judgment was already selecting and contextualizing before the analysis started — and that judgment needed to be made explicit and reproducible, not assumed away.</p>
+<p>Scope was bounded intentionally: start with molecular mechanism of action, expand later. A testbed that produces something concrete to react to, not a complete system.</p>
+<hr>
+<h2 id="outcome">Outcome</h2>
+<p>A proof-of-concept pipeline shipped end-to-end. The output: a rank-ordered list of candidate targets with prescribed follow-up assays, published to a shared reporting environment for the biologist to review.</p>
+<p>The design principle governing output format: scientists prescribe the follow-up assays. The pipeline surfaces candidates. Biology judgment decides what to test.</p>
+<hr>
+<h2 id="reflection">Reflection</h2>
+<p>The hard part of systematizing scientific workflows is the intake, not the technology.</p>
+<p>Knowledge lives in a system or in someone&rsquo;s head. This biologist&rsquo;s analytical judgment lived entirely in her head — effective, but with a bus factor of one and no reproducibility. The intake session was how we moved it from implicit expertise to explicit, encodable process.</p>
+<p>The three inputs we canonicalized came from that session. Not from a requirements document. Not from prior literature. From documenting what she was already doing, precisely enough to formalize it. That&rsquo;s the discipline — understand the shadow process before you build anything.</p>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; 2026 Athan Dial, PhD &middot; Boston, MA</span>
+    <ul class="site-footer__links">
+      
+        <li><a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">LinkedIn</a></li>
+      
+        <li><a href="https://github.com/athan-dial" target="_blank" rel="noopener">GitHub</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

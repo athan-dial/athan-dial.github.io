@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Adoption-Strategy on Athan Dial - Portfolio</title><link>http://localhost:1313/tags/adoption-strategy/</link><description>Recent content in Adoption-Strategy on Athan Dial - Portfolio</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/adoption-strategy/index.xml" rel="self" type="application/rss+xml"/><item><title>Product Signals for Scientific Tools</title><link>http://localhost:1313/case-studies/product-management-data-science/</link><pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate><guid>http://localhost:1313/case-studies/product-management-data-science/</guid><description>&lt;h2 id="context"&gt;Context&lt;/h2&gt;
-&lt;p&gt;Internal discovery tools decide which experiments get prioritized, yet they were being specced in Slack and launched without adoption plans. Installing product discipline meant scientists stopped guessing whether a tool worked and leadership could see the tradeoff becomes obvious instead of theoretical when two platforms competed for the same quarter.&lt;/p&gt;
-&lt;p&gt;The tooling backlog spanned similarity search, compound analytics, cross-reference dashboards, and data reporting. None had requirements, personas, or success metrics. Whoever yelled loudest got engineering cycles, and the only governance was &amp;ldquo;ship before the OKR checkpoint.&amp;rdquo;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Adoption-Strategy on Athan Dial - Portfolio</title>
+    <link>http://localhost:1313/tags/adoption-strategy/</link>
+    <description>Recent content in Adoption-Strategy on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/adoption-strategy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Product Signals for Scientific Tools</title>
+      <link>http://localhost:1313/case-studies/product-management-data-science/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/case-studies/product-management-data-science/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Internal discovery tools decide which experiments get prioritized, yet they were being specced in Slack and launched without adoption plans. Installing product discipline meant scientists stopped guessing whether a tool worked and leadership could see the tradeoff becomes obvious instead of theoretical when two platforms competed for the same quarter.&lt;/p&gt;&#xA;&lt;p&gt;The tooling backlog spanned similarity search, compound analytics, cross-reference dashboards, and data reporting. None had requirements, personas, or success metrics. Whoever yelled loudest got engineering cycles, and the only governance was &amp;ldquo;ship before the OKR checkpoint.&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

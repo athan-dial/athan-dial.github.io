@@ -1,8 +1,256 @@
-<!doctype html><html lang=en><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Standardizing Montai's App Ecosystem with R Shiny | Athan Dial - Portfolio</title><meta name=description content="Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity"><meta property="og:title" content="Standardizing Montai's App Ecosystem with R Shiny | Athan Dial - Portfolio"><meta property="og:description" content="Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity"><meta property="og:type" content="article"><meta property="og:url" content="http://localhost:1313/case-studies/shiny-framework-standardization-montai/"><meta property="og:image" content="http://localhost:1313/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=http://localhost:1313/case-studies/shiny-framework-standardization-montai/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/advisory/>Advisory</a>
-<a href=/agency/>The Agency</a>
-<button id=theme-toggle type=button aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed=false>
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><div class="container page-editorial page-editorial--case-study"><article class=case-study-article><div class=case-study-intro><a href=/case-studies/ class=case-study-back>&larr; All Case Studies</a><header class=case-study-header><h1 class=case-study-header__title>Standardizing Montai's App Ecosystem with R Shiny</h1><div class=case-study-header__meta><span class=case-study-card__tag>technical architecture</span>
-<span class=case-study-card__tag>&#183; team</span>
-<span class=case-study-card__tag>&#183; medium</span></div><p class=case-study-header__lead>Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity</p></header></div><div class=case-study-body><aside class=case-study-toc aria-label="On this page"><p class=case-study-toc__label>On this page</p><nav id=TableOfContents><ul><li><a href=#context>Context</a></li><li><a href=#ownership>Ownership</a></li><li><a href=#decision-frame>Decision Frame</a></li><li><a href=#outcome>Outcome</a></li><li><a href=#reflection>Reflection</a></li></ul></nav></aside><div class="prose prose--editorial prose--case-study case-study-body__prose"><h2 id=context>Context</h2><p>By mid-2024, Montai&rsquo;s internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.</p><p><strong>Facts:</strong></p><ul><li>2024: Growing need for internal web apps (compound selection, data visualization, report generation)</li><li>Problem: Different engineers using different frameworks (Python Streamlit/Dash, R Shiny, Jupyter notebooks)</li><li>Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost</li><li>Stakes: Small team (~5-6 people) needed velocity + consistency</li></ul><p>Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of &ldquo;one size fits all&rdquo; dogma that ignores practical constraints.</p><h2 id=ownership>Ownership</h2><p>I owned:</p><ul><li>Framework evaluation (Streamlit vs Dash vs Shiny vs multi-framework)</li><li>Proof-of-concept implementation (Nomination App in Shiny)</li><li>Internal standards documentation (app dev guidelines)</li><li>Team training (brown bag sessions on Shiny patterns)</li></ul><p>I influenced:</p><ul><li>Montai Style library (with Kyle T - UI components for Shiny)</li><li>Posit Connect deployment strategy (with Platform Eng)</li><li>Team skill development (mentored colleagues on Shiny)</li></ul><h2 id=decision-frame>Decision Frame</h2><p><strong>Problem statement:</strong></p><p>Choose and standardize a single internal app framework to accelerate development velocity and establish consistent UX, constrained by:</p><ul><li>Mixed team skills (some Python, some R, few full-stack engineers)</li><li>Data-heavy use cases (need robust plotting + data wrangling)</li><li>Small team (can&rsquo;t support multiple frameworks well)</li></ul><p><strong>Options considered:</strong></p><p><strong>Option A: Streamlit (Python)</strong></p><ul><li>Pros: Quick to develop, popular, Python-based (most engineers know)</li><li>Cons: Lacked flexibility for complex UI at the time, less mature</li><li>Risk: Montai had significant R analytics codebase to leverage</li></ul><p><strong>Option B: Dash (Python/Plotly)</strong></p><ul><li>Pros: More customizable than Streamlit, production-ready</li><li>Cons: More engineering-heavy, steeper learning curve</li><li>Risk: Fewer team members comfortable with Plotly ecosystem</li></ul><p><strong>Option C: R Shiny</strong></p><ul><li>Pros: Powerful for data apps, integrates with R analytics, Posit Connect deployment, data team knows R</li><li>Cons: Fewer pure software engineers comfortable with R</li><li>Risk: Long-term maintainability if team shifts to Python-heavy</li></ul><p><strong>Option D: Multi-framework (case-by-case)</strong></p><ul><li>Pros: Flexibility, use best tool per job</li><li>Cons: Fragmentation persists, no consistency gains</li><li>Risk: Maintenance burden grows, onboarding harder</li></ul><p><strong>Decision:</strong> Chose Option C (R Shiny) because:</p><p>[FACTS from archaeology p.17-18:]</p><ol><li><strong>Team skills alignment:</strong> Data scientists already used R for analysis (reuse code directly in apps)</li><li><strong>Deployment simplicity:</strong> Posit Connect already in use (easy publishing)</li><li><strong>Rapid prototyping:</strong> Shiny allows quick UI iteration with reactive data</li><li><strong>Ecosystem maturity:</strong> Robust R packages (ggplot2, dplyr) for data visualization</li><li><strong>Proof-of-concept success:</strong> Built Nomination App as flagship example (validated approach)</li></ol><p>Tradeoff accepted: Some engineers less comfortable with R, but data team velocity more valuable.</p><p><strong>Constraints:</strong></p><ul><li>3-month timeline to show value (mid-2024 goal)</li><li>No dedicated UI/UX designer (needed framework with decent defaults)</li><li>Small Platform Eng capacity (deployment needed to be straightforward)</li></ul><h2 id=outcome>Outcome</h2><p><strong>Primary outcome:</strong></p><p>Cut app development time ~66% (3 weeks → 1 week for new apps) while establishing consistent UI/UX:</p><ul><li>Velocity: SAR Dashboard app built in 1 week using Shiny template (vs 3 weeks from scratch)</li><li>Consistency: All internal apps shared Montai Style components (auth, layout, branding)</li><li>Capability: Non-engineer (chemist) added filter to Shiny app after training (broadened contributor base)</li></ul><p>Standardization enabled a small team to punch above its weight. By converging on R Shiny, we transformed app development from bespoke engineering work into repeatable application of templates and patterns. The Montai Style library meant new apps inherited authentication, theming, and layout automatically — developers focused on domain logic, not infrastructure.</p><p><strong>Metrics:</strong></p><ul><li>App development time: 3 weeks → 1 week (anecdotal, for similar scope)</li><li>Framework adoption: 100% of new apps in Shiny by Q4 2024</li><li>Team contributions: Chemist contributed feature (skill development success)</li></ul><p><strong>Technical artifacts:</strong></p><ul><li>Nomination App (flagship proof-of-concept)</li><li>Montai Style repo (UI components library for Shiny)</li><li>Internal dev guidelines (Confluence: &ldquo;How to build a Shiny app&rdquo;)</li></ul><p><strong>Second-order effects:</strong></p><ul><li>Template for other internal tools (SAR Dashboard, compound selection)</li><li>Reusable patterns (authentication, data connections, theming)</li><li>Easier onboarding (new hires learned one framework, not three)</li></ul><p><strong>Limitations acknowledged:</strong></p><ul><li>Nomination App &ldquo;still in early stages&rdquo; by mid-2024 (incomplete proof-of-concept initially)</li><li>Some engineers less comfortable with R (required training investment)</li><li>Framework lock-in risk (if future needs exceed Shiny capabilities)</li></ul><h2 id=reflection>Reflection</h2><p><strong>What I&rsquo;d do differently:</strong></p><p>Three technical decision lessons stand out:</p><ul><li>Build 2-3 small apps as proof-of-concept (not one large incomplete app)</li><li>Pair with full-stack engineer earlier (balanced R expertise with UI polish)</li><li>Evaluate hybrid (Shiny prototype → React for scale) for future-proofing</li></ul><p>The Nomination App as flagship proof-of-concept was the right instinct but wrong execution — it remained &ldquo;in early stages&rdquo; too long, undermining confidence in the standardization decision. Building multiple small, complete examples would have demonstrated feasibility more convincingly. The other two are standard risk mitigations I should have applied upfront.</p><p><strong>What this taught me about decision-making:</strong></p><p>Framework standardization reinforced three architecture principles:</p><ul><li>Standardization is both social and technical — adoption matters more than theoretical &ldquo;best tool&rdquo;; R Shiny won because the data team already used R for analysis, not because it was objectively superior to Python frameworks</li><li>Proof-of-concept validates assumptions better than research — actual implementation exposed deployment constraints and UI limitations that documentation never revealed</li><li>Small team constraints favor simplicity over flexibility — supporting one framework well beats supporting many poorly; the tradeoff was clear and correct</li></ul><p><strong>How this informs future decisions:</strong></p><p>These tool selection principles now guide my technical architecture work:</p><ul><li>Always prototype with a real use case before mandating a standard — abstract evaluation misses practical constraints that only implementation reveals</li><li>Optimize for team strengths, not abstract &ldquo;best practices&rdquo; — the best framework is the one your team can actually use effectively</li><li>Standardization trades flexibility for velocity — know when that tradeoff is worth it (small teams yes, large platform teams maybe not)</li></ul><hr><p><strong>Factual Evidence Citations:</strong></p><ul><li>Project Inventory p.8 (Shiny framework entry)</li><li>Technical Architecture p.17-18 (decision rationale)</li><li>2024 Mid-Year Review (Shiny standardization goal)</li><li>Slack: Montai Style repo ready (Kyle T)</li></ul></div></div></article></div></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script src=https://platform.linkedin.com/badges/js/profile.js async defer type=text/javascript></script><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Standardizing Montai&#39;s App Ecosystem with R Shiny | Athan Dial - Portfolio</title>
+  <meta name="description" content="Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity">
+  <meta property="og:title" content="Standardizing Montai&#39;s App Ecosystem with R Shiny | Athan Dial - Portfolio">
+  <meta property="og:description" content="Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/">
+  <meta property="og:image" content="https://athan-dial.github.io/img/profile.jpg">
+  <meta name="author" content="Athan Dial, PhD">
+  <link rel="canonical" href="https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css" integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU=">
+  <meta name="generator" content="Hugo 0.154.3">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
+    <nav class="site-nav">
+      
+        <a href="/about/">About</a>
+      
+        <a href="/advisory/">Advisory</a>
+      
+        <a href="/agency/">The Agency</a>
+      
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
+        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
+        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+    
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">Standardizing Montai&#39;s App Ecosystem with R Shiny</h1>
+        <div class="case-study-header__meta">
+          <span class="case-study-card__tag">technical architecture</span>
+          <span class="case-study-card__tag">&middot; team</span>
+          <span class="case-study-card__tag">&middot; medium</span>
+        </div>
+        <p class="case-study-header__lead">Converged fragmented app development onto single framework, cutting development time 66% — balanced team skills with deployment simplicity to accelerate internal tool velocity</p>
+      </header>
+    </div>
+    <div class="case-study-body">
+      
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#ownership">Ownership</a></li>
+    <li><a href="#decision-frame">Decision Frame</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+      </aside>
+      
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        <h2 id="context">Context</h2>
+<p>By mid-2024, Montai&rsquo;s internal web app landscape had fragmented. Different engineers built tools in their preferred frameworks — Python Streamlit, Python Dash, R Shiny, Jupyter notebooks — creating a sprawling ecosystem with inconsistent UX and duplicated effort. For a small data team (~5-6 people), this fragmentation imposed hidden costs: context-switching overhead, maintenance burden, and harder onboarding.</p>
+<p><strong>Facts:</strong></p>
+<ul>
+<li>2024: Growing need for internal web apps (compound selection, data visualization, report generation)</li>
+<li>Problem: Different engineers using different frameworks (Python Streamlit/Dash, R Shiny, Jupyter notebooks)</li>
+<li>Pain: Inconsistent UX, duplicated effort, hard to maintain, context-switching cost</li>
+<li>Stakes: Small team (~5-6 people) needed velocity + consistency</li>
+</ul>
+<p>Technical leadership was needed to converge on a single approach. The challenge: balance team skills, deployment infrastructure, and use case requirements — while avoiding the trap of &ldquo;one size fits all&rdquo; dogma that ignores practical constraints.</p>
+<h2 id="ownership">Ownership</h2>
+<p>I owned:</p>
+<ul>
+<li>Framework evaluation (Streamlit vs Dash vs Shiny vs multi-framework)</li>
+<li>Proof-of-concept implementation (Nomination App in Shiny)</li>
+<li>Internal standards documentation (app dev guidelines)</li>
+<li>Team training (brown bag sessions on Shiny patterns)</li>
+</ul>
+<p>I influenced:</p>
+<ul>
+<li>Montai Style library (with Kyle T - UI components for Shiny)</li>
+<li>Posit Connect deployment strategy (with Platform Eng)</li>
+<li>Team skill development (mentored colleagues on Shiny)</li>
+</ul>
+<h2 id="decision-frame">Decision Frame</h2>
+<p><strong>Problem statement:</strong></p>
+<p>Choose and standardize a single internal app framework to accelerate development velocity and establish consistent UX, constrained by:</p>
+<ul>
+<li>Mixed team skills (some Python, some R, few full-stack engineers)</li>
+<li>Data-heavy use cases (need robust plotting + data wrangling)</li>
+<li>Small team (can&rsquo;t support multiple frameworks well)</li>
+</ul>
+<p><strong>Options considered:</strong></p>
+<p><strong>Option A: Streamlit (Python)</strong></p>
+<ul>
+<li>Pros: Quick to develop, popular, Python-based (most engineers know)</li>
+<li>Cons: Lacked flexibility for complex UI at the time, less mature</li>
+<li>Risk: Montai had significant R analytics codebase to leverage</li>
+</ul>
+<p><strong>Option B: Dash (Python/Plotly)</strong></p>
+<ul>
+<li>Pros: More customizable than Streamlit, production-ready</li>
+<li>Cons: More engineering-heavy, steeper learning curve</li>
+<li>Risk: Fewer team members comfortable with Plotly ecosystem</li>
+</ul>
+<p><strong>Option C: R Shiny</strong></p>
+<ul>
+<li>Pros: Powerful for data apps, integrates with R analytics, Posit Connect deployment, data team knows R</li>
+<li>Cons: Fewer pure software engineers comfortable with R</li>
+<li>Risk: Long-term maintainability if team shifts to Python-heavy</li>
+</ul>
+<p><strong>Option D: Multi-framework (case-by-case)</strong></p>
+<ul>
+<li>Pros: Flexibility, use best tool per job</li>
+<li>Cons: Fragmentation persists, no consistency gains</li>
+<li>Risk: Maintenance burden grows, onboarding harder</li>
+</ul>
+<p><strong>Decision:</strong> Chose Option C (R Shiny) because:</p>
+<p>[FACTS from archaeology p.17-18:]</p>
+<ol>
+<li><strong>Team skills alignment:</strong> Data scientists already used R for analysis (reuse code directly in apps)</li>
+<li><strong>Deployment simplicity:</strong> Posit Connect already in use (easy publishing)</li>
+<li><strong>Rapid prototyping:</strong> Shiny allows quick UI iteration with reactive data</li>
+<li><strong>Ecosystem maturity:</strong> Robust R packages (ggplot2, dplyr) for data visualization</li>
+<li><strong>Proof-of-concept success:</strong> Built Nomination App as flagship example (validated approach)</li>
+</ol>
+<p>Tradeoff accepted: Some engineers less comfortable with R, but data team velocity more valuable.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>3-month timeline to show value (mid-2024 goal)</li>
+<li>No dedicated UI/UX designer (needed framework with decent defaults)</li>
+<li>Small Platform Eng capacity (deployment needed to be straightforward)</li>
+</ul>
+<h2 id="outcome">Outcome</h2>
+<p><strong>Primary outcome:</strong></p>
+<p>Cut app development time ~66% (3 weeks → 1 week for new apps) while establishing consistent UI/UX:</p>
+<ul>
+<li>Velocity: SAR Dashboard app built in 1 week using Shiny template (vs 3 weeks from scratch)</li>
+<li>Consistency: All internal apps shared Montai Style components (auth, layout, branding)</li>
+<li>Capability: Non-engineer (chemist) added filter to Shiny app after training (broadened contributor base)</li>
+</ul>
+<p>Standardization enabled a small team to punch above its weight. By converging on R Shiny, we transformed app development from bespoke engineering work into repeatable application of templates and patterns. The Montai Style library meant new apps inherited authentication, theming, and layout automatically — developers focused on domain logic, not infrastructure.</p>
+<p><strong>Metrics:</strong></p>
+<ul>
+<li>App development time: 3 weeks → 1 week (anecdotal, for similar scope)</li>
+<li>Framework adoption: 100% of new apps in Shiny by Q4 2024</li>
+<li>Team contributions: Chemist contributed feature (skill development success)</li>
+</ul>
+<p><strong>Technical artifacts:</strong></p>
+<ul>
+<li>Nomination App (flagship proof-of-concept)</li>
+<li>Montai Style repo (UI components library for Shiny)</li>
+<li>Internal dev guidelines (Confluence: &ldquo;How to build a Shiny app&rdquo;)</li>
+</ul>
+<p><strong>Second-order effects:</strong></p>
+<ul>
+<li>Template for other internal tools (SAR Dashboard, compound selection)</li>
+<li>Reusable patterns (authentication, data connections, theming)</li>
+<li>Easier onboarding (new hires learned one framework, not three)</li>
+</ul>
+<p><strong>Limitations acknowledged:</strong></p>
+<ul>
+<li>Nomination App &ldquo;still in early stages&rdquo; by mid-2024 (incomplete proof-of-concept initially)</li>
+<li>Some engineers less comfortable with R (required training investment)</li>
+<li>Framework lock-in risk (if future needs exceed Shiny capabilities)</li>
+</ul>
+<h2 id="reflection">Reflection</h2>
+<p><strong>What I&rsquo;d do differently:</strong></p>
+<p>Three technical decision lessons stand out:</p>
+<ul>
+<li>Build 2-3 small apps as proof-of-concept (not one large incomplete app)</li>
+<li>Pair with full-stack engineer earlier (balanced R expertise with UI polish)</li>
+<li>Evaluate hybrid (Shiny prototype → React for scale) for future-proofing</li>
+</ul>
+<p>The Nomination App as flagship proof-of-concept was the right instinct but wrong execution — it remained &ldquo;in early stages&rdquo; too long, undermining confidence in the standardization decision. Building multiple small, complete examples would have demonstrated feasibility more convincingly. The other two are standard risk mitigations I should have applied upfront.</p>
+<p><strong>What this taught me about decision-making:</strong></p>
+<p>Framework standardization reinforced three architecture principles:</p>
+<ul>
+<li>Standardization is both social and technical — adoption matters more than theoretical &ldquo;best tool&rdquo;; R Shiny won because the data team already used R for analysis, not because it was objectively superior to Python frameworks</li>
+<li>Proof-of-concept validates assumptions better than research — actual implementation exposed deployment constraints and UI limitations that documentation never revealed</li>
+<li>Small team constraints favor simplicity over flexibility — supporting one framework well beats supporting many poorly; the tradeoff was clear and correct</li>
+</ul>
+<p><strong>How this informs future decisions:</strong></p>
+<p>These tool selection principles now guide my technical architecture work:</p>
+<ul>
+<li>Always prototype with a real use case before mandating a standard — abstract evaluation misses practical constraints that only implementation reveals</li>
+<li>Optimize for team strengths, not abstract &ldquo;best practices&rdquo; — the best framework is the one your team can actually use effectively</li>
+<li>Standardization trades flexibility for velocity — know when that tradeoff is worth it (small teams yes, large platform teams maybe not)</li>
+</ul>
+<hr>
+<p><strong>Factual Evidence Citations:</strong></p>
+<ul>
+<li>Project Inventory p.8 (Shiny framework entry)</li>
+<li>Technical Architecture p.17-18 (decision rationale)</li>
+<li>2024 Mid-Year Review (Shiny standardization goal)</li>
+<li>Slack: Montai Style repo ready (Kyle T)</li>
+</ul>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; 2026 Athan Dial, PhD &middot; Boston, MA</span>
+    <ul class="site-footer__links">
+      
+        <li><a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">LinkedIn</a></li>
+      
+        <li><a href="https://github.com/athan-dial" target="_blank" rel="noopener">GitHub</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

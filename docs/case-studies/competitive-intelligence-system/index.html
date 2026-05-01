@@ -1,8 +1,140 @@
-<!doctype html><html lang=en><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Competitive Intelligence Runs on Identity | Athan Dial - Portfolio</title><meta name=description content="Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker."><meta property="og:title" content="Competitive Intelligence Runs on Identity | Athan Dial - Portfolio"><meta property="og:description" content="Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker."><meta property="og:type" content="article"><meta property="og:url" content="http://localhost:1313/case-studies/competitive-intelligence-system/"><meta property="og:image" content="http://localhost:1313/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=http://localhost:1313/case-studies/competitive-intelligence-system/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/advisory/>Advisory</a>
-<a href=/agency/>The Agency</a>
-<button id=theme-toggle type=button aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed=false>
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><div class="container page-editorial page-editorial--case-study"><article class=case-study-article><div class=case-study-intro><a href=/case-studies/ class=case-study-back>&larr; All Case Studies</a><header class=case-study-header><h1 class=case-study-header__title>Competitive Intelligence Runs on Identity</h1><div class=case-study-header__meta><span class=case-study-card__tag>decision systems</span>
-<span class=case-study-card__tag>&#183; organization</span>
-<span class=case-study-card__tag>&#183; high</span></div><p class=case-study-header__lead>Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker.</p></header></div><div class=case-study-body><aside class=case-study-toc aria-label="On this page"><p class=case-study-toc__label>On this page</p><nav id=TableOfContents><ul><li><a href=#context>Context</a></li><li><a href=#ownership>Ownership</a></li><li><a href=#decision-frame>Decision Frame</a></li><li><a href=#outcome>Outcome</a></li><li><a href=#reflection>Reflection</a></li></ul></nav></aside><div class="prose prose--editorial prose--case-study case-study-body__prose"><h2 id=context>Context</h2><p>Leadership needed a live map of 15–20 competitor programs to steer pipeline bets, but the closest thing we had was a scientist eyeballing Excel diffs once a week. Shipping a competitive intelligence platform in three weeks meant proving that entity resolution—not visualization—was the blocker, and that the tradeoff becomes obvious instead of theoretical when we invested in canonical identities first.</p><p>The inherited workflow compared last week&rsquo;s spreadsheet to this week&rsquo;s and hoped nothing important changed names. &ldquo;Pfizer Inc.&rdquo;, &ldquo;Pfizer, Inc.&rdquo;, and &ldquo;Pfizer Global R&amp;D&rdquo; were different rows, clinical trials showed up twice with slightly different metadata, and once a diff was done the prior state disappeared forever. We needed to watch organizations, assets, and biological targets across AACT, ChEMBL, Open Targets, EFO, and ROR, but every source disagreed on identifiers.</p><hr><h2 id=ownership>Ownership</h2><p>I owned the architecture, entity resolution pipeline, evaluation tooling, and v5.0 product plan. I shaped the decision to prioritize data identity over UI, scoped four milestones (v4.0–v4.2 plus v5.0 PRD), delivered versioned releases on time, and built the curator feedback loop and documentation layer into the system from day one.</p><hr><h2 id=decision-frame>Decision Frame</h2><p>The decision in front of me was whether to bolt dashboards onto messy exports or spend the limited three-week window building a canonical catalog with resolution logic, even though the organization was hungry for UI. The core problem was not reporting; it was identity. Without canonical entities, every downstream insight would be suspect, and analysts would keep reconstructing context manually. I chose the harder path: build the data spine, then add views.</p><p>Everything ran inside a Django application for speed: familiar ORM, admin for curation, and tight integration across modules. The architecture had five modules. Auth plus dashboards handled access and a single-glance view of landscape health. The canonical entity catalog modeled organizations, assets, targets, trials, and indications with alias tables, provenance metadata, and structural fingerprints. The diff engine provided backward-compatible uploads so analysts could keep submitting spreadsheets while we migrated them to API-driven ingestion. The ingestion pipeline pulled from AACT (trials), ChEMBL (bioactivity), Open Targets (target-disease links), EFO (ontology), and ROR (organizations), normalizing schemas into the catalog. Finally, documentation lived inside the app—model definitions, API docs, onboarding guides—so new users onboarded without spelunking through Slack threads.</p><p>The centerpiece was the entity resolution pipeline. Organizations got a five-tier sponsor resolver anchored on AACT: deterministic ID matches, fuzzy string matching, ROR lookups, LLM-assisted disambiguation with rationale, and curator override. Targets used gene symbol normalization, ontology traversal, and alias clustering. Chemical assets combined structure-based fingerprints with synonym expansion. For each entity type I enforced two independent matching methods so no pipeline relied on a single heuristic. When confidence dropped below threshold, the system invoked a user-agent loop: three lightweight LLM prompts generated candidate rationales, curators confirmed the correct mapping, and the correction fed back into alias tables. That let us keep velocity while learning from edge cases. I trained curators with short playbooks that showed how to interpret the model&rsquo;s confidence score, when to escalate, and how to capture new aliases so the knowledge lives in a system or in someone&rsquo;s head.</p><p>I also built evaluation tooling alongside the pipeline. Every ingestion job emitted precision/recall approximations by sampling matched entities and comparing them against a curated golden set. Resolution metrics landed in the dashboard so we could see whether sponsor matches held steady across releases or whether a new ontology update degraded accuracy. That measurement layer is real, stable, and repeatable, and it kept us honest when we added new sources. To keep leadership close, I narrated progress relative to the watchlist: &ldquo;These 20 organizations now have canonical IDs, tracked across two therapeutic areas, updated nightly.&rdquo; Documentation and inline metrics showed ingestion freshness, match confidence, and curation backlog, so anyone could audit platform health without reading code.</p><p>The v5.0 PRD translated the developer-centric platform into an analyst-ready product plan: six phases, five release slices, nine feature groups, outlining how we&rsquo;d expose self-serve queries without compromising the identity layer. It also called out explicit tradeoffs, such as delaying advanced visualization in exchange for finishing assets-on-target resolution, so prioritization conversations were grounded in portfolio impact.</p><hr><h2 id=outcome>Outcome</h2><p>Versioned releases landed on time. v4.0 (CI Foundation) delivered the core data model, ingestion jobs, and catalog. v4.1 shipped inline documentation and API references so anyone could onboard without a call. v4.2 enabled landscape quality workflows: 58 of 67 scoped requirements completed, curation queues live, resolution metrics tracking accuracy over time, and human-in-the-loop reviews stitched into the admin UI.</p><p>The watchlist of ~15–20 organizations was now tracked automatically, with program-level dashboards showing asset counts, trial stages, and recent changes backed by canonical IDs. Analysts stopped diffing spreadsheets manually because the diff engine gave them backward-compatible uploads while teaching them the new system. The evaluation dashboards surfaced when ontology changes broke mappings, letting us fix them before stakeholders noticed.</p><p>The PRD for v5.0 meant we weren&rsquo;t guessing about the next quarter; we had a blueprint for taking the tool from developer sandbox to analyst self-serve, including KPIs for analyst response time and backlog burn-down. Most importantly, leadership could finally ask &ldquo;what did competitor X announce last week and how does it touch target Y?&rdquo; and get an answer grounded in reconciled data rather than anecdote. When procurement asked for a rapid briefing while I was offsite, the team pulled the canonical catalog, generated a briefing, and cited the resolution confidence scores without me in the room.</p><hr><h2 id=reflection>Reflection</h2><p>Competitive intelligence that ignores entity resolution is theater; the real leverage comes from solving identity first so every downstream insight actually refers to the same company, target, or molecule. The tradeoff of delaying UI to build data identity felt contentious in week one, but by week three it was obvious: the system could answer the leadership question correctly because we had reconciled the data. The human-in-the-loop feedback loop—curators annotating edge cases, corrections feeding back into alias tables—was essential to keep velocity and quality tight together. If I were doing this again, I&rsquo;d front-load the measurement layer even earlier so stakeholders see resolution accuracy improve week-over-week, which makes the &ldquo;boring&rdquo; identity work visible and valuable.</p></div></div></article></div></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script src=https://platform.linkedin.com/badges/js/profile.js async defer type=text/javascript></script><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Competitive Intelligence Runs on Identity | Athan Dial - Portfolio</title>
+  <meta name="description" content="Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker.">
+  <meta property="og:title" content="Competitive Intelligence Runs on Identity | Athan Dial - Portfolio">
+  <meta property="og:description" content="Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/case-studies/competitive-intelligence-system/">
+  <meta property="og:image" content="http://localhost:1313/img/profile.jpg">
+  <meta name="author" content="Athan Dial, PhD">
+  <link rel="canonical" href="http://localhost:1313/case-studies/competitive-intelligence-system/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css" integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU=">
+  <meta name="generator" content="Hugo 0.154.3">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
+    <nav class="site-nav">
+      
+        <a href="/about/">About</a>
+      
+        <a href="/advisory/">Advisory</a>
+      
+        <a href="/agency/">The Agency</a>
+      
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
+        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
+        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+    
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">Competitive Intelligence Runs on Identity</h1>
+        <div class="case-study-header__meta">
+          <span class="case-study-card__tag">decision systems</span>
+          <span class="case-study-card__tag">&middot; organization</span>
+          <span class="case-study-card__tag">&middot; high</span>
+        </div>
+        <p class="case-study-header__lead">Building a canonical entity resolution system as the foundation for competitive intelligence, proving that data identity—not visualization—was the blocker.</p>
+      </header>
+    </div>
+    <div class="case-study-body">
+      
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#ownership">Ownership</a></li>
+    <li><a href="#decision-frame">Decision Frame</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+      </aside>
+      
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        <h2 id="context">Context</h2>
+<p>Leadership needed a live map of 15–20 competitor programs to steer pipeline bets, but the closest thing we had was a scientist eyeballing Excel diffs once a week. Shipping a competitive intelligence platform in three weeks meant proving that entity resolution—not visualization—was the blocker, and that the tradeoff becomes obvious instead of theoretical when we invested in canonical identities first.</p>
+<p>The inherited workflow compared last week&rsquo;s spreadsheet to this week&rsquo;s and hoped nothing important changed names. &ldquo;Pfizer Inc.&rdquo;, &ldquo;Pfizer, Inc.&rdquo;, and &ldquo;Pfizer Global R&amp;D&rdquo; were different rows, clinical trials showed up twice with slightly different metadata, and once a diff was done the prior state disappeared forever. We needed to watch organizations, assets, and biological targets across AACT, ChEMBL, Open Targets, EFO, and ROR, but every source disagreed on identifiers.</p>
+<hr>
+<h2 id="ownership">Ownership</h2>
+<p>I owned the architecture, entity resolution pipeline, evaluation tooling, and v5.0 product plan. I shaped the decision to prioritize data identity over UI, scoped four milestones (v4.0–v4.2 plus v5.0 PRD), delivered versioned releases on time, and built the curator feedback loop and documentation layer into the system from day one.</p>
+<hr>
+<h2 id="decision-frame">Decision Frame</h2>
+<p>The decision in front of me was whether to bolt dashboards onto messy exports or spend the limited three-week window building a canonical catalog with resolution logic, even though the organization was hungry for UI. The core problem was not reporting; it was identity. Without canonical entities, every downstream insight would be suspect, and analysts would keep reconstructing context manually. I chose the harder path: build the data spine, then add views.</p>
+<p>Everything ran inside a Django application for speed: familiar ORM, admin for curation, and tight integration across modules. The architecture had five modules. Auth plus dashboards handled access and a single-glance view of landscape health. The canonical entity catalog modeled organizations, assets, targets, trials, and indications with alias tables, provenance metadata, and structural fingerprints. The diff engine provided backward-compatible uploads so analysts could keep submitting spreadsheets while we migrated them to API-driven ingestion. The ingestion pipeline pulled from AACT (trials), ChEMBL (bioactivity), Open Targets (target-disease links), EFO (ontology), and ROR (organizations), normalizing schemas into the catalog. Finally, documentation lived inside the app—model definitions, API docs, onboarding guides—so new users onboarded without spelunking through Slack threads.</p>
+<p>The centerpiece was the entity resolution pipeline. Organizations got a five-tier sponsor resolver anchored on AACT: deterministic ID matches, fuzzy string matching, ROR lookups, LLM-assisted disambiguation with rationale, and curator override. Targets used gene symbol normalization, ontology traversal, and alias clustering. Chemical assets combined structure-based fingerprints with synonym expansion. For each entity type I enforced two independent matching methods so no pipeline relied on a single heuristic. When confidence dropped below threshold, the system invoked a user-agent loop: three lightweight LLM prompts generated candidate rationales, curators confirmed the correct mapping, and the correction fed back into alias tables. That let us keep velocity while learning from edge cases. I trained curators with short playbooks that showed how to interpret the model&rsquo;s confidence score, when to escalate, and how to capture new aliases so the knowledge lives in a system or in someone&rsquo;s head.</p>
+<p>I also built evaluation tooling alongside the pipeline. Every ingestion job emitted precision/recall approximations by sampling matched entities and comparing them against a curated golden set. Resolution metrics landed in the dashboard so we could see whether sponsor matches held steady across releases or whether a new ontology update degraded accuracy. That measurement layer is real, stable, and repeatable, and it kept us honest when we added new sources. To keep leadership close, I narrated progress relative to the watchlist: &ldquo;These 20 organizations now have canonical IDs, tracked across two therapeutic areas, updated nightly.&rdquo; Documentation and inline metrics showed ingestion freshness, match confidence, and curation backlog, so anyone could audit platform health without reading code.</p>
+<p>The v5.0 PRD translated the developer-centric platform into an analyst-ready product plan: six phases, five release slices, nine feature groups, outlining how we&rsquo;d expose self-serve queries without compromising the identity layer. It also called out explicit tradeoffs, such as delaying advanced visualization in exchange for finishing assets-on-target resolution, so prioritization conversations were grounded in portfolio impact.</p>
+<hr>
+<h2 id="outcome">Outcome</h2>
+<p>Versioned releases landed on time. v4.0 (CI Foundation) delivered the core data model, ingestion jobs, and catalog. v4.1 shipped inline documentation and API references so anyone could onboard without a call. v4.2 enabled landscape quality workflows: 58 of 67 scoped requirements completed, curation queues live, resolution metrics tracking accuracy over time, and human-in-the-loop reviews stitched into the admin UI.</p>
+<p>The watchlist of ~15–20 organizations was now tracked automatically, with program-level dashboards showing asset counts, trial stages, and recent changes backed by canonical IDs. Analysts stopped diffing spreadsheets manually because the diff engine gave them backward-compatible uploads while teaching them the new system. The evaluation dashboards surfaced when ontology changes broke mappings, letting us fix them before stakeholders noticed.</p>
+<p>The PRD for v5.0 meant we weren&rsquo;t guessing about the next quarter; we had a blueprint for taking the tool from developer sandbox to analyst self-serve, including KPIs for analyst response time and backlog burn-down. Most importantly, leadership could finally ask &ldquo;what did competitor X announce last week and how does it touch target Y?&rdquo; and get an answer grounded in reconciled data rather than anecdote. When procurement asked for a rapid briefing while I was offsite, the team pulled the canonical catalog, generated a briefing, and cited the resolution confidence scores without me in the room.</p>
+<hr>
+<h2 id="reflection">Reflection</h2>
+<p>Competitive intelligence that ignores entity resolution is theater; the real leverage comes from solving identity first so every downstream insight actually refers to the same company, target, or molecule. The tradeoff of delaying UI to build data identity felt contentious in week one, but by week three it was obvious: the system could answer the leadership question correctly because we had reconciled the data. The human-in-the-loop feedback loop—curators annotating edge cases, corrections feeding back into alias tables—was essential to keep velocity and quality tight together. If I were doing this again, I&rsquo;d front-load the measurement layer even earlier so stakeholders see resolution accuracy improve week-over-week, which makes the &ldquo;boring&rdquo; identity work visible and valuable.</p>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; 2026 Athan Dial, PhD &middot; Boston, MA</span>
+    <ul class="site-footer__links">
+      
+        <li><a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">LinkedIn</a></li>
+      
+        <li><a href="https://github.com/athan-dial" target="_blank" rel="noopener">GitHub</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
