@@ -1,0 +1,21 @@
+{{/* LinkedIn post card — reuses .case-study-card styling */}}
+<article class="case-study-card">
+  <a href="{{ .url }}" class="case-study-card__link" target="_blank" rel="noopener">
+    <div>
+      {{ with .tag }}
+        <div class="case-study-card__category">{{ . }}</div>
+      {{ end }}
+      {{ with .excerpt }}
+        <h3 class="case-study-card__title">{{ . }}</h3>
+      {{ end }}
+    </div>
+    <div>
+      <div class="case-study-card__footer">
+        <div class="case-study-card__metadata">
+          {{ with .date }}<span class="case-study-card__tag">{{ dateFormat "Jan 2, 2006" . }}</span>{{ end }}
+        </div>
+        <span class="case-study-card__arrow">&rarr;</span>
+      </div>
+    </div>
+  </a>
+</article>

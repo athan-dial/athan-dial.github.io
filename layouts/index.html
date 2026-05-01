@@ -1,6 +1,8 @@
 {{ define "main" }}
-<section class="hero container">
-  <div class="hero__grid">
+<section class="hero hero--splash" aria-label="Introduction">
+  <div class="hero__backdrop" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__grid">
     <div class="hero__content">
       <div class="hero__badge">
         <span class="hero__badge-dot"></span>
@@ -9,36 +11,36 @@
       <h1 class="hero__name">{{ .Site.Params.firstName }} Dial,<br><span>PhD</span></h1>
       <div class="hero__intro">{{ .Content }}</div>
       <div class="hero__actions">
-        <a href="/case-studies/" class="btn-primary">Review Portfolio</a>
-        <a href="/resume.pdf" class="btn-secondary">Download Resume</a>
+        <a href="https://www.linkedin.com/in/athandial/" class="btn-primary" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <a href="/resume.pdf" class="btn-secondary" download="Athan-Dial-Resume.pdf">Download resume PDF</a>
       </div>
     </div>
     <div class="hero__portrait">
       <div class="hero__portrait-bg"></div>
       <div class="hero__portrait-frame">
-        <img src="/img/portrait.jpg" alt="Dr. Athan Dial" loading="eager">
+        <img src="/img/profile.jpg" alt="Portrait of Athan Dial" loading="eager" />
       </div>
+    </div>
     </div>
   </div>
 </section>
 
-{{ $caseStudies := where .Site.RegularPages "Section" "case-studies" }}
-{{ if $caseStudies }}
-<section class="section">
+{{ with .Site.Data.linkedin_posts }}
+{{ if .posts }}
+<section class="section section--home-work" aria-label="Recent LinkedIn posts">
   <div class="container">
-    <span class="section__label">02 // Select Work Artifacts</span>
-    <h2 class="section__heading">Decision Evidence</h2>
+    <span class="section__label">02 // From LinkedIn</span>
+    <h2 class="section__heading">Recent thinking</h2>
     <div class="case-studies-grid">
-      {{ range first 5 $caseStudies }}
-        {{ partial "case-study-card.html" . }}
+      {{ range first 6 .posts }}
+        {{ partial "linkedin-posts.html" . }}
       {{ end }}
     </div>
-    {{ if gt (len $caseStudies) 5 }}
     <div class="section-cta">
-      <a href="/case-studies/">View All Case Studies &rarr;</a>
+      <a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">Follow on LinkedIn &rarr;</a>
     </div>
-    {{ end }}
   </div>
 </section>
+{{ end }}
 {{ end }}
 {{ end }}
