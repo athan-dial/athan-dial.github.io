@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Competitive-Intelligence on Athan Dial - Portfolio</title><link>http://localhost:1313/tags/competitive-intelligence/</link><description>Recent content in Competitive-Intelligence on Athan Dial - Portfolio</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/competitive-intelligence/index.xml" rel="self" type="application/rss+xml"/><item><title>Competitive Intelligence Runs on Identity</title><link>http://localhost:1313/case-studies/competitive-intelligence-system/</link><pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate><guid>http://localhost:1313/case-studies/competitive-intelligence-system/</guid><description>&lt;h2 id="context"&gt;Context&lt;/h2&gt;
-&lt;p&gt;Leadership needed a live map of 15–20 competitor programs to steer pipeline bets, but the closest thing we had was a scientist eyeballing Excel diffs once a week. Shipping a competitive intelligence platform in three weeks meant proving that entity resolution—not visualization—was the blocker, and that the tradeoff becomes obvious instead of theoretical when we invested in canonical identities first.&lt;/p&gt;
-&lt;p&gt;The inherited workflow compared last week&amp;rsquo;s spreadsheet to this week&amp;rsquo;s and hoped nothing important changed names. &amp;ldquo;Pfizer Inc.&amp;rdquo;, &amp;ldquo;Pfizer, Inc.&amp;rdquo;, and &amp;ldquo;Pfizer Global R&amp;amp;D&amp;rdquo; were different rows, clinical trials showed up twice with slightly different metadata, and once a diff was done the prior state disappeared forever. We needed to watch organizations, assets, and biological targets across AACT, ChEMBL, Open Targets, EFO, and ROR, but every source disagreed on identifiers.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Competitive-Intelligence on Athan Dial - Portfolio</title>
+    <link>http://localhost:1313/tags/competitive-intelligence/</link>
+    <description>Recent content in Competitive-Intelligence on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/competitive-intelligence/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Competitive Intelligence Runs on Identity</title>
+      <link>http://localhost:1313/case-studies/competitive-intelligence-system/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/case-studies/competitive-intelligence-system/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Leadership needed a live map of 15–20 competitor programs to steer pipeline bets, but the closest thing we had was a scientist eyeballing Excel diffs once a week. Shipping a competitive intelligence platform in three weeks meant proving that entity resolution—not visualization—was the blocker, and that the tradeoff becomes obvious instead of theoretical when we invested in canonical identities first.&lt;/p&gt;&#xA;&lt;p&gt;The inherited workflow compared last week&amp;rsquo;s spreadsheet to this week&amp;rsquo;s and hoped nothing important changed names. &amp;ldquo;Pfizer Inc.&amp;rdquo;, &amp;ldquo;Pfizer, Inc.&amp;rdquo;, and &amp;ldquo;Pfizer Global R&amp;amp;D&amp;rdquo; were different rows, clinical trials showed up twice with slightly different metadata, and once a diff was done the prior state disappeared forever. We needed to watch organizations, assets, and biological targets across AACT, ChEMBL, Open Targets, EFO, and ROR, but every source disagreed on identifiers.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

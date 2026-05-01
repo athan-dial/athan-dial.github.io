@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Instrumentation on Athan Dial - Portfolio</title><link>http://localhost:1313/tags/instrumentation/</link><description>Recent content in Instrumentation on Athan Dial - Portfolio</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/instrumentation/index.xml" rel="self" type="application/rss+xml"/><item><title>Operating Discipline in Compound Nominations</title><link>http://localhost:1313/case-studies/nominations-decision-system/</link><pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate><guid>http://localhost:1313/case-studies/nominations-decision-system/</guid><description>&lt;h2 id="context"&gt;Context&lt;/h2&gt;
-&lt;p&gt;Each nomination wave locked $30K–$100K of procurement and months of wet-lab capacity. A sloppy compound picklist translated directly into sunk experimental runs with no way to learn from the outcome.&lt;/p&gt;
-&lt;p&gt;The company&amp;rsquo;s computational drug discovery group could produce ranked compound lists on demand, yet every screening cycle restarted from zero. Scientists ran their own filters, mixed vendor catalogs with local enumerations, and argued from memory because knowledge lived in a system or in someone&amp;rsquo;s head. Assay readouts landed six months later with no mechanism to attribute success or failure back to the initial decision. The consequence: we could not learn whether structural diversity constraints mattered, whether AI rankings were overfitting, or whether procurement dollars were allocated to the right exploration vs. exploitation balance.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Instrumentation on Athan Dial - Portfolio</title>
+    <link>http://localhost:1313/tags/instrumentation/</link>
+    <description>Recent content in Instrumentation on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/instrumentation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Operating Discipline in Compound Nominations</title>
+      <link>http://localhost:1313/case-studies/nominations-decision-system/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/case-studies/nominations-decision-system/</guid>
+      <description>&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;&#xA;&lt;p&gt;Each nomination wave locked $30K–$100K of procurement and months of wet-lab capacity. A sloppy compound picklist translated directly into sunk experimental runs with no way to learn from the outcome.&lt;/p&gt;&#xA;&lt;p&gt;The company&amp;rsquo;s computational drug discovery group could produce ranked compound lists on demand, yet every screening cycle restarted from zero. Scientists ran their own filters, mixed vendor catalogs with local enumerations, and argued from memory because knowledge lived in a system or in someone&amp;rsquo;s head. Assay readouts landed six months later with no mechanism to attribute success or failure back to the initial decision. The consequence: we could not learn whether structural diversity constraints mattered, whether AI rankings were overfitting, or whether procurement dollars were allocated to the right exploration vs. exploitation balance.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

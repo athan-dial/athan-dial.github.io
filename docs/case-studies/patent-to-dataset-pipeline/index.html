@@ -1,8 +1,153 @@
-<!doctype html><html lang=en><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Training Data as Product: Building a Reusable Dataset Pipeline | Athan Dial - Portfolio</title><meta name=description content="I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review."><meta property="og:title" content="Training Data as Product: Building a Reusable Dataset Pipeline | Athan Dial - Portfolio"><meta property="og:description" content="I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review."><meta property="og:type" content="article"><meta property="og:url" content="http://localhost:1313/case-studies/patent-to-dataset-pipeline/"><meta property="og:image" content="http://localhost:1313/img/profile.jpg"><meta name=author content="Athan Dial, PhD"><link rel=canonical href=http://localhost:1313/case-studies/patent-to-dataset-pipeline/><link rel=icon type=image/svg+xml href=/favicon.svg><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU="><meta name=generator content="Hugo 0.154.3"><script>(function(){var e=localStorage.getItem("theme");e==="dark"&&document.documentElement.classList.add("dark")})()</script></head><body><a href=#main-content class=skip-link>Skip to main content</a><header class=site-header><div class=site-header__inner><a href=/ class=site-header__name>ATHAN DIAL<span class=suffix>.PHD</span></a><nav class=site-nav><a href=/about/>About</a>
-<a href=/advisory/>Advisory</a>
-<a href=/agency/>The Agency</a>
-<button id=theme-toggle type=button aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed=false>
-<span class=light-icon aria-hidden=true>&#9728;&#xFE0F;</span>
-<span class=dark-icon aria-hidden=true>&#x1F319;</span></button></nav></div></header><main id=main-content><div class="container page-editorial page-editorial--case-study"><article class=case-study-article><div class=case-study-intro><a href=/case-studies/ class=case-study-back>&larr; All Case Studies</a><header class=case-study-header><h1 class=case-study-header__title>Training Data as Product: Building a Reusable Dataset Pipeline</h1><div class=case-study-header__meta><span class=case-study-card__tag>technical architecture</span>
-<span class=case-study-card__tag>&#183; team</span>
-<span class=case-study-card__tag>&#183; high</span></div><p class=case-study-header__lead>I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review.</p></header></div><div class=case-study-body><aside class=case-study-toc aria-label="On this page"><p class=case-study-toc__label>On this page</p><nav id=TableOfContents><ul><li><a href=#context>Context</a></li><li><a href=#ownership>Ownership</a></li><li><a href=#decision-frame>Decision Frame</a></li><li><a href=#outcome>Outcome</a></li><li><a href=#reflection>Reflection</a></li></ul></nav></aside><div class="prose prose--editorial prose--case-study case-study-body__prose"><h2 id=context>Context</h2><p>Our cyclic peptide program had the modeling stack in place, but lacked the training data to run it. The modeling team was standing by, but no applied AI training dataset existed for this therapeutic protein target. Public bioactivity coverage was sparse, and the obvious starting point—ChEMBL—didn&rsquo;t have sufficient relevant data.</p><p>The richest signal source was a published patent: dozens of pages of compound tables, activity annotations, and structural descriptions. Extracting that into usable training data meant making judgment calls that affect downstream behavior: what counts as a positive, what as a negative, how to represent structure, how to manage class imbalance, and how to preserve provenance so results survive scientific review during nomination.</p><p>The program moved from blocked on data to a repeatable loop where curation decisions were explicit, documented, and carried forward into downstream review.</p><hr><h2 id=ownership>Ownership</h2><p>I owned the full dataset design and delivery—schema definition, evidence extraction from the patent source, integration with the ingestion pipeline, and handoff to applied AI and experimental workflows. I coordinated with a platform engineer to get the table into the data lake cleanly, an ML engineer to ensure the schema matched featurization requirements, and a scientist to align on how model outputs would be reviewed in nomination. The curation work and selection logic were my responsibility; the downstream training and deployment sat with the applied AI team.</p><hr><h2 id=decision-frame>Decision Frame</h2><p>The constraint was direct: we had models and featurization pipelines but no labeled training table. Could I unblock the team with a quick-and-dirty extraction, or should I invest up front in a dataset designed for stable ingestion and reuse?</p><p>I chose to build for reuse. The tradeoff was deliberate: more time spent on schema, QA, and integration documentation so the output could be consumed repeatedly without re-litigating definitions every iteration. Knowledge lives in a system or in someone&rsquo;s head; I built the system.</p><p>I treated the dataset as a product with three simultaneous consumers: the featurization pipeline, the model training loop, and scientists reviewing downstream nominations. That meant each row needed a structure representation suitable for cyclic peptide featurization, a label suitable for supervised learning, and enough provenance to explain the label when a result was questioned.</p><p>I made two design choices explicit early because they drive downstream behavior:</p><ol><li><strong>Label definition as data contract</strong>: activity annotations from the patent needed to map cleanly into a positive class without embedding hidden assumptions in notebooks.</li><li><strong>Traceability back to source</strong>: the dataset would preserve provenance so scientific review could answer &ldquo;why is this labeled active?&rdquo; without reopening the extraction process.</li></ol><hr><h2 id=outcome>Outcome</h2><p>The final deliverable was a <strong>9,687-row CSV</strong> uploaded to the cloud data lake, integrated with the ingestion pipeline, and ready for model consumption. It contained:</p><ul><li>~10,000 cyclic peptides overall (9,687 rows in the delivered table)</li><li>~300 patent-derived positives with curated structural data and activity annotations</li><li>~7,300 database-derived negatives selected for structural relevance (from a public peptide database)</li><li><strong>Four task variants</strong> with different positive-to-negative ratios to give the applied AI team explicit control over balancing strategies during training</li></ul><p>The approach to positives and negatives was deliberate. Patent positives were normalized into one consistent representation so the model saw one definition of &ldquo;active&rdquo; rather than dozens of table-specific conventions. Negatives were chosen for chemical relevance—cyclic peptides from a public peptide database kept the inactive class close enough to the positive class to be informative, rather than teaching the model to separate peptides from everything else. The tradeoff was explicit: &ldquo;no reported activity&rdquo; is not the same as &ldquo;proven inactive,&rdquo; and that became obvious instead of theoretical when looking at model behavior under different class balances.</p><p>Instead of shipping one dataset and hoping training code compensated for imbalance, I created four task variants as controlled views over the same underlying rows. That kept review simple: one evidence base, multiple training configurations, making failure modes visible early (e.g., if a model predicts &ldquo;inactive&rdquo; every time, it should not pass evaluation just because the dataset is skewed).</p><p>The dataset directly fed the program&rsquo;s nomination workflow—model outputs were evaluated by scientists and advanced into experimental workflows. It reduced coordination overhead: engineers and scientists could use the same table as a shared reference point instead of reconstructing assumptions in each training run. When the team wanted to adjust training setup—different class balance, different featurization choices, different evaluation cuts—they could do it against a stable dataset already integrated into the ingestion pipeline.</p><hr><h2 id=reflection>Reflection</h2><p>In applied AI for drug discovery, the durable leverage is building the training dataset as a product: schema, provenance, and imbalance controls that make training and review repeatable.</p><p>The key insight was treating data curation as infrastructure, not a preprocessing step. Once the dataset was in the data lake and ingestion pipeline, the team could retrain, re-featurize, and rerun nomination cycles without redoing the curation work. The four task variants made imbalance tradeoffs explicit and measurable rather than hidden in training code or optimization heuristics.</p><p>The explicit traceability back to source material—distinguishing patent positives from database negatives with clarity in the schema—ensured results stayed interpretable when they reached scientists. That&rsquo;s the difference between a dataset and a dataset that survives review.</p></div></div></article></div></main><footer class=site-footer><div class=site-footer__inner><span class=site-footer__copy>&copy; 2026 Athan Dial, PhD &#183; Boston, MA</span><ul class=site-footer__links><li><a href=https://www.linkedin.com/in/athandial/ target=_blank rel=noopener>LinkedIn</a></li><li><a href=https://github.com/athan-dial target=_blank rel=noopener>GitHub</a></li></ul></div></footer><script src=https://platform.linkedin.com/badges/js/profile.js async defer type=text/javascript></script><script>document.getElementById("theme-toggle").addEventListener("click",function(){var e=document.documentElement,t=e.classList.toggle("dark");localStorage.setItem("theme",t?"dark":"light")})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training Data as Product: Building a Reusable Dataset Pipeline | Athan Dial - Portfolio</title>
+  <meta name="description" content="I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review.">
+  <meta property="og:title" content="Training Data as Product: Building a Reusable Dataset Pipeline | Athan Dial - Portfolio">
+  <meta property="og:description" content="I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://localhost:1313/case-studies/patent-to-dataset-pipeline/">
+  <meta property="og:image" content="http://localhost:1313/img/profile.jpg">
+  <meta name="author" content="Athan Dial, PhD">
+  <link rel="canonical" href="http://localhost:1313/case-studies/patent-to-dataset-pipeline/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.min.08d4f8a97b2c02fae38bfa875787bf32a42edd8368f38b7a2d832bb2c8df2df5.css" integrity="sha256-CNT4qXssAvrji/qHV4e/MqQu3YNo84t6LYMrssjfLfU=">
+  <meta name="generator" content="Hugo 0.154.3">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
+    <nav class="site-nav">
+      
+        <a href="/about/">About</a>
+      
+        <a href="/advisory/">Advisory</a>
+      
+        <a href="/agency/">The Agency</a>
+      
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
+        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
+        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+    
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">Training Data as Product: Building a Reusable Dataset Pipeline</h1>
+        <div class="case-study-header__meta">
+          <span class="case-study-card__tag">technical architecture</span>
+          <span class="case-study-card__tag">&middot; team</span>
+          <span class="case-study-card__tag">&middot; high</span>
+        </div>
+        <p class="case-study-header__lead">I built a 10,000-compound training dataset from patent and public database sources, designing it for stable ingestion, repeatable consumption, and defensible review.</p>
+      </header>
+    </div>
+    <div class="case-study-body">
+      
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#ownership">Ownership</a></li>
+    <li><a href="#decision-frame">Decision Frame</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+      </aside>
+      
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        <h2 id="context">Context</h2>
+<p>Our cyclic peptide program had the modeling stack in place, but lacked the training data to run it. The modeling team was standing by, but no applied AI training dataset existed for this therapeutic protein target. Public bioactivity coverage was sparse, and the obvious starting point—ChEMBL—didn&rsquo;t have sufficient relevant data.</p>
+<p>The richest signal source was a published patent: dozens of pages of compound tables, activity annotations, and structural descriptions. Extracting that into usable training data meant making judgment calls that affect downstream behavior: what counts as a positive, what as a negative, how to represent structure, how to manage class imbalance, and how to preserve provenance so results survive scientific review during nomination.</p>
+<p>The program moved from blocked on data to a repeatable loop where curation decisions were explicit, documented, and carried forward into downstream review.</p>
+<hr>
+<h2 id="ownership">Ownership</h2>
+<p>I owned the full dataset design and delivery—schema definition, evidence extraction from the patent source, integration with the ingestion pipeline, and handoff to applied AI and experimental workflows. I coordinated with a platform engineer to get the table into the data lake cleanly, an ML engineer to ensure the schema matched featurization requirements, and a scientist to align on how model outputs would be reviewed in nomination. The curation work and selection logic were my responsibility; the downstream training and deployment sat with the applied AI team.</p>
+<hr>
+<h2 id="decision-frame">Decision Frame</h2>
+<p>The constraint was direct: we had models and featurization pipelines but no labeled training table. Could I unblock the team with a quick-and-dirty extraction, or should I invest up front in a dataset designed for stable ingestion and reuse?</p>
+<p>I chose to build for reuse. The tradeoff was deliberate: more time spent on schema, QA, and integration documentation so the output could be consumed repeatedly without re-litigating definitions every iteration. Knowledge lives in a system or in someone&rsquo;s head; I built the system.</p>
+<p>I treated the dataset as a product with three simultaneous consumers: the featurization pipeline, the model training loop, and scientists reviewing downstream nominations. That meant each row needed a structure representation suitable for cyclic peptide featurization, a label suitable for supervised learning, and enough provenance to explain the label when a result was questioned.</p>
+<p>I made two design choices explicit early because they drive downstream behavior:</p>
+<ol>
+<li><strong>Label definition as data contract</strong>: activity annotations from the patent needed to map cleanly into a positive class without embedding hidden assumptions in notebooks.</li>
+<li><strong>Traceability back to source</strong>: the dataset would preserve provenance so scientific review could answer &ldquo;why is this labeled active?&rdquo; without reopening the extraction process.</li>
+</ol>
+<hr>
+<h2 id="outcome">Outcome</h2>
+<p>The final deliverable was a <strong>9,687-row CSV</strong> uploaded to the cloud data lake, integrated with the ingestion pipeline, and ready for model consumption. It contained:</p>
+<ul>
+<li>~10,000 cyclic peptides overall (9,687 rows in the delivered table)</li>
+<li>~300 patent-derived positives with curated structural data and activity annotations</li>
+<li>~7,300 database-derived negatives selected for structural relevance (from a public peptide database)</li>
+<li><strong>Four task variants</strong> with different positive-to-negative ratios to give the applied AI team explicit control over balancing strategies during training</li>
+</ul>
+<p>The approach to positives and negatives was deliberate. Patent positives were normalized into one consistent representation so the model saw one definition of &ldquo;active&rdquo; rather than dozens of table-specific conventions. Negatives were chosen for chemical relevance—cyclic peptides from a public peptide database kept the inactive class close enough to the positive class to be informative, rather than teaching the model to separate peptides from everything else. The tradeoff was explicit: &ldquo;no reported activity&rdquo; is not the same as &ldquo;proven inactive,&rdquo; and that became obvious instead of theoretical when looking at model behavior under different class balances.</p>
+<p>Instead of shipping one dataset and hoping training code compensated for imbalance, I created four task variants as controlled views over the same underlying rows. That kept review simple: one evidence base, multiple training configurations, making failure modes visible early (e.g., if a model predicts &ldquo;inactive&rdquo; every time, it should not pass evaluation just because the dataset is skewed).</p>
+<p>The dataset directly fed the program&rsquo;s nomination workflow—model outputs were evaluated by scientists and advanced into experimental workflows. It reduced coordination overhead: engineers and scientists could use the same table as a shared reference point instead of reconstructing assumptions in each training run. When the team wanted to adjust training setup—different class balance, different featurization choices, different evaluation cuts—they could do it against a stable dataset already integrated into the ingestion pipeline.</p>
+<hr>
+<h2 id="reflection">Reflection</h2>
+<p>In applied AI for drug discovery, the durable leverage is building the training dataset as a product: schema, provenance, and imbalance controls that make training and review repeatable.</p>
+<p>The key insight was treating data curation as infrastructure, not a preprocessing step. Once the dataset was in the data lake and ingestion pipeline, the team could retrain, re-featurize, and rerun nomination cycles without redoing the curation work. The four task variants made imbalance tradeoffs explicit and measurable rather than hidden in training code or optimization heuristics.</p>
+<p>The explicit traceability back to source material—distinguishing patent positives from database negatives with clarity in the schema—ensured results stayed interpretable when they reached scientists. That&rsquo;s the difference between a dataset and a dataset that survives review.</p>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">&copy; 2026 Athan Dial, PhD &middot; Boston, MA</span>
+    <ul class="site-footer__links">
+      
+        <li><a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">LinkedIn</a></li>
+      
+        <li><a href="https://github.com/athan-dial" target="_blank" rel="noopener">GitHub</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      var html = document.documentElement;
+      var isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
