@@ -5,7 +5,7 @@
       {{ range .Site.Menus.main }}
         <a href="{{ .URL }}">{{ .Name }}</a>
       {{ end }}
-      <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
         <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
         <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
       </button>

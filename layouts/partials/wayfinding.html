@@ -1,0 +1,32 @@
+{{- /* Wayfinding — editorial numbered list pointing to other site sections.
+       Skips whichever destination matches the current page (no self-link).
+       Caller passes:  (dict "page" .  "rail" "04 // Keep going")          */ -}}
+{{- $rail := "03 // Keep going" -}}
+{{- with .rail }}{{ $rail = . }}{{ end -}}
+{{- $current := "" -}}
+{{- with .page }}{{ $current = .RelPermalink }}{{ end -}}
+{{- $items := slice
+  (dict "num" "01" "url" "/about/"    "title" "About"      "desc" "How I got here, and what I bring to the work.")
+  (dict "num" "02" "url" "/advisory/" "title" "Advisory"   "desc" "Talks, panels, and peer conversations on decision systems and applied AI.")
+  (dict "num" "03" "url" "/agency/"   "title" "The Agency" "desc" "Field notes from running Claude Code and applied AI in real work.")
+-}}
+<section class="section section--home-explore" aria-label="More from this site">
+  <div class="container">
+    <span class="section__label">{{ $rail }}</span>
+    <h2 class="section__heading">Where to next</h2>
+    <nav class="explore-list" aria-label="Site sections">
+      {{- range $items }}
+      {{- if ne .url $current }}
+      <a class="explore-item" href="{{ .url }}">
+        <span class="explore-item__num" aria-hidden="true">{{ .num }}</span>
+        <span class="explore-item__body">
+          <span class="explore-item__title">{{ .title }}</span>
+          <span class="explore-item__desc">{{ .desc }}</span>
+        </span>
+        <span class="explore-item__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      {{- end }}
+      {{- end }}
+    </nav>
+  </div>
+</section>

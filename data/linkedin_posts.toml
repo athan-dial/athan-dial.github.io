@@ -1,21 +1,41 @@
-# Curated LinkedIn posts shown on the homepage.
-# Add a [[posts]] block for each post you want to feature.
-# Order here = order on the page. Newest first is recommended.
+# Featured LinkedIn posts. Two render modes:
+#   - id only        → renders LinkedIn's official embed iframe (live likes/comments)
+#   - text present   → renders a Harbor-styled native card with the post text
+#
+# Use the iframe form when the post is public + share-type. Use the native
+# card form when the post requires login (ugcPost) or you want full control.
 
 [[posts]]
-url = "https://www.linkedin.com/in/athandial/"
-date = "2026-04-15"
-tag = "Drug discovery"
-excerpt = "Replace this placeholder with the first ~200 characters of the post you want to feature. The card links out to the full post on LinkedIn."
+id = "7455976119599775746"
+slug = "appliedai-technicalleadership-aiadoption"
 
 [[posts]]
-url = "https://www.linkedin.com/in/athandial/"
-date = "2026-03-28"
-tag = "Decision systems"
-excerpt = "Second placeholder excerpt. Keep these short — one or two sentences that earn the click."
+id = "7450570272941879297"
+slug = "technicalleadership-appliedai-hiring"
 
 [[posts]]
-url = "https://www.linkedin.com/in/athandial/"
-date = "2026-03-10"
-tag = "Data science"
-excerpt = "Third placeholder excerpt. Swap the url, date, tag, and excerpt with the real post details."
+id = "7447774093472546816"
+slug = "four-years-ago-i-joined-montai-therapeutics"
+date = "2026-04-08"
+title = "A new chapter at Montai"
+text = """
+Four years ago I joined Montai Therapeutics as a data scientist. Today, I'm stepping into a new role as Associate Director of Data Science & Product Management.
+
+Over the last four years I built decision-support platforms, data warehouses, executive dashboards, and predictive tooling. That work taught me something: the hardest problems weren't analytical — they were about how decisions actually get made across an organization. I've always thought of what we build at Montai as a product, and as AI accelerates what's possible, I'm focused on how each person's contributions compound into something bigger than any one tool or team.
+
+The models are table stakes. What compounds is the operating layer: the workflows, the human-in-the-loop design, the institutional knowledge that can live in a system instead of someone's head. That's where I've been excited to spend my time.
+
+A big part of what's ahead is applied AI — rolling out LLM and AI systems; not just for development, but for helping our people find leverage in how they think, build, and decide. This space evolves at a pace that makes short-term execution the only honest strategy — and I find that energizing, not because we deployed the tools, but because of what they unlock when the whole org starts thinking differently.
+
+I'm grateful to the people who made this past chapter what it was — Hendrik (Jake) Ombach for always asking the right questions and delivering relentlessly, Reed Crocker for making everything we ship robust and reproducible, and William Hayes Ph.D. for keeping our small-but-mighty data team prepped and proactively tackling the business' biggest issues. Finally, I'm grateful to Montai Therapeutics for being the kind of place that's genuinely at the cutting edge of applying these technologies in a scientific environment. Not every org gives you the room to figure this space out — and apply it — in real time.
+
+Bring on the next chapter.
+"""
+
+[[posts]]
+id = "7444845745058258944"
+slug = "decisionintelligence-drugdiscovery-dataanalytics"
+
+[[posts]]
+id = "7441829944076238848"
+slug = "datascience-decisionintelligence-productmanagement"

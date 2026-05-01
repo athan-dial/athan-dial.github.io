@@ -1,65 +1,28 @@
 ---
-title: "Advisory & Thought Partnership"
+title: "Talks & Conversations"
 date: 2026-01-20
-description: "Conversations about decision systems, evaluation frameworks, and analytics strategy"
-aliases: ["/consulting"]
+description: "Where I show up to share ideas about decision systems, evaluation, and applied AI in scientific organizations."
+aliases: ["/consulting", "/advisory"]
 ---
 
-# Let's Talk
+I write and speak about decision systems, evaluation under uncertainty, and how scientific organizations actually adopt AI — beyond the demo, into the operating layer.
 
-I occasionally advise teams working on decision systems, evaluation frameworks, and analytics strategy. I enjoy conversations about turning ambiguous, high-stakes problems into decision frameworks that teams can actually use.
-
-My background: research-grade evaluation rigor (PhD in multi-omics analysis) + product judgment (drug discovery ML). I design frameworks from first principles, not templates.
-
----
-
-## Topics I Think About
-
-### Designing Decision Frameworks
-- How to structure decision contexts for ambiguous problems
-- Building north star + guardrails that actually guide prioritization
-- Stakeholder alignment when definitions of "good" conflict
-
-### Evaluation Systems for ML & Data Products
-- Offline validation + online monitoring architectures
-- Preventing "metric theater" in model evaluation
-- What counts as evidence when ground truth is delayed or absent
-
-### Analytics Strategy & Capability Building
-- Moving from ad-hoc analyses to repeatable decision systems
-- Aligning analytics with business OKRs
-- Building analytics functions that accelerate decision velocity
-
-### Technical Architecture for Data Systems
-- Tradeoff analysis for build vs. buy decisions
-- Data pipeline optimization for cost, latency, reliability
-- Monitoring and observability for production systems
+Most of my time goes into the day job. The rest I spend trading notes with peers in data science, product, and research leadership who are working through similar problems.
 
 ---
 
-## How I Approach These Conversations
+## What I'm thinking about
 
-I focus on understanding your decision context first—what's uncertain, what's constrained, what counts as "good enough." Then I work through options analysis and tradeoff documentation to make decisions defensible to stakeholders.
+These are the conversations I don't get tired of:
 
-I don't deliver generic best practices. Every framework is designed from first principles for your specific constraints.
+- **Evaluation when ground truth is delayed, partial, or contested.** What counts as evidence, and what's metric theater dressed up as rigor.
+- **Decision-support tooling that scientists actually use.** Instead of bypass with a side of resentment.
+- **Applied AI inside scientific organizations.** The models are the easy part — the operating layer is where it lives or dies.
+- **The translation layer.** Research rigor on one side, product judgment on the other, and the people in between trying to ship.
 
----
+If your team is working through any of these and would benefit from an outside perspective — for a talk, a panel, a guest session, or a longer conversation — drop a note.
 
-## Examples of My Thinking
-
-Want to see how I approach decision systems? Read my case studies:
-
-- [Preventing Metric Theater in Drug Discovery ML](/case-studies/preventing-metric-theater-drug-discovery-ml/)
-- [Reducing Pipeline Latency to Accelerate Decision Velocity](/case-studies/reducing-pipeline-latency-decision-velocity/)
-
----
-
-## Let's Connect
-
-Interested in a conversation? Book a time below.
-
-<div style="text-align: center; margin-top: 2rem;">
-  <a href="https://calendar.app.google/Skaryd6X15GjQEcG7" target="_blank" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: background-color 0.2s;">
-    📅 Schedule a Chat
-  </a>
+<div class="cta-row">
+  <a href="mailto:athandial@gmail.com" class="btn-secondary">Send me a note</a>
+  <a href="https://www.linkedin.com/in/athandial/" class="btn-secondary" target="_blank" rel="noopener">Connect on LinkedIn</a>
 </div>
