@@ -6,7 +6,7 @@
     <div class="hero__content">
       <div class="hero__badge">
         <span class="hero__badge-dot"></span>
-        <span class="hero__badge-text">Executive Leadership — Data Science</span>
+        <span class="hero__badge-text">Data Science · Product · Applied AI</span>
       </div>
       <h1 class="hero__name">{{ .Site.Params.firstName }} Dial,<br><span>PhD</span></h1>
       <div class="hero__intro">{{ .Content }}</div>
@@ -31,16 +31,18 @@
   <div class="container">
     <span class="section__label">02 // From LinkedIn</span>
     <h2 class="section__heading">Recent thinking</h2>
-    <div class="case-studies-grid">
-      {{ range first 6 .posts }}
+    <div class="linkedin-grid">
+      {{ range first 3 .posts }}
         {{ partial "linkedin-posts.html" . }}
       {{ end }}
     </div>
     <div class="section-cta">
-      <a href="https://www.linkedin.com/in/athandial/" target="_blank" rel="noopener">Follow on LinkedIn &rarr;</a>
+      <a href="https://www.linkedin.com/in/athandial/recent-activity/all/" target="_blank" rel="noopener">See more on LinkedIn &rarr;</a>
     </div>
   </div>
 </section>
 {{ end }}
 {{ end }}
+
+{{ partial "wayfinding.html" (dict "page" . "rail" "03 // Keep going") }}
 {{ end }}

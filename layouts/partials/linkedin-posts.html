@@ -1,21 +1,48 @@
-{{/* LinkedIn post card — reuses .case-study-card styling */}}
-<article class="case-study-card">
-  <a href="{{ .url }}" class="case-study-card__link" target="_blank" rel="noopener">
-    <div>
-      {{ with .tag }}
-        <div class="case-study-card__category">{{ . }}</div>
-      {{ end }}
-      {{ with .excerpt }}
-        <h3 class="case-study-card__title">{{ . }}</h3>
-      {{ end }}
-    </div>
-    <div>
-      <div class="case-study-card__footer">
-        <div class="case-study-card__metadata">
-          {{ with .date }}<span class="case-study-card__tag">{{ dateFormat "Jan 2, 2006" . }}</span>{{ end }}
+{{/* Two render modes:
+       - .text present  → Harbor-styled native card
+       - else           → LinkedIn official embed iframe                    */}}
+{{ if .text }}
+<article class="linkedin-embed linkedin-embed--native">
+  <div class="linkedin-embed__frame">
+    <div class="linkedin-native">
+      {{ with .date }}
+        <div class="linkedin-native__meta">
+          <span class="linkedin-native__source">LinkedIn</span>
+          <span class="linkedin-native__dot" aria-hidden="true">&middot;</span>
+          <time datetime="{{ . }}">{{ dateFormat "Jan 2, 2006" . }}</time>
         </div>
-        <span class="case-study-card__arrow">&rarr;</span>
+      {{ end }}
+      {{ with .title }}<h3 class="linkedin-native__title">{{ . }}</h3>{{ end }}
+      <div class="linkedin-native__body">
+        {{ range (split (trim .text "\n") "\n\n") }}
+          <p>{{ . | safeHTML }}</p>
+        {{ end }}
       </div>
     </div>
+    <div class="linkedin-embed__fade" aria-hidden="true"></div>
+  </div>
+  <a class="linkedin-embed__cta"
+     href="https://www.linkedin.com/feed/update/urn:li:activity:{{ .id }}/"
+     target="_blank" rel="noopener">
+    Read full post on LinkedIn <span aria-hidden="true">&rarr;</span>
   </a>
 </article>
+{{ else }}
+<article class="linkedin-embed">
+  <div class="linkedin-embed__frame">
+    <iframe
+      src="https://www.linkedin.com/embed/feed/update/urn:li:{{ default "share" .type }}:{{ .id }}"
+      width="100%"
+      frameborder="0"
+      allowfullscreen=""
+      loading="lazy"
+      title="LinkedIn post {{ .id }}"></iframe>
+    <div class="linkedin-embed__fade" aria-hidden="true"></div>
+  </div>
+  <a class="linkedin-embed__cta"
+     href="https://www.linkedin.com/feed/update/urn:li:activity:{{ .id }}/"
+     target="_blank" rel="noopener">
+    Read full post on LinkedIn <span aria-hidden="true">&rarr;</span>
+  </a>
+</article>
+{{ end }}

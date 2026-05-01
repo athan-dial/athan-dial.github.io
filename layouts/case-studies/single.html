@@ -1,18 +1,28 @@
 {{ define "main" }}
-<div class="container">
-  <article>
-    <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
-    <header class="case-study-header">
-      <h1 class="case-study-header__title">{{ .Title }}</h1>
-      <div class="case-study-header__meta">
-        {{ with .Params.problem_type }}<span class="case-study-card__tag">{{ replace . "-" " " }}</span>{{ end }}
-        {{ with .Params.scope }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
-        {{ with .Params.complexity }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
+<div class="container page-editorial page-editorial--case-study">
+  <article class="case-study-article">
+    <div class="case-study-intro">
+      <a href="/case-studies/" class="case-study-back">&larr; All Case Studies</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">{{ .Title }}</h1>
+        <div class="case-study-header__meta">
+          {{ with .Params.problem_type }}<span class="case-study-card__tag">{{ replace . "-" " " }}</span>{{ end }}
+          {{ with .Params.scope }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
+          {{ with .Params.complexity }}<span class="case-study-card__tag">&middot; {{ . }}</span>{{ end }}
+        </div>
+        {{ with .Description }}<p class="case-study-header__lead">{{ . }}</p>{{ end }}
+      </header>
+    </div>
+    <div class="case-study-body">
+      {{ with .TableOfContents }}
+      <aside class="case-study-toc" aria-label="On this page">
+        <p class="case-study-toc__label">On this page</p>
+        {{ . }}
+      </aside>
+      {{ end }}
+      <div class="prose prose--editorial prose--case-study case-study-body__prose">
+        {{ .Content }}
       </div>
-      {{ with .Description }}<p>{{ . }}</p>{{ end }}
-    </header>
-    <div class="prose">
-      {{ .Content }}
     </div>
   </article>
 </div>
