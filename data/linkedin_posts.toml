@@ -1,0 +1,21 @@
+# Curated LinkedIn posts shown on the homepage.
+# Add a [[posts]] block for each post you want to feature.
+# Order here = order on the page. Newest first is recommended.
+
+[[posts]]
+url = "https://www.linkedin.com/in/athandial/"
+date = "2026-04-15"
+tag = "Drug discovery"
+excerpt = "Replace this placeholder with the first ~200 characters of the post you want to feature. The card links out to the full post on LinkedIn."
+
+[[posts]]
+url = "https://www.linkedin.com/in/athandial/"
+date = "2026-03-28"
+tag = "Decision systems"
+excerpt = "Second placeholder excerpt. Keep these short — one or two sentences that earn the click."
+
+[[posts]]
+url = "https://www.linkedin.com/in/athandial/"
+date = "2026-03-10"
+tag = "Data science"
+excerpt = "Third placeholder excerpt. Swap the url, date, tag, and excerpt with the real post details."

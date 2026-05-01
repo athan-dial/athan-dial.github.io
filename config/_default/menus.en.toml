@@ -1,17 +1,22 @@
-# -- Main Menu --
-# Blowfish theme navigation
+# Primary site navigation (Harbor layouts)
 
 [[main]]
   name = "About"
   url = "/about/"
   weight = 1
 
-[[main]]
-  name = "Case Studies"
-  url = "/case-studies/"
-  weight = 2
+# Case Studies hidden until Deep Research content lands
+# [[main]]
+#   name = "Case Studies"
+#   url = "/case-studies/"
+#   weight = 2
 
 [[main]]
   name = "Advisory"
   url = "/advisory/"
   weight = 3
+
+[[main]]
+  name = "The Agency"
+  url = "/agency/"
+  weight = 4
