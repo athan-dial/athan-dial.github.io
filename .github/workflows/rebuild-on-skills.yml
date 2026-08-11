@@ -1,3 +1,13 @@
+# Triggered when athan-dial/skills publishes new plugin-site releases.
+#
+# UNDER THE OLD MODEL this workflow rebuilt the site and committed the regenerated docs/ tree
+# back to gh-pages. Under the main + Actions model there is no committed output: this workflow
+# simply re-runs the deploy pipeline against main, which fetches the fresh plugin subsites as
+# part of its own build.
+#
+# Kept as a separate workflow (rather than adding repository_dispatch to deploy.yml) so the
+# skills-update trigger stays visible and independently runnable in the Actions tab.
+
 name: Rebuild on skills update
 
 on:
@@ -6,44 +16,24 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  actions: write
+  contents: read
 
 jobs:
-  rebuild:
+  trigger-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.154.3"
-          extended: true
-
-      - name: Setup gh auth
-        run: echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-
-      - name: Fetch skills
-        run: bash scripts/fetch-skills.sh
-
-      - name: Build site
-        run: hugo --gc --minify
-
-      - name: Sanity check plugin sites
+      - name: Trigger the Pages deploy workflow against main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Slotted plugin sites:"
-          find docs/skills -maxdepth 2 -name index.html -not -path '*/docs/*' | sort
+          set -euo pipefail
+          echo "Skills update received — dispatching Deploy to Pages on main."
+          gh workflow run deploy.yml --ref main --repo "$GITHUB_REPOSITORY"
 
-      - name: Commit regenerated docs/
+      - name: Report
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "site: rebuild from athan-dial/skills@$(echo $GITHUB_SHA | cut -c1-7) — $(find docs/skills -maxdepth 2 -name index.html -not -path '*/docs/*' | wc -l | tr -d ' ') plugin sites"
-            git push
-          fi
+          echo "Deploy dispatched. Watch it at:"
+          echo "  https://github.com/$GITHUB_REPOSITORY/actions/workflows/deploy.yml"
