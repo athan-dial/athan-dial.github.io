@@ -1,0 +1,63 @@
+{{/*
+  Work index / Selected Work row.
+  Rule-separated grouped fields — not a floating card.
+  Exposes users, role, themes, and summary (constraint + outcome narrative
+  until dedicated frontmatter fields exist). Safe when fields are missing.
+  Evidence labels mark claims that are not fully verified (CONTENT-MODEL.md).
+*/}}
+{{- $page := . -}}
+{{- $heading := "h3" -}}
+{{- if isset . "page" -}}
+  {{- $page = .page -}}
+  {{- $heading = .heading | default "h3" -}}
+{{- end -}}
+{{- $evidence := $page.Params.evidence_status | default "" -}}
+{{- $users := $page.Params.users | default slice -}}
+{{- $role := $page.Params.role | default "" -}}
+{{- $themes := $page.Params.themes | default slice -}}
+{{- $summary := $page.Params.summary | default $page.Description | default "" -}}
+{{- $evidenceLabel := "" -}}
+{{- if eq $evidence "range-only" -}}
+  {{- $evidenceLabel = "Range only" -}}
+{{- else if eq $evidence "mechanism-only" -}}
+  {{- $evidenceLabel = "Mechanism only" -}}
+{{- else if and $evidence (ne $evidence "verified") -}}
+  {{- $evidenceLabel = replace $evidence "-" " " -}}
+{{- end -}}
+<article class="work-card">
+  <a href="{{ $page.RelPermalink }}" class="work-card__link">
+    <div class="work-card__meta">
+      {{- with $users -}}
+      <div class="work-card__field">
+        <span class="grouped-field__label">Users</span>
+        <span class="label-mono">{{ delimit . ", " }}</span>
+      </div>
+      {{- end -}}
+      {{- with $role -}}
+      <div class="work-card__field">
+        <span class="grouped-field__label">Role</span>
+        <span class="label-mono">{{ . }}</span>
+      </div>
+      {{- end -}}
+      {{- with $themes -}}
+      <div class="work-card__field">
+        <span class="grouped-field__label">Themes</span>
+        <span class="label-mono">{{ delimit . ", " }}</span>
+      </div>
+      {{- end -}}
+    </div>
+    <div class="work-card__body">
+      {{- if eq $heading "h2" -}}
+      <h2 class="headline-md work-card__title">{{ $page.Title }}</h2>
+      {{- else -}}
+      <h3 class="headline-sm work-card__title">{{ $page.Title }}</h3>
+      {{- end -}}
+      {{- with $summary -}}
+      <p class="body-md work-card__summary">{{ . }}</p>
+      {{- end -}}
+      {{- if $evidenceLabel -}}
+      <p><span class="evidence-label">{{ $evidenceLabel }}</span></p>
+      {{- end -}}
+    </div>
+  </a>
+</article>

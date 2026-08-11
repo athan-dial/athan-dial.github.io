@@ -1,0 +1,89 @@
+{{ define "main" }}
+{{- $evidence := .Params.evidence_status | default "" -}}
+{{- $evidenceLabel := "" -}}
+{{- if eq $evidence "range-only" -}}
+  {{- $evidenceLabel = "Range only" -}}
+{{- else if eq $evidence "mechanism-only" -}}
+  {{- $evidenceLabel = "Mechanism only" -}}
+{{- else if and $evidence (ne $evidence "verified") -}}
+  {{- $evidenceLabel = replace $evidence "-" " " -}}
+{{- end -}}
+{{- $users := .Params.users | default slice -}}
+{{- $role := .Params.role | default "" -}}
+{{- $themes := .Params.themes | default slice -}}
+{{- $bluf := .Params.summary | default "" -}}
+{{- $railNotes := slice -}}
+{{- with $role -}}{{- $railNotes = $railNotes | append (printf "Role · %s" .) -}}{{- end -}}
+{{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
+{{- with $evidenceLabel -}}{{- $railNotes = $railNotes | append (printf "Evidence · %s" .) -}}{{- end -}}
+{{- with .Date -}}{{- $railNotes = $railNotes | append (.Format "2006-01-02") -}}{{- end -}}
+
+<div class="container page-editorial page-editorial--case-study">
+  <article class="work-article case-study-article">
+    <div class="case-study-intro">
+      <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">{{ .Title }}</h1>
+        <div class="case-study-header__meta metadata-caps">
+          {{- with $role -}}<span>{{ . }}</span>{{- end -}}
+          {{- with $users -}}
+            {{- if $role -}}<span aria-hidden="true"> · </span>{{- end -}}
+            <span>{{ delimit . ", " }}</span>
+          {{- end -}}
+          {{- with $themes -}}
+            {{- if or $role $users -}}<span aria-hidden="true"> · </span>{{- end -}}
+            <span>{{ delimit . ", " }}</span>
+          {{- end -}}
+          {{- with .Date -}}
+            {{- if or $role $users $themes -}}<span aria-hidden="true"> · </span>{{- end -}}
+            <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>
+          {{- end -}}
+        </div>
+        {{- /* BLUF as standfirst (lead), not a pull-quote / blockquote. */ -}}
+        {{- with $bluf -}}
+        <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
+        {{- end -}}
+        {{- if $evidenceLabel -}}
+        <p class="work-article__evidence"><span class="evidence-label">{{ $evidenceLabel }}</span></p>
+        {{- end -}}
+      </header>
+    </div>
+
+    <div class="case-study-body section-rail work-article__body">
+      {{- if templates.Exists "partials/section-rail.html" -}}
+        {{ partial "section-rail.html" (dict
+          "page" .
+          "notes" $railNotes
+          "evidence_label" $evidenceLabel
+        ) }}
+      {{- else -}}
+      <aside class="section-rail__meta case-study-toc" aria-label="Case metadata">
+        {{- range $railNotes -}}
+        <p class="metadata-caps">{{ . }}</p>
+        {{- end -}}
+        {{- if $evidenceLabel -}}
+        <p><span class="evidence-label">{{ $evidenceLabel }}</span></p>
+        {{- end -}}
+        {{- /* Eight-part scan map — anchors match Hugo slug of archetypes/work.md headings */ -}}
+        <nav class="work-article__outline" aria-label="Case structure">
+          <p class="case-study-toc__label">Structure</p>
+          <ul>
+            <li><a href="#bluf">BLUF</a></li>
+            <li><a href="#who-was-doing-the-work">Who was doing the work</a></li>
+            <li><a href="#what-was-already-possible">What was already possible</a></li>
+            <li><a href="#the-product-boundary">The product boundary</a></li>
+            <li><a href="#the-hard-choice">The hard choice</a></li>
+            <li><a href="#athans-ownership">Athan's ownership</a></li>
+            <li><a href="#what-changed">What changed</a></li>
+            <li><a href="#what-he-would-change-now">What he would change now</a></li>
+          </ul>
+        </nav>
+      </aside>
+      {{- end -}}
+      <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
+        {{ .Content }}
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}

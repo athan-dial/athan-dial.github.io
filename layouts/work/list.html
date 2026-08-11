@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{- /* Public gate: status published AND visibility public. Never invent entries. */ -}}
+{{- $published := where .Pages "Params.status" "published" -}}
+{{- $public := where $published "Params.visibility" "public" -}}
+<section class="section work-index">
+  <div class="container">
+    <header class="work-index__header section-rail">
+      <div class="section-rail__meta">
+        <span class="label-mono" aria-hidden="true">01</span>
+      </div>
+      <div class="section-rail__content">
+        <h1>{{ .Title }}</h1>
+        {{- with .Params.summary -}}
+        <p class="body-lg">{{ . }}</p>
+        {{- else -}}
+          {{- with .Content -}}
+          <div class="body-lg">{{ . }}</div>
+          {{- end -}}
+        {{- end -}}
+      </div>
+    </header>
+
+    {{- if $public -}}
+    <div class="case-studies work-index__list">
+      <ul>
+        {{- range $public -}}
+        <li>
+          {{ partial "work-card.html" (dict "page" . "heading" "h2") }}
+        </li>
+        {{- end -}}
+      </ul>
+    </div>
+    {{- else -}}
+    <p class="body-md work-index__empty" role="status">
+      This section is being rebuilt. Evidence-validated case studies will appear here once they clear review — nothing unpublished is listed.
+    </p>
+    {{- end -}}
+  </div>
+</section>
+{{ end }}
