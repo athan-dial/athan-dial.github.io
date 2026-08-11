@@ -88,14 +88,8 @@ waves:
           - content/essays/_index.md
           - content/notes/_index.md
           - .planning/CONTENT-MODEL.md
-        new_files:
-          - archetypes/work.md
-          - archetypes/essay.md
-          - archetypes/note.md
-          - content/work/_index.md
-          - content/essays/_index.md
-          - content/notes/_index.md
-          - .planning/CONTENT-MODEL.md
+        # new_files omitted: this PR has landed, all paths now exist
+        new_files: []
 
   - wave: 1
     label: Parallel build — shell, templates, migration, evidence ledger
@@ -204,10 +198,9 @@ waves:
             new_files:
               - layouts/sitemap.xml
               - .planning/ACCESSIBILITY-CHECKS.md
-              # declared new here too: w0-03 lands them as stubs, but plan
-              # validation runs before Wave 0 executes, so they read as absent
-              - layouts/partials/schema.html
-              - layouts/partials/og-image.html
+              # schema.html / og-image.html were declared new here while Wave 0 was
+              # still pending; w0-03 has since landed them as stubs, so this PR
+              # modifies rather than creates them.
 
       - id: notes-migration
         cursor_wt: wt-notes
