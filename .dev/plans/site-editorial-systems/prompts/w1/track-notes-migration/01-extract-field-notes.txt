@@ -1,0 +1,109 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: Recover six field notes from the built Agency site into real Hugo content.
+
+WHY THIS IS UNUSUAL — READ CAREFULLY: The Agency's markdown source DOES NOT EXIST. Not in this repo,
+not in athan-dial/skills (verified), nowhere on disk. The only surviving copy of this writing is the
+BUILT HTML committed under docs/agency/. The commit that added it is literally named "chore(agency):
+sync built Agency site to docs/agency for GitHub Pages". So this PR is a recovery operation: you are
+extracting prose from rendered HTML back into markdown. Be careful and lossless.
+
+READ FIRST: docs/agency/dispatches/autonomous-agents-need-a-foreman/index.html (read the whole file to
+understand the markup shape before writing an extractor), archetypes/note.md and
+content/notes/_index.md (the frontmatter contract Wave 0 created — match those field names exactly),
+.planning/CONTENT-MODEL.md, .planning/design/REDESIGN-PLAN.md section "What happens to the current
+Agency material".
+
+THE SIX NOTES TO MIGRATE (these are the seven available dispatches minus one; migrate exactly these
+six, in this order of confidence):
+  docs/agency/dispatches/autonomous-agents-need-a-foreman/            -> content/notes/autonomous-agents-need-a-foreman.md
+  docs/agency/dispatches/read-only-automation-is-a-feature/           -> content/notes/read-only-automation-is-a-feature.md
+  docs/agency/dispatches/delegation-is-the-real-skill/                -> content/notes/delegation-is-the-real-skill.md
+  docs/agency/dispatches/memory-across-sessions/                      -> content/notes/memory-across-sessions.md
+  docs/agency/dispatches/skills-encode-what-you-learned-the-hard-way/ -> content/notes/skills-encode-what-you-learned-the-hard-way.md
+  docs/agency/dispatches/ai-research-that-actually-cites-sources/     -> content/notes/ai-research-that-actually-cites-sources.md
+(The seventh, cowork-changed-how-i-think-about-ai, stays in the archive — the plan says migrate only
+material that earns its place, and Athan will decide on that one separately. Do not migrate it.)
+
+METHOD:
+  1. Strip script/style/nav/header/footer, unescape HTML entities, and convert the remaining article
+     body back to markdown. Preserve heading levels, lists, code blocks, inline code, links, emphasis,
+     and blockquotes faithfully. Anchor-link artifacts like a trailing "#" on headings (Hugo heading
+     anchors) must be removed.
+  2. This is Athan's real voice and it is the best voice corpus available in the repo — DO NOT rewrite,
+     tighten, modernise, or "improve" a single sentence. Extraction only. If a passage is ambiguous
+     after conversion, keep the original wording and flag it in your report rather than paraphrasing.
+  3. Extract the real publication date from the page (or its index.xml sibling) rather than using
+     today's date. If no date is recoverable, omit the field and flag it — do not invent one.
+  4. Frontmatter per archetypes/note.md: title, type: note, date, summary (extract the standfirst or
+     first sentence — do not compose a new one), themes (choose from the controlled vocabulary only:
+     expert-workflows, product-judgment, reliable-ai-systems), source_url set to the live Agency URL
+     (https://athan-dial.github.io/agency/dispatches/<slug>/).
+  5. status and visibility: these six are ALREADY PUBLIC on the live site, so publishing them breaks
+     nothing and the plan wants 4-6 selected field notes at launch. Set status: published and
+     visibility: public for these six ONLY — they are the one exception to the safe-default rule, and
+     say so explicitly in your report. If any note contains a claim about Montai programs, internal
+     tooling, colleagues, or metrics, set it to status: draft instead and flag it for employer review.
+     Check each one for that.
+
+DELIVERABLES:
+  1. The six content/notes/*.md files above.
+  2. .planning/AGENCY-MIGRATION-MAP.md (new) — for each of the 7 dispatches and 13 playbooks under
+     docs/agency/: slug, live URL, disposition (migrated / archived-in-place / deferred), and the new
+     content path where applicable. This is the input the shell track's redirect map needs, and the
+     record of what is intentionally left behind. Include the extraction command you used so it is
+     reproducible.
+
+HARD CONSTRAINTS:
+  * Do NOT modify, move, or delete ANYTHING under docs/. Read-only there. The Agency tree is
+    irreplaceable and stays live at its current URLs.
+  * Do NOT touch content/notes/_index.md (Wave 0 owns it) or any layout.
+  * Do not add a Hugo shortcode that does not already exist; if the original used a code fence, keep a
+    plain fenced block.
+
+Verify: guard passes; `hugo --gc --destination /private/tmp/hugo-guard` renders exactly six pages under
+/notes/; diff the extracted prose against the source HTML text (strip tags from both, normalise
+whitespace) and confirm no sentence was lost or altered — include that diff result in your report;
+docs/ is unchanged (`git status --short docs/` prints nothing).

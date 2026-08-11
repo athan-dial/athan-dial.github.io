@@ -1,0 +1,102 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+TASK: Prepare the source/output split and CI deploy. PREPARE ONLY — do not execute branch surgery.
+
+CONTEXT YOU MUST UNDERSTAND BEFORE WRITING ANYTHING:
+  * Current model: branch gh-pages is the default branch AND the source AND the published output.
+    hugo.toml sets publishDir = "docs". Every content change commits a regenerated docs/ tree.
+  * origin/main EXISTS and holds an unrelated project — the Quartz "model-citizen" site
+    (quartz.config.ts, package.json, quartz/, its own content/). It is 268 commits behind gh-pages
+    on a completely different tree. Athan has decided to ABANDON model-citizen and overwrite main
+    with the Hugo source. docs/model-citizen/ is NOT tracked in this repo, so nothing live depends
+    on it here.
+  * Because overwriting main is destructive and outward-facing, an agent must not do it. Your job is
+    to make it a single reviewed, reversible, copy-pasteable operation for Athan.
+
+READ FIRST: .github/workflows/rebuild-on-skills.yml, config/_default/hugo.toml, scripts/fetch-skills.sh
+
+DELIVERABLES:
+
+1. scripts/verify-build.sh (new, executable)
+   Reusable build guard. Must:
+     - build with `hugo --gc --destination "$(mktemp -d)"` (never touch docs/)
+     - assert docs/agency/index.html exists and docs/skills/ is a non-empty directory
+     - assert no tracked file under docs/agency/ is missing vs HEAD (git diff --name-only --diff-filter=D)
+     - exit non-zero with a clear message naming which assertion failed
+     - be safe to run repeatedly; no network
+
+2. .github/workflows/deploy.yml (new)
+   Builds the site on push to `main` and deploys via actions/deploy-pages (Pages "GitHub Actions"
+   source), NOT by committing docs/. Requirements:
+     - permissions: contents read, pages write, id-token write; concurrency group "pages"
+     - peaceiris/actions-hugo@v3 pinned to hugo-version "0.154.3", extended: true
+     - run scripts/fetch-skills.sh before the build (it needs GH_TOKEN from secrets.GITHUB_TOKEN)
+     - run scripts/verify-build.sh as a gate before upload
+     - upload the built site with actions/upload-pages-artifact, deploy with actions/deploy-pages
+     - a workflow_dispatch trigger as well as push:main
+   Because fetch-skills.sh writes into docs/skills/ and docs/agency/ is committed, the build must
+   publish a directory that CONTAINS the committed docs/agency tree. Read fetch-skills.sh and
+   hugo.toml carefully and choose the approach that preserves it; state your choice in a comment at
+   the top of the workflow and in the runbook. Do not silently drop /agency/.
+
+3. .github/workflows/rebuild-on-skills.yml (modify)
+   Retarget at the new model: it currently rebuilds and commits docs/ on gh-pages. It should instead
+   trigger the deploy workflow (or run the same build+deploy path) against main. Keep the
+   repository_dispatch skills-updated trigger and workflow_dispatch.
+
+4. .planning/DEPLOY-MIGRATION.md (new)
+   The runbook Athan executes by hand. Must contain, in order, as copy-pasteable commands with an
+   explicit expected result after each:
+     a. Archive the Quartz tree before it is lost: create tag archive/quartz-main at origin/main,
+        push the tag, AND produce a git bundle at ~/Github/_archive/quartz-main.bundle. Include the
+        exact commands and a verification step that the bundle restores.
+     b. A note that Athan may want a vault project note under 2B-new-icloud/200 Projects/ recording
+        that model-citizen is retired and where the archive lives. State the path; do not write into
+        the vault yourself.
+     c. Push the Hugo source to main (force), with the exact refspec and a pre-flight check that the
+        archive tag exists first.
+     d. Switch GitHub Pages source to "GitHub Actions" — give both the web UI path (Settings →
+        Pages → Build and deployment → Source) and the equivalent `gh api` call.
+     e. Change the repo default branch to main (`gh repo edit --default-branch main`).
+     f. Verification: the live URLs that must still resolve after the switch — /, /about/,
+        /advisory/, /agency/, /agency/dispatches/autonomous-agents-need-a-foreman/, /skills/,
+        /resume.pdf — as a checklist.
+     g. Rollback: exactly how to revert to serving from gh-pages/docs if the Actions deploy fails.
+   Also record the open question of whether hugo.toml should stop setting publishDir="docs" once
+   Actions deploys an artifact, and your recommendation.
+
+DO NOT: create or delete branches, force-push anything, change repo settings, call gh api to mutate
+state, or edit config/_default/hugo.toml in this PR.

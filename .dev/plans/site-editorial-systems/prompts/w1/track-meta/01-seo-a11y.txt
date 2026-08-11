@@ -1,0 +1,111 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: Metadata, structured data, and the accessibility check contract.
+
+READ FIRST: layouts/partials/schema.html and layouts/partials/og-image.html (stubs created by Wave 0
+— you implement them), layouts/_default/baseof.html (see how they are called and what meta tags
+already exist there), layouts/robots.txt, config/_default/hugo.toml, data/profile.toml,
+.planning/design/REDESIGN-PLAN.md sections "Search and sharing", "Accessibility", and "Performance"
+(all three are requirements, with cited thresholds).
+
+DELIVERABLES:
+
+1. layouts/partials/schema.html (implement) — JSON-LD structured data, type-switched:
+     - Person + ProfilePage on the profile surfaces (home and /about/), per Google's ProfilePage
+       guidance the plan cites (https://developers.google.com/search/docs/appearance/structured-data/profile-page).
+       Fields from data/profile.toml only: name, jobTitle, worksFor, address/locality, url, sameAs
+       (LinkedIn, GitHub), alumniOf ONLY if the repo already states it unambiguously — otherwise omit.
+     - Article on essays and notes: headline, datePublished, dateModified, author, mainEntityOfPage,
+       and the canonical URL. Honour a frontmatter canonical_url pointing at an external LinkedIn
+       version if present.
+     - Emit nothing for quarantined/draft pages.
+   Invent no facts. If a field is not in data/profile.toml or frontmatter, omit the property rather
+   than guessing.
+
+2. layouts/partials/og-image.html (implement) — per-page Open Graph and Twitter card tags. baseof.html
+   already emits basic og:title/description/type/url and a site-wide og:image from
+   Site.Params.profileImage; consolidate so there is exactly ONE set of OG tags and no duplicates —
+   coordinate by reading baseof.html and, if the clean fix is to remove duplicated lines from
+   baseof.html, DO NOT edit baseof.html (another wave owns it): instead make your partial authoritative,
+   and report precisely which baseof lines should be deleted in a follow-up.
+   Per-page image resolution order: page param `og_image` → section default → the portrait. Include
+   og:image:width/height and a descriptive og:image:alt. Also unique title and description per page,
+   and a canonical URL (baseof already sets rel=canonical — verify, do not duplicate).
+
+3. layouts/sitemap.xml (new) — override Hugo's default so the sitemap contains ONLY public canonical
+   pages. Must exclude: anything with status != published or visibility != public, anything with
+   draft: true or the build/render-never treatment Wave 0 applied, the quarantined case studies,
+   /resume/ while it remains gated, and redirect stubs. The plan is explicit that "the sitemap includes
+   a resume page and seven case studies that the repository itself labels as fabricated or generic" is
+   a trust and employer-safety issue.
+   NOTE: the committed docs/agency/** tree is static and outside Hugo's page graph, so it will not
+   appear in the generated sitemap. Record that fact in your report and in ACCESSIBILITY-CHECKS.md as
+   an open item — those pages are live but unlisted.
+
+4. layouts/robots.txt (modify) — allow crawling of public pages, and add explicit Disallow for the
+   quarantined paths so a stale index gets a clear signal: /case-studies/, /resume/ while gated.
+   Reference the sitemap URL.
+
+5. .planning/ACCESSIBILITY-CHECKS.md (new) — the launch-gate checklist the plan's "Verify the
+   experience" pass will run, written so it is executable rather than aspirational:
+     - WCAG 2.2 AA items as a checklist: semantic heading order and landmarks, full keyboard nav,
+       visible focus on every control, 4.5:1 text contrast, non-text and focus-state contrast, 44px
+       pointer targets, descriptive links and alt text, reduced-motion support, nothing conveyed by
+       color alone.
+     - A CONTRAST TABLE with the measured ratio for every Editorial Systems foreground/background pair
+       from .planning/design/EDITORIAL-SYSTEMS.md: ink on paper, ink on surface, ink-secondary on
+       paper, ink-secondary on surface, structural-teal on paper, evidence-amber on paper, evidence-amber
+       on its light amber tint, paper on ink (primary button). COMPUTE the actual ratios and mark
+       pass/fail against 4.5:1 (3:1 for large text and non-text). The design plan says these values
+       are "direction, not final tokens; they must be tested for contrast" — so test them and flag any
+       that fail, with a suggested corrected hex. Do not silently change tokens.css.
+     - Core Web Vitals launch gates at p75: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1, with the measurement
+       method.
+     - Responsive capture list: 360, 390, 768, 1280, 1440px.
+     - The commands to run each check locally.
+
+Verify: guard passes; the built sitemap.xml contains no /case-studies/ or /resume/ URL; exactly one
+og:title and one canonical link per page (grep a built page and count); JSON-LD validates as
+well-formed JSON (pipe it through python3 -m json.tool).

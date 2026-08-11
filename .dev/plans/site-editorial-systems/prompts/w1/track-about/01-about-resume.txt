@@ -1,0 +1,101 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: About and Résumé — both rendered from the single profile source.
+
+READ FIRST: content/about.md (IMPORTANT — the plan says this page "contains real voice, especially the
+transition from research to product work and the phrase 'a strong allergy to metric theater'". That
+voice is an asset. Preserve it), content/resume.md, content/advisory.md (its employer-safe copy moves
+into About#conversations), data/profile.toml, data/experience.json, data/education.json,
+data/skills.json, data/tools.json, layouts/_default/single.html, layouts/_default/list.html,
+static/css/resume-override.css, .planning/design/stitch-screens/about.html (structure ONLY — its
+Trajectory entries "Head of Product, Synthesis", "Senior Data Scientist, QuantCo", "PhD Researcher,
+MIT" are FABRICATED and must never appear).
+
+DELIVERABLES:
+
+1. layouts/_default/single.html (rewrite) — the general page template on Editorial Systems: 720px
+   reading column in the 1240px shell, Source Serif 4 title, Manrope body, rule-separated sections,
+   optional section rail. This is what /about/ uses.
+
+2. layouts/_default/list.html (rewrite) — the generic section list, same system. Keep it plain; the
+   work/thinking/notes sections have their own templates.
+
+3. layouts/resume/single.html (new) — the HTML résumé. Per the plan the URL stays /resume/ but the
+   content is replaced and "the current invisible CTA styling" is fixed — find that bug (check
+   static/css/resume-override.css and the current resume rendering) and fix it; report what it was.
+   Render experience, education, skills, and tools from the data/*.json files, with the role title and
+   contact block from data/profile.toml so nothing contradicts. Include a prominent, VISIBLE download
+   link to /resume.pdf. Print-friendly: an @media print block that drops nav/footer and keeps the
+   rules. No shadows, no radius, mono for dates.
+   IMPORTANT: Wave 0 quarantined /resume/ as part of the trust pass because its titles and metrics are
+   unverified. Your job is the TEMPLATE, not un-quarantining it. Leave the quarantine frontmatter in
+   content/resume.md intact unless it prevents you from previewing — and if you must preview, use
+   `hugo server -D` locally rather than changing the frontmatter. State clearly in your report that
+   /resume/ remains gated on Athan verifying every title, date, and metric.
+
+4. content/about.md (edit, carefully) — restructure to the plan's three-part About: Trajectory,
+   Working Principles, Conversations.
+     - Trajectory: the research-to-product arc. PRESERVE the existing authentic voice and the "strong
+       allergy to metric theater" line. Reorganise and tighten; do not rewrite in a new voice, and do
+       not add employers, titles, dates, or metrics that are not already in this repo.
+     - Working Principles: derive from what Athan has actually written in this repo (content/about.md,
+       and the migrated field notes under content/notes/ if they have landed). Do not invent generic
+       principles like "Evidence over Intuition / Respect the User's Time / Systems Thinking" — those
+       are the Stitch screen's fabricated placeholders and they are exactly the AI-generic pattern
+       CLAUDE.md warns against.
+     - Conversations: an #conversations anchor holding the employer-safe advisory copy relocated from
+       content/advisory.md. Informal, infrequent framing per CLAUDE.md's Employer Safety Guidelines —
+       "I occasionally advise teams", no pricing, no timeframes, no discovery calls, no deliverables.
+       The anchor id must be exactly `conversations` because /advisory/ redirects to /about/#conversations.
+   Before writing ANY prose, invoke the `writing-style` skill and follow it. His global style rules
+   apply: no em-dash pile-ups, no buzzword clusters ("operating layer", "decision evidence",
+   "compounds"), concrete over abstract, positive framing.
+
+5. content/resume.md (edit) — reduce to frontmatter plus any short standfirst the template needs; the
+   body renders from the data files. Keep the quarantine frontmatter.
+
+Verify: guard passes; grep the built output for "QuantCo", "Synthesis", "MIT", "Evidence over
+Intuition" and get nothing; /about/ has an element with id="conversations"; the résumé download link
+is visibly styled (not the invisible-CTA bug); no phone number anywhere; print stylesheet present.

@@ -1,0 +1,250 @@
+format_version: dev-plan/1
+slug: site-editorial-systems
+title: Rebuild athan-dial.github.io on the Editorial Systems design system per the Stitch redesign plan
+
+guard:
+  custom: "hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills"
+
+gate:
+  type: human
+  instructions: >
+    Athan reviews the local preview (hugo server) of the new Editorial Systems shell and approves it,
+    AND picks two work stories from .planning/EVIDENCE-LEDGER.md ranked candidates.
+    Nothing in this plan publishes content: every new work/essay/note file ships as
+    status=draft, visibility=private and is excluded from the build. The follow-up plan
+    (site-content-pass) drafts the approved stories. Also pending Athan: the force-push of
+    main and the Pages source switch, per .planning/DEPLOY-MIGRATION.md — deliberately NOT
+    done by any agent.
+
+waves:
+  - wave: 0
+    label: Shared foundation — deploy runbook, trust quarantine, design tokens, content model
+    serial: true
+    prs:
+      - id: w0-01
+        prompt: prompts/w0/01-deploy-runbook.txt
+        agent: claude-direct
+        notes: "Prepares main-as-source + Actions deploy; does NOT execute branch surgery"
+        expected_files:
+          - .github/workflows/deploy.yml
+          - .github/workflows/rebuild-on-skills.yml
+          - scripts/verify-build.sh
+          - .planning/DEPLOY-MIGRATION.md
+        new_files:
+          - .github/workflows/deploy.yml
+          - scripts/verify-build.sh
+          - .planning/DEPLOY-MIGRATION.md
+
+      - id: w0-02
+        prompt: prompts/w0/02-trust-quarantine.txt
+        agent: cursor
+        notes: "Pass 0 — nothing public is fabricated, stale, or employer-unsafe"
+        expected_files:
+          - config/_default/params.toml
+          - config/_default/hugo.toml
+          - data/profile.toml
+          - layouts/index.html
+          - layouts/partials/linkedin-posts.html
+          - layouts/partials/wayfinding.html
+          - content/advisory.md
+          - content/case-studies/_index.md
+          - content/case-studies/learning-agenda-framework-montai.md
+          - content/case-studies/preventing-metric-theater-drug-discovery-ml.md
+          - content/case-studies/reducing-pipeline-latency-decision-velocity.md
+          - content/case-studies/scaling-ai-nominations-montai.md
+          - content/case-studies/shiny-framework-standardization-montai.md
+          - content/case-studies/stat6-data-crisis-response-montai.md
+          - content/case-studies/xtalpi-build-vs-buy-analysis-montai.md
+        new_files:
+          - data/profile.toml
+
+      - id: w0-03
+        prompt: prompts/w0/03-editorial-tokens.txt
+        agent: codex
+        notes: "THE shared shim — every Wave 1 template consumes these tokens"
+        expected_files:
+          - assets/css/tokens.css
+          - assets/css/main.css
+          - layouts/_default/baseof.html
+          - layouts/partials/schema.html
+          - layouts/partials/og-image.html
+          - static/fonts/README.md
+        new_files:
+          - assets/css/tokens.css
+          - layouts/partials/schema.html
+          - layouts/partials/og-image.html
+          - static/fonts/README.md
+
+      - id: w0-04
+        prompt: prompts/w0/04-content-model.txt
+        agent: cursor
+        notes: "Frontmatter contract + collections; build excludes non-published"
+        expected_files:
+          - config/_default/hugo.toml
+          - archetypes/work.md
+          - archetypes/essay.md
+          - archetypes/note.md
+          - content/work/_index.md
+          - content/essays/_index.md
+          - content/notes/_index.md
+          - .planning/CONTENT-MODEL.md
+        new_files:
+          - archetypes/work.md
+          - archetypes/essay.md
+          - archetypes/note.md
+          - content/work/_index.md
+          - content/essays/_index.md
+          - content/notes/_index.md
+          - .planning/CONTENT-MODEL.md
+
+  - wave: 1
+    label: Parallel build — shell, templates, migration, evidence ledger
+    tracks:
+      - id: shell
+        cursor_wt: wt-shell
+        prs:
+          - id: w1-shell-01
+            prompt: prompts/w1/track-shell/01-nav-footer-redirects.txt
+            agent: cursor
+            notes: "Work/Thinking/About/Resume nav + redirect map for every retired route"
+            expected_files:
+              - layouts/partials/nav.html
+              - layouts/partials/footer.html
+              - config/_default/menus.en.toml
+              - data/redirects.toml
+              - layouts/_default/redirect.html
+              - scripts/verify-redirects.sh
+            new_files:
+              - data/redirects.toml
+              - layouts/_default/redirect.html
+              - scripts/verify-redirects.sh
+
+      - id: home
+        cursor_wt: wt-home
+        prs:
+          - id: w1-home-01
+            prompt: prompts/w1/track-home/01-homepage.txt
+            agent: codex
+            notes: "Six-section executive brief per the Stitch home screen"
+            expected_files:
+              - layouts/index.html
+              - content/_index.md
+              - layouts/partials/section-rail.html
+            new_files:
+              - layouts/partials/section-rail.html
+
+      - id: work
+        cursor_wt: wt-work
+        prs:
+          - id: w1-work-01
+            prompt: prompts/w1/track-work/01-work-templates.txt
+            agent: cursor
+            notes: "/work/ index + 8-part case template; retires case-studies layouts"
+            expected_files:
+              - layouts/work/list.html
+              - layouts/work/single.html
+              - layouts/partials/work-card.html
+              - layouts/case-studies/list.html
+              - layouts/case-studies/single.html
+              - layouts/partials/case-study-card.html
+            new_files:
+              - layouts/work/list.html
+              - layouts/work/single.html
+              - layouts/partials/work-card.html
+
+      - id: thinking
+        cursor_wt: wt-thinking
+        prs:
+          - id: w1-thinking-01
+            prompt: prompts/w1/track-thinking/01-thinking-templates.txt
+            agent: cursor
+            notes: "Cornerstone / Practice / Field Notes tiers per the Stitch thinking screen"
+            expected_files:
+              - layouts/thinking/list.html
+              - layouts/essays/single.html
+              - layouts/notes/list.html
+              - layouts/notes/single.html
+              - layouts/partials/note-card.html
+            new_files:
+              - layouts/thinking/list.html
+              - layouts/essays/single.html
+              - layouts/notes/list.html
+              - layouts/notes/single.html
+              - layouts/partials/note-card.html
+
+      - id: about
+        cursor_wt: wt-about
+        prs:
+          - id: w1-about-01
+            prompt: prompts/w1/track-about/01-about-resume.txt
+            agent: codex
+            notes: "About (trajectory/principles/conversations) + resume from data/profile.toml"
+            expected_files:
+              - layouts/_default/single.html
+              - layouts/_default/list.html
+              - layouts/resume/single.html
+              - content/about.md
+              - content/resume.md
+            new_files:
+              - layouts/resume/single.html
+
+      - id: meta
+        cursor_wt: wt-meta
+        prs:
+          - id: w1-meta-01
+            prompt: prompts/w1/track-meta/01-seo-a11y.txt
+            agent: cursor
+            notes: "Fills the schema/og stubs from w0-03; sitemap excludes non-public"
+            expected_files:
+              - layouts/partials/schema.html
+              - layouts/partials/og-image.html
+              - layouts/sitemap.xml
+              - layouts/robots.txt
+              - .planning/ACCESSIBILITY-CHECKS.md
+            new_files:
+              - layouts/sitemap.xml
+              - .planning/ACCESSIBILITY-CHECKS.md
+              # declared new here too: w0-03 lands them as stubs, but plan
+              # validation runs before Wave 0 executes, so they read as absent
+              - layouts/partials/schema.html
+              - layouts/partials/og-image.html
+
+      - id: notes-migration
+        cursor_wt: wt-notes
+        prs:
+          - id: w1-notes-01
+            prompt: prompts/w1/track-notes-migration/01-extract-field-notes.txt
+            agent: cursor
+            notes: "Recovers 6 field notes from built docs/agency HTML — no source exists"
+            expected_files:
+              - content/notes/autonomous-agents-need-a-foreman.md
+              - content/notes/read-only-automation-is-a-feature.md
+              - content/notes/delegation-is-the-real-skill.md
+              - content/notes/memory-across-sessions.md
+              - content/notes/skills-encode-what-you-learned-the-hard-way.md
+              - content/notes/ai-research-that-actually-cites-sources.md
+              - .planning/AGENCY-MIGRATION-MAP.md
+            new_files:
+              - content/notes/autonomous-agents-need-a-foreman.md
+              - content/notes/read-only-automation-is-a-feature.md
+              - content/notes/delegation-is-the-real-skill.md
+              - content/notes/memory-across-sessions.md
+              - content/notes/skills-encode-what-you-learned-the-hard-way.md
+              - content/notes/ai-research-that-actually-cites-sources.md
+              - .planning/AGENCY-MIGRATION-MAP.md
+
+      - id: evidence
+        cursor_wt: wt-evidence
+        prs:
+          - id: w1-evidence-01
+            prompt: prompts/w1/track-evidence/01-evidence-ledger.txt
+            agent: claude-subagent
+            notes: "Ranked work-story candidates, every claim classified; feeds the human gate"
+            expected_files:
+              - .planning/EVIDENCE-LEDGER.md
+              - .planning/WORK-CANDIDATES.md
+              - .planning/CONTEXT-PACK.md
+            new_files:
+              - .planning/EVIDENCE-LEDGER.md
+              - .planning/WORK-CANDIDATES.md
+              - .planning/CONTEXT-PACK.md

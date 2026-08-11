@@ -1,0 +1,98 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: The /thinking/ section — the intellectual spine, three tiers of writing.
+
+READ FIRST: content/writing.md (the page being superseded), content/essays/_index.md and
+content/notes/_index.md plus archetypes/essay.md and archetypes/note.md (the frontmatter contract
+Wave 0 created — read exactly those field names), .planning/design/REDESIGN-PLAN.md section
+"Thinking should be the intellectual spine, not a social-feed mirror" (the three-level table and the
+publishing rule are both requirements), .planning/design/stitch-screens/thinking.html (its h2 tree is
+the intended tiering: Cornerstone / Practice / Field Notes — the essay titles under those headings are
+fabricated, do not reproduce them).
+
+The tiering is the whole point: "A two-minute Claude Code recovery note should not receive the same
+visual weight as a cornerstone essay about expert agency." Cornerstone gets the most weight,
+Practice is a middle tier, Field Notes are quiet and dense.
+
+DELIVERABLES:
+
+1. layouts/thinking/list.html (new) — the /thinking/ index, the canonical writing destination that
+   /writing/ redirects into. Three visually distinct tiers in one page:
+     - Cornerstone: essays with tier: cornerstone. Largest treatment, Source Serif 4 headline scale,
+       a standfirst, generous but not empty.
+     - Practice: essays with tier: practice. Middle weight, rule-separated rows.
+     - Field Notes: the notes section. Quietest and densest — a compact rule-separated list. Per the
+       plan, surface only SELECTED notes here and keep the complete archive available but quieter:
+       show the most recent handful and link to /notes/ for the full archive.
+   Render only status: published AND visibility: public; the notes track publishes six migrated notes,
+   so this section will have real content. Essays will likely be empty at first — honest empty state,
+   no invented titles.
+
+2. layouts/essays/single.html (new) — the essay reader. 720px reading column, Source Serif 4 title,
+   Manrope body at body-lg (19px/32px) since these are long-form. Per the plan's publishing rule the
+   page must carry: author, date, reading time (compute it in the template from word count — do not
+   require a frontmatter field), canonical URL, and the tier as a monospaced label. If canonical_url
+   points at an external LinkedIn version, render a link to it as a SECONDARY action and set the
+   canonical <link> correctly — the site holds the canonical full text, LinkedIn is distribution.
+   Never an iframe.
+
+3. layouts/notes/list.html (new) — the full Field Notes archive at /notes/. Dense, chronological,
+   rule-separated grouped fields. Include the themes taxonomy as a quiet filter affordance only if it
+   needs no JavaScript; the plan explicitly excludes complex filters and article search from launch,
+   so plain grouping by year or theme is preferable to anything interactive.
+
+4. layouts/notes/single.html (new) — the note reader. Shorter measure, same reading column, with a
+   monospaced provenance line rendering source_url when present ("originally published in The Agency")
+   so the migrated material is honestly attributed.
+
+5. layouts/partials/note-card.html (new) — the compact note row used by /thinking/, /notes/, and the
+   homepage's Current Thinking section. Must render safely with missing fields.
+
+Write NO prose content in this PR — templates only. Do not create or edit any file under
+content/notes/ or content/essays/ beyond what Wave 0 made; the notes-migration track owns the note
+content and will land in parallel.
+
+Verify: guard passes; the three tiers are visually distinguishable at desktop and still legible
+stacked at 390px; no shadows, no radius; reading time renders; heading order semantic.

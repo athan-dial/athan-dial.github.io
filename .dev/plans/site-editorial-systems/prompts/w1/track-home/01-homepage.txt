@@ -1,0 +1,114 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: The homepage — a sharp executive brief in six sections.
+
+READ FIRST: layouts/index.html (current, 48 lines, HARBOR-era), content/_index.md, data/profile.toml,
+.planning/design/REDESIGN-PLAN.md section "The homepage should behave like a sharp executive brief"
+(hero copy, the six-item homepage sequence, AND the "What should disappear" list — all three are
+requirements), .planning/design/stitch-screens/home.html (structure and rhythm; its h1/h2/h3 tree is
+the intended hierarchy — but its case-study titles and metrics are FABRICATED, do not reproduce them).
+
+The hero copy is SPECIFIED in the plan and lives in data/profile.toml — render it from there, do not
+retype it:
+  eyebrow      AI product leadership for expert work
+  headline     I build AI and data products for people whose work depends on judgment.
+  support      My work sits between expert workflows, shared infrastructure, and applied AI: what
+               should be standardized, what should stay flexible, and how a promising capability
+               becomes something an organization can trust.
+  credibility  Associate Director, Data Science & Product Management at Montai Therapeutics ·
+               PhD-trained data scientist · Boston
+  primary CTA    View selected work    -> /work/
+  secondary CTA  Read current thinking -> /thinking/
+If any of those fields is missing from data/profile.toml, add it there is NOT your call — report the
+gap and render from what exists.
+
+DELIVERABLES:
+
+1. layouts/index.html — the six sections in this order, per the plan:
+   1. Hero — one screen, one proposition, two actions. A SMALLER portrait treatment than the current
+      half-page headshot (static/img/portrait.jpg exists); editorial supporting material, not half the
+      product. Résumé stays reachable from header/footer but must NOT be a hero action, and
+      "Connect on LinkedIn" must NOT be the first ask.
+   2. Selected work — proof before biography. Two or three cards, each exposing user, constraint,
+      Athan's role, and what changed. Render from the `work` section, filtered to featured + published.
+      THERE IS NO PUBLISHED WORK YET (Wave 0 quarantined everything and the new work content is
+      gated). So: the section must render gracefully empty — an honest placeholder state that says
+      the section is being rebuilt, NOT invented case studies, NOT lorem ipsum, NOT the fabricated
+      titles from the Stitch screen. Make the empty state look deliberate.
+   3. "The shared layer is where leverage compounds" — a compact section explaining the repeated
+      product move: deciding what belongs in shared data, infrastructure, verification, workflow, or
+      interface. This is conceptual, not factual; you may render it from a short prose block in
+      content/_index.md. Keep it tight.
+   4. Current thinking — one cornerstone essay and two shorter notes, rendered NATIVELY from the
+      essays and notes sections. No iframes. Handle the empty/partial case the same honest way.
+   5. From research depth to product leadership — a short trajectory strip. Full biography belongs on
+      About; this is a compressed 3–4 beat sequence. Render from data/profile.toml / data/experience.json
+      if the facts are there; if they are contradictory or absent, render fewer beats rather than
+      guessing. Do NOT write new employment history.
+   6. A low-pressure conversation path — LinkedIn, email, résumé. Nothing else.
+
+   MUST NOT APPEAR (the plan's explicit removal list): LinkedIn iframes; a generic skills inventory;
+   "Where to next" navigation repeating the header; three equal-weight identity labels
+   ("Data Science · Product · Applied AI"); giant empty vertical regions; decorative counters like
+   "02 // From LinkedIn" unless the numbering communicates a real sequence.
+
+   Density is a requirement, not a preference: the plan says the current site "under-signals the
+   density of Athan's thinking". Keep breathing room, lose the acreage.
+
+2. content/_index.md — the homepage's own prose: the shared-layer section body and any section
+   standfirsts. Match Athan's voice. Before writing ANY prose here, invoke the `writing-style` skill
+   and follow it; his global style rules also apply (no em-dash pile-ups, no buzzword clusters like
+   "operating layer" / "decision evidence" / "compounds", concrete over abstract). Keep it short —
+   this is a homepage, not an essay. Make no factual claims about programs, metrics, or outcomes.
+
+3. layouts/partials/section-rail.html (new) — the reusable section-rail component from
+   EDITORIAL-SYSTEMS.md: a vertical rule plus an outer-column slot for monospaced margin notes,
+   evidence labels, or a section number. Parameterised (label, number, note). This is the component
+   the homepage sections and later the work/essay templates hang annotations on. Mobile: the
+   monospace metadata moves ABOVE the primary content.
+
+Verify: guard passes; the built homepage contains no iframe, no "Data Science · Product · Applied AI"
+triple, no box-shadow, no non-zero border-radius; h1 is the specified headline; heading order is
+semantic (single h1, no skipped levels); every interactive element has a visible focus style.

@@ -1,0 +1,93 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, themeless, branch gh-pages)
+
+READ FIRST (in this order):
+  1. CLAUDE.md — repo non-negotiables. NOTE: its "Clinical Architect" design section is STALE and
+     is being replaced by this work. Its content-authenticity and employer-safety rules still apply.
+  2. .planning/design/EDITORIAL-SYSTEMS.md — canonical design tokens. Source of truth.
+  3. .planning/design/REDESIGN-PLAN.md — the strategy spec driving all of this.
+
+NON-NEGOTIABLES — read every line, these are load-bearing:
+  * NEVER run `rm -rf docs/`, `rm -rf docs`, or any command that clears the publishDir.
+    docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
+    athan-dial/skills. A clean Hugo build does NOT regenerate it. Deleting it destroys the live
+    Agency site permanently. Same caution for docs/skills/** (regenerable only via
+    scripts/fetch-skills.sh, which needs network + gh auth).
+  * Build to a throwaway dir when checking your work: `hugo --gc --destination /private/tmp/hugo-guard`.
+    Never `hugo` bare (it writes docs/).
+  * NO dark mode. Editorial Systems is light-only; the html.dark block and the theme toggle are
+    being removed. Do not add dark variants, do not add `prefers-color-scheme` color blocks.
+  * NO shadows. NO border radius (0px everywhere). NO third-party embeds or iframes (the LinkedIn
+    platform script and badge are being removed).
+  * The Stitch screen HTML in .planning/design/stitch-screens/*.html is a STRUCTURAL AND VISUAL
+    REFERENCE ONLY. Its copy is FABRICATED — the About screen invents "Head of Product, Synthesis",
+    "QuantCo", and "PhD Researcher, MIT", none of which are real. Never lift prose, job titles,
+    employers, dates, or metrics from those files. Take layout, hierarchy, rhythm, and component
+    structure only.
+  * Do NOT write new factual claims about Athan's work. If a template needs example content, use
+    obviously-marked placeholder text or render from data/profile.toml.
+  * Do NOT commit. Do NOT push. Leave changes in the working tree. Minimal focused diff — touch
+    only the files this brief names.
+
+GUARD — run before reporting done, must pass:
+  hugo --gc --destination /private/tmp/hugo-guard && test -f docs/agency/index.html && test -d docs/skills
+
+REPORT: list files changed, what the guard printed, and anything you could not do.
+
+WAVE 1 CONTEXT: Wave 0 has already landed. assets/css/tokens.css exists with the full Editorial
+Systems token layer and assets/css/main.css implements the grid, type scale, rules, and components.
+CONSUME those tokens — do not define new colors, sizes, or spacing values, and do not add a <style>
+block. If you genuinely need a token that does not exist, add it to tokens.css only if this brief
+says you own that file; otherwise report it as a gap. data/profile.toml is the single source for
+name, role, employer, location, email, links, and the positioning lines — read from it, never
+hardcode those strings. Other tracks are editing other files in parallel: touch ONLY the files this
+brief names.
+
+TASK: The /work/ section — index and case-study detail templates.
+
+READ FIRST: layouts/case-studies/list.html and layouts/case-studies/single.html (the templates you
+are replacing), layouts/partials/case-study-card.html, content/work/_index.md and
+archetypes/work.md (the frontmatter contract Wave 0 created — your templates must read exactly
+those field names), .planning/CONTENT-MODEL.md, .planning/design/REDESIGN-PLAN.md section "The Work
+section should prove the thesis" (the 8-part case template AND the evidence gate),
+.planning/design/stitch-screens/work.html (index structure — note its h1 carries a monospace "01"
+section number and its cards are rule-separated rows, not floating cards).
+
+DELIVERABLES:
+
+1. layouts/work/list.html (new) — the Work index. Grouped-field rows separated by 1px --rule lines,
+   NOT a card grid (EDITORIAL-SYSTEMS.md: "Data-heavy lists should use grouped fields — horizontal
+   rows separated by rules, rather than individual floating cards"). Each row exposes: the expert
+   user, the constraint, Athan's role, and what changed — per the plan, "not merely a dramatic title".
+   Show the evidence label (see 3) where evidence_status is not fully verified. Render only
+   status: published AND visibility: public. Because nothing is published yet, the empty state must be
+   deliberate and honest — a short line saying the section is being rebuilt. Never invent entries.
+
+2. layouts/work/single.html (new) — the case-study detail. 720px reading column inside the 1240px
+   shell, with a section rail (layouts/partials/section-rail.html, created by the home track — call it
+   if it exists, and degrade gracefully if it does not, since tracks land independently) carrying
+   monospaced margin notes and evidence labels. Must structure the plan's eight parts as real
+   headings so a case is scannable in 90 seconds and rewarding at five minutes:
+   BLUF / Who was doing the work / What was already possible / The product boundary / The hard choice /
+   Athan's ownership / What changed / What he would change now.
+   Render frontmatter metadata (role, users, themes, date) in IBM Plex Mono metadata-caps. Include a
+   BLUF treatment that visually reads as a standfirst, not a pull quote.
+
+3. layouts/partials/work-card.html (new) — the row/card component used by the Work index and by the
+   homepage's Selected Work section. It must render safely when fields are missing. Include the
+   evidence-label treatment from EDITORIAL-SYSTEMS.md (amber text on a light amber tint, monospace)
+   used to mark range-only and mechanism-only claims — this is the visual expression of the plan's
+   evidence gate and it is a differentiator, not decoration.
+
+4. Retire the old templates. layouts/case-studies/list.html, layouts/case-studies/single.html, and
+   layouts/partials/case-study-card.html must be DELETED — but only after you confirm nothing still
+   resolves to them. content/case-studies/ was quarantined by Wave 0 (build: render never), so the
+   section should no longer render. Verify with a build BEFORE deleting; if the quarantined content
+   still needs a layout to avoid a build error, keep the minimum stub and say so in your report
+   rather than breaking the build.
+
+Write NO prose content in this PR — templates only. Do not create any file under content/work/ beyond
+what Wave 0 made. If a template needs sample data to verify, create it under /private/tmp, not in the
+repo.
+
+Verify: guard passes; /work/ renders with the honest empty state; no card has a shadow or radius;
+the reading column measures 65–75 characters at desktop; heading order is semantic.
