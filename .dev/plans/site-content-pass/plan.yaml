@@ -1,0 +1,110 @@
+format_version: dev-plan/1
+slug: site-content-pass
+title: Draft the launch content — two work cases, a proof note, a cornerstone essay, and the verified publication record
+
+guard:
+  custom: "bash scripts/verify-build.sh"
+
+gate:
+  type: human
+  instructions: >
+    Athan reads every draft in local preview (hugo server -D) and approves or corrects it.
+    NOTHING in this plan publishes: every content file ships status=draft, visibility=private,
+    so the production build excludes it and verify-build.sh exits 5 if that is ever breached.
+    A third plan flips approved drafts to status=published after his sign-off.
+    Also still pending Athan from the previous plan: run .planning/DEPLOY-MIGRATION.md, and
+    decide whether the 7 committed docs/agency pages now shadowed by redirect stubs should be
+    deleted. Blocked in this plan pending his line-by-line verification: the employment
+    summaries in data/experience.json, which carry unverified percentage and dollar claims and
+    name an internal system.
+
+waves:
+  - wave: 0
+    label: Shared contracts — content safety enforcement and voice reference
+    serial: true
+    prs:
+      - id: w0-01
+        prompt: prompts/w0/01-content-safety-contract.txt
+        agent: claude-direct
+        notes: "Makes employer safety mechanical, not aspirational — greps content/ and fails the build"
+        expected_files:
+          - .planning/CONTENT-SAFETY-CONTRACT.md
+          - scripts/verify-content-safety.sh
+          - scripts/verify-build.sh
+        new_files:
+          - .planning/CONTENT-SAFETY-CONTRACT.md
+          - scripts/verify-content-safety.sh
+
+      - id: w0-02
+        prompt: prompts/w0/02-voice-reference.txt
+        agent: cursor
+        notes: "Public-safe voice reference every drafting track consumes"
+        expected_files:
+          - .planning/VOICE-REFERENCE.md
+        new_files:
+          - .planning/VOICE-REFERENCE.md
+
+  - wave: 1
+    label: Parallel drafting — each track owns exactly one content file
+    tracks:
+      - id: lead-case
+        cursor_wt: wt-lead-case
+        prs:
+          - id: w1-lead-case-01
+            prompt: prompts/w1/track-lead-case/01-analog-search.txt
+            agent: codex
+            notes: "The lead case. Its honest arc is a tension, not a triumph."
+            expected_files:
+              - content/work/analog-search-as-a-product.md
+            new_files:
+              - content/work/analog-search-as-a-product.md
+
+      - id: second-case
+        cursor_wt: wt-second-case
+        prs:
+          - id: w1-second-case-01
+            prompt: prompts/w1/track-second-case/01-ci-platform.txt
+            agent: codex
+            notes: "Proves the thesis travels outside chemistry; three claims need correcting"
+            expected_files:
+              - content/work/intelligence-platform-for-an-absent-user.md
+            new_files:
+              - content/work/intelligence-platform-for-an-absent-user.md
+
+      - id: proof-note
+        cursor_wt: wt-proof-note
+        prs:
+          - id: w1-proof-note-01
+            prompt: prompts/w1/track-proof-note/01-lineage-incident.txt
+            agent: cursor
+            notes: "Short work note where the mechanism IS the argument"
+            expected_files:
+              - content/work/one-character-four-layers.md
+            new_files:
+              - content/work/one-character-four-layers.md
+
+      - id: cornerstone
+        cursor_wt: wt-cornerstone
+        prs:
+          - id: w1-cornerstone-01
+            prompt: prompts/w1/track-cornerstone/01-operating-layer.txt
+            agent: codex
+            notes: "Extends an argument Athan already made publicly; no confidential detail needed"
+            expected_files:
+              - content/essays/the-operating-layer.md
+            new_files:
+              - content/essays/the-operating-layer.md
+
+      - id: credentials
+        cursor_wt: wt-credentials
+        prs:
+          - id: w1-credentials-01
+            prompt: prompts/w1/track-credentials/01-publications.txt
+            agent: cursor
+            notes: "14 verified public DOIs currently surfaced nowhere; plus the spelling conflict"
+            expected_files:
+              - data/publications.json
+              - layouts/resume/single.html
+              - content/resume.md
+            new_files:
+              - data/publications.json

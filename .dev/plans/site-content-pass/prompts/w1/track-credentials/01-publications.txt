@@ -1,0 +1,109 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io  (Hugo 0.154.3+extended, branch redesign/editorial-systems)
+
+READ FIRST, IN THIS ORDER:
+  1. CLAUDE.md — repo rules. Its Content Authenticity Constraint and Employer Safety Guidelines are
+     binding on everything you write here.
+  2. .planning/CONTENT-SAFETY-CONTRACT.md — the abstraction and claim-labelling rules. Non-negotiable.
+  3. .planning/VOICE-REFERENCE.md — how Athan actually writes.
+  4. .planning/EVIDENCE-DECISIONS.md — what is settled, retired, and viable (public-safe summary).
+  5. .planning/design/REDESIGN-PLAN.md — the strategy this content has to substantiate.
+  6. .planning/CONTENT-MODEL.md + archetypes/ — the frontmatter contract you must match exactly.
+
+THE EVIDENCE LIVES IN .planning/private/ (gitignored, on disk, read it):
+  - CHATGPT-EVIDENCE-RESPONSE.md — the primary source. Claim-by-claim, with epistemic labels
+    (MEASURED / ESTIMATED / TARGET / INFERRED) and sensitivity labels (PUBLIC / INTERNAL /
+    LIKELY-CONFIDENTIAL). This is your factual authority.
+  - EVIDENCE-LEDGER.md, WORK-CANDIDATES.md, CONTEXT-PACK.md — the earlier internal mining pass.
+    Where these disagree with CHATGPT-EVIDENCE-RESPONSE.md, the latter wins: it cites primary
+    records, and it corrected several claims the earlier pass had wrong.
+
+THIS REPO IS PUBLIC. That is the single most important fact about your task.
+  * NEVER write into content/ any internal program name, tool codename, vendor or CRO name, model
+    codename, internal document ID, chat permalink, colleague name, internal hostname, IAM or cloud
+    identifier, or absolute dollar figure. The evidence files are full of these. Abstract every one
+    per CONTENT-SAFETY-CONTRACT.md.
+  * scripts/verify-content-safety.sh enforces this and FAILS THE BUILD. Run it.
+
+CLAIM DISCIPLINE — the reason this plan exists:
+  * A `TARGET` is not a result. Every number in the relevant product requirements document is a
+    target or success criterion. The quarantined case studies published targets as results; that is
+    the specific failure being corrected. If you state a number, it must be MEASURED, and you must
+    say what was measured.
+  * Where evidence is `NO RECORD`, SAY SO IN THE PROSE. "We did not instrument this, and I would do
+    that differently" is a publishable sentence and an on-brand one. Silence is not.
+  * Invent nothing. No metric, no date, no quote, no outcome. If a template section has no evidence,
+    write the section about the absence or leave it out — do not fill it.
+
+VOICE:
+  * Invoke the `writing-style` skill and follow it. This is Athan writing in first person.
+  * Athan's global rules: no em-dash pile-ups; no buzzword clusters ("operating layer" as a slogan,
+    "decision evidence", "compounds" as a verb); concrete over abstract; one idea per sentence; show
+    the real example.
+  * Do NOT write like a case-study template being filled in. The headings are scaffolding; the prose
+    has to read like a person who was there.
+
+FRONTMATTER — every file you create:
+  status: draft
+  visibility: private
+  These are MANDATORY and must not be changed to published/public. Nothing in this plan ships.
+  Athan reviews in local preview first. verify-build.sh exits 5 if you get this wrong.
+
+Do NOT commit. Do NOT push. Minimal focused diff — create or edit ONLY the file(s) this brief names.
+
+GUARD — run before reporting done:
+  bash scripts/verify-build.sh
+
+REPORT: the file you wrote, every claim you made with its epistemic label and where you got it,
+every place you chose to state an absence, and anything you could not evidence.
+
+TASK: Surface the verified publication record, and resolve a spelling conflict.
+FILES: data/publications.json (new), layouts/resume/single.html, content/resume.md
+
+READ THE EVIDENCE FIRST: .planning/private/CHATGPT-EVIDENCE-RESPONSE.md Part 3, section 5
+"Publications" — a table of 14 DOI-bearing outputs, every row labelled MEASURED and PUBLIC, with
+authorship position. Also read section 3 "Prior employer" and the contradictions table in Part 5.
+Then read layouts/resume/single.html (it renders from data/*.json) and config/_default/params.toml
+(the `sections` list controls order).
+
+THIS IS THE EASIEST HIGH-VALUE WORK IN THE PLAN. Fourteen peer-reviewed outputs, nine of them first-
+or sole-authored, all public and DOI-verifiable, and the site currently mentions none of them. For a
+portfolio whose thesis is "technical credibility," that is a real credential sitting on the floor.
+Everything here is PUBLIC — this is the one track with no confidentiality tension.
+
+DELIVERABLES:
+
+1. data/publications.json (new) — all 14 entries, transcribed EXACTLY from the evidence table. Per
+   entry: authors (as listed, preserving order), title, venue, year, volume/pages where given, type
+   (journal article | review | conference abstract | protocol), first_author (bool), doi, url.
+   Transcribe carefully; a wrong DOI is worse than no DOI. Do not reformat author names, do not
+   abbreviate titles, do not "fix" capitalisation in titles.
+
+2. layouts/resume/single.html (modify) — render publications as a new section, in the Editorial
+   Systems idiom: grouped-field rows separated by 1px rules, NOT cards; monospace for year and DOI;
+   the DOI as a real link. Group by type with full articles first, and make authorship legible — bold
+   or otherwise mark Athan's name in the author list so first-authorship is visible at a glance
+   without him claiming it in prose.
+   IMPORTANT — state the denominator honestly. The count is 7, 13, or 14 depending on whether
+   abstracts and the protocol are included, and the evidence explicitly warns against mixing them. So
+   do not print a single headline number without saying what it counts. Either omit a total or label
+   it precisely ("7 journal and review articles; 6 conference abstracts; 1 protocol").
+   If params.toml's `sections` list needs "publications" added to control ordering, DO NOT edit
+   params.toml — another concern owns it. Report that it needs the entry and render the section
+   unconditionally for now.
+
+3. content/resume.md (modify) — the résumé page's own copy. It is QUARANTINED and must STAY
+   quarantined: leave status/draft/build frontmatter exactly as it is. You are preparing the page, not
+   publishing it. Add only what the template needs.
+
+4. THE SPELLING CONFLICT: content/resume.md and data/experience.json disagree with each other on the
+   name of a former employer — one has an extra letter. The exact legal spelling is NO RECORD. Make
+   the repo INTERNALLY CONSISTENT by using the spelling that appears in the saved résumé PDF and
+   data/experience.json (the majority spelling), and note in your report that the true legal spelling
+   remains unverified and is on Athan's open-questions list. Do not guess at a legal suffix.
+
+DO NOT TOUCH the employment summaries in data/experience.json. They contain unverified percentage and
+dollar claims and name an internal system, and they are BLOCKED pending Athan's line-by-line
+verification. Flag them in your report; change nothing.
+
+Frontmatter: you are not creating content pages, so no status/visibility fields apply — but do not
+un-quarantine content/resume.md.

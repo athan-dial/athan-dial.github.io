@@ -1,0 +1,74 @@
+REPO: /Users/adial/GitHub/athan-dial.github.io (Hugo, branch redesign/editorial-systems)
+
+TASK: Make employer safety mechanical instead of aspirational. Every content PR in Wave 1 consumes
+what you produce, and the build must refuse to pass if any of it is violated.
+
+WHY: This repo is PUBLIC (verified: visibility=PUBLIC). The evidence material the drafting tracks
+must read from — .planning/private/ — is dense with employer-confidential detail: internal program
+and tool codenames, vendor and CRO names, internal document IDs, Slack permalinks, colleague names,
+cloud/IAM identifiers, per-round dollar figures. Five separate agents are about to read those files
+and write prose into a public repo. Relying on each of them to remember the rules is how a leak
+happens. Earlier in this project an agent leaked internal codenames into three committed files and
+the history had to be surgically rewritten.
+
+READ FIRST: CLAUDE.md (Employer Safety Guidelines), .planning/EVIDENCE-DECISIONS.md,
+.planning/design/REDESIGN-PLAN.md section "Evidence and employer-safety gate",
+scripts/verify-build.sh (you are extending it), and .planning/private/CHATGPT-EVIDENCE-RESPONSE.md
+plus .planning/private/WORK-CANDIDATES.md — read those two specifically to inventory what actually
+needs abstracting. Each candidate in WORK-CANDIDATES.md already has a per-story risk/mitigation table;
+use them.
+
+DELIVERABLES:
+
+1. .planning/CONTENT-SAFETY-CONTRACT.md (new) — MUST BE PUBLIC-SAFE. This file will be committed to
+   the public repo, so it states RULES and TARGET VOCABULARY. It must NOT contain the real names it
+   is protecting, and must NOT pair a real name with its abstraction — that pairing is itself the
+   leak. Point at .planning/private/ for the per-story mappings.
+   Contents:
+     - The categories that must never appear in content/: internal program names, internal tool and
+       app codenames, third-party scientific/vendor/CRO names, model codenames, internal document or
+       ticket IDs, chat permalinks, colleague names, internal hostnames, cloud/IAM identifiers,
+       absolute dollar figures, and unpublished headcount or portfolio figures.
+     - The approved generic vocabulary to use instead — e.g. "the assay registry", "a desktop
+       chemistry tool", "commercial catalogs", "an external chemistry partner", "the nomination
+       workflow", "an internal knowledge system". Extend this list from what the stories actually
+       need. Being consistent across tracks is the point: five agents inventing five different
+       euphemisms for the same thing reads as evasion.
+     - The ONE named exception and why: widely-used open-source technology may be named, because a
+       build-versus-buy decision is unintelligible without it and naming it is what makes the story
+       credible to engineers. State the test — is it public technology anyone can download, or is it
+       a commercial relationship / internal asset?
+     - The TARGET-versus-MEASURED rule, stated as a hard gate.
+     - The four claim classifications from the redesign plan (public-and-verified / publishable-in-a-
+       range / publishable-as-mechanism-only / private) and how each maps to what a sentence may say.
+     - Ranges over precision: when a figure is sensitive but directional evidence matters, publish
+       the range and say it is a range.
+     - The rule that `NO RECORD` gets stated in prose, not hidden.
+     - A short pre-publish checklist a human can run in two minutes.
+
+2. scripts/verify-content-safety.sh (new, executable) — the enforcement. Must:
+     - scan content/**/*.md (and only content/, not .planning/ or .dev/) for a denylist of internal
+       markers. Build the denylist by reading .planning/private/ for the actual names at risk. THE
+       DENYLIST ITSELF IS THE PROBLEM: a script containing the real names, committed to a public repo,
+       leaks exactly what it defends. Solve this properly — read the patterns at runtime from a
+       gitignored file under .planning/private/ (create it, e.g. .planning/private/denylist.txt), and
+       have the script degrade LOUDLY but not fatally if that file is absent (print a clear warning
+       that safety scanning is unavailable, exit 0) so a fresh clone without the private dir can still
+       build. Document this design choice in a comment at the top.
+     - additionally scan for structural red flags that need no secret list: URLs pointing at
+       slack.com, atlassian.net, notion.so or app.notion.com; strings matching internal ID patterns
+       (pageId=, hosted-zone-like Z[A-Z0-9]{10,}); and bare dollar figures over three digits.
+     - print each violation as file:line with the matched marker, and exit non-zero.
+     - be fast, repeatable, and network-free.
+
+3. scripts/verify-build.sh (modify) — call verify-content-safety.sh as an additional assertion, so
+   the single guard covers it and every Wave 1 track picks it up automatically. Add an exit code for
+   it and document it in the header block alongside the existing 1/2/3/4/5.
+
+VERIFY BOTH DIRECTIONS, and show me the output:
+  - clean tree: verify-build.sh passes.
+  - plant a violation: create a temp content file containing an obvious internal marker and a
+    slack.com URL, confirm the guard FAILS and names the file and line, then delete the temp file and
+    confirm the guard passes again.
+
+Do NOT commit. Do not touch content/ except for the temporary test file, which you must delete.
