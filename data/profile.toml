@@ -1,8 +1,9 @@
 # Canonical profile — single source of truth for home, about, resume, metadata, and structured data.
 # Role title resolved to the REDESIGN-PLAN.md credibility line (Associate Director, Data Science &
 # Product Management at Montai Therapeutics · PhD-trained data scientist · Boston).
-# Prior public titles were contradictory across this repo (Associate Director / Data Research Lead /
-# Head of Decision Science & Product). Use only this file going forward. Facts drawn from
+# Prior public titles were contradictory across this repo: two real ones plus a third that was
+# self-described and unsupported by any employer record. Use only this file going forward.
+# Facts drawn from
 # content/about.md, content/resume.md, data/experience.json, config/_default/params.toml, and
 # .planning/design/REDESIGN-PLAN.md — no invented dates, metrics, or employers.
 
@@ -14,7 +15,7 @@ location = "Boston"
 email = "athandial@gmail.com"
 
 # Pronoun-free short bio from existing About page facts only.
-short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD-trained in multi-omics analysis."
+short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
 
 # Homepage positioning from REDESIGN-PLAN.md recommended hero copy.
 positioning_eyebrow = "AI product leadership for expert work"

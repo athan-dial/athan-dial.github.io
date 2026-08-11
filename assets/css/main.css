@@ -252,8 +252,49 @@ hr {
 }
 
 .reading-column {
+  /* The 720px token is tuned for body-lg (19px), where it yields ~73 characters.
+     At body-md (17px) the same width runs to ~82, past the 65-75 measure
+     EDITORIAL-SYSTEMS.md requires. --measure-cap holds the measure at either size.
+     NB: 1ch is the "0" glyph (~0.62em in Manrope) but average lowercase is ~0.52em,
+     so a ch cap must be ~15% tighter than the character count you are aiming for.
+     62ch computes wider than 720px at 19px, so body-lg pages are unaffected. */
   width: min(100%, var(--reading-column));
   margin-inline: auto;
+}
+
+/* Inside a rail the content column is already the measure; auto-centring it there
+   pushes prose off the heading's left edge and reads as a mis-indent. */
+.section-rail__content .reading-column,
+.section__body .reading-column {
+  margin-inline: 0;
+}
+
+/* The rail is 2 of 12 columns (~190px at the 1240 shell). A 32px Source Serif h2
+   overflows it and collides with the content column — which is what "CORNERSTONE"
+   was doing on /thinking/. EDITORIAL-SYSTEMS.md scopes rails to annotations and
+   labels "set in the metadata font", so tier headings take the label treatment and
+   keep their semantic level. */
+.section-rail__meta h2,
+.section-rail__meta h3 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  font-weight: var(--metadata-caps-weight);
+  line-height: var(--metadata-caps-line-height);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* F. An empty tier should not reserve a full section's worth of vertical space.
+   Two stacked near-empty sections are the "giant empty vertical regions" the
+   redesign plan asks to remove. */
+.section-rail:has(.empty-state) {
+  padding-block: var(--stack-md);
+}
+
+.empty-state {
+  color: var(--ink-secondary);
 }
 
 .section-rail {
@@ -354,6 +395,13 @@ hr {
 }
 
 .site-nav a {
+  /* Targets were 16px tall with no padding — under the 24x24 AA minimum of WCAG 2.5.8
+     and well under the 44px this project's accessibility checklist asks for. Padding
+     grows the hit area without changing the type size. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
   color: var(--ink-secondary);
   font-family: var(--font-mono);
   font-size: var(--metadata-caps-size);
@@ -772,6 +820,15 @@ samp {
   border-top: 1px solid var(--rule);
 }
 
+/* With exactly three cards in two columns the fourth cell is an empty hole. Let the
+   first card span the row instead: it fills the gap and gives the cornerstone slot the
+   weight the Thinking tiering wants anyway. */
+@media (min-width: 768px) {
+  .case-studies-grid:has(> :nth-child(3):last-child) > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
 .case-study-card {
   background: transparent;
   border-bottom: 1px solid var(--rule);
@@ -1012,6 +1069,16 @@ samp {
   gap: var(--stack-md);
 }
 
+/* Footer links carried the same 15px-tall target problem the nav did. Same remedy:
+   grow the hit area with padding, leave the type size alone. WCAG 2.5.8 AA wants 24x24;
+   this project's checklist asks for 44. */
+.site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
+}
+
 .site-footer__copy,
 .site-footer__links {
   color: var(--ink-secondary);
@@ -1150,4 +1217,27 @@ samp {
     animation-duration: 0s;
     animation-delay: 0s;
   }
+}
+
+
+/* Measure cap — EDITORIAL-SYSTEMS.md requires a 65-75 character line.
+   The 720px --reading-column delivers that at body-lg (19px) but runs to ~82 characters
+   at body-md (17px). The cap is expressed in `ch` and applied to the elements that carry
+   the font-size, because `ch` resolved inside a :root custom property computes against
+   the root font-size and would be identical at every size (see tokens.css).
+   Manrope's "0" is ~0.61em while average lowercase is ~0.52em, so 61ch measures ~72
+   characters at both 17px and 19px. Tuned empirically in-browser, not derived. */
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote,
+.body-md,
+.body-lg {
+  max-width: 61ch;
+}
+
+/* A card summary inside a rail should still wrap at the measure. */
+.note-card__summary,
+.work-card__summary {
+  max-width: 61ch;
 }

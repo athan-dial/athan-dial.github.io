@@ -85,6 +85,12 @@
   /* Layout and rhythm */
   --max-width: 1240px;
   --reading-column: 720px;
+  /* NOTE: the character-based measure cap deliberately does NOT live here. A `ch` value
+     inside a custom property is resolved once, against the font-size at the point of
+     DEFINITION (:root) — not against the element that consumes it. Defining it here made
+     every column the same pixel width regardless of body size, which is the opposite of
+     the intent. The cap is therefore applied in main.css on the elements that carry the
+     font-size. Verified in-browser. */
   --gutter: 24px;
   --margin-mobile: 16px;
   --margin-desktop: 40px;

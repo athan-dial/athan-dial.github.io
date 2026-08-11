@@ -40,13 +40,22 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT" || exit 1
 
 DENYLIST=".planning/private/denylist.txt"
-SCAN_DIR="content"
+# Path+pattern exemptions, each with a written reason. See the file's header for the rule:
+# only already-public, unchangeable values (a live URL) qualify. Prose is reworded, never
+# allowlisted.
+ALLOWLIST=".planning/private/allowlist.txt"
+# data/ and layouts/ also reach the rendered page — data/experience.json carried an
+# internal tool codename that rendered on the resume while only content/ was scanned.
+SCAN_DIRS=(content data layouts)
 VIOLATIONS=0
+ALLOWED=0
 TMP="$(mktemp)"
 trap 'rm -f "$TMP"' EXIT
 
-if [ ! -d "$SCAN_DIR" ]; then
-  printf 'content-safety: no %s/ directory — nothing to scan\n' "$SCAN_DIR"
+EXISTING=()
+for d in "${SCAN_DIRS[@]}"; do [ -d "$d" ] && EXISTING+=("$d"); done
+if [ "${#EXISTING[@]}" -eq 0 ]; then
+  printf 'content-safety: none of %s exist — nothing to scan\n' "${SCAN_DIRS[*]}"
   exit 0
 fi
 
@@ -67,15 +76,23 @@ if [ -f "$DENYLIST" ]; then
     PATTERN_COUNT=$((PATTERN_COUNT + 1))
     # -w applies word boundaries so "PEAK" does not fire on "peaks" mid-word,
     # while still catching the standalone codename.
-    grep -rniwE --include='*.md' -- "$pat" "$SCAN_DIR" > "$TMP" 2>/dev/null || true
+    grep -rniwE --include='*.md' --include='*.json' --include='*.toml' --include='*.html' \
+      -- "$pat" "${EXISTING[@]}" > "$TMP" 2>/dev/null || true
     if [ -s "$TMP" ]; then
       while IFS= read -r hit; do
         f="${hit%%:*}"; rest="${hit#*:}"; ln="${rest%%:*}"
+        if [ -f "$ALLOWLIST" ] && awk -F'|' -v f="$f" -v p="$pat" \
+             '$0 !~ /^[[:space:]]*#/ && NF>=3 && index(f,$1)>0 && $2==p {found=1} END{exit !found}' \
+             "$ALLOWLIST"; then
+          ALLOWED=$((ALLOWED + 1))
+          continue
+        fi
         report "$f:$ln  matched denied term: $pat"
       done < "$TMP"
     fi
   done < "$DENYLIST"
-  printf 'content-safety:   scanned %s/ against %s denied patterns\n' "$SCAN_DIR" "$PATTERN_COUNT"
+  printf 'content-safety:   scanned %s against %s denied patterns\n' "${EXISTING[*]}" "$PATTERN_COUNT"
+  [ "$ALLOWED" -gt 0 ] && printf 'content-safety:   %s match(es) exempted by the allowlist (each has a recorded reason)\n' "$ALLOWED"
 else
   printf 'content-safety: WARNING — %s not found.\n' "$DENYLIST" >&2
   printf 'content-safety: WARNING — name-based scanning is UNAVAILABLE. Structural checks only.\n' >&2
@@ -87,8 +104,8 @@ fi
 # ---------------------------------------------------------------------------
 
 # Internal service permalinks. Nothing on a public site should link into a private workspace.
-grep -rniE --include='*.md' -- '(slack\.com|atlassian\.net|\.notion\.so|app\.notion\.com|hub\.zoom\.us|docs\.zoom\.us)' \
-     "$SCAN_DIR" > "$TMP" 2>/dev/null || true
+grep -rniE --include='*.md' --include='*.json' --include='*.toml' -- '(slack\.com|atlassian\.net|\.notion\.so|app\.notion\.com|hub\.zoom\.us|docs\.zoom\.us)' \
+     "${EXISTING[@]}" > "$TMP" 2>/dev/null || true
 if [ -s "$TMP" ]; then
   while IFS= read -r hit; do
     f="${hit%%:*}"; rest="${hit#*:}"; ln="${rest%%:*}"
@@ -97,8 +114,8 @@ if [ -s "$TMP" ]; then
 fi
 
 # Internal document / infrastructure identifier shapes.
-grep -rniE --include='*.md' -- '(pageId=[0-9]+|\bZ0[A-Z0-9]{9,}\b|arn:aws:)' \
-     "$SCAN_DIR" > "$TMP" 2>/dev/null || true
+grep -rniE --include='*.md' --include='*.json' --include='*.toml' -- '(pageId=[0-9]+|\bZ0[A-Z0-9]{9,}\b|arn:aws:)' \
+     "${EXISTING[@]}" > "$TMP" 2>/dev/null || true
 if [ -s "$TMP" ]; then
   while IFS= read -r hit; do
     f="${hit%%:*}"; rest="${hit#*:}"; ln="${rest%%:*}"
@@ -109,8 +126,8 @@ fi
 # Absolute dollar figures of four digits or more (including comma-grouped).
 # Unpublished cost and portfolio figures are the highest-risk numbers on the site.
 # Small figures are allowed — the point of the lineage story is that the amount was trivial.
-grep -rnE --include='*.md' -- '\$[0-9]{1,3},[0-9]{3}|\$[0-9]{4,}' \
-     "$SCAN_DIR" > "$TMP" 2>/dev/null || true
+grep -rnE --include='*.md' --include='*.json' --include='*.toml' -- '\$[0-9]{1,3},[0-9]{3}|\$[0-9]{4,}' \
+     "${EXISTING[@]}" > "$TMP" 2>/dev/null || true
 if [ -s "$TMP" ]; then
   while IFS= read -r hit; do
     f="${hit%%:*}"; rest="${hit#*:}"; ln="${rest%%:*}"

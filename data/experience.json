@@ -8,7 +8,7 @@
   {
     "role": "Data Research Lead",
     "company": "Montai Therapeutics",
-    "summary": "Owned the end-to-end nomination product sourcing 10K+ compounds per run; redesigned UX, data model, and pipeline to cut cycle time by ~90% and make it the default tool for HTS campaigns. Designed a dbt/S3 warehouse reducing compute cost by ~$75k/yr and shortening analytics turnaround by ~75%. Built exec-ready dashboards used in ~3 portfolio reviews/quarter, guiding $10M+ R&D investment decisions. Integrated predictive modeling into early-stage gates, improving progression precision by ~20% and reducing false positives by ~15%. Product-managed PEAK (institutional knowledge system) from concept to adoption across 6+ discovery teams.",
+    "summary": "Owned the end-to-end nomination product sourcing 10K+ compounds per run; redesigned UX, data model, and pipeline to cut cycle time by ~90% and make it the default tool for HTS campaigns. Designed a dbt/S3 warehouse reducing compute cost by ~$75k/yr and shortening analytics turnaround by ~75%. Built exec-ready dashboards used in ~3 portfolio reviews/quarter, guiding $10M+ R&D investment decisions. Integrated predictive modeling into early-stage gates, improving progression precision by ~20% and reducing false positives by ~15%. Product-managed an institutional knowledge system from concept to adoption across 6+ discovery teams.",
     "range": "2022 - 2026"
   },
   {
