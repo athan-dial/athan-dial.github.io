@@ -21,6 +21,7 @@
 #   3  docs/skills tree damaged or missing
 #   4  hugo not installed
 #   5  content gate breached (an unsafe page would publish)
+#   6  content safety violation (employer-confidential material in content/)
 
 set -uo pipefail
 
@@ -132,5 +133,24 @@ if [ -n "$GATE_VIOLATIONS" ]; then
   fail 5 "content gate breached — these pages would publish. Set draft: true, or promote to status: published + visibility: public."
 fi
 ok "content gate holds (no unsafe page is publishable)"
+
+# ---------------------------------------------------------------------------
+# 5. Content safety — nothing employer-confidential in content/.
+#
+# THIS REPO IS PUBLIC. Delegated to scripts/verify-content-safety.sh, which reads its
+# denied-term list at runtime from a gitignored file (a denylist of real names committed
+# to a public repo would leak what it defends). That script warns loudly and passes if the
+# private list is missing, so a fresh clone still builds.
+# ---------------------------------------------------------------------------
+if [ -x scripts/verify-content-safety.sh ] || [ -f scripts/verify-content-safety.sh ]; then
+  if ! SAFETY_OUT="$(bash scripts/verify-content-safety.sh 2>&1)"; then
+    printf '%s\n' "$SAFETY_OUT" >&2
+    fail 6 "content safety violations — see above. Reword the prose; do not weaken the denylist."
+  fi
+  printf '%s\n' "$SAFETY_OUT" | grep -E 'WARNING|scanned' >&2 || true
+  ok "content safety scan clean"
+else
+  printf 'verify-build: warn — scripts/verify-content-safety.sh missing; content not scanned\n' >&2
+fi
 
 printf 'verify-build: PASS\n'
