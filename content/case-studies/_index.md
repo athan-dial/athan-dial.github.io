@@ -2,6 +2,14 @@
 title: "Case Studies"
 date: 2026-01-09
 description: "Decision evidence from building data platforms and product strategy at Montai (2023-2026)"
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 ## Overview

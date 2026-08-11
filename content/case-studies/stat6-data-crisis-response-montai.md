@@ -6,6 +6,14 @@ problem_type: "execution-leadership"
 scope: "organization"
 complexity: "high"
 tags: ["incident-response", "data-quality", "team-leadership", "postmortem"]
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 ## Context

@@ -1,9 +1,8 @@
 # Hugo Resume Theme Parameters
 
 firstName = "Athan"
-lastName = "Dial, PhD"
+lastName = "Dial"
 address = "Boston, MA"
-phone = "[redacted-phone]"
 email = "athandial@gmail.com"
 profileImage = "img/profile.jpg"
 showQr = false

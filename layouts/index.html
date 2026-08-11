@@ -25,24 +25,4 @@
   </div>
 </section>
 
-{{ with .Site.Data.linkedin_posts }}
-{{ if .posts }}
-<section class="section section--home-work" aria-label="Recent LinkedIn posts">
-  <div class="container">
-    <span class="section__label">02 // From LinkedIn</span>
-    <h2 class="section__heading">Recent thinking</h2>
-    <div class="linkedin-grid">
-      {{ range first 3 .posts }}
-        {{ partial "linkedin-posts.html" . }}
-      {{ end }}
-    </div>
-    <div class="section-cta">
-      <a href="https://www.linkedin.com/in/athandial/recent-activity/all/" target="_blank" rel="noopener">See more on LinkedIn &rarr;</a>
-    </div>
-  </div>
-</section>
-{{ end }}
-{{ end }}
-
-{{ partial "wayfinding.html" (dict "page" . "rail" "03 // Keep going") }}
 {{ end }}

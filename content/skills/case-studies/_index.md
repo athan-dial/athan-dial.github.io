@@ -2,7 +2,7 @@
 title: "Case Studies"
 description: "Hidden — placeholder section, not yet populated."
 draft: true
-_build:
+build:
   render: never
   list: never
 ---

@@ -2,6 +2,14 @@
 title: "Decision Portfolio"
 date: 2026-01-20
 description: "Decision systems, not achievements - evidence of how I approach high-stakes product decisions"
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 <div style="text-align: center; margin-bottom: 2rem;">
@@ -119,7 +127,7 @@ Developed multi-omics analysis pipelines and evaluation frameworks for translati
 ---
 
 <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light);">
-  <p><strong>Want to see how I think?</strong> Read my <a href="/case-studies/">full case studies</a> or explore my <a href="/consulting/">consulting services</a>.</p>
+  <p><strong>Want to see how I think?</strong> Read the <a href="/about/">About</a> page or <a href="/agency/">field notes</a>.</p>
   <a href="/resume.pdf" download="Athan-Dial-Resume.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: background-color 0.2s; margin-top: 1rem;">
     📄 Download PDF Resume
   </a>

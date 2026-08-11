@@ -6,6 +6,14 @@ problem_type: "product-strategy"
 scope: "organization"
 complexity: "medium"
 tags: ["decision-frameworks", "product-strategy", "cross-functional", "phd-transfer"]
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 ## Context

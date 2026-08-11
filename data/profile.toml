@@ -1,0 +1,27 @@
+# Canonical profile — single source of truth for home, about, resume, metadata, and structured data.
+# Role title resolved to the REDESIGN-PLAN.md credibility line (Associate Director, Data Science &
+# Product Management at Montai Therapeutics · PhD-trained data scientist · Boston).
+# Prior public titles were contradictory across this repo (Associate Director / Data Research Lead /
+# Head of Decision Science & Product). Use only this file going forward. Facts drawn from
+# content/about.md, content/resume.md, data/experience.json, config/_default/params.toml, and
+# .planning/design/REDESIGN-PLAN.md — no invented dates, metrics, or employers.
+
+name = "Athan Dial"
+wordmark = "Athan Dial"
+role_title = "Associate Director, Data Science & Product Management"
+employer = "Montai Therapeutics"
+location = "Boston"
+email = "athandial@gmail.com"
+
+# Pronoun-free short bio from existing About page facts only.
+short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD-trained in multi-omics analysis."
+
+# Homepage positioning from REDESIGN-PLAN.md recommended hero copy.
+positioning_eyebrow = "AI product leadership for expert work"
+positioning_headline = "I build AI and data products for people whose work depends on judgment."
+positioning_support = "My work sits between expert workflows, shared infrastructure, and applied AI: what should be standardized, what should stay flexible, and how a promising capability becomes something an organization can trust."
+
+[links]
+linkedin = "https://www.linkedin.com/in/athandial/"
+github = "https://github.com/athan-dial"
+resume_pdf = "/resume.pdf"

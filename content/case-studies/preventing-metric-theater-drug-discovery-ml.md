@@ -6,6 +6,14 @@ problem_type: "product-strategy"
 scope: "team"
 complexity: "high"
 tags: ["evaluation-frameworks", "product-strategy", "stakeholder-alignment", "ml-systems"]
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 ## Context

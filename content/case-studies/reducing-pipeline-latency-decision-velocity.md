@@ -6,6 +6,14 @@ problem_type: "technical-architecture"
 scope: "team"
 complexity: "medium"
 tags: ["data-pipelines", "technical-architecture", "stakeholder-alignment", "platform-thinking"]
+draft: true
+build:
+  list: never
+  render: never
+  publishResources: false
+sitemap:
+  disable: true
+noindex: true
 ---
 
 ## Context
