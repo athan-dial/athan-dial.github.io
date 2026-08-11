@@ -13,20 +13,19 @@
   <meta name="author" content="{{ .Site.Params.firstName }} {{ .Site.Params.lastName }}">
   <link rel="canonical" href="{{ .Permalink }}">
   {{ partialCached "favicons.html" . site.BaseURL }}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+  {{ partial "schema.html" . }}
+  {{ partial "og-image.html" . }}
+  {{/* Self-hosted latin-subset WOFF2. Provenance and refetch commands: static/fonts/README.md */}}
+  <link rel="preload" href="/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/source-serif-4-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/source-serif-4-latin-variable-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/ibm-plex-mono-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+  {{- $tokens := resources.Get "css/tokens.css" -}}
+  {{- $main := resources.Get "css/main.css" -}}
+  {{- $css := slice $tokens $main | resources.Concat "css/editorial.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{ hugo.Generator }}
-  <script>
-    (function() {
-      var saved = localStorage.getItem('theme');
-      if (saved === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    })();
-  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -37,13 +36,5 @@
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-  <script>
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-      var html = document.documentElement;
-      var isDark = html.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-  </script>
 </body>
 </html>
