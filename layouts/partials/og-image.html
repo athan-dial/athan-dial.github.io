@@ -1,1 +1,75 @@
-{{- /* No-op stub: the metadata track (w1-meta-01) implements Open Graph image metadata. */ -}}
+{{- /*
+  Authoritative Open Graph + Twitter card tags.
+  Resolution: page Params.og_image → section Params.og_image → portrait.
+  Do not emit rel=canonical here — baseof.html already sets it.
+  FOLLOW-UP (baseof owned by another wave): delete duplicate OG tags in
+  layouts/_default/baseof.html lines 8–12 (og:title, og:description, og:type,
+  og:url, og:image) so this partial is the sole emitter.
+*/ -}}
+{{- $profile := site.Data.profile -}}
+{{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) -}}
+{{- $description := "" -}}
+{{- if .IsHome -}}
+  {{- $description = site.Params.description | default $profile.short_bio | default $profile.positioning_support -}}
+{{- else -}}
+  {{- $description = .Description | default .Params.summary | default $profile.short_bio -}}
+{{- end -}}
+{{- $ogType := "website" -}}
+{{- if or (eq .Type "essay") (eq .Type "note") (eq .Section "essays") (eq .Section "notes") (eq .Section "work") -}}
+  {{- if eq .Kind "page" }}{{ $ogType = "article" }}{{ end -}}
+{{- else if eq .RelPermalink "/about/" -}}
+  {{- $ogType = "profile" -}}
+{{- else if and (not .IsHome) (eq .Kind "page") -}}
+  {{- $ogType = "article" -}}
+{{- end -}}
+
+{{- $imagePath := "" -}}
+{{- $imageWidth := 0 -}}
+{{- $imageHeight := 0 -}}
+{{- $imageAlt := printf "Portrait of %s" ($profile.name | default site.Title) -}}
+{{- with .Params.og_image -}}
+  {{- $imagePath = . -}}
+  {{- with $.Params.og_image_width }}{{ $imageWidth = int . }}{{ end -}}
+  {{- with $.Params.og_image_height }}{{ $imageHeight = int . }}{{ end -}}
+  {{- with $.Params.og_image_alt }}{{ $imageAlt = . }}{{ end -}}
+{{- else -}}
+  {{- $sectionOg := false -}}
+  {{- with .CurrentSection -}}
+    {{- with .Params.og_image -}}
+      {{- $imagePath = . -}}
+      {{- $sectionOg = true -}}
+      {{- with $.CurrentSection.Params.og_image_width }}{{ $imageWidth = int . }}{{ end -}}
+      {{- with $.CurrentSection.Params.og_image_height }}{{ $imageHeight = int . }}{{ end -}}
+      {{- with $.CurrentSection.Params.og_image_alt }}{{ $imageAlt = . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $sectionOg -}}
+    {{- /* Portrait fallback — static/img/portrait.jpg (724×1086) */ -}}
+    {{- $imagePath = "img/portrait.jpg" -}}
+    {{- $imageWidth = 724 -}}
+    {{- $imageHeight = 1086 -}}
+  {{- end -}}
+{{- end -}}
+{{- $imageURL := $imagePath | absURL -}}
+
+<meta property="og:title" content="{{ $title }}">
+{{- with $description }}
+<meta property="og:description" content="{{ . }}">
+{{- end }}
+<meta property="og:type" content="{{ $ogType }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $imageURL }}">
+{{- if gt $imageWidth 0 }}
+<meta property="og:image:width" content="{{ $imageWidth }}">
+{{- end }}
+{{- if gt $imageHeight 0 }}
+<meta property="og:image:height" content="{{ $imageHeight }}">
+{{- end }}
+<meta property="og:image:alt" content="{{ $imageAlt }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+{{- with $description }}
+<meta name="twitter:description" content="{{ . }}">
+{{- end }}
+<meta name="twitter:image" content="{{ $imageURL }}">
+<meta name="twitter:image:alt" content="{{ $imageAlt }}">

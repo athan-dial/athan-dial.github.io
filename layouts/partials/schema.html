@@ -1,1 +1,59 @@
-{{- /* No-op stub: the metadata track (w1-meta-01) implements structured data. */ -}}
+{{- /*
+  JSON-LD structured data (Editorial Systems / REDESIGN-PLAN).
+  - ProfilePage + Person on home and /about/
+  - Article on essay and note pages
+  - Nothing for drafts, private, or quarantined pages
+  Facts only from data/profile.toml or page frontmatter — omit unknowns.
+*/ -}}
+{{- $profile := site.Data.profile -}}
+{{- $status := .Params.status -}}
+{{- $visibility := .Params.visibility -}}
+{{- $quarantined := or .Draft (eq $status "draft") (eq $visibility "private") (eq .Params.noindex true) (eq .Section "case-studies") (eq .Section "resume") (eq .RelPermalink "/resume/") -}}
+{{- if $quarantined -}}
+{{- /* emit nothing */ -}}
+{{- else -}}
+  {{- $isProfile := or .IsHome (eq .RelPermalink "/about/") -}}
+  {{- $isArticle := and (eq .Kind "page") (or (eq .Type "essay") (eq .Type "note") (eq .Section "essays") (eq .Section "notes")) -}}
+  {{- if $isProfile -}}
+    {{- $sameAs := slice -}}
+    {{- with $profile.links.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+    {{- with $profile.links.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+    {{- $person := dict "@type" "Person" -}}
+    {{- with $profile.name }}{{ $person = merge $person (dict "name" .) }}{{ end -}}
+    {{- with $profile.role_title }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end -}}
+    {{- with $profile.employer }}{{ $person = merge $person (dict "worksFor" (dict "@type" "Organization" "name" .)) }}{{ end -}}
+    {{- with $profile.location }}{{ $person = merge $person (dict "address" (dict "@type" "PostalAddress" "addressLocality" .)) }}{{ end -}}
+    {{- $person = merge $person (dict "url" site.BaseURL) -}}
+    {{- if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end -}}
+    {{- /* alumniOf omitted: not present in data/profile.toml */ -}}
+    {{- $graph := dict
+      "@context" "https://schema.org"
+      "@type" "ProfilePage"
+      "url" .Permalink
+      "mainEntity" $person
+    -}}
+    {{- with .Date }}{{ $graph = merge $graph (dict "dateCreated" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+    {{- with .Lastmod }}{{ $graph = merge $graph (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+<script type="application/ld+json">
+{{ $graph | jsonify | safeJS }}
+</script>
+  {{- else if $isArticle -}}
+    {{- $canonical := .Permalink -}}
+    {{- with .Params.canonical_url }}{{ $canonical = . }}{{ end -}}
+    {{- $article := dict
+      "@context" "https://schema.org"
+      "@type" "Article"
+      "headline" .Title
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" $canonical)
+      "url" $canonical
+    -}}
+    {{- with .Date }}{{ $article = merge $article (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+    {{- $modified := .Lastmod -}}
+    {{- if $modified.IsZero }}{{ $modified = .Date }}{{ end -}}
+    {{- with $modified }}{{ $article = merge $article (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+    {{- with $profile.name }}{{ $article = merge $article (dict "author" (dict "@type" "Person" "name" . "url" site.BaseURL)) }}{{ end -}}
+<script type="application/ld+json">
+{{ $article | jsonify | safeJS }}
+</script>
+  {{- end -}}
+{{- end -}}

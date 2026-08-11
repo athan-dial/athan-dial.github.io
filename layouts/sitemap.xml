@@ -1,0 +1,35 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{- /* Public canonical pages only. Excludes drafts, private/non-published
+       content-model pages, quarantined case studies, gated resume, taxonomy
+       stubs, and redirect aliases. docs/agency/** is static and outside Hugo's
+       page graph — live but unlisted (see .planning/ACCESSIBILITY-CHECKS.md). */ -}}
+  {{- range .Data.Pages }}
+    {{- $skip := false -}}
+    {{- if .Draft }}{{ $skip = true }}{{ end -}}
+    {{- if .Sitemap.Disable }}{{ $skip = true }}{{ end -}}
+    {{- if or (eq .Section "case-studies") (eq .Section "resume") (eq .RelPermalink "/resume/") (hasPrefix .RelPermalink "/case-studies/") }}{{ $skip = true }}{{ end -}}
+    {{- if or (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "alias") }}{{ $skip = true }}{{ end -}}
+    {{- /* Redirect stubs from aliases are not in .Data.Pages for sitemap; belt-and-braces */ -}}
+    {{- if isset .Params "status" -}}
+      {{- if ne .Params.status "published" }}{{ $skip = true }}{{ end -}}
+    {{- end -}}
+    {{- if isset .Params "visibility" -}}
+      {{- if ne .Params.visibility "public" }}{{ $skip = true }}{{ end -}}
+    {{- end -}}
+    {{- /* Scaffolding section indexes (work/essays/notes) stay out until they
+         declare status: published + visibility: public explicitly. */ -}}
+    {{- if and (eq .Kind "section") (or (eq .Section "work") (eq .Section "essays") (eq .Section "notes")) -}}
+      {{- if or (ne .Params.status "published") (ne .Params.visibility "public") }}{{ $skip = true }}{{ end -}}
+    {{- end -}}
+    {{- if not $skip }}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+  </url>
+    {{- end }}
+  {{- end }}
+</urlset>
