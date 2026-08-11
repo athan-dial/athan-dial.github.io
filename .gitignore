@@ -26,3 +26,9 @@ node_modules/
 # Environment
 .env
 .env.local
+
+# Internal evidence material — THIS REPO IS PUBLIC.
+# Contains employer-confidential program/tool codenames, internal Confluence page
+# IDs, Slack permalinks, colleague-attributed sources, and unpublished metrics.
+# Never commit. Sanitized, publishable conclusions belong in .planning/*.md instead.
+/.planning/private/
