@@ -1,8 +1,23 @@
 {{ define "main" }}
-<div class="container page-editorial">
-  <article class="prose prose--editorial page-editorial__article">
+<div class="shell page-editorial">
+  {{ if .Params.rail }}
+    <div class="section-rail">
+      <aside class="section-rail__meta">{{ .Params.rail }}</aside>
+      <article class="prose prose--editorial section-rail__content reading-column">
+  {{ else }}
+      <article class="prose prose--editorial page-editorial__article reading-column">
+  {{ end }}
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+
+    {{ if .Params.show_profile_links }}
+      {{ $profile := .Site.Data.profile }}
+      <div class="hero__actions" aria-label="Contact links">
+        <a class="btn-secondary" href="mailto:{{ $profile.email }}">Send a note</a>
+        <a class="btn-secondary" href="{{ $profile.links.linkedin }}" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+    {{ end }}
   </article>
+  {{ if .Params.rail }}</div>{{ end }}
 </div>
 {{ end }}

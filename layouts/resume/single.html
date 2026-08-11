@@ -1,0 +1,86 @@
+{{ define "main" }}
+{{ $profile := .Site.Data.profile }}
+<link rel="stylesheet" href="/css/resume-override.css">
+<article class="shell page-editorial resume-page">
+  <div class="reading-column">
+    <header class="case-study-header">
+      <span class="section__label">Résumé</span>
+      <h1>{{ $profile.name }}</h1>
+      <p class="body-lg">{{ $profile.role_title }} at {{ $profile.employer }} · {{ $profile.location }}</p>
+
+      <ul class="grouped-fields" aria-label="Contact information">
+        <li>
+          <span class="grouped-field__label">Email</span>
+          <a href="mailto:{{ $profile.email }}">{{ $profile.email }}</a>
+        </li>
+        <li>
+          <span class="grouped-field__label">Online</span>
+          <span><a href="{{ $profile.links.linkedin }}">LinkedIn</a> · <a href="{{ $profile.links.github }}">GitHub</a></span>
+        </li>
+      </ul>
+
+      <div class="hero__actions resume-actions">
+        <a class="btn-primary" href="{{ $profile.links.resume_pdf }}" download="Athan-Dial-Resume.pdf">Download résumé PDF</a>
+      </div>
+    </header>
+
+    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+    <section class="resume-section section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="section__heading">Experience</h2>
+      <ol class="grouped-fields">
+        {{ range .Site.Data.experience }}
+          <li class="grouped-field">
+            <span class="grouped-field__label">{{ .range }}</span>
+            <div>
+              <h3>{{ .role }}</h3>
+              <p class="label-mono">{{ .company }}</p>
+              <p>{{ .summary }}</p>
+            </div>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    <section class="resume-section section" aria-labelledby="education-heading">
+      <h2 id="education-heading" class="section__heading">Education</h2>
+      <ol class="grouped-fields">
+        {{ range .Site.Data.education }}
+          <li class="grouped-field">
+            <span class="grouped-field__label">{{ .range }}</span>
+            <div>
+              <h3>{{ .degree }}{{ with .major }}, {{ . }}{{ end }}</h3>
+              <p class="label-mono">{{ .school }}</p>
+              {{ with .notes }}<p>{{ . }}</p>{{ end }}
+            </div>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    <section class="resume-section section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="section__heading">Skills</h2>
+      <ul class="grouped-fields">
+        {{ range .Site.Data.skills }}
+          <li class="grouped-field">
+            <span class="grouped-field__label">{{ .grouping }}</span>
+            <span>{{ delimit .skills " · " }}</span>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+
+    <section class="resume-section section" aria-labelledby="tools-heading">
+      <h2 id="tools-heading" class="section__heading">Tools</h2>
+      <ul class="grouped-fields">
+        {{ range .Site.Data.tools }}
+          <li class="grouped-field">
+            <span class="grouped-field__label">{{ .grouping }}</span>
+            <span>{{ range $index, $tool := .skills }}{{ if $index }} · {{ end }}{{ $tool.name }}{{ end }}</span>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  </div>
+</article>
+{{ end }}
