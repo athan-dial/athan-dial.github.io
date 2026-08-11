@@ -1,0 +1,29 @@
+{{/*
+  Compact Field Notes row for /thinking/, /notes/, and homepage Current Thinking.
+  Expects a Page context. Renders safely when title, summary, date, or themes are missing.
+*/}}
+{{- $title := .Title | default "Untitled note" -}}
+{{- $href := .RelPermalink | default "#" -}}
+<article class="note-card grouped-field">
+  <div class="grouped-field__label">
+    {{- with .Date -}}
+      <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "02 Jan 2006" }}</time>
+    {{- else -}}
+      <span>Undated</span>
+    {{- end -}}
+  </div>
+  <div class="note-card__body">
+    <a class="note-card__title" href="{{ $href }}">{{ $title }}</a>
+    {{- with .Params.summary -}}
+      <p class="note-card__summary body-md">{{ . }}</p>
+    {{- end -}}
+    {{- with .Params.themes -}}
+      <p class="note-card__themes label-mono">
+        {{- range $i, $theme := . -}}
+          {{- if $i }} · {{ end -}}
+          <a href="{{ printf "/themes/%s/" $theme | relURL }}">{{ replace $theme "-" " " }}</a>
+        {{- end -}}
+      </p>
+    {{- end -}}
+  </div>
+</article>

@@ -1,0 +1,135 @@
+{{ define "main" }}
+{{- $essays := where site.RegularPages "Section" "essays" -}}
+{{- $essays = where $essays "Params.status" "published" -}}
+{{- $essays = where $essays "Params.visibility" "public" -}}
+{{- $cornerstone := where $essays "Params.tier" "cornerstone" -}}
+{{- $cornerstone = sort $cornerstone "Date" "desc" -}}
+{{- $practice := where $essays "Params.tier" "practice" -}}
+{{- $practice = sort $practice "Date" "desc" -}}
+{{- $notes := where site.RegularPages "Section" "notes" -}}
+{{- $notes = where $notes "Params.status" "published" -}}
+{{- $notes = where $notes "Params.visibility" "public" -}}
+{{- $notes = sort $notes "Date" "desc" -}}
+{{- $selectedNotes := first 5 $notes -}}
+{{- $notesArchive := site.GetPage "section" "notes" -}}
+
+<div class="page-editorial page-editorial--thinking">
+  <header class="container section">
+    <h1 class="display-lg">{{ .Title | default "Thinking" }}</h1>
+    {{- with .Params.summary -}}
+      <p class="label-mono">{{ . }}</p>
+    {{- end -}}
+  </header>
+
+  {{/* Cornerstone — largest treatment */}}
+  <section class="section section--home-explore" aria-labelledby="thinking-cornerstone">
+    <div class="container">
+      <div class="section-rail">
+        <div class="section-rail__meta">
+          <h2 id="thinking-cornerstone">Cornerstone</h2>
+        </div>
+        <div class="section-rail__content">
+          {{- if $cornerstone -}}
+            <ul class="grouped-fields">
+              {{- range $cornerstone -}}
+                <li class="grouped-field">
+                  <div class="grouped-field__label">
+                    {{- with .Date -}}
+                      <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2006" }}</time>
+                    {{- end -}}
+                  </div>
+                  <div>
+                    <h3 class="headline-md">
+                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{- with .Params.summary -}}
+                      <p class="lead body-lg">{{ . }}</p>
+                    {{- end -}}
+                    <p>
+                      <a class="label-mono" href="{{ .RelPermalink }}">Read the essay →</a>
+                    </p>
+                  </div>
+                </li>
+              {{- end -}}
+            </ul>
+          {{- else -}}
+            <p class="body-md">No cornerstone essays published yet.</p>
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* Practice — middle weight, rule-separated rows */}}
+  <section class="section" aria-labelledby="thinking-practice">
+    <div class="container">
+      <div class="section-rail">
+        <div class="section-rail__meta">
+          <h2 id="thinking-practice">Practice</h2>
+        </div>
+        <div class="section-rail__content">
+          {{- if $practice -}}
+            <ul class="grouped-fields">
+              {{- range $practice -}}
+                <li class="grouped-field">
+                  <div class="grouped-field__label">
+                    {{- with .Date -}}
+                      <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2006" }}</time>
+                    {{- end -}}
+                  </div>
+                  <div>
+                    <h3 class="headline-sm">
+                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{- with .Params.summary -}}
+                      <p class="body-md">{{ . }}</p>
+                    {{- end -}}
+                  </div>
+                </li>
+              {{- end -}}
+            </ul>
+          {{- else -}}
+            <p class="body-md">No practice essays published yet.</p>
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* Field Notes — quietest, densest; selected only */}}
+  <section class="section section--home-explore" aria-labelledby="thinking-field-notes">
+    <div class="container">
+      <div class="section-rail">
+        <div class="section-rail__meta">
+          <h2 id="thinking-field-notes">Field Notes</h2>
+          {{- with $notesArchive -}}
+            <p class="label-mono"><a href="{{ .RelPermalink }}">Full archive →</a></p>
+          {{- else -}}
+            <p class="label-mono"><a href="{{ "/notes/" | relURL }}">Full archive →</a></p>
+          {{- end -}}
+        </div>
+        <div class="section-rail__content">
+          {{- if $selectedNotes -}}
+            <div class="grouped-fields">
+              {{- range $selectedNotes -}}
+                {{ partial "note-card.html" . }}
+              {{- end -}}
+            </div>
+            {{- if gt (len $notes) (len $selectedNotes) -}}
+              <p class="label-mono">
+                {{- with $notesArchive -}}
+                  <a href="{{ .RelPermalink }}">All {{ len $notes }} field notes →</a>
+                {{- else -}}
+                  <a href="{{ "/notes/" | relURL }}">All {{ len $notes }} field notes →</a>
+                {{- end -}}
+              </p>
+            {{- end -}}
+          {{- else -}}
+            <p class="body-md">No field notes published yet.</p>
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

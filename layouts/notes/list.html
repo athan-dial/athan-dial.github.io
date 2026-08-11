@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{- $notes := where site.RegularPages "Section" "notes" -}}
+{{- $notes = where $notes "Params.status" "published" -}}
+{{- $notes = where $notes "Params.visibility" "public" -}}
+{{- $notes = sort $notes "Date" "desc" -}}
+<div class="container page-editorial page-editorial--notes">
+  <header class="section">
+    <p class="section__label">Archive</p>
+    <h1 class="display-lg">{{ .Title | default "Field Notes" }}</h1>
+    {{- with .Params.summary -}}
+      <p class="lead body-lg">{{ . }}</p>
+    {{- else -}}
+      {{- with .Content -}}
+        <div class="prose body-md">{{ . }}</div>
+      {{- end -}}
+    {{- end -}}
+  </header>
+
+  {{- /* Quiet taxonomy affordance: static links only, no JS filters. */ -}}
+  {{- with site.Taxonomies.themes -}}
+    {{- if gt (len .) 0 -}}
+      <nav class="section" aria-label="Themes">
+        <p class="section__label">Themes</p>
+        <ul class="site-footer__links">
+          {{- range $name, $pages := . -}}
+            <li><a class="metadata-caps" href="{{ printf "/themes/%s/" $name | relURL }}">{{ replace $name "-" " " }}</a></li>
+          {{- end -}}
+        </ul>
+      </nav>
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $notes -}}
+    {{- range $notes.GroupByDate "2006" -}}
+      <section class="section-rail" aria-labelledby="notes-year-{{ .Key }}">
+        <div class="section-rail__meta">
+          <h2 id="notes-year-{{ .Key }}">{{ .Key }}</h2>
+        </div>
+        <div class="section-rail__content">
+          <div class="grouped-fields">
+            {{- range .Pages -}}
+              {{ partial "note-card.html" . }}
+            {{- end -}}
+          </div>
+        </div>
+      </section>
+    {{- end -}}
+  {{- else -}}
+    <section class="section" aria-labelledby="notes-empty">
+      <h2 id="notes-empty" class="headline-sm">No field notes published yet</h2>
+      <p class="body-md">Selected notes will appear here when they are marked published and public.</p>
+    </section>
+  {{- end -}}
+</div>
+{{ end }}
