@@ -1,0 +1,13 @@
+{{- /* Boundary diagram for the analog-search case. Content lives here rather than in
+       the markdown so the terms stay abstracted per .planning/CONTENT-SAFETY-CONTRACT.md
+       and the diagram inherits the design tokens. */ -}}
+{{ partial "diagram-boundary.html" (dict
+  "title" "What the product made reliable, and what the chemist kept"
+  "desc" "Above the boundary, three judgments that stayed with the expert: whether a molecule is meaningfully similar, which candidates are worth pursuing, and how tight the threshold should be. Below it, a shared substrate the product made common and reliable: retrieval and ranking, a preserved path to every result, and one place to review the set."
+  "expert_label" "Stays with the expert"
+  "expert_items" (slice "Is this meaningfully similar?" "Which are worth pursuing?" "How tight should the threshold be?")
+  "boundary_label" "the line where reliability becomes shared"
+  "shared_label" "Made common and reliable"
+  "shared_items" (slice "Retrieval and ranking" "A preserved path to each result" "One place to review the set")
+  "caption" "The first release drew the line here deliberately: a thin similarity slice over the one dependency that was not fragile, rather than the full vision over data quality the team did not control."
+) }}

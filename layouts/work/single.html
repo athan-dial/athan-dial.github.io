@@ -15,7 +15,8 @@
 {{- $railNotes := slice -}}
 {{- with $role -}}{{- $railNotes = $railNotes | append (printf "Role · %s" .) -}}{{- end -}}
 {{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
-{{- with $evidenceLabel -}}{{- $railNotes = $railNotes | append (printf "Evidence · %s" .) -}}{{- end -}}
+{{- /* Evidence class is rendered by the rail as the evidence-label component, not as a
+     plain note — including it here too printed it twice. */ -}}
 {{- with .Date -}}{{- $railNotes = $railNotes | append (.Format "2006-01-02") -}}{{- end -}}
 
 <div class="container page-editorial page-editorial--case-study">

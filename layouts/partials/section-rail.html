@@ -1,11 +1,58 @@
 {{- /*
   Outer-column metadata for a .section-rail wrapper. The wrapper supplies the
-  primary-content slot; this partial keeps its label, sequence number, and note
-  consistent. On mobile, existing Editorial Systems CSS places this metadata
-  above the primary content.
+  primary-content slot; this partial supplies everything in the rail.
+
+  Two shapes, because two kinds of page use rails:
+
+    1. Section label (homepage, listings)
+       (dict "label" "Selected work")
+       (dict "label" "The hard choice" "ordinal" "05")
+
+    2. Case metadata (work/single.html)
+       (dict "notes" $railNotes "evidence_label" $evidenceLabel)
+
+  ONE label in shape 1. No sequence number, no secondary note. It previously
+  rendered number + label + note, which stacked three layers of scaffolding above
+  every section. Two rules converge against that: numbered section markers and
+  repeated uppercase eyebrows are AI section-grammar, and
+  .planning/design/REDESIGN-PLAN.md independently bans decorative counters
+  "unless the numbering communicates a real sequence". A homepage read order is
+  not that sequence. The rail is a documented part of Editorial Systems and
+  stays; the apparatus around it does not.
+
+  `ordinal` exists for the case where order genuinely carries information the
+  reader needs. It is not section grammar; do not add it to a listing page.
+
+  Shape 2 previously rendered NOTHING. work/single.html passed `notes` and
+  `evidence_label`, which this partial did not handle, and its own fallback
+  markup was unreachable because templates.Exists was true — so every case study
+  shipped an empty rail and lost its evidence label. Both keys are handled now.
+
+  `number` and `note` are still accepted and ignored, so no caller breaks.
+
+  On mobile, existing Editorial Systems CSS places this metadata above the
+  primary content.
 */ -}}
 <aside class="section-rail__meta" aria-label="Section context">
-  {{- with .number }}<div class="label-mono">{{ . }}</div>{{ end -}}
-  {{- with .label }}<div>{{ . }}</div>{{ end -}}
-  {{- with .note }}<div class="label-mono">{{ . }}</div>{{ end -}}
+  {{- with .label }}
+  <div class="section-rail__label">
+    {{- with $.ordinal }}<span class="section-rail__ordinal">{{ . }}</span>{{ end -}}
+    {{ . }}
+  </div>
+  {{- end -}}
+
+  {{- with .notes }}
+  <div class="section-rail__notes">
+    {{- range . }}
+    <p class="metadata-caps">{{ . }}</p>
+    {{- end }}
+  </div>
+  {{- end -}}
+
+  {{- with .evidence_label }}
+  {{- /* The evidence label is the one component that makes the evidence gate
+         visible. Amber marks the claim class; the copy itself is ink, because
+         amber on paper measures 3.62:1 and fails 4.5:1 for body text. */ -}}
+  <p class="evidence-label" title="How the claims in this case are classified">{{ . }}</p>
+  {{- end -}}
 </aside>

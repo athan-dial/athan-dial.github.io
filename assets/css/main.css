@@ -297,6 +297,43 @@ hr {
   color: var(--ink-secondary);
 }
 
+/* Rail label. Inherits the mono metadata treatment from .section-rail__meta; this
+   just controls the optional ordinal, which is used only where reading order
+   carries information (case-study sections), never as listing-page grammar. */
+.section-rail__ordinal {
+  margin-right: 0.5em;
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.section-rail__notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-sm);
+}
+
+.section-rail__notes p {
+  margin: 0;
+}
+
+/* Evidence label — the evidence gate made visible. Amber marks the claim class,
+   the copy is ink: amber on paper measures 3.62:1, which passes 3:1 for non-text
+   but fails 4.5:1 for body text. */
+.evidence-label {
+  margin-block: var(--stack-md) 0;
+  padding: 0.35em 0.6em;
+  background: color-mix(in oklab, var(--evidence-amber) 10%, var(--surface));
+  /* Full 1px border, not a left-only stripe. A coloured side-stripe is a decorative
+     tell; a full hairline reads as part of the system's rule language. */
+  border: 1px solid color-mix(in oklab, var(--evidence-amber) 45%, var(--surface));
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  line-height: var(--metadata-caps-line-height);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
 .section-rail {
   display: grid;
   grid-template-areas: "meta" "content";
@@ -1240,4 +1277,97 @@ samp {
 .note-card__summary,
 .work-card__summary {
   max-width: 61ch;
+}
+
+/* ============================================
+   Diagrams — sanitised real artifacts
+   The redesign plan asks for boundary diagrams, evidence tables, and workflow
+   maps, and a brand page carried by typography alone is a failure mode. Built in
+   HTML/CSS rather than SVG: these diagrams are rectangles, rules and prose, and
+   SVG <text> does not wrap, which overflowed every node in the first attempt.
+   No stock imagery, no AI-generated abstract art, no sketchy hand-drawn paths.
+   ============================================ */
+.diagram {
+  margin-block: var(--stack-lg);
+  margin-inline: 0;
+}
+
+.diagram__caption {
+  margin-top: var(--stack-md);
+  max-width: 61ch;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  line-height: 1.6;
+}
+
+.boundary__side-label {
+  margin: 0 0 var(--stack-sm);
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.boundary__nodes,
+.boundary__shared {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--stack-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .boundary__nodes,
+  .boundary__shared {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--stack-md);
+  }
+}
+
+/* Nodes are outlines, not filled cards — the system is flat and rule-defined. */
+.boundary__node {
+  padding: var(--stack-md);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* The boundary is the heaviest rule on the page, because it is the argument. */
+.boundary__line {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-md);
+  margin: var(--stack-md) 0 0;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.boundary__line::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--ink);
+}
+
+.boundary__substrate {
+  margin-top: var(--stack-md);
+  padding: var(--stack-lg) var(--stack-md);
+  background: color-mix(in oklab, var(--structural-teal) 7%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--structural-teal) 28%, var(--surface));
+}
+
+.boundary__shared li {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.45;
 }

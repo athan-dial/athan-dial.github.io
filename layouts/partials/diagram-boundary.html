@@ -1,0 +1,49 @@
+{{- /*
+  Boundary diagram — the recurring visual idea of Editorial Systems: local nodes,
+  a common substrate, and the line where reliability becomes shared responsibility.
+
+  Built in HTML and CSS, not SVG. The first version was inline SVG and it failed
+  the way SVG always fails for text-led diagrams: <text> does not wrap, so node
+  labels overflowed their rectangles and the substrate items collided. This
+  diagram is rectangles, a rule, and prose — exactly what CSS grid does well. The
+  HTML version wraps, reflows at any width, inherits the type scale, stays
+  selectable and translatable, and needs no ARIA scaffolding to be readable.
+
+  Deliberately not: stock imagery, AI-generated abstract art, sketchy hand-drawn
+  paths. It renders a real argument, not decoration.
+
+  Params:
+    title                        — the claim (rendered as the caption's lead)
+    expert_label / expert_items  — what stayed under expert control
+    boundary_label               — the line's own label
+    shared_label / shared_items  — what became common and reliable
+    caption                      — the decision the diagram records
+*/ -}}
+<figure class="diagram diagram--boundary">
+  <div class="boundary">
+
+    <p class="boundary__side-label">{{ .expert_label | default "Stays with the expert" }}</p>
+    <ul class="boundary__nodes">
+      {{- range .expert_items }}
+      <li class="boundary__node">{{ . }}</li>
+      {{- end }}
+    </ul>
+
+    <p class="boundary__line" role="separator">
+      <span>{{ .boundary_label | default "the line where reliability becomes shared" }}</span>
+    </p>
+
+    <div class="boundary__substrate">
+      <p class="boundary__side-label">{{ .shared_label | default "Made common and reliable" }}</p>
+      <ul class="boundary__shared">
+        {{- range .shared_items }}
+        <li>{{ . }}</li>
+        {{- end }}
+      </ul>
+    </div>
+
+  </div>
+  {{- with .caption }}
+  <figcaption class="diagram__caption">{{ . }}</figcaption>
+  {{- end }}
+</figure>

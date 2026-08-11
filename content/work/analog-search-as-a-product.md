@@ -48,6 +48,8 @@ That boundary shaped the first release. We did not begin with every data overlay
 
 The principle was simple: make the common work reliable, then leave the last judgment legible and adjustable.
 
+{{< boundary-diagram >}}
+
 ## The hard choice
 
 The first hard choice was the search engine. I wrote a decision memo comparing PostgreSQL with RDKit against Milvus. The matrix weighted product fit most heavily; data alignment, scalability, and operating ownership came next; delivery risk carried the remaining weight.

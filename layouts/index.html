@@ -16,7 +16,7 @@
 <section class="hero hero--splash" aria-labelledby="home-title">
   <div class="hero__backdrop" aria-hidden="true"></div>
   <div class="container hero__inner section-rail">
-    {{ partial "section-rail.html" (dict "number" "01" "label" $profile.positioning_eyebrow "note" "Position") }}
+    {{ partial "section-rail.html" (dict "label" $profile.positioning_eyebrow) }}
     <div class="section-rail__content">
       <div class="hero__grid">
         <div class="hero__content">
@@ -28,13 +28,20 @@
               <span>{{ $profile.role_title }} at {{ $profile.employer }} &middot; {{ $profile.location }}</span>
             </li>
           </ul>
+          {{- /* The redesign plan specifies two hero actions: primary "View selected work",
+                 secondary "Read current thinking". Both were missing, so the hero offered a
+                 reader no path forward at all. Resume stays reachable from header and footer
+                 and is deliberately NOT a hero action; neither is "connect on LinkedIn". */ -}}
+          <div class="hero__actions">
+            <a class="btn-primary" href="/work/">View selected work</a>
+            <a class="btn-secondary" href="/thinking/">Read current thinking</a>
+          </div>
         </div>
         <figure class="hero__portrait">
           <div class="hero__portrait-bg" aria-hidden="true"></div>
           <div class="hero__portrait-frame">
             <img src="/img/portrait.jpg" alt="Portrait of {{ $profile.name }}" width="600" height="800" loading="eager" fetchpriority="high">
           </div>
-          <figcaption class="metadata-caps">{{ $profile.name }}</figcaption>
         </figure>
       </div>
     </div>
@@ -43,7 +50,7 @@
 
 <section class="container" aria-labelledby="selected-work-title">
   <div class="section-rail">
-    {{ partial "section-rail.html" (dict "number" "02" "label" "Selected work" "note" "Evidence before biography") }}
+    {{ partial "section-rail.html" (dict "label" "Selected work") }}
     <div class="section-rail__content">
       <h2 id="selected-work-title" class="section__heading">Selected work</h2>
       <p class="body-lg">{{ .Params.selected_work_standfirst }}</p>
@@ -94,7 +101,7 @@
 
 <section class="container" aria-labelledby="shared-layer-title">
   <div class="section-rail">
-    {{ partial "section-rail.html" (dict "number" "03" "label" "Product boundary" "note" "A repeated question") }}
+    {{ partial "section-rail.html" (dict "label" "Product boundary") }}
     <div class="section-rail__content">
       <h2 id="shared-layer-title" class="section__heading">{{ .Params.shared_layer_title }}</h2>
       <p class="body-lg reading-column">{{ .Params.shared_layer_body }}</p>
@@ -104,7 +111,7 @@
 
 <section class="container" aria-labelledby="current-thinking-title">
   <div class="section-rail">
-    {{ partial "section-rail.html" (dict "number" "04" "label" "Current thinking" "note" "Essays and field notes") }}
+    {{ partial "section-rail.html" (dict "label" "Current thinking") }}
     <div class="section-rail__content">
       <h2 id="current-thinking-title" class="section__heading">Current thinking</h2>
       <p class="body-lg">{{ .Params.thinking_standfirst }}</p>
@@ -168,7 +175,7 @@
 
 <section class="container" aria-labelledby="trajectory-title">
   <div class="section-rail">
-    {{ partial "section-rail.html" (dict "number" "05" "label" "Trajectory" "note" "The compressed version") }}
+    {{ partial "section-rail.html" (dict "label" "Trajectory") }}
     <div class="section-rail__content">
       <h2 id="trajectory-title" class="section__heading">From research depth to product leadership</h2>
       <ul class="grouped-fields">
@@ -185,7 +192,7 @@
 
 <section class="container" aria-labelledby="conversation-title">
   <div class="section-rail">
-    {{ partial "section-rail.html" (dict "number" "06" "label" "Conversation" "note" "No form or funnel") }}
+    {{ partial "section-rail.html" (dict "label" "Conversation") }}
     <div class="section-rail__content">
       <h2 id="conversation-title" class="section__heading">A low-pressure conversation path</h2>
       <p class="body-lg">{{ .Params.conversation_standfirst }}</p>
