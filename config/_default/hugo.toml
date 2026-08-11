@@ -15,9 +15,20 @@ PygmentsCodeFences = true
 PygmentsCodeFencesGuessSyntax = true
 PygmentsStyle = "monokai"
 
+# Content gate (Editorial Systems / REDESIGN-PLAN):
+# Hugo has no native frontmatter-predicate exclusion for status/visibility.
+# Mechanism chosen: buildDrafts = false + draft: true convention.
+# Archetypes and section cascade (_target kind: page) default to status: draft,
+# visibility: private, and draft: true. Publishable pages must set
+# status: published, visibility: public, AND draft: false. Anything with
+# status: draft or visibility: private must keep draft: true — then it produces
+# no output page and no sitemap entry. See .planning/CONTENT-MODEL.md.
+buildDrafts = false
+
 [taxonomies]
   tag = "tags"
   category = "categories"
+  theme = "themes"
 
 [sitemap]
   changefreq = 'daily'

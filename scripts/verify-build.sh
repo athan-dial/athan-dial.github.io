@@ -20,6 +20,7 @@
 #   2  docs/agency tree damaged or missing
 #   3  docs/skills tree damaged or missing
 #   4  hugo not installed
+#   5  content gate breached (an unsafe page would publish)
 
 set -uo pipefail
 
@@ -83,5 +84,53 @@ if [ -n "$SKILLS_DELETED" ]; then
   fail 3 "tracked files under docs/skills have been deleted — regenerate with: bash scripts/fetch-skills.sh"
 fi
 ok "docs/skills intact ($SKILLS_ENTRIES plugin subsites, none deleted)"
+
+# ---------------------------------------------------------------------------
+# 4. Content gate — status/visibility must agree with draft.
+#
+# hugo.toml gates publication on `buildDrafts = false` plus a convention: anything
+# not (status: published AND visibility: public) keeps `draft: true`. Section
+# cascades set that default, but an explicit `draft: false` in a page's own
+# frontmatter OVERRIDES the cascade — so one wrong field silently publishes private
+# content and lists it in the sitemap. Verified failure, 2026-08-11.
+#
+# The plan requires that such a page produce no output at all, so this is enforced
+# here rather than trusted: the build refuses instead of publishing.
+# ---------------------------------------------------------------------------
+GATE_VIOLATIONS="$(
+  python3 - <<'PY'
+import glob, os, re, sys
+
+bad = []
+for path in glob.glob("content/**/*.md", recursive=True):
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    m = re.match(r"^---\n(.*?)\n---", text, re.S)
+    if not m:
+        continue
+    fm = m.group(1)
+
+    def field(name):
+        f = re.search(rf"^{name}:\s*(\S+)", fm, re.M)
+        return f.group(1).strip().strip("\"'").lower() if f else None
+
+    status, visibility, draft = field("status"), field("visibility"), field("draft")
+    # Only pages that declare the new content-model fields are in scope.
+    if status is None and visibility is None:
+        continue
+    unsafe = (status not in (None, "published")) or (visibility not in (None, "public"))
+    if unsafe and draft != "true":
+        bad.append(f"{path}: status={status} visibility={visibility} draft={draft}")
+
+print("\n".join(bad))
+PY
+)"
+
+if [ -n "$GATE_VIOLATIONS" ]; then
+  printf 'verify-build: content-gate violations (unsafe status/visibility without draft: true):\n' >&2
+  printf '%s\n' "$GATE_VIOLATIONS" >&2
+  fail 5 "content gate breached — these pages would publish. Set draft: true, or promote to status: published + visibility: public."
+fi
+ok "content gate holds (no unsafe page is publishable)"
 
 printf 'verify-build: PASS\n'
