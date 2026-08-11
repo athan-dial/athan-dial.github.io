@@ -1,0 +1,11 @@
+{{- /*
+  Outer-column metadata for a .section-rail wrapper. The wrapper supplies the
+  primary-content slot; this partial keeps its label, sequence number, and note
+  consistent. On mobile, existing Editorial Systems CSS places this metadata
+  above the primary content.
+*/ -}}
+<aside class="section-rail__meta" aria-label="Section context">
+  {{- with .number }}<div class="label-mono">{{ . }}</div>{{ end -}}
+  {{- with .label }}<div>{{ . }}</div>{{ end -}}
+  {{- with .note }}<div class="label-mono">{{ . }}</div>{{ end -}}
+</aside>

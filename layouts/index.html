@@ -1,28 +1,200 @@
 {{ define "main" }}
-<section class="hero hero--splash" aria-label="Introduction">
+{{- $profile := .Site.Data.profile -}}
+{{- $publicWork := where (where (where (where .Site.RegularPages "Section" "work") "Params.featured" true) "Params.status" "published") "Params.visibility" "public" -}}
+{{- $publicWork = first 3 $publicWork -}}
+{{- $essays := where (where (where .Site.RegularPages "Section" "essays") "Params.status" "published") "Params.visibility" "public" -}}
+{{- $notes := where (where (where .Site.RegularPages "Section" "notes") "Params.status" "published") "Params.visibility" "public" -}}
+{{- $cornerstones := where $essays "Params.cornerstone" true -}}
+{{- if not $cornerstones }}{{ $cornerstones = where $essays "Params.featured" true }}{{ end -}}
+{{- if not $cornerstones }}{{ $cornerstones = first 1 $essays }}{{ end -}}
+{{- $cornerstone := false -}}
+{{- with (first 1 $cornerstones) }}{{ $cornerstone = index . 0 }}{{ end -}}
+{{- $currentNotes := first 2 (sort $notes "Date" "desc") -}}
+{{- $bioParts := split $profile.short_bio ". " -}}
+{{- $foundation := index $bioParts (sub (len $bioParts) 1) -}}
+
+<section class="hero hero--splash" aria-labelledby="home-title">
   <div class="hero__backdrop" aria-hidden="true"></div>
-  <div class="container hero__inner">
-    <div class="hero__grid">
-    <div class="hero__content">
-      <div class="hero__badge">
-        <span class="hero__badge-dot"></span>
-        <span class="hero__badge-text">Data Science · Product · Applied AI</span>
+  <div class="container hero__inner section-rail">
+    {{ partial "section-rail.html" (dict "number" "01" "label" $profile.positioning_eyebrow "note" "Position") }}
+    <div class="section-rail__content">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <h1 id="home-title" class="hero__name">{{ $profile.positioning_headline }}</h1>
+          <p class="hero__intro">{{ $profile.positioning_support }}</p>
+          <ul class="grouped-fields" aria-label="Current role and location">
+            <li>
+              <span class="grouped-field__label">Current</span>
+              <span>{{ $profile.role_title }} at {{ $profile.employer }} &middot; {{ $profile.location }}</span>
+            </li>
+          </ul>
+        </div>
+        <figure class="hero__portrait">
+          <div class="hero__portrait-bg" aria-hidden="true"></div>
+          <div class="hero__portrait-frame">
+            <img src="/img/portrait.jpg" alt="Portrait of {{ $profile.name }}" width="600" height="800" loading="eager" fetchpriority="high">
+          </div>
+          <figcaption class="metadata-caps">{{ $profile.name }}</figcaption>
+        </figure>
       </div>
-      <h1 class="hero__name">{{ .Site.Params.firstName }} Dial,<br><span>PhD</span></h1>
-      <div class="hero__intro">{{ .Content }}</div>
-      <div class="hero__actions">
-        <a href="https://www.linkedin.com/in/athandial/" class="btn-primary" target="_blank" rel="noopener">Connect on LinkedIn</a>
-        <a href="/resume.pdf" class="btn-secondary" download="Athan-Dial-Resume.pdf">Download resume PDF</a>
-      </div>
-    </div>
-    <div class="hero__portrait">
-      <div class="hero__portrait-bg"></div>
-      <div class="hero__portrait-frame">
-        <img src="/img/profile.jpg" alt="Portrait of Athan Dial" loading="eager" />
-      </div>
-    </div>
     </div>
   </div>
 </section>
 
+<section class="container" aria-labelledby="selected-work-title">
+  <div class="section-rail">
+    {{ partial "section-rail.html" (dict "number" "02" "label" "Selected work" "note" "Evidence before biography") }}
+    <div class="section-rail__content">
+      <h2 id="selected-work-title" class="section__heading">Selected work</h2>
+      <p class="body-lg">{{ .Params.selected_work_standfirst }}</p>
+      {{ if $publicWork }}
+        <div class="case-studies-grid">
+          {{ range $publicWork }}
+            {{- $users := .Params.users | default .Params.user -}}
+            {{- $changed := .Params.changed | default .Params.outcome -}}
+            <article class="case-study-card">
+              <a class="case-study-card__link" href="{{ .RelPermalink }}">
+                <div>
+                  <span class="case-study-card__category">Published work</span>
+                  <h3 class="case-study-card__title">{{ .Title }}</h3>
+                  {{ with (.Params.summary | default .Description) }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
+                </div>
+                <ul class="grouped-fields">
+                  <li><span class="grouped-field__label">User</span><span>{{ with $users }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ else }}Not yet documented{{ end }}</span></li>
+                  <li><span class="grouped-field__label">Constraint</span><span>{{ .Params.constraint | default "Not yet documented" }}</span></li>
+                  <li><span class="grouped-field__label">Role</span><span>{{ .Params.role | default "Not yet documented" }}</span></li>
+                  <li><span class="grouped-field__label">What changed</span><span>{{ $changed | default "Not yet documented" }}</span></li>
+                </ul>
+                <span class="case-study-card__footer"><span class="metadata-caps">Read case study</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          {{ end }}
+          {{ if lt (len $publicWork) 2 }}
+            <div class="case-study-card">
+              <div class="case-study-card__link">
+                <div>
+                  <span class="case-study-card__category">In review</span>
+                  <p>{{ $.Params.selected_work_partial }}</p>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="grouped-fields" role="status">
+          <div class="grouped-field">
+            <span class="grouped-field__label">In review</span>
+            <p>{{ .Params.selected_work_empty }}</p>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="container" aria-labelledby="shared-layer-title">
+  <div class="section-rail">
+    {{ partial "section-rail.html" (dict "number" "03" "label" "Product boundary" "note" "A repeated question") }}
+    <div class="section-rail__content">
+      <h2 id="shared-layer-title" class="section__heading">{{ .Params.shared_layer_title }}</h2>
+      <p class="body-lg reading-column">{{ .Params.shared_layer_body }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="container" aria-labelledby="current-thinking-title">
+  <div class="section-rail">
+    {{ partial "section-rail.html" (dict "number" "04" "label" "Current thinking" "note" "Essays and field notes") }}
+    <div class="section-rail__content">
+      <h2 id="current-thinking-title" class="section__heading">Current thinking</h2>
+      <p class="body-lg">{{ .Params.thinking_standfirst }}</p>
+      {{ if or $cornerstone $currentNotes }}
+        <div class="case-studies-grid">
+          {{ with $cornerstone }}
+            <article class="case-study-card">
+              <a class="case-study-card__link" href="{{ .RelPermalink }}">
+                <div>
+                  <span class="case-study-card__category">Cornerstone essay</span>
+                  <h3 class="case-study-card__title">{{ .Title }}</h3>
+                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
+                </div>
+                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          {{ else }}
+            <div class="case-study-card">
+              <div class="case-study-card__link">
+                <div>
+                  <span class="case-study-card__category">Cornerstone essay</span>
+                  <p>{{ $.Params.thinking_essay_empty }}</p>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+          {{ range $currentNotes }}
+            <article class="case-study-card">
+              <a class="case-study-card__link" href="{{ .RelPermalink }}">
+                <div>
+                  <span class="case-study-card__category">Field note</span>
+                  <h3 class="case-study-card__title">{{ .Title }}</h3>
+                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
+                </div>
+                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          {{ end }}
+          {{ if lt (len $currentNotes) 2 }}
+            <div class="case-study-card">
+              <div class="case-study-card__link">
+                <div>
+                  <span class="case-study-card__category">Field notes</span>
+                  <p>{{ $.Params.thinking_notes_empty }}</p>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="grouped-fields" role="status">
+          <div class="grouped-field">
+            <span class="grouped-field__label">In edit</span>
+            <p>{{ .Params.thinking_empty }}</p>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="container" aria-labelledby="trajectory-title">
+  <div class="section-rail">
+    {{ partial "section-rail.html" (dict "number" "05" "label" "Trajectory" "note" "The compressed version") }}
+    <div class="section-rail__content">
+      <h2 id="trajectory-title" class="section__heading">From research depth to product leadership</h2>
+      <ul class="grouped-fields">
+        {{ with $foundation }}
+          <li><span class="grouped-field__label">Foundation</span><span>{{ . }}</span></li>
+        {{ end }}
+        {{ if and $profile.role_title $profile.employer }}
+          <li><span class="grouped-field__label">Current</span><span>{{ $profile.role_title }} at {{ $profile.employer }}</span></li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="container" aria-labelledby="conversation-title">
+  <div class="section-rail">
+    {{ partial "section-rail.html" (dict "number" "06" "label" "Conversation" "note" "No form or funnel") }}
+    <div class="section-rail__content">
+      <h2 id="conversation-title" class="section__heading">A low-pressure conversation path</h2>
+      <p class="body-lg">{{ .Params.conversation_standfirst }}</p>
+      <nav class="hero__actions" aria-label="Contact and resume links">
+        {{ with $profile.links.linkedin }}<a class="btn-secondary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+        {{ with $profile.email }}<a class="btn-secondary" href="mailto:{{ . }}">Email</a>{{ end }}
+        {{ with $profile.links.resume_pdf }}<a class="btn-secondary" href="{{ . }}">Résumé</a>{{ end }}
+      </nav>
+    </div>
+  </div>
+</section>
 {{ end }}
