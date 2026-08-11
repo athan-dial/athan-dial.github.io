@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting…</title>
+  {{- $target := .Params.target -}}
+  {{- $canonical := index (split $target "#") 0 -}}
+  <link rel="canonical" href="{{ $canonical | absURL }}">
+  <meta http-equiv="refresh" content="0;url={{ $target }}">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <p class="label-mono">
+    This page has moved to
+    <a href="{{ $target }}">{{ $target }}</a>.
+  </p>
+</body>
+</html>

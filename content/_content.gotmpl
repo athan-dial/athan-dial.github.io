@@ -1,0 +1,38 @@
+{{/*
+  Emit meta-refresh redirect stubs from data/redirects.toml.
+
+  Uses a root content adapter so retired paths (writing/, advisory/, …) replace
+  leftover content pages without editing those files' frontmatter. Custom
+  outputFormats in hugo.toml are intentionally avoided — that file is owned by
+  Wave 0.
+
+  Agency constraint: public URLs under /agency/ are set via `url`, while adapter
+  `path` stays under redirects/ (except advisory/writing replacements). That
+  avoids creating a content/agency section that would emit agency/index.xml over
+  the committed static tree. Only the six migrated dispatch slugs redirect;
+  playbooks and other Agency deep links are not generated.
+*/}}
+{{/* Hide the synthetic redirects/ section index — stubs are reached via their public URLs only. */}}
+{{ $.AddPage (dict
+  "kind" "section"
+  "path" "redirects"
+  "title" "Redirects"
+  "build" (dict "render" "never" "list" "never" "publishResources" false)
+  "sitemap" (dict "Disable" true)
+) }}
+
+{{ range site.Data.redirects.redirects }}
+  {{ if not .path }}
+    {{ errorf "data/redirects.toml: redirect from %q is missing required path" .from }}
+  {{ end }}
+  {{ $.AddPage (dict
+    "kind" "page"
+    "path" .path
+    "url" .from
+    "title" (printf "Redirect to %s" .to)
+    "layout" "redirect"
+    "outputs" (slice "HTML")
+    "params" (dict "target" .to "permanent" .permanent)
+    "sitemap" (dict "Disable" true)
+  ) }}
+{{ end }}

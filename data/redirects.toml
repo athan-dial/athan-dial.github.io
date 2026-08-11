@@ -1,0 +1,120 @@
+# Redirect map for retired routes (Editorial Systems redesign).
+# Rendered as meta-refresh + canonical stubs via layouts/_default/redirect.html
+# and content/_content.gotmpl. Do not add entries under docs/agency/ except the
+# agency index and the six migrated dispatch slugs — playbooks and other deep
+# links must keep serving the committed static tree.
+#
+# `path` is the content-adapter identity (under redirects/ so we never create a
+# real content/agency section that would emit index.xml over the static tree).
+# `from` is the public URL.
+
+[[redirects]]
+  from = "/case-studies/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies"
+
+[[redirects]]
+  from = "/case-studies/learning-agenda-framework-montai/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-learning-agenda-framework-montai"
+
+[[redirects]]
+  from = "/case-studies/preventing-metric-theater-drug-discovery-ml/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-preventing-metric-theater-drug-discovery-ml"
+
+[[redirects]]
+  from = "/case-studies/reducing-pipeline-latency-decision-velocity/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-reducing-pipeline-latency-decision-velocity"
+
+[[redirects]]
+  from = "/case-studies/scaling-ai-nominations-montai/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-scaling-ai-nominations-montai"
+
+[[redirects]]
+  from = "/case-studies/shiny-framework-standardization-montai/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-shiny-framework-standardization-montai"
+
+[[redirects]]
+  from = "/case-studies/stat6-data-crisis-response-montai/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-stat6-data-crisis-response-montai"
+
+[[redirects]]
+  from = "/case-studies/xtalpi-build-vs-buy-analysis-montai/"
+  to = "/work/"
+  permanent = true
+  path = "redirects/case-studies-xtalpi-build-vs-buy-analysis-montai"
+
+[[redirects]]
+  from = "/agency/"
+  to = "/thinking/notes/"
+  permanent = true
+  path = "redirects/agency"
+
+[[redirects]]
+  from = "/agency/dispatches/ai-research-that-actually-cites-sources/"
+  to = "/notes/ai-research-that-actually-cites-sources/"
+  permanent = true
+  path = "redirects/agency-dispatches-ai-research-that-actually-cites-sources"
+
+[[redirects]]
+  from = "/agency/dispatches/autonomous-agents-need-a-foreman/"
+  to = "/notes/autonomous-agents-need-a-foreman/"
+  permanent = true
+  path = "redirects/agency-dispatches-autonomous-agents-need-a-foreman"
+
+[[redirects]]
+  from = "/agency/dispatches/delegation-is-the-real-skill/"
+  to = "/notes/delegation-is-the-real-skill/"
+  permanent = true
+  path = "redirects/agency-dispatches-delegation-is-the-real-skill"
+
+[[redirects]]
+  from = "/agency/dispatches/memory-across-sessions/"
+  to = "/notes/memory-across-sessions/"
+  permanent = true
+  path = "redirects/agency-dispatches-memory-across-sessions"
+
+[[redirects]]
+  from = "/agency/dispatches/read-only-automation-is-a-feature/"
+  to = "/notes/read-only-automation-is-a-feature/"
+  permanent = true
+  path = "redirects/agency-dispatches-read-only-automation-is-a-feature"
+
+[[redirects]]
+  from = "/agency/dispatches/skills-encode-what-you-learned-the-hard-way/"
+  to = "/notes/skills-encode-what-you-learned-the-hard-way/"
+  permanent = true
+  path = "redirects/agency-dispatches-skills-encode-what-you-learned-the-hard-way"
+
+# Replace leftover content/advisory.md and its /consulting alias without
+# editing that file's frontmatter (owned by another track).
+[[redirects]]
+  from = "/advisory/"
+  to = "/about/#conversations"
+  permanent = true
+  path = "advisory"
+
+[[redirects]]
+  from = "/consulting/"
+  to = "/about/#conversations"
+  permanent = true
+  path = "redirects/consulting"
+
+# Replace leftover content/writing.md without editing its frontmatter.
+[[redirects]]
+  from = "/writing/"
+  to = "/thinking/"
+  permanent = true
+  path = "writing"

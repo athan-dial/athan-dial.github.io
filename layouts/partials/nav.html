@@ -1,14 +1,20 @@
+{{- $profile := site.Data.profile -}}
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="site-header__name">ATHAN DIAL<span class="suffix">.PHD</span></a>
-    <nav class="site-nav">
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}">{{ .Name }}</a>
-      {{ end }}
-      <button id="theme-toggle" type="button" aria-label="Switch between light and dark color theme" title="Light / dark theme" aria-pressed="false">
-        <span class="light-icon" aria-hidden="true">&#x2600;&#xFE0F;</span>
-        <span class="dark-icon" aria-hidden="true">&#x1F319;</span>
-      </button>
+    <a href="/" class="site-header__name">{{ $profile.wordmark }}</a>
+    <nav class="site-nav" aria-label="Primary">
+      {{- $page := . -}}
+      {{- range site.Menus.main }}
+        {{- $active := false -}}
+        {{- if hasPrefix $page.RelPermalink .URL -}}
+          {{- $active = true -}}
+        {{- end }}
+      <a
+        href="{{ .URL }}"
+        class="metadata-caps"
+        {{- if $active }} aria-current="page"{{- end -}}
+      >{{ .Name }}</a>
+      {{- end }}
     </nav>
   </div>
 </header>
