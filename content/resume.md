@@ -12,4 +12,4 @@ sitemap:
 noindex: true
 ---
 
-Experience, education, skills, and tools are assembled from the site's structured data so the HTML and PDF can be reviewed together.
+Experience, education, publications, skills, and tools are assembled from the site's structured data so the HTML and PDF can be reviewed together.

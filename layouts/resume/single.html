@@ -1,5 +1,12 @@
 {{ define "main" }}
 {{ $profile := .Site.Data.profile }}
+{{ $publications := .Site.Data.publications }}
+{{ $pubGroups := slice
+  (dict "type" "journal article" "heading" "Journal articles")
+  (dict "type" "review" "heading" "Reviews")
+  (dict "type" "conference abstract" "heading" "Conference abstracts")
+  (dict "type" "protocol" "heading" "Protocols")
+}}
 <link rel="stylesheet" href="/css/resume-override.css">
 <article class="shell page-editorial resume-page">
   <div class="reading-column">
@@ -56,6 +63,43 @@
           </li>
         {{ end }}
       </ol>
+    </section>
+
+    <section class="resume-section section" aria-labelledby="publications-heading">
+      <h2 id="publications-heading" class="section__heading">Publications</h2>
+      <p class="body-lg">7 journal and review articles; 6 conference abstracts; 1 protocol. Nine are first-author or sole-author across those categories.</p>
+      {{ range $pubGroups }}
+        {{ $items := where $publications "type" .type }}
+        {{ if $items }}
+          <h3 class="section__label">{{ .heading }}</h3>
+          <ol class="grouped-fields">
+            {{ range $items }}
+              <li class="grouped-field">
+                <span class="grouped-field__label">{{ .year }}</span>
+                <div>
+                  <h3>{{ .title }}</h3>
+                  <p>
+                    {{- range $i, $author := .authors -}}
+                      {{- if $i }}, {{ end -}}
+                      {{- if hasPrefix $author "Dial" -}}
+                        <strong>{{ $author }}</strong>
+                      {{- else -}}
+                        {{ $author }}
+                      {{- end -}}
+                    {{- end -}}
+                  </p>
+                  <p class="label-mono">
+                    {{- .venue -}}
+                    {{- with .volume -}} {{ . -}}{{- end -}}
+                    {{- with .pages -}}:{{ . -}}{{- end -}}
+                  </p>
+                  <p class="label-mono"><a href="{{ .url }}">{{ .doi }}</a></p>
+                </div>
+              </li>
+            {{ end }}
+          </ol>
+        {{ end }}
+      {{ end }}
     </section>
 
     <section class="resume-section section" aria-labelledby="skills-heading">
