@@ -3,10 +3,10 @@ title: "When a Faster Search Tool Still Felt Incomplete"
 type: work
 date: 2026-08-11
 summary: "I led the product definition for an analog-search tool that made warmed-database queries roughly an order of magnitude faster after an implementation change. Then its primary expert user said a commercial alternative returned more results. My proposed response was not to claim parity. It was to give the expert threshold control and make the edge of a match visible."
-status: draft
+status: published
 evidence_status: range-only
-visibility: private
-employer_review: pending
+visibility: public
+employer_review: self-cleared  # Athan's own judgment, 2026-08-12. No employer review; names no employer, program, or figure.
 featured: true
 role: "Product lead"
 users:
@@ -17,7 +17,7 @@ themes:
   - expert-workflows
   - product-judgment
 canonical_url: ""
-draft: true
+draft: false
 ---
 
 ## BLUF

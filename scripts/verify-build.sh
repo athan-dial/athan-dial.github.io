@@ -176,13 +176,21 @@ fi
 # makes the field real.
 #
 # Scope: only pages that declare employer_review. Essays and notes do not carry it.
-# Accepted cleared values: cleared, n/a, not-required.
+#
+# Accepted values, and what each MEANS -- the distinction is the point:
+#   cleared        a human at the employer reviewed and signed off.
+#   self-cleared   Athan judged it safe himself. No employer review happened. Valid for
+#                  pages that name no employer, program, or figure and pass the safety
+#                  scan, which is the bar the content-safety contract sets.
+#   n/a            the page describes no employer work.
+#   not-required   explicitly exempted.
+# Anything else (notably `pending`) blocks publication.
 # ---------------------------------------------------------------------------
 REVIEW_VIOLATIONS="$(
   python3 - <<'PY_REVIEW'
 import glob, re
 
-CLEARED = {"cleared", "n/a", "not-required"}
+CLEARED = {"cleared", "self-cleared", "n/a", "not-required"}
 bad = []
 for path in glob.glob("content/**/*.md", recursive=True):
     with open(path, encoding="utf-8") as fh:

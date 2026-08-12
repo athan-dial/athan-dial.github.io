@@ -3,16 +3,16 @@ title: "The primary user was not in the room"
 type: work
 date: 2026-08-11
 summary: "I designed and helped build an internal intelligence platform that reconciled records from multiple sources without asking a model to decide what was true. A discovery conversation changed the primary user from the analyst to a leadership function. That reframe clarified the product boundary: the machine could retrieve, rank, and propose; the analyst still had to adjudicate. The platform eventually reached production after an earlier attempt failed at a permissions boundary."
-status: draft
+status: published
 evidence_status: mechanism-only
-visibility: private
-employer_review: pending
+visibility: public
+employer_review: self-cleared  # Athan's own judgment, 2026-08-12. No employer review; names no employer, program, or figure.
 featured: true
 role: "Product and technical lead"
 users: ["competitive-intelligence analysts", "business-development leadership"]
 themes: ["expert-workflows", "product-judgment", "reliable-ai-systems"]
 canonical_url: ""
-draft: true
+draft: false
 ---
 
 ## BLUF
