@@ -56,20 +56,34 @@ if printf '%s' "$BUILD_LOG" | grep -q 'deprecated'; then
 fi
 
 # ---------------------------------------------------------------------------
-# 2. docs/agency — irreplaceable, must be present and complete.
+# 2. docs/agency — RETIRED 2026-08-12, deliberately. Assert it stays gone.
+#
+# This slot used to assert the opposite: that 127 tracked files under docs/agency were
+# present, because they had no source anywhere and a clean build would destroy them.
+# The tree was retired by owner decision — the dispatch notes were removed as
+# off-subject, and the playbooks, tag pages and diagrams went with them.
+#
+# The check is inverted rather than deleted so a stale build output, a bad merge, or a
+# restore from a backup bundle cannot quietly republish the retired site. The Agency
+# URLs still resolve: data/redirects.toml generates meta-refresh stubs for /agency/,
+# /agency/dispatches/, /agency/playbooks/ and the seven dispatch slugs, so external
+# inbound links land on /thinking/ instead of 404ing.
+#
+# If the tree is ever intentionally brought back, replace this block with the
+# presence assertions from git history (see the commit that retired it).
 # ---------------------------------------------------------------------------
-[ -f docs/agency/index.html ] || fail 2 "docs/agency/index.html is missing — the Agency site has been destroyed"
-
 AGENCY_TRACKED="$(git ls-files docs/agency | wc -l | tr -d ' ')"
-[ "$AGENCY_TRACKED" -gt 0 ] || fail 2 "no tracked files under docs/agency — expected ~127"
+[ "$AGENCY_TRACKED" -eq 0 ] || fail 2 "docs/agency has $AGENCY_TRACKED tracked files — the retired Agency tree is back; remove it with: git rm -r docs/agency"
 
-# Any tracked file under docs/agency that has been deleted from the working tree.
-AGENCY_DELETED="$(git diff --name-only --diff-filter=D HEAD -- docs/agency | head -20)"
-if [ -n "$AGENCY_DELETED" ]; then
-  printf 'verify-build: deleted files under docs/agency:\n%s\n' "$AGENCY_DELETED" >&2
-  fail 2 "tracked files under docs/agency have been deleted — revert with: git checkout -- docs/agency"
+if [ -d docs/agency ]; then
+  # Generated redirect stubs are expected; anything else is the old site resurfacing.
+  AGENCY_UNEXPECTED="$(find docs/agency -type f ! -name index.html | head -5)"
+  if [ -n "$AGENCY_UNEXPECTED" ]; then
+    printf 'verify-build: unexpected files under docs/agency:\n%s\n' "$AGENCY_UNEXPECTED" >&2
+    fail 2 "docs/agency contains non-stub files — the retired Agency site has been rebuilt into the publish dir"
+  fi
 fi
-ok "docs/agency intact ($AGENCY_TRACKED tracked files, none deleted)"
+ok "docs/agency stays retired (no tracked files; redirect stubs only)"
 
 # ---------------------------------------------------------------------------
 # 3. docs/skills — regenerable via fetch-skills.sh, but must not be silently gone.

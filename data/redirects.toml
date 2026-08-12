@@ -88,3 +88,60 @@
   to = "/thinking/"
   permanent = true
   path = "writing"
+
+# The committed docs/agency/ static tree was removed (2026-08-12). These stubs keep the
+# externally-linkable Agency URLs resolving to somewhere real instead of 404ing.
+
+[[redirects]]
+  from = "/agency/dispatches/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches"
+
+[[redirects]]
+  from = "/agency/playbooks/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-playbooks"
+
+[[redirects]]
+  from = "/agency/dispatches/ai-research-that-actually-cites-sources/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-ai-research-that-actually-cites-sources"
+
+[[redirects]]
+  from = "/agency/dispatches/autonomous-agents-need-a-foreman/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-autonomous-agents-need-a-foreman"
+
+[[redirects]]
+  from = "/agency/dispatches/delegation-is-the-real-skill/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-delegation-is-the-real-skill"
+
+[[redirects]]
+  from = "/agency/dispatches/memory-across-sessions/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-memory-across-sessions"
+
+[[redirects]]
+  from = "/agency/dispatches/read-only-automation-is-a-feature/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-read-only-automation-is-a-feature"
+
+[[redirects]]
+  from = "/agency/dispatches/skills-encode-what-you-learned-the-hard-way/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-skills-encode-what-you-learned-the-hard-way"
+
+[[redirects]]
+  from = "/agency/dispatches/cowork-changed-how-i-think-about-ai/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/agency-dispatches-cowork-changed-how-i-think-about-ai"
