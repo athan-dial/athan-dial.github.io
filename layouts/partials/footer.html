@@ -13,9 +13,12 @@
       <li>
         <a class="metadata-caps" href="mailto:{{ $profile.email }}">Email</a>
       </li>
+      {{/* Guarded: no résumé link is published. See the note in data/profile.toml. */}}
+      {{ with $profile.links.resume_page }}
       <li>
-        <a class="metadata-caps" href="{{ $profile.links.resume_pdf }}">Résumé</a>
+        <a class="metadata-caps" href="{{ . }}">Résumé</a>
       </li>
+      {{ end }}
     </ul>
     <p class="site-footer__copy label-mono">
       &copy; {{ now.Year }} {{ $profile.name }}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Field Notes on Athan Dial - Portfolio</title>
+    <link>https://athan-dial.github.io/notes/</link>
+    <description>Recent content in Field Notes on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://athan-dial.github.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI research that actually cites sources</title>
+      <link>https://athan-dial.github.io/notes/ai-research-that-actually-cites-sources/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/ai-research-that-actually-cites-sources/</guid>
+      <description>A fake citation in a product brief forced the switch: parallel pulls from PubMed, preprints, and trials, then tables with DOIs I can open before I repeat a number.</description>
+    </item>
+    <item>
+      <title>Autonomous agents need a foreman</title>
+      <link>https://athan-dial.github.io/notes/autonomous-agents-need-a-foreman/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/autonomous-agents-need-a-foreman/</guid>
+      <description>I learned the hard way that one-shot multi-phase Claude Code returns fast code and expensive cleanup; discuss → plan → execute → verify with atomic commits is what made autonomy survivable for me.</description>
+    </item>
+    <item>
+      <title>Delegation is the real skill</title>
+      <link>https://athan-dial.github.io/notes/delegation-is-the-real-skill/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/delegation-is-the-real-skill/</guid>
+      <description>I filed a vague /codex-task on a Friday and spent Monday unwinding five conflicting guesses; the real bottleneck is always the same—context, legible scope, and explicit format—so a new teammate could ship without guessing.</description>
+    </item>
+    <item>
+      <title>Memory across sessions</title>
+      <link>https://athan-dial.github.io/notes/memory-across-sessions/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/memory-across-sessions/</guid>
+      <description>I stopped burning every session opener on the same policy paragraph once /remember, /reflect, and the knowledge hub gave me one collaborator that already held decisions, guardrails, and corrections.</description>
+    </item>
+    <item>
+      <title>Read-only automation is a feature</title>
+      <link>https://athan-dial.github.io/notes/read-only-automation-is-a-feature/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/read-only-automation-is-a-feature/</guid>
+      <description>I keep automations in draft: Claude proposes, I send—parallel drafts for speed, human gate for tail risk after a near-miss taught me the cost of auto-send.</description>
+    </item>
+    <item>
+      <title>Skills encode what you learned the hard way</title>
+      <link>https://athan-dial.github.io/notes/skills-encode-what-you-learned-the-hard-way/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/notes/skills-encode-what-you-learned-the-hard-way/</guid>
+      <description>Every skill I write holds the constraint I burned time discovering — the CLI flag that silently fails, the join pattern that actually works, the config the docs forgot to mention.</description>
+    </item>
+  </channel>
+</rss>

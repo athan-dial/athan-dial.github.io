@@ -25,4 +25,16 @@ positioning_support = "My work sits between expert workflows, shared infrastruct
 [links]
 linkedin = "https://www.linkedin.com/in/athandial/"
 github = "https://github.com/athan-dial"
-resume_pdf = "/resume.pdf"
+# No resume link of any kind is published right now, deliberately.
+#   * resume_pdf  — pulled, see below.
+#   * resume_page — NOT set, because content/resume.md is `draft: true` with
+#     `build.render: never`. Linking /resume/ would ship a 404. Setting this key only
+#     makes sense once that front matter changes.
+# Both call sites (layouts/partials/footer.html, layouts/index.html) guard on these keys
+# with `with`, so an unset key drops the link cleanly rather than emitting an empty href.
+#
+# resume_pdf intentionally REMOVED. The Canva-exported PDF was a flattened image
+# carrying a personal phone number, and it also named an internal Montai system and
+# internal dollar figures. Pulled from the published site until an employer-safe
+# export exists. Do NOT reintroduce a key pointing at /resume.pdf — templates guard
+# on this key, so re-adding it silently republishes the file.

@@ -32,3 +32,6 @@ node_modules/
 # IDs, Slack permalinks, colleague-attributed sources, and unpublished metrics.
 # Never commit. Sanitized, publishable conclusions belong in .planning/*.md instead.
 /.planning/private/
+
+# Local-only artifacts, never published or committed
+_private/

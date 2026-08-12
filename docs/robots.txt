@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+
+# Quarantined / gated surfaces — clear signal for stale indexes
+Disallow: /case-studies/
+Disallow: /resume/
+
 Sitemap: https://athan-dial.github.io/sitemap.xml

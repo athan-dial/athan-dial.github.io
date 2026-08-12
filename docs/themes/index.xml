@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Themes on Athan Dial - Portfolio</title>
+    <link>https://athan-dial.github.io/themes/</link>
+    <description>Recent content in Themes on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 06 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://athan-dial.github.io/themes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Expert-Workflows</title>
+      <link>https://athan-dial.github.io/themes/expert-workflows/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/themes/expert-workflows/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Product-Judgment</title>
+      <link>https://athan-dial.github.io/themes/product-judgment/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/themes/product-judgment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reliable-Ai-Systems</title>
+      <link>https://athan-dial.github.io/themes/reliable-ai-systems/</link>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/themes/reliable-ai-systems/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

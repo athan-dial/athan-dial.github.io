@@ -1,5 +1,12 @@
 # Primary site navigation — Editorial Systems IA
-# Order is load-bearing: Work, Thinking, About, Résumé.
+# Order is load-bearing: Work, Thinking, About.
+#
+# The Résumé entry is REMOVED, not reordered. content/resume.md is `draft: true` with
+# `build.render: never`, so /resume/ is never generated and the nav item was a 404. On the
+# deployed site that 404 was masked by a stale docs/resume/index.html left over from the
+# retired Clinical Architect build — an orphan Hugo never cleans, which was still serving
+# old fabricated copy plus a link to the PII-bearing resume PDF. Restore this entry only
+# when content/resume.md actually renders.
 
 [[main]]
   name = "Work"
@@ -16,7 +23,3 @@
   url = "/about/"
   weight = 3
 
-[[main]]
-  name = "Résumé"
-  url = "/resume/"
-  weight = 4

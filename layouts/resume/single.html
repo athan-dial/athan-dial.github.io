@@ -26,9 +26,13 @@
         </li>
       </ul>
 
+      {{/* Guarded: profile.resume_pdf is deliberately unset, so no PDF is published.
+           Re-adding that key restores this button — see the note in data/profile.toml. */}}
+      {{ with $profile.links.resume_pdf }}
       <div class="hero__actions resume-actions">
-        <a class="btn-primary" href="{{ $profile.links.resume_pdf }}" download="Athan-Dial-Resume.pdf">Download résumé PDF</a>
+        <a class="btn-primary" href="{{ . }}" download="Athan-Dial-Resume.pdf">Download résumé PDF</a>
       </div>
+      {{ end }}
     </header>
 
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
