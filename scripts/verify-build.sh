@@ -72,18 +72,37 @@ fi
 # If the tree is ever intentionally brought back, replace this block with the
 # presence assertions from git history (see the commit that retired it).
 # ---------------------------------------------------------------------------
-AGENCY_TRACKED="$(git ls-files docs/agency | wc -l | tr -d ' ')"
-[ "$AGENCY_TRACKED" -eq 0 ] || fail 2 "docs/agency has $AGENCY_TRACKED tracked files — the retired Agency tree is back; remove it with: git rm -r docs/agency"
-
+# Check SHAPE, not tracking. An earlier version of this asserted zero tracked files under
+# docs/agency, which failed in CI for a boring reason: docs/ is the committed publish dir,
+# so the redirect stubs Hugo generates there are necessarily tracked too. The stubs are
+# supposed to exist. What must not come back is the retired *content*.
 if [ -d docs/agency ]; then
-  # Generated redirect stubs are expected; anything else is the old site resurfacing.
-  AGENCY_UNEXPECTED="$(find docs/agency -type f ! -name index.html | head -5)"
-  if [ -n "$AGENCY_UNEXPECTED" ]; then
-    printf 'verify-build: unexpected files under docs/agency:\n%s\n' "$AGENCY_UNEXPECTED" >&2
-    fail 2 "docs/agency contains non-stub files — the retired Agency site has been rebuilt into the publish dir"
+  # Every surviving file must be a meta-refresh stub. Real pages carry a stylesheet link.
+  AGENCY_NONSTUB=""
+  while IFS= read -r f; do
+    grep -qi 'http-equiv=.\?refresh' "$f" || AGENCY_NONSTUB="$AGENCY_NONSTUB$f"$'\n'
+  done < <(find docs/agency -type f -name '*.html')
+  if [ -n "$AGENCY_NONSTUB" ]; then
+    printf 'verify-build: non-stub pages under docs/agency:\n%s\n' "$AGENCY_NONSTUB" >&2
+    fail 2 "docs/agency contains real pages — the retired Agency site is back; it should be redirect stubs only"
+  fi
+
+  # The retired subtrees must not reappear with content in them.
+  for sub in playbooks tags diagrams; do
+    n="$(find "docs/agency/$sub" -type f 2>/dev/null | wc -l | tr -d ' ')"
+    if [ "$n" -gt 1 ]; then
+      fail 2 "docs/agency/$sub has $n files — the retired Agency $sub tree is back (expected at most one redirect stub)"
+    fi
+  done
+
+  # Any non-HTML asset means the old site's CSS/JS/images were restored.
+  AGENCY_ASSETS="$(find docs/agency -type f ! -name '*.html' | head -5)"
+  if [ -n "$AGENCY_ASSETS" ]; then
+    printf 'verify-build: unexpected assets under docs/agency:\n%s\n' "$AGENCY_ASSETS" >&2
+    fail 2 "docs/agency contains non-HTML assets — the retired Agency site has been restored"
   fi
 fi
-ok "docs/agency stays retired (no tracked files; redirect stubs only)"
+ok "docs/agency stays retired (redirect stubs only, no content)"
 
 # ---------------------------------------------------------------------------
 # 3. docs/skills — regenerable via fetch-skills.sh, but must not be silently gone.
