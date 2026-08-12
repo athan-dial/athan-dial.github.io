@@ -38,15 +38,27 @@
 {{ $graph | jsonify | safeJS }}
 </script>
   {{- else if $isArticle -}}
-    {{- $canonical := .Permalink -}}
-    {{- with .Params.canonical_url }}{{ $canonical = . }}{{ end -}}
+    {{- /* The site permalink is ALWAYS the canonical identity here, matching the
+           <link rel="canonical"> in baseof and the stated intent in essays/single.html
+           ("LinkedIn is distribution only").
+
+           This previously assigned .Params.canonical_url into both `url` and
+           `mainEntityOfPage.@id`, which pointed the structured data at LinkedIn while
+           the link tag pointed at this site — contradictory signals that hand article
+           attribution to the syndicated copy. An external original is expressed as
+           `sameAs` instead: same work, other location, canonicality unchanged. */ -}}
     {{- $article := dict
       "@context" "https://schema.org"
       "@type" "Article"
       "headline" .Title
-      "mainEntityOfPage" (dict "@type" "WebPage" "@id" $canonical)
-      "url" $canonical
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+      "url" .Permalink
     -}}
+    {{- with .Params.canonical_url -}}
+      {{- if and (ne . "") (ne . $.Permalink) (hasPrefix . "http") -}}
+        {{- $article = merge $article (dict "sameAs" (slice .)) -}}
+      {{- end -}}
+    {{- end -}}
     {{- with .Date }}{{ $article = merge $article (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
     {{- $modified := .Lastmod -}}
     {{- if $modified.IsZero }}{{ $modified = .Date }}{{ end -}}

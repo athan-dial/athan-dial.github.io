@@ -10,9 +10,13 @@ summary: "AI makes the plan-build-verify loop faster, which also makes it easier
 status: published
 visibility: public
 themes: [expert-workflows, product-judgment]
-# Originally published on LinkedIn. The site permalink stays the HTML canonical;
-# the template treats a LinkedIn URL here as distribution only. Awaiting the URL.
-canonical_url: ""
+# Originally published as a LinkedIn Pulse article. This is the ARTICLE url, not the
+# feed post that promotes it. The site permalink stays the HTML canonical (see
+# partials/schema.html); the template treats a linkedin.com value here as distribution
+# only and renders a "View on LinkedIn" button.
+# Companion feed post, for provenance — no template consumes it today:
+#   https://www.linkedin.com/feed/update/urn:li:activity:7493263472353497088/
+canonical_url: "https://www.linkedin.com/pulse/outer-loop-product-judgment-athan-dial-3n79c/"
 draft: false
 ---
 
