@@ -1,0 +1,42 @@
+{{/*
+  Curated LinkedIn post row for /thinking/. Mirrors note-card.html's grouped-field
+  shape so the two read as one system.
+
+  Expects a dict from data/linkedin.toml: quote, url, date, and optional label + essay.
+
+  Two deliberate choices:
+    * The quote renders inside `mark`, the amber highlighter. These cards are the
+      densest legitimate use of it on the site — a pulled line is exactly what a
+      highlighter is for.
+    * When `essay` is set, the local essay is the primary link and LinkedIn is
+      secondary, so a curated post drives readers inward rather than away.
+
+  Renders safely when date, label, or essay are missing. A card with no quote or no
+  url is skipped rather than rendered half-empty.
+*/}}
+{{- $quote := .quote | default "" -}}
+{{- $url := .url | default "" -}}
+{{- if and $quote $url -}}
+{{- $label := .label | default "Post" -}}
+<article class="note-card grouped-field">
+  <div class="grouped-field__label">
+    {{- with .date -}}
+      {{- $t := time . -}}
+      <time datetime="{{ $t.Format "2006-01-02" }}">{{ $t.Format "02 Jan 2006" }}</time>
+    {{- else -}}
+      <span>{{ $label }}</span>
+    {{- end -}}
+  </div>
+  <div class="note-card__body">
+    <blockquote class="linkedin-card__quote">
+      <p class="body-md"><mark>{{ $quote }}</mark></p>
+    </blockquote>
+    <p class="note-card__themes label-mono">
+      {{- with .essay -}}
+        <a href="{{ . | relURL }}">Read the essay</a>{{ " · " }}
+      {{- end -}}
+      <a href="{{ $url }}" rel="noopener noreferrer">{{ $label }} on LinkedIn &rarr;</a>
+    </p>
+  </div>
+</article>
+{{- end -}}

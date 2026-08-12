@@ -12,6 +12,16 @@
 {{- $notes = sort $notes "Date" "desc" -}}
 {{- $selectedNotes := first 5 $notes -}}
 {{- $notesArchive := site.GetPage "section" "notes" -}}
+{{/* Curated LinkedIn posts. No API exists for a member's own posts, so data/linkedin.toml
+     is the source of truth. Sorted newest-first; entries missing quote or url are skipped
+     by the partial. */}}
+{{- $linkedinPosts := slice -}}
+{{- with site.Data.linkedin -}}
+  {{- with .posts -}}
+    {{- $linkedinPosts = first 5 (sort . "date" "desc") -}}
+  {{- end -}}
+{{- end -}}
+{{- $profileLinkedin := site.Data.profile.links.linkedin | default "" -}}
 
 <div class="page-editorial page-editorial--thinking">
   <header class="container section">
@@ -96,7 +106,34 @@
     </div>
   </section>
 
-  {{/* Field Notes — quietest, densest; selected only */}}
+  {{/* From LinkedIn — curated posts from data/linkedin.toml. Hand-maintained by
+       necessity: LinkedIn exposes no API for a member's own posts. */}}
+  {{- with $linkedinPosts -}}
+  <section class="section section--home-explore" aria-labelledby="thinking-linkedin">
+    <div class="container">
+      <div class="section-rail">
+        <div class="section-rail__meta">
+          <h2 id="thinking-linkedin">From LinkedIn</h2>
+          {{- with $profileLinkedin -}}
+            <p class="label-mono"><a href="{{ . }}" rel="noopener noreferrer">Profile &rarr;</a></p>
+          {{- end -}}
+        </div>
+        <div class="section-rail__content">
+          <div class="grouped-fields">
+            {{- range . -}}
+              {{ partial "linkedin-card.html" . }}
+            {{- end -}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{- end -}}
+
+  {{/* Field Notes — quietest, densest; selected only. Hidden entirely when empty:
+       the agency-skills notes were retired, so an empty-state header would be dead UI.
+       Add a note under content/notes/ and this section returns on its own. */}}
+  {{- if $selectedNotes -}}
   <section class="section section--home-explore" aria-labelledby="thinking-field-notes">
     <div class="container">
       <div class="section-rail">
@@ -124,12 +161,11 @@
                 {{- end -}}
               </p>
             {{- end -}}
-          {{- else -}}
-            <p class="body-md empty-state">Field notes appear here as they are written.</p>
           {{- end -}}
         </div>
       </div>
     </div>
   </section>
+  {{- end -}}
 </div>
 {{ end }}

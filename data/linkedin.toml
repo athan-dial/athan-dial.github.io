@@ -1,0 +1,42 @@
+# Curated LinkedIn posts, surfaced on /thinking/ as "From LinkedIn".
+#
+# WHY THIS IS A HAND-CURATED FILE AND NOT A FEED
+# There is no way to fetch these automatically. LinkedIn's API does not expose a
+# member's own posts without partner-tier access, and scraping requires an
+# authenticated session, breaks their terms, and would break again on any markup
+# change. So this file is the source of truth: paste a URL, write a line.
+#
+# FIELDS
+#   quote  (required) One line in your own words, pulled from the post. This is the
+#          card's body — it renders inside a `mark` highlighter, so make it the
+#          sentence you'd want someone to remember. Keep it under ~140 characters.
+#   url    (required) The post permalink. Feed posts look like
+#          https://www.linkedin.com/feed/update/urn:li:activity:<id>/
+#          Pulse articles look like https://www.linkedin.com/pulse/<slug>/
+#   date   (required) ISO date, used for sort order. Newest first.
+#   label  (optional) Overrides the default "Post" eyebrow — e.g. "Article".
+#   essay  (optional) Site path, if this post corresponds to a published essay here.
+#          When set, the card links to the local essay first and LinkedIn second,
+#          so curated posts drive traffic inward rather than away.
+#
+# Order in this file does not matter; the template sorts by date descending and
+# shows the newest `limit` set in layouts/thinking/list.html.
+
+[[posts]]
+  quote = "Expertise steers. Systems execute."
+  url = "https://www.linkedin.com/feed/update/urn:li:activity:7493263472353497088/"
+  date = "2026-08-12"
+  label = "Post"
+  essay = "/essays/the-outer-loop/"
+
+# READY TO ENABLE — needs one fact I do not have.
+# The quote and URL below are taken verbatim from content/essays/the-operating-layer.md,
+# which already cites this post, so both are yours and verified. I do NOT know the post's
+# date, and inventing one would breach the content-authenticity rule in CLAUDE.md.
+# Fill in `date` with the real posting date and uncomment.
+#
+# [[posts]]
+#   quote = "The models are table stakes. What compounds is the operating layer: the workflows, the human-in-the-loop design, the institutional knowledge that can live in a system instead of someone's head."
+#   url = "https://www.linkedin.com/feed/update/urn:li:activity:7447774093472546816/"
+#   date = "YYYY-MM-DD"
+#   label = "Post"

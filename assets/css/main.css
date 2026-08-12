@@ -778,7 +778,11 @@ select:focus {
 /* The digital highlighter. EDITORIAL-SYSTEMS.md describes amber as acting like one; no
    component actually did it, so a writer had no way to mark the load-bearing sentence in a
    long argument. Ink on the tint is 13.1:1. */
-.prose mark {
+/* Unscoped on purpose. This was `.prose mark`, which meant a `mark` anywhere outside an
+   article body fell back to the browser's default fluorescent yellow — a visible defect
+   the moment the LinkedIn cards on /thinking/ used one. The highlighter is a token, so it
+   should look the same wherever it appears. */
+mark {
   padding: 0.1em 0.15em;
   color: var(--ink);
   background: var(--highlight);
@@ -1579,4 +1583,17 @@ samp {
     animation-duration: 0s;
     animation-delay: 0s;
   }
+}
+
+/* Curated LinkedIn card quote on /thinking/. The prose blockquote rules are scoped to
+   .prose, so this card needs its own — it sits inside a grouped-field, not an article
+   body. Keeps the amber rule and the highlighter, drops the prose indent and margins. */
+.linkedin-card__quote {
+  margin: 0 0 var(--space-2xs, 0.5rem);
+  padding-left: var(--space-sm, 1rem);
+  border-left: 1px solid var(--rule-amber);
+}
+
+.linkedin-card__quote p {
+  margin: 0;
 }
