@@ -58,45 +58,15 @@
 
 [[redirects]]
   from = "/agency/"
-  to = "/thinking/notes/"
+  to = "/thinking/"
   permanent = true
   path = "redirects/agency"
 
-[[redirects]]
-  from = "/agency/dispatches/ai-research-that-actually-cites-sources/"
-  to = "/notes/ai-research-that-actually-cites-sources/"
-  permanent = true
-  path = "redirects/agency-dispatches-ai-research-that-actually-cites-sources"
 
-[[redirects]]
-  from = "/agency/dispatches/autonomous-agents-need-a-foreman/"
-  to = "/notes/autonomous-agents-need-a-foreman/"
-  permanent = true
-  path = "redirects/agency-dispatches-autonomous-agents-need-a-foreman"
 
-[[redirects]]
-  from = "/agency/dispatches/delegation-is-the-real-skill/"
-  to = "/notes/delegation-is-the-real-skill/"
-  permanent = true
-  path = "redirects/agency-dispatches-delegation-is-the-real-skill"
 
-[[redirects]]
-  from = "/agency/dispatches/memory-across-sessions/"
-  to = "/notes/memory-across-sessions/"
-  permanent = true
-  path = "redirects/agency-dispatches-memory-across-sessions"
 
-[[redirects]]
-  from = "/agency/dispatches/read-only-automation-is-a-feature/"
-  to = "/notes/read-only-automation-is-a-feature/"
-  permanent = true
-  path = "redirects/agency-dispatches-read-only-automation-is-a-feature"
 
-[[redirects]]
-  from = "/agency/dispatches/skills-encode-what-you-learned-the-hard-way/"
-  to = "/notes/skills-encode-what-you-learned-the-hard-way/"
-  permanent = true
-  path = "redirects/agency-dispatches-skills-encode-what-you-learned-the-hard-way"
 
 # Replace leftover content/advisory.md and its /consulting alias without
 # editing that file's frontmatter (owned by another track).
