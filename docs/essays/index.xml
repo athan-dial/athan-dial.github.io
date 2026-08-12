@@ -6,6 +6,14 @@
     <description>Recent content in Essays on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
+    <lastBuildDate>Wed, 12 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://athan-dial.github.io/essays/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Outer Loop</title>
+      <link>https://athan-dial.github.io/essays/the-outer-loop/</link>
+      <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/essays/the-outer-loop/</guid>
+      <description>AI makes the plan-build-verify loop faster, which also makes it easier to perfect the wrong product. The outer loop keeps the user, the problem, and the product shape open to question — and it matters more now that the expert can arrive with a prototype.</description>
+    </item>
   </channel>
 </rss>
