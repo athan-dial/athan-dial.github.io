@@ -1,19 +1,7 @@
 {{ define "main" }}
+{{- /* Label rendering lives in partials/evidence-label.html — it was duplicated here and
+       in work-card.html, and missing from the homepage. One implementation now. */ -}}
 {{- $evidence := .Params.evidence_status | default "" -}}
-{{- /* Kept in step with partials/work-card.html: `verified` renders its own label and
-       variant instead of falling through to nothing. */ -}}
-{{- $evidenceLabel := "" -}}
-{{- $evidenceVariant := "" -}}
-{{- if eq $evidence "range-only" -}}
-  {{- $evidenceLabel = "Range only" -}}
-{{- else if eq $evidence "mechanism-only" -}}
-  {{- $evidenceLabel = "Mechanism only" -}}
-{{- else if eq $evidence "verified" -}}
-  {{- $evidenceLabel = "Verified" -}}
-  {{- $evidenceVariant = " evidence-label--verified" -}}
-{{- else if $evidence -}}
-  {{- $evidenceLabel = replace $evidence "-" " " -}}
-{{- end -}}
 {{- $users := .Params.users | default slice -}}
 {{- $role := .Params.role | default "" -}}
 {{- $themes := .Params.themes | default slice -}}
@@ -50,9 +38,7 @@
         {{- with $bluf -}}
         <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
         {{- end -}}
-        {{- if $evidenceLabel -}}
-        <p class="work-article__evidence"><span class="evidence-label{{ $evidenceVariant }}">{{ $evidenceLabel }}</span></p>
-        {{- end -}}
+        {{ partial "evidence-label.html" (dict "status" $evidence "class" "work-article__evidence") }}
       </header>
     </div>
 
@@ -61,17 +47,14 @@
         {{ partial "section-rail.html" (dict
           "page" .
           "notes" $railNotes
-          "evidence_label" $evidenceLabel
-          "evidence_variant" $evidenceVariant
+          "evidence_status" $evidence
         ) }}
       {{- else -}}
       <aside class="section-rail__meta case-study-toc" aria-label="Case metadata">
         {{- range $railNotes -}}
         <p class="metadata-caps">{{ . }}</p>
         {{- end -}}
-        {{- if $evidenceLabel -}}
-        <p><span class="evidence-label{{ $evidenceVariant }}">{{ $evidenceLabel }}</span></p>
-        {{- end -}}
+        {{ partial "evidence-label.html" (dict "status" $evidence) }}
         {{- /* Eight-part scan map — anchors match Hugo slug of archetypes/work.md headings */ -}}
         <nav class="work-article__outline" aria-label="Case structure">
           <p class="case-study-toc__label">Structure</p>

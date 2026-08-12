@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Essays on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/essays/</link>
+    <link>http://localhost:1415/essays/</link>
     <description>Recent content in Essays on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 12 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://athan-dial.github.io/essays/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1415/essays/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Outer Loop</title>
-      <link>https://athan-dial.github.io/essays/the-outer-loop/</link>
+      <link>http://localhost:1415/essays/the-outer-loop/</link>
       <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/essays/the-outer-loop/</guid>
+      <guid>http://localhost:1415/essays/the-outer-loop/</guid>
       <description>AI makes the plan-build-verify loop faster, which also makes it easier to perfect the wrong product. The outer loop keeps the user, the problem, and the product shape open to question — and it matters more now that the expert can arrive with a prototype.</description>
     </item>
     <item>
       <title>When Measurement Cannot Choose for You</title>
-      <link>https://athan-dial.github.io/essays/the-operating-layer/</link>
+      <link>http://localhost:1415/essays/the-operating-layer/</link>
       <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/essays/the-operating-layer/</guid>
+      <guid>http://localhost:1415/essays/the-operating-layer/</guid>
       <description>Some model choices cannot be settled by a fair comparison. The honest response is to write down the strategic argument, the uncertainty, and what would change your mind.</description>
     </item>
   </channel>

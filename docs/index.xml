@@ -2,199 +2,199 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Athan Dial on Athan Dial - Portfolio</title>
-    <link>https://athan-dial.github.io/</link>
+    <link>http://localhost:1415/</link>
     <description>Recent content in Athan Dial on Athan Dial - Portfolio</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 12 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://athan-dial.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1415/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An all-false column is a legal column</title>
-      <link>https://athan-dial.github.io/notes/an-all-false-column-is-a-legal-column/</link>
+      <link>http://localhost:1415/notes/an-all-false-column-is-a-legal-column/</link>
       <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/notes/an-all-false-column-is-a-legal-column/</guid>
+      <guid>http://localhost:1415/notes/an-all-false-column-is-a-legal-column/</guid>
       <description>A one-character naming mismatch made a boolean false for every row. Five layers each behaved correctly and nothing threw. The only check that caught it was a person who knew the answer was impossible.</description>
     </item>
     <item>
       <title>The Outer Loop</title>
-      <link>https://athan-dial.github.io/essays/the-outer-loop/</link>
+      <link>http://localhost:1415/essays/the-outer-loop/</link>
       <pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/essays/the-outer-loop/</guid>
+      <guid>http://localhost:1415/essays/the-outer-loop/</guid>
       <description>AI makes the plan-build-verify loop faster, which also makes it easier to perfect the wrong product. The outer loop keeps the user, the problem, and the product shape open to question — and it matters more now that the expert can arrive with a prototype.</description>
     </item>
     <item>
       <title>The primary user was not in the room</title>
-      <link>https://athan-dial.github.io/work/intelligence-platform-for-an-absent-user/</link>
+      <link>http://localhost:1415/work/intelligence-platform-for-an-absent-user/</link>
       <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/work/intelligence-platform-for-an-absent-user/</guid>
+      <guid>http://localhost:1415/work/intelligence-platform-for-an-absent-user/</guid>
       <description>I designed and helped build an internal intelligence platform that reconciled records from multiple sources without asking a model to decide what was true. A discovery conversation changed the primary user from the analyst to a leadership function. That reframe clarified the product boundary: the machine could retrieve, rank, and propose; the analyst still had to adjudicate. The platform eventually reached production after an earlier attempt failed at a permissions boundary.</description>
     </item>
     <item>
       <title>When a Faster Search Tool Still Felt Incomplete</title>
-      <link>https://athan-dial.github.io/work/analog-search-as-a-product/</link>
+      <link>http://localhost:1415/work/analog-search-as-a-product/</link>
       <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/work/analog-search-as-a-product/</guid>
+      <guid>http://localhost:1415/work/analog-search-as-a-product/</guid>
       <description>I led the product definition for an analog-search tool that made warmed-database queries roughly an order of magnitude faster after an implementation change. Then its primary expert user said a commercial alternative returned more results. My proposed response was not to claim parity. It was to give the expert threshold control and make the edge of a match visible.</description>
     </item>
     <item>
       <title>When Measurement Cannot Choose for You</title>
-      <link>https://athan-dial.github.io/essays/the-operating-layer/</link>
+      <link>http://localhost:1415/essays/the-operating-layer/</link>
       <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/essays/the-operating-layer/</guid>
+      <guid>http://localhost:1415/essays/the-operating-layer/</guid>
       <description>Some model choices cannot be settled by a fair comparison. The honest response is to write down the strategic argument, the uncertainty, and what would change your mind.</description>
     </item>
     <item>
       <title>About</title>
-      <link>https://athan-dial.github.io/about/</link>
+      <link>http://localhost:1415/about/</link>
       <pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/about/</guid>
+      <guid>http://localhost:1415/about/</guid>
       <description>&lt;p&gt;The path from bench science to product wasn&amp;rsquo;t planned. The transferable skill turned out to be &lt;strong&gt;designing decision systems under uncertainty&lt;/strong&gt;: figuring out what counts as evidence, which experiment is worth the cost, and how to keep a team&amp;rsquo;s confidence calibrated when truth comes back late or partial.&lt;/p&gt;&#xA;&lt;h2 id=&#34;trajectory&#34;&gt;Trajectory&lt;/h2&gt;&#xA;&lt;p&gt;PhD work taught those moves; drug discovery ML uses them every day.&lt;/p&gt;&#xA;&lt;p&gt;The questions changed. &lt;em&gt;Which model architecture balances precision versus recall for this drug target?&lt;/em&gt; replaced &lt;em&gt;Which experimental condition will produce the cleanest signal?&lt;/em&gt; The decision-making register stayed the same: first-principles framing of what counts as evidence, explicit tradeoffs, and a strong allergy to metric theater.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Redirect to /about/#conversations</title>
-      <link>https://athan-dial.github.io/advisory/</link>
+      <link>http://localhost:1415/advisory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/advisory/</guid>
+      <guid>http://localhost:1415/advisory/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /about/#conversations</title>
-      <link>https://athan-dial.github.io/consulting/</link>
+      <link>http://localhost:1415/consulting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/consulting/</guid>
+      <guid>http://localhost:1415/consulting/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/ai-research-that-actually-cites-sources/</link>
+      <link>http://localhost:1415/agency/dispatches/ai-research-that-actually-cites-sources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/ai-research-that-actually-cites-sources/</guid>
+      <guid>http://localhost:1415/agency/dispatches/ai-research-that-actually-cites-sources/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/autonomous-agents-need-a-foreman/</link>
+      <link>http://localhost:1415/agency/dispatches/autonomous-agents-need-a-foreman/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/autonomous-agents-need-a-foreman/</guid>
+      <guid>http://localhost:1415/agency/dispatches/autonomous-agents-need-a-foreman/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/cowork-changed-how-i-think-about-ai/</link>
+      <link>http://localhost:1415/agency/dispatches/cowork-changed-how-i-think-about-ai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/cowork-changed-how-i-think-about-ai/</guid>
+      <guid>http://localhost:1415/agency/dispatches/cowork-changed-how-i-think-about-ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/delegation-is-the-real-skill/</link>
+      <link>http://localhost:1415/agency/dispatches/delegation-is-the-real-skill/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/delegation-is-the-real-skill/</guid>
+      <guid>http://localhost:1415/agency/dispatches/delegation-is-the-real-skill/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/memory-across-sessions/</link>
+      <link>http://localhost:1415/agency/dispatches/memory-across-sessions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/memory-across-sessions/</guid>
+      <guid>http://localhost:1415/agency/dispatches/memory-across-sessions/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/read-only-automation-is-a-feature/</link>
+      <link>http://localhost:1415/agency/dispatches/read-only-automation-is-a-feature/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/read-only-automation-is-a-feature/</guid>
+      <guid>http://localhost:1415/agency/dispatches/read-only-automation-is-a-feature/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/skills-encode-what-you-learned-the-hard-way/</link>
+      <link>http://localhost:1415/agency/dispatches/skills-encode-what-you-learned-the-hard-way/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/skills-encode-what-you-learned-the-hard-way/</guid>
+      <guid>http://localhost:1415/agency/dispatches/skills-encode-what-you-learned-the-hard-way/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/dispatches/</link>
+      <link>http://localhost:1415/agency/dispatches/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/dispatches/</guid>
+      <guid>http://localhost:1415/agency/dispatches/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/playbooks/</link>
+      <link>http://localhost:1415/agency/playbooks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/playbooks/</guid>
+      <guid>http://localhost:1415/agency/playbooks/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/agency/</link>
+      <link>http://localhost:1415/agency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/agency/</guid>
+      <guid>http://localhost:1415/agency/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /thinking/</title>
-      <link>https://athan-dial.github.io/writing/</link>
+      <link>http://localhost:1415/writing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/writing/</guid>
+      <guid>http://localhost:1415/writing/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</link>
+      <link>http://localhost:1415/case-studies/learning-agenda-framework-montai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/learning-agenda-framework-montai/</guid>
+      <guid>http://localhost:1415/case-studies/learning-agenda-framework-montai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
+      <link>http://localhost:1415/case-studies/preventing-metric-theater-drug-discovery-ml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
+      <guid>http://localhost:1415/case-studies/preventing-metric-theater-drug-discovery-ml/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</link>
+      <link>http://localhost:1415/case-studies/reducing-pipeline-latency-decision-velocity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
+      <guid>http://localhost:1415/case-studies/reducing-pipeline-latency-decision-velocity/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</link>
+      <link>http://localhost:1415/case-studies/scaling-ai-nominations-montai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/scaling-ai-nominations-montai/</guid>
+      <guid>http://localhost:1415/case-studies/scaling-ai-nominations-montai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</link>
+      <link>http://localhost:1415/case-studies/shiny-framework-standardization-montai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/shiny-framework-standardization-montai/</guid>
+      <guid>http://localhost:1415/case-studies/shiny-framework-standardization-montai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</link>
+      <link>http://localhost:1415/case-studies/stat6-data-crisis-response-montai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/stat6-data-crisis-response-montai/</guid>
+      <guid>http://localhost:1415/case-studies/stat6-data-crisis-response-montai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
+      <link>http://localhost:1415/case-studies/xtalpi-build-vs-buy-analysis-montai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
+      <guid>http://localhost:1415/case-studies/xtalpi-build-vs-buy-analysis-montai/</guid>
       <description></description>
     </item>
     <item>
       <title>Redirect to /work/</title>
-      <link>https://athan-dial.github.io/case-studies/</link>
+      <link>http://localhost:1415/case-studies/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://athan-dial.github.io/case-studies/</guid>
+      <guid>http://localhost:1415/case-studies/</guid>
       <description></description>
     </item>
   </channel>

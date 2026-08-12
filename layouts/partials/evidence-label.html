@@ -1,0 +1,41 @@
+{{/*
+  Evidence label — the single source of truth for how evidence_status renders.
+
+  This logic was duplicated in layouts/work/single.html and partials/work-card.html, and
+  omitted entirely from the homepage's Selected work card, so the same claim classification
+  rendered three different ways (twice identically, once not at all). One implementation now.
+
+  Params (dict):
+    status  (required) the page's evidence_status value
+    class   (optional) class for the wrapping <p>, e.g. "work-article__evidence"
+
+  Emits nothing at all when status is empty, so callers get no stray empty paragraph.
+
+  Vocabulary comes from .planning/CONTENT-MODEL.md. `verified` states itself in its own
+  colour: it used to fall through every branch and render no label, which meant a fully
+  sourced case looked exactly like an unclassified one while the qualified cases got a
+  badge — the evidence gate was legible only for its weakest outcomes.
+*/}}
+{{- $status := "" -}}
+{{- $class := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- $status = .status | default "" -}}
+  {{- $class = .class | default "" -}}
+{{- else -}}
+  {{- $status = . | default "" -}}
+{{- end -}}
+{{- $label := "" -}}
+{{- $variant := "" -}}
+{{- if eq $status "range-only" -}}
+  {{- $label = "Range only" -}}
+{{- else if eq $status "mechanism-only" -}}
+  {{- $label = "Mechanism only" -}}
+{{- else if eq $status "verified" -}}
+  {{- $label = "Verified" -}}
+  {{- $variant = " evidence-label--verified" -}}
+{{- else if $status -}}
+  {{- $label = replace $status "-" " " -}}
+{{- end -}}
+{{- with $label -}}
+<p{{ with $class }} class="{{ . }}"{{ end }}><span class="evidence-label{{ $variant }}" title="How the claims in this case are classified">{{ . }}</span></p>
+{{- end -}}

@@ -16,22 +16,6 @@
 {{- $role := $page.Params.role | default "" -}}
 {{- $themes := $page.Params.themes | default slice -}}
 {{- $summary := $page.Params.summary | default $page.Description | default "" -}}
-{{- /* `verified` used to fall through every branch and render no label at all, so a fully
-       sourced case looked exactly like an unclassified one while the qualified cases got a
-       badge — the evidence gate was legible only for its weakest outcomes. Verified now
-       states itself, in its own colour. */ -}}
-{{- $evidenceLabel := "" -}}
-{{- $evidenceVariant := "" -}}
-{{- if eq $evidence "range-only" -}}
-  {{- $evidenceLabel = "Range only" -}}
-{{- else if eq $evidence "mechanism-only" -}}
-  {{- $evidenceLabel = "Mechanism only" -}}
-{{- else if eq $evidence "verified" -}}
-  {{- $evidenceLabel = "Verified" -}}
-  {{- $evidenceVariant = " evidence-label--verified" -}}
-{{- else if $evidence -}}
-  {{- $evidenceLabel = replace $evidence "-" " " -}}
-{{- end -}}
 <article class="work-card">
   <a href="{{ $page.RelPermalink }}" class="work-card__link">
     <div class="work-card__meta">
@@ -63,9 +47,7 @@
       {{- with $summary -}}
       <p class="body-md work-card__summary">{{ . }}</p>
       {{- end -}}
-      {{- if $evidenceLabel -}}
-      <p><span class="evidence-label{{ $evidenceVariant }}">{{ $evidenceLabel }}</span></p>
-      {{- end -}}
+      {{ partial "evidence-label.html" (dict "status" $evidence) }}
     </div>
   </a>
 </article>

@@ -49,6 +49,12 @@
   </div>
   {{- end -}}
 
+  {{- /* Prefer `evidence_status` and delegate to partials/evidence-label.html, the single
+         implementation. `evidence_label` + `evidence_variant` are still honoured so any
+         caller passing pre-computed values keeps working. */ -}}
+  {{- with .evidence_status }}
+  {{ partial "evidence-label.html" (dict "status" .) }}
+  {{- end }}
   {{- with .evidence_label }}
   {{- /* The evidence label is the one component that makes the evidence gate
          visible. Amber marks the claim class; the copy itself is ink, because

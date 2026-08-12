@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://athan-dial.github.io/notes/an-all-false-column-is-a-legal-column/</loc>
+    <loc>http://localhost:1415/notes/an-all-false-column-is-a-legal-column/</loc>
     <lastmod>2026-08-12T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/</loc>
+    <loc>http://localhost:1415/</loc>
     <lastmod>2026-08-12T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/essays/the-outer-loop/</loc>
+    <loc>http://localhost:1415/essays/the-outer-loop/</loc>
     <lastmod>2026-08-12T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/work/intelligence-platform-for-an-absent-user/</loc>
+    <loc>http://localhost:1415/work/intelligence-platform-for-an-absent-user/</loc>
     <lastmod>2026-08-11T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/work/analog-search-as-a-product/</loc>
+    <loc>http://localhost:1415/work/analog-search-as-a-product/</loc>
     <lastmod>2026-08-11T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/essays/the-operating-layer/</loc>
+    <loc>http://localhost:1415/essays/the-operating-layer/</loc>
     <lastmod>2026-08-11T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/about/</loc>
+    <loc>http://localhost:1415/about/</loc>
     <lastmod>2026-01-20T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://athan-dial.github.io/thinking/</loc>
+    <loc>http://localhost:1415/thinking/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
