@@ -35,3 +35,27 @@ node_modules/
 
 # Local-only artifacts, never published or committed
 _private/
+
+# ---------------------------------------------------------------------------
+# Process exhaust — kept locally, never published. This repo is PUBLIC, and
+# .planning/ is the tree that previously leaked 946 lines of internal material
+# (see the history rewrite of 2026-08-12). Do not re-track these.
+# A short allowlist below keeps the few docs that code comments cite.
+# ---------------------------------------------------------------------------
+_bmad/
+_bmad-output/
+.cursor/
+.dev/
+.DS_Store
+model-citizen/
+layouts.blowfish.bak/
+
+.planning/*
+!.planning/ACCESSIBILITY-CHECKS.md
+!.planning/CONTENT-SAFETY-CONTRACT.md
+!.planning/CONTENT-MODEL.md
+!.planning/DEPLOY-MIGRATION.md
+!.planning/VOICE-REFERENCE.md
+!.planning/design/
+.planning/design/*
+!.planning/design/REDESIGN-PLAN.md
