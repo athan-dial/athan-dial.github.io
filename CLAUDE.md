@@ -1,219 +1,170 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code working in this repository.
+
+> **This file was stale until 2026-08-12 and caused real damage.** It described a design
+> system ("Clinical Architect") that had already been retired, so an agent briefed from it
+> was told to preserve a teal/Manrope/glassmorphic/dark-mode system that no longer exists.
+> If you change the design system, typography, or colour model, **update this file in the
+> same commit.** A confidently wrong CLAUDE.md is worse than none.
 
 ## Project Overview
 
-This is a personal portfolio website built with **Hugo** (v0.154.3+extended), **themeless** (no external theme dependency). The site showcases a data science and product leadership portfolio using the **"Clinical Architect"** design system — a high-impact, editorial aesthetic designed in Google Stitch. It is deployed to GitHub Pages from the `docs/` directory.
+Personal portfolio site. **Hugo v0.154.3+extended, themeless** — every layout is custom in
+`layouts/`, no theme dependency, no Hugo modules. Deployed to GitHub Pages from `docs/`.
 
-**Key characteristics:**
-- Focus on "decision evidence, not achievements" - case studies demonstrate product judgment, technical depth, and execution leadership
-- "Clinical Architect" design system: Deep Teal (#0D9488), Manrope + Space Grotesk, extralight headlines, uppercase monospaced labels
-- Soft-card UI with teal-tinted borders, generous spacing, glassmorphic navigation
-- Light-first design with dark mode toggle
+Positioning: "decision evidence, not achievements." Pages carry evidence about product
+judgment and applied-AI work rather than achievement lists.
 
-## Build & Development Commands
+The design system is **Editorial Systems**: warm paper, near-black ink, serif display,
+flat surfaces. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
 
-### Local Development
+## Build & Development
+
 ```bash
-# Serve site locally with live reload on http://localhost:1313
-hugo server -D
-
-# Serve with drafts and watch for changes
-hugo server --buildDrafts --watch
+hugo server -D          # local, live reload, http://localhost:1313
+hugo                    # production build into docs/
 ```
 
-### Build for Production
-```bash
-# Build site to docs/ directory (GitHub Pages publishDir)
-hugo
+### Do NOT use `--cleanDestinationDir` (or `rm -rf docs/`)
 
-# Build with drafts included
-hugo -D
+`docs/` is a **mixed directory**: Hugo output *plus* a separately synced agency microsite
+(127 committed files with its own favicons, CSS bundles, and 404). A clean build deletes the
+synced half, and Hugo will not regenerate it. To remove a stale orphan, delete that path
+specifically after a plain `hugo` build.
 
-# Clean and rebuild
-rm -rf docs/ && hugo
+Hugo also never cleans orphans on its own, so a page that stops rendering leaves its old
+`index.html` in `docs/` and GitHub Pages keeps serving it. This already caused a live
+incident: a retired `docs/resume/index.html` kept serving old copy plus a link to a PDF
+carrying a personal phone number, months after the page stopped being generated. **After
+removing or unpublishing a page, check `docs/` for its orphan.**
+
+## Design System: Editorial Systems
+
+**Authority:** `DESIGN.md`. Tokens: `assets/css/tokens.css`. Implementation:
+`assets/css/main.css`. Measured contrast: `.planning/ACCESSIBILITY-CHECKS.md`.
+Zero `!important`, zero border-radius, zero box-shadow — all deliberate.
+
+### Typography
+
+Fonts are **self-hosted woff2** in `static/fonts/`, not a CDN.
+
+| Token | Stack | Role |
+|---|---|---|
+| `--font-serif` | Source Serif 4 | Display and long-form reading |
+| `--font-sans` | Manrope | UI text, summaries |
+| `--font-mono` | IBM Plex Mono | Rail labels, metadata, evidence labels |
+
+### Colour
+
+Light only. **There is no dark mode** — no toggle in `baseof.html`, no `html.dark` block in
+`main.css`. It is deferred on purpose ("ship one polished light experience"). The
+`#theme-toggle` rules in `main.css` are orphans from the retired system. Untested dark
+starting values are recorded in a `tokens.css` comment and are marked do-not-ship-unmeasured.
+**Do not invent a dark theme as a side effect of another task.**
+
+```css
+--paper: #f6f2ea;            --surface: #fffdf8;
+--ink: #14202b;              --ink-secondary: #53606a;
+--structural-teal: #17616a;  --evidence-amber: #b86b35;
+--evidence-amber-ink: #96521f;  --evidence-verified: #41603f;
+--rule: #d8d1c4;
 ```
+
+Three accents, each with exactly one job, none decorative:
+
+| Hue | Job |
+|---|---|
+| `--structural-teal` | Structure and wayfinding: where the reader is, where they can go |
+| `--evidence-amber` | A claim needing qualification, and the in-prose highlighter |
+| `--evidence-verified` | A claim with a traceable source |
+
+Rules that are easy to break by accident:
+
+1. **`--evidence-amber` cannot carry text.** It is 3.62:1 on paper — fine as a non-text
+   marker, fails AA as type. Use `--evidence-amber-ink` (5.34:1) for amber type.
+2. **No hardcoded colour at call sites.** Every hex lives once, in `:root`. Tints and
+   hairlines are `color-mix()` derivations (`--tint-*`, `--rule-*`, `--highlight`) so a hue
+   changes in one place.
+3. **Colour is never the only channel.** Every evidence label states its class in words and
+   carries a marker square; the current nav item carries `aria-current` as well as a rule.
+4. **Verify contrast in-browser, through a canvas.** The `color-mix()` tints compute as
+   `oklab()` and cannot be read off a hex table — a naive JS parse silently mis-reads them.
+5. **Never animate a layout property on hover.** Text must not reflow under the pointer.
+6. **`prefers-reduced-motion` must stay last in `main.css`.** Mid-file, it silently fails to
+   zero every transition declared after it.
+
+### Accents render only where content exercises them
+
+The evidence label, `verified` state, `mark`, and blockquote have **no live instances** —
+no work page is published and no content sets `evidence_status: verified`. So the built
+components are correct but largely invisible. If the site reads monochrome, the fix is
+usually content that uses these, not more CSS.
 
 ## Architecture
 
-### Content Structure
-- `content/_index.md` - Homepage intro text
-- `content/about.md` - About page
-- `content/advisory.md` - Advisory & Thought Partnership (alias /consulting)
-- `content/resume.md` - Resume page
-- `content/writing.md` - Writing page
-- `content/case-studies/` - Case study articles demonstrating decision-making and outcomes
+### Content
 
-### Layouts & Partials
-- `layouts/_default/baseof.html` - Base HTML shell (Google Fonts, Hugo Pipes CSS, dark mode script)
-- `layouts/_default/single.html` - Default page layout
-- `layouts/_default/list.html` - Default list layout
-- `layouts/index.html` - Homepage with hero + case study grid
-- `layouts/case-studies/single.html` - Case study detail with back link + tags
-- `layouts/case-studies/list.html` - Case study grid listing
-- `layouts/partials/nav.html` - Glassmorphic fixed navigation
-- `layouts/partials/footer.html` - Footer with uppercase monospaced links
-- `layouts/partials/case-study-card.html` - Card component (category/title/excerpt/arrow)
+`content/_index.md` (home) · `about.md` · `advisory.md` (aliases `/consulting`, `/advisory`)
+· `writing.md` · `resume.md` · sections `work/`, `thinking/`, `notes/`, `essays/`, `skills/`
+· `_content.gotmpl` generates the `/agency/` dispatches and `/case-studies/` pages.
 
-### Design System: "The Clinical Architect"
+Deliberately unpublished right now — do not "fix" these without asking:
+- `content/resume.md` — `draft: true` + `build.render: never`. `/resume/` does **not** exist.
+  No résumé link is published anywhere; `data/profile.toml` explains why and both call sites
+  guard on the key with `with`.
+- `content/skills/_index.md` — draft, so `/skills/` 404s.
 
-**Source of truth**: `assets/css/main.css` (~400 lines, zero `!important`)
+### Data
 
-**Fonts** (Google Fonts CDN):
-- `Manrope` — Headlines (weight 200 extralight) and body (weight 300-400)
-- `Space Grotesk` — Labels, navigation, tags, metadata (always uppercase, wide tracking)
+`data/profile.toml` is the **canonical profile source** — name, role, employer, positioning,
+and `[links]`. Prefer it over `config/_default/params.toml` for anything a template renders.
+`data/experience.json` backs the résumé template.
 
-**Color Palette (Light Mode Default)**:
-```css
---color-primary: #0D9488;        /* Deep Teal */
---color-primary-hover: #0F766E;  /* Darker teal */
---color-bg: #F8F9FA;             /* Soft off-white */
---color-surface: #FFFFFF;         /* White cards */
---color-text: #1F2937;           /* Dark gray */
---color-text-secondary: #4B5563; /* Medium gray */
---color-text-muted: #94A3B8;     /* Light gray (labels) */
-```
+### Key layouts
 
-**Dark Mode** (`html.dark`):
-```css
---color-primary: #2DD4BF;  /* Bright teal */
---color-bg: #0F172A;       /* Deep navy */
---color-surface: #1E293B;  /* Dark slate */
---color-text: #F1F5F9;     /* Near-white */
-```
+`_default/baseof.html` (shell, self-hosted fonts, Hugo Pipes CSS) · `index.html` (home) ·
+`work/{list,single}.html` · `thinking/list.html` · `notes/{list,single}.html` ·
+`essays/single.html` · `resume/single.html`
 
-**Key Design Principles:**
-1. **Extralight headlines (200 weight)** — Display and section titles use Manrope extralight, uppercase
-2. **Uppercase monospaced labels** — All section labels, nav links, tags use Space Grotesk 11px, uppercase, 0.2em+ tracking
-3. **Soft-card pattern** — White bg, 1px teal-tinted border (10% opacity), hover intensifies to 30% + shadow
-4. **Glassmorphic nav** — Fixed position, `backdrop-filter: blur(20px)`, semi-transparent bg
-5. **Generous padding** — Cards use 3rem padding, sections have 10rem vertical padding
-6. **No-line rule** — Depth via background tonal shifts, not 1px borders (except soft-card borders)
-7. **Airy gradient** — Subtle radial teal gradients on body background
+Partials worth knowing: `section-rail.html` (vertical rule + one mono label, the core
+structural unit), `work-card.html`, `note-card.html`, `nav.html`, `footer.html`,
+`wayfinding.html`, `diagram-boundary.html`, `og-image.html`, `schema.html`.
 
-**Spacing:**
-```css
---space-xs: 0.5rem;   --space-sm: 1rem;    --space-md: 1.5rem;
---space-lg: 2.5rem;   --space-xl: 4rem;    --space-2xl: 6rem;
---space-3xl: 10rem;
-```
+### Config
 
-### Configuration Files
-- `config/_default/hugo.toml` - Main Hugo settings, baseURL, taxonomies
-- `config/_default/params.toml` - Site parameters (name, email, social handles)
-- `config/_default/languages.en.toml` - Site metadata and author info
-- `config/_default/menus.en.toml` - Navigation menu structure
-- `config/_default/module.toml` - Empty (no theme imports)
+`config/_default/` — `hugo.toml` (baseURL and `publishDir = "docs"`; **do not change
+either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (empty).
 
-## Case Study Content Format
+## Hard Constraints
 
-Case studies follow a structured format with frontmatter metadata:
-
-```markdown
----
-title: "Title"
-date: 2026-01-09
-description: "Brief summary"
-problem_type: "product-strategy" | "technical-architecture" | "decision-systems" | "execution-leadership"
-scope: "team" | "organization" | "individual"
-complexity: "high" | "medium" | "low"
-tags: ["tag1", "tag2"]
----
-
-## Context
-[Problem space and stakes]
-
-## Ownership
-[What you owned vs influenced]
-
-## Decision Frame
-[Problem statement, options, decision rationale, constraints]
-
-## Outcome
-[Primary outcomes, guardrails, second-order effects, limitations]
-
-## Reflection
-[What you'd do differently, lessons learned, future implications]
-```
-
-## Important Notes
-
-1. **GitHub Pages Deployment**: Site builds to `docs/` directory (configured in hugo.toml), which is the publishDir for GitHub Pages on the `gh-pages` branch
-
-2. **Themeless Architecture**: No Hugo theme dependency. All layouts are custom in `layouts/`. The only external dependency is Google Fonts (Manrope + Space Grotesk) loaded via CDN in baseof.html.
-
-3. **Design System Source**: The "Clinical Architect" design was created in Google Stitch (project ID: `615008401046984188`). The canonical reference screen is "Landing Page: Clinical Architect Master Cut (Final Sync)".
-
-4. **Content Philosophy**: All content emphasizes:
-   - Decision systems over one-off analyses
-   - Measurable outcomes over activity metrics
-   - Product judgment + technical depth + execution leadership
-   - Candid reflection on trade-offs and limitations
-
-5. **Content Authenticity Constraint**: Current portfolio content is fabricated/generic and does NOT sound like Athan. All future content creation must be informed by ChatGPT Deep Research outputs (Voice & Style Guide + Montai Work Archaeology). Do NOT write new case studies or major content without this research data.
-
-6. **Employer Safety**: Portfolio must not appear to be running an active consulting business while employed at Montai. Use "Advisory" language, avoid pricing/timeframes, frame as informal thought partnership.
-
-## Content Authenticity & Voice
-
-**Critical Problem**: AI-generated content lacks Athan's authentic voice and factual basis, undermining the "decision evidence, not achievements" brand positioning.
-
-### ChatGPT Deep Research Integration
-
-Two comprehensive research prompts have been created to extract authentic content:
-
-**Location**: `/Users/adial/Library/Mobile Documents/iCloud~md~obsidian/Documents/2B-new/000 System/01 Inbox`
-
-1. **Voice & Style Guide** (`ChatGPT Deep Research - Voice and Style Guide.md`)
-2. **Montai Work Archaeology** (`ChatGPT Deep Research - Montai Work Archaeology.md`)
-
-### Content Creation Workflow
-
-**Before Deep Research Results**:
-- Do NOT write new case studies (lack factual details)
-- Do NOT rewrite resume content (lack authentic voice + project details)
-- CAN do structural work (scaffolding, templates, design)
-- CAN do technical improvements (SEO, analytics, performance)
-
-**After Deep Research Results**:
-1. Apply Voice & Style Guide to all writing
-2. Reference factual project details from Work Archaeology
-3. Avoid generic AI patterns ("I helped...", "I implemented...")
-
-## Employer Safety Guidelines
-
-**Constraint**: Cannot appear to be running active consulting business while employed at Montai.
-
-### Safe Language Patterns
-- "Advisory & Thought Partnership" (not "Consulting Services")
-- "I occasionally advise teams..." (informal, infrequent)
-- "Let's Connect" (networking)
-
-### Avoid
-- Explicit pricing, timeframes, engagement types with deliverables
-- "Discovery call", "Booking", "Investment"
+1. **No PII in committed or published artifacts.** A phone number shipped for months inside
+   a flattened Canva PDF, where no text search could find it. Treat image-only PDFs as
+   opaque: render and *read* them before publishing. A phone-free copy lives in gitignored
+   `_private/`; the published site links no résumé at all.
+2. **Employer safety.** Must not read as running an active consulting business while employed
+   at Montai. Use "Advisory & Thought Partnership," never pricing, timeframes, or deliverables.
+   Avoid "discovery call," "booking," "investment."
+3. **Content authenticity.** Existing portfolio prose is substantially fabricated and does not
+   sound like Athan. Do **not** write new case studies or rewrite the résumé without the
+   ChatGPT Deep Research outputs (Voice & Style Guide, Montai Work Archaeology) in
+   `2B-new/000 System/01 Inbox`. Structural, design, and technical work is fine meanwhile.
+   See `.planning/VOICE-REFERENCE.md` and `.planning/CONTENT-SAFETY-CONTRACT.md`.
+4. **Never commit internal Montai material.** `.planning/` is tracked and **public**. A prior
+   commit put 946 lines of internal evidence material into this public repo; deleting it from
+   HEAD did not remove it from history.
+5. **Mobile below 768px is not verifiably testable here.** Viewport emulation is unsupported
+   in cmux/WKWebView and headless Chrome will not start in this sandbox. Verify at 800px and
+   1600px and say plainly that narrow is unverified — do not claim it.
 
 ## Common Tasks
 
-### Adding a New Case Study
-1. Create markdown file in `content/case-studies/`
-2. Use the frontmatter structure shown above
-3. Follow the section structure: Context -> Ownership -> Decision Frame -> Outcome -> Reflection
-4. Build and preview: `hugo server -D`
+**Styles:** edit `assets/css/main.css`, consume tokens from `tokens.css`, add no new hex
+outside `:root`, re-measure contrast in-browser, update `DESIGN.md` and
+`.planning/ACCESSIBILITY-CHECKS.md` in the same commit.
 
-### Updating Styles
-1. Edit `assets/css/main.css`
-2. Use CSS variables defined in `:root` (light) and `html.dark` (dark)
-3. Test both light and dark modes
-4. Rebuild: `hugo`
+**Navigation:** edit `config/_default/menus.en.toml`. Confirm the target actually renders —
+a menu entry pointing at an unrendered page is a 404 that a stale `docs/` orphan can hide.
 
-### Updating Navigation
-1. Edit `config/_default/menus.en.toml`
-2. Hugo will automatically generate nav from menu items
-
-### Updating the Design
-The design was created in Google Stitch. To iterate:
-1. Use the Stitch MCP (`mcp__stitch__*` tools) to pull or edit screens
-2. Project ID: `615008401046984188`
-3. Map Stitch HTML/CSS changes to `assets/css/main.css` and Hugo layouts
+**Unpublishing a page:** change the front matter, rebuild, then delete the orphan from
+`docs/`, then grep `docs/` for any surviving link to it.
