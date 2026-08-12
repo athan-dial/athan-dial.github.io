@@ -9,7 +9,7 @@
        (dict "label" "The hard choice" "ordinal" "05")
 
     2. Case metadata (work/single.html)
-       (dict "notes" $railNotes "evidence_label" $evidenceLabel)
+       (dict "notes" $railNotes "evidence_label" $evidenceLabel "evidence_variant" $evidenceVariant)
 
   ONE label in shape 1. No sequence number, no secondary note. It previously
   rendered number + label + note, which stacked three layers of scaffolding above
@@ -53,6 +53,6 @@
   {{- /* The evidence label is the one component that makes the evidence gate
          visible. Amber marks the claim class; the copy itself is ink, because
          amber on paper measures 3.62:1 and fails 4.5:1 for body text. */ -}}
-  <p class="evidence-label" title="How the claims in this case are classified">{{ . }}</p>
+  <p class="evidence-label{{ $.evidence_variant }}" title="How the claims in this case are classified">{{ . }}</p>
   {{- end -}}
 </aside>

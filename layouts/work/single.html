@@ -1,11 +1,17 @@
 {{ define "main" }}
 {{- $evidence := .Params.evidence_status | default "" -}}
+{{- /* Kept in step with partials/work-card.html: `verified` renders its own label and
+       variant instead of falling through to nothing. */ -}}
 {{- $evidenceLabel := "" -}}
+{{- $evidenceVariant := "" -}}
 {{- if eq $evidence "range-only" -}}
   {{- $evidenceLabel = "Range only" -}}
 {{- else if eq $evidence "mechanism-only" -}}
   {{- $evidenceLabel = "Mechanism only" -}}
-{{- else if and $evidence (ne $evidence "verified") -}}
+{{- else if eq $evidence "verified" -}}
+  {{- $evidenceLabel = "Verified" -}}
+  {{- $evidenceVariant = " evidence-label--verified" -}}
+{{- else if $evidence -}}
   {{- $evidenceLabel = replace $evidence "-" " " -}}
 {{- end -}}
 {{- $users := .Params.users | default slice -}}
@@ -45,7 +51,7 @@
         <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
         {{- end -}}
         {{- if $evidenceLabel -}}
-        <p class="work-article__evidence"><span class="evidence-label">{{ $evidenceLabel }}</span></p>
+        <p class="work-article__evidence"><span class="evidence-label{{ $evidenceVariant }}">{{ $evidenceLabel }}</span></p>
         {{- end -}}
       </header>
     </div>
@@ -56,6 +62,7 @@
           "page" .
           "notes" $railNotes
           "evidence_label" $evidenceLabel
+          "evidence_variant" $evidenceVariant
         ) }}
       {{- else -}}
       <aside class="section-rail__meta case-study-toc" aria-label="Case metadata">
@@ -63,7 +70,7 @@
         <p class="metadata-caps">{{ . }}</p>
         {{- end -}}
         {{- if $evidenceLabel -}}
-        <p><span class="evidence-label">{{ $evidenceLabel }}</span></p>
+        <p><span class="evidence-label{{ $evidenceVariant }}">{{ $evidenceLabel }}</span></p>
         {{- end -}}
         {{- /* Eight-part scan map — anchors match Hugo slug of archetypes/work.md headings */ -}}
         <nav class="work-article__outline" aria-label="Case structure">

@@ -27,16 +27,44 @@ Light only. A dark variant is deferred rather than half-built.
 | Secondary text | `--ink-secondary` | `#53606A` |
 | Structural accent | `--structural-teal` | `#17616A` |
 | Evidence / tension | `--evidence-amber` | `#B86B35` |
+| Evidence, text-safe | `--evidence-amber-ink` | `#96521F` |
+| Evidence, verified | `--evidence-verified` | `#41603F` |
 | Rules and dividers | `--rule` | `#D8D1C4` |
 
-Strategy: **restrained**. Two accents, each with one job. Teal is functional and navigational. Amber
-is reserved for evidence labels — the marker on a claim that is range-only or mechanism-only — and
-appears nowhere decorative.
+Strategy: **restrained**. Three hues, each with exactly one job, none decorative.
 
-Measured contrast (see `.planning/ACCESSIBILITY-CHECKS.md` for the full table): ink on paper 15.4:1,
-ink-secondary on paper 5.9:1, teal on paper 6.0:1. **Amber on paper is 3.62:1 — it passes 3:1 for
-non-text and large text but fails 4.5:1 for body text, so it is used only as a non-text marker with
-its label copy set in ink.** Do not set small amber text on paper.
+| Hue | Job | Where it appears |
+|---|---|---|
+| Structural teal | Structure and wayfinding: where the reader is, where they can go | Masthead rule, section-rail labels and rules, current nav item, links, arrows, card hover, portrait mount |
+| Evidence amber | A claim that needs qualifying, and the in-prose highlighter | Evidence labels, `mark`, blockquotes, empty/in-review states |
+| Evidence verified | A claim with a traceable source | `.evidence-label--verified` |
+
+Derived tints and rules (`--tint-*`, `--rule-*`, `--highlight`) are `color-mix()` of those three
+against `--surface`, so a hue changes in one place. No call site hardcodes a colour.
+
+**The accents were previously near-invisible, which is the problem this system had rather than a
+shortage of colour.** Both lived almost entirely on elements that render on no page (`.hero__badge`,
+`.case-study-card__category`, `.evidence-label` with no published work), so the first viewport of
+every page was pure ink on paper. Amber additionally could not carry type at all — `#B86B35` is
+3.62:1 on paper — so it only ever appeared as a 1px border or a 10% tint. Two fixes: the accents moved
+onto elements that always render, and `--evidence-amber-ink` (5.34:1) lets amber be type.
+
+Amber is no longer spent on section furniture. It previously painted every `.section__label`, every
+card category, and the hero badge; a highlighter that marks every line marks nothing. Section labels
+are wayfinding and took teal; card categories are metadata and took `--ink-secondary`.
+
+Measured contrast (full table, including the canvas-resolved `oklab()` tints, in
+`.planning/ACCESSIBILITY-CHECKS.md`): ink on paper 14.8:1, ink-secondary on paper 5.8:1, teal on
+paper 6.4:1, amber-ink on paper 5.3:1, verified on paper 6.3:1, amber-ink on its tint 5.2:1, verified
+on its tint 5.9:1, ink on highlight 12.2:1. All pass AA for small text. **`--evidence-amber` itself
+still fails 4.5:1 and remains a non-text marker only; use `--evidence-amber-ink` for any amber type.**
+
+Colour is never the only channel: evidence labels state their class in words and carry a square
+marker, and the current nav item carries `aria-current="page"` as well as its teal underline.
+
+Dark mode: still deferred, and there is no toggle in `baseof.html` (the `#theme-toggle` rules in
+`main.css` are orphans from the retired Clinical Architect system). `tokens.css` records untested
+starting values for the accents so a future dark pass has a starting point, not a shipped theme.
 
 Note: the warm-paper family is a known AI default, and the token is literally named `--paper`. It
 survives here because it is a committed identity decision made in Stitch by the owner, not a
@@ -90,7 +118,8 @@ grid is genuinely the affordance, defined by a 1px border or a shift to `--surfa
 ## Components
 
 - **Buttons** — square. Primary: ink fill, paper text. Secondary: 1px rule border, ink text. Active: teal.
-- **Evidence label** — mono, amber on a light amber tint, marking a claim's classification. The system's one distinctive component; it is the evidence gate made visible.
+- **Evidence label** — mono, amber on a light amber tint, marking a claim's classification. The system's one distinctive component; it is the evidence gate made visible. Two variants: default (amber, a claim needing qualification) and `--verified` (green, a sourced claim). A square marker gives it a second channel beyond hue. `evidence_status: verified` used to render no label at all, so the strongest claim class was invisible while the weakest ones were badged; both `partials/work-card.html` and `work/single.html` now emit it.
+- **Highlighter** — `.prose mark`, ink on an amber tint. Amber has always been described as acting like a highlighter; this is the component that does it.
 - **Grouped-field row** — the default list unit.
 - **Section rail** — vertical rule plus one mono label.
 - **Empty state** — a quiet mono line inside the rail with a stated intent, on collapsed section padding. Honest that the section exists and is being filled, without reserving dead vertical space.
@@ -98,8 +127,18 @@ grid is genuinely the affordance, defined by a 1px border or a shift to `--surfa
 ## Motion
 
 Minimal and fast: navigation, disclosure, and state changes only. No entrance choreography, no
-scroll reveals — content is never gated behind a transition. Every animation has a
-`prefers-reduced-motion: reduce` path.
+scroll reveals; content is never gated behind a transition.
+
+Tokens: `--duration-fast` 120ms, `--duration-base` 180ms, `--ease-out-quart`. Everything animated is
+colour, text-decoration, or a 4px arrow translate, so the reduced-motion path is an instant state
+change rather than a removed one.
+
+Hover never touches layout. `.case-study-card__link` and `.explore-item` used to animate
+`padding-inline`, which reflowed every line of the row under the pointer as the reader aimed at it;
+the tonal shift now sits on the row container, which already spans its grid cell.
+
+**The `prefers-reduced-motion` block must stay last in `main.css`.** It was mid-file, ahead of the
+card and measure-cap rules, so any transition declared after it was never zeroed.
 
 ## Imagery
 

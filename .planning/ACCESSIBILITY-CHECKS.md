@@ -71,6 +71,24 @@ Thresholds: **4.5:1** normal text; **3:1** large text and non-text UI.
 | Evidence-amber on light amber tint | `#B86B35` | `#FFF5EB` | **3.76:1** | **Fail** | Pass | Tint from `.evidence-label` in `main.css`. Label copy uses `--ink` on this tint (**15.35:1**, Pass). Amber is a non-text marker. Suggested amber if it must be text on this tint: `#A56030` (~4.52:1). |
 | Paper on ink (primary button) | `#F6F2EA` | `#14202B` | **14.79:1** | Pass | Pass | Primary button label |
 
+### Accent extension (measured 2026-08-12, in-browser via canvas-resolved `oklab()` computed values)
+
+The tints are `color-mix(in oklab, ...)` so they cannot be read off a hex table; these ratios were
+resolved from `getComputedStyle` through a 1x1 canvas, not calculated from source values.
+
+| Pair | Foreground | Background | Ratio | 4.5:1 text | 3:1 large/non-text | Notes |
+|---|---|---|---|---|---|---|
+| Evidence-amber-ink on paper | `#96521F` | `#F6F2EA` | **5.34:1** | Pass | Pass | The text-safe amber. Supersedes the "do not use amber for small text" workaround above: amber label copy is now amber rather than ink. |
+| Evidence-amber-ink on tint-amber | `#96521F` | `rgb(248,237,226)` | **5.17:1** | Pass | Pass | `.evidence-label` default |
+| Evidence-verified on paper | `#41603F` | `#F6F2EA` | **6.33:1** | Pass | Pass | Sits in teal's register (6.37) on purpose |
+| Evidence-verified on tint-verified | `#41603F` | `rgb(235,236,228)` | **5.94:1** | Pass | Pass | `.evidence-label--verified` |
+| Ink on highlight | `#14202B` | `--highlight` | **12.17:1** | Pass | Pass | `.prose mark`, the digital highlighter |
+| Ink on tint-amber | `#14202B` | `--tint-amber` | **14.32:1** | Pass | Pass | `.prose blockquote` |
+| Structural-teal on paper (masthead rule, current-page underline) | `#17616A` | `#F6F2EA` | **6.37:1** | n/a | Pass | Non-text structural marks |
+
+Colour is never the sole channel: every evidence label states its class in words and carries a
+square marker, and the current nav item carries `aria-current="page"`.
+
 **Recompute locally:**
 
 ```bash

@@ -206,18 +206,34 @@ strong {
   font-weight: 700;
 }
 
+/* Links carried `text-decoration-color: transparent`, so an inline link was distinguished
+   from body copy by hue alone — no signifier until the pointer was already on it — and
+   hover then turned the link INK, i.e. hovering removed the accent. Both are inverted. The
+   underline is now present at rest (faint, so prose still reads as prose) and firms up on
+   hover while the teal stays. Also satisfies "nothing conveyed by colour alone". */
 a {
   color: var(--structural-teal);
-  text-decoration-color: transparent;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  transition: color 160ms ease, text-decoration-color 160ms ease, background-color 160ms ease;
+  transition: color var(--duration-base) var(--ease-out-quart),
+    text-decoration-color var(--duration-base) var(--ease-out-quart),
+    text-decoration-thickness var(--duration-fast) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart);
 }
 
 a:hover {
-  color: var(--ink);
+  color: var(--structural-teal);
   text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+/* Composite links wrap whole blocks of content; an underline would decorate the block.
+   .work-card__link had no rule at all, so it inherited the one above. */
+.work-card__link {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 ul,
@@ -274,6 +290,9 @@ hr {
    was doing on /thinking/. EDITORIAL-SYSTEMS.md scopes rails to annotations and
    labels "set in the metadata font", so tier headings take the label treatment and
    keep their semantic level. */
+/* Teal rather than ink: /thinking/ and /notes/ name their rails with an h2 while the
+   homepage uses .section-rail__label, and both are doing the same wayfinding job. Colouring
+   only one of them would make the accent look arbitrary from page to page. */
 .section-rail__meta h2,
 .section-rail__meta h3 {
   margin: 0;
@@ -283,7 +302,7 @@ hr {
   line-height: var(--metadata-caps-line-height);
   letter-spacing: var(--metadata-caps-tracking);
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--structural-teal);
 }
 
 /* F. An empty tier should not reserve a full section's worth of vertical space.
@@ -293,13 +312,54 @@ hr {
   padding-block: var(--stack-md);
 }
 
+/* Empty states carry most of the pixels on /work/ and /thinking/ right now, and they were
+   undifferentiated grey paragraphs — indistinguishable from body copy, so a reader could
+   not tell "nothing here yet" from "here is the content". DESIGN.md treats a stated absence
+   as a credential ("an honest absence beats both"), which makes it a claim-status, which
+   makes it amber's job. Same 6px square the evidence label uses, so there is one marker
+   language for claim status rather than two. */
 .empty-state {
+  display: flex;
+  gap: 0.7em;
   color: var(--ink-secondary);
 }
 
-/* Rail label. Inherits the mono metadata treatment from .section-rail__meta; this
-   just controls the optional ordinal, which is used only where reading order
-   carries information (case-study sections), never as listing-page grammar. */
+.empty-state::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.72em;
+  background: var(--evidence-amber);
+}
+
+/* The homepage's in-review notices use grouped fields rather than .empty-state. Their
+   label is the status, so the label takes the status colour. */
+[role="status"] .grouped-field__label {
+  color: var(--evidence-amber-ink);
+}
+
+/* A work/thinking card with no link is a placeholder for something not yet published, so
+   its category slot is really a state. Marked as one, without needing a template change. */
+.case-study-card:not(:has(a)) .case-study-card__category {
+  color: var(--evidence-amber-ink);
+}
+
+/* Rail label. This is the one element that appears on every section of every page, and it
+   was --ink-secondary grey — which is why the hero's first viewport had no accent in it at
+   all. A section label answers "where am I", which is precisely structural-teal's job in
+   the system, so the colour is carrying meaning rather than being applied to it.
+   Teal on paper is 6.37:1, comfortably AA at this 12px size. */
+/* A long label wraps to three or four lines in a ~190px rail, and the 16px metadata
+   line-height reads as cramped once it does. Looser leading applies only to the rail. */
+.section-rail__label {
+  color: var(--structural-teal);
+  line-height: 1.55;
+}
+
+/* Inherits the mono metadata treatment from .section-rail__meta; this just controls the
+   optional ordinal, used only where reading order carries information (case-study
+   sections), never as listing-page grammar. */
 .section-rail__ordinal {
   margin-right: 0.5em;
   color: var(--ink-secondary);
@@ -316,23 +376,9 @@ hr {
   margin: 0;
 }
 
-/* Evidence label — the evidence gate made visible. Amber marks the claim class,
-   the copy is ink: amber on paper measures 3.62:1, which passes 3:1 for non-text
-   but fails 4.5:1 for body text. */
-.evidence-label {
-  margin-block: var(--stack-md) 0;
-  padding: 0.35em 0.6em;
-  background: color-mix(in oklab, var(--evidence-amber) 10%, var(--surface));
-  /* Full 1px border, not a left-only stripe. A coloured side-stripe is a decorative
-     tell; a full hairline reads as part of the system's rule language. */
-  border: 1px solid color-mix(in oklab, var(--evidence-amber) 45%, var(--surface));
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: var(--metadata-caps-size);
-  line-height: var(--metadata-caps-line-height);
-  letter-spacing: var(--metadata-caps-tracking);
-  text-transform: uppercase;
-}
+/* The evidence label is defined once, further down under "Evidence and grouped fields".
+   It used to be declared twice — and the second declaration silently reinstated the
+   3px coloured side-stripe that the first one had deliberately removed. */
 
 .section-rail {
   display: grid;
@@ -371,12 +417,14 @@ hr {
   border-top: 1px solid var(--rule);
 }
 
+/* Was a 2px amber side-stripe on grey text. Two problems: the coloured side-stripe is a
+   decorative tell rather than part of the rule language, and it spent the evidence
+   highlighter on generic section furniture — amber marking every section is amber marking
+   nothing. A section label is wayfinding, so it takes teal and drops the stripe. */
 .section__label {
   display: block;
   margin-bottom: var(--stack-sm);
-  padding-left: 12px;
-  color: var(--ink-secondary);
-  border-left: 2px solid var(--evidence-amber);
+  color: var(--structural-teal);
 }
 
 .section__heading {
@@ -384,11 +432,17 @@ hr {
 }
 
 /* Header */
+/* The masthead rule. Every page previously opened on pure ink-on-paper with no accent in
+   the first viewport at all — the two accents lived on elements (.hero__badge,
+   .case-study-card__category, .evidence-label) that render on almost no page. A structural
+   rule across the top of the masthead is the oldest signifier in the register this system
+   borrows from, it costs no layout, and it puts the brand's own colour on 100% of pages. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
   background: color-mix(in srgb, var(--paper) 96%, transparent);
+  border-top: var(--masthead-rule) solid var(--structural-teal);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -450,10 +504,20 @@ hr {
   text-transform: uppercase;
 }
 
-.site-nav a:hover,
-.site-nav a[aria-current="page"] {
+.site-nav a:hover {
   color: var(--ink);
   text-decoration-color: currentColor;
+}
+
+/* Where the reader is, in the colour that means wayfinding. The current page was
+   previously marked by an ink underline identical to plain hover, so the two states were
+   indistinguishable once the pointer moved. The thicker teal rule is unambiguous, and
+   aria-current still carries it for anyone not seeing colour. */
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration-color: var(--structural-teal);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 #theme-toggle {
@@ -579,22 +643,48 @@ select:focus {
 }
 
 /* Evidence and grouped fields */
+
+/* Evidence label — the evidence gate made visible, and the system's one distinctive
+   component. Three changes here:
+     1. One declaration. It was defined twice, and the second copy reinstated the coloured
+        3px border-left the first had removed on purpose. Side-stripes are out.
+     2. The text is amber now, not ink. Canonical --evidence-amber cannot carry type
+        (3.62:1), which is why amber never read as colour anywhere; --evidence-amber-ink is
+        the same hue at 5.34:1, so the label finally looks like the thing it signals.
+     3. Tint and border come from tokens instead of a hardcoded #fff5eb.
+   The square marker gives the label a second, non-colour channel, and the copy always
+   names the claim class in words. */
 .evidence-label {
   display: inline-flex;
   align-items: center;
+  gap: 0.55em;
   padding: 4px 8px;
-  /* Canonical amber is 3.76:1 on this tint, so ink carries the label text
-     while amber remains the evidence signal. */
-  color: var(--ink);
-  background: #fff5eb;
-  border: 1px solid color-mix(in srgb, var(--evidence-amber) 35%, var(--paper));
-  border-left: 3px solid var(--evidence-amber);
+  color: var(--evidence-amber-ink);
+  background: var(--tint-amber);
+  border: 1px solid var(--rule-amber);
   font-family: var(--font-mono);
   font-size: var(--metadata-caps-size);
   font-weight: var(--metadata-caps-weight);
   line-height: var(--metadata-caps-line-height);
   letter-spacing: var(--metadata-caps-tracking);
   text-transform: uppercase;
+}
+
+.evidence-label::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+}
+
+/* Verified was the missing state: `evidence_status: verified` rendered no label at all, so
+   a fully sourced claim looked identical to an unclassified one while the qualified claims
+   got a badge. The strongest class now reads strongest. */
+.evidence-label--verified {
+  color: var(--evidence-verified);
+  background: var(--tint-verified);
+  border-color: var(--rule-verified);
 }
 
 .grouped-fields {
@@ -667,11 +757,14 @@ select:focus {
   line-height: var(--body-lg-line-height);
 }
 
+/* A pulled quote is a tension point, which is amber's actual brief. Full amber-tinted
+   panel instead of the 3px side-stripe: same signal, no decorative tell, and it gives the
+   accent an area rather than a sliver so the colour is legible while reading. */
 .prose blockquote {
   margin: var(--stack-lg) 0;
   padding: var(--stack-md) var(--stack-lg);
-  background: var(--surface);
-  border-left: 3px solid var(--evidence-amber);
+  background: var(--tint-amber);
+  border: 1px solid var(--rule-amber);
 }
 
 .prose blockquote p {
@@ -680,6 +773,22 @@ select:focus {
   font-size: var(--headline-sm-size);
   font-style: italic;
   line-height: var(--headline-sm-line-height);
+}
+
+/* The digital highlighter. EDITORIAL-SYSTEMS.md describes amber as acting like one; no
+   component actually did it, so a writer had no way to mark the load-bearing sentence in a
+   long argument. Ink on the tint is 13.1:1. */
+.prose mark {
+  padding: 0.1em 0.15em;
+  color: var(--ink);
+  background: var(--highlight);
+}
+
+/* Prose section boundaries. A tinted rule keeps a thread of the accent running down the
+   length of a long essay; the heaviest anchors (case-study header, section rails, footer)
+   stay pure ink so ink still reads as the top of the hierarchy. */
+.prose h2 {
+  border-top-color: var(--rule-teal);
 }
 
 code,
@@ -750,11 +859,13 @@ samp {
   overflow: hidden;
 }
 
+/* The band's edge is a percentage of the VIEWPORT while the shell is a centred 1240px, so
+   above ~1320px the tonal block detaches from the portrait column it is meant to sit behind
+   and bleeds off the right edge, unaligned to anything in the grid. Tinting it made that
+   misalignment legible rather than causing it. The hero's tonal field now comes from the
+   portrait's own offset frame below, which is on the grid. */
 .hero__backdrop {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent 0 75%, var(--surface-container-low) 75% 100%);
+  display: none;
 }
 
 .hero__inner {
@@ -768,16 +879,16 @@ samp {
   align-items: center;
 }
 
+/* Side-stripe removed, same reasoning as .section__label. The dot is the marker. */
 .hero__badge {
   display: inline-flex;
   align-items: center;
   gap: var(--stack-sm);
   margin-bottom: var(--stack-md);
-  padding-left: 12px;
-  border-left: 2px solid var(--evidence-amber);
 }
 
 .hero__badge-dot {
+  flex: none;
   width: 8px;
   height: 8px;
   background: var(--evidence-amber);
@@ -819,13 +930,20 @@ samp {
   margin-top: var(--stack-lg);
 }
 
+/* The portrait is mounted, and the 8px padding is the mount. Tinting it puts the hero's
+   tonal field on an edge that is actually part of the grid, unlike the old viewport-relative
+   backdrop band. Reads as a photograph on coloured board, which is the register this system
+   is borrowing from anyway. */
 .hero__portrait {
   position: relative;
   padding: var(--stack-sm);
-  background: var(--paper);
-  border: 1px solid var(--rule);
+  background: var(--tint-teal);
+  border: 1px solid var(--rule-teal);
 }
 
+/* Inert: `z-index: -1` paints this behind the opaque background of an ancestor, so it has
+   never rendered. Left in place rather than deleted because the markup emits it and removing
+   markup is outside a colour pass — but do not style it expecting to see anything. */
 .hero__portrait-bg {
   position: absolute;
   inset: var(--stack-md) calc(-1 * var(--stack-md)) calc(-1 * var(--stack-md)) var(--stack-md);
@@ -869,6 +987,8 @@ samp {
 .case-study-card {
   background: transparent;
   border-bottom: 1px solid var(--rule);
+  transition: background-color var(--duration-base) var(--ease-out-quart),
+    border-bottom-color var(--duration-base) var(--ease-out-quart);
 }
 
 .case-study-card__link {
@@ -880,14 +1000,32 @@ samp {
   text-decoration: none;
 }
 
-.case-study-card__link:hover {
-  padding-inline: var(--stack-md);
+/* Hover used to set `padding-inline` on the link, which reflowed every line of the card
+   under the pointer — the text moved as you aimed at it. The tonal shift now sits on the
+   card, which already spans its grid cell, so nothing moves. The bottom rule going teal is
+   the second channel: the row the reader is on is the row the accent is on.
+   :has() so the "In review" placeholder cards, which contain no link, stay inert rather
+   than advertising an affordance they do not have. */
+.case-study-card:has(a):hover {
   background: var(--surface);
+  border-bottom-color: var(--structural-teal);
 }
 
+.case-study-card:has(a):hover .case-study-card__title {
+  color: var(--structural-teal);
+}
+
+.case-study-card__title {
+  transition: color var(--duration-base) var(--ease-out-quart);
+}
+
+/* The category was amber on every card regardless of what the card was — published work,
+   cornerstone essay, field note, and the "In review" placeholder all shared the evidence
+   highlighter. That is the spend that left nothing to highlight with. Categories are
+   metadata, so they read as metadata; amber is now reserved for claim classification. */
 .case-study-card__category {
   margin-bottom: var(--stack-sm);
-  color: var(--evidence-amber);
+  color: var(--ink-secondary);
 }
 
 .case-study-card__title {
@@ -915,9 +1053,17 @@ samp {
   color: var(--ink-secondary);
 }
 
+/* The arrow is the one place a small movement is genuinely informative: it points, so it
+   travels the direction it points. 4px, 180ms, zeroed under prefers-reduced-motion. */
 .case-study-card__arrow {
   color: var(--structural-teal);
   font-family: var(--font-mono);
+  transition: transform var(--duration-base) var(--ease-out-quart);
+}
+
+.case-study-card:has(a):hover .case-study-card__arrow,
+.explore-item:hover .explore-item__arrow {
+  transform: translateX(4px);
 }
 
 /* Case study detail and rail */
@@ -1026,9 +1172,23 @@ samp {
   text-decoration: none;
 }
 
+/* Same reflow-on-hover fix as the work cards: shift tone and rule, never layout. */
+.explore-item {
+  transition: background-color var(--duration-base) var(--ease-out-quart),
+    border-bottom-color var(--duration-base) var(--ease-out-quart);
+}
+
 .explore-item:hover {
-  padding-inline: var(--stack-md);
   background: var(--surface);
+  border-bottom-color: var(--structural-teal);
+}
+
+.explore-item:hover .explore-item__title {
+  color: var(--structural-teal);
+}
+
+.explore-item__title {
+  transition: color var(--duration-base) var(--ease-out-quart);
 }
 
 .explore-item__num,
@@ -1036,6 +1196,10 @@ samp {
   color: var(--structural-teal);
   font-family: var(--font-mono);
   font-size: var(--label-mono-size);
+}
+
+.explore-item__arrow {
+  transition: transform var(--duration-base) var(--ease-out-quart);
 }
 
 .explore-item__body {
@@ -1167,9 +1331,12 @@ samp {
     column-gap: var(--gutter);
   }
 
+  /* The rail's vertical divider is the system's signature line. A teal-tinted rule keeps
+     the accent running down the full height of every section instead of only touching the
+     label, and reads as part of the rule language rather than as an added ornament. */
   .section-rail__meta {
     padding-right: var(--stack-md);
-    border-right: 1px solid var(--rule);
+    border-right: 1px solid var(--rule-teal);
   }
 
   .hero__grid {
@@ -1241,22 +1408,6 @@ samp {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0s;
-    transition-delay: 0s;
-    animation-duration: 0s;
-    animation-delay: 0s;
-  }
-}
-
-
 /* Measure cap — EDITORIAL-SYSTEMS.md requires a 65-75 character line.
    The 720px --reading-column delivers that at body-lg (19px) but runs to ~82 characters
    at body-md (17px). The cap is expressed in `ch` and applied to the elements that carry
@@ -1277,6 +1428,41 @@ samp {
 .note-card__summary,
 .work-card__summary {
   max-width: 61ch;
+}
+
+/* Note and work card titles had no rule of their own, so a field note on /thinking/
+   rendered as a 17px Manrope link — the same weight as the summary beneath it. They are
+   headline links: serif, ink at rest, teal on hover like every other card title. */
+.note-card__title {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--headline-sm-size);
+  font-weight: var(--headline-sm-weight);
+  line-height: var(--headline-sm-line-height);
+  text-decoration-color: transparent;
+}
+
+.note-card__title:hover,
+.work-card__link:hover .work-card__title {
+  color: var(--structural-teal);
+}
+
+.note-card__title:hover {
+  text-decoration-color: currentColor;
+}
+
+.work-card__title {
+  transition: color var(--duration-base) var(--ease-out-quart);
+}
+
+/* The table of contents is a dense stack of links; underlining all of them at rest turns
+   the rail into noise. This is the one place the quiet-until-hover treatment is right. */
+.case-study-toc a {
+  text-decoration-color: transparent;
+}
+
+.case-study-toc a:hover {
+  text-decoration-color: currentColor;
 }
 
 /* ============================================
@@ -1370,4 +1556,27 @@ samp {
   color: var(--ink);
   font-size: 15px;
   line-height: 1.45;
+}
+
+/* ============================================
+   Reduced motion — global override, and it must be LAST in the file.
+   It previously sat mid-file, ahead of the rules in the "Measure cap" and card sections,
+   so any transition declared after it was never zeroed. An override that depends on source
+   order belongs at the end, where nothing can outrank it.
+   Every transition in this stylesheet is colour, decoration, or a 4px transform, so the
+   reduced-motion path is an instant state change rather than a removed one.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s;
+    transition-delay: 0s;
+    animation-duration: 0s;
+    animation-delay: 0s;
+  }
 }

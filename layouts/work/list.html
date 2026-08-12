@@ -5,9 +5,11 @@
 <section class="section work-index">
   <div class="container">
     <header class="work-index__header section-rail">
-      <div class="section-rail__meta">
-        <span class="label-mono" aria-hidden="true">01</span>
-      </div>
+      {{- /* Was a bare aria-hidden "01" — a decorative counter with nothing to count, which
+             DESIGN.md removed as AI section-grammar everywhere else, and it left the only
+             rail on this page carrying no information. A named label is what the rail is
+             for, and it goes through the shared partial like every other page. */ -}}
+      {{ partial "section-rail.html" (dict "label" "Case studies") }}
       <div class="section-rail__content">
         <h1>{{ .Title }}</h1>
         {{- with .Params.summary -}}
@@ -31,9 +33,19 @@
       </ul>
     </div>
     {{- else -}}
-    <p class="body-md work-index__empty empty-state reading-column" role="status">
-      This section is being rebuilt. Evidence-validated case studies will appear here once they clear review — nothing unpublished is listed.
-    </p>
+    {{- /* The empty state was a direct child of .container carrying `reading-column`, whose
+           `margin-inline: auto` centred it in the 1240px shell while the heading above it sits
+           in the rail's content column — so the only paragraph on the page lined up with
+           nothing. Inside a rail it inherits the content column and the override that
+           suppresses auto-centring there. */ -}}
+    <div class="section-rail work-index__empty-row">
+      {{ partial "section-rail.html" (dict "label" "In review") }}
+      <div class="section-rail__content">
+        <p class="body-md work-index__empty empty-state reading-column" role="status">
+          This section is being rebuilt. Evidence-validated case studies will appear here once they clear review, and nothing unpublished is listed.
+        </p>
+      </div>
+    </div>
     {{- end -}}
   </div>
 </section>
