@@ -3,9 +3,6 @@ title: "The Outer Loop"
 type: essay
 date: 2026-08-12
 tier: cornerstone
-# Homepage selects on the boolean `cornerstone`; /thinking/ selects on `tier`.
-# Both are set deliberately — see the note in the commit message.
-cornerstone: true
 summary: "AI makes the plan-build-verify loop faster, which also makes it easier to perfect the wrong product. The outer loop keeps the user, the problem, and the product shape open to question — and it matters more now that the expert can arrive with a prototype."
 status: published
 visibility: public

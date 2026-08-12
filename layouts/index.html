@@ -4,9 +4,13 @@
 {{- $publicWork = first 3 $publicWork -}}
 {{- $essays := where (where (where .Site.RegularPages "Section" "essays") "Params.status" "published") "Params.visibility" "public" -}}
 {{- $notes := where (where (where .Site.RegularPages "Section" "notes") "Params.status" "published") "Params.visibility" "public" -}}
-{{- $cornerstones := where $essays "Params.cornerstone" true -}}
-{{- if not $cornerstones }}{{ $cornerstones = where $essays "Params.featured" true }}{{ end -}}
-{{- if not $cornerstones }}{{ $cornerstones = first 1 $essays }}{{ end -}}
+{{/* `tier` is the SINGLE cornerstone selector, matching /thinking/ and archetypes/essay.md.
+     This used to select on a boolean `Params.cornerstone`, falling back to `featured` and
+     then to whatever essay came first -- so the homepage and /thinking/ could disagree
+     about the flagship, and the homepage was in fact reaching its cornerstone through the
+     first-essay fallback rather than by intent. One field, one meaning. */}}
+{{- $cornerstones := sort (where $essays "Params.tier" "cornerstone") "Date" "desc" -}}
+{{- if not $cornerstones }}{{ $cornerstones = first 1 (sort $essays "Date" "desc") }}{{ end -}}
 {{- $cornerstone := false -}}
 {{- with (first 1 $cornerstones) }}{{ $cornerstone = index . 0 }}{{ end -}}
 {{- $currentNotes := first 2 (sort $notes "Date" "desc") -}}
