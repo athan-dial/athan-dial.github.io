@@ -2,13 +2,15 @@
 title: "When Measurement Cannot Choose for You"
 type: essay
 date: 2026-08-11
-tier: cornerstone
+# Demoted from cornerstone 2026-08-12: one cornerstone keeps the flagship unambiguous,
+# and this reads as a practice piece — a specific argument, not a territory-defining claim.
+tier: practice
 summary: "Some model choices cannot be settled by a fair comparison. The honest response is to write down the strategic argument, the uncertainty, and what would change your mind."
-status: draft
-visibility: private
+status: published
+visibility: public
 themes: [expert-workflows, product-judgment, reliable-ai-systems]
 canonical_url: ""
-draft: true
+draft: false
 ---
 
 Model access is becoming ordinary. The hard part is deciding what to do when the model cannot settle the question in front of you.

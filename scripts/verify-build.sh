@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Build guard for athan-dial.github.io.
 #
-# Asserts that the site builds AND that the two irreplaceable static trees under docs/
-# are still intact. Safe to run repeatedly. No network access.
+# Asserts that the site builds, that the static tree under docs/ is intact, that the
+# retired Agency tree stays retired, and that nothing publishes past its gates.
+# Safe to run repeatedly. No network access.
 #
-# WHY THE STATIC-TREE ASSERTIONS EXIST:
-#   docs/agency/** is 127 tracked files with NO SOURCE anywhere — not in this repo, not in
-#   athan-dial/skills. A clean Hugo build does not regenerate it. `rm -rf docs/ && hugo`
-#   (which CLAUDE.md documents as the rebuild command) destroys the live Agency site
-#   permanently. docs/skills/** is regenerable, but only via scripts/fetch-skills.sh,
-#   which needs network + gh auth.
+# WHY THE STATIC-TREE ASSERTION EXISTS:
+#   docs/skills/** is not Hugo output. It is regenerable, but only via
+#   scripts/fetch-skills.sh, which needs network + gh auth — so a clean build silently
+#   drops it. docs/agency/** used to be a second such tree; it was retired 2026-08-12
+#   and the check for it is now inverted (see section 2).
 #
 # Usage:
 #   bash scripts/verify-build.sh
@@ -22,6 +22,7 @@
 #   4  hugo not installed
 #   5  content gate breached (an unsafe page would publish)
 #   6  content safety violation (employer-confidential material in content/)
+#   7  employer_review not cleared on a page that would publish
 
 set -uo pipefail
 
@@ -165,6 +166,55 @@ if [ -n "$GATE_VIOLATIONS" ]; then
   printf '%s\n' "$GATE_VIOLATIONS" >&2
   fail 5 "content gate breached — these pages would publish. Set draft: true, or promote to status: published + visibility: public."
 fi
+
+# ---------------------------------------------------------------------------
+# 4b. Employer review gate — employer_review must be cleared before a work page ships.
+#
+# The work/ cascade sets `employer_review: pending`. Until 2026-08-12 NOTHING read that
+# field: it looked like a gate and was decoration, so flipping the three publication
+# fields would ship an unreviewed page describing the employer's internal work. This
+# makes the field real.
+#
+# Scope: only pages that declare employer_review. Essays and notes do not carry it.
+# Accepted cleared values: cleared, n/a, not-required.
+# ---------------------------------------------------------------------------
+REVIEW_VIOLATIONS="$(
+  python3 - <<'PY_REVIEW'
+import glob, re
+
+CLEARED = {"cleared", "n/a", "not-required"}
+bad = []
+for path in glob.glob("content/**/*.md", recursive=True):
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    m = re.match(r"^---\n(.*?)\n---", text, re.S)
+    if not m:
+        continue
+    fm = m.group(1)
+
+    def field(name):
+        f = re.search(rf"^{name}:\s*(\S+)", fm, re.M)
+        return f.group(1).strip().strip("\"'").lower() if f else None
+
+    review = field("employer_review")
+    if review is None:
+        continue  # not in scope
+    status, visibility, draft = field("status"), field("visibility"), field("draft")
+    would_publish = status == "published" and visibility == "public" and draft == "false"
+    if would_publish and review not in CLEARED:
+        bad.append(f"{path}: employer_review={review}")
+
+print("\n".join(bad))
+PY_REVIEW
+)"
+
+if [ -n "$REVIEW_VIOLATIONS" ]; then
+  printf 'verify-build: pages that would publish without employer review:\n' >&2
+  printf '%s\n' "$REVIEW_VIOLATIONS" >&2
+  fail 7 "employer_review not cleared — set employer_review: cleared once a human at the employer has signed off, or keep the page unpublished."
+fi
+ok "employer review gate holds (no unreviewed page would publish)"
+
 ok "content gate holds (no unsafe page is publishable)"
 
 # ---------------------------------------------------------------------------

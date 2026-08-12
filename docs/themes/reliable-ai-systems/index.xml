@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reliable-Ai-Systems on Athan Dial - Portfolio</title>
+    <link>https://athan-dial.github.io/themes/reliable-ai-systems/</link>
+    <description>Recent content in Reliable-Ai-Systems on Athan Dial - Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 11 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://athan-dial.github.io/themes/reliable-ai-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>When Measurement Cannot Choose for You</title>
+      <link>https://athan-dial.github.io/essays/the-operating-layer/</link>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://athan-dial.github.io/essays/the-operating-layer/</guid>
+      <description>Some model choices cannot be settled by a fair comparison. The honest response is to write down the strategic argument, the uncertainty, and what would change your mind.</description>
+    </item>
+  </channel>
+</rss>
