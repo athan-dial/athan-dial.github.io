@@ -63,18 +63,33 @@
           {{ range $publicWork }}
             {{- $users := .Params.users | default .Params.user -}}
             {{- $changed := .Params.changed | default .Params.outcome -}}
+            {{/* card_proof, else first sentence of summary. Split on ". " assumes no abbreviations. */}}
+            {{- $proof := .Params.card_proof -}}
+            {{- if not $proof -}}
+              {{- with (.Params.summary | default .Description) -}}
+                {{- $proof = printf "%s." (index (split . ". ") 0) -}}
+              {{- end -}}
+            {{- end -}}
             <article class="case-study-card">
               <a class="case-study-card__link" href="{{ .RelPermalink }}">
                 <div>
                   <span class="case-study-card__category">Published work</span>
                   <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with (.Params.summary | default .Description) }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
+                  {{ with $proof }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
                 </div>
                 <ul class="grouped-fields">
-                  <li><span class="grouped-field__label">User</span><span>{{ with $users }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ else }}Not yet documented{{ end }}</span></li>
-                  <li><span class="grouped-field__label">Constraint</span><span>{{ .Params.constraint | default "Not yet documented" }}</span></li>
-                  <li><span class="grouped-field__label">Role</span><span>{{ .Params.role | default "Not yet documented" }}</span></li>
-                  <li><span class="grouped-field__label">What changed</span><span>{{ $changed | default "Not yet documented" }}</span></li>
+                  {{- with $users -}}
+                  <li><span class="grouped-field__label">User</span><span>{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</span></li>
+                  {{- end -}}
+                  {{- with .Params.constraint -}}
+                  <li><span class="grouped-field__label">Constraint</span><span>{{ . }}</span></li>
+                  {{- end -}}
+                  {{- with .Params.role -}}
+                  <li><span class="grouped-field__label">Role</span><span>{{ . }}</span></li>
+                  {{- end -}}
+                  {{- with $changed -}}
+                  <li><span class="grouped-field__label">What changed</span><span>{{ . }}</span></li>
+                  {{- end -}}
                 </ul>
                 <span class="case-study-card__footer"><span class="metadata-caps">Read case study</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
               </a>
