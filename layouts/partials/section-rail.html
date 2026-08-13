@@ -74,7 +74,7 @@
     <nav class="work-article__outline" aria-label="Case structure">
       <ul>
         {{- range . }}
-        <li><a href="#{{ .ID }}">{{ .Title }}</a></li>
+        <li><a href="#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
         {{- end }}
       </ul>
     </nav>
@@ -83,7 +83,7 @@
     <p class="case-study-toc__label">Structure</p>
     <ul>
       {{- range . }}
-      <li><a href="#{{ .ID }}">{{ .Title }}</a></li>
+      <li><a href="#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
       {{- end }}
     </ul>
   </nav>

@@ -53,6 +53,11 @@ Target: [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/). Mark each item pass/
   and collide with neighbouring words. Listing titles and standalone actions (archive,
   profile, read-essay) carry the 44px target instead via `.link-action`.
 
+  **Open item — masthead wordmark focus ring.** `.site-header__name` now meets 44px, but it
+  keeps `overflow: hidden` as its flex truncation guard, which clips its 3px focus ring. Fixing
+  that properly means restructuring the header's truncation, and narrow widths are not testable
+  in this sandbox (CLAUDE.md constraint 5). Verify below 768px on real hardware before changing it.
+
 - [ ] **Descriptive links** — No “click here”; link text makes sense out of context.
 - [ ] **Alt text** — Informative images have descriptive `alt`; decorative images `alt=""`. OG `og:image:alt` set.
 

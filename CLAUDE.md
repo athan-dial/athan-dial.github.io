@@ -76,7 +76,7 @@ Three accents, each with exactly one job, none decorative:
 | Hue | Job |
 |---|---|
 | `--structural-teal` | Structure and wayfinding: where the reader is, where they can go |
-| `--evidence-amber` | A claim needing qualification, and the in-prose highlighter (`mark`, blockquotes, empty states). **No live consumer today** — the visible evidence badge was removed; the token stays for those CSS paths |
+| `--evidence-amber` | The in-prose highlighter. Live on `/thinking/`: the LinkedIn card's `<mark>` and its blockquote rule. The evidence badge that also used it was removed |
 | `--evidence-verified` | A claim with a traceable source. Reserved; no live consumer yet |
 
 Rules that are easy to break by accident:
@@ -96,11 +96,12 @@ Rules that are easy to break by accident:
 
 ### Accents render only where content exercises them
 
-`mark`, blockquote, and the verified treatment have **no live instances** — no content uses
-`<mark>` or blockquotes as evidence chrome, and nothing sets `evidence_status: verified` for
-a rendered treatment. The visible evidence badge was removed on purpose (jargon to first-time
-readers); `evidence_status` remains in front matter only. If the site reads monochrome, the
-fix is usually content that uses the remaining accents, not more CSS.
+`mark` and blockquote **do** have a live instance — `partials/linkedin-card.html` renders both,
+so amber paints on `/thinking/` (verified in-browser 2026-08-13, not inferred from the CSS).
+The verified treatment has none: nothing sets `evidence_status: verified`. The visible evidence
+badge was removed on purpose (jargon to first-time readers); `evidence_status` remains in front
+matter only. If the site reads monochrome, the fix is usually content that uses the remaining
+accents, not more CSS.
 
 ## Architecture
 

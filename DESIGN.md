@@ -42,10 +42,12 @@ Strategy: **restrained**. Three hues, each with exactly one job, none decorative
 Derived tints and rules (`--tint-*`, `--rule-*`, `--highlight`) are `color-mix()` of those three
 against `--surface`, so a hue changes in one place. No call site hardcodes a colour.
 
-**`--evidence-amber` currently has no live consumer.** The visible evidence badge that used it
-was removed (it read as unexplained jargon to first-time readers). The token stays defined for
-`mark`, blockquotes, and empty/in-review states — those CSS paths exist, but no published content
-exercises them. Do not treat the unused token as an accidental orphan.
+**`--evidence-amber` lost its badge, not its job.** The visible evidence label that used it was
+removed (it read as unexplained jargon to first-time readers). Amber still paints on every visit
+to `/thinking/`: the LinkedIn card renders a real `<mark>` on `--highlight` inside a blockquote
+ruled with `--rule-amber`, both `color-mix()` derivations of this token. Measured in-browser
+2026-08-13. So amber is the highlighter now, and nothing else — which is closer to how this
+document always described it than the badge was.
 
 **The accents were previously near-invisible, which is the problem this system had rather than a
 shortage of colour.** Both lived almost entirely on elements that render on no page (`.hero__badge`,

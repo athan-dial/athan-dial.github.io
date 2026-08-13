@@ -467,7 +467,16 @@ hr {
   gap: var(--stack-md);
 }
 
+/* The wordmark is the site's only link home, so it is a standalone action and gets the
+   44px target like the rest. `overflow: hidden` stays — it is the flex truncation guard
+   for narrow headers, and narrow widths are not testable in this sandbox (CLAUDE.md
+   constraint 5), so it is not worth trading a layout regression for. Consequence: the
+   focus ring on this one link is still clipped. Open item, recorded in
+   .planning/ACCESSIBILITY-CHECKS.md rather than fixed blind. */
 .site-header__name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   flex: 0 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -1043,8 +1052,15 @@ samp {
   padding-top: var(--stack-lg);
 }
 
+/* The return path on cases, essays, and notes. It measured 16px high — it was the one
+   standalone action .link-action never reached, because it lives in five templates that
+   were split across different PRs and each left it to the other. Same remedy, applied
+   once here so all five inherit it. */
 .case-study-back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
   margin-bottom: var(--stack-lg);
   font-family: var(--font-mono);
   font-size: var(--metadata-caps-size);
@@ -1365,12 +1381,19 @@ samp {
     gap: var(--gutter);
   }
 
+  /* `overflow: auto` makes this a scroll container, which clips anything painted outside
+     the padding box — including the 3px focus ring at 3px offset. The outline links sit
+     flush against the left edge, so a keyboard user saw the ring sliced off. The 6px of
+     inline-start padding gives the ring room inside the scroll box; the matching negative
+     margin keeps the text itself on the same optical line as the rest of the rail. */
   .case-study-toc {
     position: sticky;
     top: 96px;
     align-self: start;
     max-height: calc(100vh - 96px - var(--stack-md));
     overflow: auto;
+    padding-left: 6px;
+    margin-left: -6px;
     padding-right: var(--stack-md);
     border-right: 1px solid var(--rule);
     border-bottom: 0;
