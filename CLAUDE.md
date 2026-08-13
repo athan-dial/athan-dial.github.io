@@ -16,8 +16,10 @@ Personal portfolio site. **Hugo v0.154.3+extended, themeless** — every layout 
 Positioning: "decision evidence, not achievements." Pages carry evidence about product
 judgment and applied-AI work rather than achievement lists.
 
-The design system is **Editorial Systems**: warm paper, near-black ink, serif display,
-flat surfaces. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
+The design system is **Hybrid + book architecture** (2026-08-13): near-white ground, black ink,
+Archivo grotesque, one forest-green accent, flat surfaces, and book structure on long-form pages
+(running head, margin index, folios, colophon). It replaced *Editorial Systems* (warm paper, serif
+display), which an external review found sat in a saturated AI-portfolio lane. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
 
 ## Build & Development
 
@@ -39,7 +41,7 @@ incident: a retired `docs/resume/index.html` kept serving old copy plus a link t
 carrying a personal phone number, months after the page stopped being generated. **After
 removing or unpublishing a page, check `docs/` for its orphan.**
 
-## Design System: Editorial Systems
+## Design System: Hybrid + book architecture
 
 **Authority:** `DESIGN.md`. Tokens: `assets/css/tokens.css`. Implementation:
 `assets/css/main.css`. Measured contrast: `.planning/ACCESSIBILITY-CHECKS.md`.
@@ -51,9 +53,9 @@ Fonts are **self-hosted woff2** in `static/fonts/`, not a CDN.
 
 | Token | Stack | Role |
 |---|---|---|
-| `--font-serif` | Source Serif 4 | Display and long-form reading |
-| `--font-sans` | Manrope | UI text, summaries |
-| `--font-mono` | IBM Plex Mono | Rail labels, metadata |
+| `--font-serif` | Archivo | Display and headings (name is legacy; the face is a grotesque) |
+| `--font-sans` | Archivo | Body, UI text, summaries |
+| `--font-mono` | IBM Plex Mono | Running heads, folios, index, colophon, diagram labels |
 
 ### Colour
 
@@ -64,25 +66,29 @@ starting values are recorded in a `tokens.css` comment and are marked do-not-shi
 **Do not invent a dark theme as a side effect of another task.**
 
 ```css
---paper: #f6f2ea;            --surface: #fffdf8;
---ink: #14202b;              --ink-secondary: #53606a;
---structural-teal: #17616a;  --evidence-amber: #b86b35;
---evidence-amber-ink: #96521f;  --evidence-verified: #41603f;
---rule: #d8d1c4;
+--paper: #fbfbfa;            --surface: #ffffff;
+--ink: #0b0b0c;              --ink-secondary: #5c6066;
+--structural-teal: #14543c;  /* forest green — token name is a misnomer, rename pending */
+--evidence-amber: #14543c;   /* collapsed onto the accent; amber is retired */
+--evidence-amber-ink: #0e3d2b;  --evidence-verified: #14543c;
+--rule: #0b0b0c;             /* same as --ink; name lies, rename pending */
 ```
 
-Three accents, each with exactly one job, none decorative:
+**One accent, four jobs.** The three evidence hues have collapsed onto the same forest green;
+they survive as separate tokens only so every call site did not have to change at once.
 
-| Hue | Job |
+| Token | Job |
 |---|---|
-| `--structural-teal` | Structure and wayfinding: where the reader is, where they can go |
-| `--evidence-amber` | The in-prose highlighter. Live on `/thinking/`: the LinkedIn card's `<mark>` and its blockquote rule. The evidence badge that also used it was removed |
-| `--evidence-verified` | A claim with a traceable source. Reserved; no live consumer yet |
+| `--structural-teal` | The accent. Masthead rule, current nav item, back link and folios, running-head title |
+| `--evidence-amber` | Now identical to the accent. The LinkedIn card's `<mark>` and blockquote rule therefore paint **green, not amber** |
+| `--evidence-verified` | Now identical to the accent. No distinct treatment |
 
 Rules that are easy to break by accident:
 
-1. **`--evidence-amber` cannot carry text.** It is 3.62:1 on paper — fine as a non-text
-   marker, fails AA as type. Use `--evidence-amber-ink` (5.34:1) for amber type.
+1. **The accent is safe as small type here — that is new.** Forest `#14543C` on `#fbfbfa`
+   measures **8.58:1**, so it carries 10-11px folios and index links. The old amber could not
+   (3.62:1) and was marker-only. Do not carry that old caveat forward; do re-measure if the
+   accent changes.
 2. **No hardcoded colour at call sites.** Every hex lives once, in `:root`. Tints and
    hairlines are `color-mix()` derivations (`--tint-*`, `--rule-*`, `--highlight`) so a hue
    changes in one place.
@@ -96,12 +102,14 @@ Rules that are easy to break by accident:
 
 ### Accents render only where content exercises them
 
-`mark` and blockquote **do** have a live instance — `partials/linkedin-card.html` renders both,
-so amber paints on `/thinking/` (verified in-browser 2026-08-13, not inferred from the CSS).
-The verified treatment has none: nothing sets `evidence_status: verified`. The visible evidence
-badge was removed on purpose (jargon to first-time readers); `evidence_status` remains in front
-matter only. If the site reads monochrome, the fix is usually content that uses the remaining
-accents, not more CSS.
+`mark` and blockquote have a live instance — `partials/linkedin-card.html` renders both on
+`/thinking/` — but since `--evidence-amber` now resolves to the accent, they paint green. There is
+currently **no highlighter hue distinct from the structural accent**. If you want one back, choose
+it deliberately and measure it against `#fbfbfa`; do not reinstate `#B86B35`.
+
+`evidence_status` remains in front matter and renders nothing: the visible badge was removed as
+jargon. Long-form pages get their colour from folios, the running head and the margin index rather
+than from prose accents.
 
 ## Architecture
 

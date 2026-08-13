@@ -1,6 +1,14 @@
 /* Editorial Systems implementation. Token definitions are bundled before this file. */
 
 @font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/archivo-latin-variable.woff2") format("woff2");
+}
+
+@font-face {
   font-family: "Manrope";
   font-style: normal;
   font-weight: 200 800;
@@ -1377,7 +1385,7 @@ samp {
 
   .case-study-body {
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-areas: "meta meta meta content content content content content content content . .";
+    grid-template-areas: "meta meta content content content content content content content content content content";
     gap: var(--gutter);
   }
 
@@ -1649,6 +1657,172 @@ samp {
    Every transition in this stylesheet is colour, decoration, or a 4px transform, so the
    reduced-motion path is an instant state change rather than a removed one.
    ============================================ */
+
+/* ==== Hybrid + book architecture ==== */
+/* Hybrid structural overrides — Swiss hardness, Fathom's data manners.
+   Shared by every accent variant so the ONLY difference between them is one hex. */
+
+/* Rules are structural and black. Swiss separates with weight, not tint. */
+.explore-list { border-top-width: 3px; border-top-color: var(--ink); }
+.site-header  { border-bottom: 3px solid var(--ink); }
+.section-rail__meta { border-color: var(--ink); }
+
+/* No tinted bands anywhere — sections are separated by rule and space only. */
+.section--home-explore {
+  background: transparent;
+  border-block-color: var(--ink);
+}
+
+/* Labels: mono, not shouty. The Swiss variant's bold caps got loud at three
+   lines; keeping the mono voice here is the Fathom half of the hybrid and
+   fixes that without losing the caption register. */
+.section-rail__label,
+.metadata-caps,
+.label-mono,
+.case-study-toc__label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+/* Tabular figures wherever a number or range appears. */
+.grouped-fields,
+.work-card__field,
+.metadata-caps { font-variant-numeric: tabular-nums; }
+
+/* The accent earns its place on exactly two jobs: where you are, and the
+   diagram that is the site's own visual mechanism. */
+[aria-current="page"] { color: var(--structural-teal); }
+
+.diagram--boundary {
+  border: 3px solid var(--ink);
+  padding: var(--stack-md);
+  background: transparent;
+}
+
+.diagram--boundary figcaption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--ink-secondary);
+}
+
+/* ============================================================
+   BOOK ARCHITECTURE — the structural half of direction C.
+   None of this is expressible in tokens, which is exactly why the
+   earlier probe failed: it repainted the page instead of rebuilding it.
+   ============================================================ */
+
+/* --- Running head -------------------------------------------------------
+   A book names itself on every spread. This is the page's own identity line,
+   sitting above the title in the register a folio would occupy. */
+.running-head {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-sm);
+  margin: 0 0 var(--stack-lg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+.running-head__rule { flex: 1; height: 1px; background: var(--rule); }
+.running-head__title { color: var(--structural-teal); }
+
+/* --- Asymmetric measure -------------------------------------------------
+   The outer margin is ACTIVE space, not padding. Text sits at a book measure
+   and the right margin stays open for folios and marginalia. */
+/* The site's rail is a 12-column grid driven by grid-template-AREAS
+   ("meta meta content ×10"), not by explicit columns. Redefining the columns
+   left the spanned children to invent implicit tracks, which is why the first
+   attempt produced a 12-track mess. Reshape the areas instead: index takes 3
+   columns (long outline titles like "Who was doing the work" need ~280px at
+   the 1240 shell — 2 tracks / ~186px wrapped mid-phrase), text keeps 7, and
+   the last 2 stay empty — that empty band IS the active outer margin. Taking
+   the extra index track from the empty outer margin, not from the text column,
+   so the reading measure is unchanged. Shared by work, essays, and notes via
+   .case-study--book. */
+@media (min-width: 768px) {
+  .case-study--book .case-study-body {
+    grid-template-areas: "meta meta meta content content content content content content content . .";
+  }
+}
+
+/* --- Folios -------------------------------------------------------------
+   Section numbers live in the margin, never in the text column. A CSS counter
+   means they renumber themselves when a case gains or loses a section — a
+   hardcoded list would rot the way the old outline did. */
+.case-study--book .prose--case-study { counter-reset: folio; position: relative; }
+
+.case-study--book .prose--case-study h2 {
+  counter-increment: folio;
+  position: relative;
+  border-top: 1px solid var(--rule);
+  padding-top: var(--stack-sm);
+}
+
+.case-study--book .prose--case-study h2::before {
+  content: counter(folio, decimal-leading-zero);
+  position: absolute;
+  left: -3.25rem;
+  top: var(--stack-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--structural-teal);
+}
+
+@media (max-width: 767px) {
+  /* No margin to put a folio in — inline it rather than clipping it. */
+  .case-study--book .prose--case-study h2::before {
+    position: static;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+/* --- Colophon -----------------------------------------------------------
+   Production notes at the foot, where a book puts them, so the opening spread
+   carries only the title and the argument. */
+.colophon {
+  margin-top: var(--stack-xl, 4rem);
+  padding-top: var(--stack-md);
+  border-top: 3px double var(--ink);
+}
+
+.colophon__label {
+  margin: 0 0 var(--stack-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--structural-teal);
+}
+
+.colophon__list {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 4px var(--stack-md);
+  margin: 0;
+  font-size: var(--body-md-size);
+  line-height: var(--body-md-line-height);
+}
+
+.colophon__list dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  align-self: baseline;
+}
+
+.colophon__list dd { margin: 0; }
+
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

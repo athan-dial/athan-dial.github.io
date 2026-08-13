@@ -1,4 +1,12 @@
 {{ define "main" }}
+{{- /* BOOK ARCHITECTURE probe — Irma Boom's structural ideas on the hybrid surface.
+       Three additions the token swap could never express:
+         1. A running head, the way a book names itself on every spread.
+         2. Folios — section numbers living in the margin, not the text column.
+         3. A colophon: the metadata moves OUT of the header and to the foot,
+            where a book puts its production notes, so the opening is just the
+            title and the argument.
+       The wide outer margin is deliberate active space, not padding. */ -}}
 {{- $users := .Params.users | default slice -}}
 {{- $role := .Params.role | default "" -}}
 {{- $themes := .Params.themes | default slice -}}
@@ -8,28 +16,23 @@
 {{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
 {{- with .Date -}}{{- $railNotes = $railNotes | append (.Format "2006-01-02") -}}{{- end -}}
 
-<div class="container page-editorial page-editorial--case-study">
+<div class="container page-editorial page-editorial--case-study case-study--book">
   <article class="work-article case-study-article">
+
+    {{- /* Running head. Aria-hidden: it is a print convention repeated on every
+           page, and a screen reader announcing it adds nothing the h1 does not. */ -}}
+    <p class="running-head" aria-hidden="true">
+      <span class="running-head__work">Selected work</span>
+      <span class="running-head__rule"></span>
+      <span class="running-head__title">{{ .Title }}</span>
+    </p>
+
     <div class="case-study-intro">
       <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
       <header class="case-study-header">
         <h1 class="case-study-header__title">{{ .Title }}</h1>
-        <div class="case-study-header__meta metadata-caps">
-          {{- with $role -}}<span>{{ . }}</span>{{- end -}}
-          {{- with $users -}}
-            {{- if $role -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <span>{{ delimit . ", " }}</span>
-          {{- end -}}
-          {{- with $themes -}}
-            {{- if or $role $users -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <span>{{ delimit . ", " }}</span>
-          {{- end -}}
-          {{- with .Date -}}
-            {{- if or $role $users $themes -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>
-          {{- end -}}
-        </div>
-        {{- /* BLUF as standfirst (lead), not a pull-quote / blockquote. */ -}}
+        {{- /* The metadata row that used to sit here has moved to the colophon.
+               A book does not print its production notes above the first line. */ -}}
         {{- with $bluf -}}
         <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
         {{- end -}}
@@ -37,14 +40,25 @@
     </div>
 
     <div class="case-study-body section-rail work-article__body">
-      {{ partial "section-rail.html" (dict
-        "page" .
-        "notes" $railNotes
-      ) }}
+      {{- /* No notes passed: the colophon owns the metadata now. Passing them
+             here too printed role/users/date twice on the same screen. The rail
+             is left carrying only the structural index, which is its real job. */ -}}
+      {{ partial "section-rail.html" (dict "page" .) }}
       <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
         {{ .Content }}
       </div>
     </div>
+
+    <footer class="colophon">
+      <p class="colophon__label">Colophon</p>
+      <dl class="colophon__list">
+        {{- with $role }}<dt>Role</dt><dd>{{ . }}</dd>{{- end }}
+        {{- with $users }}<dt>Users</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
+        {{- with $themes }}<dt>Themes</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
+        {{- with .Date }}<dt>Written</dt><dd><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time></dd>{{- end }}
+      </dl>
+    </footer>
+
   </article>
 </div>
 {{ end }}

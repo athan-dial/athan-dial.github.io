@@ -67,7 +67,40 @@ Target: [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/). Mark each item pass/
 
 ---
 
-## Contrast table (Editorial Systems)
+## Contrast table — Hybrid + book architecture (current)
+
+Measured **2026-08-13 in-browser**, resolving every colour through a canvas rather than parsing
+hex. That method is not optional here: the `--tint-*` and `--rule-*` derivations compute as
+`oklab()`, and a naive JS parse silently mis-reads them.
+
+Thresholds: **4.5:1** normal text; **3:1** large text (>=24px, or >=18.66px bold) and non-text UI.
+
+| Element | Size / weight | Ratio | Needs | Result |
+|---|---|---:|---:|---|
+| Case title (h1) | 60px / 700 | **19.0:1** | 3 | Pass |
+| Body prose | 17px / 400 | **6.11:1** | 4.5 | Pass |
+| Lead (BLUF standfirst) | 17px / 400 | **6.11:1** | 4.5 | Pass |
+| Running-head title, forest | 10px / 400 | **8.58:1** | 4.5 | Pass |
+| Margin index link, forest | 14px / 500 | **8.58:1** | 4.5 | Pass |
+| Index label "Structure" | 12px / 500 | **6.11:1** | 4.5 | Pass |
+| Folio number, forest | 11px | **8.58:1** | 4.5 | Pass |
+| Colophon label, forest | 10px / 400 | **8.58:1** | 4.5 | Pass |
+| Colophon term | 11px / 400 | **6.11:1** | 4.5 | Pass |
+| Colophon value | 16px / 400 | **19.0:1** | 4.5 | Pass |
+| Back link, forest | 12px / 500 | **8.58:1** | 4.5 | Pass |
+| Current nav item | 12px / 500 | **19.0:1** | 4.5 | Pass |
+| Diagram caption | 12px / 400 | **6.11:1** | 4.5 | Pass |
+| Diagram side label | 12px / 500 | **6.11:1** | 4.5 | Pass |
+
+**14 of 14 pass.** Forest `#14543C` on paper `#fbfbfa` measures 8.58:1, which is why it survives at
+10-11px in the margin — the accent is safe as type here in a way `--evidence-amber` never was on
+the old warm paper (3.62:1, marker-only).
+
+Reproduce with the canvas probe used to produce this table; do not re-derive it from hex values.
+
+---
+
+## Contrast table (Editorial Systems — retired warm-paper palette, kept for reference)
 
 Measured 2026-08-11 with relative luminance per WCAG 2.x (`(L1+0.05)/(L2+0.05)`).
 Thresholds: **4.5:1** normal text; **3:1** large text and non-text UI.

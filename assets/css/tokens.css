@@ -3,13 +3,13 @@
    semantic components can consume the complete style without duplicating values. */
 :root {
   /* Core palette */
-  --paper: #f6f2ea;
-  --surface: #fffdf8;
-  --ink: #14202b;
-  --ink-secondary: #53606a;
-  --structural-teal: #17616a;
-  --evidence-amber: #b86b35;
-  --rule: #d8d1c4;
+  --paper: #fbfbfa;
+  --surface: #ffffff;
+  --ink: #0b0b0c;
+  --ink-secondary: #5c6066;
+  --structural-teal: #14543c;
+  --evidence-amber: #14543c;
+  --rule: #0b0b0c;
 
   /* Accent extension. DESIGN.md commits to a restrained strategy: every hue has exactly
      one job, and none of them are decorative. Three jobs, three hues:
@@ -19,13 +19,13 @@
      The third exists because `evidence_status: verified` previously rendered NO label at
      all, so the strongest claim class was invisible while the weakest ones got a badge.
      Colour never carries the meaning alone — every label states its class in words. */
-  --evidence-verified: #41603f;
+  --evidence-verified: #14543c;
 
   /* Text-safe amber. Canonical --evidence-amber is 3.62:1 on paper: it passes 3:1 as a
      non-text marker but fails 4.5:1 as type, which is why amber never actually read as
      colour anywhere on the site — it could only ever be a 1px border or a 10% tint.
      This darker sienna is the same hue family at 5.34:1 on paper, so amber can be TYPE. */
-  --evidence-amber-ink: #96521f;
+  --evidence-amber-ink: #0e3d2b;
 
   /* Accent tints and rules, derived from the accents so a hue changes in exactly one
      place. Replaces the hardcoded #fff5eb that used to sit in main.css. */
@@ -54,11 +54,11 @@
 
   /* Supporting surface ladder */
   --surface-container-lowest: #ffffff;
-  --surface-container-low: #f7f3eb;
-  --surface-container: #f1ede5;
-  --surface-container-high: #ece8e0;
-  --surface-container-highest: #e6e2da;
-  --surface-dim: #dddad2;
+  --surface-container-low: #ffffff;
+  --surface-container: #f2f2f1;
+  --surface-container-high: #eaeae8;
+  --surface-container-highest: #e0e0de;
+  --surface-dim: #d5d5d2;
   --outline: #74777c;
   --outline-variant: #c4c6cc;
   --error: #ba1a1a;
@@ -81,43 +81,43 @@
      amber-ink #e0a878, verified #7fa87d — all untested, do not ship unmeasured. */
 
   /* Font families */
-  --font-serif: "Source Serif 4", Georgia, serif;
-  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-serif: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Archivo", "Helvetica Neue", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   /* display-lg */
-  --display-lg-size: 56px;
-  --display-lg-line-height: 64px;
+  --display-lg-size:  60px;
+  --display-lg-line-height:  64px;
   --display-lg-weight: 700;
-  --display-lg-tracking: -0.02em;
+  --display-lg-tracking:  -0.035em;
 
   /* display-lg-mobile */
-  --display-lg-mobile-size: 40px;
-  --display-lg-mobile-line-height: 48px;
+  --display-lg-mobile-size:  38px;
+  --display-lg-mobile-line-height:  40px;
   --display-lg-mobile-weight: 700;
-  --display-lg-mobile-tracking: -0.01em;
+  --display-lg-mobile-tracking:  -0.025em;
 
   /* headline-md */
   --headline-md-size: 32px;
   --headline-md-line-height: 40px;
-  --headline-md-weight: 600;
-  --headline-md-tracking: 0;
+  --headline-md-weight:  700;
+  --headline-md-tracking:  -0.02em;
 
   /* headline-sm */
-  --headline-sm-size: 24px;
+  --headline-sm-size:  22px;
   --headline-sm-line-height: 32px;
-  --headline-sm-weight: 600;
-  --headline-sm-tracking: 0;
+  --headline-sm-weight:  700;
+  --headline-sm-tracking:  -0.01em;
 
   /* body-lg */
-  --body-lg-size: 19px;
+  --body-lg-size:  17px;
   --body-lg-line-height: 32px;
   --body-lg-weight: 400;
   --body-lg-tracking: 0;
 
   /* body-md */
-  --body-md-size: 17px;
-  --body-md-line-height: 28px;
+  --body-md-size:  16px;
+  --body-md-line-height:  24px;
   --body-md-weight: 400;
   --body-md-tracking: 0;
 
