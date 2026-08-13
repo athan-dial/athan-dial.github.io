@@ -46,6 +46,13 @@ Target: [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/). Mark each item pass/
 ### Targets, links, media
 
 - [ ] **Pointer targets ≥ 44×44 CSS px** — Preferred; exceptions documented if unavoidable.
+
+  **Exception — inline prose citations:** Links that sit inside running body copy (citations,
+  cross-references, theme chips inside a sentence) stay visually inline and are **not**
+  enlarged to 44×44. Padding them into block hit areas would break measure, wrap mid-phrase,
+  and collide with neighbouring words. Listing titles and standalone actions (archive,
+  profile, read-essay) carry the 44px target instead via `.link-action`.
+
 - [ ] **Descriptive links** — No “click here”; link text makes sense out of context.
 - [ ] **Alt text** — Informative images have descriptive `alt`; decorative images `alt=""`. OG `og:image:alt` set.
 

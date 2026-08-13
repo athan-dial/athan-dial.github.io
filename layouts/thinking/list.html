@@ -50,13 +50,13 @@
                   </div>
                   <div>
                     <h3 class="headline-md">
-                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                      <a class="link-action" href="{{ .RelPermalink }}">{{ .Title }}</a>
                     </h3>
                     {{- with .Params.summary -}}
                       <p class="lead body-lg">{{ . }}</p>
                     {{- end -}}
                     <p>
-                      <a class="label-mono" href="{{ .RelPermalink }}">Read the essay →</a>
+                      <a class="label-mono link-action" href="{{ .RelPermalink }}">Read the essay →</a>
                     </p>
                   </div>
                 </li>
@@ -115,7 +115,7 @@
         <div class="section-rail__meta">
           <h2 id="thinking-linkedin">From LinkedIn</h2>
           {{- with $profileLinkedin -}}
-            <p class="label-mono"><a href="{{ . }}" rel="noopener noreferrer">Profile &rarr;</a></p>
+            <p class="label-mono"><a class="link-action" href="{{ . }}" rel="noopener noreferrer">Profile &rarr;</a></p>
           {{- end -}}
         </div>
         <div class="section-rail__content">
@@ -140,9 +140,9 @@
         <div class="section-rail__meta">
           <h2 id="thinking-field-notes">Field Notes</h2>
           {{- with $notesArchive -}}
-            <p class="label-mono"><a href="{{ .RelPermalink }}">Full archive →</a></p>
+            <p class="label-mono"><a class="link-action" href="{{ .RelPermalink }}">Full archive →</a></p>
           {{- else -}}
-            <p class="label-mono"><a href="{{ "/notes/" | relURL }}">Full archive →</a></p>
+            <p class="label-mono"><a class="link-action" href="{{ "/notes/" | relURL }}">Full archive →</a></p>
           {{- end -}}
         </div>
         <div class="section-rail__content">
@@ -155,9 +155,9 @@
             {{- if gt (len $notes) (len $selectedNotes) -}}
               <p class="label-mono">
                 {{- with $notesArchive -}}
-                  <a href="{{ .RelPermalink }}">All {{ len $notes }} field notes →</a>
+                  <a class="link-action" href="{{ .RelPermalink }}">All {{ len $notes }} field notes →</a>
                 {{- else -}}
-                  <a href="{{ "/notes/" | relURL }}">All {{ len $notes }} field notes →</a>
+                  <a class="link-action" href="{{ "/notes/" | relURL }}">All {{ len $notes }} field notes →</a>
                 {{- end -}}
               </p>
             {{- end -}}

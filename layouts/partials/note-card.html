@@ -13,7 +13,7 @@
     {{- end -}}
   </div>
   <div class="note-card__body">
-    <a class="note-card__title" href="{{ $href }}">{{ $title }}</a>
+    <a class="note-card__title link-action" href="{{ $href }}">{{ $title }}</a>
     {{- with .Params.summary -}}
       <p class="note-card__summary body-md">{{ . }}</p>
     {{- end -}}

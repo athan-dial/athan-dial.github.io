@@ -1558,6 +1558,41 @@ samp {
   line-height: 1.45;
 }
 
+/* Curated LinkedIn card quote on /thinking/. The prose blockquote rules are scoped to
+   .prose, so this card needs its own — it sits inside a grouped-field, not an article
+   body. Keeps the amber rule and the highlighter, drops the prose indent and margins. */
+.linkedin-card__quote {
+  margin: 0 0 var(--space-2xs, 0.5rem);
+  padding-left: var(--space-sm, 1rem);
+  border-left: 1px solid var(--rule-amber);
+}
+
+.linkedin-card__quote p {
+  margin: 0;
+}
+
+/* Standalone and listing actions — grow the hit area to the checklist’s 44px without
+   turning the link into a button. Same remedy as .site-nav a / footer links: inline-flex
+   + min-height, type size unchanged. Inline prose citations stay exempt (see
+   ACCESSIBILITY-CHECKS.md). Padding is static — never grow on hover (DESIGN.md). */
+.link-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
+}
+
+/* Keep adjacent 44px actions from reading as one blob: a meta archive/profile link sits
+   under its rail heading with a clear gap; the field-notes “all” link sits clear of the
+   list above. Focus outline (3px + 3px offset) must not be clipped. */
+.section-rail__meta > .label-mono {
+  margin: var(--stack-sm) 0 0;
+}
+
+.section-rail__content > .label-mono {
+  margin: var(--stack-md) 0 0;
+}
+
 /* ============================================
    Reduced motion — global override, and it must be LAST in the file.
    It previously sat mid-file, ahead of the rules in the "Measure cap" and card sections,
@@ -1579,17 +1614,4 @@ samp {
     animation-duration: 0s;
     animation-delay: 0s;
   }
-}
-
-/* Curated LinkedIn card quote on /thinking/. The prose blockquote rules are scoped to
-   .prose, so this card needs its own — it sits inside a grouped-field, not an article
-   body. Keeps the amber rule and the highlighter, drops the prose indent and margins. */
-.linkedin-card__quote {
-  margin: 0 0 var(--space-2xs, 0.5rem);
-  padding-left: var(--space-sm, 1rem);
-  border-left: 1px solid var(--rule-amber);
-}
-
-.linkedin-card__quote p {
-  margin: 0;
 }
