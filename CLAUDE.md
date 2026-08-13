@@ -53,7 +53,7 @@ Fonts are **self-hosted woff2** in `static/fonts/`, not a CDN.
 |---|---|---|
 | `--font-serif` | Source Serif 4 | Display and long-form reading |
 | `--font-sans` | Manrope | UI text, summaries |
-| `--font-mono` | IBM Plex Mono | Rail labels, metadata, evidence labels |
+| `--font-mono` | IBM Plex Mono | Rail labels, metadata |
 
 ### Colour
 
@@ -76,8 +76,8 @@ Three accents, each with exactly one job, none decorative:
 | Hue | Job |
 |---|---|
 | `--structural-teal` | Structure and wayfinding: where the reader is, where they can go |
-| `--evidence-amber` | A claim needing qualification, and the in-prose highlighter |
-| `--evidence-verified` | A claim with a traceable source |
+| `--evidence-amber` | A claim needing qualification, and the in-prose highlighter (`mark`, blockquotes, empty states). **No live consumer today** — the visible evidence badge was removed; the token stays for those CSS paths |
+| `--evidence-verified` | A claim with a traceable source. Reserved; no live consumer yet |
 
 Rules that are easy to break by accident:
 
@@ -86,8 +86,8 @@ Rules that are easy to break by accident:
 2. **No hardcoded colour at call sites.** Every hex lives once, in `:root`. Tints and
    hairlines are `color-mix()` derivations (`--tint-*`, `--rule-*`, `--highlight`) so a hue
    changes in one place.
-3. **Colour is never the only channel.** Every evidence label states its class in words and
-   carries a marker square; the current nav item carries `aria-current` as well as a rule.
+3. **Colour is never the only channel.** The current nav item carries `aria-current` as
+   well as a rule.
 4. **Verify contrast in-browser, through a canvas.** The `color-mix()` tints compute as
    `oklab()` and cannot be read off a hex table — a naive JS parse silently mis-reads them.
 5. **Never animate a layout property on hover.** Text must not reflow under the pointer.
@@ -96,10 +96,11 @@ Rules that are easy to break by accident:
 
 ### Accents render only where content exercises them
 
-The evidence label, `verified` state, `mark`, and blockquote have **no live instances** —
-no work page is published and no content sets `evidence_status: verified`. So the built
-components are correct but largely invisible. If the site reads monochrome, the fix is
-usually content that uses these, not more CSS.
+`mark`, blockquote, and the verified treatment have **no live instances** — no content uses
+`<mark>` or blockquotes as evidence chrome, and nothing sets `evidence_status: verified` for
+a rendered treatment. The visible evidence badge was removed on purpose (jargon to first-time
+readers); `evidence_status` remains in front matter only. If the site reads monochrome, the
+fix is usually content that uses the remaining accents, not more CSS.
 
 ## Architecture
 

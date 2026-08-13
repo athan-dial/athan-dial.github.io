@@ -69,9 +69,6 @@
                   <span class="case-study-card__category">Published work</span>
                   <h3 class="case-study-card__title">{{ .Title }}</h3>
                   {{ with (.Params.summary | default .Description) }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
-                  {{/* Was omitted here, so a claim's classification was visible on /work/
-                       and on the case page but not on the homepage that links to them. */}}
-                  {{ partial "evidence-label.html" (dict "status" (.Params.evidence_status | default "")) }}
                 </div>
                 <ul class="grouped-fields">
                   <li><span class="grouped-field__label">User</span><span>{{ with $users }}{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}{{ else }}Not yet documented{{ end }}</span></li>

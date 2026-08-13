@@ -434,7 +434,7 @@ hr {
 /* Header */
 /* The masthead rule. Every page previously opened on pure ink-on-paper with no accent in
    the first viewport at all — the two accents lived on elements (.hero__badge,
-   .case-study-card__category, .evidence-label) that render on almost no page. A structural
+   .case-study-card__category) that render on almost no page. A structural
    rule across the top of the masthead is the oldest signifier in the register this system
    borrows from, it costs no layout, and it puts the brand's own colour on 100% of pages. */
 .site-header {
@@ -642,50 +642,7 @@ select:focus {
   padding: 8px 11px;
 }
 
-/* Evidence and grouped fields */
-
-/* Evidence label — the evidence gate made visible, and the system's one distinctive
-   component. Three changes here:
-     1. One declaration. It was defined twice, and the second copy reinstated the coloured
-        3px border-left the first had removed on purpose. Side-stripes are out.
-     2. The text is amber now, not ink. Canonical --evidence-amber cannot carry type
-        (3.62:1), which is why amber never read as colour anywhere; --evidence-amber-ink is
-        the same hue at 5.34:1, so the label finally looks like the thing it signals.
-     3. Tint and border come from tokens instead of a hardcoded #fff5eb.
-   The square marker gives the label a second, non-colour channel, and the copy always
-   names the claim class in words. */
-.evidence-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55em;
-  padding: 4px 8px;
-  color: var(--evidence-amber-ink);
-  background: var(--tint-amber);
-  border: 1px solid var(--rule-amber);
-  font-family: var(--font-mono);
-  font-size: var(--metadata-caps-size);
-  font-weight: var(--metadata-caps-weight);
-  line-height: var(--metadata-caps-line-height);
-  letter-spacing: var(--metadata-caps-tracking);
-  text-transform: uppercase;
-}
-
-.evidence-label::before {
-  content: "";
-  flex: none;
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-}
-
-/* Verified was the missing state: `evidence_status: verified` rendered no label at all, so
-   a fully sourced claim looked identical to an unclassified one while the qualified claims
-   got a badge. The strongest class now reads strongest. */
-.evidence-label--verified {
-  color: var(--evidence-verified);
-  background: var(--tint-verified);
-  border-color: var(--rule-verified);
-}
+/* Grouped fields */
 
 .grouped-fields {
   margin: 0;

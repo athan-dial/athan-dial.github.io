@@ -1,7 +1,4 @@
 {{ define "main" }}
-{{- /* Label rendering lives in partials/evidence-label.html — it was duplicated here and
-       in work-card.html, and missing from the homepage. One implementation now. */ -}}
-{{- $evidence := .Params.evidence_status | default "" -}}
 {{- $users := .Params.users | default slice -}}
 {{- $role := .Params.role | default "" -}}
 {{- $themes := .Params.themes | default slice -}}
@@ -9,8 +6,6 @@
 {{- $railNotes := slice -}}
 {{- with $role -}}{{- $railNotes = $railNotes | append (printf "Role · %s" .) -}}{{- end -}}
 {{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
-{{- /* Evidence class is rendered by the rail as the evidence-label component, not as a
-     plain note — including it here too printed it twice. */ -}}
 {{- with .Date -}}{{- $railNotes = $railNotes | append (.Format "2006-01-02") -}}{{- end -}}
 
 <div class="container page-editorial page-editorial--case-study">
@@ -38,7 +33,6 @@
         {{- with $bluf -}}
         <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
         {{- end -}}
-        {{ partial "evidence-label.html" (dict "status" $evidence "class" "work-article__evidence") }}
       </header>
     </div>
 
@@ -47,14 +41,12 @@
         {{ partial "section-rail.html" (dict
           "page" .
           "notes" $railNotes
-          "evidence_status" $evidence
         ) }}
       {{- else -}}
       <aside class="section-rail__meta case-study-toc" aria-label="Case metadata">
         {{- range $railNotes -}}
         <p class="metadata-caps">{{ . }}</p>
         {{- end -}}
-        {{ partial "evidence-label.html" (dict "status" $evidence) }}
         {{- /* Eight-part scan map — anchors match Hugo slug of archetypes/work.md headings */ -}}
         <nav class="work-article__outline" aria-label="Case structure">
           <p class="case-study-toc__label">Structure</p>

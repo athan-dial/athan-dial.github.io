@@ -36,15 +36,20 @@ Strategy: **restrained**. Three hues, each with exactly one job, none decorative
 | Hue | Job | Where it appears |
 |---|---|---|
 | Structural teal | Structure and wayfinding: where the reader is, where they can go | Masthead rule, section-rail labels and rules, current nav item, links, arrows, card hover, portrait mount |
-| Evidence amber | A claim that needs qualifying, and the in-prose highlighter | Evidence labels, `mark`, blockquotes, empty/in-review states |
-| Evidence verified | A claim with a traceable source | `.evidence-label--verified` |
+| Evidence amber | A claim that needs qualifying, and the in-prose highlighter | `mark`, blockquotes, empty/in-review states |
+| Evidence verified | A claim with a traceable source | Reserved for a sourced-claim treatment; no live consumer yet |
 
 Derived tints and rules (`--tint-*`, `--rule-*`, `--highlight`) are `color-mix()` of those three
 against `--surface`, so a hue changes in one place. No call site hardcodes a colour.
 
+**`--evidence-amber` currently has no live consumer.** The visible evidence badge that used it
+was removed (it read as unexplained jargon to first-time readers). The token stays defined for
+`mark`, blockquotes, and empty/in-review states — those CSS paths exist, but no published content
+exercises them. Do not treat the unused token as an accidental orphan.
+
 **The accents were previously near-invisible, which is the problem this system had rather than a
 shortage of colour.** Both lived almost entirely on elements that render on no page (`.hero__badge`,
-`.case-study-card__category`, `.evidence-label` with no published work), so the first viewport of
+`.case-study-card__category`), so the first viewport of
 every page was pure ink on paper. Amber additionally could not carry type at all — `#B86B35` is
 3.62:1 on paper — so it only ever appeared as a 1px border or a 10% tint. Two fixes: the accents moved
 onto elements that always render, and `--evidence-amber-ink` (5.34:1) lets amber be type.
@@ -59,8 +64,8 @@ paper 6.4:1, amber-ink on paper 5.3:1, verified on paper 6.3:1, amber-ink on its
 on its tint 5.9:1, ink on highlight 12.2:1. All pass AA for small text. **`--evidence-amber` itself
 still fails 4.5:1 and remains a non-text marker only; use `--evidence-amber-ink` for any amber type.**
 
-Colour is never the only channel: evidence labels state their class in words and carry a square
-marker, and the current nav item carries `aria-current="page"` as well as its teal underline.
+Colour is never the only channel: the current nav item carries `aria-current="page"` as well as
+its teal underline.
 
 Dark mode: still deferred, and there is no toggle in `baseof.html` (the `#theme-toggle` rules in
 `main.css` are orphans from the retired Clinical Architect system). `tokens.css` records untested
@@ -76,7 +81,7 @@ Three families, each with one job.
 
 - **Source Serif 4** — thesis headings, essay and case titles. Carries the editorial texture.
 - **Manrope** — body and UI. Long-form reading.
-- **IBM Plex Mono** — metadata only: rail labels, dates, evidence tags, provenance lines.
+- **IBM Plex Mono** — metadata only: rail labels, dates, provenance lines.
 
 Self-hosted latin-subset WOFF2 in `static/fonts/`, preloaded, no external font request. (Both Source
 Serif 4's companion Newsreader and IBM Plex Mono appear on impeccable's reflex-reject list; they are
@@ -118,11 +123,14 @@ grid is genuinely the affordance, defined by a 1px border or a shift to `--surfa
 ## Components
 
 - **Buttons** — square. Primary: ink fill, paper text. Secondary: 1px rule border, ink text. Active: teal.
-- **Evidence label** — mono, amber on a light amber tint, marking a claim's classification. The system's one distinctive component; it is the evidence gate made visible. Two variants: default (amber, a claim needing qualification) and `--verified` (green, a sourced claim). A square marker gives it a second channel beyond hue. `evidence_status: verified` used to render no label at all, so the strongest claim class was invisible while the weakest ones were badged; both `partials/work-card.html` and `work/single.html` now emit it.
-- **Highlighter** — `.prose mark`, ink on an amber tint. Amber has always been described as acting like a highlighter; this is the component that does it.
+- **Highlighter** — `.prose mark`, ink on an amber tint. Amber has always been described as acting like a highlighter; this is the component that does it. No published content uses `<mark>` yet.
 - **Grouped-field row** — the default list unit.
 - **Section rail** — vertical rule plus one mono label.
 - **Empty state** — a quiet mono line inside the rail with a stated intent, on collapsed section padding. Honest that the section exists and is being filled, without reserving dead vertical space.
+
+The visible evidence badge (mono amber pill: "Range only", "Mechanism only", "Verified") was
+removed. `evidence_status` remains in front matter as claim-classification data; it is no longer
+rendered. The badge read as unexplained jargon to a first-time reader.
 
 ## Motion
 
