@@ -7,6 +7,7 @@
 {{- if lt $minutes 1 }}{{ $minutes = 1 }}{{ end -}}
 <div class="container page-editorial page-editorial--note">
   <article class="reading-column">
+    <a href="{{ "/thinking/" | relURL }}" class="case-study-back">&larr; All thinking</a>
     <header class="case-study-header">
       <p class="section__label">Field note</p>
       <h1>{{ .Title }}</h1>

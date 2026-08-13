@@ -8,6 +8,9 @@
         {{- $active := false -}}
         {{- if hasPrefix $page.RelPermalink .URL -}}
           {{- $active = true -}}
+        {{- else if and (eq .URL "/thinking/") (or (eq $page.Section "essays") (eq $page.Section "notes")) -}}
+          {{- /* Essays/notes render at /essays/ and /notes/, not under /thinking/. */ -}}
+          {{- $active = true -}}
         {{- end }}
       <a
         href="{{ .URL }}"
