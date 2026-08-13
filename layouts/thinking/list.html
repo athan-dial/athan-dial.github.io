@@ -32,7 +32,7 @@
   </header>
 
   {{/* Cornerstone — largest treatment */}}
-  <section class="section section--home-explore" aria-labelledby="thinking-cornerstone">
+  <section class="section section--home-explore{{ if le (len $cornerstone) 2 }} section--sparse{{ end }}" aria-labelledby="thinking-cornerstone">
     <div class="container">
       <div class="section-rail">
         <div class="section-rail__meta">
@@ -71,7 +71,7 @@
   </section>
 
   {{/* Practice — middle weight, rule-separated rows */}}
-  <section class="section" aria-labelledby="thinking-practice">
+  <section class="section{{ if le (len $practice) 2 }} section--sparse{{ end }}" aria-labelledby="thinking-practice">
     <div class="container">
       <div class="section-rail">
         <div class="section-rail__meta">
@@ -109,13 +109,13 @@
   {{/* From LinkedIn — curated posts from data/linkedin.toml. Hand-maintained by
        necessity: LinkedIn exposes no API for a member's own posts. */}}
   {{- with $linkedinPosts -}}
-  <section class="section section--home-explore" aria-labelledby="thinking-linkedin">
+  <section class="section section--home-explore{{ if le (len .) 2 }} section--sparse{{ end }}" aria-labelledby="thinking-linkedin">
     <div class="container">
       <div class="section-rail">
         <div class="section-rail__meta">
           <h2 id="thinking-linkedin">From LinkedIn</h2>
           {{- with $profileLinkedin -}}
-            <p class="label-mono"><a class="link-action" href="{{ . }}" rel="noopener noreferrer">Profile &rarr;</a></p>
+            <p class="label-mono"><a class="link-action" href="{{ . }}" target="_blank" rel="noopener noreferrer">Profile →</a></p>
           {{- end -}}
         </div>
         <div class="section-rail__content">
@@ -134,7 +134,7 @@
        the agency-skills notes were retired, so an empty-state header would be dead UI.
        Add a note under content/notes/ and this section returns on its own. */}}
   {{- if $selectedNotes -}}
-  <section class="section section--home-explore" aria-labelledby="thinking-field-notes">
+  <section class="section section--home-explore{{ if le (len $selectedNotes) 2 }} section--sparse{{ end }}" aria-labelledby="thinking-field-notes">
     <div class="container">
       <div class="section-rail">
         <div class="section-rail__meta">

@@ -417,6 +417,17 @@ hr {
   border-top: 1px solid var(--rule);
 }
 
+/* Sparse tiers (one or two items): full ceremonial --stack-xl bands leave acreage around
+   thin content. Density is respect (PRODUCT.md) — tighten rhythm, keep the heading/tier.
+   Empty tiers already collapse the rail via :has(.empty-state); this covers live-but-thin. */
+.section--sparse {
+  padding-block: var(--stack-lg);
+}
+
+.section--sparse .section-rail {
+  padding-block: var(--stack-md);
+}
+
 /* Was a 2px amber side-stripe on grey text. Two problems: the coloured side-stripe is a
    decorative tell rather than part of the rule language, and it spent the evidence
    highlighter on generic section furniture — amber marking every section is amber marking
@@ -1451,8 +1462,22 @@ samp {
   text-decoration-color: currentColor;
 }
 
+/* Work is the higher-value destination; the composite link strips the default underline,
+   so the title carries a resting underline in the same faint→firm language as body links.
+   Discoverability must not depend on hover. */
 .work-card__title {
-  transition: color var(--duration-base) var(--ease-out-quart);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-base) var(--ease-out-quart),
+    text-decoration-color var(--duration-base) var(--ease-out-quart),
+    text-decoration-thickness var(--duration-fast) var(--ease-out-quart);
+}
+
+.work-card__link:hover .work-card__title {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 /* The table of contents is a dense stack of links; underlining all of them at rest turns
