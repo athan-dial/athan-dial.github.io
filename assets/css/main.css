@@ -1084,6 +1084,26 @@ samp {
   color: var(--ink-secondary);
 }
 
+/* Mobile: native <details> outline. Desktop nav is the sticky twin (see 768px). */
+.case-study-toc__disclosure {
+  margin-top: var(--stack-md);
+}
+
+.case-study-toc__disclosure > summary.case-study-toc__label {
+  display: list-item;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: var(--ink-secondary);
+}
+
+.case-study-toc__disclosure[open] > summary.case-study-toc__label {
+  margin-bottom: var(--stack-sm);
+}
+
+.case-study-toc__nav--desktop {
+  display: none;
+}
+
 .case-study-toc ul {
   margin: 0;
   padding: 0;
@@ -1110,6 +1130,8 @@ samp {
 
 .prose--case-study h2 {
   color: var(--ink);
+  /* Clear the sticky masthead when jumping from the outline. */
+  scroll-margin-top: calc(72px + var(--stack-md));
 }
 
 /* Wayfinding */
@@ -1335,9 +1357,26 @@ samp {
   .case-study-toc {
     position: sticky;
     top: 96px;
+    align-self: start;
+    max-height: calc(100vh - 96px - var(--stack-md));
+    overflow: auto;
     padding-right: var(--stack-md);
     border-right: 1px solid var(--rule);
     border-bottom: 0;
+  }
+
+  /* Sticky rail shows the outline directly; hide the mobile disclosure. */
+  .case-study-toc__disclosure {
+    display: none;
+  }
+
+  .case-study-toc__nav--desktop {
+    display: block;
+    margin-top: var(--stack-md);
+  }
+
+  .prose--case-study h2 {
+    scroll-margin-top: calc(96px + var(--stack-sm));
   }
 
   .site-footer__inner {
