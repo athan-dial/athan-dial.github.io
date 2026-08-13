@@ -20,8 +20,6 @@ canonical_url: ""
 draft: false
 ---
 
-## BLUF
-
 I led the product definition for an analog-search tool that got materially faster on a measured basis. After an implementation change, warmed-database query times for typical and heavy searches improved by roughly an order of magnitude. Months later, its primary expert user said a commercial alternative returned more results and wanted broader coverage. I thought we were looking at a completeness problem, not evidence that our results were less relevant. My proposed response was to give the expert more control and make the boundary of the match visible.
 
 ## Who was doing the work

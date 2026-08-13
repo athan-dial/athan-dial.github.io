@@ -26,11 +26,11 @@ Light only. A dark variant is deferred rather than half-built.
 | Elevated / inset | `--surface` | `#FFFFFF` |
 | Primary text | `--ink` | `#0B0B0C` |
 | Secondary text | `--ink-secondary` | `#5C6066` |
-| Structural accent | `--structural-teal` (misnomer — now forest green, rename pending) | `#14543C` |
-| Evidence / tension | `--evidence-amber` | `#14543C` |
-| Evidence, text-safe | `--evidence-amber-ink` | `#0E3D2B` |
-| Evidence, verified | `--evidence-verified` | `#14543C` |
-| Rules and dividers | `--rule` | `#0B0B0C` (same as `--ink`; name lies, rename pending) |
+| Accent | `--accent` | `#14543C` forest green |
+| Highlighter (`mark`) | `--evidence-amber` | `#14543C` — same as accent |
+| Evidence, text-safe | `--accent-ink` | `#0E3D2B` |
+
+| Rules and dividers | `--rule` | `#0B0B0C` — deliberately equal to `--ink`; rules are structural here, not hairlines |
 
 Strategy: **restrained**. Ink, paper, and ONE accent. The three separate evidence hues collapsed
 into a single forest green when the evidence badge was retired and the palette moved to near-white;
@@ -153,7 +153,7 @@ That empty band is the active outer margin, and it is load-bearing, not padding.
 
 ### Accent
 
-One accent, `--structural-teal: #14543C` (the token name is now a misnomer and should be renamed).
+One accent, `--accent: #14543C`.
 Deep green was chosen over Swiss red, ultramarine and ochre: it is sober, it suits expert-domain
 work, and it is genuinely uncommon in this space. It measures **8.58:1** on paper, which is why it
 is safe as 10px type in the margin — something the old amber never was.
@@ -163,7 +163,6 @@ and the running-head title. Everything else is ink on paper.
 
 ### Known open items
 
-- `--rule` is now the same value as `--ink`, so the token name lies. Rename before this ships.
 - The masthead is 96% opaque, so content is faintly visible scrolling under it. Pre-existing and
   possibly wanted; decide deliberately.
 - "BLUF" remains undefined for a first-time reader, and the larger type makes it more prominent,

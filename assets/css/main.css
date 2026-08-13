@@ -100,7 +100,7 @@ select {
 
 ::selection {
   color: var(--surface-container-lowest);
-  background: var(--structural-teal);
+  background: var(--accent);
 }
 
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
@@ -220,7 +220,7 @@ strong {
    underline is now present at rest (faint, so prose still reads as prose) and firms up on
    hover while the teal stays. Also satisfies "nothing conveyed by colour alone". */
 a {
-  color: var(--structural-teal);
+  color: var(--accent);
   text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
@@ -232,7 +232,7 @@ a {
 }
 
 a:hover {
-  color: var(--structural-teal);
+  color: var(--accent);
   text-decoration-color: currentColor;
   text-decoration-thickness: 2px;
 }
@@ -310,7 +310,7 @@ hr {
   line-height: var(--metadata-caps-line-height);
   letter-spacing: var(--metadata-caps-tracking);
   text-transform: uppercase;
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 /* F. An empty tier should not reserve a full section's worth of vertical space.
@@ -344,13 +344,13 @@ hr {
 /* The homepage's in-review notices use grouped fields rather than .empty-state. Their
    label is the status, so the label takes the status colour. */
 [role="status"] .grouped-field__label {
-  color: var(--evidence-amber-ink);
+  color: var(--accent-ink);
 }
 
 /* A work/thinking card with no link is a placeholder for something not yet published, so
    its category slot is really a state. Marked as one, without needing a template change. */
 .case-study-card:not(:has(a)) .case-study-card__category {
-  color: var(--evidence-amber-ink);
+  color: var(--accent-ink);
 }
 
 /* Rail label. This is the one element that appears on every section of every page, and it
@@ -361,7 +361,7 @@ hr {
 /* A long label wraps to three or four lines in a ~190px rail, and the 16px metadata
    line-height reads as cramped once it does. Looser leading applies only to the rail. */
 .section-rail__label {
-  color: var(--structural-teal);
+  color: var(--accent);
   line-height: 1.55;
 }
 
@@ -443,7 +443,7 @@ hr {
 .section__label {
   display: block;
   margin-bottom: var(--stack-sm);
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .section__heading {
@@ -461,7 +461,7 @@ hr {
   top: 0;
   z-index: 100;
   background: color-mix(in srgb, var(--paper) 96%, transparent);
-  border-top: var(--masthead-rule) solid var(--structural-teal);
+  border-top: var(--masthead-rule) solid var(--accent);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -543,7 +543,7 @@ hr {
    aria-current still carries it for anyone not seeing colour. */
 .site-nav a[aria-current="page"] {
   color: var(--ink);
-  text-decoration-color: var(--structural-teal);
+  text-decoration-color: var(--accent);
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
@@ -612,8 +612,8 @@ input[type="submit"]:active,
 .btn.is-active,
 .btn[aria-pressed="true"] {
   color: var(--paper);
-  background: var(--structural-teal);
-  border-color: var(--structural-teal);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .btn-secondary {
@@ -624,15 +624,15 @@ input[type="submit"]:active,
 .btn-secondary:hover {
   color: var(--ink);
   background: var(--surface);
-  border-color: var(--structural-teal);
+  border-color: var(--accent);
 }
 
 .btn-secondary:active,
 .btn-secondary.is-active,
 .btn-secondary[aria-pressed="true"] {
   color: var(--paper);
-  background: var(--structural-teal);
-  border-color: var(--structural-teal);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 label {
@@ -666,7 +666,7 @@ textarea {
 input:not([type="button"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
-  border: 2px solid var(--structural-teal);
+  border: 2px solid var(--accent);
   padding: 8px 11px;
 }
 
@@ -777,7 +777,7 @@ mark {
    length of a long essay; the heaviest anchors (case-study header, section rails, footer)
    stay pure ink so ink still reads as the top of the hierarchy. */
 .prose h2 {
-  border-top-color: var(--rule-teal);
+  border-top-color: var(--rule-accent);
 }
 
 code,
@@ -898,7 +898,7 @@ samp {
 }
 
 .hero__name span {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .hero__intro {
@@ -926,8 +926,8 @@ samp {
 .hero__portrait {
   position: relative;
   padding: var(--stack-sm);
-  background: var(--tint-teal);
-  border: 1px solid var(--rule-teal);
+  background: var(--tint-accent);
+  border: 1px solid var(--rule-accent);
 }
 
 /* Inert: `z-index: -1` paints this behind the opaque background of an ancestor, so it has
@@ -997,11 +997,11 @@ samp {
    than advertising an affordance they do not have. */
 .case-study-card:has(a):hover {
   background: var(--surface);
-  border-bottom-color: var(--structural-teal);
+  border-bottom-color: var(--accent);
 }
 
 .case-study-card:has(a):hover .case-study-card__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .case-study-card__title {
@@ -1045,7 +1045,7 @@ samp {
 /* The arrow is the one place a small movement is genuinely informative: it points, so it
    travels the direction it points. 4px, 180ms, zeroed under prefers-reduced-motion. */
 .case-study-card__arrow {
-  color: var(--structural-teal);
+  color: var(--accent);
   font-family: var(--font-mono);
   transition: transform var(--duration-base) var(--ease-out-quart);
 }
@@ -1198,11 +1198,11 @@ samp {
 
 .explore-item:hover {
   background: var(--surface);
-  border-bottom-color: var(--structural-teal);
+  border-bottom-color: var(--accent);
 }
 
 .explore-item:hover .explore-item__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .explore-item__title {
@@ -1211,7 +1211,7 @@ samp {
 
 .explore-item__num,
 .explore-item__arrow {
-  color: var(--structural-teal);
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: var(--label-mono-size);
 }
@@ -1354,7 +1354,7 @@ samp {
      label, and reads as part of the rule language rather than as an added ornament. */
   .section-rail__meta {
     padding-right: var(--stack-md);
-    border-right: 1px solid var(--rule-teal);
+    border-right: 1px solid var(--rule-accent);
   }
 
   .hero__grid {
@@ -1486,7 +1486,7 @@ samp {
 
 .note-card__title:hover,
 .work-card__link:hover .work-card__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .note-card__title:hover {
@@ -1604,8 +1604,8 @@ samp {
 .boundary__substrate {
   margin-top: var(--stack-md);
   padding: var(--stack-lg) var(--stack-md);
-  background: color-mix(in oklab, var(--structural-teal) 7%, var(--surface));
-  border: 1px solid color-mix(in oklab, var(--structural-teal) 28%, var(--surface));
+  background: color-mix(in oklab, var(--accent) 7%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, var(--surface));
 }
 
 .boundary__shared li {
@@ -1693,7 +1693,7 @@ samp {
 
 /* The accent earns its place on exactly two jobs: where you are, and the
    diagram that is the site's own visual mechanism. */
-[aria-current="page"] { color: var(--structural-teal); }
+[aria-current="page"] { color: var(--accent); }
 
 .diagram--boundary {
   border: 3px solid var(--ink);
@@ -1729,7 +1729,7 @@ samp {
   color: var(--ink-secondary);
 }
 .running-head__rule { flex: 1; height: 1px; background: var(--rule); }
-.running-head__title { color: var(--structural-teal); }
+.running-head__title { color: var(--accent); }
 
 /* --- Asymmetric measure -------------------------------------------------
    The outer margin is ACTIVE space, not padding. Text sits at a book measure
@@ -1772,7 +1772,7 @@ samp {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 @media (max-width: 767px) {
@@ -1782,6 +1782,17 @@ samp {
     display: block;
     margin-bottom: 4px;
   }
+}
+
+
+/* The case body used to open with an "## BLUF" heading — military shorthand no first-time
+   reader can be expected to know. The heading is gone; the paragraph it introduced now
+   carries the opening on its own, so it takes the lead register instead of body register.
+   Sized between the standfirst and body so the page still steps down, not sideways. */
+.case-study--book .prose--case-study > p:first-child {
+  color: var(--ink);
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-line-height);
 }
 
 /* --- Colophon -----------------------------------------------------------
@@ -1799,7 +1810,7 @@ samp {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .colophon__list {

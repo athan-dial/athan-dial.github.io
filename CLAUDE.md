@@ -68,10 +68,10 @@ starting values are recorded in a `tokens.css` comment and are marked do-not-shi
 ```css
 --paper: #fbfbfa;            --surface: #ffffff;
 --ink: #0b0b0c;              --ink-secondary: #5c6066;
---structural-teal: #14543c;  /* forest green — token name is a misnomer, rename pending */
+--accent: #14543c;           /* forest green — the single accent */
 --evidence-amber: #14543c;   /* collapsed onto the accent; amber is retired */
---evidence-amber-ink: #0e3d2b;  --evidence-verified: #14543c;
---rule: #0b0b0c;             /* same as --ink; name lies, rename pending */
+--accent-ink: #0e3d2b;  --evidence-verified: #14543c;
+--rule: #0b0b0c;             /* deliberately equal to --ink: rules are structural, not hairlines */
 ```
 
 **One accent, four jobs.** The three evidence hues have collapsed onto the same forest green;
@@ -79,9 +79,9 @@ they survive as separate tokens only so every call site did not have to change a
 
 | Token | Job |
 |---|---|
-| `--structural-teal` | The accent. Masthead rule, current nav item, back link and folios, running-head title |
+| `--accent` | The accent. Masthead rule, current nav item, back link and folios, running-head title |
 | `--evidence-amber` | Now identical to the accent. The LinkedIn card's `<mark>` and blockquote rule therefore paint **green, not amber** |
-| `--evidence-verified` | Now identical to the accent. No distinct treatment |
+
 
 Rules that are easy to break by accident:
 

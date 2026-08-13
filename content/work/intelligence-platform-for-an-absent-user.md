@@ -15,8 +15,6 @@ canonical_url: ""
 draft: false
 ---
 
-## BLUF
-
 I designed and helped build an internal intelligence platform that reconciled records from multiple sources without asking a model to decide what was true. A discovery conversation changed the primary user from the analyst to a leadership function. That reframe clarified the product boundary: the machine could retrieve, rank, and propose; the analyst still had to adjudicate. The platform eventually reached production after an earlier attempt failed at a permissions boundary.
 
 The supported result is narrower than an adoption claim. The record does not support the milestone count, delivery interval, or requirements ratio that appeared in an earlier version of this story. I do not use them here.

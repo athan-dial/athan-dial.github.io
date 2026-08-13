@@ -7,37 +7,40 @@
   --surface: #ffffff;
   --ink: #0b0b0c;
   --ink-secondary: #5c6066;
-  --structural-teal: #14543c;
+  --accent: #14543c;
+  /* Highlighter hue. Identical to --accent since the palette moved to near-white;
+     kept as a separate name so `mark` can be given its own colour again without
+     touching every accent call site. */
   --evidence-amber: #14543c;
   --rule: #0b0b0c;
 
   /* Accent extension. DESIGN.md commits to a restrained strategy: every hue has exactly
      one job, and none of them are decorative. Three jobs, three hues:
        structural-teal    structure and wayfinding — where the reader is, where they can go
-       evidence-amber     a claim that needs qualifying, and the in-prose highlighter
-       evidence-verified  a claim with a traceable source
+       evidence-amber     the in-prose highlighter (mark, blockquote)
      The third exists because `evidence_status: verified` previously rendered NO label at
      all, so the strongest claim class was invisible while the weakest ones got a badge.
      Colour never carries the meaning alone — every label states its class in words. */
-  --evidence-verified: #14543c;
 
-  /* Text-safe amber. Canonical --evidence-amber is 3.62:1 on paper: it passes 3:1 as a
+  /* Text-safe accent. NOTE: the 3.62:1 figure below described the RETIRED warm-paper
+     amber. On the current near-white ground the accent measures 8.58:1 and is safe as
+     small type. Kept for history; do not act on the old number.
+
+     Legacy note: canonical amber was 3.62:1 on the old paper: it passed 3:1 as a
      non-text marker but fails 4.5:1 as type, which is why amber never actually read as
      colour anywhere on the site — it could only ever be a 1px border or a 10% tint.
      This darker sienna is the same hue family at 5.34:1 on paper, so amber can be TYPE. */
-  --evidence-amber-ink: #0e3d2b;
+  --accent-ink: #0e3d2b;
 
   /* Accent tints and rules, derived from the accents so a hue changes in exactly one
      place. Replaces the hardcoded #fff5eb that used to sit in main.css. */
   /* 8% measured only 1.04:1 against paper — invisible as a panel or an offset sliver, which
      is what made the first attempt at a tinted hero band read as flat grey. 15% is still
      pale enough to sit under ink at 12:1+ but actually reads as the brand hue. */
-  --tint-teal: color-mix(in oklab, var(--structural-teal) 15%, var(--surface));
+  --tint-accent: color-mix(in oklab, var(--accent) 15%, var(--surface));
   --tint-amber: color-mix(in oklab, var(--evidence-amber) 11%, var(--surface));
-  --tint-verified: color-mix(in oklab, var(--evidence-verified) 10%, var(--surface));
-  --rule-teal: color-mix(in oklab, var(--structural-teal) 40%, var(--rule));
+  --rule-accent: color-mix(in oklab, var(--accent) 40%, var(--rule));
   --rule-amber: color-mix(in oklab, var(--evidence-amber) 45%, var(--surface));
-  --rule-verified: color-mix(in oklab, var(--evidence-verified) 40%, var(--surface));
 
   /* The digital highlighter. EDITORIAL-SYSTEMS.md describes amber as acting like one;
      until now there was no component that did. Carries ink text, so it stays readable. */
@@ -69,16 +72,9 @@
      paper/ink 14.79:1, and outline/paper 4.03:1 (non-text boundary).
      Evidence amber/light-amber tint is only 3.76:1, so amber is a non-text
      marker on evidence labels; their ink text on that tint is 15.35:1.
-
-     Accent extension audit (2026-08-12): evidence-verified/paper 6.33:1,
-     evidence-verified/surface 6.96:1, evidence-amber-ink/paper 5.34:1,
-     evidence-amber-ink/tint-amber 5.35:1, evidence-verified/tint-verified 5.98:1,
-     ink/highlight 13.1:1. All pass AA for small text.
-
-     No html.dark block: dark mode is deferred by EDITORIAL-SYSTEMS.md ("ship one
-     polished light experience") and there is no toggle in baseof.html. When it is
-     built, the accents invert roughly as teal #5fa8b0, amber #d99a63,
-     amber-ink #e0a878, verified #7fa87d — all untested, do not ship unmeasured. */
+     Accent audit superseded 2026-08-13; see .planning/ACCESSIBILITY-CHECKS.md for the
+     canvas-measured table against the current palette.
+  */
 
   /* Font families */
   --font-serif: "Archivo", "Helvetica Neue", sans-serif;

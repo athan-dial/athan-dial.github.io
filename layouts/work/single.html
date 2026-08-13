@@ -33,9 +33,10 @@
         <h1 class="case-study-header__title">{{ .Title }}</h1>
         {{- /* The metadata row that used to sit here has moved to the colophon.
                A book does not print its production notes above the first line. */ -}}
-        {{- with $bluf -}}
-        <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
-        {{- end -}}
+        {{- /* The standfirst used to render .Params.summary here. With the "## BLUF"
+               heading gone, that printed the same claim twice in a row — the summary and
+               the body's opening paragraph say the same thing in different words. The body
+               keeps it; summary still feeds the homepage cards and the OG description. */ -}}
       </header>
     </div>
 
