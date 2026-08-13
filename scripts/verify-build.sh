@@ -23,6 +23,7 @@
 #   5  content gate breached (an unsafe page would publish)
 #   6  content safety violation (employer-confidential material in content/)
 #   7  employer_review not cleared on a page that would publish
+#   8  render-HTML assertion failed (what the reader receives)
 
 set -uo pipefail
 
@@ -242,6 +243,26 @@ if [ -x scripts/verify-content-safety.sh ] || [ -f scripts/verify-content-safety
   ok "content safety scan clean"
 else
   printf 'verify-build: warn — scripts/verify-content-safety.sh missing; content not scanned\n' >&2
+fi
+
+# ---------------------------------------------------------------------------
+# 6. Render-HTML assertions — what the reader receives, not that Hugo compiled.
+#
+# Delegated to scripts/verify-render.sh. verify-build.sh never inspected rendered
+# HTML; that gap shipped duplicated OG tags, a never-rendered case outline,
+# homepage placeholders, a removed evidence label still printing, and essay/note
+# pages with no active nav — all on a green build. Warn-but-pass if the
+# sub-script is missing so a partial checkout still builds.
+# ---------------------------------------------------------------------------
+if [ -x scripts/verify-render.sh ] || [ -f scripts/verify-render.sh ]; then
+  if ! RENDER_OUT="$(bash scripts/verify-render.sh 2>&1)"; then
+    printf '%s\n' "$RENDER_OUT" >&2
+    fail 8 "render-HTML assertions failed — see above. Fix the template or content; do not weaken the check."
+  fi
+  printf '%s\n' "$RENDER_OUT" | grep -E 'verify-render: (  ok|PASS)' || true
+  ok "render-HTML assertions clean"
+else
+  printf 'verify-build: warn — scripts/verify-render.sh missing; rendered HTML not checked\n' >&2
 fi
 
 printf 'verify-build: PASS\n'
