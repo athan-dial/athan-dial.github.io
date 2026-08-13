@@ -7,6 +7,32 @@ show_profile_links: true
 
 The path from bench science to product wasn't planned. The transferable skill turned out to be **designing decision systems under uncertainty**: figuring out what counts as evidence, which experiment is worth the cost, and how to keep a team's confidence calibrated when truth comes back late or partial.
 
+## Experience
+
+I describe the job as a fusion of product and data: making sure the company builds the right
+things, on time, with good evidence behind each decision.
+
+**Associate Director, Data Science & Product Management** · Montai Therapeutics · 2026–present
+
+Product direction and data rigour at the same desk. Applied-AI prototypes and agentic workflows,
+and the decision and briefing patterns leadership uses to make research trade-offs.
+
+**Data Research Lead** · Montai Therapeutics · 2022–2026
+
+Owned the nomination workflow end to end and moved it from a single-shot process to an iterative,
+model-informed one. Built the analytics substrate the discovery teams work on, and put predictive
+modelling into early-stage decision gates.
+
+**Data Scientist** · Replica Analytics · 2019–2020
+
+Clinical data pipelines, and privacy-preserving synthetic data for health research.
+
+**Chief Analytics Officer** · ArchitecHealth · 2018–2019
+
+Analytics strategy for small and mid-size biotech clients.
+
+**PhD, Medical Sciences** · McMaster University
+
 ## Trajectory
 
 PhD work taught those moves; drug discovery ML uses them every day.

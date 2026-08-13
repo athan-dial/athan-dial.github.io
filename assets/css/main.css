@@ -1795,6 +1795,19 @@ samp {
   line-height: var(--body-lg-line-height);
 }
 
+
+/* Experience entries on /about/. Markdown gives us alternating "role line" and
+   "description" paragraphs; this tightens the pair so each reads as one row rather
+   than four loose paragraphs, without needing a shortcode or a class in the content. */
+.prose--editorial p:has(> strong:first-child:last-child),
+.prose--editorial p > strong:first-child {
+  color: var(--ink);
+}
+
+.prose--editorial p:has(> strong:first-child) {
+  margin-bottom: var(--stack-xs, 0.35rem);
+}
+
 /* --- Colophon -----------------------------------------------------------
    Production notes at the foot, where a book puts them, so the opening spread
    carries only the title and the argument. */
