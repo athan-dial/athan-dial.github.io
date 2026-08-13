@@ -5,21 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}">
-  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-  <meta property="og:description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}">
-  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
-  <meta property="og:url" content="{{ .Permalink }}">
-  {{ with .Site.Params.profileImage }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
   <meta name="author" content="{{ .Site.Params.firstName }} {{ .Site.Params.lastName }}">
   <link rel="canonical" href="{{ .Permalink }}">
   {{ partialCached "favicons.html" . site.BaseURL }}
   {{ partial "schema.html" . }}
   {{ partial "og-image.html" . }}
-  {{/* Self-hosted latin-subset WOFF2. Provenance and refetch commands: static/fonts/README.md */}}
+  {{/* Self-hosted latin-subset WOFF2. Provenance and refetch commands: static/fonts/README.md
+       Preload only above-the-fold faces (nav + first viewport): Manrope body, Source Serif 4
+       roman display, IBM Plex Mono 500 for nav/rail labels. Italic serif and mono 400 still
+       load via @font-face when needed — they are not first-viewport. */}}
   <link rel="preload" href="/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/source-serif-4-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/source-serif-4-latin-variable-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/ibm-plex-mono-latin-500.woff2" as="font" type="font/woff2" crossorigin>
   {{- $tokens := resources.Get "css/tokens.css" -}}
   {{- $main := resources.Get "css/main.css" -}}
