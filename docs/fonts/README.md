@@ -1,7 +1,33 @@
 # Self-hosted fonts
 
-Editorial Systems uses Latin-subset WOFF2 files served from `/fonts/`. The source
-stylesheet is Google Fonts:
+Latin-subset WOFF2 files served from `/fonts/`. No CDN, no external font request.
+
+## Archivo — the current text face (added 2026-08-13)
+
+`archivo-latin-variable.woff2`, 35KB, weights 100–900 in one variable file. It carries display,
+headings and body; IBM Plex Mono carries metadata. Fetched from the Google Fonts CSS API with a
+woff2-capable User-Agent, taking the `latin` subset (the `unicode-range` containing `U+0000-00FF`):
+
+```bash
+curl -A "<modern browser UA>" \
+  "https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&display=swap"
+# then curl the URL from the /* latin */ @font-face block
+```
+
+**Licence: OFL-1.1** (SIL Open Font License), verified against the upstream repository
+`Omnibus-Type/Archivo`. Self-hosting and redistribution are permitted, so there is no licensing
+tail on this direction — worth recording, because the design exploration initially assumed the
+grotesque would be a commercial face.
+
+## Retired, still present
+
+`manrope-latin-variable.woff2` and the two `source-serif-4-*` files are no longer in the type
+scale. They remain here, and their `@font-face` rules remain in `main.css`, until a cleanup pass
+confirms nothing references them. Do not delete them without checking.
+
+## Original provenance (Editorial Systems)
+
+The source stylesheet was Google Fonts:
 
 ```text
 https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap

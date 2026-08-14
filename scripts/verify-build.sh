@@ -5,11 +5,13 @@
 # retired Agency tree stays retired, and that nothing publishes past its gates.
 # Safe to run repeatedly. No network access.
 #
-# WHY THE STATIC-TREE ASSERTION EXISTS:
-#   docs/skills/** is not Hugo output. It is regenerable, but only via
-#   scripts/fetch-skills.sh, which needs network + gh auth — so a clean build silently
-#   drops it. docs/agency/** used to be a second such tree; it was retired 2026-08-12
-#   and the check for it is now inverted (see section 2).
+# WHY THE STATIC-TREE ASSERTIONS ARE ALL INVERTED NOW:
+#   docs/ once held two trees Hugo does not generate. docs/agency/** was retired 2026-08-12,
+#   and the fetched docs/skills/** plugin subsites were retired 2026-08-14 when
+#   athan-dial/skills was deleted and scripts/fetch-skills.sh went with it. Both checks
+#   assert absence rather than presence (sections 2 and 3), so a stale build or a restore
+#   from a backup bundle cannot quietly republish either. /skills/case-studies/ is ordinary
+#   Hugo output and is still asserted present.
 #
 # Usage:
 #   bash scripts/verify-build.sh
@@ -18,7 +20,7 @@
 #   0  all assertions passed
 #   1  hugo build failed
 #   2  docs/agency tree damaged or missing
-#   3  docs/skills tree damaged or missing
+#   3  retired docs/skills plugin subsite republished, or case-studies missing
 #   4  hugo not installed
 #   5  content gate breached (an unsafe page would publish)
 #   6  content safety violation (employer-confidential material in content/)
@@ -107,19 +109,50 @@ fi
 ok "docs/agency stays retired (redirect stubs only, no content)"
 
 # ---------------------------------------------------------------------------
-# 3. docs/skills — regenerable via fetch-skills.sh, but must not be silently gone.
+# 3. docs/skills plugin subsites — RETIRED 2026-08-14, deliberately. Assert they stay gone.
+#
+# This slot used to assert the opposite: that the fetched subsites were PRESENT, because a
+# clean build would silently drop them (they were not Hugo output, and only
+# scripts/fetch-skills.sh could regenerate them — needing network plus gh auth).
+#
+# The source is gone. The dev plugin moved into the private claude-skills repo as user-level
+# dev:* skills, athan-dial/skills was deleted, and fetch-skills.sh went with it. Nothing can
+# regenerate these trees, so asserting their presence would fail every build from now on.
+#
+# Inverted rather than deleted, for the same reason as docs/agency above: a stale build
+# output, a bad merge, or a restore from the backup bundle must not quietly republish plugin
+# docs for a repo that no longer exists. The URLs still resolve — data/redirects.toml
+# generates meta-refresh stubs for /skills/, /skills/orc/ and /skills/folio/.
+#
+# /skills/case-studies/ is NOT retired. It is ordinary Hugo output from content/skills/
+# and must keep building.
 # ---------------------------------------------------------------------------
-[ -d docs/skills ] || fail 3 "docs/skills/ is missing — regenerate with: bash scripts/fetch-skills.sh"
-
-SKILLS_ENTRIES="$(find docs/skills -mindepth 1 -maxdepth 1 | wc -l | tr -d ' ')"
-[ "$SKILLS_ENTRIES" -gt 0 ] || fail 3 "docs/skills/ is empty — regenerate with: bash scripts/fetch-skills.sh"
-
-SKILLS_DELETED="$(git diff --name-only --diff-filter=D HEAD -- docs/skills | head -20)"
-if [ -n "$SKILLS_DELETED" ]; then
-  printf 'verify-build: deleted files under docs/skills:\n%s\n' "$SKILLS_DELETED" >&2
-  fail 3 "tracked files under docs/skills have been deleted — regenerate with: bash scripts/fetch-skills.sh"
+RETIRED_SKILLS_TREES="orc folio _template"
+if [ -d docs/skills ]; then
+  for sub in $RETIRED_SKILLS_TREES; do
+    [ -d "docs/skills/$sub" ] || continue
+    # Any surviving file must be a meta-refresh stub. Real pages carry a stylesheet link.
+    NONSTUB=""
+    while IFS= read -r f; do
+      grep -qi 'http-equiv=.\?refresh' "$f" || NONSTUB="$NONSTUB$f"$'\n'
+    done < <(find "docs/skills/$sub" -type f -name '*.html')
+    if [ -n "$NONSTUB" ]; then
+      printf 'verify-build: non-stub pages under docs/skills/%s:\n%s\n' "$sub" "$NONSTUB" >&2
+      fail 3 "docs/skills/$sub contains real pages — a retired plugin subsite is back; it should be redirect stubs only"
+    fi
+    # Any non-HTML asset means the fetched bundle's CSS/JS/search index was restored.
+    ASSETS="$(find "docs/skills/$sub" -type f ! -name '*.html' | head -5)"
+    if [ -n "$ASSETS" ]; then
+      printf 'verify-build: unexpected assets under docs/skills/%s:\n%s\n' "$sub" "$ASSETS" >&2
+      fail 3 "docs/skills/$sub contains non-HTML assets — a retired plugin subsite has been restored"
+    fi
+  done
 fi
-ok "docs/skills intact ($SKILLS_ENTRIES plugin subsites, none deleted)"
+ok "docs/skills plugin subsites stay retired (redirect stubs only, no content)"
+
+# /skills/case-studies/ is live Hugo output and must not vanish with them.
+[ -d docs/skills/case-studies ] || fail 3 "docs/skills/case-studies/ is missing — it is Hugo output from content/skills/case-studies/, not a retired tree"
+ok "docs/skills/case-studies intact"
 
 # ---------------------------------------------------------------------------
 # 4. Content gate — status/visibility must agree with draft.
