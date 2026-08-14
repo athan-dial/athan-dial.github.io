@@ -1,11 +1,19 @@
 # Redirect map for retired routes (Editorial Systems redesign).
 # Rendered as meta-refresh + canonical stubs via layouts/_default/redirect.html
-# and content/_content.gotmpl. Do not add entries under docs/agency/ except the
-# agency index and the six migrated dispatch slugs — playbooks and other deep
-# links must keep serving the committed static tree.
+# and content/_content.gotmpl.
+#
+# The docs/agency/** static tree this used to sit alongside (127 files) was fully
+# retired in d8e83376 (2026-08-12) — there is no "committed static tree" left to
+# defer to, and publishDir itself moved docs/ -> public/ on 2026-08-14. Only the
+# agency index, the agency dispatches/playbooks index pages, and the seven
+# migrated dispatch slugs got stubs here; individual playbook slugs (e.g.
+# build-your-first-skill) were deliberately not migrated — see
+# content/_content.gotmpl:13 ("playbooks and other Agency deep links are not
+# generated"). Do not add a stub for a playbook slug without a real reason;
+# their absence is the retirement decision working as intended, not a gap.
 #
 # `path` is the content-adapter identity (under redirects/ so we never create a
-# real content/agency section that would emit index.xml over the static tree).
+# real content/agency section that would emit index.xml over the retired tree).
 # `from` is the public URL.
 
 [[redirects]]

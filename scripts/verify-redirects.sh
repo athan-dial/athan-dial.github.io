@@ -84,31 +84,40 @@ EOF
 
 # ---------------------------------------------------------------------------
 # 2. Must-not-break paths.
-#    Agency playbooks / dispatches index live in the committed docs/ tree (Hugo
-#    does not regenerate them into a throwaway destination). Confirm they still
-#    exist under docs/, and that this build did not emit a colliding stub there.
+#
+#    Retired 2026-08-14 (was: assert docs/agency/playbooks/build-your-first-skill/
+#    and docs/agency/dispatches/ still exist in a committed docs/ tree, plus a
+#    docs/skills/ check below it). Both targets are gone, on purpose, for two
+#    independent reasons:
+#      1. docs/agency/** (127 files) was deliberately retired in d8e83376
+#         (2026-08-12) — "retire the Agency tree and purge 69 orphaned pages".
+#         That commit itself deleted docs/agency/playbooks/build-your-first-skill/
+#         index.html. Individual playbook slugs were never re-added as redirect
+#         stubs — only /agency/, /agency/dispatches/, /agency/playbooks/ (the
+#         index pages) and the seven migrated dispatch slugs were, per
+#         data/redirects.toml. content/_content.gotmpl:13 confirms this is
+#         intentional: "playbooks and other Agency deep links are not
+#         generated." /agency/playbooks/ builds as an empty list page by design.
+#      2. docs/skills/** (the fetched plugin subsites) was separately retired
+#         2026-08-14 — see the /skills/* redirect stubs in data/redirects.toml.
+#    Both checks also hardcoded "docs/" regardless of the $BUILD_DIR argument,
+#    which is doubly moot now: publishDir moved docs/ -> public/ on 2026-08-14
+#    and docs/ no longer exists in this repo at all. Asserting a deleted path
+#    exists in a renamed, nonexistent directory was never going to pass; it was
+#    dismissible as "stale path" instead of a real regression. Nothing here
+#    protects the retired trees going forward — that job belongs to
+#    verify-build.sh's inverted exit-code-2 check, which asserts they stay gone.
 # ---------------------------------------------------------------------------
-for rel in \
-  "agency/playbooks/build-your-first-skill/index.html" \
-  "agency/dispatches/index.html"
-do
-  [ -f "$REPO_ROOT/docs/$rel" ] || fail "must-not-break missing in docs/: /$rel"
-  if [ -f "$BUILD_DIR/$rel" ]; then
-    fail "build emitted $rel — would overwrite committed docs/$rel"
-  fi
-  ok "protected /$rel (present in docs/, absent from build)"
-done
 
-# /skills/ is the committed docs/skills/** plugin tree (not Hugo content). A
-# throwaway destination will not contain it; assert the source-of-record exists
-# and the build did not emit a colliding /skills/index.html stub.
-[ -d "$REPO_ROOT/docs/skills" ] || fail "must-not-break missing in docs/: /skills/"
-if [ -f "$BUILD_DIR/skills/index.html" ]; then
-  fail "build emitted skills/index.html — would overwrite committed docs/skills/"
-fi
-ok "protected /skills/ (present in docs/, no colliding build stub)"
-
-for rel in "resume.pdf" "about/index.html"; do
+# resume.pdf dropped from this list 2026-08-14: this check (c6cf9bdd, 2026-08-11)
+# predates 61597158 "security: pull the resume PDF" (2026-08-12), the deliberate
+# fix for the flattened-Canva-PDF phone-number leak (CLAUDE.md hard constraint 1).
+# data/profile.toml:36-39 explicitly forbids reintroducing a resume_pdf key —
+# asserting the PDF must be present in every build fights that decision and
+# would only ever pass by accident (or force someone to undo the security fix
+# to turn this gate green). /resume/ itself stays unpublished (draft: true,
+# build.render: never) so there is no page to link a PDF from either.
+for rel in "about/index.html"; do
   if [ -e "$BUILD_DIR/$rel" ]; then
     ok "must-not-break present in build: /$rel"
   else
@@ -145,7 +154,7 @@ PY
   done <<EOF
 $(find "$BUILD_DIR/agency" -type f)
 EOF
-  [ -z "$unexpected" ] || fail "build generated unexpected agency path(s): ${unexpected}(would shadow docs/agency)"
+  [ -z "$unexpected" ] || fail "build generated unexpected agency path(s): ${unexpected}(not in the retired-agency redirect map)"
   ok "agency build output limited to redirect map entries"
 fi
 
