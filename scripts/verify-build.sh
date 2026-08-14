@@ -57,68 +57,75 @@ if printf '%s' "$BUILD_LOG" | grep -q 'deprecated'; then
 fi
 
 # ---------------------------------------------------------------------------
-# 2. docs/agency — RETIRED 2026-08-12, deliberately. Assert it stays gone.
+# 2 & 3. Retired static trees — /agency/ and the /skills/ plugin subsites.
 #
-# This slot used to assert the opposite: that 127 tracked files under docs/agency were
-# present, because they had no source anywhere and a clean build would destroy them.
-# The tree was retired by owner decision — the dispatch notes were removed as
-# off-subject, and the playbooks, tag pages and diagrams went with them.
+# docs/ is no longer a committed tree. publishDir moved to public/ and docs/ is gitignored,
+# so these assertions run against the FRESH BUILD OUTPUT ($BUILD_OUT), which is the thing the
+# deploy actually uploads. Checking a committed directory could only ever tell you what was
+# checked in, not what ships.
 #
-# The check is inverted rather than deleted so a stale build output, a bad merge, or a
-# restore from a backup bundle cannot quietly republish the retired site. The Agency
-# URLs still resolve: data/redirects.toml generates meta-refresh stubs for /agency/,
-# /agency/dispatches/, /agency/playbooks/ and the seven dispatch slugs, so external
-# inbound links land on /thinking/ instead of 404ing.
+# What is being asserted, and why each was retired:
+#   /agency/**  — RETIRED 2026-08-12. 127 files with no source anywhere; the dispatch notes
+#                 were removed as off-subject and the playbooks, tag pages and diagrams went
+#                 with them.
+#   /skills/**  — RETIRED 2026-08-14. Plugin subsites fetched from athan-dial/skills, which
+#                 was deleted when the dev plugin moved into the private claude-skills repo
+#                 as user-level dev:* skills. Nothing can regenerate them.
 #
-# If the tree is ever intentionally brought back, replace this block with the
-# presence assertions from git history (see the commit that retired it).
+# Both checks assert ABSENCE of real content, not absence of the path: data/redirects.toml
+# generates meta-refresh stubs under both prefixes so external inbound links resolve instead
+# of 404ing. A stub is allowed; a real page is not.
+#
+# /skills/case-studies/ is NOT retired — it is ordinary Hugo output from content/skills/.
 # ---------------------------------------------------------------------------
-# Check SHAPE, not tracking. An earlier version of this asserted zero tracked files under
-# docs/agency, which failed in CI for a boring reason: docs/ is the committed publish dir,
-# so the redirect stubs Hugo generates there are necessarily tracked too. The stubs are
-# supposed to exist. What must not come back is the retired *content*.
-if [ -d docs/agency ]; then
-  # Every surviving file must be a meta-refresh stub. Real pages carry a stylesheet link.
-  AGENCY_NONSTUB=""
+assert_stubs_only() {
+  local prefix="$1" label="$2" code="$3"
+  local dir="$BUILD_OUT/$prefix"
+  [ -d "$dir" ] || return 0
+
+  local nonstub=""
   while IFS= read -r f; do
-    grep -qi 'http-equiv=.\?refresh' "$f" || AGENCY_NONSTUB="$AGENCY_NONSTUB$f"$'\n'
-  done < <(find docs/agency -type f -name '*.html')
-  if [ -n "$AGENCY_NONSTUB" ]; then
-    printf 'verify-build: non-stub pages under docs/agency:\n%s\n' "$AGENCY_NONSTUB" >&2
-    fail 2 "docs/agency contains real pages — the retired Agency site is back; it should be redirect stubs only"
+    grep -qi 'http-equiv=.\?refresh' "$f" || nonstub="$nonstub$f"$'\n'
+  done < <(find "$dir" -type f -name '*.html' ! -path "$BUILD_OUT/skills/case-studies/*")
+  if [ -n "$nonstub" ]; then
+    printf 'verify-build: non-stub pages under /%s:\n%s\n' "$prefix" "$nonstub" >&2
+    fail "$code" "/$prefix contains real pages — the retired $label site is back; it should be redirect stubs only"
   fi
 
-  # The retired subtrees must not reappear with content in them.
-  for sub in playbooks tags diagrams; do
-    n="$(find "docs/agency/$sub" -type f 2>/dev/null | wc -l | tr -d ' ')"
-    if [ "$n" -gt 1 ]; then
-      fail 2 "docs/agency/$sub has $n files — the retired Agency $sub tree is back (expected at most one redirect stub)"
-    fi
-  done
-
-  # Any non-HTML asset means the old site's CSS/JS/images were restored.
-  AGENCY_ASSETS="$(find docs/agency -type f ! -name '*.html' | head -5)"
-  if [ -n "$AGENCY_ASSETS" ]; then
-    printf 'verify-build: unexpected assets under docs/agency:\n%s\n' "$AGENCY_ASSETS" >&2
-    fail 2 "docs/agency contains non-HTML assets — the retired Agency site has been restored"
+  local assets
+  assets="$(find "$dir" -type f ! -name '*.html' ! -path "$BUILD_OUT/skills/case-studies/*" | head -5)"
+  if [ -n "$assets" ]; then
+    printf 'verify-build: unexpected assets under /%s:\n%s\n' "$prefix" "$assets" >&2
+    fail "$code" "/$prefix contains non-HTML assets — the retired $label site has been restored"
   fi
+}
+
+assert_stubs_only agency Agency 2
+ok "/agency stays retired (redirect stubs only, no content)"
+
+assert_stubs_only skills "plugin subsite" 3
+ok "/skills plugin subsites stay retired (redirect stubs only, no content)"
+
+# /skills/case-studies/ is NOT asserted present, and that is deliberate. It was live at 200
+# until 2026-08-14 — but only because the old committed docs/ tree still held a copy from
+# before the section was hidden. Both content/skills/_index.md and
+# content/skills/case-studies/_index.md carry draft: true and build.render: never, and the
+# latter describes itself as "Hidden — placeholder section, not yet populated." A clean build
+# renders neither, which is what their frontmatter asks for.
+#
+# The content gate in section 4 never caught this: the gate is right that the page is not
+# publishable. What published it was the committed artifact, not the build. Untracking docs/
+# is what closes the hole, and this note exists so nobody "fixes" the resulting 404 by
+# re-committing the page.
+
+# docs/ must not come back as a committed tree. It is build output; committing it is how three
+# superseded CSS fingerprints and a localhost-referencing RSS feed ended up served publicly.
+DOCS_TRACKED="$(git ls-files docs | head -5)"
+if [ -n "$DOCS_TRACKED" ]; then
+  printf 'verify-build: tracked files under docs/:\n%s\n' "$DOCS_TRACKED" >&2
+  fail 3 "docs/ has tracked files again — it is build output and must stay gitignored (publishDir is public/)"
 fi
-ok "docs/agency stays retired (redirect stubs only, no content)"
-
-# ---------------------------------------------------------------------------
-# 3. docs/skills — regenerable via fetch-skills.sh, but must not be silently gone.
-# ---------------------------------------------------------------------------
-[ -d docs/skills ] || fail 3 "docs/skills/ is missing — regenerate with: bash scripts/fetch-skills.sh"
-
-SKILLS_ENTRIES="$(find docs/skills -mindepth 1 -maxdepth 1 | wc -l | tr -d ' ')"
-[ "$SKILLS_ENTRIES" -gt 0 ] || fail 3 "docs/skills/ is empty — regenerate with: bash scripts/fetch-skills.sh"
-
-SKILLS_DELETED="$(git diff --name-only --diff-filter=D HEAD -- docs/skills | head -20)"
-if [ -n "$SKILLS_DELETED" ]; then
-  printf 'verify-build: deleted files under docs/skills:\n%s\n' "$SKILLS_DELETED" >&2
-  fail 3 "tracked files under docs/skills have been deleted — regenerate with: bash scripts/fetch-skills.sh"
-fi
-ok "docs/skills intact ($SKILLS_ENTRIES plugin subsites, none deleted)"
+ok "docs/ stays untracked"
 
 # ---------------------------------------------------------------------------
 # 4. Content gate — status/visibility must agree with draft.

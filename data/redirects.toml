@@ -145,3 +145,44 @@
   to = "/thinking/"
   permanent = true
   path = "redirects/agency-dispatches-cowork-changed-how-i-think-about-ai"
+
+# The fetched docs/skills/ plugin subsites were removed (2026-08-14): the dev plugin moved into
+# the private claude-skills repo as user-level dev:* skills, and athan-dial/skills was deleted.
+# These stubs keep the externally-linkable plugin-doc URLs resolving. /skills/ itself was
+# serving a stale RSS feed with http://localhost:1313 baked in — a stub is a real improvement
+# on that. /skills/case-studies/ is untouched, ordinary Hugo output.
+
+[[redirects]]
+  from = "/skills/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/skills"
+
+[[redirects]]
+  from = "/skills/orc/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/skills-orc"
+
+[[redirects]]
+  from = "/skills/folio/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/skills-folio"
+
+[[redirects]]
+  from = "/skills/dev/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/skills-dev"
+
+# /skills/case-studies/ served a hidden placeholder page for a while, leaked by the committed
+# docs/ tree rather than generated (its frontmatter is draft: true, build.render: never). It
+# stops publishing with the rest of docs/. A stub rather than a hard 404 because the URL was
+# returning 200 until 2026-08-14.
+
+[[redirects]]
+  from = "/skills/case-studies/"
+  to = "/thinking/"
+  permanent = true
+  path = "redirects/skills-case-studies"

@@ -193,26 +193,53 @@ Re-run the Step 6 checklist afterwards. Nothing about the rollback needs the arc
 
 ---
 
-## Open question — `publishDir`
+## Resolved 2026-08-14 — `publishDir` moved to `public/`, `docs/` is no longer committed
 
-`hugo.toml` still sets `publishDir = "docs"`, and `deploy.yml` deliberately relies on it: building
-into `docs/` is what preserves `docs/agency/**` and `docs/skills/**` in the uploaded artifact,
-because Hugo does not prune files it did not generate.
+This section used to recommend **keeping** `publishDir = "docs"`. The reason was specific:
+building into the committed publish dir was what preserved `docs/agency/**` and
+`docs/skills/**` in the uploaded artifact, because Hugo does not prune files it did not
+generate. Moving to a clean directory would have required copying both trees in by hand, with
+a failure mode where a missed copy silently drops `/agency/` from the live site.
 
-**Recommendation: keep `publishDir = "docs"`.** Changing it to a clean directory would require
-explicitly copying both static trees into the build output, adding a failure mode where a missed
-copy silently drops `/agency/` from the live site. The current arrangement is uglier to read and
-harder to break.
+Both trees are now retired, so there is nothing left to preserve:
 
-What *should* change once this migration is verified: `docs/` stops being committed. Add it to
-`.gitignore` **only after** Step 6 passes, and in a separate commit, so the working state is easy
-to bisect. Note that `docs/agency/**` must stay tracked — it is source-of-record, not build output.
-So the correct `.gitignore` entry is narrow, not `/docs/`:
+- `docs/agency/**` — retired 2026-08-12.
+- `docs/skills/**` — retired 2026-08-14. The subsites were fetched from `athan-dial/skills`,
+  which was deleted when the `dev` plugin moved into the private `claude-skills` repo as
+  user-level `dev:*` skills. `scripts/fetch-skills.sh` ran unconditionally in `deploy.yml`
+  under `set -euo pipefail`, so the next push to `main` would have failed the deploy.
 
-```
-/docs/*
-!/docs/agency/
-```
+What changed: `publishDir = "public"`, `/docs/` and `/public/` are both gitignored, the fetch
+step is gone, and the artifact upload points at `public/`. The old narrow `.gitignore`
+recommendation (`/docs/*` with `!/docs/agency/`) is void — `docs/agency/` was source-of-record
+only until it was retired, and it is now redirect stubs generated from `data/redirects.toml`.
 
-Verify with `git status --short` that no generated page reappears as untracked noise before
-committing that change.
+**Why committing the publish dir was worth ending.** Untracking it removed 174 tracked files
+and three live defects that had accumulated precisely because Hugo never prunes: three
+superseded fingerprinted CSS files still being served, an RSS feed at `/skills/` with
+`http://localhost:1313` baked into it as the channel link, and `/skills/case-studies/` serving
+a page whose own frontmatter says `draft: true`, `build.render: never`, "Hidden — placeholder
+section, not yet populated." The content gate in `verify-build.sh` was right that the page was
+not publishable; the committed artifact published it anyway.
+
+`verify-build.sh` sections 2 and 3 now assert against the fresh build output rather than a
+committed directory, and one new assertion fails the build if `docs/` ever becomes tracked
+again.
+
+Verified before pushing: clean build, `verify-build` PASS, all six redirect stubs generated,
+and **0 of the 8 URLs in the live sitemap would 404**.
+
+---
+
+## Note on Step 1 — never executed
+
+`archive/quartz-main` does not exist on the remote (`git ls-remote --tags origin` returns
+nothing for it), and `gh-pages` is gone. Steps 3–5 clearly happened — `main` is the Hugo
+source, Pages `build_type` is `workflow`, the default branch is `main` — but the archive tag
+was skipped along the way.
+
+The retired Quartz / model-citizen tree therefore survives in only two places, neither of them
+on GitHub: the stale local `main` branch at `58a3c61` in this checkout, and
+`~/Github/_archive/athan-dial.github.io-20260805.bundle`. If that tree still matters, push the
+tag before anyone prunes the local branch. If it does not, delete the local `main` and say so
+here.
