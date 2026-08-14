@@ -60,7 +60,7 @@ The second hard choice arrived after shipment. One expert compared the tool with
 
 Chasing result-count parity would have made an external service's behavior our product specification. I thought the complaint was about confidence in completeness. A looser threshold would return more results. More threshold choices would give the expert control. Showing results in a strong-match tier and an edge-of-match tier would let the user see where the tool became uncertain, then tighten or widen the search themselves.
 
-## Athan's ownership
+## My ownership
 
 I owned the problem framing and product definition. I wrote the requirements, phased the release, mapped the user flow, and authored the engine decision at several levels of technical detail. I also set the boundary between what the product should make consistent and what the scientist should continue to judge.
 
@@ -74,7 +74,7 @@ At least one expert tested the running tool. Months later, the primary expert us
 
 We also did not instrument adoption. There is no defensible user count, query count, retention measure, or evidence that the tool became the default. The last recorded objective snapshots were at risk, and I found no scored closeout. The measured performance change and the expert's objection are both real. A broader adoption outcome is not in the record.
 
-## What he would change now
+## What I would change now
 
 I would define adoption instrumentation as part of the product, not as cleanup after launch. Shipping established that the workflow could be put into software. Faster warmed-database queries established that one implementation change worked. Neither told us whether experts trusted the product enough to return to it.
 

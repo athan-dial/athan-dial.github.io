@@ -57,7 +57,7 @@ Automatic resolution made sense when the evidence cleared a high confidence bar.
 
 The discovery conversation added a second constraint. Leadership needed a coherent view, but coherence could not come from hiding disagreement. That pushed the design toward a canonical layer with provenance and explicit curation. It also kept interpretation with the analyst. The platform could organize the evidence around a competitor's move. It could not decide what that move meant for the business.
 
-## Athan's ownership
+## My ownership
 
 I owned the product requirements, roadmap, and architecture, and I worked directly in the implementation across the application. This was not a requirements document handed across a boundary. Product and technical choices moved together.
 
@@ -73,7 +73,7 @@ The record does not establish a specific number of versioned milestones in a spe
 
 The evidence establishes that the platform reached production. It does not give me a measured adoption or decision-quality result I can responsibly publish. That limits the outcome claim, and it should.
 
-## What he would change now
+## What I would change now
 
 The most consequential architecture correction arrived during the build. Publication date and event date are different facts. A source can report an event after it happened, and the system can learn about that source later still. Treating those moments as one timestamp produces a clean but false timeline.
 

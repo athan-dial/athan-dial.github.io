@@ -19,10 +19,6 @@ and the decision and briefing patterns leadership uses to make research trade-of
 
 **Data Research Lead** · Montai Therapeutics · 2022–2026
 
-Owned the nomination workflow end to end and moved it from a single-shot process to an iterative,
-model-informed one. Built the analytics substrate the discovery teams work on, and put predictive
-modelling into early-stage decision gates.
-
 **Data Scientist** · Replica Analytics · 2019–2020
 
 Clinical data pipelines, and privacy-preserving synthetic data for health research.
@@ -37,9 +33,9 @@ Analytics strategy for small and mid-size biotech clients.
 
 PhD work taught those moves; drug discovery ML uses them every day.
 
-The questions changed. *Which model architecture balances precision versus recall for this drug target?* replaced *Which experimental condition will produce the cleanest signal?* The decision-making register stayed the same: first-principles framing of what counts as evidence, explicit tradeoffs, and a strong allergy to metric theater.
+The questions changed. *Which model architecture balances precision versus recall for this drug target?* replaced *Which experimental condition will produce the cleanest signal?* The decision-making register stayed the same: first-principles framing of what counts as evidence and explicit tradeoffs.
 
-A pattern I keep noticing in data and AI leadership: people tend to be strong on product intuition or technical depth, with leadership glued in afterward. The hybrid of product judgment, technical depth, and research training is rarer than it should be. It's where I do my best work.
+A pattern I keep noticing in data and AI leadership: people tend to be strong on product intuition or technical depth, with leadership glued in afterward.
 
 ## Working Principles
 

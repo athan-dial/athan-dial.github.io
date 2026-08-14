@@ -187,11 +187,31 @@ move again without the same care), `params.toml`, `languages.en.toml`, `menus.en
 2. **Employer safety.** Must not read as running an active consulting business while employed
    at Montai. Use "Advisory & Thought Partnership," never pricing, timeframes, or deliverables.
    Avoid "discovery call," "booking," "investment."
-3. **Content authenticity.** Existing portfolio prose is substantially fabricated and does not
-   sound like Athan. Do **not** write new case studies or rewrite the résumé without the
+3. **Content authenticity.** Do **not** write new case studies or rewrite the résumé without the
    ChatGPT Deep Research outputs (Voice & Style Guide, Montai Work Archaeology) in
-   `2B-new/000 System/01 Inbox`. Structural, design, and technical work is fine meanwhile.
-   See `.planning/VOICE-REFERENCE.md` and `.planning/CONTENT-SAFETY-CONTRACT.md`.
+   `2B-new/000 System/01 Inbox`. That rule stands. Structural, design, and technical work is
+   fine meanwhile. See `.planning/VOICE-REFERENCE.md` and
+   `.planning/CONTENT-SAFETY-CONTRACT.md`.
+
+   **The live prose is no longer the fabricated archive — updated 2026-08-14.** This constraint
+   used to open by saying existing portfolio prose was substantially fabricated. That was true
+   when seven `/case-studies/` pages and seven `/agency/dispatches/` pages were live. They were
+   **retired to redirect stubs, not repaired** — do not go looking for that archive, and do not
+   treat its absence as a gap to fill. An audit of the nine remaining real content files found
+   zero percentages, zero dollar figures, and zero counts; five long-form pages state their own
+   evidence limits in body text (`content/work/analog-search-as-a-product.md` — "We also did not
+   instrument adoption. There is no defensible user count…"; `intelligence-platform-for-an-absent-user.md`
+   — "The record does not support the milestone count… I do not use them here."); and two pages
+   are externally verifiable as his, via a `canonical_url` to his own LinkedIn article and a
+   verbatim quote of his own post. **Do not cut a live page on a fabrication assumption.**
+
+   **The one open content risk is the About page's Experience section.** The Data Research Lead
+   description was unpublished on 2026-08-14 for claiming unhedged ownership of shared systems
+   with no split between his contribution and the team's — the split both `/work/` pages draw
+   carefully. The role line stands with no description. That paragraph is **Athan's to rewrite**;
+   the verbatim removed copy is preserved in gitignored
+   `.planning/private/about-experience-AWAITING-REWRITE.md`. Two "metric theater" and
+   self-assessment lines came out of Trajectory in the same pass, for the reasons recorded there.
 4. **Never commit internal Montai material.** `.planning/` is tracked and **public**. A prior
    commit put 946 lines of internal evidence material into this public repo; deleting it from
    HEAD did not remove it from history.
