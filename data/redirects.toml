@@ -52,17 +52,16 @@
   permanent = true
   path = "redirects/case-studies-shiny-framework-standardization-montai"
 
-[[redirects]]
-  from = "/case-studies/stat6-data-crisis-response-montai/"
-  to = "/work/"
-  permanent = true
-  path = "redirects/case-studies-stat6-data-crisis-response-montai"
-
-[[redirects]]
-  from = "/case-studies/xtalpi-build-vs-buy-analysis-montai/"
-  to = "/work/"
-  permanent = true
-  path = "redirects/case-studies-xtalpi-build-vs-buy-analysis-montai"
+# Two further /case-studies/ stubs were DELETED here on 2026-08-14, and are not to be
+# reinstated. Each slug concatenated an internal identifier with the employer name, and
+# was generated into every build. Under CONTENT-SAFETY-CONTRACT.md the disclosure IS the
+# association with the employer, so the slug itself was the disclosure — a redirect stub
+# is not a special case. They had been exempted by the private allowlist on the grounds
+# that a live URL cannot be changed without breaking an inbound link; that reasoning was
+# overturned because the entries protected a stub, not an article. The articles are
+# already retired, so the stubs carried nothing a reader loses. Both URLs now 404 —
+# accepted deliberately. Do not re-add them, and do not re-add an allowlist exemption
+# for them; the fix is the deletion, not the exemption.
 
 [[redirects]]
   from = "/agency/"
