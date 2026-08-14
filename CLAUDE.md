@@ -11,7 +11,9 @@ Guidance for Claude Code working in this repository.
 ## Project Overview
 
 Personal portfolio site. **Hugo v0.154.3+extended, themeless** — every layout is custom in
-`layouts/`, no theme dependency, no Hugo modules. Deployed to GitHub Pages from `docs/`.
+`layouts/`, no theme dependency, no Hugo modules. Deployed to GitHub Pages via Actions
+(`.github/workflows/deploy.yml`): CI builds fresh with `hugo --gc --minify` on every push to
+`main` and uploads `public/` as the Pages artifact. Nothing under the publish dir is committed.
 
 Positioning: "decision evidence, not achievements." Pages carry evidence about product
 judgment and applied-AI work rather than achievement lists.
@@ -25,21 +27,33 @@ display), which an external review found sat in a saturated AI-portfolio lane. S
 
 ```bash
 hugo server -D          # local, live reload, http://localhost:1313
-hugo                    # production build into docs/
+hugo                    # production build into public/
 ```
 
-### Do NOT use `--cleanDestinationDir` (or `rm -rf docs/`)
+### Never commit build output
 
-`docs/` is a **mixed directory**: Hugo output *plus* a separately synced agency microsite
-(127 committed files with its own favicons, CSS bundles, and 404). A clean build deletes the
-synced half, and Hugo will not regenerate it. To remove a stale orphan, delete that path
-specifically after a plain `hugo` build.
+`publishDir` moved from `docs/` to `public/` on 2026-08-14, and `public/` (like the old
+`docs/`) is gitignored. Every deployed file is Hugo output built fresh in CI from source —
+nothing under the publish dir is ever committed. This still matters: committing build output
+is exactly how three superseded CSS fingerprints and an RSS feed with `http://localhost:1313`
+baked into it once ended up served on the public site. `scripts/verify-build.sh` asserts
+`docs/` stays untracked (`git ls-files docs` must be empty) so that tree can't come back.
 
-Hugo also never cleans orphans on its own, so a page that stops rendering leaves its old
-`index.html` in `docs/` and GitHub Pages keeps serving it. This already caused a live
-incident: a retired `docs/resume/index.html` kept serving old copy plus a link to a PDF
-carrying a personal phone number, months after the page stopped being generated. **After
-removing or unpublishing a page, check `docs/` for its orphan.**
+The old orphan-page hazard — "Hugo never prunes its publish dir, so an unpublished page's
+`index.html` keeps being served" — no longer applies the same way: CI builds into a fresh
+`public/` on every deploy, so nothing from a previous build ever survives into the next one.
+The current risk looks different: `data/redirects.toml` + `content/_content.gotmpl` generate
+meta-refresh stubs for retired paths (`/agency/**`, `/skills/**` plugin subsites,
+`/case-studies/**`), and `scripts/verify-build.sh` specifically asserts those trees stay
+**stubs only** — a real page reappearing under a retired path (e.g. a content file's
+`draft: true` getting flipped back, or a fetch script resurrected) is the failure mode to
+watch for now, not a stale file lingering from a prior build.
+
+This already caused a live incident under the old mechanism: a retired `docs/resume/index.html`
+kept serving old copy plus a link to a PDF carrying a personal phone number, months after the
+page stopped being generated, because nothing ever pruned the committed `docs/` tree. That
+specific recurrence path is closed now that the publish dir is gitignored and rebuilt fresh
+every deploy — but the underlying PII lesson stands: see Hard Constraint 1.
 
 ## Design System: Hybrid + book architecture
 
@@ -117,13 +131,24 @@ than from prose accents.
 
 `content/_index.md` (home) · `about.md` · `advisory.md` (aliases `/consulting`, `/advisory`)
 · `writing.md` · `resume.md` · sections `work/`, `thinking/`, `notes/`, `essays/`, `skills/`
-· `_content.gotmpl` generates the `/agency/` dispatches and `/case-studies/` pages.
+· `_content.gotmpl` reads `data/redirects.toml` and generates **redirect stubs only** (a
+root content adapter, `layouts/_default/redirect.html`) for retired paths — `/agency/**`,
+`/case-studies/**`, and the `/skills/` plugin subsites all resolve this way now, to `/work/`
+or `/thinking/`. It does not generate real content pages.
 
 Deliberately unpublished right now — do not "fix" these without asking:
 - `content/resume.md` — `draft: true` + `build.render: never`. `/resume/` does **not** exist.
   No résumé link is published anywhere; `data/profile.toml` explains why and both call sites
   guard on the key with `with`.
-- `content/skills/_index.md` — draft, so `/skills/` 404s.
+- `content/skills/_index.md` and `content/skills/case-studies/_index.md` — both
+  `draft: true` + `build.render: never` + `build.list: never`. This does **not** 404:
+  `/skills/`, `/skills/orc/`, `/skills/folio/`, `/skills/dev/`, and `/skills/case-studies/`
+  all build as redirect stubs (via `data/redirects.toml`) to `/thinking/`. The `/skills/`
+  plugin subsites themselves (`orc`, `folio`, the fetched dev-plugin docs) were retired
+  2026-08-14 when `athan-dial/skills` was deleted; `/skills/case-studies/` was a hidden
+  placeholder that had only kept serving because the old committed `docs/` tree held a stale
+  copy — untracking that tree is what actually stopped it, not the frontmatter, which was
+  already `draft: true`.
 
 ### Data
 
@@ -133,18 +158,25 @@ and `[links]`. Prefer it over `config/_default/params.toml` for anything a templ
 
 ### Key layouts
 
-`_default/baseof.html` (shell, self-hosted fonts, Hugo Pipes CSS) · `index.html` (home) ·
-`work/{list,single}.html` · `thinking/list.html` · `notes/{list,single}.html` ·
-`essays/single.html` · `resume/single.html`
+`_default/baseof.html` (shell, self-hosted fonts, Hugo Pipes CSS) · `_default/list.html` ·
+`_default/single.html` · `_default/redirect.html` (renders the meta-refresh stubs from
+`_content.gotmpl`) · `index.html` (home) · `work/{list,single}.html` · `thinking/list.html` ·
+`notes/list.html` · `note/single.html` (Hugo singularizes the type for the single template;
+the content dir stays `notes/`) · `essay/single.html` (same pattern — content dir is
+`essays/`) · `resume/single.html` · `skills/{list,single}.html` (present but unused while
+`content/skills/` stays `draft: true` + `render: never`).
 
 Partials worth knowing: `section-rail.html` (vertical rule + one mono label, the core
-structural unit), `work-card.html`, `note-card.html`, `nav.html`, `footer.html`,
-`wayfinding.html`, `diagram-boundary.html`, `og-image.html`, `schema.html`.
+structural unit), `work-card.html`, `note-card.html`, `linkedin-card.html`, `nav.html`,
+`footer.html`, `favicons.html`, `wayfinding.html`, `diagram-boundary.html`, `og-image.html`,
+`schema.html`.
 
 ### Config
 
-`config/_default/` — `hugo.toml` (baseURL and `publishDir = "docs"`; **do not change
-either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (empty).
+`config/_default/` — `hugo.toml` (baseURL and `publishDir = "public"`; **do not change
+either** — `publishDir` moved here from `docs` on 2026-08-14, deliberately, and should not
+move again without the same care), `params.toml`, `languages.en.toml`, `menus.en.toml`,
+`module.toml` (empty).
 
 ## Hard Constraints
 
@@ -174,7 +206,13 @@ outside `:root`, re-measure contrast in-browser, update `DESIGN.md` and
 `.planning/ACCESSIBILITY-CHECKS.md` in the same commit.
 
 **Navigation:** edit `config/_default/menus.en.toml`. Confirm the target actually renders —
-a menu entry pointing at an unrendered page is a 404 that a stale `docs/` orphan can hide.
+a menu entry pointing at a `draft: true` or unrendered page is a dead link that's easy to
+miss since `public/` is rebuilt fresh every time and carries no history to grep.
 
-**Unpublishing a page:** change the front matter, rebuild, then delete the orphan from
-`docs/`, then grep `docs/` for any surviving link to it.
+**Unpublishing a page:** set `draft: true` (+ `build.render: never` / `build.list: never`
+to also drop it from lists), rebuild to a throwaway dir, and confirm with
+`scripts/verify-build.sh`. There is no `docs/` orphan to delete anymore — `public/` is
+gitignored and rebuilt fresh every deploy. If the URL has external inbound links worth
+preserving, add a stub in `data/redirects.toml` (see the `/skills/**` and `/case-studies/**`
+entries for the pattern) so it 301s instead of 404ing; then `scripts/verify-redirects.sh`
+confirms the stub resolves and grep the built output for any surviving internal link to it.
