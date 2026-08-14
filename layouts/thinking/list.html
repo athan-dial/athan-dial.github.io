@@ -12,6 +12,7 @@
 {{- $notes = sort $notes "Date" "desc" -}}
 {{- $selectedNotes := first 5 $notes -}}
 {{- $notesArchive := site.GetPage "section" "notes" -}}
+{{- $essaysArchive := site.GetPage "section" "essays" -}}
 {{/* Curated LinkedIn posts. No API exists for a member's own posts, so data/linkedin.toml
      is the source of truth. Sorted newest-first; entries missing quote or url are skipped
      by the partial. */}}
@@ -37,6 +38,16 @@
       <div class="section-rail">
         <div class="section-rail__meta">
           <h2 id="thinking-cornerstone">Cornerstone</h2>
+          {{- /* /essays/ is the section index for BOTH tiers below. Without this link no
+               page linked it, so the archive existed but was unreachable. Same pattern as
+               the Field Notes archive link further down. */ -}}
+          {{- if $essays -}}
+            {{- with $essaysArchive -}}
+              <p class="label-mono"><a class="link-action" href="{{ .RelPermalink }}">All essays →</a></p>
+            {{- else -}}
+              <p class="label-mono"><a class="link-action" href="{{ "/essays/" | relURL }}">All essays →</a></p>
+            {{- end -}}
+          {{- end -}}
         </div>
         <div class="section-rail__content">
           {{- if $cornerstone -}}

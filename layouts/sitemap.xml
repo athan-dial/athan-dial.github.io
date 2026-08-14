@@ -10,7 +10,14 @@
     {{- if .Draft }}{{ $skip = true }}{{ end -}}
     {{- if .Sitemap.Disable }}{{ $skip = true }}{{ end -}}
     {{- if or (eq .Section "case-studies") (eq .Section "resume") (eq .RelPermalink "/resume/") (hasPrefix .RelPermalink "/case-studies/") }}{{ $skip = true }}{{ end -}}
-    {{- if or (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "alias") }}{{ $skip = true }}{{ end -}}
+    {{- if eq .Kind "alias" }}{{ $skip = true }}{{ end -}}
+    {{- /* Taxonomies: `themes` is real navigation — essay, note and work pages link to
+         /themes/<term>/, so those pages must be listed. `categories` and `tags` are
+         declared in hugo.toml but nothing is filed under them and nothing links them;
+         they build as empty shells and stay out. */ -}}
+    {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+      {{- if not (hasPrefix .RelPermalink "/themes/") }}{{ $skip = true }}{{ end -}}
+    {{- end -}}
     {{- /* Redirect stubs from aliases are not in .Data.Pages for sitemap; belt-and-braces */ -}}
     {{- if isset .Params "status" -}}
       {{- if ne .Params.status "published" }}{{ $skip = true }}{{ end -}}
@@ -19,7 +26,9 @@
       {{- if ne .Params.visibility "public" }}{{ $skip = true }}{{ end -}}
     {{- end -}}
     {{- /* Scaffolding section indexes (work/essays/notes) stay out until they
-         declare status: published + visibility: public explicitly. */ -}}
+         declare status: published + visibility: public explicitly. All three now
+         declare it in their _index.md — the guard stays so a new section index is
+         opt-in, not opt-out. */ -}}
     {{- if and (eq .Kind "section") (or (eq .Section "work") (eq .Section "essays") (eq .Section "notes")) -}}
       {{- if or (ne .Params.status "published") (ne .Params.visibility "public") }}{{ $skip = true }}{{ end -}}
     {{- end -}}
