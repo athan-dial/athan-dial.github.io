@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # Build guard for athan-dial.github.io.
 #
-# Asserts that the site builds, that the static tree under docs/ is intact, that the
-# retired Agency tree stays retired, and that nothing publishes past its gates.
+# Asserts that the site builds, that both retired static trees stay retired, that docs/ never
+# becomes a committed tree again, and that nothing publishes past its gates.
 # Safe to run repeatedly. No network access.
 #
-# WHY THE STATIC-TREE ASSERTION EXISTS:
-#   docs/skills/** is not Hugo output. It is regenerable, but only via
-#   scripts/fetch-skills.sh, which needs network + gh auth — so a clean build silently
-#   drops it. docs/agency/** used to be a second such tree; it was retired 2026-08-12
-#   and the check for it is now inverted (see section 2).
+# WHY THE STATIC-TREE ASSERTIONS ARE ALL INVERTED NOW:
+#   docs/ once held two trees Hugo does not generate. docs/agency/** was retired 2026-08-12,
+#   and the fetched docs/skills/** plugin subsites were retired 2026-08-14 when
+#   athan-dial/skills was deleted and scripts/fetch-skills.sh went with it. Both checks assert
+#   absence of real content rather than presence (see sections 2 and 3), so a stale build or a
+#   restore from a backup bundle cannot quietly republish either.
 #
 # Usage:
 #   bash scripts/verify-build.sh
@@ -17,8 +18,8 @@
 # Exit codes:
 #   0  all assertions passed
 #   1  hugo build failed
-#   2  docs/agency tree damaged or missing
-#   3  docs/skills tree damaged or missing
+#   2  retired /agency content republished
+#   3  retired /skills content republished, or docs/ tracked again
 #   4  hugo not installed
 #   5  content gate breached (an unsafe page would publish)
 #   6  content safety violation (employer-confidential material in content/)
