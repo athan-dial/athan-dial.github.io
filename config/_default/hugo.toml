@@ -1,11 +1,15 @@
 # -- Site Configuration --
 # Hugo Resume Theme Configuration
 
-# CRITICAL: Do not change baseURL or publishDir (GitHub Pages deployment)
+# CRITICAL: Do not change baseURL (GitHub Pages deployment).
+# publishDir moved docs -> public on 2026-08-14. It was "docs" so that building INTO the
+# committed publish dir preserved two static trees Hugo does not generate (docs/agency/**
+# and the fetched docs/skills/** plugin subsites). Both are retired, so nothing needs
+# preserving and the build output is no longer committed at all.
 baseURL = "https://athan-dial.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-publishDir = "docs"
+publishDir = "public"
 
 title = "Athan Dial"
 enableRobotsTXT = true

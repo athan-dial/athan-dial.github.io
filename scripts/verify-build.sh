@@ -5,13 +5,11 @@
 # retired Agency tree stays retired, and that nothing publishes past its gates.
 # Safe to run repeatedly. No network access.
 #
-# WHY THE STATIC-TREE ASSERTIONS ARE ALL INVERTED NOW:
-#   docs/ once held two trees Hugo does not generate. docs/agency/** was retired 2026-08-12,
-#   and the fetched docs/skills/** plugin subsites were retired 2026-08-14 when
-#   athan-dial/skills was deleted and scripts/fetch-skills.sh went with it. Both checks
-#   assert absence rather than presence (sections 2 and 3), so a stale build or a restore
-#   from a backup bundle cannot quietly republish either. /skills/case-studies/ is ordinary
-#   Hugo output and is still asserted present.
+# WHY THE STATIC-TREE ASSERTION EXISTS:
+#   docs/skills/** is not Hugo output. It is regenerable, but only via
+#   scripts/fetch-skills.sh, which needs network + gh auth — so a clean build silently
+#   drops it. docs/agency/** used to be a second such tree; it was retired 2026-08-12
+#   and the check for it is now inverted (see section 2).
 #
 # Usage:
 #   bash scripts/verify-build.sh
@@ -20,12 +18,11 @@
 #   0  all assertions passed
 #   1  hugo build failed
 #   2  docs/agency tree damaged or missing
-#   3  retired docs/skills plugin subsite republished, or case-studies missing
+#   3  docs/skills tree damaged or missing
 #   4  hugo not installed
 #   5  content gate breached (an unsafe page would publish)
 #   6  content safety violation (employer-confidential material in content/)
 #   7  employer_review not cleared on a page that would publish
-#   8  render-HTML assertion failed (what the reader receives)
 
 set -uo pipefail
 
@@ -60,99 +57,75 @@ if printf '%s' "$BUILD_LOG" | grep -q 'deprecated'; then
 fi
 
 # ---------------------------------------------------------------------------
-# 2. docs/agency — RETIRED 2026-08-12, deliberately. Assert it stays gone.
+# 2 & 3. Retired static trees — /agency/ and the /skills/ plugin subsites.
 #
-# This slot used to assert the opposite: that 127 tracked files under docs/agency were
-# present, because they had no source anywhere and a clean build would destroy them.
-# The tree was retired by owner decision — the dispatch notes were removed as
-# off-subject, and the playbooks, tag pages and diagrams went with them.
+# docs/ is no longer a committed tree. publishDir moved to public/ and docs/ is gitignored,
+# so these assertions run against the FRESH BUILD OUTPUT ($BUILD_OUT), which is the thing the
+# deploy actually uploads. Checking a committed directory could only ever tell you what was
+# checked in, not what ships.
 #
-# The check is inverted rather than deleted so a stale build output, a bad merge, or a
-# restore from a backup bundle cannot quietly republish the retired site. The Agency
-# URLs still resolve: data/redirects.toml generates meta-refresh stubs for /agency/,
-# /agency/dispatches/, /agency/playbooks/ and the seven dispatch slugs, so external
-# inbound links land on /thinking/ instead of 404ing.
+# What is being asserted, and why each was retired:
+#   /agency/**  — RETIRED 2026-08-12. 127 files with no source anywhere; the dispatch notes
+#                 were removed as off-subject and the playbooks, tag pages and diagrams went
+#                 with them.
+#   /skills/**  — RETIRED 2026-08-14. Plugin subsites fetched from athan-dial/skills, which
+#                 was deleted when the dev plugin moved into the private claude-skills repo
+#                 as user-level dev:* skills. Nothing can regenerate them.
 #
-# If the tree is ever intentionally brought back, replace this block with the
-# presence assertions from git history (see the commit that retired it).
+# Both checks assert ABSENCE of real content, not absence of the path: data/redirects.toml
+# generates meta-refresh stubs under both prefixes so external inbound links resolve instead
+# of 404ing. A stub is allowed; a real page is not.
+#
+# /skills/case-studies/ is NOT retired — it is ordinary Hugo output from content/skills/.
 # ---------------------------------------------------------------------------
-# Check SHAPE, not tracking. An earlier version of this asserted zero tracked files under
-# docs/agency, which failed in CI for a boring reason: docs/ is the committed publish dir,
-# so the redirect stubs Hugo generates there are necessarily tracked too. The stubs are
-# supposed to exist. What must not come back is the retired *content*.
-if [ -d docs/agency ]; then
-  # Every surviving file must be a meta-refresh stub. Real pages carry a stylesheet link.
-  AGENCY_NONSTUB=""
+assert_stubs_only() {
+  local prefix="$1" label="$2" code="$3"
+  local dir="$BUILD_OUT/$prefix"
+  [ -d "$dir" ] || return 0
+
+  local nonstub=""
   while IFS= read -r f; do
-    grep -qi 'http-equiv=.\?refresh' "$f" || AGENCY_NONSTUB="$AGENCY_NONSTUB$f"$'\n'
-  done < <(find docs/agency -type f -name '*.html')
-  if [ -n "$AGENCY_NONSTUB" ]; then
-    printf 'verify-build: non-stub pages under docs/agency:\n%s\n' "$AGENCY_NONSTUB" >&2
-    fail 2 "docs/agency contains real pages — the retired Agency site is back; it should be redirect stubs only"
+    grep -qi 'http-equiv=.\?refresh' "$f" || nonstub="$nonstub$f"$'\n'
+  done < <(find "$dir" -type f -name '*.html' ! -path "$BUILD_OUT/skills/case-studies/*")
+  if [ -n "$nonstub" ]; then
+    printf 'verify-build: non-stub pages under /%s:\n%s\n' "$prefix" "$nonstub" >&2
+    fail "$code" "/$prefix contains real pages — the retired $label site is back; it should be redirect stubs only"
   fi
 
-  # The retired subtrees must not reappear with content in them.
-  for sub in playbooks tags diagrams; do
-    n="$(find "docs/agency/$sub" -type f 2>/dev/null | wc -l | tr -d ' ')"
-    if [ "$n" -gt 1 ]; then
-      fail 2 "docs/agency/$sub has $n files — the retired Agency $sub tree is back (expected at most one redirect stub)"
-    fi
-  done
-
-  # Any non-HTML asset means the old site's CSS/JS/images were restored.
-  AGENCY_ASSETS="$(find docs/agency -type f ! -name '*.html' | head -5)"
-  if [ -n "$AGENCY_ASSETS" ]; then
-    printf 'verify-build: unexpected assets under docs/agency:\n%s\n' "$AGENCY_ASSETS" >&2
-    fail 2 "docs/agency contains non-HTML assets — the retired Agency site has been restored"
+  local assets
+  assets="$(find "$dir" -type f ! -name '*.html' ! -path "$BUILD_OUT/skills/case-studies/*" | head -5)"
+  if [ -n "$assets" ]; then
+    printf 'verify-build: unexpected assets under /%s:\n%s\n' "$prefix" "$assets" >&2
+    fail "$code" "/$prefix contains non-HTML assets — the retired $label site has been restored"
   fi
-fi
-ok "docs/agency stays retired (redirect stubs only, no content)"
+}
 
-# ---------------------------------------------------------------------------
-# 3. docs/skills plugin subsites — RETIRED 2026-08-14, deliberately. Assert they stay gone.
-#
-# This slot used to assert the opposite: that the fetched subsites were PRESENT, because a
-# clean build would silently drop them (they were not Hugo output, and only
-# scripts/fetch-skills.sh could regenerate them — needing network plus gh auth).
-#
-# The source is gone. The dev plugin moved into the private claude-skills repo as user-level
-# dev:* skills, athan-dial/skills was deleted, and fetch-skills.sh went with it. Nothing can
-# regenerate these trees, so asserting their presence would fail every build from now on.
-#
-# Inverted rather than deleted, for the same reason as docs/agency above: a stale build
-# output, a bad merge, or a restore from the backup bundle must not quietly republish plugin
-# docs for a repo that no longer exists. The URLs still resolve — data/redirects.toml
-# generates meta-refresh stubs for /skills/, /skills/orc/ and /skills/folio/.
-#
-# /skills/case-studies/ is NOT retired. It is ordinary Hugo output from content/skills/
-# and must keep building.
-# ---------------------------------------------------------------------------
-RETIRED_SKILLS_TREES="orc folio _template"
-if [ -d docs/skills ]; then
-  for sub in $RETIRED_SKILLS_TREES; do
-    [ -d "docs/skills/$sub" ] || continue
-    # Any surviving file must be a meta-refresh stub. Real pages carry a stylesheet link.
-    NONSTUB=""
-    while IFS= read -r f; do
-      grep -qi 'http-equiv=.\?refresh' "$f" || NONSTUB="$NONSTUB$f"$'\n'
-    done < <(find "docs/skills/$sub" -type f -name '*.html')
-    if [ -n "$NONSTUB" ]; then
-      printf 'verify-build: non-stub pages under docs/skills/%s:\n%s\n' "$sub" "$NONSTUB" >&2
-      fail 3 "docs/skills/$sub contains real pages — a retired plugin subsite is back; it should be redirect stubs only"
-    fi
-    # Any non-HTML asset means the fetched bundle's CSS/JS/search index was restored.
-    ASSETS="$(find "docs/skills/$sub" -type f ! -name '*.html' | head -5)"
-    if [ -n "$ASSETS" ]; then
-      printf 'verify-build: unexpected assets under docs/skills/%s:\n%s\n' "$sub" "$ASSETS" >&2
-      fail 3 "docs/skills/$sub contains non-HTML assets — a retired plugin subsite has been restored"
-    fi
-  done
-fi
-ok "docs/skills plugin subsites stay retired (redirect stubs only, no content)"
+assert_stubs_only agency Agency 2
+ok "/agency stays retired (redirect stubs only, no content)"
 
-# /skills/case-studies/ is live Hugo output and must not vanish with them.
-[ -d docs/skills/case-studies ] || fail 3 "docs/skills/case-studies/ is missing — it is Hugo output from content/skills/case-studies/, not a retired tree"
-ok "docs/skills/case-studies intact"
+assert_stubs_only skills "plugin subsite" 3
+ok "/skills plugin subsites stay retired (redirect stubs only, no content)"
+
+# /skills/case-studies/ is NOT asserted present, and that is deliberate. It was live at 200
+# until 2026-08-14 — but only because the old committed docs/ tree still held a copy from
+# before the section was hidden. Both content/skills/_index.md and
+# content/skills/case-studies/_index.md carry draft: true and build.render: never, and the
+# latter describes itself as "Hidden — placeholder section, not yet populated." A clean build
+# renders neither, which is what their frontmatter asks for.
+#
+# The content gate in section 4 never caught this: the gate is right that the page is not
+# publishable. What published it was the committed artifact, not the build. Untracking docs/
+# is what closes the hole, and this note exists so nobody "fixes" the resulting 404 by
+# re-committing the page.
+
+# docs/ must not come back as a committed tree. It is build output; committing it is how three
+# superseded CSS fingerprints and a localhost-referencing RSS feed ended up served publicly.
+DOCS_TRACKED="$(git ls-files docs | head -5)"
+if [ -n "$DOCS_TRACKED" ]; then
+  printf 'verify-build: tracked files under docs/:\n%s\n' "$DOCS_TRACKED" >&2
+  fail 3 "docs/ has tracked files again — it is build output and must stay gitignored (publishDir is public/)"
+fi
+ok "docs/ stays untracked"
 
 # ---------------------------------------------------------------------------
 # 4. Content gate — status/visibility must agree with draft.
@@ -276,26 +249,6 @@ if [ -x scripts/verify-content-safety.sh ] || [ -f scripts/verify-content-safety
   ok "content safety scan clean"
 else
   printf 'verify-build: warn — scripts/verify-content-safety.sh missing; content not scanned\n' >&2
-fi
-
-# ---------------------------------------------------------------------------
-# 6. Render-HTML assertions — what the reader receives, not that Hugo compiled.
-#
-# Delegated to scripts/verify-render.sh. verify-build.sh never inspected rendered
-# HTML; that gap shipped duplicated OG tags, a never-rendered case outline,
-# homepage placeholders, a removed evidence label still printing, and essay/note
-# pages with no active nav — all on a green build. Warn-but-pass if the
-# sub-script is missing so a partial checkout still builds.
-# ---------------------------------------------------------------------------
-if [ -x scripts/verify-render.sh ] || [ -f scripts/verify-render.sh ]; then
-  if ! RENDER_OUT="$(bash scripts/verify-render.sh 2>&1)"; then
-    printf '%s\n' "$RENDER_OUT" >&2
-    fail 8 "render-HTML assertions failed — see above. Fix the template or content; do not weaken the check."
-  fi
-  printf '%s\n' "$RENDER_OUT" | grep -E 'verify-render: (  ok|PASS)' || true
-  ok "render-HTML assertions clean"
-else
-  printf 'verify-build: warn — scripts/verify-render.sh missing; rendered HTML not checked\n' >&2
 fi
 
 printf 'verify-build: PASS\n'

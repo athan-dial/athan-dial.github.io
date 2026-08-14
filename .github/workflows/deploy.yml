@@ -2,27 +2,22 @@
 #
 # ARTIFACT STRATEGY — read before changing anything here.
 #
-# hugo.toml sets publishDir = "docs". docs/ used to contain two static trees that Hugo does
-# NOT generate. Both are now retired, so every file under docs/ is Hugo output again:
+# hugo.toml sets publishDir = "public", and public/ is gitignored. Every file the deploy
+# uploads is Hugo output, built fresh in this job. Nothing under the publish dir is committed.
 #
-#   * docs/agency/**  — RETIRED 2026-08-12 by owner decision (127 tracked files, no source).
+# It used to be publishDir = "docs", committed, and built INTO — because docs/ held two trees
+# Hugo does not generate and does not prune:
+#   * docs/agency/**  — RETIRED 2026-08-12 (127 files, no source anywhere).
 #   * docs/skills/**  — plugin subsites fetched by scripts/fetch-skills.sh from the
 #     athan-dial/skills releases. RETIRED 2026-08-14: the dev plugin moved into the private
-#     claude-skills repo as user-level dev:* skills, and athan-dial/skills was deleted, so
-#     there is nothing left to fetch. The fetch step and that script are gone with it.
-#     /skills/case-studies/ survives — it is ordinary Hugo output from content/skills/.
+#     claude-skills repo as user-level dev:* skills and that repo was deleted, so the fetch
+#     step could only fail. The script is gone with it.
 #
-# verify-build.sh asserts both stay gone, and data/redirects.toml generates meta-refresh
-# stubs so the old /agency/* and /skills/* inbound links resolve instead of 404ing.
+# Both are now redirect stubs generated from data/redirects.toml, so old inbound links still
+# resolve. scripts/verify-build.sh asserts they stay stubs, and that docs/ never becomes a
+# tracked tree again — committing build output is how three superseded CSS fingerprints and an
+# RSS feed with http://localhost:1313 in it ended up served on the public site.
 #
-# Hugo does not prune unknown files from publishDir. That mattered while the static trees
-# existed — building into a fresh dir would have silently dropped them from the published
-# site. It no longer does, but this workflow still builds into docs/ and uploads docs/ as the
-# Pages artifact, because the redirect stubs for both retired trees live there.
-#
-# The artifact is uploaded, never committed. Under the old gh-pages model every content change
-# committed a regenerated docs/ tree; that is what this replaces.
-
 name: Deploy to Pages
 
 on:
@@ -55,7 +50,7 @@ jobs:
           hugo-version: "0.154.3"
           extended: true
 
-      - name: Build site into docs/ (retired trees survive as redirect stubs only)
+      - name: Build site
         run: hugo --gc --minify
 
       - name: Verify build and static trees
@@ -67,7 +62,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: public
 
   deploy:
     needs: build

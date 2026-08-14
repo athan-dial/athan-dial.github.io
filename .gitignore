@@ -1,5 +1,9 @@
-# Hugo
+# Hugo. publishDir is public/ as of 2026-08-14 (was docs/, and committed).
+# docs/ stays ignored so a stale local build cannot be re-tracked: Hugo never prunes its
+# publish dir, so a committed one silently accumulates superseded fingerprinted CSS and
+# feeds pointing at localhost, then serves them.
 /public/
+/docs/
 /resources/_gen/
 .hugo_build.lock
 
