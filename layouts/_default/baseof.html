@@ -11,9 +11,9 @@
   {{ partial "schema.html" . }}
   {{ partial "og-image.html" . }}
   {{/* Self-hosted latin-subset WOFF2. Provenance and refetch commands: static/fonts/README.md
-       Preload only above-the-fold faces (nav + first viewport): Manrope body, Source Serif 4
-       roman display, IBM Plex Mono 500 for nav/rail labels. Italic serif and mono 400 still
-       load via @font-face when needed — they are not first-viewport. */}}
+       Preload only above-the-fold faces (nav + first viewport): Archivo (display/body/headings),
+       IBM Plex Mono 500 for nav/rail labels. Mono 400 still loads via @font-face when needed —
+       it is not first-viewport. */}}
   <link rel="preload" href="/fonts/archivo-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/ibm-plex-mono-latin-500.woff2" as="font" type="font/woff2" crossorigin>
   {{- $tokens := resources.Get "css/tokens.css" -}}
