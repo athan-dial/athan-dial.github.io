@@ -18,7 +18,11 @@
   <link rel="preload" href="/fonts/ibm-plex-mono-latin-500.woff2" as="font" type="font/woff2" crossorigin>
   {{- $tokens := resources.Get "css/tokens.css" -}}
   {{- $main := resources.Get "css/main.css" -}}
-  {{- $css := slice $tokens $main | resources.Concat "css/editorial.css" | minify | fingerprint -}}
+  {{- /* expressive.css is LAST on purpose: it raises the register of components main.css
+         already defines, and it carries the prefers-reduced-motion block, which must be the
+         final rule in the bundle. Do not reorder these three. */ -}}
+  {{- $expressive := resources.Get "css/expressive.css" -}}
+  {{- $css := slice $tokens $main $expressive | resources.Concat "css/editorial.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{ hugo.Generator }}
 </head>

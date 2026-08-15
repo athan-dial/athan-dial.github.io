@@ -16,6 +16,9 @@ users:
 themes:
   - expert-workflows
   - product-judgment
+diagram: "analog-search"
+diagram_label: "Threshold control"
+diagram_caption: "The product boundary as built: the machine retrieves, ranks and proposes; the expert sets the similarity threshold and adjudicates. Drawn from this case only — no figures are implied."
 canonical_url: ""
 draft: false
 ---

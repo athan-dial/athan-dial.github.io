@@ -1,0 +1,64 @@
+{{- /*
+  Case artifact: "When a Faster Search Tool Still Felt Incomplete".
+
+  Scope is deliberately narrow. This case already carries a boundary diagram mid-body
+  (the {{< boundary-diagram >}} shortcode → partials/diagram-boundary.html), which lists
+  what stayed with the expert against what became common and reliable. Repeating that
+  split here would print the same argument twice on one page, so this figure draws only
+  what that one cannot: the ranked set, and the threshold cutting it where the reader can
+  see it. "Make the edge of a match visible" is the case's proposal; this is that edge.
+
+  Draws only what the case text states. No throughput figures, no result counts, no
+  invented stages. Labels stay short — SVG <text> does not wrap.
+*/ -}}
+<svg class="artifact" viewBox="0 0 1200 330" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-labelledby="artifact-analog-title artifact-analog-desc">
+  <title id="artifact-analog-title">A ranked candidate set with the expert's threshold drawn on it</title>
+  <desc id="artifact-analog-desc">A starting structure is retrieved, ranked, and proposed as a set.
+    The candidates are drawn in rank order, most similar at the left. A movable threshold, set by the
+    expert rather than fixed by the product, cuts the row — so the candidates just outside the match
+    stay visible instead of being silently dropped.</desc>
+
+  <text class="artifact__band-label" x="0" y="14">RETRIEVAL PATH · REPEATABLE</text>
+
+  <g class="artifact__stage">
+    <rect x="0"   y="30" width="228" height="60" />
+    <rect x="264" y="30" width="196" height="60" />
+    <rect x="496" y="30" width="196" height="60" />
+    <rect x="728" y="30" width="228" height="60" />
+  </g>
+  <g class="artifact__stage-label">
+    <text x="20"  y="66">STARTING STRUCTURE</text>
+    <text x="284" y="66">RETRIEVE</text>
+    <text x="516" y="66">RANK</text>
+    <text x="748" y="66">PROPOSE SET</text>
+  </g>
+  <g class="artifact__flow">
+    <path d="M228 60H252" /><path d="M460 60H484" /><path d="M692 60H716" />
+    <path d="M246 54l10 6-10 6z" class="artifact__arrowhead" />
+    <path d="M478 54l10 6-10 6z" class="artifact__arrowhead" />
+    <path d="M710 54l10 6-10 6z" class="artifact__arrowhead" />
+  </g>
+
+  <text class="artifact__axis-label" x="0" y="140">MORE SIMILAR</text>
+  <text class="artifact__axis-label artifact__axis-label--end" x="1200" y="140">LESS SIMILAR</text>
+
+  {{- /* The ranked set. Bars shorten left to right because rank does; the row is drawn on
+         a shared baseline so the threshold reads as a cut through it, not as a chart. */ -}}
+  <g class="artifact__ranked">
+    {{- range $i := (seq 0 17) -}}
+    <rect x="{{ mul $i 66 }}" y="{{ add 158 (mul $i 4) }}" width="46" height="{{ sub 92 (mul $i 4) }}" />
+    {{- end -}}
+  </g>
+  <path class="artifact__baseline" d="M0 250H1188" />
+
+  {{- /* The threshold: expert-set and movable. Drawn ON the set, because the argument is
+         that its position is visible rather than buried in a default. */ -}}
+  <g class="artifact__threshold">
+    <path d="M726 126V268" />
+    <rect x="712" y="116" width="28" height="12" />
+    <text class="artifact__threshold-label" x="752" y="126">THRESHOLD · MOVED BY THE EXPERT</text>
+  </g>
+  <text class="artifact__note-mono" x="752" y="292">THE CANDIDATES JUST OUTSIDE IT STAY VISIBLE</text>
+</svg>

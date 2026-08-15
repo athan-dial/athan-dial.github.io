@@ -25,9 +25,9 @@
     {{- if $public -}}
     <div class="case-studies work-index__list">
       <ul>
-        {{- range $public -}}
+        {{- range $i, $p := $public -}}
         <li>
-          {{ partial "work-card.html" (dict "page" . "heading" "h2") }}
+          {{ partial "work-card.html" (dict "page" $p "heading" "h2" "ordinal" (printf "%02d" (add $i 1))) }}
         </li>
         {{- end -}}
       </ul>

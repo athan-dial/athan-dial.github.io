@@ -1,0 +1,86 @@
+{{- /*
+  Case artifact: "The primary user was not in the room".
+
+  Draws only what the case text states — records arrive from multiple sources, the platform
+  reconciles them without a model deciding what is true, the analyst adjudicates, and a
+  leadership function consumes the picture with a route back to the evidence. The permissions
+  boundary is drawn because the case says the earlier attempt failed at one; it is drawn as a
+  gate on the path, not as a number.
+*/ -}}
+<svg class="artifact" viewBox="0 0 1200 470" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-labelledby="diag-recon-title diag-recon-desc">
+  <title id="diag-recon-title">How records reach a leadership reader without a model deciding what is true</title>
+  <desc id="diag-recon-desc">Records from several sources pass through a reconciliation layer and a
+    permissions gate. The analyst adjudicates conflicts; the leadership reader receives a coherent
+    picture and keeps a route back to the underlying evidence.</desc>
+
+  <text class="artifact__band-label" x="0" y="14">SOURCES · INCONSISTENT</text>
+  <g class="artifact__stage">
+    <rect x="0"   y="32" width="264" height="58" />
+    <rect x="0"   y="102" width="264" height="58" />
+    <rect x="0"   y="172" width="264" height="58" />
+  </g>
+  <g class="artifact__stage-label">
+    <text x="20" y="68">SOURCE A</text>
+    <text x="20" y="138">SOURCE B</text>
+    <text x="20" y="208">SOURCE C</text>
+  </g>
+
+  {{- /* Converging, not merging: the lines meet the layer, they do not become each other. */ -}}
+  <g class="artifact__flow">
+    <path d="M264 61H360V131" /><path d="M264 131H360" /><path d="M264 201H360V131" />
+    <path d="M360 131H418" />
+    <path d="M412 125l10 6-10 6z" class="artifact__arrowhead" />
+  </g>
+
+  <g class="artifact__stage artifact__stage--layer">
+    <rect x="422" y="32" width="356" height="198" />
+  </g>
+  <g class="artifact__stage-label">
+    <text x="442" y="68">RECONCILIATION LAYER</text>
+  </g>
+  <g class="artifact__note">
+    <text x="442" y="106">Retrieves, ranks, proposes.</text>
+    <text x="442" y="132">Keeps the conflict visible.</text>
+    <text x="442" y="158">Does not decide what is true.</text>
+  </g>
+  <path class="artifact__rule-hairline" d="M442 186H758" />
+  <text class="artifact__note-mono" x="442" y="212">EVERY RECORD KEEPS ITS SOURCE</text>
+
+  {{- /* The gate the earlier attempt failed at. Drawn ON the path, deliberately. */ -}}
+  <g class="artifact__flow">
+    <path d="M778 131H842" />
+  </g>
+  <g class="artifact__gate">
+    <path d="M862 46V216" />
+    <rect x="848" y="36" width="28" height="12" />
+    <rect x="848" y="204" width="28" height="12" />
+    <text class="artifact__gate-label" x="890" y="120">PERMISSIONS</text>
+    <text class="artifact__gate-label" x="890" y="146">BOUNDARY</text>
+  </g>
+
+  {{- /* The boundary between what the machine settles and what a person settles. */ -}}
+  <path class="artifact__boundary" d="M0 286H1200" />
+  <text class="artifact__band-label" x="0" y="316">PEOPLE · ADJUDICATE AND READ</text>
+
+  <g class="artifact__stage artifact__stage--expert">
+    <rect x="0"   y="334" width="562" height="106" />
+    <rect x="638" y="334" width="562" height="106" />
+  </g>
+  <g class="artifact__stage-label">
+    <text x="20"  y="370">ANALYST</text>
+    <text x="658" y="370">LEADERSHIP READER</text>
+  </g>
+  <g class="artifact__note">
+    <text x="20"  y="406">Resolves the conflicts the layer surfaced.</text>
+    <text x="658" y="406">Reads one coherent picture.</text>
+    <text x="658" y="430">Keeps a route back to the evidence.</text>
+  </g>
+
+  {{- /* The route back. A returning line, because that is what the case argues for. */ -}}
+  <g class="artifact__flow artifact__flow--return">
+    <path d="M600 388H562" />
+    <path d="M568 382l-10 6 10 6z" class="artifact__arrowhead" />
+  </g>
+</svg>

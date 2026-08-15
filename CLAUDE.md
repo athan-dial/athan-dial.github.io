@@ -58,8 +58,15 @@ every deploy — but the underlying PII lesson stands: see Hard Constraint 1.
 ## Design System: Hybrid + book architecture
 
 **Authority:** `DESIGN.md`. Tokens: `assets/css/tokens.css`. Implementation:
-`assets/css/main.css`. Measured contrast: `.planning/ACCESSIBILITY-CHECKS.md`.
-Zero `!important`, zero border-radius, zero box-shadow — all deliberate.
+`assets/css/main.css` + `assets/css/expressive.css`. Measured contrast:
+`.planning/ACCESSIBILITY-CHECKS.md`. Zero `!important`, zero border-radius, zero box-shadow —
+all deliberate.
+
+The bundle is **three files in this order: tokens → main → expressive** (`baseof.html`). Do not
+reorder them. `expressive.css` (added 2026-08-15) is the layer that raises the register — scale,
+the full-bleed statement band, work-index rows, the boundary motif and the case artifacts — and
+it is last so it can override components `main.css` defines. See DESIGN.md, "the expressive
+layer".
 
 ### Typography
 
@@ -111,8 +118,10 @@ Rules that are easy to break by accident:
 4. **Verify contrast in-browser, through a canvas.** The `color-mix()` tints compute as
    `oklab()` and cannot be read off a hex table — a naive JS parse silently mis-reads them.
 5. **Never animate a layout property on hover.** Text must not reflow under the pointer.
-6. **`prefers-reduced-motion` must stay last in `main.css`.** Mid-file, it silently fails to
-   zero every transition declared after it.
+6. **`prefers-reduced-motion` must stay last in the BUNDLE — it now lives at the end of
+   `expressive.css`, not `main.css`.** It moved on 2026-08-15 when `expressive.css` was appended
+   after `main.css`. Anywhere earlier, it silently fails to zero every transition declared after
+   it. The invariant is cascade position, not filename.
 
 ### Accents render only where content exercises them
 
@@ -170,6 +179,15 @@ Partials worth knowing: `section-rail.html` (vertical rule + one mono label, the
 structural unit), `work-card.html`, `note-card.html`, `linkedin-card.html`, `nav.html`,
 `footer.html`, `favicons.html`, `wayfinding.html`, `diagram-boundary.html`, `og-image.html`,
 `schema.html`.
+
+Drawn artifacts (2026-08-15): `boundary-motif.html` is the site's one signature mark;
+`case-diagram.html` dispatches a case to `diagrams/<name>.html` on its `diagram:` front-matter
+key. Two rules. A case with no key renders **nothing** — never a placeholder, never another
+case's figure. And each diagram draws only what its case text states: no figures, no counts, no
+invented stages, which is Hard Constraint 3 applied to pictures. Note the two engines are not
+interchangeable: `diagram-boundary.html` is prose-led HTML/CSS because its labels are sentences
+that must wrap, while `diagrams/*.html` are SVG because their labels are single short lines.
+SVG `<text>` does not wrap; this already caused one rewrite.
 
 ### Config
 

@@ -1,0 +1,32 @@
+{{- /*
+  Dispatches a case page to its hand-authored artifact diagram.
+
+  A case opts in with `diagram: "<name>"` in front matter, matching a partial under
+  layouts/partials/diagrams/. A page with no `diagram` key, or a key naming a partial that
+  does not exist, renders nothing — a missing diagram is silence, never a placeholder box
+  and never a stand-in from another case.
+
+  Params:
+    page      the page
+    caption   optional; if absent the diagram carries its own SVG title only
+    variant   "figure" (default, in-flow figure) | "bare" (caller supplies the frame)
+*/ -}}
+{{- $page := .page -}}
+{{- $name := $page.Params.diagram -}}
+{{- if $name -}}
+{{- $path := printf "diagrams/%s.html" $name -}}
+{{- if templates.Exists (printf "partials/%s" $path) -}}
+{{- if eq (.variant | default "figure") "bare" -}}
+{{ partial $path . }}
+{{- else -}}
+<figure class="case-figure">
+  <div class="case-figure__frame">
+    {{ partial $path . }}
+  </div>
+  {{- with .caption }}
+  <figcaption class="case-figure__caption">{{ . }}</figcaption>
+  {{- end }}
+</figure>
+{{- end -}}
+{{- end -}}
+{{- end -}}

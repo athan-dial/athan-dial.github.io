@@ -1,0 +1,607 @@
+/* Expressive layer — 2026-08-15.
+   ---------------------------------------------------------------------------------------
+   Loaded AFTER main.css so it can raise the register of components main.css already
+   defines. It introduces no new colour, no new family, no radius, no shadow: the whole
+   layer is scale, field, and drawn artifact, built from the tokens already in tokens.css.
+
+   Why it exists. The Hybrid + book direction produced a disciplined page whose every
+   section carried the same weight, no page contained a drawn artifact, and the accent
+   appeared once, as a 3px rule above the masthead. That reads as restraint on a page that
+   has something to be restrained about, and as an unfinished template on a portfolio.
+   This layer supplies the three things the system named but never built: a drawn boundary
+   motif, artifact diagrams on cases, and one moment of scale on each page.
+
+   Rules this layer keeps:
+     - Every value derives from a token. No hex outside :root, still true.
+     - Flat: no border-radius, no box-shadow, no gradient. Still true.
+     - One accent field per page, maximum. A second one makes both of them wallpaper.
+     - Nothing animates a layout property. Hover moves colour and 4px arrows only.
+     - The prefers-reduced-motion block lives at the END of this file, because this file
+       is now last in the bundle. That invariant moved here from main.css with it.
+   --------------------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------------------
+   1. Scale. One oversized moment per page, and it is the page's own subject.
+   ------------------------------------------------------------------------------------- */
+
+/* The display size was a fixed 60px, which is a large heading rather than a scale event.
+   The Müller-Brockmann half of the direction is scale, and the built page never spent it.
+
+   Capped at 76px, not higher: the hero headline lives in the rail's content column, which
+   is ~7/11 of ~1010px. A 104px first attempt broke that sentence over NINE lines and read
+   as a ransom note. The `ch` cap is the real control — it holds the break at three or four
+   lines at any viewport, where a vw-only rule reflows the shape at every width. */
+.hero__name,
+.page-hero__title {
+  font-size: clamp(38px, 6.2vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.038em;
+  max-width: 26ch;
+  margin-bottom: var(--stack-xl);
+  text-wrap: balance;
+}
+
+/* A listing page's own title is the same kind of event at a smaller amplitude. */
+.work-index__header h1,
+.page-editorial > header h1,
+.page-editorial > .container > header h1 {
+  font-size: clamp(38px, 6vw, 84px);
+  line-height: 0.96;
+  letter-spacing: -0.038em;
+}
+
+/* -------------------------------------------------------------------------------------
+   2. The boundary motif. The site's stated recurring idea, drawn.
+   ------------------------------------------------------------------------------------- */
+
+.motif {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* On the ink band a 1px hairline at full paper still reads as almost nothing, because the
+   drawing is scaled down and the stroke goes sub-pixel. Nodes carry a faint fill as well as
+   the stroke so they read as objects rather than as scratches. */
+.motif__nodes rect {
+  fill: currentColor;
+  fill-opacity: 0.09;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.motif__drops path {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-dasharray: 2 7;
+  opacity: 0.7;
+}
+
+.motif__boundary {
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.motif__substrate rect {
+  fill: currentColor;
+  fill-opacity: 0.14;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.motif__substrate-divider {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.55;
+}
+
+.motif__cell-label,
+.motif__band-label {
+  fill: currentColor;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+}
+
+.motif__band-label { opacity: 0.62; font-size: 12px; }
+
+.motif__label {
+  fill: currentColor;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+}
+
+.motif--ink { color: var(--ink); }
+.motif--ink .motif__boundary { stroke: var(--accent); }
+.motif--ink .motif__label { fill: var(--accent); }
+.motif--paper { color: var(--paper); }
+
+/* -------------------------------------------------------------------------------------
+   3. The statement band. One ink field per page, full-bleed, carrying the page's argument.
+   ------------------------------------------------------------------------------------- */
+
+/* Full-bleed out of the centred shell without a wrapper element or a transform.
+   100vw would overflow by the scrollbar width and give the page a horizontal scroll on
+   Windows; `100cqw`-free maths against the shell keeps it exact. */
+.statement {
+  --statement-bleed: calc(50% - 50vw);
+  margin-inline: var(--statement-bleed);
+  padding-inline: max(var(--margin-desktop), calc(50vw - (var(--max-width) / 2)));
+  padding-block: clamp(48px, 7vw, 104px);
+  background: var(--ink);
+  color: var(--paper);
+  border-block: 3px solid var(--accent);
+}
+
+@supports (width: 100dvw) {
+  .statement { --statement-bleed: calc(50% - 50dvw); }
+}
+
+.statement__grid {
+  display: grid;
+  gap: var(--stack-lg);
+  align-items: start;
+}
+
+/* The motif was first placed in a 5fr column beside the text, where it rendered ~400px
+   wide: a 1200-unit drawing scaled to a third, with 13px labels landing at 4px. It is a
+   wide, short drawing, so it gets a wide, short place — full width under the statement,
+   which also reads as the substrate the sentence above it is describing. */
+.statement__figure {
+  margin: var(--stack-xl) 0 0;
+  padding-top: var(--stack-lg);
+  border-top: 1px solid color-mix(in oklab, var(--paper) 24%, transparent);
+}
+
+.statement__label {
+  display: block;
+  margin-bottom: var(--stack-md);
+  color: var(--paper);
+  opacity: 0.62;
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.statement__title {
+  margin: 0 0 var(--stack-lg);
+  color: var(--paper);
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.statement__body {
+  max-width: 58ch;
+  margin: 0;
+  color: var(--paper);
+  opacity: 0.86;
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-line-height);
+}
+
+/* -------------------------------------------------------------------------------------
+   4. Work index. Was two grey text blocks on the left half of a 1240px page.
+   ------------------------------------------------------------------------------------- */
+
+.work-index__list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 3px solid var(--rule);
+}
+
+.work-index__list > ul > li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.work-card__link {
+  display: grid;
+  gap: var(--stack-md) var(--gutter);
+  padding-block: clamp(28px, 3.4vw, 56px);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* index | text | artifact. The artifact column is why this page now uses its full width:
+   the right half held nothing at all, and a case study without a visible artifact is the
+   one thing a design portfolio cannot afford. */
+@media (min-width: 900px) {
+  .work-card__link {
+    grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, 0.82fr);
+    align-items: start;
+  }
+}
+
+.work-card__ordinal {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+  font-variant-numeric: tabular-nums;
+}
+
+.work-card__title {
+  margin: 0 0 var(--stack-md);
+  font-size: clamp(26px, 2.9vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  transition: color var(--duration-base) var(--ease-out-quart);
+}
+
+.work-card__summary {
+  max-width: 58ch;
+  margin: 0 0 var(--stack-lg);
+  color: var(--ink-secondary);
+}
+
+/* Metadata reads as a spec strip under the summary rather than as three stacked mono
+   lines above the title, where it delayed the headline by three rows of shouting caps. */
+.work-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--stack-sm) var(--stack-lg);
+  padding-top: var(--stack-md);
+  border-top: 1px solid var(--rule);
+}
+
+.work-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.work-card__field .grouped-field__label { margin: 0; }
+
+.work-card__field .label-mono {
+  color: var(--ink);
+  text-transform: none;
+}
+
+.work-card__thumb {
+  /* start, not stretch: stretched, the frame grew to the height of the text column and
+     hung an empty white field under a 90px drawing. */
+  align-self: start;
+  padding: var(--stack-md);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  transition: border-color var(--duration-base) var(--ease-out-quart),
+    background-color var(--duration-base) var(--ease-out-quart);
+}
+
+/* The thumbnail is a crop of the case's own diagram, not a generic mark: each row shows
+   the artifact it links to. It is inert to the pointer; the whole row is the target. */
+.work-card__thumb .artifact {
+  width: 100%;
+  height: auto;
+}
+
+.work-card__thumb-label {
+  display: block;
+  margin-top: var(--stack-md);
+  padding-top: var(--stack-sm);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.work-card:hover .work-card__title { color: var(--accent); }
+.work-card:hover .work-card__thumb { border-color: var(--accent); }
+.work-card:hover .artifact__boundary { stroke: var(--accent); }
+
+/* -------------------------------------------------------------------------------------
+   5. Artifact diagrams. Hand-authored, token-driven, flat.
+   ------------------------------------------------------------------------------------- */
+
+.artifact {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+  overflow: visible;
+}
+
+.artifact__stage rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.artifact__stage--layer rect { fill: var(--tint-accent); stroke: var(--rule-accent); }
+.artifact__stage--expert rect { fill: var(--surface); }
+
+.artifact__flow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.artifact__flow--return path { stroke-dasharray: 3 4; }
+.artifact__arrowhead { fill: currentColor; stroke: none; }
+
+.artifact__ranked rect {
+  fill: currentColor;
+  opacity: 0.13;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.artifact__boundary {
+  stroke: var(--accent);
+  stroke-width: 3;
+  transition: stroke var(--duration-base) var(--ease-out-quart);
+}
+
+.artifact__rule-hairline { stroke: var(--rule-accent); stroke-width: 1; }
+
+.artifact__baseline { stroke: currentColor; stroke-width: 1; }
+
+.artifact__threshold path,
+.artifact__gate path {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.artifact__threshold rect,
+.artifact__gate rect { fill: var(--accent); }
+
+.artifact text {
+  fill: currentColor;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.artifact__band-label,
+.artifact__stage-label text,
+.artifact__axis-label,
+.artifact__note-mono,
+.artifact__threshold-label,
+.artifact__gate-label,
+.artifact__excluded-label text {
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+}
+
+.artifact__band-label,
+.artifact__axis-label,
+.artifact__note-mono,
+.artifact__excluded-label text { fill: var(--ink-secondary); font-size: 12px; }
+
+.artifact__threshold-label,
+.artifact__gate-label { fill: var(--accent); font-size: 12px; }
+
+.artifact__axis-label--end { text-anchor: end; }
+
+.artifact__note text {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  letter-spacing: 0;
+  fill: var(--ink-secondary);
+}
+
+/* The figure on a case page. Breaks the reading column deliberately: an artifact is the
+   one element allowed to be wider than the prose, because it is not read at prose measure. */
+.case-figure {
+  margin: var(--stack-xl) 0;
+}
+
+.case-figure__frame {
+  padding: clamp(20px, 2.6vw, 40px);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+
+.case-figure__caption {
+  margin-top: var(--stack-md);
+  max-width: 62ch;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  line-height: 18px;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 1100px) {
+  /* Push into the active outer margin the book architecture reserves — the margin is
+     load-bearing, so the artifact is the thing that earns the right to enter it. */
+  .work-article .case-figure { margin-inline: 0 calc(-1 * var(--stack-xl)); }
+}
+
+/* -------------------------------------------------------------------------------------
+   6. Homepage composition.
+   ------------------------------------------------------------------------------------- */
+
+/* The hero was a centred two-column split with the portrait floating in the middle of a
+   column of air. Top-aligned and weighted 7:4, the portrait sits where the headline ends. */
+@media (min-width: 900px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: start;
+    gap: var(--stack-xl);
+  }
+}
+
+/* The portrait is supporting editorial material, not half the page (DESIGN.md, Imagery).
+   At 4fr of the hero row it lands around 300px, which is a photograph on a page rather
+   than a headshot competing with the headline. */
+.hero__portrait { align-self: start; max-width: 320px; }
+
+.hero__intro {
+  max-width: 54ch;
+  color: var(--ink-secondary);
+}
+
+/* A mono spec strip under the hero, in place of a one-row grouped-field list that spent a
+   full rule on a single value. Reads as the colophon of the page it opens. */
+.hero__spec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--stack-md) var(--stack-xl);
+  margin-top: var(--stack-lg);
+  padding-top: var(--stack-md);
+  border-top: 1px solid var(--rule);
+}
+
+.hero__spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hero__spec-label {
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  font-weight: var(--metadata-caps-weight);
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.hero__spec-value {
+  margin: 0;
+  font-size: var(--body-md-size);
+}
+
+/* Selected-work rows on the homepage share the work-index grammar rather than being
+   side-by-side grey twins that differ in nothing but their text. */
+.home-work__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 3px solid var(--rule);
+}
+
+.home-work__list > li { border-bottom: 1px solid var(--rule); }
+
+/* -------------------------------------------------------------------------------------
+   7. Thinking, essays, notes. Typographic flair only — these pages are for reading.
+   ------------------------------------------------------------------------------------- */
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 3px solid var(--rule);
+}
+
+.entry-list > li { border-bottom: 1px solid var(--rule); }
+
+.entry-row {
+  display: grid;
+  gap: var(--stack-sm) var(--gutter);
+  padding-block: clamp(20px, 2.4vw, 36px);
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .entry-row {
+    grid-template-columns: 4.5rem minmax(0, 1fr) 7rem;
+    align-items: baseline;
+  }
+}
+
+.entry-row__ordinal {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: var(--metadata-caps-tracking);
+  font-variant-numeric: tabular-nums;
+}
+
+.entry-row__title {
+  margin: 0 0 var(--stack-sm);
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.14;
+  letter-spacing: -0.022em;
+  transition: color var(--duration-base) var(--ease-out-quart);
+}
+
+.entry-row__summary {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--ink-secondary);
+}
+
+.entry-row__date {
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--metadata-caps-size);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry-row:hover .entry-row__title { color: var(--accent); }
+
+/* A row standing in for something unpublished is not a link and does not pretend to be:
+   no hover, no arrow, and the honest mono line the empty-state component already defines. */
+.entry-row--empty { color: var(--ink-secondary); }
+.entry-row--empty .entry-row__summary { margin: 0; }
+
+/* /thinking/ keeps its own four-tier template; these are corrections to it rather than a
+   rebuild, because the tiering (cornerstone, practice, LinkedIn, field notes) is editorial
+   structure and not styling.
+
+   The date column was `minmax(8rem, 1fr)` against a 3fr body, which at this shell put a
+   ~310px empty gutter between a six-character date and every title on the page. A date is
+   eight characters of tabular mono; it needs eight characters of column. */
+.page-editorial--thinking .grouped-fields > li,
+.page-editorial--thinking .grouped-field {
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: var(--stack-lg);
+  padding-block: var(--stack-lg);
+}
+
+/* Entry titles were link-coloured and underlined, so a reading list read as a page of
+   links while /work/ rows read as titles. Same grammar in both places: ink at rest,
+   accent on hover, and the whole row is the target either way. */
+.page-editorial--thinking .grouped-field h3 a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-out-quart);
+}
+
+.page-editorial--thinking .grouped-field h3 a:hover,
+.page-editorial--thinking .grouped-field h3 a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* -------------------------------------------------------------------------------------
+   8. Reduced motion. MUST REMAIN THE LAST BLOCK IN THE BUNDLE.
+   Moved here from the end of main.css on 2026-08-15, when this file was appended after it.
+   Mid-bundle, it silently fails to zero every transition declared after it — which is
+   exactly the bug DESIGN.md records from the first time it drifted.
+   ------------------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s;
+    transition-delay: 0s;
+    animation-duration: 0s;
+    animation-delay: 0s;
+  }
+}

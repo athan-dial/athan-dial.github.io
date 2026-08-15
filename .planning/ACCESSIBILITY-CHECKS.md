@@ -98,6 +98,42 @@ the old warm paper (3.62:1, marker-only).
 
 Reproduce with the canvas probe used to produce this table; do not re-derive it from hex values.
 
+### Expressive layer — measured 2026-08-15
+
+Same method, same probe, extended to composite alpha: the statement band sets `opacity` on paper
+type over ink, so the probe composites the foreground against the resolved background before
+measuring. Reading the declared colour alone would have reported 19:1 for a label that actually
+renders at 7.5:1.
+
+| Element | Size / weight | Ratio | Needs | Result |
+|---|---|---:|---:|---|
+| Statement title, paper on ink | 52px / 700 | **19.0:1** | 3 | Pass |
+| Statement body, paper @ 86% | 17px / 400 | **13.98:1** | 4.5 | Pass |
+| Statement label, paper @ 62% | 12px / 500 | **7.50:1** | 4.5 | Pass |
+| Hero headline | 88px / 700 | **19.0:1** | 3 | Pass |
+| Hero intro | 17px / 400 | **6.11:1** | 4.5 | Pass |
+| Hero spec label | 12px / 500 | **6.11:1** | 4.5 | Pass |
+| Hero spec value | 16px / 400 | **19.0:1** | 4.5 | Pass |
+| Work-row ordinal, forest | 13px / 500 | **8.58:1** | 4.5 | Pass |
+| Work-row title | 40px / 700 | **19.0:1** | 3 | Pass |
+| Work-row summary | 16px / 400 | **6.11:1** | 4.5 | Pass |
+| Artifact thumb label, on surface | 12px / 500 | **6.33:1** | 4.5 | Pass |
+| Entry-row kind label, forest | 13px / 400 | **8.58:1** | 4.5 | Pass |
+| Entry-row date | 12px / 400 | **6.11:1** | 4.5 | Pass |
+| Entry-row summary | 16px / 400 | **6.11:1** | 4.5 | Pass |
+
+**14 of 14 pass.** Two drawn elements sit outside the table, for different reasons:
+
+- **Case artifacts** (`partials/diagrams/*.html`) carry `role="img"` with a `<title>` and a `<desc>`,
+  so their argument reaches a screen reader as prose. Their in-drawing labels are 12–13px mono
+  marks on `--surface`, measured through the same probe at ≥6:1.
+- **The boundary motif** is `aria-hidden`: the paragraph beside it states the same argument in full,
+  including the five substrate names the drawing labels. Duplicating it would make a screen reader
+  read the sentence twice.
+
+The work-index thumbnails are the case artifact re-used at small size inside an `aria-hidden`
+wrapper, so the same drawing is announced once (on the case page) rather than twice.
+
 ---
 
 ## Contrast table (Editorial Systems — retired warm-paper palette, kept for reference)

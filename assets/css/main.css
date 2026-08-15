@@ -1820,17 +1820,7 @@ samp {
 .colophon__list dd { margin: 0; }
 
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0s;
-    transition-delay: 0s;
-    animation-duration: 0s;
-    animation-delay: 0s;
-  }
-}
+/* The prefers-reduced-motion block that lived here moved to the END of expressive.css on
+   2026-08-15, when expressive.css was appended after this file in the bundle. The invariant
+   is "last in the bundle", not "last in main.css" — leaving it here would have put it ahead
+   of every transition the expressive layer declares. */

@@ -22,16 +22,31 @@
   <div class="container hero__inner section-rail">
     {{ partial "section-rail.html" (dict "label" $profile.positioning_eyebrow) }}
     <div class="section-rail__content">
+      {{- /* The headline is out of the two-column grid on purpose. Inside it, the sentence
+             had ~600px to work with and broke over six lines at any size worth calling a
+             display — the scale event and the portrait were competing for the same width.
+             Full measure first, then the supporting row beneath it. */ -}}
+      <h1 id="home-title" class="hero__name">{{ $profile.positioning_headline }}</h1>
       <div class="hero__grid">
         <div class="hero__content">
-          <h1 id="home-title" class="hero__name">{{ $profile.positioning_headline }}</h1>
           <p class="hero__intro">{{ $profile.positioning_support }}</p>
-          <ul class="grouped-fields" aria-label="Current role and location">
-            <li>
-              <span class="grouped-field__label">Current</span>
-              <span>{{ $profile.role_title }} at {{ $profile.employer }} &middot; {{ $profile.location }}</span>
-            </li>
-          </ul>
+          {{- /* Was a one-row grouped-field list, which spent a full rule and a label column
+                 on a single value. A spec strip splits the same facts into named fields and
+                 reads as the colophon of the page it opens. */ -}}
+          <dl class="hero__spec" aria-label="Current role and location">
+            <div class="hero__spec-item">
+              <dt class="hero__spec-label">Role</dt>
+              <dd class="hero__spec-value">{{ $profile.role_title }}</dd>
+            </div>
+            <div class="hero__spec-item">
+              <dt class="hero__spec-label">Organisation</dt>
+              <dd class="hero__spec-value">{{ $profile.employer }}</dd>
+            </div>
+            <div class="hero__spec-item">
+              <dt class="hero__spec-label">Based in</dt>
+              <dd class="hero__spec-value">{{ $profile.location }}</dd>
+            </div>
+          </dl>
           {{- /* The redesign plan specifies two hero actions: primary "View selected work",
                  secondary "Read current thinking". Both were missing, so the hero offered a
                  reader no path forward at all. Resume stays reachable from header and footer
@@ -58,54 +73,16 @@
     <div class="section-rail__content">
       <h2 id="selected-work-title" class="section__heading">Selected work</h2>
       <p class="body-lg">{{ .Params.selected_work_standfirst }}</p>
+      {{- /* Was a two-up card grid: identical grey twins differing only in their text, with
+             every field repeated on both. The homepage now shows the same rule-separated
+             rows as /work/, so a reader meets one grammar for a case study, and each row
+             carries the case's own artifact. */ -}}
       {{ if $publicWork }}
-        <div class="case-studies-grid">
-          {{ range $publicWork }}
-            {{- $users := .Params.users | default .Params.user -}}
-            {{- $changed := .Params.changed | default .Params.outcome -}}
-            {{/* card_proof, else first sentence of summary. Split on ". " assumes no abbreviations. */}}
-            {{- $proof := .Params.card_proof -}}
-            {{- if not $proof -}}
-              {{- with (.Params.summary | default .Description) -}}
-                {{- $proof = printf "%s." (index (split . ". ") 0) -}}
-              {{- end -}}
-            {{- end -}}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Published work</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with $proof }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
-                </div>
-                <ul class="grouped-fields">
-                  {{- with $users -}}
-                  <li><span class="grouped-field__label">User</span><span>{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</span></li>
-                  {{- end -}}
-                  {{- with .Params.constraint -}}
-                  <li><span class="grouped-field__label">Constraint</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                  {{- with .Params.role -}}
-                  <li><span class="grouped-field__label">Role</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                  {{- with $changed -}}
-                  <li><span class="grouped-field__label">What changed</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                </ul>
-                <span class="case-study-card__footer"><span class="metadata-caps">Read case study</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ end }}
-          {{ if lt (len $publicWork) 2 }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">In review</span>
-                  <p>{{ $.Params.selected_work_partial }}</p>
-                </div>
-              </div>
-            </div>
-          {{ end }}
-        </div>
+        <ul class="home-work__list">
+          {{- range $i, $p := $publicWork }}
+          <li>{{ partial "work-card.html" (dict "page" $p "heading" "h3" "ordinal" (printf "%02d" (add $i 1))) }}</li>
+          {{- end }}
+        </ul>
       {{ else }}
         <div class="grouped-fields" role="status">
           <div class="grouped-field">
@@ -118,13 +95,22 @@
   </div>
 </section>
 
+{{- /* The one field of colour on the page, and it carries the page's actual argument rather
+       than decorating it. This section used to be a heading and a paragraph in the same
+       weight as every other section, so the site's central claim read as an aside. The motif
+       beside it is the "boundary and shared layer" idea DESIGN.md has named since the Hybrid
+       direction landed and nothing ever drew. One band per page: a second makes both
+       wallpaper. */ -}}
 <section class="container" aria-labelledby="shared-layer-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Product boundary") }}
-    <div class="section-rail__content">
-      <h2 id="shared-layer-title" class="section__heading">{{ .Params.shared_layer_title }}</h2>
-      <p class="body-lg reading-column">{{ .Params.shared_layer_body }}</p>
+  <div class="statement">
+    <div class="statement__grid">
+      <span class="statement__label">Product boundary</span>
+      <h2 id="shared-layer-title" class="statement__title">{{ .Params.shared_layer_title }}</h2>
+      <p class="statement__body">{{ .Params.shared_layer_body }}</p>
     </div>
+    <figure class="statement__figure">
+      {{ partial "boundary-motif.html" (dict "tone" "paper" "label" "SHARED LAYER") }}
+    </figure>
   </div>
 </section>
 
@@ -134,52 +120,47 @@
     <div class="section-rail__content">
       <h2 id="current-thinking-title" class="section__heading">Current thinking</h2>
       <p class="body-lg">{{ .Params.thinking_standfirst }}</p>
+      {{- /* Was the same two-up card grid the work section used, so an essay and a case
+             study were rendered as the same object. Thinking is a reading list: rule-separated
+             rows, kind on the left, date on the right, and the title carrying the weight. */ -}}
       {{ if or $cornerstone $currentNotes }}
-        <div class="case-studies-grid">
+        <ul class="entry-list">
           {{ with $cornerstone }}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Cornerstone essay</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
-                </div>
-                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ else }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">Cornerstone essay</span>
-                  <p>{{ $.Params.thinking_essay_empty }}</p>
-                </div>
+          <li>
+            <a class="entry-row" href="{{ .RelPermalink }}">
+              <span class="entry-row__ordinal">Essay</span>
+              <div>
+                <h3 class="entry-row__title">{{ .Title }}</h3>
+                {{ with (.Params.summary | default .Description | default .Summary) }}<p class="entry-row__summary">{{ . | plainify }}</p>{{ end }}
               </div>
-            </div>
+              {{ with .Date }}<time class="entry-row__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>{{ end }}
+            </a>
+          </li>
+          {{ else }}
+          <li class="entry-row entry-row--empty">
+            <span class="entry-row__ordinal">Essay</span>
+            <p class="entry-row__summary empty-state">{{ $.Params.thinking_essay_empty }}</p>
+          </li>
           {{ end }}
           {{ range $currentNotes }}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Field note</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
-                </div>
-                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
+          <li>
+            <a class="entry-row" href="{{ .RelPermalink }}">
+              <span class="entry-row__ordinal">Note</span>
+              <div>
+                <h3 class="entry-row__title">{{ .Title }}</h3>
+                {{ with (.Params.summary | default .Description | default .Summary) }}<p class="entry-row__summary">{{ . | plainify }}</p>{{ end }}
+              </div>
+              {{ with .Date }}<time class="entry-row__date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>{{ end }}
+            </a>
+          </li>
           {{ end }}
           {{ if lt (len $currentNotes) 2 }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">Field notes</span>
-                  <p>{{ $.Params.thinking_notes_empty }}</p>
-                </div>
-              </div>
-            </div>
+          <li class="entry-row entry-row--empty">
+            <span class="entry-row__ordinal">Notes</span>
+            <p class="entry-row__summary empty-state">{{ $.Params.thinking_notes_empty }}</p>
+          </li>
           {{ end }}
-        </div>
+        </ul>
       {{ else }}
         <div class="grouped-fields" role="status">
           <div class="grouped-field">

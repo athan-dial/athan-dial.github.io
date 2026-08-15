@@ -46,6 +46,12 @@
              is left carrying only the structural index, which is its real job. */ -}}
       {{ partial "section-rail.html" (dict "page" .) }}
       <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
+        {{- /* The artifact, before the argument. A case study about product judgment that
+               shows nothing it drew is asking to be taken on trust; the diagram states the
+               boundary the prose then defends. It is hand-authored per case from that case's
+               own text — a page with no `diagram` key renders nothing here rather than
+               borrowing another case's figure. */ -}}
+        {{ partial "case-diagram.html" (dict "page" . "caption" .Params.diagram_caption) }}
         {{ .Content }}
       </div>
     </div>

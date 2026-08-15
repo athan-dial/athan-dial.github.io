@@ -11,6 +11,9 @@ featured: true
 role: "Product and technical lead"
 users: ["competitive-intelligence analysts", "business-development leadership"]
 themes: ["expert-workflows", "product-judgment", "reliable-ai-systems"]
+diagram: "reconciliation"
+diagram_label: "Reconciliation layer"
+diagram_caption: "Records arrive inconsistent, the layer reconciles and keeps the conflict visible, and a person decides what is true. The permissions gate is drawn because the earlier attempt failed at one."
 canonical_url: ""
 draft: false
 ---

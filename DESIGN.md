@@ -168,6 +168,73 @@ and the running-head title. Everything else is ink on paper.
 - "BLUF" remains undefined for a first-time reader, and the larger type makes it more prominent,
   not less. A content fix, not a CSS one.
 
+## Direction: the expressive layer (2026-08-15)
+
+Hybrid + book fixed the typeface, the scale and the structure. What it did not do was *spend*
+them. Every section on every page carried the same weight, no page contained a drawn artifact,
+and the one accent appeared once — as a 3px rule above the masthead. On a page with something
+to be restrained about that reads as restraint; on a portfolio it reads as an unfinished
+template. The `/work/` index was the clearest case: two grey text blocks on the left half of a
+1240px shell, with the right half holding nothing at all.
+
+The expressive layer adds three things the system had already named and never built. It adds no
+colour, no family, no radius and no shadow — it is scale, field, and drawn artifact, assembled
+from tokens that already existed.
+
+Implementation: `assets/css/expressive.css`, concatenated **after** `main.css`.
+
+### 1. The boundary motif, drawn
+
+"Boundary and shared layer" has been the stated recurring visual idea since the Hybrid direction
+landed, and it existed only as this sentence. `partials/boundary-motif.html` draws it: unequal
+local nodes, dependency drops, one 3px boundary, and a named substrate.
+
+The first version left every box empty and read as a placeholder wireframe — the failure mode of
+an abstract mark is that it looks like a diagram of nothing. The substrate cells now carry the
+five candidates the homepage copy itself names (shared data, infrastructure, verification,
+workflow, interface), so the picture and the paragraph cannot drift apart.
+
+### 2. Artifact diagrams on cases
+
+`partials/diagrams/<name>.html`, dispatched by a `diagram:` key in a case's front matter through
+`partials/case-diagram.html`. A page with no key renders nothing: a missing artifact is silence,
+never a placeholder and never another case's figure.
+
+Each is hand-authored from that case's own text and draws **only what the text states** — no
+figures, no counts, no invented stages. `analog-search` is deliberately narrow because that case
+already carries the HTML boundary diagram mid-body; repeating the expert/shared split would print
+one argument twice, so the artifact draws what the other cannot: the ranked set with the expert's
+threshold cutting it.
+
+SVG is right here and wrong for `diagram-boundary.html`, which is prose-led and needs wrapping
+text. These are label-led: every string is one short line. Keep it that way — SVG `<text>` does
+not wrap.
+
+### 3. One moment of scale, and one field of colour, per page
+
+- Hero display is fluid to 88px and sits **outside** the two-column grid. Inside it the sentence
+  had ~600px and broke over six lines at any size worth calling a display.
+- The homepage's Product boundary section is a full-bleed ink band carrying the site's central
+  claim, bordered in the accent, with the motif beneath it. **One band per page, maximum** — a
+  second makes both of them wallpaper.
+- `/work/` rows run ordinal | text | artifact across the full shell, and the homepage's Selected
+  work uses the same grammar, so a reader meets one shape for a case study. Metadata moved below
+  the title: three rows of uppercase mono used to delay every headline.
+- `/thinking/` keeps its four-tier template; it got its date column narrowed from a ~310px empty
+  gutter to 9rem, and its entry titles set in ink rather than link-green.
+
+### The invariant that moved
+
+**`prefers-reduced-motion` now lives at the end of `expressive.css`**, not `main.css`, because
+`expressive.css` is last in the bundle. The rule was always "last in the cascade"; leaving it in
+`main.css` would have put it ahead of every transition this layer declares — which is the exact
+bug recorded under Motion below, from the first time it drifted.
+
+Contrast for every new element was measured in-browser through a canvas, compositing alpha
+against the resolved background: `.planning/ACCESSIBILITY-CHECKS.md`, 14 of 14 pass. The
+statement band's label declares paper at 62% opacity and renders at 7.5:1; reading the declared
+colour alone would have reported 19:1.
+
 ## Components
 
 - **Buttons** — square. Primary: ink fill, paper text. Secondary: 1px rule border, ink text. Active: teal.

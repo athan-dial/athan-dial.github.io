@@ -1,0 +1,64 @@
+{{- /*
+  The site's recurring visual idea, drawn once and reused: what experts keep shaping,
+  the boundary, and the layer every team relies on. DESIGN.md has named this ("boundary and
+  shared layer") since the Hybrid direction landed but nothing ever rendered it, so the idea
+  lived only in prose.
+
+  It draws the sentence beside it rather than decorating it. The substrate cells default to
+  the five candidates the homepage's own copy names — shared data, infrastructure,
+  verification, workflow, interface — so the picture and the paragraph cannot drift apart.
+  The first version left every box empty and read as a placeholder wireframe, which is the
+  failure mode for an abstract mark: it looked like a diagram of nothing.
+
+  Hand-authored, token-driven, flat. No gradients, no rounded joins, no shadow — drawn with
+  the same rule language as the page (1px hairlines, 3px structural rules).
+
+  Params:
+    tone       "ink" (default, for paper grounds) | "paper" (for the ink statement band)
+    label      the boundary's own caption
+    top_label  band label above the boundary
+    cells      slice of substrate labels; keep them single words, SVG text does not wrap
+
+  Decorative in the accessibility sense — the adjacent paragraph carries the same argument
+  in full — so it is aria-hidden and takes no alt text.
+*/ -}}
+{{- $tone := .tone | default "ink" -}}
+{{- $label := .label | default "THE BOUNDARY IS THE PRODUCT DECISION" -}}
+{{- $topLabel := .top_label | default "EXPERTS KEEP SHAPING" -}}
+{{- $cells := .cells | default (slice "SHARED DATA" "INFRASTRUCTURE" "VERIFICATION" "WORKFLOW" "INTERFACE") -}}
+{{- $n := len $cells -}}
+<svg class="motif motif--{{ $tone }}" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <text class="motif__band-label" x="0" y="12">{{ $topLabel }}</text>
+
+  {{- /* Local nodes: five, unequal, because the teams they stand for are unequal. An evenly
+         spaced row would read as ornament rather than as a claim about how work is shaped. */ -}}
+  <g class="motif__nodes">
+    <rect x="0"   y="34" width="196" height="72" />
+    <rect x="220" y="50" width="148" height="56" />
+    <rect x="392" y="22" width="232" height="84" />
+    <rect x="648" y="50" width="124" height="56" />
+    <rect x="796" y="38" width="404" height="68" />
+  </g>
+
+  {{- /* Each local node depends on the layer beneath it. */ -}}
+  <g class="motif__drops">
+    <path d="M98 106V168" /><path d="M294 106V168" /><path d="M508 106V168" />
+    <path d="M710 106V168" /><path d="M998 106V168" />
+  </g>
+
+  {{- /* The boundary. The one 3px rule in the drawing: this is the decision. */ -}}
+  <path class="motif__boundary" d="M0 168H1200" />
+  {{- with $label }}<text class="motif__label" x="0" y="194">{{ . }}</text>{{ end }}
+
+  {{- /* The shared substrate: continuous, and named, because "shared layer" means nothing
+         until you say what is in it. */ -}}
+  <g class="motif__substrate">
+    <rect x="0" y="216" width="1200" height="72" />
+    {{- range $i, $cell := $cells -}}
+    {{- $w := div 1200.0 $n -}}
+    {{- if gt $i 0 }}<path class="motif__substrate-divider" d="M{{ math.Round (mul $i $w) }} 216V288" />{{ end }}
+    <text class="motif__cell-label" x="{{ add (math.Round (mul $i $w)) 16 }}" y="258">{{ $cell }}</text>
+    {{- end -}}
+  </g>
+</svg>
