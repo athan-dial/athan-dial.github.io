@@ -9,7 +9,7 @@
        (dict "label" "The hard choice" "ordinal" "05")
 
     2. Case metadata (work/single.html)
-       (dict "notes" $railNotes "evidence_label" $evidenceLabel "evidence_variant" $evidenceVariant)
+       (dict "page" . "notes" $railNotes)
 
   ONE label in shape 1. No sequence number, no secondary note. It previously
   rendered number + label + note, which stacked three layers of scaffolding above
@@ -23,17 +23,35 @@
   `ordinal` exists for the case where order genuinely carries information the
   reader needs. It is not section grammar; do not add it to a listing page.
 
-  Shape 2 previously rendered NOTHING. work/single.html passed `notes` and
-  `evidence_label`, which this partial did not handle, and its own fallback
-  markup was unreachable because templates.Exists was true — so every case study
-  shipped an empty rail and lost its evidence label. Both keys are handled now.
+  Shape 2 previously rendered NOTHING. work/single.html passed `notes`, which
+  this partial did not handle, and its own fallback markup was unreachable
+  because templates.Exists was true — so every case study shipped an empty rail.
+  `notes` is handled now. The case outline is generated from `.page.Fragments`
+  (h2 only) so hrefs always match Hugo's heading IDs; a hardcoded list silently
+  rots when a case uses different headings.
 
   `number` and `note` are still accepted and ignored, so no caller breaks.
+  `evidence_status` is accepted and ignored (badge retired; front matter only).
 
   On mobile, existing Editorial Systems CSS places this metadata above the
-  primary content.
+  primary content. The outline is a native <details> disclosure there; on
+  desktop it is a sticky nav in the rail (see .case-study-toc).
 */ -}}
-<aside class="section-rail__meta" aria-label="Section context">
+{{- $outline := slice -}}
+{{- with .page -}}
+  {{- range .Fragments.Headings -}}
+    {{- if eq .Level 2 -}}
+      {{- $outline = $outline | append . -}}
+    {{- end -}}
+    {{- range .Headings -}}
+      {{- if eq .Level 2 -}}
+        {{- $outline = $outline | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $isCaseRail := or .notes $outline -}}
+<aside class="section-rail__meta{{ if $isCaseRail }} case-study-toc{{ end }}" aria-label="{{ if $isCaseRail }}Case metadata{{ else }}Section context{{ end }}">
   {{- with .label }}
   <div class="section-rail__label">
     {{- with $.ordinal }}<span class="section-rail__ordinal">{{ . }}</span>{{ end -}}
@@ -49,16 +67,25 @@
   </div>
   {{- end -}}
 
-  {{- /* Prefer `evidence_status` and delegate to partials/evidence-label.html, the single
-         implementation. `evidence_label` + `evidence_variant` are still honoured so any
-         caller passing pre-computed values keeps working. */ -}}
-  {{- with .evidence_status }}
-  {{ partial "evidence-label.html" (dict "status" .) }}
-  {{- end }}
-  {{- with .evidence_label }}
-  {{- /* The evidence label is the one component that makes the evidence gate
-         visible. Amber marks the claim class; the copy itself is ink, because
-         amber on paper measures 3.62:1 and fails 4.5:1 for body text. */ -}}
-  <p class="evidence-label{{ $.evidence_variant }}" title="How the claims in this case are classified">{{ . }}</p>
+  {{- with $outline }}
+  {{- /* Mobile: native details (keyboard + SR with no ARIA scaffolding). Desktop: sticky nav. */ -}}
+  <details class="case-study-toc__disclosure">
+    <summary class="case-study-toc__label">Structure</summary>
+    <nav class="work-article__outline" aria-label="Case structure">
+      <ul>
+        {{- range . }}
+        <li><a href="#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+  </details>
+  <nav class="work-article__outline case-study-toc__nav--desktop" aria-label="Case structure">
+    <p class="case-study-toc__label">Structure</p>
+    <ul>
+      {{- range . }}
+      <li><a href="#{{ .ID }}">{{ .Title | safeHTML }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
   {{- end -}}
 </aside>

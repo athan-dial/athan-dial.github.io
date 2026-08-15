@@ -29,9 +29,10 @@ PygmentsStyle = "monokai"
 # no output page and no sitemap entry. See .planning/CONTENT-MODEL.md.
 buildDrafts = false
 
+# tag/category taxonomies removed 2026-08-14: zero terms, zero inbound links, generated two
+# empty public pages (/categories/, /tags/) already excluded from sitemap.xml. `themes` stays —
+# 5 content files carry a themes: front-matter key with 10 real inbound hrefs.
 [taxonomies]
-  tag = "tags"
-  category = "categories"
   theme = "themes"
 
 [sitemap]

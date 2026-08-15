@@ -3,41 +3,44 @@
    semantic components can consume the complete style without duplicating values. */
 :root {
   /* Core palette */
-  --paper: #f6f2ea;
-  --surface: #fffdf8;
-  --ink: #14202b;
-  --ink-secondary: #53606a;
-  --structural-teal: #17616a;
-  --evidence-amber: #b86b35;
-  --rule: #d8d1c4;
+  --paper: #fbfbfa;
+  --surface: #ffffff;
+  --ink: #0b0b0c;
+  --ink-secondary: #5c6066;
+  --accent: #14543c;
+  /* Highlighter hue. Identical to --accent since the palette moved to near-white;
+     kept as a separate name so `mark` can be given its own colour again without
+     touching every accent call site. */
+  --evidence-amber: #14543c;
+  --rule: #0b0b0c;
 
   /* Accent extension. DESIGN.md commits to a restrained strategy: every hue has exactly
      one job, and none of them are decorative. Three jobs, three hues:
        structural-teal    structure and wayfinding — where the reader is, where they can go
-       evidence-amber     a claim that needs qualifying, and the in-prose highlighter
-       evidence-verified  a claim with a traceable source
+       evidence-amber     the in-prose highlighter (mark, blockquote)
      The third exists because `evidence_status: verified` previously rendered NO label at
      all, so the strongest claim class was invisible while the weakest ones got a badge.
      Colour never carries the meaning alone — every label states its class in words. */
-  --evidence-verified: #41603f;
 
-  /* Text-safe amber. Canonical --evidence-amber is 3.62:1 on paper: it passes 3:1 as a
+  /* Text-safe accent. NOTE: the 3.62:1 figure below described the RETIRED warm-paper
+     amber. On the current near-white ground the accent measures 8.58:1 and is safe as
+     small type. Kept for history; do not act on the old number.
+
+     Legacy note: canonical amber was 3.62:1 on the old paper: it passed 3:1 as a
      non-text marker but fails 4.5:1 as type, which is why amber never actually read as
      colour anywhere on the site — it could only ever be a 1px border or a 10% tint.
      This darker sienna is the same hue family at 5.34:1 on paper, so amber can be TYPE. */
-  --evidence-amber-ink: #96521f;
+  --accent-ink: #0e3d2b;
 
   /* Accent tints and rules, derived from the accents so a hue changes in exactly one
      place. Replaces the hardcoded #fff5eb that used to sit in main.css. */
   /* 8% measured only 1.04:1 against paper — invisible as a panel or an offset sliver, which
      is what made the first attempt at a tinted hero band read as flat grey. 15% is still
      pale enough to sit under ink at 12:1+ but actually reads as the brand hue. */
-  --tint-teal: color-mix(in oklab, var(--structural-teal) 15%, var(--surface));
+  --tint-accent: color-mix(in oklab, var(--accent) 15%, var(--surface));
   --tint-amber: color-mix(in oklab, var(--evidence-amber) 11%, var(--surface));
-  --tint-verified: color-mix(in oklab, var(--evidence-verified) 10%, var(--surface));
-  --rule-teal: color-mix(in oklab, var(--structural-teal) 40%, var(--rule));
+  --rule-accent: color-mix(in oklab, var(--accent) 40%, var(--rule));
   --rule-amber: color-mix(in oklab, var(--evidence-amber) 45%, var(--surface));
-  --rule-verified: color-mix(in oklab, var(--evidence-verified) 40%, var(--surface));
 
   /* The digital highlighter. EDITORIAL-SYSTEMS.md describes amber as acting like one;
      until now there was no component that did. Carries ink text, so it stays readable. */
@@ -54,11 +57,11 @@
 
   /* Supporting surface ladder */
   --surface-container-lowest: #ffffff;
-  --surface-container-low: #f7f3eb;
-  --surface-container: #f1ede5;
-  --surface-container-high: #ece8e0;
-  --surface-container-highest: #e6e2da;
-  --surface-dim: #dddad2;
+  --surface-container-low: #ffffff;
+  --surface-container: #f2f2f1;
+  --surface-container-high: #eaeae8;
+  --surface-container-highest: #e0e0de;
+  --surface-dim: #d5d5d2;
   --outline: #74777c;
   --outline-variant: #c4c6cc;
   --error: #ba1a1a;
@@ -69,55 +72,48 @@
      paper/ink 14.79:1, and outline/paper 4.03:1 (non-text boundary).
      Evidence amber/light-amber tint is only 3.76:1, so amber is a non-text
      marker on evidence labels; their ink text on that tint is 15.35:1.
-
-     Accent extension audit (2026-08-12): evidence-verified/paper 6.33:1,
-     evidence-verified/surface 6.96:1, evidence-amber-ink/paper 5.34:1,
-     evidence-amber-ink/tint-amber 5.35:1, evidence-verified/tint-verified 5.98:1,
-     ink/highlight 13.1:1. All pass AA for small text.
-
-     No html.dark block: dark mode is deferred by EDITORIAL-SYSTEMS.md ("ship one
-     polished light experience") and there is no toggle in baseof.html. When it is
-     built, the accents invert roughly as teal #5fa8b0, amber #d99a63,
-     amber-ink #e0a878, verified #7fa87d — all untested, do not ship unmeasured. */
+     Accent audit superseded 2026-08-13; see .planning/ACCESSIBILITY-CHECKS.md for the
+     canvas-measured table against the current palette.
+  */
 
   /* Font families */
-  --font-serif: "Source Serif 4", Georgia, serif;
-  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-serif: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Archivo", "Helvetica Neue", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   /* display-lg */
-  --display-lg-size: 56px;
-  --display-lg-line-height: 64px;
+  --display-lg-size:  60px;
+  --display-lg-line-height:  64px;
   --display-lg-weight: 700;
-  --display-lg-tracking: -0.02em;
+  --display-lg-tracking:  -0.035em;
 
   /* display-lg-mobile */
-  --display-lg-mobile-size: 40px;
-  --display-lg-mobile-line-height: 48px;
+  --display-lg-mobile-size:  38px;
+  --display-lg-mobile-line-height:  40px;
   --display-lg-mobile-weight: 700;
-  --display-lg-mobile-tracking: -0.01em;
+  --display-lg-mobile-tracking:  -0.025em;
 
   /* headline-md */
   --headline-md-size: 32px;
   --headline-md-line-height: 40px;
-  --headline-md-weight: 600;
-  --headline-md-tracking: 0;
+  --headline-md-weight:  700;
+  --headline-md-tracking:  -0.02em;
 
   /* headline-sm */
-  --headline-sm-size: 24px;
+  --headline-sm-size:  22px;
   --headline-sm-line-height: 32px;
-  --headline-sm-weight: 600;
-  --headline-sm-tracking: 0;
+  --headline-sm-weight:  700;
+  --headline-sm-tracking:  -0.01em;
 
   /* body-lg */
-  --body-lg-size: 19px;
+  --body-lg-size:  17px;
   --body-lg-line-height: 32px;
   --body-lg-weight: 400;
   --body-lg-tracking: 0;
 
   /* body-md */
-  --body-md-size: 17px;
-  --body-md-line-height: 28px;
+  --body-md-size:  16px;
+  --body-md-line-height:  24px;
   --body-md-weight: 400;
   --body-md-tracking: 0;
 

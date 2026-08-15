@@ -11,35 +11,51 @@ Guidance for Claude Code working in this repository.
 ## Project Overview
 
 Personal portfolio site. **Hugo v0.154.3+extended, themeless** — every layout is custom in
-`layouts/`, no theme dependency, no Hugo modules. Deployed to GitHub Pages from `docs/`.
+`layouts/`, no theme dependency, no Hugo modules. Deployed to GitHub Pages via Actions
+(`.github/workflows/deploy.yml`): CI builds fresh with `hugo --gc --minify` on every push to
+`main` and uploads `public/` as the Pages artifact. Nothing under the publish dir is committed.
 
 Positioning: "decision evidence, not achievements." Pages carry evidence about product
 judgment and applied-AI work rather than achievement lists.
 
-The design system is **Editorial Systems**: warm paper, near-black ink, serif display,
-flat surfaces. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
+The design system is **Hybrid + book architecture** (2026-08-13): near-white ground, black ink,
+Archivo grotesque, one forest-green accent, flat surfaces, and book structure on long-form pages
+(running head, margin index, folios, colophon). It replaced *Editorial Systems* (warm paper, serif
+display), which an external review found sat in a saturated AI-portfolio lane. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
 
 ## Build & Development
 
 ```bash
 hugo server -D          # local, live reload, http://localhost:1313
-hugo                    # production build into docs/
+hugo                    # production build into public/
 ```
 
-### Do NOT use `--cleanDestinationDir` (or `rm -rf docs/`)
+### Never commit build output
 
-`docs/` is a **mixed directory**: Hugo output *plus* a separately synced agency microsite
-(127 committed files with its own favicons, CSS bundles, and 404). A clean build deletes the
-synced half, and Hugo will not regenerate it. To remove a stale orphan, delete that path
-specifically after a plain `hugo` build.
+`publishDir` moved from `docs/` to `public/` on 2026-08-14, and `public/` (like the old
+`docs/`) is gitignored. Every deployed file is Hugo output built fresh in CI from source —
+nothing under the publish dir is ever committed. This still matters: committing build output
+is exactly how three superseded CSS fingerprints and an RSS feed with `http://localhost:1313`
+baked into it once ended up served on the public site. `scripts/verify-build.sh` asserts
+`docs/` stays untracked (`git ls-files docs` must be empty) so that tree can't come back.
 
-Hugo also never cleans orphans on its own, so a page that stops rendering leaves its old
-`index.html` in `docs/` and GitHub Pages keeps serving it. This already caused a live
-incident: a retired `docs/resume/index.html` kept serving old copy plus a link to a PDF
-carrying a personal phone number, months after the page stopped being generated. **After
-removing or unpublishing a page, check `docs/` for its orphan.**
+The old orphan-page hazard — "Hugo never prunes its publish dir, so an unpublished page's
+`index.html` keeps being served" — no longer applies the same way: CI builds into a fresh
+`public/` on every deploy, so nothing from a previous build ever survives into the next one.
+The current risk looks different: `data/redirects.toml` + `content/_content.gotmpl` generate
+meta-refresh stubs for retired paths (`/agency/**`, `/skills/**` plugin subsites,
+`/case-studies/**`), and `scripts/verify-build.sh` specifically asserts those trees stay
+**stubs only** — a real page reappearing under a retired path (e.g. a content file's
+`draft: true` getting flipped back, or a fetch script resurrected) is the failure mode to
+watch for now, not a stale file lingering from a prior build.
 
-## Design System: Editorial Systems
+This already caused a live incident under the old mechanism: a retired `docs/resume/index.html`
+kept serving old copy plus a link to a PDF carrying a personal phone number, months after the
+page stopped being generated, because nothing ever pruned the committed `docs/` tree. That
+specific recurrence path is closed now that the publish dir is gitignored and rebuilt fresh
+every deploy — but the underlying PII lesson stands: see Hard Constraint 1.
+
+## Design System: Hybrid + book architecture
 
 **Authority:** `DESIGN.md`. Tokens: `assets/css/tokens.css`. Implementation:
 `assets/css/main.css`. Measured contrast: `.planning/ACCESSIBILITY-CHECKS.md`.
@@ -51,9 +67,9 @@ Fonts are **self-hosted woff2** in `static/fonts/`, not a CDN.
 
 | Token | Stack | Role |
 |---|---|---|
-| `--font-serif` | Source Serif 4 | Display and long-form reading |
-| `--font-sans` | Manrope | UI text, summaries |
-| `--font-mono` | IBM Plex Mono | Rail labels, metadata, evidence labels |
+| `--font-serif` | Archivo | Display and headings (name is legacy; the face is a grotesque) |
+| `--font-sans` | Archivo | Body, UI text, summaries |
+| `--font-mono` | IBM Plex Mono | Running heads, folios, index, colophon, diagram labels |
 
 ### Colour
 
@@ -64,30 +80,34 @@ starting values are recorded in a `tokens.css` comment and are marked do-not-shi
 **Do not invent a dark theme as a side effect of another task.**
 
 ```css
---paper: #f6f2ea;            --surface: #fffdf8;
---ink: #14202b;              --ink-secondary: #53606a;
---structural-teal: #17616a;  --evidence-amber: #b86b35;
---evidence-amber-ink: #96521f;  --evidence-verified: #41603f;
---rule: #d8d1c4;
+--paper: #fbfbfa;            --surface: #ffffff;
+--ink: #0b0b0c;              --ink-secondary: #5c6066;
+--accent: #14543c;           /* forest green — the single accent */
+--evidence-amber: #14543c;   /* collapsed onto the accent; amber is retired */
+--accent-ink: #0e3d2b;  --evidence-verified: #14543c;
+--rule: #0b0b0c;             /* deliberately equal to --ink: rules are structural, not hairlines */
 ```
 
-Three accents, each with exactly one job, none decorative:
+**One accent, four jobs.** The three evidence hues have collapsed onto the same forest green;
+they survive as separate tokens only so every call site did not have to change at once.
 
-| Hue | Job |
+| Token | Job |
 |---|---|
-| `--structural-teal` | Structure and wayfinding: where the reader is, where they can go |
-| `--evidence-amber` | A claim needing qualification, and the in-prose highlighter |
-| `--evidence-verified` | A claim with a traceable source |
+| `--accent` | The accent. Masthead rule, current nav item, back link and folios, running-head title |
+| `--evidence-amber` | Now identical to the accent. The LinkedIn card's `<mark>` and blockquote rule therefore paint **green, not amber** |
+
 
 Rules that are easy to break by accident:
 
-1. **`--evidence-amber` cannot carry text.** It is 3.62:1 on paper — fine as a non-text
-   marker, fails AA as type. Use `--evidence-amber-ink` (5.34:1) for amber type.
+1. **The accent is safe as small type here — that is new.** Forest `#14543C` on `#fbfbfa`
+   measures **8.58:1**, so it carries 10-11px folios and index links. The old amber could not
+   (3.62:1) and was marker-only. Do not carry that old caveat forward; do re-measure if the
+   accent changes.
 2. **No hardcoded colour at call sites.** Every hex lives once, in `:root`. Tints and
    hairlines are `color-mix()` derivations (`--tint-*`, `--rule-*`, `--highlight`) so a hue
    changes in one place.
-3. **Colour is never the only channel.** Every evidence label states its class in words and
-   carries a marker square; the current nav item carries `aria-current` as well as a rule.
+3. **Colour is never the only channel.** The current nav item carries `aria-current` as
+   well as a rule.
 4. **Verify contrast in-browser, through a canvas.** The `color-mix()` tints compute as
    `oklab()` and cannot be read off a hex table — a naive JS parse silently mis-reads them.
 5. **Never animate a layout property on hover.** Text must not reflow under the pointer.
@@ -96,10 +116,14 @@ Rules that are easy to break by accident:
 
 ### Accents render only where content exercises them
 
-The evidence label, `verified` state, `mark`, and blockquote have **no live instances** —
-no work page is published and no content sets `evidence_status: verified`. So the built
-components are correct but largely invisible. If the site reads monochrome, the fix is
-usually content that uses these, not more CSS.
+`mark` and blockquote have a live instance — `partials/linkedin-card.html` renders both on
+`/thinking/` — but since `--evidence-amber` now resolves to the accent, they paint green. There is
+currently **no highlighter hue distinct from the structural accent**. If you want one back, choose
+it deliberately and measure it against `#fbfbfa`; do not reinstate `#B86B35`.
+
+`evidence_status` remains in front matter and renders nothing: the visible badge was removed as
+jargon. Long-form pages get their colour from folios, the running head and the margin index rather
+than from prose accents.
 
 ## Architecture
 
@@ -107,13 +131,24 @@ usually content that uses these, not more CSS.
 
 `content/_index.md` (home) · `about.md` · `advisory.md` (aliases `/consulting`, `/advisory`)
 · `writing.md` · `resume.md` · sections `work/`, `thinking/`, `notes/`, `essays/`, `skills/`
-· `_content.gotmpl` generates the `/agency/` dispatches and `/case-studies/` pages.
+· `_content.gotmpl` reads `data/redirects.toml` and generates **redirect stubs only** (a
+root content adapter, `layouts/_default/redirect.html`) for retired paths — `/agency/**`,
+`/case-studies/**`, and the `/skills/` plugin subsites all resolve this way now, to `/work/`
+or `/thinking/`. It does not generate real content pages.
 
 Deliberately unpublished right now — do not "fix" these without asking:
 - `content/resume.md` — `draft: true` + `build.render: never`. `/resume/` does **not** exist.
   No résumé link is published anywhere; `data/profile.toml` explains why and both call sites
   guard on the key with `with`.
-- `content/skills/_index.md` — draft, so `/skills/` 404s.
+- `content/skills/_index.md` and `content/skills/case-studies/_index.md` — both
+  `draft: true` + `build.render: never` + `build.list: never`. This does **not** 404:
+  `/skills/`, `/skills/orc/`, `/skills/folio/`, `/skills/dev/`, and `/skills/case-studies/`
+  all build as redirect stubs (via `data/redirects.toml`) to `/thinking/`. The `/skills/`
+  plugin subsites themselves (`orc`, `folio`, the fetched dev-plugin docs) were retired
+  2026-08-14 when `athan-dial/skills` was deleted; `/skills/case-studies/` was a hidden
+  placeholder that had only kept serving because the old committed `docs/` tree held a stale
+  copy — untracking that tree is what actually stopped it, not the frontmatter, which was
+  already `draft: true`.
 
 ### Data
 
@@ -123,18 +158,25 @@ and `[links]`. Prefer it over `config/_default/params.toml` for anything a templ
 
 ### Key layouts
 
-`_default/baseof.html` (shell, self-hosted fonts, Hugo Pipes CSS) · `index.html` (home) ·
-`work/{list,single}.html` · `thinking/list.html` · `notes/{list,single}.html` ·
-`essays/single.html` · `resume/single.html`
+`_default/baseof.html` (shell, self-hosted fonts, Hugo Pipes CSS) · `_default/list.html` ·
+`_default/single.html` · `_default/redirect.html` (renders the meta-refresh stubs from
+`_content.gotmpl`) · `index.html` (home) · `work/{list,single}.html` · `thinking/list.html` ·
+`notes/list.html` · `note/single.html` (Hugo singularizes the type for the single template;
+the content dir stays `notes/`) · `essay/single.html` (same pattern — content dir is
+`essays/`) · `resume/single.html` · `skills/{list,single}.html` (present but unused while
+`content/skills/` stays `draft: true` + `render: never`).
 
 Partials worth knowing: `section-rail.html` (vertical rule + one mono label, the core
-structural unit), `work-card.html`, `note-card.html`, `nav.html`, `footer.html`,
-`wayfinding.html`, `diagram-boundary.html`, `og-image.html`, `schema.html`.
+structural unit), `work-card.html`, `note-card.html`, `linkedin-card.html`, `nav.html`,
+`footer.html`, `favicons.html`, `wayfinding.html`, `diagram-boundary.html`, `og-image.html`,
+`schema.html`.
 
 ### Config
 
-`config/_default/` — `hugo.toml` (baseURL and `publishDir = "docs"`; **do not change
-either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (empty).
+`config/_default/` — `hugo.toml` (baseURL and `publishDir = "public"`; **do not change
+either** — `publishDir` moved here from `docs` on 2026-08-14, deliberately, and should not
+move again without the same care), `params.toml`, `languages.en.toml`, `menus.en.toml`,
+`module.toml` (empty).
 
 ## Hard Constraints
 
@@ -145,11 +187,31 @@ either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (e
 2. **Employer safety.** Must not read as running an active consulting business while employed
    at Montai. Use "Advisory & Thought Partnership," never pricing, timeframes, or deliverables.
    Avoid "discovery call," "booking," "investment."
-3. **Content authenticity.** Existing portfolio prose is substantially fabricated and does not
-   sound like Athan. Do **not** write new case studies or rewrite the résumé without the
+3. **Content authenticity.** Do **not** write new case studies or rewrite the résumé without the
    ChatGPT Deep Research outputs (Voice & Style Guide, Montai Work Archaeology) in
-   `2B-new/000 System/01 Inbox`. Structural, design, and technical work is fine meanwhile.
-   See `.planning/VOICE-REFERENCE.md` and `.planning/CONTENT-SAFETY-CONTRACT.md`.
+   `2B-new/000 System/01 Inbox`. That rule stands. Structural, design, and technical work is
+   fine meanwhile. See `.planning/VOICE-REFERENCE.md` and
+   `.planning/CONTENT-SAFETY-CONTRACT.md`.
+
+   **The live prose is no longer the fabricated archive — updated 2026-08-14.** This constraint
+   used to open by saying existing portfolio prose was substantially fabricated. That was true
+   when seven `/case-studies/` pages and seven `/agency/dispatches/` pages were live. They were
+   **retired to redirect stubs, not repaired** — do not go looking for that archive, and do not
+   treat its absence as a gap to fill. An audit of the nine remaining real content files found
+   zero percentages, zero dollar figures, and zero counts; five long-form pages state their own
+   evidence limits in body text (`content/work/analog-search-as-a-product.md` — "We also did not
+   instrument adoption. There is no defensible user count…"; `intelligence-platform-for-an-absent-user.md`
+   — "The record does not support the milestone count… I do not use them here."); and two pages
+   are externally verifiable as his, via a `canonical_url` to his own LinkedIn article and a
+   verbatim quote of his own post. **Do not cut a live page on a fabrication assumption.**
+
+   **The one open content risk is the About page's Experience section.** The Data Research Lead
+   description was unpublished on 2026-08-14 for claiming unhedged ownership of shared systems
+   with no split between his contribution and the team's — the split both `/work/` pages draw
+   carefully. The role line stands with no description. That paragraph is **Athan's to rewrite**;
+   the verbatim removed copy is preserved in gitignored
+   `.planning/private/about-experience-AWAITING-REWRITE.md`. Two "metric theater" and
+   self-assessment lines came out of Trajectory in the same pass, for the reasons recorded there.
 4. **Never commit internal Montai material.** `.planning/` is tracked and **public**. A prior
    commit put 946 lines of internal evidence material into this public repo; deleting it from
    HEAD did not remove it from history.
@@ -164,7 +226,13 @@ outside `:root`, re-measure contrast in-browser, update `DESIGN.md` and
 `.planning/ACCESSIBILITY-CHECKS.md` in the same commit.
 
 **Navigation:** edit `config/_default/menus.en.toml`. Confirm the target actually renders —
-a menu entry pointing at an unrendered page is a 404 that a stale `docs/` orphan can hide.
+a menu entry pointing at a `draft: true` or unrendered page is a dead link that's easy to
+miss since `public/` is rebuilt fresh every time and carries no history to grep.
 
-**Unpublishing a page:** change the front matter, rebuild, then delete the orphan from
-`docs/`, then grep `docs/` for any surviving link to it.
+**Unpublishing a page:** set `draft: true` (+ `build.render: never` / `build.list: never`
+to also drop it from lists), rebuild to a throwaway dir, and confirm with
+`scripts/verify-build.sh`. There is no `docs/` orphan to delete anymore — `public/` is
+gitignored and rebuilt fresh every deploy. If the URL has external inbound links worth
+preserving, add a stub in `data/redirects.toml` (see the `/skills/**` and `/case-studies/**`
+entries for the pattern) so it 301s instead of 404ing; then `scripts/verify-redirects.sh`
+confirms the stub resolves and grep the built output for any surviving internal link to it.

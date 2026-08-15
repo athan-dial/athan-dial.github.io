@@ -7,9 +7,11 @@
 /resources/_gen/
 .hugo_build.lock
 
-# Plugin docs fetched at build time by scripts/fetch-skills.sh.
-# The hub page (_index.md) and case studies are checked in; per-plugin
-# bundles are regenerated from athan-dial/skills on every build.
+# Plugin docs used to be fetched at build time by scripts/fetch-skills.sh. Retired
+# 2026-08-14 (athan-dial/skills deleted; the dev plugin is now private dev:* skills), so
+# nothing writes per-plugin bundles here any more. The ignore is kept so a leftover local
+# bundle from before the retirement cannot get committed by accident; case studies stay
+# checked in.
 /content/skills/*/
 !/content/skills/case-studies/
 

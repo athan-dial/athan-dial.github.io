@@ -135,6 +135,23 @@ if [ -s "$TMP" ]; then
   done < "$TMP"
 fi
 
+# Absolute dollar figures written with a MAGNITUDE SUFFIX — $75k, $1.5M, $10M+, $2bn.
+# The digits-only pattern above cannot see these: "$75k" is two digits, so it slipped the
+# four-digit gate entirely. That is not hypothetical — data/experience.json carried two
+# suffixed figures in a tracked file in a PUBLIC repo, past a green scan, because this
+# pattern did not exist. The contract bans absolute dollar figures above three digits
+# however they are spelled; a suffix is a spelling, not an exemption.
+# Deliberately NOT matched: a magnitude spelled out in words ("multi-million-dollar"),
+# which is the characterisation the contract asks for instead.
+grep -rnE --include='*.md' --include='*.json' --include='*.toml' -- '\$[0-9]+(\.[0-9]+)?[[:space:]]*(k|K|M|B|m|bn|BN|Bn)\b\+?' \
+     "${EXISTING[@]}" > "$TMP" 2>/dev/null || true
+if [ -s "$TMP" ]; then
+  while IFS= read -r hit; do
+    f="${hit%%:*}"; rest="${hit#*:}"; ln="${rest%%:*}"
+    report "$f:$ln  absolute dollar figure with a magnitude suffix — use a range, or characterise it"
+  done < "$TMP"
+fi
+
 # ---------------------------------------------------------------------------
 if [ "$VIOLATIONS" -gt 0 ]; then
   printf '\ncontent-safety: FAIL — %s violation(s). Reword the prose; do not weaken the denylist.\n' "$VIOLATIONS" >&2

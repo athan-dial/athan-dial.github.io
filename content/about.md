@@ -7,13 +7,35 @@ show_profile_links: true
 
 The path from bench science to product wasn't planned. The transferable skill turned out to be **designing decision systems under uncertainty**: figuring out what counts as evidence, which experiment is worth the cost, and how to keep a team's confidence calibrated when truth comes back late or partial.
 
+## Experience
+
+I describe the job as a fusion of product and data: making sure the company builds the right
+things, on time, with good evidence behind each decision.
+
+**Associate Director, Data Science & Product Management** · Montai Therapeutics · 2026–present
+
+Product direction and data rigour at the same desk. Applied-AI prototypes and agentic workflows,
+and the decision and briefing patterns leadership uses to make research trade-offs.
+
+**Data Research Lead** · Montai Therapeutics · 2022–2026
+
+**Data Scientist** · Replica Analytics · 2019–2020
+
+Clinical data pipelines, and privacy-preserving synthetic data for health research.
+
+**Chief Analytics Officer** · ArchitecHealth · 2018–2019
+
+Analytics strategy for small and mid-size biotech clients.
+
+**PhD, Medical Sciences** · McMaster University
+
 ## Trajectory
 
 PhD work taught those moves; drug discovery ML uses them every day.
 
-The questions changed. *Which model architecture balances precision versus recall for this drug target?* replaced *Which experimental condition will produce the cleanest signal?* The decision-making register stayed the same: first-principles framing of what counts as evidence, explicit tradeoffs, and a strong allergy to metric theater.
+The questions changed. *Which model architecture balances precision versus recall for this drug target?* replaced *Which experimental condition will produce the cleanest signal?* The decision-making register stayed the same: first-principles framing of what counts as evidence and explicit tradeoffs.
 
-A pattern I keep noticing in data and AI leadership: people tend to be strong on product intuition or technical depth, with leadership glued in afterward. The hybrid of product judgment, technical depth, and research training is rarer than it should be. It's where I do my best work.
+A pattern I keep noticing in data and AI leadership: people tend to be strong on product intuition or technical depth, with leadership glued in afterward.
 
 ## Working Principles
 

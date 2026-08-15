@@ -31,11 +31,14 @@
     <blockquote class="linkedin-card__quote">
       <p class="body-md"><mark>{{ $quote }}</mark></p>
     </blockquote>
+    {{- /* These two are the card's standalone actions, so they carry the 44px target via
+           .link-action like every other listing action. The theme chips elsewhere in this
+           row stay inline per the documented exception in ACCESSIBILITY-CHECKS.md. */ -}}
     <p class="note-card__themes label-mono">
       {{- with .essay -}}
-        <a href="{{ . | relURL }}">Read the essay</a>{{ " · " }}
+        <a class="link-action" href="{{ . | relURL }}">Read the essay</a>{{ " · " }}
       {{- end -}}
-      <a href="{{ $url }}" rel="noopener noreferrer">{{ $label }} on LinkedIn &rarr;</a>
+      <a class="link-action" href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $label }} on LinkedIn →</a>
     </p>
   </div>
 </article>

@@ -1,7 +1,12 @@
 {{ define "main" }}
-{{- /* Label rendering lives in partials/evidence-label.html — it was duplicated here and
-       in work-card.html, and missing from the homepage. One implementation now. */ -}}
-{{- $evidence := .Params.evidence_status | default "" -}}
+{{- /* BOOK ARCHITECTURE probe — Irma Boom's structural ideas on the hybrid surface.
+       Three additions the token swap could never express:
+         1. A running head, the way a book names itself on every spread.
+         2. Folios — section numbers living in the margin, not the text column.
+         3. A colophon: the metadata moves OUT of the header and to the foot,
+            where a book puts its production notes, so the opening is just the
+            title and the argument.
+       The wide outer margin is deliberate active space, not padding. */ -}}
 {{- $users := .Params.users | default slice -}}
 {{- $role := .Params.role | default "" -}}
 {{- $themes := .Params.themes | default slice -}}
@@ -9,72 +14,52 @@
 {{- $railNotes := slice -}}
 {{- with $role -}}{{- $railNotes = $railNotes | append (printf "Role · %s" .) -}}{{- end -}}
 {{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
-{{- /* Evidence class is rendered by the rail as the evidence-label component, not as a
-     plain note — including it here too printed it twice. */ -}}
 {{- with .Date -}}{{- $railNotes = $railNotes | append (.Format "2006-01-02") -}}{{- end -}}
 
-<div class="container page-editorial page-editorial--case-study">
+<div class="container page-editorial page-editorial--case-study case-study--book">
   <article class="work-article case-study-article">
+
+    {{- /* Running head. Aria-hidden: it is a print convention repeated on every
+           page, and a screen reader announcing it adds nothing the h1 does not. */ -}}
+    <p class="running-head" aria-hidden="true">
+      <span class="running-head__work">Selected work</span>
+      <span class="running-head__rule"></span>
+      <span class="running-head__title">{{ .Title }}</span>
+    </p>
+
     <div class="case-study-intro">
       <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
       <header class="case-study-header">
         <h1 class="case-study-header__title">{{ .Title }}</h1>
-        <div class="case-study-header__meta metadata-caps">
-          {{- with $role -}}<span>{{ . }}</span>{{- end -}}
-          {{- with $users -}}
-            {{- if $role -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <span>{{ delimit . ", " }}</span>
-          {{- end -}}
-          {{- with $themes -}}
-            {{- if or $role $users -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <span>{{ delimit . ", " }}</span>
-          {{- end -}}
-          {{- with .Date -}}
-            {{- if or $role $users $themes -}}<span aria-hidden="true"> · </span>{{- end -}}
-            <time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>
-          {{- end -}}
-        </div>
-        {{- /* BLUF as standfirst (lead), not a pull-quote / blockquote. */ -}}
-        {{- with $bluf -}}
-        <p class="lead case-study-header__lead work-bluf">{{ . }}</p>
-        {{- end -}}
-        {{ partial "evidence-label.html" (dict "status" $evidence "class" "work-article__evidence") }}
+        {{- /* The metadata row that used to sit here has moved to the colophon.
+               A book does not print its production notes above the first line. */ -}}
+        {{- /* The standfirst used to render .Params.summary here. With the "## BLUF"
+               heading gone, that printed the same claim twice in a row — the summary and
+               the body's opening paragraph say the same thing in different words. The body
+               keeps it; summary still feeds the homepage cards and the OG description. */ -}}
       </header>
     </div>
 
     <div class="case-study-body section-rail work-article__body">
-      {{- if templates.Exists "partials/section-rail.html" -}}
-        {{ partial "section-rail.html" (dict
-          "page" .
-          "notes" $railNotes
-          "evidence_status" $evidence
-        ) }}
-      {{- else -}}
-      <aside class="section-rail__meta case-study-toc" aria-label="Case metadata">
-        {{- range $railNotes -}}
-        <p class="metadata-caps">{{ . }}</p>
-        {{- end -}}
-        {{ partial "evidence-label.html" (dict "status" $evidence) }}
-        {{- /* Eight-part scan map — anchors match Hugo slug of archetypes/work.md headings */ -}}
-        <nav class="work-article__outline" aria-label="Case structure">
-          <p class="case-study-toc__label">Structure</p>
-          <ul>
-            <li><a href="#bluf">BLUF</a></li>
-            <li><a href="#who-was-doing-the-work">Who was doing the work</a></li>
-            <li><a href="#what-was-already-possible">What was already possible</a></li>
-            <li><a href="#the-product-boundary">The product boundary</a></li>
-            <li><a href="#the-hard-choice">The hard choice</a></li>
-            <li><a href="#athans-ownership">Athan's ownership</a></li>
-            <li><a href="#what-changed">What changed</a></li>
-            <li><a href="#what-he-would-change-now">What he would change now</a></li>
-          </ul>
-        </nav>
-      </aside>
-      {{- end -}}
+      {{- /* No notes passed: the colophon owns the metadata now. Passing them
+             here too printed role/users/date twice on the same screen. The rail
+             is left carrying only the structural index, which is its real job. */ -}}
+      {{ partial "section-rail.html" (dict "page" .) }}
       <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
         {{ .Content }}
       </div>
     </div>
+
+    <footer class="colophon">
+      <p class="colophon__label">Colophon</p>
+      <dl class="colophon__list">
+        {{- with $role }}<dt>Role</dt><dd>{{ . }}</dd>{{- end }}
+        {{- with $users }}<dt>Users</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
+        {{- with $themes }}<dt>Themes</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
+        {{- with .Date }}<dt>Written</dt><dd><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time></dd>{{- end }}
+      </dl>
+    </footer>
+
   </article>
 </div>
 {{ end }}

@@ -1,6 +1,10 @@
 ---
 title: "Essays"
 summary: "Cornerstone and practice point-of-view pieces — part of Thinking."
+# The section INDEX is public: /thinking/ links to it as the essay archive, so it must be
+# reachable and sitemapped. The cascade below still defaults every CHILD to draft/private.
+status: published
+visibility: public
 cascade:
   - _target:
       kind: page

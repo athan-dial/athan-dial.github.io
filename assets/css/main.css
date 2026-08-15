@@ -1,30 +1,11 @@
 /* Editorial Systems implementation. Token definitions are bundled before this file. */
 
 @font-face {
-  font-family: "Manrope";
+  font-family: "Archivo";
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Source Serif 4";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/source-serif-4-latin-variable.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Source Serif 4";
-  font-style: italic;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/source-serif-4-latin-variable-italic.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("/fonts/archivo-latin-variable.woff2") format("woff2");
 }
 
 @font-face {
@@ -92,7 +73,7 @@ select {
 
 ::selection {
   color: var(--surface-container-lowest);
-  background: var(--structural-teal);
+  background: var(--accent);
 }
 
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
@@ -212,7 +193,7 @@ strong {
    underline is now present at rest (faint, so prose still reads as prose) and firms up on
    hover while the teal stays. Also satisfies "nothing conveyed by colour alone". */
 a {
-  color: var(--structural-teal);
+  color: var(--accent);
   text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
@@ -224,7 +205,7 @@ a {
 }
 
 a:hover {
-  color: var(--structural-teal);
+  color: var(--accent);
   text-decoration-color: currentColor;
   text-decoration-thickness: 2px;
 }
@@ -302,7 +283,7 @@ hr {
   line-height: var(--metadata-caps-line-height);
   letter-spacing: var(--metadata-caps-tracking);
   text-transform: uppercase;
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 /* F. An empty tier should not reserve a full section's worth of vertical space.
@@ -336,13 +317,13 @@ hr {
 /* The homepage's in-review notices use grouped fields rather than .empty-state. Their
    label is the status, so the label takes the status colour. */
 [role="status"] .grouped-field__label {
-  color: var(--evidence-amber-ink);
+  color: var(--accent-ink);
 }
 
 /* A work/thinking card with no link is a placeholder for something not yet published, so
    its category slot is really a state. Marked as one, without needing a template change. */
 .case-study-card:not(:has(a)) .case-study-card__category {
-  color: var(--evidence-amber-ink);
+  color: var(--accent-ink);
 }
 
 /* Rail label. This is the one element that appears on every section of every page, and it
@@ -353,7 +334,7 @@ hr {
 /* A long label wraps to three or four lines in a ~190px rail, and the 16px metadata
    line-height reads as cramped once it does. Looser leading applies only to the rail. */
 .section-rail__label {
-  color: var(--structural-teal);
+  color: var(--accent);
   line-height: 1.55;
 }
 
@@ -417,6 +398,17 @@ hr {
   border-top: 1px solid var(--rule);
 }
 
+/* Sparse tiers (one or two items): full ceremonial --stack-xl bands leave acreage around
+   thin content. Density is respect (PRODUCT.md) — tighten rhythm, keep the heading/tier.
+   Empty tiers already collapse the rail via :has(.empty-state); this covers live-but-thin. */
+.section--sparse {
+  padding-block: var(--stack-lg);
+}
+
+.section--sparse .section-rail {
+  padding-block: var(--stack-md);
+}
+
 /* Was a 2px amber side-stripe on grey text. Two problems: the coloured side-stripe is a
    decorative tell rather than part of the rule language, and it spent the evidence
    highlighter on generic section furniture — amber marking every section is amber marking
@@ -424,7 +416,7 @@ hr {
 .section__label {
   display: block;
   margin-bottom: var(--stack-sm);
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .section__heading {
@@ -434,7 +426,7 @@ hr {
 /* Header */
 /* The masthead rule. Every page previously opened on pure ink-on-paper with no accent in
    the first viewport at all — the two accents lived on elements (.hero__badge,
-   .case-study-card__category, .evidence-label) that render on almost no page. A structural
+   .case-study-card__category) that render on almost no page. A structural
    rule across the top of the masthead is the oldest signifier in the register this system
    borrows from, it costs no layout, and it puts the brand's own colour on 100% of pages. */
 .site-header {
@@ -442,7 +434,7 @@ hr {
   top: 0;
   z-index: 100;
   background: color-mix(in srgb, var(--paper) 96%, transparent);
-  border-top: var(--masthead-rule) solid var(--structural-teal);
+  border-top: var(--masthead-rule) solid var(--accent);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -456,7 +448,16 @@ hr {
   gap: var(--stack-md);
 }
 
+/* The wordmark is the site's only link home, so it is a standalone action and gets the
+   44px target like the rest. `overflow: hidden` stays — it is the flex truncation guard
+   for narrow headers, and narrow widths are not testable in this sandbox (CLAUDE.md
+   constraint 5), so it is not worth trading a layout regression for. Consequence: the
+   focus ring on this one link is still clipped. Open item, recorded in
+   .planning/ACCESSIBILITY-CHECKS.md rather than fixed blind. */
 .site-header__name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   flex: 0 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -515,7 +516,7 @@ hr {
    aria-current still carries it for anyone not seeing colour. */
 .site-nav a[aria-current="page"] {
   color: var(--ink);
-  text-decoration-color: var(--structural-teal);
+  text-decoration-color: var(--accent);
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
@@ -584,8 +585,8 @@ input[type="submit"]:active,
 .btn.is-active,
 .btn[aria-pressed="true"] {
   color: var(--paper);
-  background: var(--structural-teal);
-  border-color: var(--structural-teal);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .btn-secondary {
@@ -596,15 +597,15 @@ input[type="submit"]:active,
 .btn-secondary:hover {
   color: var(--ink);
   background: var(--surface);
-  border-color: var(--structural-teal);
+  border-color: var(--accent);
 }
 
 .btn-secondary:active,
 .btn-secondary.is-active,
 .btn-secondary[aria-pressed="true"] {
   color: var(--paper);
-  background: var(--structural-teal);
-  border-color: var(--structural-teal);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 label {
@@ -638,54 +639,11 @@ textarea {
 input:not([type="button"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
-  border: 2px solid var(--structural-teal);
+  border: 2px solid var(--accent);
   padding: 8px 11px;
 }
 
-/* Evidence and grouped fields */
-
-/* Evidence label — the evidence gate made visible, and the system's one distinctive
-   component. Three changes here:
-     1. One declaration. It was defined twice, and the second copy reinstated the coloured
-        3px border-left the first had removed on purpose. Side-stripes are out.
-     2. The text is amber now, not ink. Canonical --evidence-amber cannot carry type
-        (3.62:1), which is why amber never read as colour anywhere; --evidence-amber-ink is
-        the same hue at 5.34:1, so the label finally looks like the thing it signals.
-     3. Tint and border come from tokens instead of a hardcoded #fff5eb.
-   The square marker gives the label a second, non-colour channel, and the copy always
-   names the claim class in words. */
-.evidence-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55em;
-  padding: 4px 8px;
-  color: var(--evidence-amber-ink);
-  background: var(--tint-amber);
-  border: 1px solid var(--rule-amber);
-  font-family: var(--font-mono);
-  font-size: var(--metadata-caps-size);
-  font-weight: var(--metadata-caps-weight);
-  line-height: var(--metadata-caps-line-height);
-  letter-spacing: var(--metadata-caps-tracking);
-  text-transform: uppercase;
-}
-
-.evidence-label::before {
-  content: "";
-  flex: none;
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-}
-
-/* Verified was the missing state: `evidence_status: verified` rendered no label at all, so
-   a fully sourced claim looked identical to an unclassified one while the qualified claims
-   got a badge. The strongest class now reads strongest. */
-.evidence-label--verified {
-  color: var(--evidence-verified);
-  background: var(--tint-verified);
-  border-color: var(--rule-verified);
-}
+/* Grouped fields */
 
 .grouped-fields {
   margin: 0;
@@ -792,7 +750,7 @@ mark {
    length of a long essay; the heaviest anchors (case-study header, section rails, footer)
    stay pure ink so ink still reads as the top of the hierarchy. */
 .prose h2 {
-  border-top-color: var(--rule-teal);
+  border-top-color: var(--rule-accent);
 }
 
 code,
@@ -913,7 +871,7 @@ samp {
 }
 
 .hero__name span {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .hero__intro {
@@ -941,8 +899,8 @@ samp {
 .hero__portrait {
   position: relative;
   padding: var(--stack-sm);
-  background: var(--tint-teal);
-  border: 1px solid var(--rule-teal);
+  background: var(--tint-accent);
+  border: 1px solid var(--rule-accent);
 }
 
 /* Inert: `z-index: -1` paints this behind the opaque background of an ancestor, so it has
@@ -1012,11 +970,11 @@ samp {
    than advertising an affordance they do not have. */
 .case-study-card:has(a):hover {
   background: var(--surface);
-  border-bottom-color: var(--structural-teal);
+  border-bottom-color: var(--accent);
 }
 
 .case-study-card:has(a):hover .case-study-card__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .case-study-card__title {
@@ -1060,7 +1018,7 @@ samp {
 /* The arrow is the one place a small movement is genuinely informative: it points, so it
    travels the direction it points. 4px, 180ms, zeroed under prefers-reduced-motion. */
 .case-study-card__arrow {
-  color: var(--structural-teal);
+  color: var(--accent);
   font-family: var(--font-mono);
   transition: transform var(--duration-base) var(--ease-out-quart);
 }
@@ -1075,8 +1033,15 @@ samp {
   padding-top: var(--stack-lg);
 }
 
+/* The return path on cases, essays, and notes. It measured 16px high — it was the one
+   standalone action .link-action never reached, because it lives in five templates that
+   were split across different PRs and each left it to the other. Same remedy, applied
+   once here so all five inherit it. */
 .case-study-back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
   margin-bottom: var(--stack-lg);
   font-family: var(--font-mono);
   font-size: var(--metadata-caps-size);
@@ -1127,6 +1092,26 @@ samp {
   color: var(--ink-secondary);
 }
 
+/* Mobile: native <details> outline. Desktop nav is the sticky twin (see 768px). */
+.case-study-toc__disclosure {
+  margin-top: var(--stack-md);
+}
+
+.case-study-toc__disclosure > summary.case-study-toc__label {
+  display: list-item;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: var(--ink-secondary);
+}
+
+.case-study-toc__disclosure[open] > summary.case-study-toc__label {
+  margin-bottom: var(--stack-sm);
+}
+
+.case-study-toc__nav--desktop {
+  display: none;
+}
+
 .case-study-toc ul {
   margin: 0;
   padding: 0;
@@ -1153,6 +1138,8 @@ samp {
 
 .prose--case-study h2 {
   color: var(--ink);
+  /* Clear the sticky masthead when jumping from the outline. */
+  scroll-margin-top: calc(72px + var(--stack-md));
 }
 
 /* Wayfinding */
@@ -1184,11 +1171,11 @@ samp {
 
 .explore-item:hover {
   background: var(--surface);
-  border-bottom-color: var(--structural-teal);
+  border-bottom-color: var(--accent);
 }
 
 .explore-item:hover .explore-item__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .explore-item__title {
@@ -1197,7 +1184,7 @@ samp {
 
 .explore-item__num,
 .explore-item__arrow {
-  color: var(--structural-teal);
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: var(--label-mono-size);
 }
@@ -1340,7 +1327,7 @@ samp {
      label, and reads as part of the rule language rather than as an added ornament. */
   .section-rail__meta {
     padding-right: var(--stack-md);
-    border-right: 1px solid var(--rule-teal);
+    border-right: 1px solid var(--rule-accent);
   }
 
   .hero__grid {
@@ -1371,16 +1358,40 @@ samp {
 
   .case-study-body {
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-areas: "meta meta meta content content content content content content content . .";
+    grid-template-areas: "meta meta content content content content content content content content content content";
     gap: var(--gutter);
   }
 
+  /* `overflow: auto` makes this a scroll container, which clips anything painted outside
+     the padding box — including the 3px focus ring at 3px offset. The outline links sit
+     flush against the left edge, so a keyboard user saw the ring sliced off. The 6px of
+     inline-start padding gives the ring room inside the scroll box; the matching negative
+     margin keeps the text itself on the same optical line as the rest of the rail. */
   .case-study-toc {
     position: sticky;
     top: 96px;
+    align-self: start;
+    max-height: calc(100vh - 96px - var(--stack-md));
+    overflow: auto;
+    padding-left: 6px;
+    margin-left: -6px;
     padding-right: var(--stack-md);
     border-right: 1px solid var(--rule);
     border-bottom: 0;
+  }
+
+  /* Sticky rail shows the outline directly; hide the mobile disclosure. */
+  .case-study-toc__disclosure {
+    display: none;
+  }
+
+  .case-study-toc__nav--desktop {
+    display: block;
+    margin-top: var(--stack-md);
+  }
+
+  .prose--case-study h2 {
+    scroll-margin-top: calc(96px + var(--stack-sm));
   }
 
   .site-footer__inner {
@@ -1448,15 +1459,29 @@ samp {
 
 .note-card__title:hover,
 .work-card__link:hover .work-card__title {
-  color: var(--structural-teal);
+  color: var(--accent);
 }
 
 .note-card__title:hover {
   text-decoration-color: currentColor;
 }
 
+/* Work is the higher-value destination; the composite link strips the default underline,
+   so the title carries a resting underline in the same faint→firm language as body links.
+   Discoverability must not depend on hover. */
 .work-card__title {
-  transition: color var(--duration-base) var(--ease-out-quart);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-base) var(--ease-out-quart),
+    text-decoration-color var(--duration-base) var(--ease-out-quart),
+    text-decoration-thickness var(--duration-fast) var(--ease-out-quart);
+}
+
+.work-card__link:hover .work-card__title {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 /* The table of contents is a dense stack of links; underlining all of them at rest turns
@@ -1552,37 +1577,14 @@ samp {
 .boundary__substrate {
   margin-top: var(--stack-md);
   padding: var(--stack-lg) var(--stack-md);
-  background: color-mix(in oklab, var(--structural-teal) 7%, var(--surface));
-  border: 1px solid color-mix(in oklab, var(--structural-teal) 28%, var(--surface));
+  background: color-mix(in oklab, var(--accent) 7%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, var(--surface));
 }
 
 .boundary__shared li {
   color: var(--ink);
   font-size: 15px;
   line-height: 1.45;
-}
-
-/* ============================================
-   Reduced motion — global override, and it must be LAST in the file.
-   It previously sat mid-file, ahead of the rules in the "Measure cap" and card sections,
-   so any transition declared after it was never zeroed. An override that depends on source
-   order belongs at the end, where nothing can outrank it.
-   Every transition in this stylesheet is colour, decoration, or a 4px transform, so the
-   reduced-motion path is an instant state change rather than a removed one.
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0s;
-    transition-delay: 0s;
-    animation-duration: 0s;
-    animation-delay: 0s;
-  }
 }
 
 /* Curated LinkedIn card quote on /thinking/. The prose blockquote rules are scoped to
@@ -1596,4 +1598,239 @@ samp {
 
 .linkedin-card__quote p {
   margin: 0;
+}
+
+/* Standalone and listing actions — grow the hit area to the checklist’s 44px without
+   turning the link into a button. Same remedy as .site-nav a / footer links: inline-flex
+   + min-height, type size unchanged. Inline prose citations stay exempt (see
+   ACCESSIBILITY-CHECKS.md). Padding is static — never grow on hover (DESIGN.md). */
+.link-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
+}
+
+/* Keep adjacent 44px actions from reading as one blob: a meta archive/profile link sits
+   under its rail heading with a clear gap; the field-notes “all” link sits clear of the
+   list above. Focus outline (3px + 3px offset) must not be clipped. */
+.section-rail__meta > .label-mono {
+  margin: var(--stack-sm) 0 0;
+}
+
+.section-rail__content > .label-mono {
+  margin: var(--stack-md) 0 0;
+}
+
+/* ============================================
+   Reduced motion — global override, and it must be LAST in the file.
+   It previously sat mid-file, ahead of the rules in the "Measure cap" and card sections,
+   so any transition declared after it was never zeroed. An override that depends on source
+   order belongs at the end, where nothing can outrank it.
+   Every transition in this stylesheet is colour, decoration, or a 4px transform, so the
+   reduced-motion path is an instant state change rather than a removed one.
+   ============================================ */
+
+/* ==== Hybrid + book architecture ==== */
+/* Hybrid structural overrides — Swiss hardness, Fathom's data manners.
+   Shared by every accent variant so the ONLY difference between them is one hex. */
+
+/* Rules are structural and black. Swiss separates with weight, not tint. */
+.explore-list { border-top-width: 3px; border-top-color: var(--ink); }
+.site-header  { border-bottom: 3px solid var(--ink); }
+.section-rail__meta { border-color: var(--ink); }
+
+/* No tinted bands anywhere — sections are separated by rule and space only. */
+.section--home-explore {
+  background: transparent;
+  border-block-color: var(--ink);
+}
+
+/* Labels: mono, not shouty. The Swiss variant's bold caps got loud at three
+   lines; keeping the mono voice here is the Fathom half of the hybrid and
+   fixes that without losing the caption register. */
+.section-rail__label,
+.metadata-caps,
+.label-mono,
+.case-study-toc__label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+/* Tabular figures wherever a number or range appears. */
+.grouped-fields,
+.work-card__field,
+.metadata-caps { font-variant-numeric: tabular-nums; }
+
+/* The accent earns its place on exactly two jobs: where you are, and the
+   diagram that is the site's own visual mechanism. */
+[aria-current="page"] { color: var(--accent); }
+
+.diagram--boundary {
+  border: 3px solid var(--ink);
+  padding: var(--stack-md);
+  background: transparent;
+}
+
+.diagram--boundary figcaption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--ink-secondary);
+}
+
+/* ============================================================
+   BOOK ARCHITECTURE — the structural half of direction C.
+   None of this is expressible in tokens, which is exactly why the
+   earlier probe failed: it repainted the page instead of rebuilding it.
+   ============================================================ */
+
+/* --- Running head -------------------------------------------------------
+   A book names itself on every spread. This is the page's own identity line,
+   sitting above the title in the register a folio would occupy. */
+.running-head {
+  display: flex;
+  align-items: center;
+  gap: var(--stack-sm);
+  margin: 0 0 var(--stack-lg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+.running-head__rule { flex: 1; height: 1px; background: var(--rule); }
+.running-head__title { color: var(--accent); }
+
+/* --- Asymmetric measure -------------------------------------------------
+   The outer margin is ACTIVE space, not padding. Text sits at a book measure
+   and the right margin stays open for folios and marginalia. */
+/* The site's rail is a 12-column grid driven by grid-template-AREAS
+   ("meta meta content ×10"), not by explicit columns. Redefining the columns
+   left the spanned children to invent implicit tracks, which is why the first
+   attempt produced a 12-track mess. Reshape the areas instead: index takes 3
+   columns (long outline titles like "Who was doing the work" need ~280px at
+   the 1240 shell — 2 tracks / ~186px wrapped mid-phrase), text keeps 7, and
+   the last 2 stay empty — that empty band IS the active outer margin. Taking
+   the extra index track from the empty outer margin, not from the text column,
+   so the reading measure is unchanged. Shared by work, essays, and notes via
+   .case-study--book. */
+@media (min-width: 768px) {
+  .case-study--book .case-study-body {
+    grid-template-areas: "meta meta meta content content content content content content content . .";
+  }
+}
+
+/* --- Folios -------------------------------------------------------------
+   Section numbers live in the margin, never in the text column. A CSS counter
+   means they renumber themselves when a case gains or loses a section — a
+   hardcoded list would rot the way the old outline did. */
+.case-study--book .prose--case-study { counter-reset: folio; position: relative; }
+
+.case-study--book .prose--case-study h2 {
+  counter-increment: folio;
+  position: relative;
+  border-top: 1px solid var(--rule);
+  padding-top: var(--stack-sm);
+}
+
+.case-study--book .prose--case-study h2::before {
+  content: counter(folio, decimal-leading-zero);
+  position: absolute;
+  left: -3.25rem;
+  top: var(--stack-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  /* No margin to put a folio in — inline it rather than clipping it. */
+  .case-study--book .prose--case-study h2::before {
+    position: static;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+
+/* The case body used to open with an "## BLUF" heading — military shorthand no first-time
+   reader can be expected to know. The heading is gone; the paragraph it introduced now
+   carries the opening on its own, so it takes the lead register instead of body register.
+   Sized between the standfirst and body so the page still steps down, not sideways. */
+.case-study--book .prose--case-study > p:first-child {
+  color: var(--ink);
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-line-height);
+}
+
+
+/* Experience entries on /about/. Markdown gives us alternating "role line" and
+   "description" paragraphs; this tightens the pair so each reads as one row rather
+   than four loose paragraphs, without needing a shortcode or a class in the content. */
+.prose--editorial p:has(> strong:first-child:last-child),
+.prose--editorial p > strong:first-child {
+  color: var(--ink);
+}
+
+.prose--editorial p:has(> strong:first-child) {
+  margin-bottom: var(--stack-xs, 0.35rem);
+}
+
+/* --- Colophon -----------------------------------------------------------
+   Production notes at the foot, where a book puts them, so the opening spread
+   carries only the title and the argument. */
+.colophon {
+  margin-top: var(--stack-xl, 4rem);
+  padding-top: var(--stack-md);
+  border-top: 3px double var(--ink);
+}
+
+.colophon__label {
+  margin: 0 0 var(--stack-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.colophon__list {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 4px var(--stack-md);
+  margin: 0;
+  font-size: var(--body-md-size);
+  line-height: var(--body-md-line-height);
+}
+
+.colophon__list dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  align-self: baseline;
+}
+
+.colophon__list dd { margin: 0; }
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s;
+    transition-delay: 0s;
+    animation-duration: 0s;
+    animation-delay: 0s;
+  }
 }

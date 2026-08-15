@@ -3,7 +3,6 @@
   Rule-separated grouped fields — not a floating card.
   Exposes users, role, themes, and summary (constraint + outcome narrative
   until dedicated frontmatter fields exist). Safe when fields are missing.
-  Evidence labels mark claims that are not fully verified (CONTENT-MODEL.md).
 */}}
 {{- $page := . -}}
 {{- $heading := "h3" -}}
@@ -11,7 +10,6 @@
   {{- $page = .page -}}
   {{- $heading = .heading | default "h3" -}}
 {{- end -}}
-{{- $evidence := $page.Params.evidence_status | default "" -}}
 {{- $users := $page.Params.users | default slice -}}
 {{- $role := $page.Params.role | default "" -}}
 {{- $themes := $page.Params.themes | default slice -}}
@@ -47,7 +45,6 @@
       {{- with $summary -}}
       <p class="body-md work-card__summary">{{ . }}</p>
       {{- end -}}
-      {{ partial "evidence-label.html" (dict "status" $evidence) }}
     </div>
   </a>
 </article>
