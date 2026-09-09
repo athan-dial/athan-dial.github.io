@@ -1,23 +1,44 @@
 {{ define "main" }}
 {{ $profile := site.Data.profile }}
+{{ $experience := site.Data.experience }}
 {{ $writing := where (where (where site.RegularPages "Section" "in" (slice "notes" "essays")) "Params.status" "published") "Params.visibility" "public" }}
 {{ $work := where (where (where (where site.RegularPages "Section" "work") "Params.status" "published") "Params.visibility" "public") "Params.featured" true }}
 {{ $featured := first 1 (sort (where $writing "Params.tier" "cornerstone") "Date" "desc") }}
+
+<nav class="fn-chapter-index" aria-label="Homepage chapters">
+  <span class="fn-chapter-index__mark" aria-hidden="true">A D / 07</span>
+  <a href="#identity" data-fn-index-link>01 Identity</a>
+  <a href="#current-idea" data-fn-index-link>02 Current idea</a>
+  <a href="#work-in-practice" data-fn-index-link>03 Work</a>
+  <a href="#fieldnotes" data-fn-index-link>04 Fieldnotes</a>
+  <a href="#trajectory" data-fn-index-link>05 Trajectory</a>
+  <a href="#operating-territory" data-fn-index-link>06 Territory</a>
+  <a href="#context" data-fn-index-link>07 Context</a>
+</nav>
+
 <div class="fn-home container">
-  <section class="fn-intro" aria-labelledby="home-title">
+  <section id="identity" class="fn-intro fn-chapter" data-fn-chapter aria-labelledby="home-title">
     <div class="fn-intro__copy">
       <p class="fn-kicker">{{ $profile.positioning_eyebrow }}</p>
-      <h1 id="home-title">Try things.<br>Keep what <em>works.</em></h1>
+      <h1 id="home-title">{{ $profile.positioning_headline }}</h1>
       <p class="fn-intro__lead">{{ $profile.positioning_support }}</p>
-      <a class="fn-text-link" href="/thinking/">Open the notebook <span aria-hidden="true">↓</span></a>
+      <ul class="fn-identity-meta" aria-label="Current role and location">
+        <li><span>Current</span><strong>{{ $profile.role_title }} · {{ $profile.employer }}</strong></li>
+        <li><span>Based</span><strong>{{ $profile.location }}</strong></li>
+      </ul>
+      <div class="fn-intro__actions">
+        <a class="fn-text-link" href="#work-in-practice">See the work <span aria-hidden="true">↓</span></a>
+        <a class="fn-text-link" href="/thinking/">Open Fieldnotes <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
     <figure class="fn-portrait">
       <img src="/img/portrait.jpg" alt="Athan Dial" width="600" height="800" fetchpriority="high">
       <figcaption><span>{{ $profile.name }}</span><span>{{ $profile.location }}</span></figcaption>
     </figure>
   </section>
+
   {{ range $featured }}
-  <section class="fn-feature" aria-labelledby="feature-title">
+  <section id="current-idea" class="fn-feature fn-chapter" data-fn-chapter aria-labelledby="feature-title">
     <div class="fn-feature__copy">
       <p class="fn-kicker">A question I keep coming back to</p>
       <h2 id="feature-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
@@ -32,20 +53,71 @@
     </div>
   </section>
   {{ end }}
-  <section class="fn-section" aria-labelledby="notebook-title">
-    <div class="fn-section__head"><h2 id="notebook-title">The notebook <span>/ {{ len $writing }}</span></h2><a href="/thinking/">All writing ↗</a></div>
-    <div class="fn-note-grid">{{ range first 3 (sort $writing "Date" "desc") }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
-  </section>
+
   {{ with $work }}
-  <section class="fn-section" aria-labelledby="work-title">
-    <div class="fn-section__head"><h2 id="work-title">Selected work</h2><a href="/work/">Explore the work ↗</a></div>
-    <div class="fn-work-grid">{{ range first 2 . }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  <section id="work-in-practice" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="work-title">
+    <div class="fn-section__head"><h2 id="work-title">Work in practice</h2><a href="/work/">Explore the work ↗</a></div>
+    <p class="fn-section__standfirst">Products and systems where the interesting part was not only whether we could build them, but what should become shared, durable, and trustworthy.</p>
+    <div class="fn-work-grid">{{ range first 3 . }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
   </section>
   {{ end }}
-  <section class="fn-about" aria-labelledby="about-title">
+
+  <section id="fieldnotes" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="notebook-title">
+    <div class="fn-section__head"><h2 id="notebook-title">Fieldnotes <span>/ {{ len $writing }}</span></h2><a href="/thinking/">All writing ↗</a></div>
+    <p class="fn-section__standfirst">Working notes on AI, product judgment, expert workflows, verification, and the places where the boundary between a tool and its user keeps moving.</p>
+    <div class="fn-note-grid">{{ range first 3 (sort $writing "Date" "desc") }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  </section>
+
+  <section id="trajectory" class="fn-trajectory fn-chapter" data-fn-chapter aria-labelledby="trajectory-title">
+    <div class="fn-section__head">
+      <div>
+        <p class="fn-kicker">Trajectory</p>
+        <h2 id="trajectory-title">Research depth became a product problem.</h2>
+      </div>
+      <a href="/about/">About me ↗</a>
+    </div>
+    <p class="fn-section__standfirst">The titles changed. The through-line is closer to translating complex expert work into systems people can actually use, inspect, and improve.</p>
+    <ol class="fn-timeline">
+      <li class="fn-timeline__item fn-timeline__item--foundation">
+        <span class="fn-timeline__range">Foundation</span>
+        <div><strong>Medical research</strong><p>{{ $profile.foundation }}</p></div>
+      </li>
+      {{ range $experience }}
+      <li class="fn-timeline__item">
+        <span class="fn-timeline__range">{{ .range }}</span>
+        <div><strong>{{ .role }}</strong><p>{{ .company }}</p></div>
+      </li>
+      {{ end }}
+    </ol>
+  </section>
+
+  <section id="operating-territory" class="fn-territory fn-chapter" data-fn-chapter aria-labelledby="territory-title">
+    <div class="fn-territory__intro">
+      <p class="fn-kicker">Operating territory</p>
+      <h2 id="territory-title">The work keeps changing. A few questions keep surviving it.</h2>
+      <p>AI is making more candidate work cheap enough to try. That moves the interesting problems downstream: which work deserves to become real, how we verify it, and where ownership still needs to be explicit.</p>
+    </div>
+    <div class="fn-territory__diagram">{{ partial "fieldnote-schematic.html" "abundant-execution" }}</div>
+    <div class="fn-territory-grid">
+      <article><span>01</span><h3>Product judgment</h3><p>What deserves to exist when building gets cheap?</p></article>
+      <article><span>02</span><h3>Expert work</h3><p>What should AI do, and what should remain inspectable?</p></article>
+      <article><span>03</span><h3>Verification</h3><p>How do we know when generated work deserves trust?</p></article>
+      <article><span>04</span><h3>Operating models</h3><p>When contribution broadens, who owns what happens next?</p></article>
+    </div>
+  </section>
+
+  <section id="context" class="fn-about fn-chapter" data-fn-chapter aria-labelledby="about-title">
     <p class="fn-kicker">A little context</p>
     <h2 id="about-title">Research roots.<br>A builder’s <em>instinct.</em></h2>
-    <div><p>I started in medical research. These days, I work across data science and product at {{ $profile.employer }}, building tools for people who bring their own expertise to the problem.</p><p>This is where I write about that work: the questions, experiments, and methods worth sharing.</p><a class="fn-text-link" href="/about/">More about me <span aria-hidden="true">↗</span></a></div>
+    <div>
+      <p>I started in medical research. These days, I work across data science and product at {{ $profile.employer }}, building tools for people who bring their own expertise to the problem.</p>
+      <p>This site is the longer version of that work: what I have built, what I am testing, and the questions that keep surviving the tools.</p>
+      <div class="fn-context-links">
+        <a class="fn-text-link" href="/about/">More about me <span aria-hidden="true">↗</span></a>
+        {{ with $profile.links.linkedin }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>{{ end }}
+        {{ with $profile.links.github }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>{{ end }}
+      </div>
+    </div>
   </section>
 </div>
 {{ end }}
