@@ -19,7 +19,12 @@
   {{- $tokens := resources.Get "css/tokens.css" -}}
   {{- $main := resources.Get "css/main.css" -}}
   {{- $fieldnotes := resources.Get "css/fieldnotes.css" -}}
-  {{- $css := slice $tokens $main $fieldnotes | resources.Concat "css/editorial.css" | minify | fingerprint -}}
+  {{- $styles := slice $tokens $main $fieldnotes -}}
+  {{- if .IsHome -}}
+    {{- $fieldnotesHome := resources.Get "css/fieldnotes-home.css" -}}
+    {{- $styles = $styles | append $fieldnotesHome -}}
+  {{- end -}}
+  {{- $css := $styles | resources.Concat "css/editorial.css" | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{ hugo.Generator }}
 </head>
@@ -32,5 +37,9 @@
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- if .IsHome -}}
+    {{- $fieldnotesHomeJS := resources.Get "js/fieldnotes-home.js" | minify | fingerprint -}}
+    <script src="{{ $fieldnotesHomeJS.RelPermalink }}" integrity="{{ $fieldnotesHomeJS.Data.Integrity }}" defer></script>
+  {{- end -}}
 </body>
 </html>
