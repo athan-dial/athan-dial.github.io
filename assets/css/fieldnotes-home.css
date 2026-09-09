@@ -62,7 +62,7 @@
 
 .fn-identity-meta span,
 .fn-timeline__range {
-  font: 500 .72rem/1.55 var(--font-mono);
+  font: 500 .75rem/1.55 var(--font-mono);
   letter-spacing: .065em;
   text-transform: uppercase;
   color: var(--ink-secondary);
@@ -194,7 +194,7 @@
 }
 
 .fn-territory-grid span {
-  font: 500 .72rem/1.5 var(--font-mono);
+  font: 500 .75rem/1.5 var(--font-mono);
   color: var(--accent);
 }
 
@@ -217,7 +217,10 @@
   display: none;
 }
 
-@media (min-width: 1450px) {
+/* em, not px (90.625em == 1450px at the default 16px): text-only zoom, which does not
+   shrink the CSS viewport, still retreats the marginal index instead of letting it
+   grow into the main column. Page zoom is already covered by the viewport shrinking. */
+@media (min-width: 90.625em) {
   .fn-chapter-index {
     display: flex;
     position: fixed;
@@ -234,7 +237,7 @@
 
   .fn-chapter-index__mark {
     margin-bottom: .55rem;
-    font: 500 .68rem/1.4 var(--font-mono);
+    font: 500 .75rem/1.4 var(--font-mono);
     letter-spacing: .08em;
     color: var(--ink-secondary);
   }
@@ -245,7 +248,7 @@
     align-items: center;
     min-height: 44px;
     color: var(--ink-secondary);
-    font: 400 .68rem/1.35 var(--font-mono);
+    font: 400 .75rem/1.35 var(--font-mono);
     text-decoration: none;
     transition: color var(--duration-base) var(--ease-out-quart), transform var(--duration-base) var(--ease-out-quart);
   }

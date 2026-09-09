@@ -66,7 +66,7 @@ ok "trajectory is chronological and limited to safe role/company/range plus foun
 grep -Fq 'abundant-execution' "$INDEX" || fail "operating-territory schematic is not wired"
 grep -Fq 'IntersectionObserver' "$JS" || fail "progressive chapter observer missing"
 grep -Fq 'aria-current' "$JS" || fail "current-location enhancement missing"
-grep -Fq 'prefers-reduced-motion:reduce' "$CSS" || fail "home motion layer lacks reduced-motion override"
+grep -Eq 'prefers-reduced-motion:[[:space:]]*reduce' "$CSS" || fail "home motion layer lacks reduced-motion override"
 grep -Fq 'min-height: 44px' "$CSS" || fail "wide chapter links do not meet the 44px target requirement"
 if grep -Eq 'opacity:[[:space:]]*0([^.]|$)' "$CSS"; then
   fail "home motion layer hides content with opacity:0; motion must never gate visibility"
@@ -80,14 +80,21 @@ ok "home-only CSS and script are bundled through Hugo"
 
 if [ -f public/index.html ]; then
   HTML="public/index.html"
+  # hugo --minify drops attribute quotes, so match both id="x" and id=x.
   for item in identity current-idea work-in-practice fieldnotes trajectory operating-territory context; do
-    grep -Fq "id=\"$item\"" "$HTML" || fail "built homepage missing #$item"
+    grep -Eq "id=\"?$item\"?[ >]" "$HTML" || fail "built homepage missing #$item"
   done
   grep -Fq "$EXPECTED_HEADLINE" "$HTML" || fail "built homepage missing canonical headline"
   if grep -Fq 'Try things. Keep what works.' "$HTML"; then
     fail "built homepage still contains retired slogan"
   fi
-  ok "built homepage matches v2 chapter and headline contract"
+  # The home CSS layer once vanished from the build: resources.Concat caches by target
+  # path, so the homepage was served the non-home bundle. Assert the shipped bundle.
+  HOME_CSS_HREF="$(grep -o 'css/editorial[^"'"'"' >]*\.css' "$HTML" | head -1)"
+  [ -n "$HOME_CSS_HREF" ] || fail "built homepage links no editorial stylesheet"
+  [ -f "public/$HOME_CSS_HREF" ] || fail "homepage stylesheet $HOME_CSS_HREF is not in the build"
+  grep -Fq 'fn-chapter-index' "public/$HOME_CSS_HREF" || fail "homepage stylesheet omits the fieldnotes-home layer"
+  ok "built homepage matches v2 chapter and headline contract, and ships the home CSS layer"
 else
   printf 'verify-fieldnotes-home: note - public/index.html absent; rendered checks skipped\n'
 fi

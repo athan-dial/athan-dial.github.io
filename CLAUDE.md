@@ -106,7 +106,7 @@ before it competes with the main column.
 Before changing homepage behavior, read:
 
 - `.planning/design/PERSONAL-FIELDNOTES-UPDATE-2026-09-09.md`
-- `docs/superpowers/plans/2026-09-09-personal-fieldnotes-home-v2.md`
+- `.planning/plans/2026-09-09-personal-fieldnotes-home-v2.md`
 - `DESIGN.md`
 - `PRODUCT.md`
 - `DIAGRAMS.md`

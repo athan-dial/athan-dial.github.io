@@ -10,7 +10,10 @@
     links.map((link) => [link.getAttribute('href')?.replace(/^#/, ''), link])
   );
 
+  let currentId = null;
   const setCurrent = (id) => {
+    if (!id || id === currentId) return;
+    currentId = id;
     links.forEach((link) => link.removeAttribute('aria-current'));
     const current = linksById.get(id);
     if (current) current.setAttribute('aria-current', 'location');
@@ -23,29 +26,49 @@
     return;
   }
 
-  const active = new Map();
+  // Entered state only. Ratios are not used to pick the current chapter: a tall chapter
+  // never reaches the ratio a short one does, and cached ratios go stale between
+  // thresholds, which left the index lagging the reader by two chapters.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fn-chapter--entered');
-          active.set(entry.target.id, entry.intersectionRatio);
-        } else {
-          active.delete(entry.target.id);
-        }
+        if (entry.isIntersecting) entry.target.classList.add('fn-chapter--entered');
       });
-
-      if (!active.size) return;
-
-      const current = Array.from(active.entries())
-        .sort((a, b) => b[1] - a[1])[0]?.[0];
-      if (current) setCurrent(current);
     },
-    {
-      rootMargin: '-28% 0px -48% 0px',
-      threshold: [0.05, 0.2, 0.4, 0.6, 0.8],
-    }
+    { rootMargin: '0px 0px -15% 0px', threshold: 0.02 }
   );
-
   chapters.forEach((chapter) => observer.observe(chapter));
+
+  // The current chapter is the last one whose top has crossed the reading line.
+  const readingLine = () => window.innerHeight * 0.3;
+  const update = () => {
+    // At the foot of the page the last chapter can never reach the reading line, so
+    // clamp to it rather than leaving the index stuck on the previous chapter.
+    const atBottom =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) {
+      setCurrent(chapters[chapters.length - 1].id);
+      return;
+    }
+    const line = readingLine();
+    let found = chapters[0];
+    for (const chapter of chapters) {
+      if (chapter.getBoundingClientRect().top <= line) found = chapter;
+    }
+    setCurrent(found.id);
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      update();
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
 })();

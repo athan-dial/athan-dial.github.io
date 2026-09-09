@@ -20,11 +20,16 @@
   {{- $main := resources.Get "css/main.css" -}}
   {{- $fieldnotes := resources.Get "css/fieldnotes.css" -}}
   {{- $styles := slice $tokens $main $fieldnotes -}}
+  {{/* Concat caches by target path, so the home bundle needs its own name — reusing
+       "css/editorial.css" served the first-built (non-home) bundle to the homepage and
+       silently dropped the whole fieldnotes-home layer. */}}
+  {{- $bundle := "css/editorial.css" -}}
   {{- if .IsHome -}}
     {{- $fieldnotesHome := resources.Get "css/fieldnotes-home.css" -}}
     {{- $styles = $styles | append $fieldnotesHome -}}
+    {{- $bundle = "css/editorial-home.css" -}}
   {{- end -}}
-  {{- $css := $styles | resources.Concat "css/editorial.css" | minify | fingerprint -}}
+  {{- $css := $styles | resources.Concat $bundle | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{ hugo.Generator }}
 </head>
