@@ -49,33 +49,34 @@ for item in ids:
         raise SystemExit("chapter index missing link to #%s" % item)
 if 'data-fn-chapter' not in text or 'data-fn-index-link' not in text:
     raise SystemExit("progressive chapter hooks are missing")
-if '.summary' in text.lower() and 'experience' in text.lower():
-    # Guard against casually wiring legacy experience prose into the homepage.
-    # A false positive here is preferable to silently publishing unsupported summary text.
-    raise SystemExit("homepage source appears to reference experience summary prose")
+if re.search(r'\{\{[^}]*\.summary\b', text, re.I):
+    raise SystemExit("homepage template renders a summary field; trajectory must use safe fields only")
 print("ok")
 PY
 ok "seven chapters and marginal-index anchors are present in canonical order"
 
 grep -Fq 'site.Data.experience' "$INDEX" || fail "trajectory does not consume canonical experience data"
+grep -Fq 'collections.Reverse $experience' "$INDEX" || fail "trajectory is not rendered foundation-to-present"
 grep -Fq '.role' "$INDEX" || fail "trajectory role field missing"
 grep -Fq '.company' "$INDEX" || fail "trajectory company field missing"
 grep -Fq '.range' "$INDEX" || fail "trajectory range field missing"
 grep -Fq 'foundation' "$INDEX" || fail "trajectory foundation field missing"
-ok "trajectory is wired to safe role/company/range plus foundation fields"
+ok "trajectory is chronological and limited to safe role/company/range plus foundation fields"
 
 grep -Fq 'abundant-execution' "$INDEX" || fail "operating-territory schematic is not wired"
 grep -Fq 'IntersectionObserver' "$JS" || fail "progressive chapter observer missing"
 grep -Fq 'aria-current' "$JS" || fail "current-location enhancement missing"
 grep -Fq 'prefers-reduced-motion:reduce' "$CSS" || fail "home motion layer lacks reduced-motion override"
+grep -Fq 'min-height: 44px' "$CSS" || fail "wide chapter links do not meet the 44px target requirement"
 if grep -Eq 'opacity:[[:space:]]*0([^.]|$)' "$CSS"; then
   fail "home motion layer hides content with opacity:0; motion must never gate visibility"
 fi
-ok "progressive enhancement and non-gating reduced-motion contract present"
+ok "progressive enhancement, target sizing, and non-gating reduced-motion contract present"
 
+grep -Fq 'resources.Get "css/fieldnotes-home.css"' "$BASE" || fail "home stylesheet is not loaded through Hugo Pipes"
 grep -Fq 'resources.Get "js/fieldnotes-home.js"' "$BASE" || fail "home script is not fingerprinted through Hugo Pipes"
 grep -Fq 'defer' "$BASE" || fail "home script is not deferred"
-ok "home-only script is bundled through Hugo"
+ok "home-only CSS and script are bundled through Hugo"
 
 if [ -f public/index.html ]; then
   HTML="public/index.html"
