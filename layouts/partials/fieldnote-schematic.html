@@ -1,6 +1,6 @@
 {{ $name := . }}
 <figure class="fn-schematic">
-  <div class="fn-schematic__header"><span>{{ if eq $name "outer-loop" }}01 / Product judgment{{ else }}02 / Verification{{ end }}</span><span>A D / F N</span></div>
+  <div class="fn-schematic__header"><span>{{ if eq $name "outer-loop" }}01 / Product judgment{{ else if eq $name "known-positives" }}02 / Verification{{ else }}03 / Abundant execution{{ end }}</span><span>A D / F N</span></div>
   {{ if eq $name "outer-loop" }}
   <h3>Keep the problem open to revision.</h3>
   <div class="fn-schematic__node fn-schematic__node--decision"><small>Human judgment / Outer loop</small><strong>Who is this for? What needs to change?</strong><p>Revisit the user, the problem, and the shape of the product.</p></div>
@@ -22,5 +22,15 @@
   </div>
   <p class="fn-schematic__feedback">↶ Turn that knowledge into an executable check for known positives.</p>
   <figcaption>The schema describes a legal answer. Domain knowledge supplies a check on whether it is the right answer.</figcaption>
+  {{ else if eq $name "abundant-execution" }}
+  <h3>The bottleneck moves after execution gets cheap.</h3>
+  <div class="fn-schematic__node fn-schematic__node--action"><small>Changed constraint</small><strong>More candidate work becomes cheap enough to produce.</strong><p>Code, analysis, prototypes, and recommendations can arrive before the underlying problem is settled.</p></div>
+  <p class="fn-schematic__edge">↓ expands the solution space</p>
+  <div class="fn-schematic__branches">
+    <div class="fn-schematic__node fn-schematic__node--state"><small>New state</small><strong>Many plausible outputs</strong><p>Production alone becomes weaker evidence that a candidate deserves to change what happens next.</p></div>
+    <div class="fn-schematic__node fn-schematic__node--decision"><small>Human judgment</small><strong>Select, verify, and assign ownership.</strong><p>Decide what deserves to become real, what evidence would justify it, and who owns the transition.</p></div>
+  </div>
+  <p class="fn-schematic__feedback">↶ Feed what survives verification back into the next round of work.</p>
+  <figcaption>Abundant execution does not remove expertise. It changes where expertise has to show up.</figcaption>
   {{ else }}{{ errorf "Unknown Fieldnotes schematic: %s" $name }}{{ end }}
 </figure>
