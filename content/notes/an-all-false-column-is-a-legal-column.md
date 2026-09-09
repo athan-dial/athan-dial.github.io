@@ -2,6 +2,7 @@
 title: "An all-false column is a legal column"
 type: note
 date: 2026-08-12
+card_summary: "Every layer behaved correctly. The answer was still wrong. A small naming mismatch exposes the gap between valid data and useful verification."
 summary: "A one-character naming mismatch made a boolean false for every row. Five layers each behaved correctly and nothing threw. The only check that caught it was a person who knew the answer was impossible."
 status: published
 visibility: public
@@ -37,6 +38,8 @@ That is the whole problem. Schema validation passes: the type is right, the null
 The check that fired was a person. Someone with domain knowledge queried for records they knew existed, got an empty result, and recognised the answer as impossible. That mismatch, not a failing job, opened the thread. The fix once found was a one-line rename.
 
 I want to be careful about what I am claiming. I cannot give you a clean inventory of the test suite that existed beforehand, so I am not going to characterise it. What I can stand behind is the failure mode that got through, and that one is not unique to any particular warehouse.
+
+{{< fieldnote-schematic "known-positives" >}}
 
 ## What it implies for verification
 

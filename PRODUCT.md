@@ -6,27 +6,22 @@ brand
 
 ## Users
 
-Three readers, in priority order.
+The primary reader is someone exploring AI, data, and expert work who wants a useful idea,
+a method to borrow, or a clear account of an experiment. The notebook is the main entry point.
 
-1. **Hiring leaders and recruiters** for senior product / data roles. They arrive from a LinkedIn profile or a referral, on a laptop, with maybe ninety seconds. Their job: decide whether Athan is worth a conversation, and be able to describe his category accurately afterwards.
-2. **Product and technical peers** evaluating credibility. They read one case study properly and want to know whether the reasoning holds. They will notice an unsupported number.
-3. **Scientific and technical collaborators** who want to know if he understands their work. They care that the expert user is described correctly.
+Colleagues, product and technical peers, and hiring leaders can also explore the existing work
+and About page to understand Athan's background and judgment. Preserve those paths without
+making every visit begin with a career pitch.
 
-None of them are shopping. Every one of them is assessing judgment.
-
-## Product Purpose
-
-Present one coherent identity — an AI product leader for expert work — and substantiate it with evidence a reader can check.
-
-The site exists because four adjacent identities were competing (data-science leader, decision-science practitioner, applied-AI operator, tool-heavy publisher). All true, none of them the brand alone.
-
-Success is a change in the reader's model, not traffic: a hiring leader can describe the category after ten seconds; conversations open with product judgment rather than "tell me about your background"; visitors move from the homepage into Work or a cornerstone essay; people reference a named idea when they reach out.
+A useful visit leaves the reader with a clearer question, an explanation they can use, or a
+workflow worth testing. Articles need to stand on their own. Browsing should not require
+understanding internal names or the history of this website.
 
 ## Brand Personality
 
 **Rigorous, warm, bounded.**
 
-Voice: first person, conclusion before evidence, uncertainty labelled rather than smoothed over. States a position and names the condition that would revise it. Dry rather than funny. Specific numbers or none.
+Voice: first person, concrete situations before abstractions, uncertainty labelled rather than smoothed over. States a position and names the condition that would revise it. Dry rather than funny. Specific numbers or none.
 
 It should feel rigorous without looking clinical, warm without looking lifestyle, technical without looking like a developer landing page, structured without looking like a consulting deck, and personal without becoming a biography site.
 

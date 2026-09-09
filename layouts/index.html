@@ -1,226 +1,51 @@
 {{ define "main" }}
-{{- $profile := .Site.Data.profile -}}
-{{- $publicWork := where (where (where (where .Site.RegularPages "Section" "work") "Params.featured" true) "Params.status" "published") "Params.visibility" "public" -}}
-{{- $publicWork = first 3 $publicWork -}}
-{{- $essays := where (where (where .Site.RegularPages "Section" "essays") "Params.status" "published") "Params.visibility" "public" -}}
-{{- $notes := where (where (where .Site.RegularPages "Section" "notes") "Params.status" "published") "Params.visibility" "public" -}}
-{{/* `tier` is the SINGLE cornerstone selector, matching /thinking/ and archetypes/essay.md.
-     This used to select on a boolean `Params.cornerstone`, falling back to `featured` and
-     then to whatever essay came first -- so the homepage and /thinking/ could disagree
-     about the flagship, and the homepage was in fact reaching its cornerstone through the
-     first-essay fallback rather than by intent. One field, one meaning. */}}
-{{- $cornerstones := sort (where $essays "Params.tier" "cornerstone") "Date" "desc" -}}
-{{- if not $cornerstones }}{{ $cornerstones = first 1 (sort $essays "Date" "desc") }}{{ end -}}
-{{- $cornerstone := false -}}
-{{- with (first 1 $cornerstones) }}{{ $cornerstone = index . 0 }}{{ end -}}
-{{- $currentNotes := first 2 (sort $notes "Date" "desc") -}}
-{{- $bioParts := split $profile.short_bio ". " -}}
-{{- $foundation := index $bioParts (sub (len $bioParts) 1) -}}
-
-<section class="hero hero--splash" aria-labelledby="home-title">
-  <div class="hero__backdrop" aria-hidden="true"></div>
-  <div class="container hero__inner section-rail">
-    {{ partial "section-rail.html" (dict "label" $profile.positioning_eyebrow) }}
-    <div class="section-rail__content">
-      <div class="hero__grid">
-        <div class="hero__content">
-          <h1 id="home-title" class="hero__name">{{ $profile.positioning_headline }}</h1>
-          <p class="hero__intro">{{ $profile.positioning_support }}</p>
-          <ul class="grouped-fields" aria-label="Current role and location">
-            <li>
-              <span class="grouped-field__label">Current</span>
-              <span>{{ $profile.role_title }} at {{ $profile.employer }} &middot; {{ $profile.location }}</span>
-            </li>
-          </ul>
-          {{- /* The redesign plan specifies two hero actions: primary "View selected work",
-                 secondary "Read current thinking". Both were missing, so the hero offered a
-                 reader no path forward at all. Resume stays reachable from header and footer
-                 and is deliberately NOT a hero action; neither is "connect on LinkedIn". */ -}}
-          <div class="hero__actions">
-            <a class="btn-primary" href="/work/">View selected work</a>
-            <a class="btn-secondary" href="/thinking/">Read current thinking</a>
-          </div>
-        </div>
-        <figure class="hero__portrait">
-          <div class="hero__portrait-bg" aria-hidden="true"></div>
-          <div class="hero__portrait-frame">
-            <img src="/img/portrait.jpg" alt="Portrait of {{ $profile.name }}" width="600" height="800" loading="eager" fetchpriority="high">
-          </div>
-        </figure>
-      </div>
+{{ $profile := site.Data.profile }}
+{{ $writing := where (where (where site.RegularPages "Section" "in" (slice "notes" "essays")) "Params.status" "published") "Params.visibility" "public" }}
+{{ $work := where (where (where (where site.RegularPages "Section" "work") "Params.status" "published") "Params.visibility" "public") "Params.featured" true }}
+{{ $featured := first 1 (sort (where $writing "Params.tier" "cornerstone") "Date" "desc") }}
+<div class="fn-home container">
+  <section class="fn-intro" aria-labelledby="home-title">
+    <div class="fn-intro__copy">
+      <p class="fn-kicker">{{ $profile.positioning_eyebrow }}</p>
+      <h1 id="home-title">Try things.<br>Keep what <em>works.</em></h1>
+      <p class="fn-intro__lead">{{ $profile.positioning_support }}</p>
+      <a class="fn-text-link" href="/thinking/">Open the notebook <span aria-hidden="true">↓</span></a>
     </div>
-  </div>
-</section>
-
-<section class="container" aria-labelledby="selected-work-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Selected work") }}
-    <div class="section-rail__content">
-      <h2 id="selected-work-title" class="section__heading">Selected work</h2>
-      <p class="body-lg">{{ .Params.selected_work_standfirst }}</p>
-      {{ if $publicWork }}
-        <div class="case-studies-grid">
-          {{ range $publicWork }}
-            {{- $users := .Params.users | default .Params.user -}}
-            {{- $changed := .Params.changed | default .Params.outcome -}}
-            {{/* card_proof, else first sentence of summary. Split on ". " assumes no abbreviations. */}}
-            {{- $proof := .Params.card_proof -}}
-            {{- if not $proof -}}
-              {{- with (.Params.summary | default .Description) -}}
-                {{- $proof = printf "%s." (index (split . ". ") 0) -}}
-              {{- end -}}
-            {{- end -}}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Published work</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with $proof }}<p class="case-study-card__excerpt">{{ . }}</p>{{ end }}
-                </div>
-                <ul class="grouped-fields">
-                  {{- with $users -}}
-                  <li><span class="grouped-field__label">User</span><span>{{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}</span></li>
-                  {{- end -}}
-                  {{- with .Params.constraint -}}
-                  <li><span class="grouped-field__label">Constraint</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                  {{- with .Params.role -}}
-                  <li><span class="grouped-field__label">Role</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                  {{- with $changed -}}
-                  <li><span class="grouped-field__label">What changed</span><span>{{ . }}</span></li>
-                  {{- end -}}
-                </ul>
-                <span class="case-study-card__footer"><span class="metadata-caps">Read case study</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ end }}
-          {{ if lt (len $publicWork) 2 }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">In review</span>
-                  <p>{{ $.Params.selected_work_partial }}</p>
-                </div>
-              </div>
-            </div>
-          {{ end }}
-        </div>
-      {{ else }}
-        <div class="grouped-fields" role="status">
-          <div class="grouped-field">
-            <span class="grouped-field__label">In review</span>
-            <p>{{ .Params.selected_work_empty }}</p>
-          </div>
-        </div>
-      {{ end }}
+    <figure class="fn-portrait">
+      <img src="/img/portrait.jpg" alt="Athan Dial" width="600" height="800" fetchpriority="high">
+      <figcaption><span>{{ $profile.name }}</span><span>{{ $profile.location }}</span></figcaption>
+    </figure>
+  </section>
+  {{ range $featured }}
+  <section class="fn-feature" aria-labelledby="feature-title">
+    <div class="fn-feature__copy">
+      <p class="fn-kicker">A question I keep coming back to</p>
+      <h2 id="feature-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p>AI makes it faster to build and improve a product. The harder question is whether you are building the right thing, for the right person.</p>
+      <a class="fn-text-link" href="{{ .RelPermalink }}">Read the essay <span aria-hidden="true">↗</span></a>
     </div>
-  </div>
-</section>
-
-<section class="container" aria-labelledby="shared-layer-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Product boundary") }}
-    <div class="section-rail__content">
-      <h2 id="shared-layer-title" class="section__heading">{{ .Params.shared_layer_title }}</h2>
-      <p class="body-lg reading-column">{{ .Params.shared_layer_body }}</p>
+    <div class="fn-feature__diagram">
+      <p class="fn-kicker">The outer loop</p>
+      <p class="fn-feature__question">Who is this for?<br>What needs to change?</p>
+      <div class="fn-mini-flow"><span>Plan</span><span aria-hidden="true">→</span><span>Build</span><span aria-hidden="true">→</span><span>Verify</span></div>
+      <p class="fn-feature__return">↶ Revisit the problem, not only the solution.</p>
     </div>
-  </div>
-</section>
-
-<section class="container" aria-labelledby="current-thinking-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Current thinking") }}
-    <div class="section-rail__content">
-      <h2 id="current-thinking-title" class="section__heading">Current thinking</h2>
-      <p class="body-lg">{{ .Params.thinking_standfirst }}</p>
-      {{ if or $cornerstone $currentNotes }}
-        <div class="case-studies-grid">
-          {{ with $cornerstone }}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Cornerstone essay</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
-                </div>
-                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ else }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">Cornerstone essay</span>
-                  <p>{{ $.Params.thinking_essay_empty }}</p>
-                </div>
-              </div>
-            </div>
-          {{ end }}
-          {{ range $currentNotes }}
-            <article class="case-study-card">
-              <a class="case-study-card__link" href="{{ .RelPermalink }}">
-                <div>
-                  <span class="case-study-card__category">Field note</span>
-                  <h3 class="case-study-card__title">{{ .Title }}</h3>
-                  {{ with (.Params.summary | default .Description | default .Summary) }}<p class="case-study-card__excerpt">{{ . | plainify }}</p>{{ end }}
-                </div>
-                <span class="case-study-card__footer"><span class="label-mono">{{ with .Date }}{{ .Format "2 Jan 2006" }}{{ end }}</span><span class="case-study-card__arrow" aria-hidden="true">&rarr;</span></span>
-              </a>
-            </article>
-          {{ end }}
-          {{ if lt (len $currentNotes) 2 }}
-            <div class="case-study-card">
-              <div class="case-study-card__link">
-                <div>
-                  <span class="case-study-card__category">Field notes</span>
-                  <p>{{ $.Params.thinking_notes_empty }}</p>
-                </div>
-              </div>
-            </div>
-          {{ end }}
-        </div>
-      {{ else }}
-        <div class="grouped-fields" role="status">
-          <div class="grouped-field">
-            <span class="grouped-field__label">In edit</span>
-            <p>{{ .Params.thinking_empty }}</p>
-          </div>
-        </div>
-      {{ end }}
-    </div>
-  </div>
-</section>
-
-<section class="container" aria-labelledby="trajectory-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Trajectory") }}
-    <div class="section-rail__content">
-      <h2 id="trajectory-title" class="section__heading">From research depth to product leadership</h2>
-      <ul class="grouped-fields">
-        {{ with $foundation }}
-          <li><span class="grouped-field__label">Foundation</span><span>{{ . }}</span></li>
-        {{ end }}
-        {{ if and $profile.role_title $profile.employer }}
-          <li><span class="grouped-field__label">Current</span><span>{{ $profile.role_title }} at {{ $profile.employer }}</span></li>
-        {{ end }}
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="container" aria-labelledby="conversation-title">
-  <div class="section-rail">
-    {{ partial "section-rail.html" (dict "label" "Conversation") }}
-    <div class="section-rail__content">
-      <h2 id="conversation-title" class="section__heading">A low-pressure conversation path</h2>
-      <p class="body-lg">{{ .Params.conversation_standfirst }}</p>
-      <nav class="hero__actions" aria-label="Contact and resume links">
-        {{ with $profile.links.linkedin }}<a class="btn-secondary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
-        {{ with $profile.email }}<a class="btn-secondary" href="mailto:{{ . }}">Email</a>{{ end }}
-        {{ with $profile.links.resume_page }}<a class="btn-secondary" href="{{ . }}">Résumé</a>{{ end }}
-      </nav>
-    </div>
-  </div>
-</section>
+  </section>
+  {{ end }}
+  <section class="fn-section" aria-labelledby="notebook-title">
+    <div class="fn-section__head"><h2 id="notebook-title">The notebook <span>/ {{ len $writing }}</span></h2><a href="/thinking/">All writing ↗</a></div>
+    <div class="fn-note-grid">{{ range first 3 (sort $writing "Date" "desc") }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  </section>
+  {{ with $work }}
+  <section class="fn-section" aria-labelledby="work-title">
+    <div class="fn-section__head"><h2 id="work-title">Selected work</h2><a href="/work/">Explore the work ↗</a></div>
+    <div class="fn-work-grid">{{ range first 2 . }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  </section>
+  {{ end }}
+  <section class="fn-about" aria-labelledby="about-title">
+    <p class="fn-kicker">A little context</p>
+    <h2 id="about-title">Research roots.<br>A builder’s <em>instinct.</em></h2>
+    <div><p>I started in medical research. These days, I work across data science and product at {{ $profile.employer }}, building tools for people who bring their own expertise to the problem.</p><p>This is where I write about that work: the questions, experiments, and methods worth sharing.</p><a class="fn-text-link" href="/about/">More about me <span aria-hidden="true">↗</span></a></div>
+  </section>
+</div>
 {{ end }}

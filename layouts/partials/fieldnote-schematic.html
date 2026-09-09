@@ -1,0 +1,26 @@
+{{ $name := . }}
+<figure class="fn-schematic">
+  <div class="fn-schematic__header"><span>{{ if eq $name "outer-loop" }}01 / Product judgment{{ else }}02 / Verification{{ end }}</span><span>A D / F N</span></div>
+  {{ if eq $name "outer-loop" }}
+  <h3>Keep the problem open to revision.</h3>
+  <div class="fn-schematic__node fn-schematic__node--decision"><small>Human judgment / Outer loop</small><strong>Who is this for? What needs to change?</strong><p>Revisit the user, the problem, and the shape of the product.</p></div>
+  <p class="fn-schematic__edge">↓ informs the next attempt</p>
+  <div class="fn-schematic__steps">
+    <div class="fn-schematic__node fn-schematic__node--action"><small>Inner loop</small><strong>Plan</strong></div><span aria-hidden="true">→</span>
+    <div class="fn-schematic__node fn-schematic__node--action"><small>Inner loop</small><strong>Build</strong></div><span aria-hidden="true">→</span>
+    <div class="fn-schematic__node fn-schematic__node--action"><small>Inner loop</small><strong>Verify</strong></div>
+  </div>
+  <p class="fn-schematic__feedback">↶ Revise the implementation. Bring what you learn back to the outer-loop questions.</p>
+  <figcaption>A faster inner loop improves the solution. The outer loop keeps its starting assumptions available for review.</figcaption>
+  {{ else if eq $name "known-positives" }}
+  <h3>Well-formed can still be wrong.</h3>
+  <div class="fn-schematic__node fn-schematic__node--state"><small>Data state</small><strong>A boolean column containing only false</strong><p>Valid type. No missing values. The expected records are absent.</p></div>
+  <p class="fn-schematic__edge">↓ two different questions</p>
+  <div class="fn-schematic__branches">
+    <div class="fn-schematic__node fn-schematic__node--action"><small>Structural check</small><strong>Is the column well-formed?</strong><p>Yes. This value is permitted by the schema.</p></div>
+    <div class="fn-schematic__node fn-schematic__node--decision"><small>Domain judgment</small><strong>Should known positives exist?</strong><p>Yes. Their absence makes the result worth investigating.</p></div>
+  </div>
+  <p class="fn-schematic__feedback">↶ Turn that knowledge into an executable check for known positives.</p>
+  <figcaption>The schema describes a legal answer. Domain knowledge supplies a check on whether it is the right answer.</figcaption>
+  {{ else }}{{ errorf "Unknown Fieldnotes schematic: %s" $name }}{{ end }}
+</figure>

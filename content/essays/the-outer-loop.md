@@ -3,6 +3,7 @@ title: "The Outer Loop"
 type: essay
 date: 2026-08-12
 tier: cornerstone
+card_summary: "A faster build loop can perfect the wrong product. Keep the user, the problem, and the product shape open to question."
 summary: "AI makes the plan-build-verify loop faster, which also makes it easier to perfect the wrong product. The outer loop keeps the user, the problem, and the product shape open to question — and it matters more now that the expert can arrive with a prototype."
 status: published
 visibility: public
@@ -29,6 +30,8 @@ Their pushback was clean and simple: user friendliness. A dedicated application 
 In reality, we could have prototyped either version, tested it, found the problems, and improved it. That would have helped us build the thing correctly while still missing the more important question: _which thing should exist, for whom, and which part of it should become shared infrastructure?_
 
 For lack of a better term, that is the outer loop: stepping outside the solution long enough to keep the user, the problem, and even the product shape open to question.
+
+{{< fieldnote-schematic "outer-loop" >}}
 
 ## The inner loop can perfect the wrong product.
 

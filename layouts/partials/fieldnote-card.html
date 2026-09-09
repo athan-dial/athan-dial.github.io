@@ -1,0 +1,8 @@
+<article class="fn-note-card">
+  <a href="{{ .RelPermalink }}">
+    <div class="fn-note-card__meta"><span>{{ if eq .Section "work" }}Case study{{ else if eq .Section "essays" }}Essay{{ else }}{{ .Params.format | default "Field note" }}{{ end }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time></div>
+    <h3>{{ .Title }}</h3>
+    <p>{{ .Params.card_summary | default .Params.summary | default .Description | plainify }}</p>
+    <div class="fn-note-card__foot"><span>{{ .ReadingTime }} min read</span><span aria-hidden="true">↗</span></div>
+  </a>
+</article>

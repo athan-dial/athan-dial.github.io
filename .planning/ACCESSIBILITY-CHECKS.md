@@ -284,3 +284,20 @@ npx --yes lighthouse http://127.0.0.1:8765/about/ \
 | CWV p75 (LCP/INP/CLS) | | | |
 | Responsive captures (5 widths) | | | |
 | Sitemap / robots / JSON-LD / single canonical | | | |
+
+
+## Personal Fieldnotes · 2026-09-09
+
+Static sRGB contrast calculations for the new layer (not a browser audit):
+
+| Pair | Contrast |
+| --- | --- |
+| ink / paper | 19.00:1 |
+| secondary / paper | 6.11:1 |
+| paper / forest | 8.58:1 |
+| ink / citrus | 16.09:1 |
+| forest / paper | 8.58:1 |
+
+All listed text pairs exceed 4.5:1. The new layer uses token colors directly; historical
+computed-color results above do not validate this revision. Browser layout, text enlargement,
+and computed-color checks are pending. Diagrams now use wrapping native HTML and explicit labels.

@@ -18,9 +18,9 @@ email = "athandial@gmail.com"
 short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
 
 # Homepage positioning from REDESIGN-PLAN.md recommended hero copy.
-positioning_eyebrow = "AI product leadership for expert work"
-positioning_headline = "I build AI and data products for people whose work depends on judgment."
-positioning_support = "My work sits between expert workflows, shared infrastructure, and applied AI: what should be standardized, what should stay flexible, and how a promising capability becomes something an organization can trust."
+positioning_eyebrow = "Data science / Product / Applied AI"
+positioning_headline = "Try things. Keep what works."
+positioning_support = "I’m Athan, a data scientist and product leader. I build tools for expert work, and write about what happens when AI changes how that work gets done."
 
 [links]
 linkedin = "https://www.linkedin.com/in/athandial/"

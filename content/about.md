@@ -1,27 +1,33 @@
 ---
 title: "About"
 date: 2026-01-20
-description: "Data science and product, built from research training. Decision systems and applied AI inside scientific organizations."
+description: "Athan Dial. Data scientist and product leader with a background in medical research."
 show_profile_links: true
 ---
 
-The path from bench science to product wasn't planned. The transferable skill turned out to be **designing decision systems under uncertainty**: figuring out what counts as evidence, which experiment is worth the cost, and how to keep a team's confidence calibrated when truth comes back late or partial.
+I’m Athan. I work across data science and product at Montai Therapeutics, where the people using our tools know a great deal about the problems they are trying to solve.
+
+That makes the work interesting. A useful tool has to fit their practice, expose enough of its reasoning to be checked, and leave room for what the person knows that the software doesn’t.
+
+My background is in medical research. I still tend to approach a new idea as an experiment: what would we learn by trying it, and what would make us change course?
+
+## What I’m working on
+
+AI has made it much easier to build a convincing first version. I spend a lot of time on the questions that come next: who it helps, how to check its output, and whether it should become a shared tool or stay a small experiment.
+
+The [notebook](/thinking/) is where I work through those questions. Some pieces describe a specific failure or a method to borrow. Others follow an idea far enough to find where it stops being useful.
 
 ## Experience
 
-I describe the job as a fusion of product and data: making sure the company builds the right
-things, on time, with good evidence behind each decision.
-
 **Associate Director, Data Science & Product Management** · Montai Therapeutics · 2026–present
 
-Product direction and data rigour at the same desk. Applied-AI prototypes and agentic workflows,
-and the decision and briefing patterns leadership uses to make research trade-offs.
+Data science, product direction, and applied AI for scientific work.
 
 **Data Research Lead** · Montai Therapeutics · 2022–2026
 
 **Data Scientist** · Replica Analytics · 2019–2020
 
-Clinical data pipelines, and privacy-preserving synthetic data for health research.
+Clinical data pipelines and privacy-preserving synthetic data for health research.
 
 **Chief Analytics Officer** · ArchitecHealth · 2018–2019
 
@@ -29,37 +35,6 @@ Analytics strategy for small and mid-size biotech clients.
 
 **PhD, Medical Sciences** · McMaster University
 
-## Trajectory
+## Compare notes
 
-PhD work taught those moves; drug discovery ML uses them every day.
-
-The questions changed. *Which model architecture balances precision versus recall for this drug target?* replaced *Which experimental condition will produce the cleanest signal?* The decision-making register stayed the same: first-principles framing of what counts as evidence and explicit tradeoffs.
-
-A pattern I keep noticing in data and AI leadership: people tend to be strong on product intuition or technical depth, with leadership glued in afterward.
-
-## Working Principles
-
-### Define the evidence before choosing the answer
-
-Start with what would change the decision. Name what counts as evidence, what is still uncertain, and what truth will arrive late or only in part. That keeps confidence calibrated to what the work can actually support.
-
-### Make the tradeoffs explicit
-
-Good product and research decisions make their costs visible. I want the team to see what an option improves, what it gives up, and why the constraint matters before committing to it.
-
-### Leave behind a working system
-
-I publish skills, playbooks, and field notes from workflows I actually use. The goal is to keep the system that runs my work in the open, so the next session opens on something that already worked.
-
-## Conversations
-
-Most of my time goes into the day job. I occasionally advise teams and trade notes with peers in data science, product, and research leadership who are working through similar problems.
-
-These are conversations I don't get tired of:
-
-- **Evaluation when ground truth is delayed, partial, or contested.** What counts as evidence, and what is metric theater dressed up as rigor?
-- **Decision-support tools that scientists actually use.** How can a tool support their judgment instead of asking them to work around it?
-- **Applied AI inside scientific organizations.** What makes a promising model useful and reliable in everyday work?
-- **The translation between research and product.** How do research rigor, product judgment, and the people doing the work stay connected?
-
-If one of those questions is familiar, send a note or connect on LinkedIn.
+I’m always interested in how other people are using these tools, especially when the first attempt didn’t work as expected. If you’re wrestling with a similar question, [send me a note](mailto:athandial@gmail.com) or [find me on LinkedIn](https://www.linkedin.com/in/athandial/).

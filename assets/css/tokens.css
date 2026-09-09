@@ -2,6 +2,10 @@
    Typography tokens encode size, line-height, weight, and tracking separately so
    semantic components can consume the complete style without duplicating values. */
 :root {
+  /* Fieldnotes: serif display and citrus decision marker, approved redesign September 2026. */
+  --font-display: Georgia, "Times New Roman", serif;
+  --citrus: #e4f17c;
+  --field-rule: #d9d9ce;
   /* Core palette */
   --paper: #fbfbfa;
   --surface: #ffffff;

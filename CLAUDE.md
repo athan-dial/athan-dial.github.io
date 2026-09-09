@@ -18,10 +18,11 @@ Personal portfolio site. **Hugo v0.154.3+extended, themeless** — every layout 
 Positioning: "decision evidence, not achievements." Pages carry evidence about product
 judgment and applied-AI work rather than achievement lists.
 
-The design system is **Hybrid + book architecture** (2026-08-13): near-white ground, black ink,
-Archivo grotesque, one forest-green accent, flat surfaces, and book structure on long-form pages
-(running head, margin index, folios, colophon). It replaced *Editorial Systems* (warm paper, serif
-display), which an external review found sat in a saturated AI-portfolio lane. See `DESIGN.md` (the design authority) and `PRODUCT.md`.
+The design system is **Personal Fieldnotes** (2026-09-09), requested by Athan: the existing
+Athan Dial wordmark, portrait, Archivo/IBM Plex Mono identity, forest accent and book structure,
+combined with spacious serif display, a notebook-first homepage and citrus diagram decisions.
+See `DESIGN.md`. Prior prohibitions on serif display and a secondary highlight are superseded
+by this explicit redesign. GitHub Pages and Hugo remain unchanged.
 
 ## Build & Development
 
@@ -55,75 +56,26 @@ page stopped being generated, because nothing ever pruned the committed `docs/` 
 specific recurrence path is closed now that the publish dir is gitignored and rebuilt fresh
 every deploy — but the underlying PII lesson stands: see Hard Constraint 1.
 
-## Design System: Hybrid + book architecture
+## Design System: Personal Fieldnotes
 
-**Authority:** `DESIGN.md`. Tokens: `assets/css/tokens.css`. Implementation:
-`assets/css/main.css`. Measured contrast: `.planning/ACCESSIBILITY-CHECKS.md`.
-Zero `!important`, zero border-radius, zero box-shadow — all deliberate.
+Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book implementation:
+`assets/css/main.css`. Current editorial layer: `assets/css/fieldnotes.css`, bundled last.
 
-### Typography
-
-Fonts are **self-hosted woff2** in `static/fonts/`, not a CDN.
-
-| Token | Stack | Role |
-|---|---|---|
-| `--font-serif` | Archivo | Display and headings (name is legacy; the face is a grotesque) |
-| `--font-sans` | Archivo | Body, UI text, summaries |
-| `--font-mono` | IBM Plex Mono | Running heads, folios, index, colophon, diagram labels |
-
-### Colour
-
-Light only. **There is no dark mode** — no toggle in `baseof.html`, no `html.dark` block in
-`main.css`. It is deferred on purpose ("ship one polished light experience"). The
-`#theme-toggle` rules in `main.css` are orphans from the retired system. Untested dark
-starting values are recorded in a `tokens.css` comment and are marked do-not-ship-unmeasured.
-**Do not invent a dark theme as a side effect of another task.**
-
-```css
---paper: #fbfbfa;            --surface: #ffffff;
---ink: #0b0b0c;              --ink-secondary: #5c6066;
---accent: #14543c;           /* forest green — the single accent */
---evidence-amber: #14543c;   /* collapsed onto the accent; amber is retired */
---accent-ink: #0e3d2b;  --evidence-verified: #14543c;
---rule: #0b0b0c;             /* deliberately equal to --ink: rules are structural, not hairlines */
-```
-
-**One accent, four jobs.** The three evidence hues have collapsed onto the same forest green;
-they survive as separate tokens only so every call site did not have to change at once.
-
-| Token | Job |
-|---|---|
-| `--accent` | The accent. Masthead rule, current nav item, back link and folios, running-head title |
-| `--evidence-amber` | Now identical to the accent. The LinkedIn card's `<mark>` and blockquote rule therefore paint **green, not amber** |
-
-
-Rules that are easy to break by accident:
-
-1. **The accent is safe as small type here — that is new.** Forest `#14543C` on `#fbfbfa`
-   measures **8.58:1**, so it carries 10-11px folios and index links. The old amber could not
-   (3.62:1) and was marker-only. Do not carry that old caveat forward; do re-measure if the
-   accent changes.
-2. **No hardcoded colour at call sites.** Every hex lives once, in `:root`. Tints and
-   hairlines are `color-mix()` derivations (`--tint-*`, `--rule-*`, `--highlight`) so a hue
-   changes in one place.
-3. **Colour is never the only channel.** The current nav item carries `aria-current` as
-   well as a rule.
-4. **Verify contrast in-browser, through a canvas.** The `color-mix()` tints compute as
-   `oklab()` and cannot be read off a hex table — a naive JS parse silently mis-reads them.
-5. **Never animate a layout property on hover.** Text must not reflow under the pointer.
-6. **`prefers-reduced-motion` must stay last in `main.css`.** Mid-file, it silently fails to
-   zero every transition declared after it.
-
-### Accents render only where content exercises them
-
-`mark` and blockquote have a live instance — `partials/linkedin-card.html` renders both on
-`/thinking/` — but since `--evidence-amber` now resolves to the accent, they paint green. There is
-currently **no highlighter hue distinct from the structural accent**. If you want one back, choose
-it deliberately and measure it against `#fbfbfa`; do not reinstate `#B86B35`.
-
-`evidence_status` remains in front matter and renders nothing: the visible badge was removed as
-jargon. Long-form pages get their colour from folios, the running head and the margin index rather
-than from prose accents.
+- Keep the personal wordmark, portrait, public contact links, favicon, and canonical URLs.
+- Archivo remains the self-hosted identity/body face; IBM Plex Mono is self-hosted metadata.
+  Georgia/system serif supplies display without a new dependency or external font request.
+- Light only, flat surfaces. Forest stays the brand accent. Citrus carries featured writing
+  and explicit human decisions. Color never stands alone as the semantic signal.
+- Hex colors belong in `tokens.css`. Native HTML diagrams inherit tokens, wrap, and reflow.
+- Never animate layout properties. Reduced-motion rules terminate the final CSS layer.
+- Fieldnotes is the public label at the existing `/thinking/` path. `/notes/` and `/essays/`
+  remain archives. Do not redirect or remove existing articles as a redesign side effect.
+- Homepage/list cards include only published/public content; drafts stay excluded.
+- Signature diagrams use `layouts/partials/fieldnote-schematic.html` and its shortcode.
+  `boundary-diagram` remains supported for existing work. See `DIAGRAMS.md` for authoring.
+- The September redesign has build/static checks and numeric palette contrast checks.
+  Browser viewport and computed-color checks are unverified in this session; do not call
+  the historical browser measurements verification of the new layer.
 
 ## Architecture
 
@@ -221,7 +173,7 @@ move again without the same care), `params.toml`, `languages.en.toml`, `menus.en
 
 ## Common Tasks
 
-**Styles:** edit `assets/css/main.css`, consume tokens from `tokens.css`, add no new hex
+**Styles:** edit the appropriate base or `assets/css/fieldnotes.css` layer, consume tokens from `tokens.css`, add no new hex
 outside `:root`, re-measure contrast in-browser, update `DESIGN.md` and
 `.planning/ACCESSIBILITY-CHECKS.md` in the same commit.
 

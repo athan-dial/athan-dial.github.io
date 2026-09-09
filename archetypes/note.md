@@ -3,6 +3,8 @@ title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 type: note
 date: {{ .Date }}
 summary: ""
+card_summary: "" # optional shorter archive excerpt
+format: "Field note" # Field note | Workflow | Experiment
 status: draft # draft | published
 visibility: private # private | public
 themes: [] # expert-workflows | product-judgment | reliable-ai-systems
