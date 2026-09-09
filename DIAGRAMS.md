@@ -17,15 +17,30 @@ without color. Citrus does not mean success; forest does not mean verified.
 
 ## Current examples
 
-- `{{< fieldnote-schematic "outer-loop" >}}` — the relationship between product judgment and
+- `{{< fieldnote-schematic "outer-loop" >}}` - the relationship between product judgment and
   the plan/build/verify loop. Used in The Outer Loop.
-- `{{< fieldnote-schematic "known-positives" >}}` — structural validity versus domain verification.
+- `{{< fieldnote-schematic "known-positives" >}}` - structural validity versus domain verification.
   Used in the all-false-column note.
-- `{{< boundary-diagram >}}` — the existing expert/shared-capability boundary in the analog-search case.
+- `{{< fieldnote-schematic "abundant-execution" >}}` - the changed constraint behind the homepage
+  operating-territory section: candidate work becomes cheaper to produce, so selection,
+  verification, and ownership become more important downstream.
+- `{{< boundary-diagram >}}` - the existing expert/shared-capability boundary in the analog-search case.
 
 Implementation: `layouts/partials/fieldnote-schematic.html` and `assets/css/fieldnotes.css`.
-Unknown schematic names fail the Hugo build. Keep prose and diagrams consistent. Diagram labels
-must not add factual claims, imply measurements, or grant authority absent from the article.
+Homepage placement and chapter motion live in `assets/css/fieldnotes-home.css`. Unknown schematic
+names fail the Hugo build. Keep prose and diagrams consistent. Diagram labels must not add factual
+claims, imply measurements, or grant authority absent from the article.
+
+## Brand role
+
+Schematics are a recurring Personal Fieldnotes primitive, not merely article illustrations. They can
+appear in essay headers, work case studies, homepage concept sections, and workflow explanations when
+a relationship is easier to understand spatially than in prose. The same semantic grammar should
+survive across those surfaces so a returning reader learns what paper, forest, citrus, and dashed
+feedback mean without needing a new legend every time.
+
+Do not add a schematic only to make a page look designed. One useful diagram is better than three
+ornamental ones.
 
 ## Future notes and experiments
 
