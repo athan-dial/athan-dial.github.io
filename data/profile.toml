@@ -13,14 +13,16 @@ role_title = "Associate Director, Data Science & Product Management"
 employer = "Montai Therapeutics"
 location = "Boston"
 email = "athandial@gmail.com"
+foundation = "PhD in Medical Sciences, McMaster University"
 
 # Pronoun-free short bio from existing About page facts only.
 short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
 
-# Homepage positioning from REDESIGN-PLAN.md recommended hero copy.
+# Homepage positioning. The v2 Fieldnotes page leads with the actual problem territory rather
+# than a generic motto; see .planning/design/PERSONAL-FIELDNOTES-UPDATE-2026-09-09.md.
 positioning_eyebrow = "Data science / Product / Applied AI"
-positioning_headline = "Try things. Keep what works."
-positioning_support = "I’m Athan, a data scientist and product leader. I build tools for expert work, and write about what happens when AI changes how that work gets done."
+positioning_headline = "I build AI and data products for people whose work depends on judgment."
+positioning_support = "I work across data science and product, mostly in scientific R&D. I’m interested in what changes when AI makes more work possible: which problems deserve a product, where expert judgment still matters, and how we verify what the machine produced."
 
 [links]
 linkedin = "https://www.linkedin.com/in/athandial/"
