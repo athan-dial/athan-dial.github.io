@@ -4,6 +4,7 @@
 {{ $writing := where (where (where site.RegularPages "Section" "in" (slice "notes" "essays")) "Params.status" "published") "Params.visibility" "public" }}
 {{ $work := where (where (where (where site.RegularPages "Section" "work") "Params.status" "published") "Params.visibility" "public") "Params.featured" true }}
 {{ $featured := first 1 (sort (where $writing "Params.tier" "cornerstone") "Date" "desc") }}
+{{ if not $featured }}{{ $featured = first 1 (sort $writing "Date" "desc") }}{{ end }}
 
 <nav class="fn-chapter-index" aria-label="Homepage chapters">
   <span class="fn-chapter-index__mark" aria-hidden="true">A D / 07</span>
@@ -82,7 +83,7 @@
         <span class="fn-timeline__range">Foundation</span>
         <div><strong>Medical research</strong><p>{{ $profile.foundation }}</p></div>
       </li>
-      {{ range $experience }}
+      {{ range (collections.Reverse $experience) }}
       <li class="fn-timeline__item">
         <span class="fn-timeline__range">{{ .range }}</span>
         <div><strong>{{ .role }}</strong><p>{{ .company }}</p></div>
