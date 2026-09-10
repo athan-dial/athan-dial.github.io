@@ -353,3 +353,37 @@ and additionally marked with a dashed rule.
   font-size override, which is the standard proxy but is not the same code path.
 - Screen-reader traversal. No AT was run.
 - Core Web Vitals at p75. Not measured in this pass.
+
+## Work content render pass · 2026-09-10
+
+Re-run of the proof-layer sweep with the four review-gated Work routes added, after the
+`work_kind` depth grouping, the depth labels, and the draft-only in-review shelf.
+
+Pages under test: `/`, `/about/`, `/work/`, `/thinking/`, and the four gated Work drafts
+(`/work/the-result-got-weaker-after-we-checked-it/`,
+`/work/lock-the-outcome-not-the-prototype/`,
+`/work/before-the-agent-build-the-benchmark/`,
+`/work/automation-was-not-the-whole-bottleneck/`).
+
+| Check | Widths / condition | Result |
+| --- | --- | --- |
+| No horizontal body scroll | 1600, 1440, 1024, 768, 390 px | pass, all 8 pages at all 5 widths |
+| 200% text zoom | 1280 px | pass, all 8 pages — no horizontal scroll, no clipped text |
+| Keyboard-only, visible focus on every stop | 1280 px | pass — 32 stops on `/`, 21 on `/about/`, 17 on `/work/`, 22 on `/thinking/` |
+| JavaScript disabled | `/` and `/about/` | pass — all sections present, nothing hidden at rest |
+| `prefers-reduced-motion: reduce` | `/`, `/about/`, `/thinking/` | pass — zero animating elements |
+
+No new colour pairs. The in-review shelf uses citrus at 45% over paper as a hazard stripe,
+with all its text set on an opaque `--surface` panel rather than on the stripe, so no text
+contrast depends on the pattern. It is draft-build-only and never reaches production.
+
+### Dev-server staleness — worth knowing
+
+The long-running `hugo server -D` on :1313 stopped picking up layout changes partway
+through this pass. A static `hugo -D --destination …` build rendered the new in-review
+shelf; the server returned the old markup for the same template. Restarting the server
+fixed it.
+
+Consequence for review: **a page reviewed at localhost:1313 during a long session may be a
+stale render.** When a template change appears not to have taken effect, restart the server
+before debugging the template. Verified this session, not inferred.

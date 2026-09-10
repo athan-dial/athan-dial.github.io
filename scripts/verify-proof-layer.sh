@@ -92,7 +92,6 @@ for rel in \
   "essays/index.html" \
   "notes/index.html" \
   "work/analog-search-as-a-product/index.html" \
-  "work/intelligence-platform-for-an-absent-user/index.html" \
   "essays/the-outer-loop/index.html" \
   "essays/the-operating-layer/index.html" \
   "notes/an-all-false-column-is-a-legal-column/index.html"
@@ -193,10 +192,91 @@ grep -qE "Measured, published as a range|Mechanism only" "$WORK" \
   || fail "Work index does not state the evidence class in words"
 ok "evidence class is stated in words, not by colour alone"
 
-# Two cases is the whole set on purpose. A third means someone invented one.
+# ---------------------------------------------------------------------------
+# 5b. Work depth contract, and the publication gate around it.
+#
+#     RETIRED 2026-09-10: this section used to assert "exactly 2 public cases" and
+#     required /work/intelligence-platform-for-an-absent-user/ to be a real page. Both
+#     were wrong after the content pass. The absent-user narrative was QUARANTINED —
+#     source review found its primary-user reframe was not actually resolved by the
+#     record — and the collection is no longer a fixed pair: `work_kind` now names two
+#     depths (flagship cases and proof notes) and more are queued behind review.
+#
+#     A count is the wrong invariant anyway. It fails for two opposite reasons — someone
+#     inventing a case, and someone legitimately publishing one — so it cannot tell you
+#     which happened. What needs protecting is the GATE, not the number: every row on the
+#     index must be genuinely published and public, and nothing draft or quarantined may
+#     appear. So the expected count is DERIVED from the source frontmatter and the page
+#     is required to agree with it exactly.
+# ---------------------------------------------------------------------------
 CASE_ROWS="$(grep -o 'work-card__title' "$WORK" | wc -l | tr -d ' ')"
-[ "$CASE_ROWS" -eq 2 ] || fail "Work index lists $CASE_ROWS cases; the published set is 2 (do not pad the grid)"
-ok "Work index lists exactly the 2 published narratives"
+[ "$CASE_ROWS" -ge 1 ] || fail "Work index lists no cases at all"
+
+EXPECTED_PUBLIC="$(
+  python3 - "$REPO_ROOT/content/work" <<'PYGATE'
+import pathlib, re, sys
+n = 0
+for f in sorted(pathlib.Path(sys.argv[1]).glob("*.md")):
+    if f.name == "_index.md":
+        continue
+    parts = f.read_text(encoding="utf-8").split("---")
+    if len(parts) < 2:
+        continue
+    fm = parts[1]
+    if re.search(r'^status:\s*published\s*$', fm, re.M) and re.search(r'^visibility:\s*public\s*$', fm, re.M):
+        n += 1
+print(n)
+PYGATE
+)" || fail "could not scan content/work frontmatter"
+
+[ "$CASE_ROWS" -eq "$EXPECTED_PUBLIC" ] \
+  || fail "Work index shows $CASE_ROWS rows but $EXPECTED_PUBLIC page(s) are published+public in content/work — the index and the gate disagree"
+ok "Work index shows exactly the $EXPECTED_PUBLIC published+public page(s), no more and no fewer"
+
+# The quarantined narrative must not be in the production build, and must stay
+# quarantined at source. Do NOT resolve a failure here by publishing it: its framing has
+# not been reconciled against the discovery record.
+QUARANTINED="$REPO_ROOT/content/work/intelligence-platform-for-an-absent-user.md"
+if [ -f "$QUARANTINED" ]; then
+  grep -q -F "work_kind: quarantined" "$QUARANTINED" \
+    || fail "the absent-user narrative is no longer marked work_kind: quarantined"
+  grep -q -F "visibility: private" "$QUARANTINED" \
+    || fail "the absent-user narrative is no longer private — its user-flip framing is unreconciled"
+  ok "absent-user narrative stays quarantined and private at source"
+fi
+if [ -e "$BUILD_DIR/work/intelligence-platform-for-an-absent-user" ]; then
+  fail "the quarantined absent-user narrative is in the production build"
+fi
+ok "quarantined narrative is absent from the production build"
+
+# Depth labels. A proof note must announce itself, because a reader who is not told it is
+# narrower by design reads its length as thinness. And the index must not advertise a
+# group with nothing in it.
+if grep -q -l -F 'work_kind: proof-note' "$REPO_ROOT"/content/work/*.md 2>/dev/null; then
+  PN_PUBLIC=0
+  for f in $(grep -l -F 'work_kind: proof-note' "$REPO_ROOT"/content/work/*.md 2>/dev/null); do
+    if grep -q -F 'visibility: public' "$f" && grep -q -F 'status: published' "$f"; then
+      PN_PUBLIC=$((PN_PUBLIC + 1))
+    fi
+  done
+  if [ "$PN_PUBLIC" -gt 0 ]; then
+    grep -q -F "Proof notes" "$WORK" \
+      || fail "$PN_PUBLIC proof note(s) are published but the Work index has no Proof notes group"
+    ok "published proof notes render under their own labelled group"
+  else
+    if grep -q -F "Proof notes" "$WORK"; then
+      fail "the Work index advertises a Proof notes group with nothing published in it"
+    fi
+    ok "no proof note is public yet, and the index correctly shows no empty group"
+  fi
+fi
+
+# The draft-only review shelf must never reach production. It is gated on
+# site.BuildDrafts, so this asserts the gate rather than the intent.
+if grep -q -F 'work-index__review' "$WORK"; then
+  fail "the draft-only in-review shelf is in the production build — check the site.BuildDrafts gate in layouts/work/list.html"
+fi
+ok "draft-only in-review shelf is absent from the production build"
 
 # ---------------------------------------------------------------------------
 # 6. Outer Loop artwork — lossless source, high-density variant, no lossy WebP.

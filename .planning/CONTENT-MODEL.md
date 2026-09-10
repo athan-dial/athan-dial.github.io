@@ -72,9 +72,46 @@ hugo new notes/my-note.md
 | `role` | string | `""` |
 | `users` | list of strings | `[]` |
 | `canonical_url` | string (URL) | `""` |
+| `work_kind` | `flagship` \| `proof-note` \| `quarantined` | unset (renders as a case) |
 | `card_ownership` | string | `""` |
 | `card_measured` | string | `""` |
 | `card_unmeasured` | string | `""` |
+
+`work_kind` names the DEPTH of the piece, added 2026-09-10 by the content pass. It is not a
+category or a tag; it is a claim about how much of the decision the page traces.
+
+| Value | What it means | How it renders |
+|---|---|---|
+| `flagship` | The full case: user, constraint, what was already possible, the boundary, the hard choice, ownership, what changed, what I would change. Roughly 1,400 words. | Under **Cases** on the index. No badge — full depth is the default. |
+| `proof-note` | One artifact, one decision, one boundary. Roughly 900 words. Narrower on purpose. | Under **Proof notes**, with a "Proof note" badge and a line on the article saying it is shorter by design. |
+| `quarantined` | The framing did not survive source review. Kept in the repo as a record, never published. | Never on the index. The article says it is withheld. |
+| unset | A page predating the field. | Renders with the cases, so nothing falls out of the index for lacking a field. |
+
+Two render rules follow from this and are enforced by `scripts/verify-proof-layer.sh`:
+
+1. **A group with no published items does not render.** An empty "Proof notes" heading
+   advertises a shelf with nothing on it, which is the under-filled-archive failure the
+   whole pass exists to avoid.
+2. **A proof note must be labelled.** Unlabelled, a 900-word piece next to a 1,400-word
+   case reads as a case that ran out of material. The badge is the difference between
+   "narrow on purpose" and "thin".
+
+### The in-review shelf is gated on the build, not on the content
+
+`layouts/work/list.html` renders a list of gated pieces (`work-index__review`) when
+`site.BuildDrafts` is true — that is, under `hugo server -D` or `hugo -D`, never under a
+production `hugo --gc --minify`.
+
+It exists because the review loop had a hole. New stories are deliberately
+`draft`/`private`, and the Work index filters on published AND public, so even a `-D`
+preview showed the published cases and no proof-note group: the shape of the finished page
+could not be reviewed without first publishing the prose, which is backwards. The shelf
+shows what is queued and at what depth, and renders titles and classifications only — no
+summaries, no ownership fields, no bodies.
+
+Keying it to the build mode rather than to `status` is deliberate: it cannot leak even if
+a page's own flags are wrong. `verify-proof-layer.sh` asserts it is absent from production
+output.
 
 The three `card_*` fields are optional and drive the Work index evidence ledger (2026-09-10).
 Each one must be a **compression of that page's own body** — `card_ownership` from its "My

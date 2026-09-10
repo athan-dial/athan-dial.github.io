@@ -167,8 +167,20 @@ Two rules on that page are content boundaries wearing design clothes:
 
 The Work index states its evidence model once, above the cases, then each card carries what Athan
 owned, what was measured, and what was never measured. Evidence class renders as words —
-"Measured, published as a range", not a colour. Two published narratives is the whole set on
-purpose; `scripts/verify-proof-layer.sh` fails if a third appears.
+"Measured, published as a range", not a colour.
+
+Work renders **two depths**, named by `work_kind` (see `.planning/CONTENT-MODEL.md`): full
+**Cases**, and narrower **Proof notes** that carry one artifact, one decision, one boundary. They
+are separate labelled groups, divided by a dashed rule rather than a solid one, because a proof
+note in a flat list beside a full case reads as a case that ran out of material. A group with no
+published items does not render at all.
+
+An earlier version of this file said "two published narratives is the whole set on purpose" and the
+gate asserted exactly two. Both were retired 2026-09-10: the collection is no longer a fixed pair,
+and a count is the wrong invariant — it fails identically whether someone invented a case or
+legitimately published one. The gate now derives the expected number from the source frontmatter
+and requires the index to agree exactly, which catches a draft leaking onto the page *and* a
+published page falling off it.
 
 The Outer Loop plate on the homepage is a finished 1254x1254 lossless artwork with its own
 masthead and caption. It is never redrawn, cropped, or captioned by the site, never upscaled past

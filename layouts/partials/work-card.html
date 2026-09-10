@@ -43,6 +43,11 @@
       "mechanism-only" "Mechanism only, no published metrics"
       "needs-verification" "Not cleared for publication" -}}
 {{- $evidence := index $evidenceLabels ($page.Params.evidence_status | default "") -}}
+{{- /* Depth, in words. A proof note is shorter by design, and a reader who is not told
+       that reads its length as thinness. Cases carry no badge: full depth is the default
+       and labelling it would be noise on every row. */ -}}
+{{- $kindLabels := dict "flagship" "" "proof-note" "Proof note" "quarantined" "" -}}
+{{- $kind := index $kindLabels ($page.Params.work_kind | default "") -}}
 <article class="work-card">
   <a href="{{ $page.RelPermalink }}" class="work-card__link">
     <div class="work-card__meta">
@@ -72,6 +77,9 @@
       {{- end -}}
     </div>
     <div class="work-card__body">
+      {{- with $kind -}}
+      <p class="work-card__kind label-mono">{{ . }}</p>
+      {{- end -}}
       {{- if eq $heading "h2" -}}
       <h2 class="headline-md work-card__title">{{ $page.Title }}</h2>
       {{- else -}}
