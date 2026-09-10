@@ -9,7 +9,7 @@ evidence_status: mechanism-only
 visibility: private
 employer_review: pending
 featured: true
-role: "Analysis and product lead"
+role: "Validation design and interpretation"
 users:
   - "discovery scientists"
   - "modeling scientists"
@@ -18,7 +18,7 @@ themes:
   - product-judgment
 canonical_url: ""
 draft: true
-card_ownership: "Question framing, validation criteria, statistical corrections, interpretation, and the boundary on what the result was allowed to become."
+card_ownership: "Validation criteria, statistical corrections, interpretation, and the boundary on what the result was allowed to become."
 card_measured: "A retrospective back-test showed that one candidate confidence signal largely tracked the prediction score itself; stricter inference also caused one initially supportive cohort result to disappear."
 card_unmeasured: "No prospective validation, no evidence for using the signal as a production selection rule, and no portable effect size across discovery programs."
 ---
@@ -89,7 +89,7 @@ That was the boundary I wanted to preserve.
 
 ## My ownership
 
-I framed the analysis around the decision we were trying to support rather than around the easiest statistic to compute. I specified the validation pass when the first result looked too easy to interpret, including the need for flexible score control, inference that respected chemical relatedness, and a corrected treatment of selection into the observed set.
+I took the question as a decision-support problem rather than as a hunt for one more statistic. When the first result looked too easy to interpret, I specified the validation pass: flexible score control, inference that respected chemical relatedness, and a corrected treatment of selection into the observed set.
 
 I also owned the interpretation that mattered most to the product question: calibration and ranking are not the same thing. A feature can improve our estimate of how much to trust a score without being useful for reordering candidates.
 
