@@ -46,12 +46,35 @@
       <p>AI makes it faster to build and improve a product. The harder question is whether you are building the right thing, for the right person.</p>
       <a class="fn-text-link" href="{{ .RelPermalink }}">Read the essay <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="fn-feature__diagram">
-      <p class="fn-kicker">The outer loop</p>
-      <p class="fn-feature__question">Who is this for?<br>What needs to change?</p>
-      <div class="fn-mini-flow"><span>Plan</span><span aria-hidden="true">→</span><span>Build</span><span aria-hidden="true">→</span><span>Verify</span></div>
-      <p class="fn-feature__return">↶ Revisit the problem, not only the solution.</p>
-    </div>
+    {{- /* The Outer Loop plate. A 600x600 raster that already carries its own masthead,
+           legend, footer rule and body copy — so the site does NOT redraw it, caption over
+           it, or crop it. Two constraints follow from that and are load-bearing:
+
+           1. It is never upscaled. Its innermost labels sit at roughly 7px at native size,
+              so any enlargement softens the type it exists to make readable. `max-width`
+              is pinned at its native 600px.
+           2. It is never squeezed below the width where that type stops being legible.
+              Below the two-column breakpoint the plate takes the full measure instead of a
+              column, and the grid stops splitting.
+
+           The square is preserved by aspect-ratio rather than by object-fit: there is
+           nothing to cover or contain, because the intrinsic ratio is already 1:1 and any
+           object-fit strategy here could only introduce a crop the artwork cannot take. */ -}}
+    <figure class="fn-feature__plate">
+      {{- /* Two densities off one 1254px lossless source. The 600px webp that shipped
+             before was a 1x file in a 600 CSS-pixel box, so every 2x display stretched 600
+             device pixels into 1200 and the plate's 7px labels went soft. The 2x variant is
+             what makes this artwork legible at all; the 1x variant exists so a 1x screen
+             does not pay for it. */ -}}
+      {{- $src := resources.Get "img/outer-loop-highlight.png" -}}
+      {{- $x1 := $src.Resize "600x webp q92" -}}
+      {{- $x2 := $src.Resize "1200x webp q92" -}}
+      <img src="{{ $x1.RelPermalink }}"
+           srcset="{{ $x1.RelPermalink }} 1x, {{ $x2.RelPermalink }} 2x"
+           width="600" height="600"
+           alt="The outer loop: four human-judgment questions — who is this for, what needs to change, where does judgment remain, and what should become shared — circling an inner Plan, Build, Verify, Revise loop accelerated by AI. Evidence from the inner loop changes the next outer question. A faster build loop can perfect the wrong product."
+           loading="lazy" decoding="async">
+    </figure>
   </section>
   {{ end }}
 
