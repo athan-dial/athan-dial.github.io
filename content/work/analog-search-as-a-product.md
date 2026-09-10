@@ -2,8 +2,9 @@
 title: "When a Faster Search Tool Still Felt Incomplete"
 type: work
 work_kind: flagship
+narrative_voice: documentary
 date: 2026-08-11
-summary: "I led the product definition for an analog-search tool that made warmed-database queries roughly an order of magnitude faster after an implementation change. Then its primary expert user said a commercial alternative returned more results. My proposed response was not to claim parity. It was to give the expert threshold control and make the edge of a match visible."
+summary: "An analog-search tool became roughly an order of magnitude faster on measured warmed-database queries. Then its primary expert user compared it with a commercial alternative and saw fewer results. The useful product question moved from speed to confidence in completeness: give the expert threshold control and make the edge of a match visible rather than claim parity the evidence did not support."
 status: published
 evidence_status: range-only
 visibility: public
@@ -20,72 +21,76 @@ themes:
 canonical_url: ""
 draft: false
 # Work-index card fields. Each line below is a compression of this page's own
-# "My ownership" / "What changed" sections — nothing here states more than the body
-# already states. They exist so a reader can see the evidence model on the index
-# without opening the case, per the proof-layer spec. Keep them in sync with the body.
+# "Role in the case" / "What changed" sections. Keep them in sync with the body.
 card_ownership: "Problem framing, product definition, release phasing, and the search-engine decision. Engineering owned the production implementation; the scientific users owned the workflow knowledge and evaluated the output."
 card_measured: "Warmed-database query time for typical and heavy searches, roughly an order of magnitude faster after one implementation change."
 card_unmeasured: "Adoption was never instrumented. There is no defensible user count, query count, retention measure, or coverage percentage, and the end-to-end workflow time was never measured."
 ---
 
-I led the product definition for an analog-search tool that got materially faster on a measured basis. After an implementation change, warmed-database query times for typical and heavy searches improved by roughly an order of magnitude. Months later, its primary expert user said a commercial alternative returned more results and wanted broader coverage. I thought we were looking at a completeness problem, not evidence that our results were less relevant. My proposed response was to give the expert more control and make the boundary of the match visible.
+An analog-search tool became materially faster after an implementation change. On a warmed database, query times for typical and heavy searches improved by roughly an order of magnitude.
+
+Months later, its primary expert user compared the tool with a commercial alternative and saw fewer results. The apparent problem had moved from speed to completeness.
+
+The comparison established something real: one query returned fewer candidates. It did not establish that the internal results were less relevant, or that the commercial service defined the correct answer. The more useful product question was what an expert needed to see and control before deciding that a search was complete enough.
 
 ## Who was doing the work
 
-The search began with a compound-management scientist. They took a starting structure and assembled possible analogs for medicinal chemists to review. Biologists later consumed the resulting report.
+The search began with a compound-management scientist. A starting structure became a set of possible analogs for medicinal chemists to review, with biologists later consuming the resulting report.
 
-This was not data entry. The scientist adjusted similarity thresholds when a result set looked too small. They reconciled structures and calculated properties. They checked which compounds could actually be sourced. The output depended on chemical judgment at every step.
+This was not data entry. The scientist adjusted similarity thresholds when a result set looked too small, reconciled structures and calculated properties, checked which compounds could actually be sourced, and decided whether the resulting set made chemical sense. Judgment entered at every step.
 
-That distinction mattered. The point was not to encode a chemist's intuition and declare the problem solved. It was to remove the repeated retrieval and reconciliation work around that intuition.
+The repeatable work around that judgment was the product opportunity.
 
 ## What was already possible
 
 The manual process worked, but it took one to two days across several disconnected tools. A scientist moved among the assay registry, a desktop chemistry tool, spreadsheets, and commercial catalogs. The manual baseline covered roughly two-thirds of the available universe.
 
-The process also lost its reasoning. A finished spreadsheet showed which compounds survived, but there was no record of why a threshold moved or why one candidate was kept over another. Someone could inspect the answer. They could not reconstruct the search that produced it.
+The process also lost its reasoning. A finished spreadsheet showed which compounds survived, but not why a threshold moved or why one candidate was kept over another. The answer could be inspected. The search that produced it could not be reconstructed.
 
-The expert was already doing the adaptive part well. The product opportunity was to gather the search, ranking, availability checks, and decision trail into one place without pretending that a fixed threshold could replace review.
+The expert was already doing the adaptive part well. The product needed to gather retrieval, ranking, availability checks, and the decision trail into one place without pretending that a fixed threshold could replace review.
 
 ## The product boundary
 
-I drew the boundary around the repeatable parts of the work. The product would retrieve and rank candidates consistently, preserve the path to each result, and give the scientist a common place to review the set. The expert would still decide whether a molecule looked meaningfully similar and whether it was worth pursuing.
+The boundary was drawn around the repeatable parts of the work. The product would retrieve and rank candidates consistently, preserve the path to each result, and provide one place to review the set. The expert would still decide whether a molecule looked meaningfully similar and whether it was worth pursuing.
 
-That boundary shaped the first release. We did not begin with every data overlay in the broader vision. We shipped a thin similarity-search slice over the one dependency that was not fragile. It was enough to test the central interaction before making the product depend on upstream data quality the team did not control.
+That boundary shaped the first release. The initial slice did not include every data overlay in the broader vision. It used the one dependency that was reliable enough to support a thin similarity-search workflow, which made it possible to test the central interaction without binding the product to upstream data quality the team did not control.
 
-The principle was simple: make the common work reliable, then leave the last judgment legible and adjustable.
+Make the common work reliable. Leave the last judgment legible and adjustable.
 
 {{< boundary-diagram >}}
 
 ## The hard choice
 
-The first hard choice was the search engine. I wrote a decision memo comparing PostgreSQL with RDKit against Milvus. The matrix weighted product fit most heavily; data alignment, scalability, and operating ownership came next; delivery risk carried the remaining weight.
+The first hard choice was the search engine. A decision memo compared PostgreSQL with RDKit against Milvus, weighting product fit most heavily, followed by data alignment, scalability, operating ownership, and delivery risk.
 
-PostgreSQL with RDKit won four of the five dimensions. Milvus won on the highest scale ceiling, but that was a ceiling we had not reached. Choosing the specialized engine would have optimized for a future constraint while adding delivery and operating complexity to the first release.
+PostgreSQL with RDKit won four of the five dimensions. Milvus won on the highest scale ceiling, but that was a ceiling the product had not reached. Choosing the specialized engine would have optimized for a future constraint while adding delivery and operating complexity to the first release.
 
-I recommended the proven general-purpose option, with the engine kept behind a service boundary. Milvus remained a runnable proof of concept. If scale later became the real constraint, the team could swap the backend without rebuilding the interface.
+The recommendation favored the proven general-purpose option, with the engine kept behind a service boundary. Milvus remained a runnable proof of concept so a real scale constraint could later justify a backend change without forcing an interface rewrite.
 
-The second hard choice arrived after shipment. One expert compared the tool with a commercial alternative and saw fewer results. That observation was real. It was also one query, not a coverage study.
+The second hard choice arrived after shipment. One expert saw fewer results from the internal tool than from a commercial alternative. Chasing result-count parity would have turned an external service's behavior into the product specification.
 
-Chasing result-count parity would have made an external service's behavior our product specification. I thought the complaint was about confidence in completeness. A looser threshold would return more results. More threshold choices would give the expert control. Showing results in a strong-match tier and an edge-of-match tier would let the user see where the tool became uncertain, then tighten or widen the search themselves.
+A different interpretation fit the evidence better: the complaint was about confidence in completeness. A looser threshold could return more candidates. More threshold choices could give the expert control. A strong-match tier and an edge-of-match tier could expose where the search became uncertain, letting the user tighten or widen it deliberately.
 
-## My ownership
+## Role in the case
 
-I owned the problem framing and product definition. I wrote the requirements, phased the release, mapped the user flow, and authored the engine decision at several levels of technical detail. I also set the boundary between what the product should make consistent and what the scientist should continue to judge.
+Product lead. Scope included problem framing, requirements, release phasing, user-flow definition, and the search-engine decision. The product role also held the boundary between what should become consistent in software and what the scientist should continue to judge.
 
-Engineering owned the production implementation. Scientific users supplied the workflow knowledge and evaluated the output. My job was to turn those inputs into a product shape the team could build, test, and revise without hiding the tradeoffs.
+Engineering owned the production implementation. Scientific users supplied the workflow knowledge and evaluated the output. The product work was to turn those inputs into a shape the team could build and revise without hiding the tradeoffs.
 
 ## What changed
 
-The tool shipped. After an implementation change, the team measured warmed-database query times for typical and heavy searches. Both improved materially, by roughly an order of magnitude. That was a query-time result. We did not measure the full time from a scientist's starting structure to a reviewed analog list, so I cannot claim the one-to-two-day workflow became an equally dramatic end-to-end reduction.
+The tool shipped. After an implementation change, the team measured warmed-database query times for typical and heavy searches. Both improved materially, by roughly an order of magnitude.
 
-At least one expert tested the running tool. Months later, the primary expert user pushed back because a commercial alternative returned more results and asked for more variety and more total hits. We did not measure the tool's universe coverage. The only recorded comparison was a single query, so it cannot support a coverage percentage.
+That was a query-time result, not an end-to-end workflow result. The time from a scientist's starting structure to a reviewed analog list was never measured, so the one-to-two-day manual baseline cannot be converted into an equally dramatic workflow claim.
 
-We also did not instrument adoption. There is no defensible user count, query count, retention measure, or evidence that the tool became the default. The last recorded objective snapshots were at risk, and I found no scored closeout. The measured performance change and the expert's objection are both real. A broader adoption outcome is not in the record.
+At least one expert tested the running tool. Months later, the primary expert user asked for more variety and more total hits after comparing it with a commercial alternative. Universe coverage was not measured. The only recorded comparison was a single query, so it cannot support a coverage percentage.
 
-## What I would change now
+Adoption was not instrumented either. There is no defensible user count, query count, retention measure, or evidence that the tool became the default. The measured performance change and the expert's objection are both real. A broader adoption outcome is not in the record.
 
-I would define adoption instrumentation as part of the product, not as cleanup after launch. Shipping established that the workflow could be put into software. Faster warmed-database queries established that one implementation change worked. Neither told us whether experts trusted the product enough to return to it.
+## Retrospective
 
-I would track searches, threshold changes, result expansion, review completion, and return use from the first release. I would also test the two-tier result design directly: do experts understand why the edge cases are present, and does control over the threshold change their sense of completeness?
+With hindsight, I would define adoption instrumentation as part of the first release rather than as cleanup after launch. Shipping established that the workflow could be put into software. Faster queries established that one implementation change worked. Neither answered whether experts trusted the product enough to return to it.
 
-That missing instrumentation is the real finding here. Without it, the team could improve speed and respond thoughtfully to one expert, but it could not tell whether the product had changed the wider practice. I have argued elsewhere that uninstrumented adoption is a failure mode. This project is why I take that position seriously.
+I would also test the two-tier result design directly: whether experts understand why edge cases are present, and whether control over the threshold changes their sense of completeness.
+
+The missing instrumentation is the useful finding. It is why I now treat return use and verification behavior as part of the product definition rather than evidence to look for later.

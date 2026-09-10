@@ -73,6 +73,7 @@ hugo new notes/my-note.md
 | `users` | list of strings | `[]` |
 | `canonical_url` | string (URL) | `""` |
 | `work_kind` | `flagship` \| `proof-note` \| `quarantined` | unset (renders as a case) |
+| `narrative_voice` | `documentary` | unset |
 | `card_ownership` | string | `""` |
 | `card_measured` | string | `""` |
 | `card_unmeasured` | string | `""` |
@@ -122,7 +123,33 @@ that matters most: an empty value on a case that never instrumented its outcome 
 concealment, which is exactly what CONTENT-SAFETY-CONTRACT.md's "`NO RECORD` gets said out loud"
 rule forbids.
 
-Work body skeleton (8 parts): **BLUF** → **Who was doing the work** → **What was already possible** → **The product boundary** → **The hard choice** → **Athan's ownership** → **What changed** → **What he would change now**.
+Work body skeleton, documentary voice (2026-09-10): **BLUF** → **Who was doing the work** →
+**What was already possible** → **The product boundary** → **The hard choice** →
+**Role in the case** → **What changed** → **Retrospective**.
+
+Two headings were renamed by the documentary-voice pass, and the rename carries the whole
+rhetorical rule:
+
+- **"Athan's ownership" / "My ownership" → "Role in the case."** Ownership is still stated
+  explicitly and in full; it is simply no longer stated by making "I" the grammatical
+  subject. Fieldnotes says *here is how I think*; Work says *here is what happened*.
+- **"What he would change now" → "Retrospective."** This is the one section where first
+  person is allowed, because hindsight is genuinely personal. It is last in every
+  narrative.
+
+A proof note uses a shorter version of the same grammar — its middle sections are named for
+the specific artifact — but `Role in the case` and `Retrospective` are common to both
+depths.
+
+`scripts/verify-documentary-voice.sh` enforces this at source: the narratives must declare
+`narrative_voice: documentary`, must use `Role in the case` rather than a first-person
+ownership heading, and must keep first-person singular confined to a sparse retrospective.
+
+`assets/css/fieldnotes.css` marks the retrospective with a citrus rule, keyed to Hugo's
+auto-generated `#retrospective` id. Unmarked, the shift into first person on the final
+section reads as the voice slipping rather than as the one place it is permitted. That
+selector reaches the sibling paragraphs after the heading and relies on Retrospective being
+last; adding a section after it is the one change that would need it revisited.
 
 ### Essay only
 

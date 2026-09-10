@@ -1,0 +1,124 @@
+- generic [active] [ref=f43e1]:
+  - link "Skip to main content" [ref=f43e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f43e3]:
+    - generic [ref=f43e4]:
+      - link "Athan Dial" [ref=f43e5] [cursor=pointer]:
+        - /url: /
+      - navigation "Primary" [ref=f43e6]:
+        - link "Work" [ref=f43e7] [cursor=pointer]:
+          - /url: /work/
+        - link "Fieldnotes" [ref=f43e8] [cursor=pointer]:
+          - /url: /thinking/
+        - link "About" [ref=f43e9] [cursor=pointer]:
+          - /url: /about/
+  - main [ref=f43e10]:
+    - article [ref=f43e12]:
+      - paragraph [aria-hidden] [ref=f43e13]:
+        - generic [ref=f43e14]: Selected work
+        - generic [ref=f43e16]: When a Faster Search Tool Still Felt Incomplete
+      - generic [ref=f43e17]:
+        - link "← All work" [ref=f43e18] [cursor=pointer]:
+          - /url: /work/
+        - generic [ref=f43e19]:
+          - paragraph [ref=f43e20]: Case
+          - heading "When a Faster Search Tool Still Felt Incomplete" [level=1] [ref=f43e21]
+      - generic [ref=f43e22]:
+        - complementary "Case metadata" [ref=f43e23]:
+          - navigation "Case structure" [ref=f43e24]:
+            - paragraph [ref=f43e25]: Structure
+            - list [ref=f43e26]:
+              - listitem [ref=f43e27]:
+                - link "Who was doing the work" [ref=f43e28] [cursor=pointer]:
+                  - /url: "#who-was-doing-the-work"
+              - listitem [ref=f43e29]:
+                - link "What was already possible" [ref=f43e30] [cursor=pointer]:
+                  - /url: "#what-was-already-possible"
+              - listitem [ref=f43e31]:
+                - link "The product boundary" [ref=f43e32] [cursor=pointer]:
+                  - /url: "#the-product-boundary"
+              - listitem [ref=f43e33]:
+                - link "The hard choice" [ref=f43e34] [cursor=pointer]:
+                  - /url: "#the-hard-choice"
+              - listitem [ref=f43e35]:
+                - link "Role in the case" [ref=f43e36] [cursor=pointer]:
+                  - /url: "#role-in-the-case"
+              - listitem [ref=f43e37]:
+                - link "What changed" [ref=f43e38] [cursor=pointer]:
+                  - /url: "#what-changed"
+              - listitem [ref=f43e39]:
+                - link "Retrospective" [ref=f43e40] [cursor=pointer]:
+                  - /url: "#retrospective"
+        - generic [ref=f43e41]:
+          - paragraph [ref=f43e42]: An analog-search tool became materially faster after an implementation change. On a warmed database, query times for typical and heavy searches improved by roughly an order of magnitude.
+          - paragraph [ref=f43e43]: Months later, its primary expert user compared the tool with a commercial alternative and saw fewer results. The apparent problem had moved from speed to completeness.
+          - paragraph [ref=f43e44]: "The comparison established something real: one query returned fewer candidates. It did not establish that the internal results were less relevant, or that the commercial service defined the correct answer. The more useful product question was what an expert needed to see and control before deciding that a search was complete enough."
+          - heading "Who was doing the work" [level=2] [ref=f43e45]
+          - paragraph [ref=f43e46]: The search began with a compound-management scientist. A starting structure became a set of possible analogs for medicinal chemists to review, with biologists later consuming the resulting report.
+          - paragraph [ref=f43e47]: This was not data entry. The scientist adjusted similarity thresholds when a result set looked too small, reconciled structures and calculated properties, checked which compounds could actually be sourced, and decided whether the resulting set made chemical sense. Judgment entered at every step.
+          - paragraph [ref=f43e48]: The repeatable work around that judgment was the product opportunity.
+          - heading "What was already possible" [level=2] [ref=f43e49]
+          - paragraph [ref=f43e50]: The manual process worked, but it took one to two days across several disconnected tools. A scientist moved among the assay registry, a desktop chemistry tool, spreadsheets, and commercial catalogs. The manual baseline covered roughly two-thirds of the available universe.
+          - paragraph [ref=f43e51]: The process also lost its reasoning. A finished spreadsheet showed which compounds survived, but not why a threshold moved or why one candidate was kept over another. The answer could be inspected. The search that produced it could not be reconstructed.
+          - paragraph [ref=f43e52]: The expert was already doing the adaptive part well. The product needed to gather retrieval, ranking, availability checks, and the decision trail into one place without pretending that a fixed threshold could replace review.
+          - heading "The product boundary" [level=2] [ref=f43e53]
+          - paragraph [ref=f43e54]: The boundary was drawn around the repeatable parts of the work. The product would retrieve and rank candidates consistently, preserve the path to each result, and provide one place to review the set. The expert would still decide whether a molecule looked meaningfully similar and whether it was worth pursuing.
+          - paragraph [ref=f43e55]: That boundary shaped the first release. The initial slice did not include every data overlay in the broader vision. It used the one dependency that was reliable enough to support a thin similarity-search workflow, which made it possible to test the central interaction without binding the product to upstream data quality the team did not control.
+          - paragraph [ref=f43e56]: Make the common work reliable. Leave the last judgment legible and adjustable.
+          - 'figure "The first release drew the line here deliberately: a thin similarity slice over the one dependency that was not fragile, rather than the full vision over data quality the team did not control." [ref=f43e57]':
+            - generic [ref=f43e58]:
+              - paragraph [ref=f43e59]: Stays with the expert
+              - list [ref=f43e60]:
+                - listitem [ref=f43e61]: Is this meaningfully similar?
+                - listitem [ref=f43e62]: Which are worth pursuing?
+                - listitem [ref=f43e63]: How tight should the threshold be?
+              - separator [ref=f43e64]:
+                - generic [ref=f43e65]: the line where reliability becomes shared
+              - generic [ref=f43e66]:
+                - paragraph [ref=f43e67]: Made common and reliable
+                - list [ref=f43e68]:
+                  - listitem [ref=f43e69]: Retrieval and ranking
+                  - listitem [ref=f43e70]: A preserved path to each result
+                  - listitem [ref=f43e71]: One place to review the set
+          - heading "The hard choice" [level=2] [ref=f43e73]
+          - paragraph [ref=f43e74]: The first hard choice was the search engine. A decision memo compared PostgreSQL with RDKit against Milvus, weighting product fit most heavily, followed by data alignment, scalability, operating ownership, and delivery risk.
+          - paragraph [ref=f43e75]: PostgreSQL with RDKit won four of the five dimensions. Milvus won on the highest scale ceiling, but that was a ceiling the product had not reached. Choosing the specialized engine would have optimized for a future constraint while adding delivery and operating complexity to the first release.
+          - paragraph [ref=f43e76]: The recommendation favored the proven general-purpose option, with the engine kept behind a service boundary. Milvus remained a runnable proof of concept so a real scale constraint could later justify a backend change without forcing an interface rewrite.
+          - paragraph [ref=f43e77]: The second hard choice arrived after shipment. One expert saw fewer results from the internal tool than from a commercial alternative. Chasing result-count parity would have turned an external service’s behavior into the product specification.
+          - paragraph [ref=f43e78]: "A different interpretation fit the evidence better: the complaint was about confidence in completeness. A looser threshold could return more candidates. More threshold choices could give the expert control. A strong-match tier and an edge-of-match tier could expose where the search became uncertain, letting the user tighten or widen it deliberately."
+          - heading "Role in the case" [level=2] [ref=f43e79]
+          - paragraph [ref=f43e80]: Product lead. Scope included problem framing, requirements, release phasing, user-flow definition, and the search-engine decision. The product role also held the boundary between what should become consistent in software and what the scientist should continue to judge.
+          - paragraph [ref=f43e81]: Engineering owned the production implementation. Scientific users supplied the workflow knowledge and evaluated the output. The product work was to turn those inputs into a shape the team could build and revise without hiding the tradeoffs.
+          - heading "What changed" [level=2] [ref=f43e82]
+          - paragraph [ref=f43e83]: The tool shipped. After an implementation change, the team measured warmed-database query times for typical and heavy searches. Both improved materially, by roughly an order of magnitude.
+          - paragraph [ref=f43e84]: That was a query-time result, not an end-to-end workflow result. The time from a scientist’s starting structure to a reviewed analog list was never measured, so the one-to-two-day manual baseline cannot be converted into an equally dramatic workflow claim.
+          - paragraph [ref=f43e85]: At least one expert tested the running tool. Months later, the primary expert user asked for more variety and more total hits after comparing it with a commercial alternative. Universe coverage was not measured. The only recorded comparison was a single query, so it cannot support a coverage percentage.
+          - paragraph [ref=f43e86]: Adoption was not instrumented either. There is no defensible user count, query count, retention measure, or evidence that the tool became the default. The measured performance change and the expert’s objection are both real. A broader adoption outcome is not in the record.
+          - heading "Retrospective" [level=2] [ref=f43e87]
+          - paragraph [ref=f43e88]: With hindsight, I would define adoption instrumentation as part of the first release rather than as cleanup after launch. Shipping established that the workflow could be put into software. Faster queries established that one implementation change worked. Neither answered whether experts trusted the product enough to return to it.
+          - paragraph [ref=f43e89]: "I would also test the two-tier result design directly: whether experts understand why edge cases are present, and whether control over the threshold changes their sense of completeness."
+          - paragraph [ref=f43e90]: The missing instrumentation is the useful finding. It is why I now treat return use and verification behavior as part of the product definition rather than evidence to look for later.
+      - generic [ref=f43e91]:
+        - paragraph [ref=f43e92]: Colophon
+        - generic [ref=f43e93]:
+          - term [ref=f43e94]: Depth
+          - definition [ref=f43e95]: Case
+          - term [ref=f43e96]: Role
+          - definition [ref=f43e97]: Product lead
+          - term [ref=f43e98]: Users
+          - definition [ref=f43e99]: compound-management scientists, medicinal chemists, biologists
+          - term [ref=f43e100]: Themes
+          - definition [ref=f43e101]: expert-workflows, product-judgment
+          - term [ref=f43e102]: Written
+          - definition [ref=f43e103]:
+            - time [ref=f43e104]: 11 August 2026
+  - contentinfo [ref=f43e105]:
+    - generic [ref=f43e106]:
+      - list [ref=f43e107]:
+        - listitem [ref=f43e108]:
+          - link "LinkedIn" [ref=f43e109] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/athandial/
+        - listitem [ref=f43e110]:
+          - link "Email" [ref=f43e111] [cursor=pointer]:
+            - /url: mailto:athandial@gmail.com
+      - paragraph [ref=f43e112]: © 2026 Athan Dial
