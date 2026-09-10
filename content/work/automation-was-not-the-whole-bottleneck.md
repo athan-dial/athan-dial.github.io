@@ -9,7 +9,7 @@ evidence_status: mechanism-only
 visibility: private
 employer_review: pending
 featured: false
-role: "Product and operations lead"
+role: "Coordinator and workflow mapper"
 users:
   - "data scientists"
   - "scientific model developers"
@@ -73,7 +73,7 @@ For this workflow, that meant software and policy had to converge:
 
 - data and model checks needed to fail at the stage where someone could act on them;
 - downstream systems needed a reliable way to discover approved outputs;
-- a run needed a standard report rather than a Slack-memory reconstruction;
+- a run needed a standard report rather than a chat-memory reconstruction;
 - scientific policy needed explicit definitions where the software could not infer them;
 - ownership had to continue across handoffs rather than ending at "my service returned 200."
 
