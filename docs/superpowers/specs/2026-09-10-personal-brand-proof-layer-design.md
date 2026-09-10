@@ -15,7 +15,7 @@ The homepage should feel like the first audience. The deeper pages should prove 
 
 ## Brand architecture
 
-The site should resolve into four public destinations with distinct jobs:
+The site resolves into four public destinations with distinct jobs:
 
 - **Home** → interesting practitioner. Introduce Athan, one current idea, selected work, Fieldnotes, trajectory, operating territory, and context in one scroll.
 - **Work** → credible product leader. Evidence-backed product narratives that show ownership, tradeoffs, boundaries, and measured outcomes without overstating adoption.
@@ -61,12 +61,14 @@ Do not redesign the homepage from scratch.
 
 Replace the hardcoded mini-flow visual in the featured essay block with the actual generated Outer Loop artwork.
 
-Requirements:
+Implementation choice:
 
-- use a high-resolution lossless asset, at least 1200×1200 and preferably 1800×1800;
+- commit a lossless PNG at `static/img/outer-loop-highlight.png`;
+- use the highest-resolution generated source available, with a minimum of 1200×1200 device pixels and a target of roughly 1800×1800 where generation/export permits;
+- remove `static/img/outer-loop-highlight.webp` after the PNG is wired and verified so there is one canonical asset;
 - preserve the existing citrus editorial feature treatment around it;
-- the artwork should carry the visual density, not an alternate `boundary-motif` or forest-field diagram;
-- keep the essay title, summary, and CTA outside the image where they remain semantic HTML;
+- the artwork carries the visual density, not an alternate `boundary-motif` or forest-field diagram;
+- keep the essay title, summary, and CTA outside the image as semantic HTML;
 - preserve readability on Retina displays and narrow screens;
 - do not shrink the artwork until its labels become decorative noise.
 
@@ -117,7 +119,7 @@ Improve the archive so three content sources are legible:
 - Field Notes
 - LinkedIn
 
-The second LinkedIn item currently commented out in `data/linkedin.toml` may only be enabled once its real publication date is known. Do not invent a date.
+The second LinkedIn item currently commented out in `data/linkedin.toml` may only be enabled once its real publication date is known. Do not invent a date. In this PR, leave it commented unless a verified date is supplied from an existing source.
 
 Do not create placeholder entries to make the archive appear active.
 
@@ -127,7 +129,7 @@ This is the largest content change.
 
 The current About page is accurate but too thin and too resume-like in the Experience section. Replace it with a page that proves depth without becoming a CV.
 
-Recommended structure:
+Canonical structure:
 
 1. **Opening classification** — current role and the transition from research into product/data/AI work.
 2. **How I work** — a short practitioner section organized around problem framing, expert judgment, verification, and boundaries.
@@ -135,20 +137,23 @@ Recommended structure:
 4. **Selected work evidence** — two compact links to the public Work narratives, each framed by the decision Athan owned.
 5. **Research foundation** — selected research and a compact publication signal. Surface the verified research record without listing fourteen citations inline.
 6. **Current territory** — what Athan is actively exploring through Fieldnotes.
-7. **Talks / conversations / contact** — low-pressure invitation for panels, peer conversations, or speaking. No consulting/service language.
+7. **Conversations** — low-pressure invitation for panels, peer conversations, or speaking, anchored at `#conversations`. No consulting/service language.
 
 ### Research signal
 
-The repo contains structured publication data and education data. Use them as real evidence.
+Use the structured publication and education data as real evidence.
 
-The About page should communicate:
+The About page communicates:
 
 - PhD in Medical Sciences, McMaster University;
 - a verified research publication record;
-- selected first-author work rather than a full bibliography in the main reading flow;
-- a route to the full publication list only if the interaction remains lightweight and useful.
+- a small set of first-author publications selected from `data/publications.json`;
+- a compact aggregate signal only where it can be computed from the structured data rather than copied as prose;
+- no full fourteen-item bibliography in the primary About reading flow.
 
-Do not turn the page into an academic CV.
+If a full-publications expansion adds more interface than value, omit it. The structured source remains in the repo and the selected research is enough for this pass.
+
+Do not turn About into an academic CV.
 
 ### GitHub / open-source signal
 
@@ -156,17 +161,23 @@ Do not add a generic Open Source section simply because public repositories exis
 
 Inspect candidate repositories before surfacing them. A repository belongs on the site only if it strengthens the current brand story around data products, scientific tooling, AI-enabled work, or technical/product judgment.
 
+If no repository clearly improves the story after inspection, ship no GitHub proof module. The existing profile link remains sufficient.
+
 Historical or unrelated repositories stay off-site rather than becoming decorative proof tiles.
 
 ## Remove / redirect / archive ledger
 
 ### Retire `/writing/`
 
-`content/writing.md` is stale and still points at retired `/case-studies/` routes. Replace this public surface with a redirect or alias into `/thinking/` and remove its obsolete body copy.
+`data/redirects.toml` already defines `/writing/` → `/thinking/`. Keep that redirect as the sole public behavior.
 
-### Retire `/advisory/`
+Delete `content/writing.md`; do not retain obsolete body copy that points at retired `/case-studies/` routes.
 
-The current advisory page reads as a consultancy surface and contains older positioning. Preserve any useful speaking/panel intent by folding it into About, then redirect `/advisory/` and `/consulting/` to the relevant About anchor or `/about/`.
+### Retire `/advisory/` and `/consulting/`
+
+`data/redirects.toml` already defines both routes → `/about/#conversations`. Keep those redirects as the sole public behavior.
+
+Fold the useful speaking/panel intent into the About `#conversations` section, then delete `content/advisory.md`. Do not retain consultancy-style copy or the old alias in content frontmatter.
 
 ### Keep resume unpublished
 
@@ -174,17 +185,19 @@ The current advisory page reads as a consultancy surface and contains older posi
 
 The existing structured data can inform About, but the public resume is a separate future deliverable that requires a sanitized export and claim review.
 
-### Archive hidden Skills fixture
+### Remove hidden Skills fixture
 
-`content/skills/_index.md` is not a public destination and should not remain as a vague "Hidden until ready" resurrection hook. Either remove the fixture or replace it with an explicit archival comment/documentation path so future agents do not treat it as unfinished product scope.
+Delete `content/skills/_index.md`. The `/skills/` and retired plugin-doc routes are already owned by explicit redirects in `data/redirects.toml`.
 
-Do not expose a Skills nav item.
+Do not expose a Skills nav item. Do not modify quarantined child content unless verification shows that it conflicts with the existing redirect/publication rules.
 
-### Retire obsolete asset plan
+### Archive obsolete asset plan
 
-`ASSET_GENERATION_PLAN.md` describes an older portfolio system with a conflicting palette, generic icon library, dark-mode controls, and 35+ generated assets. It is no longer design authority.
+Move `ASSET_GENERATION_PLAN.md` to `.planning/archive/ASSET_GENERATION_PLAN-legacy.md` and prepend a short archival notice stating that it describes the retired pre-Fieldnotes visual system and is not current design authority.
 
-Move it to an explicitly archived planning location or remove it if no historical value is needed. Add a clear note in current design authority that Personal Fieldnotes supersedes it.
+Delete the root-level `ASSET_GENERATION_PLAN.md` as part of the move.
+
+Add a clear current-authority note in `DESIGN.md` and/or `CLAUDE.md` so an agent does not revive the teal/terracotta/purple system from the archived file.
 
 ## Fixtures vs intentional absence
 
@@ -256,10 +269,10 @@ Update the relevant authority files so future agents inherit the decisions:
 
 - `PRODUCT.md`
 - `DESIGN.md`
-- `.planning/CONTENT-MODEL.md` if route/content-type behavior changes
-- `CLAUDE.md` if obsolete-file or routing guidance must be explicit
+- `.planning/CONTENT-MODEL.md` where route/content-type behavior changes
+- `CLAUDE.md` for the retired-file and routing guidance
 
-The spec itself becomes the design authority for this PR.
+The spec itself is the design authority for this PR.
 
 ## Implementation boundaries
 
@@ -271,15 +284,19 @@ Likely files touched:
 - About-specific layout/CSS if needed
 - `content/work/_index.md` and/or Work list template
 - `layouts/thinking/list.html`
-- `data/linkedin.toml` only if a real date is supplied
-- `content/writing.md` or redirect data
-- `content/advisory.md` or redirect data
-- `content/skills/_index.md`
-- `ASSET_GENERATION_PLAN.md`
+- `content/writing.md` (delete)
+- `content/advisory.md` (delete)
+- `content/skills/_index.md` (delete)
+- `data/redirects.toml` (verify existing stubs; change only if tests expose a conflict)
+- `ASSET_GENERATION_PLAN.md` (move to archive)
+- `.planning/archive/ASSET_GENERATION_PLAN-legacy.md`
 - `DESIGN.md`
 - `PRODUCT.md`
+- `.planning/CONTENT-MODEL.md`
+- `CLAUDE.md`
 - verification scripts as needed
-- high-resolution Outer Loop asset
+- `static/img/outer-loop-highlight.png`
+- `static/img/outer-loop-highlight.webp` (delete after replacement)
 
 Avoid unrelated refactors.
 
@@ -298,9 +315,12 @@ Before merge:
 9. 200% text zoom
 10. reduced-motion path
 11. JavaScript-disabled homepage and About page
-12. verify stale `/writing/`, `/advisory/`, and `/consulting/` behavior explicitly
-13. verify no draft/private content enters sitemap or production output
-14. verify current public Work and Fieldnotes routes remain stable
+12. verify `/writing/` → `/thinking/`
+13. verify `/advisory/` and `/consulting/` → `/about/#conversations`
+14. verify `/skills/` remains owned by its existing redirect
+15. verify no draft/private content enters sitemap or production output
+16. verify current public Work and Fieldnotes routes remain stable
+17. verify the lossless Outer Loop asset is actually used by the homepage and the old lossy WebP is absent
 
 ## Acceptance criteria
 
@@ -314,6 +334,8 @@ Before merge:
 - The two public Work pieces remain evidence-disciplined and prominent.
 - The research record becomes visible without turning About into an academic CV.
 - The Outer Loop feature uses a crisp high-resolution lossless artwork, not the low-resolution WebP or an alternate motif substitute.
+- `/writing/`, `/advisory/`, `/consulting/`, and `/skills/` have one unambiguous redirect owner each.
+- The obsolete asset plan exists only under `.planning/archive/` with a visible retirement warning.
 - Obsolete design documents cannot plausibly override current Personal Fieldnotes authority.
 - Existing content-safety and publication gates still pass.
 
