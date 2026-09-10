@@ -124,6 +124,33 @@
   padding-left: .9rem;
 }
 
+/* --- Work: the retrospective, the one first-person block ---------------------------- */
+
+/* The documentary-voice pass (2026-09-10) made a rhetorical rule explicit: a Work page
+   reports what happened, in the third person, and reserves "I" for the closing
+   Retrospective, where hindsight is genuinely personal. `scripts/verify-documentary-voice.sh`
+   enforces that at source.
+
+   A reader has no way to see that rule. Unmarked, the shift into first person on the last
+   section reads as the voice slipping rather than as the one place it is allowed to. This
+   sets the retrospective apart so the change of footing is visible: a citrus rule, which
+   already means "human judgment" everywhere else in this system, and the closing block
+   is exactly that.
+
+   Keyed to `#retrospective`, Hugo's own auto-generated id for the `## Retrospective`
+   heading, and to the sibling paragraphs after it. Retrospective is last in all five
+   narratives, so the `~ p` reach is bounded by the end of the article. If a section is
+   ever added after it, that selector is what needs revisiting — nothing else here. */
+.prose--case-study h2#retrospective {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 3px solid var(--citrus);
+}
+
+.prose--case-study h2#retrospective ~ p {
+  color: var(--ink);
+}
+
 /* --- Work: depth groups, kind labels, and the draft-only review shelf --------------- */
 
 /* Two depths under one section, separated by a named group rather than by a gap. The
