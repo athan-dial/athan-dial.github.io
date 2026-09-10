@@ -40,6 +40,14 @@ ok() { printf 'verify-proof-layer:   ok — %s\n' "$*"; }
 
 [ -d "$BUILD_DIR" ] || fail "build directory not found: $BUILD_DIR (run hugo --gc --minify first)"
 
+# A running dev server invalidates this whole gate. `hugo server -D` writes DRAFT pages
+# into publishDir, so every assertion below would be measured against a build that is not
+# the production build — and it can fail loudly OR pass quietly on the wrong output. Warn
+# once, up front, so a later failure is not mistaken for a content or template bug.
+if pgrep -f 'hugo server' >/dev/null 2>&1; then
+  printf 'verify-proof-layer: WARNING — a "hugo server" is running. If it was started with -D it writes draft pages into %s, and the results below are measured against a polluted build. Stop it and rerun "hugo --gc --minify" for a trustworthy result.\n' "$BUILD_DIR" >&2
+fi
+
 # ---------------------------------------------------------------------------
 # 1. Redirect sole ownership.
 #
@@ -245,6 +253,14 @@ if [ -f "$QUARANTINED" ]; then
   ok "absent-user narrative stays quarantined and private at source"
 fi
 if [ -e "$BUILD_DIR/work/intelligence-platform-for-an-absent-user" ]; then
+  # Before blaming the content, check the likeliest cause. A freshly started
+  # `hugo server -D` writes draft pages into publishDir, so a gate run alongside it sees
+  # draft output in a directory it believes is a production build. That produces exactly
+  # this failure with entirely correct frontmatter, which sends you looking in the wrong
+  # place — verified the hard way on 2026-09-10.
+  if pgrep -f 'hugo server' >/dev/null 2>&1; then
+    fail "a 'hugo server' is running and has written draft pages into $BUILD_DIR — this is a POLLUTED BUILD DIR, not a content failure. Stop the server, rerun 'hugo --gc --minify', then rerun this gate. (Frontmatter may be entirely correct.)"
+  fi
   fail "the quarantined absent-user narrative is in the production build"
 fi
 ok "quarantined narrative is absent from the production build"
@@ -274,6 +290,9 @@ fi
 # The draft-only review shelf must never reach production. It is gated on
 # site.BuildDrafts, so this asserts the gate rather than the intent.
 if grep -q -F 'work-index__review' "$WORK"; then
+  if pgrep -f 'hugo server' >/dev/null 2>&1; then
+    fail "a 'hugo server' is running and has written a draft build into $BUILD_DIR — polluted build dir, not a template failure. Stop the server, rebuild, rerun."
+  fi
   fail "the draft-only in-review shelf is in the production build — check the site.BuildDrafts gate in layouts/work/list.html"
 fi
 ok "draft-only in-review shelf is absent from the production build"

@@ -387,3 +387,21 @@ fixed it.
 Consequence for review: **a page reviewed at localhost:1313 during a long session may be a
 stale render.** When a template change appears not to have taken effect, restart the server
 before debugging the template. Verified this session, not inferred.
+
+## Dev-server traps · 2026-09-10
+
+Two ways the local `hugo server` produced misleading verification results in one session.
+Both verified, neither inferred.
+
+**1. A running `hugo server -D` pollutes `public/`.** It writes draft pages into
+`publishDir`, so any gate reading `public/` measures a non-production build.
+`verify-proof-layer.sh` failed with "the quarantined absent-user narrative is in the
+production build" while that page's frontmatter was correct and `buildDrafts = false`; a
+clean `hugo --gc --minify --destination /tmp/x` excluded it properly. The same mechanism can
+produce a false PASS, which leaves no trace at all. The gate now warns when a server is
+running and reports two of its failures as a polluted build dir rather than as a content
+fault. Rule: stop the server, `rm -rf public`, rebuild, then gate.
+
+**2. A long-running server goes stale on layout changes.** It served old markup for an
+edited template while a static `-D` build rendered the new one. Restarting fixed it. If a
+template change appears to have done nothing, restart before debugging the template.

@@ -240,6 +240,28 @@ chapter/timeline/territory/index work belongs in `assets/css/fieldnotes-home.css
 from `tokens.css`, add no new hex outside `:root`, re-measure contrast in-browser, and update
 `DESIGN.md` plus `.planning/ACCESSIBILITY-CHECKS.md` when palette behavior changes.
 
+**Never run the publish gates while `hugo server` is running.** A freshly started
+`hugo server -D` writes DRAFT pages into `publishDir` (`public/`). Every gate that reads
+`public/` is then measuring a build that is not the production build. This bites in both
+directions and cost real time on 2026-09-10:
+
+- **False failure.** `verify-proof-layer.sh` reported the quarantined absent-user narrative
+  "in the production build" while its frontmatter was entirely correct — `draft: true`,
+  `visibility: private`, `buildDrafts = false`. The page was in `public/` because the dev
+  server put it there. A clean `hugo --gc --minify --destination /tmp/x` excluded it
+  correctly.
+- **False pass**, which is worse and leaves no trace. A gate can go green against draft
+  output.
+
+`verify-proof-layer.sh` now warns up front when a `hugo server` is running, and turns two of
+its failures into that diagnosis instead of a content accusation. The rule stands anyway:
+**stop the server, `rm -rf public`, rebuild, then run the gates.**
+
+A second, unrelated dev-server trap from the same day: a long-running server can go **stale**
+and stop picking up layout changes, serving old markup for an edited template while a static
+`-D` build renders the new one. If a template change looks like it did nothing, restart the
+server before debugging the template.
+
 **Homepage verification:** after any homepage/template/style/motion change, run:
 
 ```bash
