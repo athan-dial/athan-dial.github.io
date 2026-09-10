@@ -1,6 +1,7 @@
 ---
 title: "When a Faster Search Tool Still Felt Incomplete"
 type: work
+work_kind: flagship
 date: 2026-08-11
 summary: "I led the product definition for an analog-search tool that made warmed-database queries roughly an order of magnitude faster after an implementation change. Then its primary expert user said a commercial alternative returned more results. My proposed response was not to claim parity. It was to give the expert threshold control and make the edge of a match visible."
 status: published
