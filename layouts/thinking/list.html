@@ -1,13 +1,101 @@
 {{ define "main" }}
-{{ $writing := where (where (where site.RegularPages "Section" "in" (slice "notes" "essays")) "Params.status" "published") "Params.visibility" "public" }}
+{{- /*
+  Fieldnotes — the canonical writing destination at /thinking/.
+
+  The proof-layer pass restructured this page around its three real sources rather than
+  one undifferentiated feed. The previous version put every essay and note into a single
+  grid and then appended LinkedIn, which made a deliberately small corpus read as an
+  archive that had run out of material. Hierarchy is the fix, not filler: a cornerstone
+  essay leads, the remaining writing follows by source, and LinkedIn is labelled as
+  writing that lives elsewhere.
+
+  Nothing here invents an entry. Every section renders only what is published and public,
+  and a section with no items does not render at all — an absent Field Notes block is
+  more honest than a placeholder card.
+*/ -}}
+{{- $writing := where (where (where site.RegularPages "Section" "in" (slice "notes" "essays")) "Params.status" "published") "Params.visibility" "public" -}}
+{{- $essays := where $writing "Section" "essays" -}}
+{{- $notes := where $writing "Section" "notes" -}}
+{{- /* The lead is the newest cornerstone essay. `tier` is the content model's own field,
+       so this is curation the corpus already declares rather than a judgment made here. */ -}}
+{{- $lead := first 1 (sort (where $essays "Params.tier" "cornerstone") "Date" "desc") -}}
+{{- $leadPage := index $lead 0 | default false -}}
+{{- $restEssays := $essays -}}
+{{- if $leadPage -}}
+  {{- $restEssays = where $essays "Permalink" "!=" $leadPage.Permalink -}}
+{{- end -}}
+{{- $linkedin := site.Data.linkedin.posts | default slice -}}
 <div class="container fn-notebook">
-  <header class="fn-page-head"><p class="fn-kicker">Athan Dial / Fieldnotes</p><h1>The notebook.</h1><p>{{ .Params.summary }}</p></header>
-  <nav class="fn-archive-nav" aria-label="Writing archives"><span>Browse the writing</span><a href="/essays/">Essays ↗</a><a href="/notes/">Field notes ↗</a></nav>
-  <div class="fn-note-grid">{{ range sort $writing "Date" "desc" }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
-  {{ with site.Data.linkedin.posts }}
-  <section class="fn-section" aria-labelledby="linkedin-title"><div class="fn-section__head"><h2 id="linkedin-title">Also on LinkedIn</h2><a href="{{ site.Data.profile.links.linkedin }}" rel="me noopener" target="_blank">Follow along ↗</a></div>
+  <header class="fn-page-head">
+    <p class="fn-kicker">Athan Dial / Fieldnotes</p>
+    <h1>The notebook.</h1>
+    <p>{{ .Params.summary }}</p>
+  </header>
+
+  {{- /* Three sources, named, with counts computed from the corpus. The counts are here
+         because they make a small body of writing read as curated rather than thin: a
+         reader can see the shape of the whole publication before scrolling it. */ -}}
+  <nav class="fn-archive-nav" aria-label="Writing archives">
+    <span>Three sources</span>
+    <a href="/essays/">Essays / {{ len $essays }} ↗</a>
+    <a href="/notes/">Field notes / {{ len $notes }} ↗</a>
+    {{- with $linkedin }}<a href="#linkedin" >LinkedIn / {{ len . }} ↓</a>{{ end -}}
+  </nav>
+
+  {{- with $leadPage -}}
+  {{- /* The cornerstone piece gets the page's one large treatment. It is the essay the
+         homepage also features, so a reader arriving here from the homepage lands on the
+         same idea rather than on a grid that buries it. */ -}}
+  <section class="fn-lead" aria-labelledby="lead-title">
+    <p class="fn-kicker">Start here · Cornerstone essay</p>
+    <h2 id="lead-title" class="fn-lead__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <p class="fn-lead__summary">{{ .Params.summary | default .Description | plainify }}</p>
+    <p class="fn-lead__meta label-mono">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+      <span aria-hidden="true"> · </span>{{ .ReadingTime }} min read
+    </p>
+    <a class="fn-text-link" href="{{ .RelPermalink }}">Read the essay <span aria-hidden="true">↗</span></a>
+  </section>
+  {{- end -}}
+
+  {{- with $restEssays -}}
+  <section class="fn-section" id="essays" aria-labelledby="essays-title">
+    <div class="fn-section__head">
+      {{- /* "More essays", not "Essays / 1" — the cornerstone piece is already above this
+             section, so a count here that excluded it contradicted the source nav's
+             "Essays / 2" and read as a bug. */ -}}
+      <h2 id="essays-title">More essays <span>/ {{ len . }}</span></h2>
+      <a href="/essays/">All essays ↗</a>
+    </div>
+    <p class="fn-section__standfirst">Longer arguments, followed far enough to find where they stop being useful.</p>
+    {{- /* The grid is three columns. With one item that leaves two empty thirds, which
+           reads as two missing cards rather than as a curated section — the under-filled
+           archive look this pass exists to remove. The modifier collapses the track count
+           to the number of items actually present. */ -}}
+    <div class="fn-note-grid fn-note-grid--{{ cond (lt (len .) 3) (len .) 3 }}">{{ range sort . "Date" "desc" }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  </section>
+  {{- end -}}
+
+  {{- with $notes -}}
+  <section class="fn-section" id="field-notes" aria-labelledby="notes-title">
+    <div class="fn-section__head">
+      <h2 id="notes-title">Field notes <span>/ {{ len . }}</span></h2>
+      <a href="/notes/">All field notes ↗</a>
+    </div>
+    <p class="fn-section__standfirst">Shorter entries: one specific failure, one method worth borrowing, one thing the data actually did.</p>
+    <div class="fn-note-grid fn-note-grid--{{ cond (lt (len .) 3) (len .) 3 }}">{{ range sort . "Date" "desc" }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+  </section>
+  {{- end -}}
+
+  {{- with $linkedin -}}
+  <section class="fn-section" id="linkedin" aria-labelledby="linkedin-title">
+    <div class="fn-section__head">
+      <h2 id="linkedin-title">From LinkedIn <span>/ {{ len . }}</span></h2>
+      <a href="{{ site.Data.profile.links.linkedin }}" rel="me noopener" target="_blank">Follow along ↗</a>
+    </div>
+    <p class="fn-section__standfirst">Writing that started as a post. Hand-picked, not a feed — where a post became an essay here, the essay is the first link.</p>
     <div class="fn-linkedin">{{ range first 5 (sort . "date" "desc") }}{{ partial "linkedin-card.html" . }}{{ end }}</div>
   </section>
-  {{ end }}
+  {{- end -}}
 </div>
 {{ end }}

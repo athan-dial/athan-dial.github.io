@@ -18,6 +18,13 @@ themes:
   - product-judgment
 canonical_url: ""
 draft: false
+# Work-index card fields. Each line below is a compression of this page's own
+# "My ownership" / "What changed" sections — nothing here states more than the body
+# already states. They exist so a reader can see the evidence model on the index
+# without opening the case, per the proof-layer spec. Keep them in sync with the body.
+card_ownership: "Problem framing, product definition, release phasing, and the search-engine decision. Engineering owned the production implementation; the scientific users owned the workflow knowledge and evaluated the output."
+card_measured: "Warmed-database query time for typical and heavy searches, roughly an order of magnitude faster after one implementation change."
+card_unmeasured: "Adoption was never instrumented. There is no defensible user count, query count, retention measure, or coverage percentage, and the end-to-end workflow time was never measured."
 ---
 
 I led the product definition for an analog-search tool that got materially faster on a measured basis. After an implementation change, warmed-database query times for typical and heavy searches improved by roughly an order of magnitude. Months later, its primary expert user said a commercial alternative returned more results and wanted broader coverage. I thought we were looking at a completeness problem, not evidence that our results were less relevant. My proposed response was to give the expert more control and make the boundary of the match visible.

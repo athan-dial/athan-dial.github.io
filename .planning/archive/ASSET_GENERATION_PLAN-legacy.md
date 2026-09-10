@@ -1,3 +1,26 @@
+> # RETIRED — NOT CURRENT DESIGN AUTHORITY
+>
+> **Archived 2026-09-10.** This file describes the retired pre-Fieldnotes visual system:
+> the teal `#2E5C8A` / terracotta `#C17A47` / sage / purple palette, a 35-asset icon and
+> illustration programme, and the "Editorial Data Intelligence" rebranding it belonged to.
+> **None of that is the current design.**
+>
+> The current design authority is `DESIGN.md` — Personal Fieldnotes: warm paper, ink,
+> forest `#14543c`, citrus `#e4f17c`, Archivo and IBM Plex Mono, a serif editorial
+> display, flat square rule-based composition, and authored HTML diagrams. Colour tokens
+> live in `assets/css/tokens.css` and nowhere else.
+>
+> This file is kept only as a record of what was tried and rejected. Do not implement
+> anything in it. Do not reintroduce its palette, its icon sets, or its "generate all
+> assets autonomously" instruction. If you arrived here looking for how to make an asset
+> for this site, you are in the wrong file: read `DESIGN.md` and `DIAGRAMS.md`.
+>
+> It also carries a second hazard worth naming, since an agent reading only its opening
+> would obey it: the "Critical Constraint" below tells the reader to generate 35+ assets
+> without waiting for approval. That instruction is void.
+
+---
+
 # Asset Generation Sub-Project Plan
 
 **Project:** Generate all visual assets for portfolio rebranding

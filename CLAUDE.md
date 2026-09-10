@@ -128,11 +128,22 @@ Deliberately unpublished right now - do not "fix" these without asking:
 - `content/resume.md` - `draft: true` + `build.render: never`. `/resume/` does **not** exist.
   No resume link is published anywhere; `data/profile.toml` explains why and both call sites
   guard on the key with `with`.
-- `content/skills/_index.md` and `content/skills/case-studies/_index.md` - both
-  `draft: true` + `build.render: never` + `build.list: never`. This does **not** 404:
-  `/skills/`, `/skills/orc/`, `/skills/folio/`, `/skills/dev/`, and `/skills/case-studies/`
-  all build as redirect stubs (via `data/redirects.toml`) to `/thinking/`. The `/skills/`
-  plugin subsites themselves were retired 2026-08-14; do not resurrect them.
+
+**Deleted 2026-09-10 by the proof-layer pass. Do not recreate any of them.**
+
+- `content/skills/` - the whole tree, both files. They were quarantined fixtures. Deleting only
+  `_index.md` is **not safe** and was tried first: that file's `build.render: never` is what let
+  the `/skills/` redirect stub own the route, so removing it while
+  `content/skills/case-studies/_index.md` remained made Hugo generate a section index for the
+  parentless branch, and a real "Skills" page took the route back from the adapter. All five
+  `/skills/*` routes are now owned solely by `data/redirects.toml`. The plugin subsites were
+  retired 2026-08-14; do not resurrect them, and do not add Skills to nav.
+- `content/writing.md` - the `/writing/` -> `/thinking/` redirect adapter already won that route,
+  so the file only served to keep obsolete links to retired `/case-studies/` URLs alive in the
+  repo. `data/redirects.toml` is the sole owner.
+- `content/advisory.md` - same shape. `/advisory/` and `/consulting/` redirect to
+  `/about/#conversations`, whose section absorbed the useful speaking and panel intent. The
+  consultancy-style copy did not survive the fold-in, deliberately: hard constraint 2.
 
 ### Data
 
@@ -148,8 +159,11 @@ renders. `data/experience.json` backs the resume template and the homepage's saf
 `_content.gotmpl`) · `index.html` (home) · `work/{list,single}.html` · `thinking/list.html` ·
 `notes/list.html` · `note/single.html` (Hugo singularizes the type for the single template;
 the content dir stays `notes/`) · `essay/single.html` (same pattern - content dir is
-`essays/`) · `resume/single.html` · `skills/{list,single}.html` (present but unused while
-`content/skills/` stays `draft: true` + `render: never`).
+`essays/`) · `resume/single.html` · `_default/about.html` (the proof-layer About page, selected by
+`layout: about` in `content/about.md`) · `skills/{list,single}.html` (present but now entirely
+dead - `content/skills/` was deleted 2026-09-10 and all five `/skills/*` routes are redirect
+stubs; these two templates have no consumer and are kept only because removing them is a separate
+decision).
 
 Partials worth knowing: `section-rail.html`, `work-card.html`, `note-card.html`,
 `fieldnote-card.html`, `fieldnote-schematic.html`, `linkedin-card.html`, `nav.html`, `footer.html`,
@@ -159,6 +173,34 @@ Partials worth knowing: `section-rail.html`, `work-card.html`, `note-card.html`,
 
 `config/_default/` - `hugo.toml` (baseURL and `publishDir = "public"`; **do not change
 either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (empty).
+
+## Retired files that read as authority
+
+Two files in this repository will mislead an agent that reads them without this note.
+
+1. **`.planning/archive/ASSET_GENERATION_PLAN-legacy.md`** - archived 2026-09-10 from the repo
+   root. It specifies a teal `#2E5C8A` / terracotta `#C17A47` / sage / purple palette and a
+   35-asset icon programme for the retired "Editorial Data Intelligence" rebrand. **None of it is
+   current.** It also opens with a "Critical Constraint" instructing the reader to generate 35+
+   assets without waiting for approval, which is exactly the kind of line an agent obeys. Line 1
+   of the file is now a retirement notice saying so. Current authority is `DESIGN.md`, and
+   `scripts/verify-proof-layer.sh` fails if those hexes reappear in `tokens.css`.
+2. **This file, before 2026-08-12** - it described the retired Clinical Architect system as
+   current. See the warning at the top. The lesson generalises: a design document that is wrong is
+   worse than one that is missing, because an agent will act on it confidently.
+
+If a file here describes a palette that is not warm paper, ink, forest, and citrus, it is history.
+
+## Where planning artifacts go, and why not `docs/`
+
+`.planning/` - including `.planning/specs/` and `.planning/archive/`. **Never `docs/`.**
+
+`scripts/verify-build.sh` fails the build (exit 3) on *any* tracked file under `docs/`, because
+`docs/` was the old `publishDir` and committing it once served a stale page linking a PDF with a
+personal phone number in it. The guard cannot distinguish a hand-written spec from build output,
+and it is worth more than any particular file path. The proof-layer spec was authored at
+`docs/superpowers/specs/` and moved to `.planning/specs/` for exactly this reason; the move is
+recorded at the top of the spec itself.
 
 ## Hard Constraints
 
@@ -203,11 +245,19 @@ from `tokens.css`, add no new hex outside `:root`, re-measure contrast in-browse
 ```bash
 hugo --gc --minify
 bash scripts/verify-fieldnotes-home.sh
+bash scripts/verify-proof-layer.sh
 bash scripts/verify-build.sh
 bash scripts/verify-render.sh
 bash scripts/publish-gate.sh
 git diff --check main...HEAD
 ```
+
+`verify-proof-layer.sh` covers what the other gates structurally cannot: that a redirect route is
+still a **stub** rather than a real page that has taken it back, that About's seven sections and
+its computed research figures are intact, that the Work index still states ownership and what was
+*not* measured, and that the Outer Loop artwork is still the lossless high-resolution source with
+a 2x candidate. `verify-redirects.sh` asserts a stub exists; it cannot tell you a generated
+section index is winning the route instead.
 
 Then visually inspect `/` at wide desktop and standard desktop, keyboard-only, 200% text zoom,
 and with JavaScript disabled. Check narrow/mobile when the local browser supports it. Record any

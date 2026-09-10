@@ -37,6 +37,25 @@ whole body of work.
 The common single-scroll visit should feel progressively more specific rather than increasingly
 resume-like.
 
+## Public destinations
+
+Four, each with a distinct job. Added 2026-09-10; authority
+`.planning/specs/2026-09-10-personal-brand-proof-layer-design.md`.
+
+| Destination | Job |
+|---|---|
+| **Home** | Interesting practitioner. One scroll: who Athan is, one current idea, that the idea is grounded in real product work, then the notebook, the movement, and the recurring questions. |
+| **Work** | Credible product leader. Two evidence-disciplined product narratives showing ownership, boundaries, and what the record does not support. |
+| **Fieldnotes** | Coherent intellectual territory. Essays, field notes, and selected LinkedIn writing as three deliberate sources in one publication. |
+| **About** | Research depth, trajectory, and leadership classification. The proof surface — the place a reader can establish current role, movement, product ownership, and research foundation without a public resume existing. |
+
+The asymmetry is deliberate. The homepage should read as if it is for practitioners while
+accumulating enough evidence underneath that a hiring reader can classify the work. Ideas come
+before credentials on every surface; credentials are reachable in one click from any of them.
+
+There is no Skills page, no consultancy funnel, no project zoo, and no public resume. Each of
+those absences is a decision, not a gap — see the spec's deferred list before adding one.
+
 ## Brand Personality
 
 **Rigorous, warm, bounded.**

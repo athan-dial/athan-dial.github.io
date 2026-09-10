@@ -301,3 +301,55 @@ Static sRGB contrast calculations for the new layer (not a browser audit):
 All listed text pairs exceed 4.5:1. The new layer uses token colors directly; historical
 computed-color results above do not validate this revision. Browser layout, text enlargement,
 and computed-color checks are pending. Diagrams now use wrapping native HTML and explicit labels.
+
+## Proof layer · 2026-09-10
+
+Browser-run, not calculated. Headless Chrome via Playwright against `hugo server` on
+localhost:1313, plus a DPR-2 WKWebView check for the Outer Loop asset. The script lives at
+`scripts/`-adjacent scratch and its assertions are reproduced below; the durable regression
+subset is in `scripts/verify-proof-layer.sh`.
+
+Pages under test: `/`, `/about/`, `/work/`, `/thinking/`.
+
+| Check | Widths / condition | Result |
+| --- | --- | --- |
+| No horizontal body scroll | 1600, 1440, 1024, 768, 390 px | pass, all 4 pages at all 5 widths |
+| 200% text zoom (`html{font-size:200%}` → 32px root) | 1280 px | pass — no horizontal scroll, no text clipped by `overflow:hidden` |
+| Keyboard-only traversal, visible focus on every stop | 1280 px | pass — 33 stops on `/`, 22 on `/about/`, 13 on `/work/`, 22 on `/thinking/`, each with an outline, box-shadow, or underline |
+| JavaScript disabled | 1280 px | pass — all seven homepage chapters and all five About section anchors present; no section hidden, transparent, or `display:none` at rest; 5,027 chars of text on `/`, 7,234 on `/about/` |
+| `prefers-reduced-motion: reduce` | 1440 px | pass — zero elements with a transition or animation duration above 0.05s, `scroll-behavior: auto`, every section opaque |
+
+Narrow was testable in this environment, unlike earlier passes — 390 px is included above and
+is a real measurement, not an inference.
+
+### Outer Loop asset density
+
+The artwork is a 1254x1254 lossless PNG; Hugo Pipes emits 600 px and 1200 px WebP variants
+behind a `1x, 2x` srcset. Rendered box is 598 CSS px.
+
+| Device pixel ratio | Device pixels needed | Variant chosen | Verdict |
+| --- | --- | --- | --- |
+| 1 | 598 | 600 px | exact |
+| 2 | 1196 | 1200 px | exact — this is the case the pass existed to fix |
+| 3 | 1794 | 1200 px | **under-sampled 1.5x.** A ~1800 px source would close it; the spec names ~1800 as the target and 1200 as the floor. |
+
+### New colour pairs
+
+No new hex was introduced. Pairs used by the new components, from the 2026-09-09 table above:
+
+| Pair | Context | Contrast |
+| --- | --- | --- |
+| ink / citrus | About research-signal strip, Work index evidence rule | 16.09:1 |
+| secondary / paper | standfirsts, mono field labels, "not measured" values | 6.11:1 |
+| forest / paper | territory index numerals, lead-essay title | 8.58:1 |
+
+Colour never carries meaning alone in the new components: the Work index evidence class is
+stated in words ("Measured, published as a range"), and every "not measured" value is labelled
+and additionally marked with a dashed rule.
+
+### Not verified
+
+- Real browser text zoom in Safari and Firefox. The 200% figure above is Chrome with a root
+  font-size override, which is the standard proxy but is not the same code path.
+- Screen-reader traversal. No AT was run.
+- Core Web Vitals at p75. Not measured in this pass.
