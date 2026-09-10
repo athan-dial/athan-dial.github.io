@@ -97,7 +97,11 @@ ok "Work and About no longer institutionalize a two-case ceiling"
 #    especially easy leak paths given the private source material used for this pass.
 # ---------------------------------------------------------------------------
 for file in "$WEAKER" "$OUTCOME" "$BENCHMARK" "$AUTOMATION"; do
-  for banned in "TALOS" "ACN" "STAT6" "TL1A" "OX40L" "IL5" "Montai" "Jira" "Confluence"; do
+  for banned in \
+    "TALOS" "ACN" "STAT6" "TL1A" "OX40L" "IL5" \
+    "Montai" "Jira" "Confluence" "Slack" "Bedrock" "GlobalData" \
+    "AlphaSense" "Nomi" "Orbit" "RAPIDS"
+  do
     if grep -q -F "$banned" "$file"; then
       fail "$file leaks an unnecessary internal/source-system name: $banned"
     fi
