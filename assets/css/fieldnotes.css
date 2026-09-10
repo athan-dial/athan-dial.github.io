@@ -124,6 +124,145 @@
   padding-left: .9rem;
 }
 
+/* --- Work: the retrospective, the one first-person block ---------------------------- */
+
+/* The documentary-voice pass (2026-09-10) made a rhetorical rule explicit: a Work page
+   reports what happened, in the third person, and reserves "I" for the closing
+   Retrospective, where hindsight is genuinely personal. `scripts/verify-documentary-voice.sh`
+   enforces that at source.
+
+   A reader has no way to see that rule. Unmarked, the shift into first person on the last
+   section reads as the voice slipping rather than as the one place it is allowed to. This
+   sets the retrospective apart so the change of footing is visible: a citrus rule, which
+   already means "human judgment" everywhere else in this system, and the closing block
+   is exactly that.
+
+   Keyed to `#retrospective`, Hugo's own auto-generated id for the `## Retrospective`
+   heading, and to the sibling paragraphs after it. Retrospective is last in all five
+   narratives, so the `~ p` reach is bounded by the end of the article. If a section is
+   ever added after it, that selector is what needs revisiting — nothing else here. */
+.prose--case-study h2#retrospective {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 3px solid var(--citrus);
+}
+
+.prose--case-study h2#retrospective ~ p {
+  color: var(--ink);
+}
+
+/* --- Work: depth groups, kind labels, and the draft-only review shelf --------------- */
+
+/* Two depths under one section, separated by a named group rather than by a gap. The
+   heading row reuses .fn-section__head so Work reads in the same grammar as Fieldnotes. */
+.work-index__group {
+  padding-top: 3rem;
+}
+
+.work-index__group + .work-index__group {
+  margin-top: 1rem;
+  border-top: 1px solid var(--field-rule);
+}
+
+/* Proof notes are the narrower claim, and the rule above them says so before the cards
+   do: a dashed edge rather than the solid one that separates full cases. */
+.work-index__group--notes {
+  border-top-style: dashed;
+}
+
+/* The depth badge on a card. Only proof notes carry one — a "Case" badge on every full
+   case would be noise, since full depth is the default. */
+.work-card__kind {
+  margin: 0 0 .5rem;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+}
+
+/* Same label on the article itself, above the title. */
+.case-study-header__kind {
+  margin: 0 0 .75rem;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+}
+
+.case-study-header__kind-note {
+  margin: .75rem 0 0;
+  max-width: 52ch;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: var(--ink-secondary);
+  border-left: 1px dashed var(--ink);
+  padding-left: .9rem;
+}
+
+/* The in-review shelf. Only ever rendered by a draft build (site.BuildDrafts), so this
+   block never reaches the deployed site. Styled to look like scaffolding rather than
+   content: dashed frame, mono throughout, no editorial serif. If it ever appears on the
+   live site it should be instantly obvious that it does not belong there. */
+.work-index__review {
+  margin-top: 4rem;
+  padding: 1.75rem;
+  border: 1px dashed var(--ink);
+  background: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 10px,
+    color-mix(in oklab, var(--citrus) 45%, transparent) 10px,
+    color-mix(in oklab, var(--citrus) 45%, transparent) 20px
+  );
+}
+
+.work-index__review .fn-section__head h2 {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: var(--metadata-caps-tracking);
+  text-transform: uppercase;
+}
+
+.work-index__review .fn-section__standfirst {
+  color: var(--ink);
+  background: var(--surface);
+  padding: .75rem 1rem;
+  max-width: 60ch;
+}
+
+.work-index__review-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+}
+
+.work-index__review-list > li {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: .85rem 1rem;
+  border-top: 1px solid var(--field-rule);
+}
+
+.work-index__review-kind,
+.work-index__review-state {
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+}
+
+.work-index__review-list a {
+  font-size: 1.0625rem;
+}
+
+@media (max-width: 600px) {
+  .work-index__review {
+    padding: 1.25rem;
+  }
+
+  .work-index__review-list > li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .3rem;
+  }
+}
+
 /* --- Fieldnotes: lead essay and count-aware grids ------------------------------------ */
 
 /* The cornerstone essay's one large treatment. Rules rather than a filled panel: the

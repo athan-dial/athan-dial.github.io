@@ -1,7 +1,33 @@
 {{ define "main" }}
-{{- /* Public gate: status published AND visibility public. Never invent entries. */ -}}
+{{- /*
+  Public gate: status published AND visibility public. Never invent entries.
+
+  The content pass introduced `work_kind`, and this template renders the two depths it
+  names as separate groups rather than as one flat list:
+
+    flagship    a full case — user, constraint, boundary, ownership, what changed
+    proof-note  one artifact, one decision, one boundary, nothing padded around it
+    quarantined never reaches this page. It is draft/private by definition and the public
+                gate already excludes it; named here so its absence does not read as a
+                missing branch.
+
+  Grouping matters because the two depths make different claims. A proof note sitting in a
+  flat list beside a flagship case reads as a case that ran out of material, which is the
+  opposite of what it is. Naming the depth is what makes the shorter piece legible as a
+  deliberate choice rather than a thin one.
+
+  A group with no published items does not render at all. That is load-bearing right now:
+  the new stories are review-gated pending prose review, so the proof-note group is
+  currently empty and the page must not advertise an empty shelf.
+*/ -}}
 {{- $published := where .Pages "Params.status" "published" -}}
 {{- $public := where $published "Params.visibility" "public" -}}
+{{- $flagship := where $public "Params.work_kind" "flagship" -}}
+{{- $proofNotes := where $public "Params.work_kind" "proof-note" -}}
+{{- /* Anything public that predates `work_kind` renders with the cases, so a page can
+       never fall out of the index just because it is missing the field. */ -}}
+{{- $unclassified := where $public "Params.work_kind" nil -}}
+{{- $cases := $flagship | append $unclassified -}}
 <section class="section work-index">
   <div class="container">
     <header class="work-index__header section-rail">
@@ -24,8 +50,7 @@
         {{- end -}}
         {{- /* The evidence model, stated once, before the first case. Without it a reader
                meets "Not measured" on a card and reads it as a weakness rather than as
-               the discipline it is. Two cases is the whole set on purpose; saying so here
-               stops the page reading as an under-filled grid. */ -}}
+               the discipline it is. */ -}}
         {{- with .Params.evidence_note -}}
         <div class="work-index__evidence-note">
           <p class="body-md">{{ . | markdownify }}</p>
@@ -35,15 +60,43 @@
     </header>
 
     {{- if $public -}}
-    <div class="case-studies work-index__list">
-      <ul>
-        {{- range $public -}}
-        <li>
-          {{ partial "work-card.html" (dict "page" . "heading" "h2") }}
-        </li>
-        {{- end -}}
-      </ul>
-    </div>
+
+    {{- with $cases -}}
+    <section class="work-index__group" aria-labelledby="work-cases-title">
+      <div class="fn-section__head">
+        <h2 id="work-cases-title">Cases <span>/ {{ len . }}</span></h2>
+      </div>
+      <p class="fn-section__standfirst">The full decision: who was doing the work, what was already possible, where the boundary went, what I owned, and what the record does and does not support.</p>
+      <div class="case-studies work-index__list">
+        <ul>
+          {{- range (sort . "Date" "desc") -}}
+          <li>
+            {{ partial "work-card.html" (dict "page" . "heading" "h3") }}
+          </li>
+          {{- end -}}
+        </ul>
+      </div>
+    </section>
+    {{- end -}}
+
+    {{- with $proofNotes -}}
+    <section class="work-index__group work-index__group--notes" aria-labelledby="work-notes-title">
+      <div class="fn-section__head">
+        <h2 id="work-notes-title">Proof notes <span>/ {{ len . }}</span></h2>
+      </div>
+      <p class="fn-section__standfirst">Narrower on purpose. One artifact, one decision, one boundary — the piece of evidence that changed the next move, without a case built around it.</p>
+      <div class="case-studies work-index__list work-index__list--notes">
+        <ul>
+          {{- range (sort . "Date" "desc") -}}
+          <li>
+            {{ partial "work-card.html" (dict "page" . "heading" "h3") }}
+          </li>
+          {{- end -}}
+        </ul>
+      </div>
+    </section>
+    {{- end -}}
+
     {{- else -}}
     {{- /* The empty state was a direct child of .container carrying `reading-column`, whose
            `margin-inline: auto` centred it in the 1240px shell while the heading above it sits
@@ -54,10 +107,56 @@
       {{ partial "section-rail.html" (dict "label" "In review") }}
       <div class="section-rail__content">
         <p class="body-md work-index__empty empty-state reading-column" role="status">
-          This section is being rebuilt. Evidence-validated case studies will appear here once they clear review, and nothing unpublished is listed.
+          This section is being rebuilt. Evidence-validated work will appear here once it clears review, and nothing unpublished is listed.
         </p>
       </div>
     </div>
+    {{- end -}}
+
+    {{- /* ---------------------------------------------------------------------------
+           IN-REVIEW SHELF — draft preview only. Never in production.
+
+           Gated on `site.BuildDrafts`, which is the BUILD MODE, not the content flags.
+           `hugo server -D` and `hugo -D` set it; a bare `hugo` / `hugo --gc --minify`
+           production build does not, so this block cannot reach the deployed site even
+           if a page's own flags were wrong. That is the whole point of keying off the
+           build rather than off `status`.
+
+           It exists because the review loop had a real hole: the new stories are
+           deliberately draft/private, and this index filters on published AND public, so
+           even a `-D` preview showed one case and no proof-note group. The shape of the
+           finished page was therefore unreviewable without first publishing the prose —
+           exactly backwards. This shelf shows what is queued, at what depth, so the
+           grouping can be judged before anything goes public.
+
+           It renders titles and classifications only. No summaries, no ownership fields,
+           no bodies: it is a manifest of what is waiting, not a preview publication.
+           --------------------------------------------------------------------------- */ -}}
+    {{- if site.BuildDrafts -}}
+    {{- $gated := where (where .Pages "Params.status" "!=" "published") "Params.work_kind" "!=" nil -}}
+    {{- with $gated -}}
+    <section class="work-index__review" aria-labelledby="work-review-title">
+      <div class="fn-section__head">
+        <h2 id="work-review-title">In review <span>/ {{ len . }}</span></h2>
+      </div>
+      <p class="fn-section__standfirst">
+        <strong>Local draft preview only.</strong> These are not published and do not appear
+        on the live site. Listed here so the grouping and depth can be reviewed before any
+        of it goes public.
+      </p>
+      <ul class="work-index__review-list">
+        {{- range (sort . "Date" "desc") -}}
+        <li>
+          <span class="work-index__review-kind label-mono">
+            {{- cond (eq .Params.work_kind "proof-note") "Proof note" (cond (eq .Params.work_kind "quarantined") "Quarantined" "Case") -}}
+          </span>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="work-index__review-state label-mono">{{ .Params.employer_review | default "pending" }}</span>
+        </li>
+        {{- end -}}
+      </ul>
+    </section>
+    {{- end -}}
     {{- end -}}
   </div>
 </section>

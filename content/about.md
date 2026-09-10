@@ -8,20 +8,13 @@ layout: about
 # two-button row from _default/single.html would repeat them a screen earlier with none.
 
 # ---------------------------------------------------------------------------------------
-# Trajectory. Role, company and range only, plus the four descriptions that are ALREADY
-# published on this page and cleared.
+# Trajectory. Role, company and range only, plus descriptions that are already cleared.
 #
 # data/experience.json is NOT the source here, on purpose. Its `summary` fields are legacy
 # resume material: they claim unhedged ownership of shared systems with no split between
-# Athan's contribution and the team's, which is exactly why the Data Research Lead
-# description was unpublished on 2026-08-14 (CLAUDE.md hard constraint 3). DESIGN.md bans
-# them from the homepage for the same reason; the boundary is about the claims, not about
-# which page renders them, so it holds here too.
-#
-# The Data Research Lead row therefore carries no description. That is not an oversight and
-# not a gap to fill — the account of that work lives in the two Work narratives, which do
-# separate what Athan owned from what engineering and the scientific users owned. The
-# `evidence` key below points a reader there instead of restating the claim.
+# Athan's contribution and the team's. The Data Research Lead row therefore carries no
+# description; the Work section carries the evidence at a grain where ownership and limits
+# can be stated properly.
 # ---------------------------------------------------------------------------------------
 trajectory:
   - role: "Associate Director, Data Science & Product Management"
@@ -31,7 +24,7 @@ trajectory:
   - role: "Data Research Lead"
     company: "Montai Therapeutics"
     range: "2022 – 2026"
-    evidence: "Both published Work narratives come from this period."
+    evidence: "The Work section carries product narratives from this period."
   - role: "Data Scientist"
     company: "Replica Analytics"
     range: "2019 – 2020"
@@ -43,20 +36,15 @@ trajectory:
 
 # ---------------------------------------------------------------------------------------
 # Selected research, addressed by DOI so the selection is explicit and cannot drift.
-# Every field a reader sees is read from data/publications.json at build time — this list
-# only chooses which three of the fourteen appear. All three are first-author and
-# peer-reviewed; the aggregate line beside them is computed from the same file.
+# Every field a reader sees is read from data/publications.json at build time.
 # ---------------------------------------------------------------------------------------
 selected_research:
   - "10.1210/clinem/dgab261"
   - "10.1016/j.tem.2018.02.010"
   - "10.1096/fj.201700868rrr"
 
-research_note: "The research is not a previous life that stopped mattering. It is where I learned what an adequately powered comparison costs, how often a clean result is a measurement artifact, and why a method section is the only part of a paper you can actually check. I use that on product work now, mostly as a reflex about what a number is allowed to claim."
+research_note: "The research is not a previous life that stopped mattering. It is where the habits came from: what an adequately powered comparison costs, how often a clean result can be a measurement artifact, and why a method section matters more than a confident conclusion. Those habits still show up in product work, mostly as a reflex about what a number is allowed to claim."
 
-# Current territory. The four questions match the homepage's operating-territory chapter on
-# purpose — same recurring problems, stated with more specificity for a reader who has
-# scrolled this far.
 territory_standfirst: "Four questions the work keeps returning to. They are the reason Fieldnotes exists: each one is easier to think through in writing than in a planning document."
 territory:
   - question: "What deserves to be built when building gets cheap?"
@@ -81,33 +69,34 @@ already works, expose enough of its reasoning to be checked, and leave room for 
 person knows and the system does not. Get that boundary wrong in either direction and the
 result is the same: the tool gets used once, politely, and then routed around.
 
-I came to this from medical research. My PhD measured skeletal muscle function and
-physiology in people with type 1 diabetes, which is a field where the effect you are
-looking for is small, the measurement is noisy, and the honest answer is often that the
-study cannot tell you. I still approach a new idea the same way — as an experiment, with
-the question of what would change my mind attached to it.
+The route here started in medical research. My PhD measured skeletal muscle function and
+physiology in people with type 1 diabetes, a setting where the effect of interest can be
+small, the measurement noisy, and the honest answer sometimes that the study cannot tell
+you. The same habit follows the product work now: treat the idea as a claim, and keep the
+question of what would change the claim attached to it.
 
-## How I work
+## How the work tends to move
 
-**I spend longer on the problem than feels comfortable.** The two narratives under
-[Work](/work/) both turn on a reframe rather than on an implementation. In one, the
-primary user turned out not to be the person who had asked for the tool. In the other, an
-expert's complaint about a competitor was a completeness problem wearing the costume of a
-relevance problem. Neither of those is discoverable from a requirements document.
+**Tighten the question before adding the feature.** One case under [Work](/work/) starts
+with an expert saying a faster search tool still feels incomplete. The literal response
+would have been to return more results. The useful question was whether the complaint was
+actually about relevance, coverage, confidence, or control. One comparison established
+that there was a problem. It could not establish which problem it was.
 
-**I try to keep expert judgment where it belongs.** The recurring design question is which
-part of the work should become consistent and shared, and which part is the expertise
-itself. My default is to make the machine retrieve, rank, and propose, and to leave the
-adjudication with the person who can be held responsible for it — and then to make the
-boundary visible in the interface rather than implicit in a default setting.
+**Keep expert judgment visible.** The recurring design question is which part of the work
+should become consistent and shared, and which part is the expertise itself. Retrieval,
+ranking, and proposal can become systematic without pretending that adjudication has
+stopped requiring the person who understands the domain. The boundary works better when
+it is visible in the product instead of buried in a default setting.
 
-**I treat verification as part of the product.** Not as a review step after the build. If
-nobody can check what a system produced, its output is a suggestion with good posture.
-This is also where I am most willing to argue: I think a number that cannot be defended is
-worse than no number, and I would rather ship a range than a figure that came out of a
-requirements document.
+**Let verification change the recommendation.** A recent retrospective analysis started
+with a useful-looking reliability signal. A stricter validation pass treated related
+observations as related, controlled the existing score more carefully, and revisited how
+candidates entered the observed set. One apparent effect disappeared. The recommendation
+got smaller with it. That is what a verification layer should be allowed to do.
 
-**I say what was not measured.** Both published cases have a paragraph naming what the
-record does not support — adoption in one, decision quality in the other. I would rather a
-reader see the gap than find it later. The absence of instrumentation in the first case is
-the finding I took most seriously, and it changed how I scope work now.
+**Name what was not measured.** A shipped tool without adoption instrumentation does not
+become a successful product because the implementation was fast. A retrospective result
+does not become a production rule because it survives one analysis. The Work pages name
+those gaps on purpose. The boundary of the evidence should be visible before the story
+gets smoother than the record deserves.

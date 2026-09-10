@@ -72,9 +72,47 @@ hugo new notes/my-note.md
 | `role` | string | `""` |
 | `users` | list of strings | `[]` |
 | `canonical_url` | string (URL) | `""` |
+| `work_kind` | `flagship` \| `proof-note` \| `quarantined` | unset (renders as a case) |
+| `narrative_voice` | `documentary` | unset |
 | `card_ownership` | string | `""` |
 | `card_measured` | string | `""` |
 | `card_unmeasured` | string | `""` |
+
+`work_kind` names the DEPTH of the piece, added 2026-09-10 by the content pass. It is not a
+category or a tag; it is a claim about how much of the decision the page traces.
+
+| Value | What it means | How it renders |
+|---|---|---|
+| `flagship` | The full case: user, constraint, what was already possible, the boundary, the hard choice, ownership, what changed, what I would change. Roughly 1,400 words. | Under **Cases** on the index. No badge — full depth is the default. |
+| `proof-note` | One artifact, one decision, one boundary. Roughly 900 words. Narrower on purpose. | Under **Proof notes**, with a "Proof note" badge and a line on the article saying it is shorter by design. |
+| `quarantined` | The framing did not survive source review. Kept in the repo as a record, never published. | Never on the index. The article says it is withheld. |
+| unset | A page predating the field. | Renders with the cases, so nothing falls out of the index for lacking a field. |
+
+Two render rules follow from this and are enforced by `scripts/verify-proof-layer.sh`:
+
+1. **A group with no published items does not render.** An empty "Proof notes" heading
+   advertises a shelf with nothing on it, which is the under-filled-archive failure the
+   whole pass exists to avoid.
+2. **A proof note must be labelled.** Unlabelled, a 900-word piece next to a 1,400-word
+   case reads as a case that ran out of material. The badge is the difference between
+   "narrow on purpose" and "thin".
+
+### The in-review shelf is gated on the build, not on the content
+
+`layouts/work/list.html` renders a list of gated pieces (`work-index__review`) when
+`site.BuildDrafts` is true — that is, under `hugo server -D` or `hugo -D`, never under a
+production `hugo --gc --minify`.
+
+It exists because the review loop had a hole. New stories are deliberately
+`draft`/`private`, and the Work index filters on published AND public, so even a `-D`
+preview showed the published cases and no proof-note group: the shape of the finished page
+could not be reviewed without first publishing the prose, which is backwards. The shelf
+shows what is queued and at what depth, and renders titles and classifications only — no
+summaries, no ownership fields, no bodies.
+
+Keying it to the build mode rather than to `status` is deliberate: it cannot leak even if
+a page's own flags are wrong. `verify-proof-layer.sh` asserts it is absent from production
+output.
 
 The three `card_*` fields are optional and drive the Work index evidence ledger (2026-09-10).
 Each one must be a **compression of that page's own body** — `card_ownership` from its "My
@@ -85,7 +123,33 @@ that matters most: an empty value on a case that never instrumented its outcome 
 concealment, which is exactly what CONTENT-SAFETY-CONTRACT.md's "`NO RECORD` gets said out loud"
 rule forbids.
 
-Work body skeleton (8 parts): **BLUF** → **Who was doing the work** → **What was already possible** → **The product boundary** → **The hard choice** → **Athan's ownership** → **What changed** → **What he would change now**.
+Work body skeleton, documentary voice (2026-09-10): **BLUF** → **Who was doing the work** →
+**What was already possible** → **The product boundary** → **The hard choice** →
+**Role in the case** → **What changed** → **Retrospective**.
+
+Two headings were renamed by the documentary-voice pass, and the rename carries the whole
+rhetorical rule:
+
+- **"Athan's ownership" / "My ownership" → "Role in the case."** Ownership is still stated
+  explicitly and in full; it is simply no longer stated by making "I" the grammatical
+  subject. Fieldnotes says *here is how I think*; Work says *here is what happened*.
+- **"What he would change now" → "Retrospective."** This is the one section where first
+  person is allowed, because hindsight is genuinely personal. It is last in every
+  narrative.
+
+A proof note uses a shorter version of the same grammar — its middle sections are named for
+the specific artifact — but `Role in the case` and `Retrospective` are common to both
+depths.
+
+`scripts/verify-documentary-voice.sh` enforces this at source: the narratives must declare
+`narrative_voice: documentary`, must use `Role in the case` rather than a first-person
+ownership heading, and must keep first-person singular confined to a sparse retrospective.
+
+`assets/css/fieldnotes.css` marks the retrospective with a citrus rule, keyed to Hugo's
+auto-generated `#retrospective` id. Unmarked, the shift into first person on the final
+section reads as the voice slipping rather than as the one place it is permitted. That
+selector reaches the sibling paragraphs after the heading and relies on Retrospective being
+last; adding a section after it is the one change that would need it revisited.
 
 ### Essay only
 
