@@ -326,6 +326,100 @@
 }
 
 /* Enhancement is decorative only: content is never hidden before this state arrives. */
+/* -------------------------------------------------------------------------------------
+   The Outer Loop plate — the homepage's signature visual.
+   -------------------------------------------------------------------------------------
+   Replaces the retired forest-field diagram panel (.fn-feature__diagram, deleted from
+   fieldnotes.css with its .fn-mini-flow / __question / __return children). The artwork is
+   a finished 600x600 editorial plate: it brings its own masthead, legend, caption and
+   footer rule. The site's job is the surrounding UI — kicker, title, summary, essay link —
+   and nothing else. Do not caption it, tint it, or crop it.
+
+   Sizing is the whole design problem here. The plate's innermost labels ("Plan", "Build",
+   "Verify", "Revise", and the feedback note) sit at roughly 7px at native size, so:
+     - it is never scaled UP past 600px, which would soften the type it exists to carry;
+     - it is never squeezed below 480px, below which that type stops being readable, so
+       the grid gives up its second column before the image gives up legibility.
+   The column track is a hard 600px rather than a fraction for exactly that reason: a
+   fractional track let the plate drift to whatever width was left over.
+
+   The 1px ink frame is structural, not decorative — the artwork's cream ground and the
+   feature block's citrus meet at a low-contrast edge, and without the hairline the plate
+   reads as a stain on the block rather than as a plate on it. Same rule language as
+   .fn-schematic.
+   ------------------------------------------------------------------------------------- */
+
+/* The track carries the plate AND its margins, or the margins eat the artwork: a bare
+   600px track rendered the image at 520px, the exact downscale this block exists to
+   prevent. 680px = the plate's native 600px + 2 x the 40px inset below. THE TWO NUMBERS
+   MOVE TOGETHER — change one and the plate silently stops rendering at native size.
+
+   Written as a literal, not as calc(600px + 5rem): Hugo's minifier emits that as
+   `minmax(0,1fr)calc(600px + 5rem)` with no space before `calc`, which is invalid, so the
+   whole declaration is dropped and the block falls back to the base `1.05fr 1fr`. The
+   symptom is a plate that looks roughly right and is quietly 518px. */
+.fn-feature {
+  grid-template-columns: minmax(0, 1fr) 680px;
+  align-items: center;
+}
+
+.fn-feature__plate {
+  /* 40px, paired with the 680px track above. */
+  margin: 40px;
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  line-height: 0;
+}
+
+.fn-feature__plate img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* The plate needs 600px plus its own margins plus a readable measure beside it. Below that
+   the two-column split is what has to go, not the artwork's scale. */
+@media (max-width: 1180px) {
+  .fn-feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fn-feature__plate {
+    margin: 0 2.5rem 2.5rem;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 900px) {
+  .fn-feature__plate { margin: 0 1.75rem 1.75rem; }
+}
+
+/* Below roughly 700px the block can no longer give the plate a width at which its inner
+   labels survive: at a 375px viewport the artwork rendered 293px wide, putting its 7px
+   type at about 3.4px. So the plate stops scaling and starts scrolling — inside its own
+   container, never the body, per the wide-content rule in CLAUDE.md. 560px is the floor:
+   about 93% of native, where the inner loop is still readable. */
+@media (max-width: 700px) {
+  /* Inset margins have to go here, not shrink. The figure is a grid item, so an inner
+     min-width propagates outward: with 1.5rem margins still on, the 560px floor pushed the
+     block past the viewport and the BODY scrolled (602px at a 375px viewport) instead of
+     the plate. Zero inline margin plus max-width:100% pins the figure to the track and
+     keeps the overflow where it belongs. */
+  .fn-feature__plate {
+    margin: 0 0 1.5rem;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .fn-feature__plate img {
+    min-width: 560px;
+  }
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .fn-enhanced .fn-chapter::before {
     width: 2.75rem;
