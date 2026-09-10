@@ -1,8 +1,18 @@
 # Personal Brand Proof Layer
 
-**Status:** approved design, implementation pending  
-**Branch:** `brand/personal-fieldnotes-proof-layer`  
-**Date:** 2026-09-10
+- **Status:** approved design, implemented 2026-09-10
+- **Branch:** `brand/personal-fieldnotes-proof-layer`
+- **Date:** 2026-09-10
+
+> **Moved.** This spec was authored at `docs/superpowers/specs/`. It lives here instead
+> because `scripts/verify-build.sh` fails the build (exit 3) on **any** tracked file under
+> `docs/` — that directory was the old `publishDir`, and committing it once served a stale
+> page linking a PDF with a personal phone number in it. The guard cannot tell a spec from
+> build output, and it is worth more than the path was. Planning artifacts belong in
+> `.planning/`.
+
+> **Two deliberate deviations from the text below, plus the GitHub inspection result.**
+> See "Implementation notes" at the end of this file before changing either.
 
 ## Purpose
 
@@ -349,3 +359,59 @@ Before merge:
 - expanding Work before new stories clear evidence and employer-safety review;
 - broad GitHub project gallery;
 - new visual framework or client-side application layer.
+
+
+---
+
+## Implementation notes (2026-09-10)
+
+Recorded here so the next agent does not read the body above as unimplemented, and does
+not "fix" either deviation back.
+
+### 1. The Outer Loop source lives in `assets/img/`, not `static/img/`
+
+The body specifies `static/img/outer-loop-highlight.png`. The implementation uses
+`assets/img/outer-loop-highlight.png`.
+
+The reason is that the two requirements in that same section conflict. Hugo Pipes cannot
+process files under `static/` — they are copied verbatim. Emitting the 1x and 2x variants
+that the Retina requirement depends on therefore requires the source to be an *asset*.
+Keeping a canonical copy in `static/` as well would commit the same 1.6 MB image twice.
+
+The spec's actual intent is met in full: one canonical lossless source, above the 1200 px
+minimum, no lossy WebP anywhere, and the browser demonstrably loading the high-density
+variant at Retina. Only the directory differs.
+
+`static/img/outer-loop-highlight.webp` is deleted as the body requires.
+
+### 2. The whole `content/skills/` tree is deleted, not only `_index.md`
+
+The body says to delete `content/skills/_index.md` and to leave the quarantined child
+content alone "unless verification shows that it conflicts with the existing
+redirect/publication rules."
+
+Verification showed exactly that conflict. `content/skills/_index.md` carried
+`build.render: never`, which is what allowed the `/skills/` redirect stub to own the route.
+Deleting only that file left `content/skills/case-studies/_index.md` behind, and Hugo
+generates a section index for a branch whose `_index.md` is absent — so `/skills/` started
+building as a real "Skills" list page that beat the redirect adapter. That is the
+duplicate-ownership failure this pass exists to remove.
+
+Removing the tree makes all five `/skills/*` routes resolve solely through
+`data/redirects.toml`. Verified in `scripts/verify-proof-layer.sh`.
+
+### 3. No GitHub proof module, after inspection
+
+Every public non-fork repository under the profile was inspected:
+
+- `folio` — archived. Its README points at `athan-dial/skills`, which is deleted, and at
+  `/skills/folio/`, which is now a redirect stub. Surfacing it would advertise an
+  abandoned artifact and a dead link trail.
+- `model-citizen` — an unmodified Quartz v4 tree, carrying upstream's README, sponsor
+  block, and Discord invite. Not a work product.
+- `data-visualizations`, `learning`, `mackhacks_2021` — 2020 to 2023, learning-era.
+- `athan-dial.github.io` — this site.
+
+None strengthens the current AI, data, and product-judgment positioning, so no module
+ships. The profile link in the homepage context chapter and the About conversations
+section remains sufficient. Re-run the inspection before revisiting.

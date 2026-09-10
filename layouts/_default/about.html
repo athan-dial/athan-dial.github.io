@@ -1,0 +1,251 @@
+{{ define "main" }}
+{{- /*
+  About — the proof surface.
+
+  Selected by `layout: about` in content/about.md rather than by section, because About is
+  a standalone page in the IA and not a collection (see .planning/CONTENT-MODEL.md).
+
+  The page has one job the rest of the site does not: a reader who needs to establish
+  current role, trajectory, product ownership, research depth, and current territory
+  should be able to do it here without a public resume existing. The seven sections below
+  are the canonical order from the proof-layer spec, and they are numbered in the markup
+  so the sequence is legible to an editor as well as to a reader.
+
+    1. Opening classification   .Content, first block
+    2. How I work               .Content, `## How I work`
+    3. Trajectory               frontmatter `trajectory`
+    4. Selected work evidence   the published work pages
+    5. Research foundation      data/publications.json + data/education.json
+    6. Current territory        frontmatter `territory`
+    7. Conversations            frontmatter, anchored #conversations
+
+  Sections 1 and 2 are authored prose and stay in the markdown body, where they can be
+  edited as prose. Sections 3 to 7 are composed from repo data so that nothing about the
+  trajectory or the research record is retyped into prose and able to drift from its
+  source.
+
+  Everything is server-rendered. There is no JavaScript on this page at all, so the
+  JavaScript-disabled reading is the only reading.
+*/ -}}
+{{- $profile := site.Data.profile -}}
+{{- $education := site.Data.education -}}
+{{- $publications := site.Data.publications -}}
+
+{{- /* Selected research: resolve each DOI in frontmatter against the publication record,
+       so every rendered field comes from data/publications.json and the page cannot state
+       a venue or year the record does not have. A DOI with no match is skipped rather
+       than rendered empty. */ -}}
+{{- $selected := slice -}}
+{{- range $doi := .Params.selected_research -}}
+  {{- range $pub := $publications -}}
+    {{- if eq $pub.doi $doi -}}{{- $selected = $selected | append $pub -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Aggregate signal, computed — never copied as prose. The point of computing it is
+       that it stays true when data/publications.json changes. "Peer-reviewed" counts
+       journal articles and the invited review, and deliberately excludes conference
+       abstracts and the deposited protocol, which are real but are not the same claim. */ -}}
+{{- $total := len $publications -}}
+{{- $firstAuthor := len (where $publications "first_author" true) -}}
+{{- $peerReviewed := len (where $publications "type" "in" (slice "journal article" "review")) -}}
+{{- $years := slice -}}
+{{- range $publications -}}{{- $years = $years | append .year -}}{{- end -}}
+
+{{- /* Work evidence: the real published pages, gated the same way every other surface
+       gates them. If both were ever unpublished this section would disappear rather than
+       leave dead links behind. */ -}}
+{{- $work := where (where (where site.RegularPages "Section" "work") "Params.status" "published") "Params.visibility" "public" -}}
+
+<div class="container fn-page about">
+
+  {{- /* 1. Opening classification, plus 2. How I work — both from the markdown body. */ -}}
+  <header class="fn-page-head about__head">
+    <p class="fn-kicker">{{ $profile.positioning_eyebrow }}</p>
+    <h1>{{ .Title }}</h1>
+    <dl class="about__spec" aria-label="Current role, organisation, and location">
+      <div class="about__spec-item">
+        <dt>Role</dt>
+        <dd>{{ $profile.role_title }}</dd>
+      </div>
+      <div class="about__spec-item">
+        <dt>Organisation</dt>
+        <dd>{{ $profile.employer }}</dd>
+      </div>
+      <div class="about__spec-item">
+        <dt>Based in</dt>
+        <dd>{{ $profile.location }}</dd>
+      </div>
+      <div class="about__spec-item">
+        <dt>Foundation</dt>
+        <dd>{{ $profile.foundation }}</dd>
+      </div>
+    </dl>
+  </header>
+
+  <section class="about__prose prose prose--editorial" aria-label="Introduction and practice">
+    {{ .Content }}
+  </section>
+
+  {{- /* 3. Trajectory. Role, company, range — and a short note only where one is already
+         cleared for publication. The Data Research Lead row carries a pointer to the Work
+         narratives instead of a description; see the comment in content/about.md. */ -}}
+  {{- with .Params.trajectory -}}
+  <section class="about__section" id="trajectory" aria-labelledby="trajectory-title">
+    <div class="fn-section__head">
+      <h2 id="trajectory-title">Trajectory</h2>
+    </div>
+    <p class="fn-section__standfirst">Medical research, then data science, then product, and now product where the product is partly a model. The movement is the point; the titles are just where it was legible from outside.</p>
+    <ol class="about__trajectory">
+      {{- range . -}}
+      <li class="about__role">
+        <span class="about__role-range label-mono">{{ .range }}</span>
+        <div class="about__role-body">
+          <strong>{{ .role }}</strong>
+          <span class="about__role-company">{{ .company }}</span>
+          {{- with .note }}<p>{{ . }}</p>{{ end -}}
+          {{- with .evidence }}<p class="about__role-evidence">{{ . }} <a href="/work/">Read the work ↗</a></p>{{ end -}}
+        </div>
+      </li>
+      {{- end -}}
+    </ol>
+    {{- with $education -}}
+    <ul class="about__education">
+      {{- range . -}}
+      <li>
+        <span class="about__role-range label-mono">{{ .range }}</span>
+        <div class="about__role-body">
+          <strong>{{ .degree }}, {{ .major }}</strong>
+          <span class="about__role-company">{{ .school }}</span>
+        </div>
+      </li>
+      {{- end -}}
+    </ul>
+    {{- end -}}
+  </section>
+  {{- end -}}
+
+  {{- /* 4. Selected work evidence. Framed by the decision, not by impact language. The
+         framing line is each case's own card_ownership field, so this section cannot
+         claim more than the Work index already claims. */ -}}
+  {{- with $work -}}
+  <section class="about__section" id="work-evidence" aria-labelledby="work-evidence-title">
+    <div class="fn-section__head">
+      <h2 id="work-evidence-title">Selected work evidence</h2>
+      <a href="/work/">All work ↗</a>
+    </div>
+    <p class="fn-section__standfirst">Two product narratives, written as decisions rather than achievements. Each one names what I owned, what the team owned, and what the record does not support.</p>
+    <ul class="about__work">
+      {{- range (sort . "Date" "desc") -}}
+      <li class="about__work-item">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        {{- with .Params.card_ownership -}}
+        <p class="about__work-ownership"><span class="grouped-field__label">What I owned</span> {{ . }}</p>
+        {{- end -}}
+        {{- with .Params.card_unmeasured -}}
+        <p class="about__work-gap"><span class="grouped-field__label">Not measured</span> {{ . }}</p>
+        {{- end -}}
+      </li>
+      {{- end -}}
+    </ul>
+  </section>
+  {{- end -}}
+
+  {{- /* 5. Research foundation. Three selected first-author papers and one computed
+         aggregate — not the full fourteen-item bibliography, which would turn this page
+         into a CV and bury the product argument above it. The structured record stays in
+         data/publications.json for anyone who wants all of it. */ -}}
+  {{- if $selected -}}
+  <section class="about__section" id="research" aria-labelledby="research-title">
+    <div class="fn-section__head">
+      <h2 id="research-title">Research foundation</h2>
+    </div>
+    {{- with .Params.research_note -}}
+    <p class="fn-section__standfirst">{{ . }}</p>
+    {{- end -}}
+    <dl class="about__research-signal">
+      <div class="about__signal-item">
+        <dt>DOI-bearing publications</dt>
+        <dd>{{ $total }}</dd>
+      </div>
+      <div class="about__signal-item">
+        <dt>First or sole author</dt>
+        <dd>{{ $firstAuthor }}</dd>
+      </div>
+      <div class="about__signal-item">
+        <dt>Peer-reviewed articles and reviews</dt>
+        <dd>{{ $peerReviewed }}</dd>
+      </div>
+      {{- with $education -}}
+      {{- with index . 0 -}}
+      <div class="about__signal-item">
+        <dt>Doctorate</dt>
+        <dd>{{ .degree }} {{ .major }}, {{ .school }}</dd>
+      </div>
+      {{- end -}}
+      {{- end -}}
+    </dl>
+    <h3 class="about__research-heading">Selected first-author work</h3>
+    <ol class="about__research">
+      {{- range $selected -}}
+      <li class="about__paper">
+        <p class="about__paper-title">
+          <a href="{{ .url }}" rel="noopener noreferrer" target="_blank">{{ .title }}</a>
+        </p>
+        <p class="about__paper-meta label-mono">
+          {{ .venue }}{{ with .volume }} · {{ . }}{{ end }}{{ with .pages }} · {{ . }}{{ end }} · {{ .year }}
+        </p>
+        <p class="about__paper-authors">{{ delimit .authors ", " }}</p>
+      </li>
+      {{- end -}}
+    </ol>
+  </section>
+  {{- end -}}
+
+  {{- /* 6. Current territory. */ -}}
+  {{- with .Params.territory -}}
+  <section class="about__section" id="territory" aria-labelledby="territory-title">
+    <div class="fn-section__head">
+      <h2 id="territory-title">Current territory</h2>
+      <a href="/thinking/">Read Fieldnotes ↗</a>
+    </div>
+    {{- with $.Params.territory_standfirst -}}
+    <p class="fn-section__standfirst">{{ . }}</p>
+    {{- end -}}
+    <ol class="about__territory">
+      {{- range $i, $item := . -}}
+      <li>
+        <span class="about__territory-index label-mono">{{ printf "%02d" (add $i 1) }}</span>
+        <div>
+          <h3>{{ $item.question }}</h3>
+          <p>{{ $item.detail }}</p>
+        </div>
+      </li>
+      {{- end -}}
+    </ol>
+  </section>
+  {{- end -}}
+
+  {{- /* 7. Conversations. Absorbs the speaking and panel intent from the retired
+         /advisory/ page, whose route now redirects here. Deliberately carries no offer,
+         no engagement language, and no call-to-action styling that would read as a
+         funnel — Athan is employed and the site must never read as a business. */ -}}
+  <section class="about__section about__conversations" id="conversations" aria-labelledby="conversations-title">
+    <div class="fn-section__head">
+      <h2 id="conversations-title">Conversations</h2>
+    </div>
+    {{- with .Params.conversations_intro -}}
+    <p class="fn-section__standfirst">{{ . }}</p>
+    {{- end -}}
+    {{- with .Params.conversations_note -}}
+    <p class="about__conversations-note">{{ . }}</p>
+    {{- end -}}
+    <div class="about__contact">
+      <a class="fn-text-link" href="mailto:{{ $profile.email }}">Send a note <span aria-hidden="true">↗</span></a>
+      {{- with $profile.links.linkedin }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>{{ end -}}
+      {{- with $profile.links.github }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>{{ end -}}
+    </div>
+  </section>
+
+</div>
+{{ end }}

@@ -13,6 +13,13 @@ users: ["competitive-intelligence analysts", "business-development leadership"]
 themes: ["expert-workflows", "product-judgment", "reliable-ai-systems"]
 canonical_url: ""
 draft: false
+# Work-index card fields. Each line below is a compression of this page's own
+# "My ownership" / "What changed" sections — nothing here states more than the body
+# already states. They exist so a reader can see the evidence model on the index
+# without opening the case, per the proof-layer spec. Keep them in sync with the body.
+card_ownership: "Product requirements, roadmap, architecture, and hands-on implementation across the application. Analysts owned the domain judgment the system was designed to preserve."
+card_measured: "Production reached, verifiably observed roughly four months after a failed first attempt, inside a window of a few weeks."
+card_unmeasured: "No measured adoption or decision-quality outcome the primary record can support. Milestone counts and requirements-met ratios are not established."
 ---
 
 I designed and helped build an internal intelligence platform that reconciled records from multiple sources without asking a model to decide what was true. A discovery conversation changed the primary user from the analyst to a leadership function. That reframe clarified the product boundary: the machine could retrieve, rank, and propose; the analyst still had to adjudicate. The platform eventually reached production after an earlier attempt failed at a permissions boundary.

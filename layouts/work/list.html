@@ -9,15 +9,27 @@
              DESIGN.md removed as AI section-grammar everywhere else, and it left the only
              rail on this page carrying no information. A named label is what the rail is
              for, and it goes through the shared partial like every other page. */ -}}
-      {{ partial "section-rail.html" (dict "label" "Case studies") }}
+      {{ partial "section-rail.html" (dict "label" "Product narratives") }}
       <div class="section-rail__content">
         <h1>{{ .Title }}</h1>
+        {{- /* summary AND content, not one or the other. The previous `with … else`
+               rendered the body only when `summary` was unset, so setting a standfirst
+               silently deleted the page's own prose. Both surfaces are wanted here: the
+               standfirst classifies the section, the body explains the shape of a case. */ -}}
         {{- with .Params.summary -}}
-        <p class="body-lg">{{ . }}</p>
-        {{- else -}}
-          {{- with .Content -}}
-          <div class="body-lg">{{ . }}</div>
-          {{- end -}}
+        <p class="body-lg work-index__standfirst">{{ . }}</p>
+        {{- end -}}
+        {{- with .Content -}}
+        <div class="work-index__intro">{{ . }}</div>
+        {{- end -}}
+        {{- /* The evidence model, stated once, before the first case. Without it a reader
+               meets "Not measured" on a card and reads it as a weakness rather than as
+               the discipline it is. Two cases is the whole set on purpose; saying so here
+               stops the page reading as an under-filled grid. */ -}}
+        {{- with .Params.evidence_note -}}
+        <div class="work-index__evidence-note">
+          <p class="body-md">{{ . | markdownify }}</p>
+        </div>
         {{- end -}}
       </div>
     </header>

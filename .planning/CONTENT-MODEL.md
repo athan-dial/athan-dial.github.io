@@ -8,6 +8,24 @@ Open tools (`docs/skills/**`, generated via `scripts/fetch-skills.sh`) are **not
 Hugo collection. About remains a standalone page (`content/about.md` / future
 `content/about/`); it is a content type in the IA, not a collection archetype here.
 
+**About renders through `layouts/_default/about.html`**, selected by `layout: about` in its own
+front matter (2026-09-10). It is the only page in the repo that composes structured data —
+`data/profile.toml`, `data/experience.json` role fields, `data/education.json`,
+`data/publications.json` — into reader-facing sections. Its front matter therefore carries
+content-bearing keys that no collection archetype has: `trajectory`, `selected_research` (DOIs
+resolved against the publication record at build time), `research_note`, `territory`,
+`territory_standfirst`, `conversations_intro`, `conversations_note`. Sections 1 and 2 of the page
+stay as markdown body prose. See `.planning/specs/2026-09-10-personal-brand-proof-layer-design.md`.
+
+`content/skills/` **no longer exists** (2026-09-10). Both its files were quarantined fixtures, and
+deleting only `_index.md` was not safe: that file's `build.render: never` was what let the
+`/skills/` redirect stub own the route, so removing it while leaving
+`content/skills/case-studies/_index.md` behind made Hugo generate a section index for the
+parentless branch, and a real "Skills" page took the route back from the adapter. All five
+`/skills/*` routes are now owned solely by `data/redirects.toml`. Same story, same fix, for
+`content/writing.md` and `content/advisory.md`: the adapters already won those routes, the files
+were dead weight pointing at retired `/case-studies/` URLs.
+
 ---
 
 ## Content types
@@ -54,6 +72,18 @@ hugo new notes/my-note.md
 | `role` | string | `""` |
 | `users` | list of strings | `[]` |
 | `canonical_url` | string (URL) | `""` |
+| `card_ownership` | string | `""` |
+| `card_measured` | string | `""` |
+| `card_unmeasured` | string | `""` |
+
+The three `card_*` fields are optional and drive the Work index evidence ledger (2026-09-10).
+Each one must be a **compression of that page's own body** — `card_ownership` from its "My
+ownership" section, `card_measured` and `card_unmeasured` from "What changed". They exist so a
+reader sees the evidence model before opening a case. A `card_*` value that states more than the
+body states is a content-safety breach, not a copywriting liberty. `card_unmeasured` is the one
+that matters most: an empty value on a case that never instrumented its outcome reads as a
+concealment, which is exactly what CONTENT-SAFETY-CONTRACT.md's "`NO RECORD` gets said out loud"
+rule forbids.
 
 Work body skeleton (8 parts): **BLUF** → **Who was doing the work** → **What was already possible** → **The product boundary** → **The hard choice** → **Athan's ownership** → **What changed** → **What he would change now**.
 

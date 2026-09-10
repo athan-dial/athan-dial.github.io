@@ -1,8 +1,25 @@
 {{/*
   Work index / Selected Work row.
   Rule-separated grouped fields — not a floating card.
-  Exposes users, role, themes, and summary (constraint + outcome narrative
-  until dedicated frontmatter fields exist). Safe when fields are missing.
+
+  The proof-layer pass added the evidence model to this row. The reason is that the
+  previous card showed users, role, themes and a summary, which is the shape of a project
+  summary — the exact reading the Work section is meant not to have. A reader could not
+  tell from the index whether a number in the case was measured, estimated, or a target,
+  and could not tell which decisions were Athan's rather than the team's. Both of those
+  are the point of these narratives, so they belong before the click.
+
+  Three fields carry it, each optional and each sourced from the page's own body:
+    card_ownership   what Athan owned, and what he did not
+    card_measured    what was actually measured
+    card_unmeasured  what was never measured — stated, not omitted
+
+  `evidence_status` renders as a WORD, never as colour alone: the four values map to
+  plain-language classes below. CONTENT-MODEL.md owns the vocabulary; this template only
+  translates it for a reader who has not read that file.
+
+  Safe when every added field is missing: a page with none of them renders exactly the
+  row that shipped before.
 */}}
 {{- $page := . -}}
 {{- $heading := "h3" -}}
@@ -14,6 +31,18 @@
 {{- $role := $page.Params.role | default "" -}}
 {{- $themes := $page.Params.themes | default slice -}}
 {{- $summary := $page.Params.summary | default $page.Description | default "" -}}
+{{- $ownership := $page.Params.card_ownership | default "" -}}
+{{- $measured := $page.Params.card_measured | default "" -}}
+{{- $unmeasured := $page.Params.card_unmeasured | default "" -}}
+{{- /* Plain-language evidence class. The map is deliberately explicit rather than a
+       title-cased slug, because "range-only" and "mechanism-only" mean nothing to a
+       reader who has not read the content model. */ -}}
+{{- $evidenceLabels := dict
+      "verified" "Measured and verified"
+      "range-only" "Measured, published as a range"
+      "mechanism-only" "Mechanism only, no published metrics"
+      "needs-verification" "Not cleared for publication" -}}
+{{- $evidence := index $evidenceLabels ($page.Params.evidence_status | default "") -}}
 <article class="work-card">
   <a href="{{ $page.RelPermalink }}" class="work-card__link">
     <div class="work-card__meta">
@@ -26,6 +55,12 @@
       {{- with $role -}}
       <div class="work-card__field">
         <span class="grouped-field__label">Role</span>
+        <span class="label-mono">{{ . }}</span>
+      </div>
+      {{- end -}}
+      {{- with $evidence -}}
+      <div class="work-card__field">
+        <span class="grouped-field__label">Evidence</span>
         <span class="label-mono">{{ . }}</span>
       </div>
       {{- end -}}
@@ -44,6 +79,30 @@
       {{- end -}}
       {{- with $summary -}}
       <p class="body-md work-card__summary">{{ . }}</p>
+      {{- end -}}
+      {{- if or $ownership (or $measured $unmeasured) -}}
+      {{- /* A definition list, not paragraphs: the three entries are labelled facts about
+             the case, and a reader skimming the index reads the labels first. */ -}}
+      <dl class="work-card__evidence">
+        {{- with $ownership -}}
+        <div class="work-card__evidence-item">
+          <dt>What I owned</dt>
+          <dd>{{ . }}</dd>
+        </div>
+        {{- end -}}
+        {{- with $measured -}}
+        <div class="work-card__evidence-item">
+          <dt>Measured</dt>
+          <dd>{{ . }}</dd>
+        </div>
+        {{- end -}}
+        {{- with $unmeasured -}}
+        <div class="work-card__evidence-item work-card__evidence-item--gap">
+          <dt>Not measured</dt>
+          <dd>{{ . }}</dd>
+        </div>
+        {{- end -}}
+      </dl>
       {{- end -}}
     </div>
   </a>
