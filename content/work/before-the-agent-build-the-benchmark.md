@@ -9,7 +9,7 @@ evidence_status: mechanism-only
 visibility: private
 employer_review: pending
 featured: false
-role: "Product and evaluation lead"
+role: "Benchmark design"
 users:
   - "data scientists"
   - "scientific model developers"
@@ -18,7 +18,7 @@ themes:
   - product-judgment
 canonical_url: ""
 draft: true
-card_ownership: "Problem framing, benchmark contract, source-probe decisions, and the boundary between sourced facts and normalized interpretation."
+card_ownership: "Benchmark contract, source-probe decisions, and the boundary between sourced facts and normalized interpretation."
 card_measured: "The source probe established that campaign reconstruction was primarily a data-join problem; the harder work was defining the scientific abstraction and evaluation contract."
 card_unmeasured: "No agent-performance claim yet. The benchmark is being built specifically so later performance claims have somewhere honest to land."
 ---
@@ -70,6 +70,12 @@ That means the evaluation cannot hand the agent future assay results, later-stag
 That sounds obvious. In practice, leakage enters through joins, derived fields, labels created after the fact, and datasets assembled for a different purpose.
 
 So I am treating leakage safety as part of the product contract, not a cleanup pass once the benchmark produces interesting scores.
+
+## My part
+
+I am shaping the benchmark contract and the decisions that determine what the evaluation means. That includes where the historical decision frontier sits, how source assertions remain traceable after normalization, and which reconstruction rules are allowed to create derived relationships.
+
+The source probe also changed what I thought the hard part was. Once campaign reconstruction collapsed into a tractable data-join problem, I stopped spending product attention on clever reconstruction and moved it toward the scientific abstraction and the benchmark boundary instead.
 
 ## Why build this before the agent?
 
