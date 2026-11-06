@@ -12,13 +12,13 @@ Start from the worktree root. Restart your `hugo server` first (the Atlas mount 
 2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Running agents together and safely 3, Data lineage and pipelines 4, Tools and directories for agents 5), every card has an image tile (12 real images, 4 typographic tiles: Letta, MCP Registry, Scientific Agent Skills, Scrapling), no broken images, "16 of 16 systems", an intro that says you read 16 projects and ran none, a legend, and a "Terms used here" disclosure (agent, MCP, knowledge graph, data lineage).
 3. Type "lineage" in Search. Pass: 2 systems, other groups disappear, URL gains `?q=lineage`, "Clear search" restores all 16.
 4. http://localhost:1313/atlas/sqlmesh--sqlmesh/ . Pass: breadcrumb, image with credit line and "View original image" link, citrus "My read" block, a "Use it when / Skip it when" line, "What I did not check", numbered "What the project says about itself" facts whose [n] jump to Sources, rail on the right.
-5. http://localhost:1313/atlas/mksglu--context-mode/ . Pass: license reads "License not stated". Also open /atlas/letta-ai--letta/ (typographic tile, no image).
+5. http://localhost:1313/atlas/letta-ai--letta/ . Pass: a catalogue plate (topic, name, repo path, ghosted initial) instead of an image; no licence anywhere on the page.
 6. Evidence: all 16 are "Read, not run". No record exists for Compared, Run or In use yet, so those cannot be seen.
 
 ## 2. Stress (3 min)
 - 200% zoom (Cmd +) on /atlas/ and a record. Pass: no overlap, no sideways scroll.
 - JavaScript off (DevTools, Disable JavaScript). Pass: all 16 cards visible, filter controls hidden.
-- Mobile 390px (DevTools device toolbar). Pass: no sideways scroll; the nav wraps to two lines (known, matches the rest of the site).
+- Mobile 390px (DevTools device toolbar). Pass: no sideways scroll; the header nav (Work, Fieldnotes, Atlas, About) stays on one line.
 
 ## 3. Scripts (3 min)
 ```
