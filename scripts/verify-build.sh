@@ -25,6 +25,7 @@
 #   6  content safety violation (employer-confidential material in content/)
 #   7  employer_review not cleared on a page that would publish
 #   8  render-HTML assertion failed (what the reader receives)
+#   9  atlas records invalid, or a synthetic atlas sample page would publish
 
 set -uo pipefail
 
@@ -42,6 +43,16 @@ ok() { printf 'verify-build:   ok — %s\n' "$*"; }
 command -v hugo >/dev/null 2>&1 || fail 4 "hugo is not installed or not on PATH"
 
 # ---------------------------------------------------------------------------
+# 0. Atlas records. Hugo reads atlas/records/*.toml directly (mount in config/_default/module.toml),
+#    so there is no generated file to keep fresh. The validator is the gate on those records.
+# ---------------------------------------------------------------------------
+if [[ -d atlas/records ]]; then
+  command -v python3 >/dev/null 2>&1 || fail 9 "python3 needed to validate atlas/records"
+  python3 atlas/validate.py atlas/records >/dev/null 2>&1 || { python3 atlas/validate.py atlas/records >&2; fail 9 "atlas/validate.py rejected atlas/records"; }
+  ok "atlas records validate"
+fi
+
+# ---------------------------------------------------------------------------
 # 1. The site must build. Build to a throwaway dir so docs/ is never touched.
 # ---------------------------------------------------------------------------
 BUILD_OUT="$(mktemp -d)"
@@ -52,6 +63,13 @@ if ! BUILD_LOG="$(hugo --gc --destination "$BUILD_OUT" 2>&1)"; then
   fail 1 "hugo build failed (see output above)"
 fi
 ok "hugo build succeeded (throwaway dir, docs/ untouched)"
+
+if [[ -d "$BUILD_OUT/atlas" ]]; then
+  if find "$BUILD_OUT/atlas" -maxdepth 1 -name 'sample-*' | grep -q . || grep -rqE 'Synthetic sample record' "$BUILD_OUT/atlas"; then
+    fail 9 "synthetic atlas sample content would publish"
+  fi
+  ok "no synthetic atlas sample pages in build"
+fi
 
 if printf '%s' "$BUILD_LOG" | grep -q 'deprecated'; then
   printf 'verify-build: warn — build emitted deprecation warnings:\n' >&2
