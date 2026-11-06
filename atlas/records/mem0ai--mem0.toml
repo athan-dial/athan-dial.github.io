@@ -55,3 +55,10 @@ source_url = "https://github.com/mem0ai/mem0#readme"
 [[facts]]
 claim = "The README says its benchmark scores reflect the managed platform, which includes optimizations not in the open-source SDK."
 source_url = "https://github.com/mem0ai/mem0#readme"
+
+[image]
+file = "mem0ai--mem0.webp"
+kind = "banner"
+alt = "Mem0 banner: the Mem0 mark and the words 'Memory For AI Agents' on a lavender background."
+credit = "Mem0"
+source_url = "https://github.com/mem0ai/mem0/blob/main/docs/images/banner-sm.png"

@@ -14,5 +14,6 @@ expect_fail "tested without evidence_note" "requires evidence_note" tests/invali
 expect_fail "missing required field" "missing required field 'mechanism'" tests/invalid3
 expect_fail "canonical_url/id mismatch" "does not resolve to id owner/repo" tests/invalid4
 expect_fail "email in text (safety scan)" "safety deny-list hit" tests/invalid5
+expect_fail "image file missing" "image.file" tests/invalid6
 expect_fail "duplicate canonical identity" "duplicate canonical identity" tests/duplicate/a tests/duplicate/b
 exit $fail

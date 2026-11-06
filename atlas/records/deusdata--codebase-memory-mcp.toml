@@ -47,3 +47,10 @@ source_url = "https://github.com/DeusData/codebase-memory-mcp#readme"
 [[facts]]
 claim = "The README says the native C backend exposes 17 MCP tools and parses languages with vendored grammars."
 source_url = "https://github.com/DeusData/codebase-memory-mcp#readme"
+
+[image]
+file = "deusdata--codebase-memory-mcp.webp"
+kind = "screenshot"
+alt = "Dark-theme screenshot of the project's graph interface in its system-structure view: a 3D map of code groups beside a details panel."
+credit = "codebase-memory-mcp"
+source_url = "https://github.com/DeusData/codebase-memory-mcp/blob/main/docs/images/lens-system-structure.png"

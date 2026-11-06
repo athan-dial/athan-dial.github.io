@@ -57,3 +57,10 @@ source_url = "https://github.com/mksglu/context-mode#readme"
 [[facts]]
 claim = "The README says the plugin is free and local, and that a separate hosted Gateway service has its own account and subscription."
 source_url = "https://github.com/mksglu/context-mode#readme"
+
+[image]
+file = "mksglu--context-mode.webp"
+kind = "banner"
+alt = "Context Mode project card with the headline 'Tool output stays out of context. Only the answer comes back.' and three figures the project reports."
+credit = "Context Mode"
+source_url = "https://github.com/mksglu/context-mode/blob/main/docs/assets/readme/hero-light.png"

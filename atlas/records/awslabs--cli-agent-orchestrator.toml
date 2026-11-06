@@ -55,3 +55,10 @@ source_url = "https://github.com/awslabs/cli-agent-orchestrator#readme"
 [[facts]]
 claim = "The repository description names Claude Code, Kiro and Codex as supported CLIs."
 source_url = "https://github.com/awslabs/cli-agent-orchestrator"
+
+[image]
+file = "awslabs--cli-agent-orchestrator.webp"
+kind = "banner"
+alt = "CLI Agent Orchestrator logo: a blue hexagon with a node graph, beside the name and the line 'Lightweight orchestration for multi-agent AI workflows'."
+credit = "CLI Agent Orchestrator"
+source_url = "https://github.com/awslabs/cli-agent-orchestrator/blob/main/docusaurus/static/img/cao-social-card.png"

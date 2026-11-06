@@ -55,3 +55,10 @@ source_url = "https://github.com/SQLMesh/sqlmesh#readme"
 [[facts]]
 claim = "The repository description says it is backwards compatible with dbt."
 source_url = "https://github.com/SQLMesh/sqlmesh"
+
+[image]
+file = "sqlmesh--sqlmesh.webp"
+kind = "diagram"
+alt = "Architecture diagram: raw data flows into SQLMesh (impact analysis, unit tests, transform, audit, blue/green deployment), which runs on compatible query engines and feeds analytics, AI/ML and data sharing."
+credit = "SQLMesh"
+source_url = "https://github.com/TobikoData/sqlmesh/blob/main/docs/readme/architecture_diagram.png"

@@ -33,6 +33,7 @@ All records are **draft candidates**. Nothing here is published.
 | `last_review_date` | date | last date the upstream repository was checked against this record |
 | `editorial_review` | string | `pending` until a human approves |
 | `unavailable` | array of string | fields or evidence deliberately not available (for example `tested`) |
+| `[image]` | table, optional | `file` (a `.webp` or `.svg` in `assets/atlas/`), `kind` (screenshot, diagram, banner, logo), `alt` (describes what it shows), `credit` (project name), `source_url` (https page it came from). Shown on the index card and record page with a credit line. |
 | `[opinion]` | table | `value_judgment` (text) and `limitations` (array, at least one). Editorial, not fact. |
 | `[provenance]` | table | `seed_pointer`, `discovery_dates`, `source_types`, `visibility = "public"`, `private_text_included = false` |
 | `[[sources]]` | array | public citations: `url` (https), `kind`, `accessed` |

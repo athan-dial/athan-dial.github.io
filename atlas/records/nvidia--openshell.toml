@@ -55,3 +55,10 @@ source_url = "https://github.com/NVIDIA/OpenShell#readme"
 [[facts]]
 claim = "The README says policy changes are checked with formal verification and risky ones wait for human review."
 source_url = "https://github.com/NVIDIA/OpenShell#readme"
+
+[image]
+file = "nvidia--openshell.webp"
+kind = "logo"
+alt = "OpenShell logo: a green shield containing a terminal prompt."
+credit = "OpenShell"
+source_url = "https://github.com/NVIDIA/OpenShell/blob/main/docs/brand/assets/openshell-avatar-1024.png"

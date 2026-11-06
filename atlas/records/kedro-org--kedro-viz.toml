@@ -47,3 +47,10 @@ source_url = "https://github.com/kedro-org/kedro-viz#readme"
 [[facts]]
 claim = "The repository description says it visualises Kedro data and machine-learning pipelines and tracks experiments."
 source_url = "https://github.com/kedro-org/kedro-viz"
+
+[image]
+file = "kedro-org--kedro-viz.webp"
+kind = "screenshot"
+alt = "Dark screenshot of Kedro-Viz: a data pipeline drawn as a left-to-right graph of nodes, beside a searchable list of pipeline nodes."
+credit = "Kedro-Viz"
+source_url = "https://github.com/kedro-org/kedro-viz/blob/main/.github/img/banner.gif"

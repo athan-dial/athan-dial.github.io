@@ -47,3 +47,10 @@ source_url = "https://github.com/reata/sqllineage#readme"
 [[facts]]
 claim = "The README says it leverages pluggable parser libraries."
 source_url = "https://github.com/reata/sqllineage#readme"
+
+[image]
+file = "reata--sqllineage.webp"
+kind = "diagram"
+alt = "Lineage graph of tables: arrows run from default.baz, bar, quux, qux and grault into default.foo, then on to default.corge."
+credit = "SQLLineage"
+source_url = "https://github.com/reata/sqllineage/blob/master/docs/_static/table.jpg"

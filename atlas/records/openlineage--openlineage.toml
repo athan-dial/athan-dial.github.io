@@ -47,3 +47,10 @@ source_url = "https://github.com/OpenLineage/OpenLineage#readme"
 [[facts]]
 claim = "The README says it defines a generic model of run, job and dataset entities identified using consistent naming strategies."
 source_url = "https://github.com/OpenLineage/OpenLineage#readme"
+
+[image]
+file = "openlineage--openlineage.svg"
+kind = "diagram"
+alt = "OpenLineage diagram from the project README."
+credit = "OpenLineage"
+source_url = "https://github.com/OpenLineage/OpenLineage/blob/main/doc/with-ol.svg"

@@ -51,3 +51,10 @@ source_url = "https://github.com/topoteretes/cognee#readme"
 [[facts]]
 claim = "The README says it runs locally with no API key required."
 source_url = "https://github.com/topoteretes/cognee#readme"
+
+[image]
+file = "topoteretes--cognee.svg"
+kind = "logo"
+alt = "Cognee wordmark in purple blocks."
+credit = "Cognee"
+source_url = "https://github.com/topoteretes/cognee/blob/main/assets/cognee-logo.svg"

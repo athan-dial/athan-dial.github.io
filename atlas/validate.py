@@ -22,6 +22,9 @@ REQUIRED = ["schema_version", "id", "canonical_url", "title", "repository_owner"
             "date_observed", "topic", "mechanism", "license_spdx", "evidence_state", "status",
             "last_review_date", "editorial_review", "unavailable", "opinion", "provenance",
             "sources", "facts"]
+IMAGE_KINDS = {"screenshot", "diagram", "banner", "logo"}
+IMAGE_EXT = {".webp", ".svg"}
+ASSET_DIR = Path(__file__).resolve().parent.parent / "assets" / "atlas"
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 RANGE = re.compile(r"^\d{4}-\d{2}-\d{2}/\d{4}-\d{2}-\d{2}$")
 ID = re.compile(r"^github:([a-z0-9][a-z0-9._-]*)/([a-z0-9._-]+)$")
@@ -119,6 +122,20 @@ def check(path, d):
             e.append("fact with empty claim")
         if f.get("source_url") not in urls:
             e.append(f"fact source_url '{f.get('source_url')}' is not listed in [[sources]]")
+    img = d.get("image")
+    if img is not None:
+        for k in ("file", "kind", "alt", "credit", "source_url"):
+            if not img.get(k):
+                e.append(f"image.{k} is required when [image] is present")
+        if img.get("kind") and img["kind"] not in IMAGE_KINDS:
+            e.append(f"image.kind '{img['kind']}' not allowed")
+        if img.get("source_url") and not URL.match(img["source_url"]):
+            e.append("image.source_url must be https")
+        f = img.get("file", "")
+        if f and (Path(f).suffix not in IMAGE_EXT or "/" in f or not (ASSET_DIR / f).is_file()):
+            e.append(f"image.file '{f}' must be a .webp or .svg in assets/atlas/")
+        if img.get("alt") and len(img["alt"]) < 20:
+            e.append("image.alt is too short to describe the image")
     for text in walk_strings(d):
         for rx, why in DENY:
             if rx.search(text):

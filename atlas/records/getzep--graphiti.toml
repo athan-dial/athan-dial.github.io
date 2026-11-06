@@ -47,3 +47,10 @@ source_url = "https://github.com/getzep/graphiti#readme"
 [[facts]]
 claim = "The repository description reads \"Build Real-Time Knowledge Graphs for AI Agents\"."
 source_url = "https://github.com/getzep/graphiti"
+
+[image]
+file = "getzep--graphiti.webp"
+kind = "diagram"
+alt = "Diagram of a small knowledge graph: Kendra linked to Puma Shoes and Adidas Shoes by edges labelled likes, loves and broke, each carrying a valid-at or invalid-at timestamp."
+credit = "Graphiti"
+source_url = "https://github.com/getzep/graphiti/blob/main/images/graphiti-graph-intro.gif"
