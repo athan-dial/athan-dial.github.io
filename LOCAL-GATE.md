@@ -9,7 +9,7 @@ Start from the worktree root. Restart your `hugo server` first (the Atlas mount 
 ## 1. Look (hugo server, 5 min)
 `hugo server -D` (restart it first), then open:
 1. http://localhost:1313/ . Pass: homepage unchanged; only the nav gained "Atlas".
-2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Running agents together and safely 3, Data lineage and pipelines 4, Tools and directories for agents 5), every card has an image tile (12 real images, 4 typographic tiles: Letta, MCP Registry, Scientific Agent Skills, Scrapling), no broken images, "16 of 16 systems", an intro that says you read 16 projects and ran none, a legend, and a "Terms used here" disclosure (agent, MCP, knowledge graph, data lineage).
+2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Running agents together and safely 3, Data lineage and pipelines 4, Tools and directories for agents 5), every card has an image tile (11 real images, 5 plates: Letta, MCP Registry, Scientific Agent Skills, Scrapling, Claude Squad), no broken images, "16 of 16 systems", an intro that says you read 16 projects and ran none, a legend, and a "Terms used here" disclosure (agent, MCP, knowledge graph, data lineage).
 3. Type "lineage" in Search. Pass: 2 systems, other groups disappear, URL gains `?q=lineage`, "Clear search" restores all 16.
 4. http://localhost:1313/atlas/sqlmesh--sqlmesh/ . Pass: breadcrumb, image with credit line and "View original image" link, citrus "My read" block, a "Use it when / Skip it when" line, "What I did not check", numbered "What the project says about itself" facts whose [n] jump to Sources, rail on the right.
 5. http://localhost:1313/atlas/letta-ai--letta/ . Pass: a catalogue plate (topic, name, repo path, ghosted initial) instead of an image; no licence anywhere on the page.
@@ -32,10 +32,10 @@ Content safety limit: `.planning/private/denylist.txt` does not exist here, so n
 "PASS" does not clear names. Read the 16 records once for private or employer content yourself.
 
 ## 4. Image provenance (3 min)
-Open `atlas/PROVENANCE.md`. You decided to include every licence class and logos and banners, so you own the risk. Check the REVIEW rows (Claude Squad AGPL-3.0, Context Mode no licence stated) and decide keep or drop; to drop one, delete its `[image]` table in the record. Pass: you are comfortable with each image, including logos (trademarked) on the permissive repos.
+Open `atlas/PROVENANCE.md`. You decided to include every licence class and logos and banners, so you own the risk. The Claude Squad image (AGPL-3.0 repo) is already removed. Check the remaining REVIEW row (Context Mode, no licence stated) and decide keep or drop; to drop one, delete its `[image]` table in the record. Pass: you are comfortable with each image, including logos (trademarked) on the permissive repos.
 
 ## 5. Review the diff (3 min)
-`git diff --stat origin/main...HEAD` (about 110 files: atlas/, 12 images in assets/atlas/, out/ evidence, the site wiring; `out/` is local-only for now). Ask:
+`git diff --stat origin/main...HEAD` (about 110 files: atlas/, 11 images in assets/atlas/, out/ evidence, the site wiring; `out/` is local-only for now). Ask:
 - Should `out/` (Hugo vs Astro evidence, audit) ship to a public repo? `.planning/` and `out/` are public once pushed.
 - Any file you did not expect under `content/`, `data/`, `layouts/`?
 

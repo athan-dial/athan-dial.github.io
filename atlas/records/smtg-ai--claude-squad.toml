@@ -52,10 +52,3 @@ source_url = "https://github.com/smtg-ai/claude-squad#readme"
 [[facts]]
 claim = "Changes can be reviewed before applying."
 source_url = "https://github.com/smtg-ai/claude-squad#readme"
-
-[image]
-file = "smtg-ai--claude-squad.webp"
-kind = "screenshot"
-alt = "Terminal screenshot of Claude Squad: a list of agent sessions on the left and a diff of a README change on the right."
-credit = "Claude Squad"
-source_url = "https://github.com/smtg-ai/claude-squad/blob/main/assets/screenshot.png"
