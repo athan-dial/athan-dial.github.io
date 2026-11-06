@@ -21,5 +21,3 @@
 .atlas-detail dt { color: var(--ink-secondary); }
 .atlas-detail dd { margin: 0; }
 @media (max-width: 600px) { .atlas__controls input, .atlas__controls select { min-width: 0; width: 100%; } .atlas__controls label { flex: 1 1 100%; } }
-.atlas-badge{font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.atlas-badge{font-weight:600;text-transform:uppercase;letter-spacing:.04em}

@@ -9,8 +9,8 @@ Start from the worktree root. Restart your `hugo server` first (the Atlas mount 
 ## 1. Look (hugo server, 5 min)
 `hugo server -D` then open:
 1. http://localhost:1313/ . Pass: homepage looks the same as main; only the nav gained "Atlas".
-2. http://localhost:1313/atlas/ . Pass: "16 of 16 records", every card shows a CANDIDATE badge; Topic/Evidence filters and search narrow the list.
-3. http://localhost:1313/atlas/mem0ai--mem0/ . Pass: Status row says Candidate (draft); repo link, license, limitations, facts, sources render.
+2. http://localhost:1313/atlas/ . Pass: "16 of 16 records", Topic/Evidence filters and search narrow the list.
+3. http://localhost:1313/atlas/mem0ai--mem0/ . Pass: repo link, license, limitations, facts, sources render.
 4. A record with `NOASSERTION` license: /atlas/mksglu--context-mode/ . Pass: license shows NOASSERTION, nothing blank.
 5. Evidence states: all 16 records are `inspected`. No record exists for evaluated, tested or adopted, so those states cannot be eyeballed yet. Pass: the filter lists only "inspected".
 6. Nav "Atlas" link is current-page highlighted on /atlas/ and record pages.
@@ -32,7 +32,7 @@ Content safety limit: `.planning/private/denylist.txt` does not exist here, so n
 "PASS" does not clear names. Read the 16 records once for private or employer content yourself.
 
 ## 4. Review the diff (3 min)
-`git diff --stat origin/main...HEAD` (about 90 files: atlas/, out/ evidence, the site wiring). Ask:
+`git diff --stat origin/main...HEAD` (about 90 files: atlas/, out/ evidence, the site wiring; `out/` is local-only for now). Ask:
 - Should `out/` (Hugo vs Astro evidence, audit) ship to a public repo? `.planning/` and `out/` are public once pushed.
 - Any file you did not expect under `content/`, `data/`, `layouts/`?
 
@@ -42,9 +42,10 @@ git worktree add --detach /tmp/rb-check HEAD && (cd /tmp/rb-check && git rebase 
 ```
 Last result (origin/main 3640e693, 2 commits ahead of merge base): clean, no conflicts.
 
-## Open, reversible defaults (decide or leave)
-- Atlas is excluded from the main `/index.xml` (`layouts/rss.xml`); it stays in the sitemap (gate G9 requires it). `/atlas/index.xml` carries its own feed. To include it, delete the `where ... "ne" "atlas"` filter.
-- Candidate label is shown everywhere. To drop it, remove the badge in `layouts/partials/atlas-card.html` and the Status row in `layouts/atlas/single.html`.
+## Decisions taken (2026-11-06)
+- Candidate/reviewed label is not rendered. Records are treated as approved for the site; the TOML `status` field is unchanged.
+- Atlas records are in the main `/index.xml` and the sitemap (about 46 feed items).
+- `out/` stays committed on this branch and local only; decide before any push whether it ships to the public repo.
 
 ## Sign-off
 Only after every pass above:
