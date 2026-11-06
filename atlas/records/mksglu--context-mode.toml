@@ -1,0 +1,59 @@
+schema_version = "atlas-record/1"
+id = "github:mksglu/context-mode"
+canonical_url = "https://github.com/mksglu/context-mode"
+title = "Context Mode: keep tool output out of the context window"
+repository_owner = "mksglu"
+repository_name = "context-mode"
+date_observed = "2026-10-31"
+topic = "agent-tooling"
+mechanism = "A local sandbox runs a tool call, stores the full output in a local SQLite index, and returns to the agent only the part it asks for."
+license_spdx = "NOASSERTION"
+license_note = "Elastic License 2.0 (ELv2), read from the repository LICENSE file. Source-available, not OSI open source."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "A cheap, local answer to context bloat. Scope here is the free plugin only, not the paid Gateway."
+limitations = ["Not run. The license is Elastic License 2.0, which is source-available rather than open source. README star and download figures are vendor claims and are not recorded."]
+
+[provenance]
+seed_pointer = "seed-index:mksglu/context-mode"
+discovery_dates = "2026-10-31"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/mksglu/context-mode"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode/blob/main/LICENSE"
+kind = "license_file"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The README says the plugin runs tool work in a local sandbox and keeps the full output in a SQLite index on the machine."
+source_url = "https://github.com/mksglu/context-mode#readme"
+
+[[facts]]
+claim = "The README says the agent is given the part it asks for."
+source_url = "https://github.com/mksglu/context-mode#readme"
+
+[[facts]]
+claim = "The README says the plugin is free and local, and that a separate hosted Gateway service has its own account and subscription."
+source_url = "https://github.com/mksglu/context-mode#readme"

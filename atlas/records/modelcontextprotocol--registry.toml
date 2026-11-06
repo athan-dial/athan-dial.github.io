@@ -1,0 +1,55 @@
+schema_version = "atlas-record/1"
+id = "github:modelcontextprotocol/registry"
+canonical_url = "https://github.com/modelcontextprotocol/registry"
+title = "MCP Registry: directory of MCP servers"
+repository_owner = "modelcontextprotocol"
+repository_name = "registry"
+date_observed = "2026-10-26"
+topic = "protocol-registry"
+mechanism = "A community-run registry service that gives MCP clients a list of MCP servers."
+license_spdx = "NOASSERTION"
+license_note = "LICENSE file states a transition from MIT to Apache-2.0; documentation is CC-BY-4.0; some contributions remain MIT."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "A registry is a good model for what an atlas entry needs: identity, a canonical source, and a status."
+limitations = ["Not run. README status notes are dated 2025 and may be out of date."]
+
+[provenance]
+seed_pointer = "seed-index:modelcontextprotocol/registry"
+discovery_dates = "2026-10-26"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/modelcontextprotocol/registry"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/modelcontextprotocol/registry#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/modelcontextprotocol/registry"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/modelcontextprotocol/registry/blob/main/LICENSE"
+kind = "license_file"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The README says the MCP registry provides MCP clients with a list of MCP servers, like an app store for MCP servers."
+source_url = "https://github.com/modelcontextprotocol/registry#readme"
+
+[[facts]]
+claim = "The README records that the registry API entered a v0.1 API freeze on 2025-10-24 and that the registry launched in preview on 2025-09-08."
+source_url = "https://github.com/modelcontextprotocol/registry#readme"

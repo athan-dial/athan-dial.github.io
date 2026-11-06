@@ -1,0 +1,17 @@
+# Verification evidence (runner self-report; not accepted until an independent verifier re-runs it)
+
+Re-run everything with: `python3 atlas/validate.py atlas/records && bash atlas/tests/run.sh && python3 atlas/check_links.py`
+
+| Id | Evidence |
+|---|---|
+| R1 (prose) | Format: `atlas/SCHEMA.md` (plain TOML, `atlas-record/1`). Validator: `atlas/validate.py`, stdlib only, deterministic. Real set: 16 valid, 0 invalid. Deliberately bad inputs fail with explicit reasons: bad topic, `tested` without note, missing field, id/URL mismatch, email in text, duplicate canonical identity. Log: `out/validator-run.log`. Identity is `github:<owner>/<repo>` lowercase, checked across the whole set and against the file name. |
+| R2 (link_check) | `atlas/check_links.py` over all canonical, README and API URLs of the 16 records (plus two LICENSE-file URLs where SPDX was NOASSERTION): 0 failing. Log: `out/link-check.log`. Each fact cites a source listed in the record (validator-enforced); claims were written from the README or repository description text read on 2026-11-04. Comparison of description to source was done by the author, not independently. |
+| R3 (human) | Checklist: `atlas/ledger/SCREENING-CHECKLIST.md`. Validator deny-list (employer name, internal hosts, emails, credential text, local paths) passes on all records. Grep over `atlas/` and `out/` for employer, ticket-key and local-path strings: only the deny-list patterns themselves matched. Needs a human read; the deny-list is a floor. |
+| R4 (prose) | Records are plain TOML files. Workflow is a text editor plus `validate.py` (Python standard library). No database, CMS or paid API anywhere in `atlas/`. `scripts/verify-content-safety.sh` passes. Hugo build output contains no atlas paths (the folder is outside `content/`, `data/`, `layouts/`). |
+| C1 (human) | All 16 records `status = "candidate"`, `editorial_review = "pending"`, `evidence_state = "inspected"`; `unavailable` lists tested/adopted. Nothing published or pushed; no experiment claimed. |
+| C2/C3 (prose, line7) | `atlas/ledger/provenance.csv` holds source pointer, observed date, evidence state and license per selected record. `atlas/COVERAGE.md` states the seed is a partial index, all 207 rows were `historically_recovered_unverified`, 205 resolved upstream, 2 did not, 16 selected, 191 unselected and still unverified. Selected rows were each checked: URL 200, public, not archived, license read from the repository (LICENSE file read for the two NOASSERTION cases). Deduplication: 207 distinct owner/repo identities in the seed, 0 duplicates; the validator enforces uniqueness. 16 is inside the 12-20 target. |
+| C4 (human) | Records hold only `seed_pointer = "seed-index:<owner/repo>"`, never conversation text. Seed CSV is not in any repo path: `grep -rl "provenance_context,mention_count"` over the worktree (excluding `.git`) returned nothing. `sha256sum -c MANIFEST.sha256` on the archived seed: OK (unchanged). |
+| C5 | No file or content was taken from the PolyForm-licensed reference site; it was not consulted. The field list comes from the ticket. |
+| C6 | Nothing pushed, no PR, no paid service. Only free read-only GitHub metadata GETs were made. |
+
+Known limits: selection of 16 is editorial judgment and needs Athan's review; all records are `inspected`, not tested; descriptions were not independently compared to sources by anyone but the author; one seed URL appears to have moved owners and was left `unverified` rather than guessed.

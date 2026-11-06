@@ -1,0 +1,49 @@
+schema_version = "atlas-record/1"
+id = "github:reata/sqllineage"
+canonical_url = "https://github.com/reata/sqllineage"
+title = "SQLLineage: source and target tables from SQL"
+repository_owner = "reata"
+repository_name = "sqllineage"
+date_observed = "date_not_recovered"
+topic = "data-lineage"
+mechanism = "Parses SQL with pluggable parser libraries and reports the source and target tables of a statement."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Small, focused static-analysis tool. Complements runtime lineage standards such as OpenLineage."
+limitations = ["Not run. Dialect coverage and column-level behavior were not checked."]
+
+[provenance]
+seed_pointer = "seed-index:reata/sqllineage"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/reata/sqllineage"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/reata/sqllineage#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/reata/sqllineage"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The README says that given a SQL command it reports the source and target tables."
+source_url = "https://github.com/reata/sqllineage#readme"
+
+[[facts]]
+claim = "The README says it leverages pluggable parser libraries."
+source_url = "https://github.com/reata/sqllineage#readme"

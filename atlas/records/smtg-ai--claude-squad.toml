@@ -1,0 +1,53 @@
+schema_version = "atlas-record/1"
+id = "github:smtg-ai/claude-squad"
+canonical_url = "https://github.com/smtg-ai/claude-squad"
+title = "Claude Squad: many terminal agents, one window"
+repository_owner = "smtg-ai"
+repository_name = "claude-squad"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A terminal app that runs several coding agents at once, each in its own isolated git workspace."
+license_spdx = "AGPL-3.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Plain worktree-per-task isolation. The simplest version of a pattern several tools in this seed share."
+limitations = ["Not run. AGPL-3.0 licensing matters for any reuse. Last push per the API was 2026-08-20."]
+
+[provenance]
+seed_pointer = "seed-index:smtg-ai/claude-squad"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/smtg-ai/claude-squad"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/smtg-ai/claude-squad#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/smtg-ai/claude-squad"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The README says it manages multiple local terminal agents in separate workspaces so tasks run simultaneously."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"
+
+[[facts]]
+claim = "The README says each task gets its own isolated git workspace."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"
+
+[[facts]]
+claim = "The README says changes can be reviewed before applying."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"
