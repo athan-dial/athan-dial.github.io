@@ -1,7 +1,6 @@
 <article class="atlas-card">
-  <div class="atlas-card__meta">
-    <span>{{ .Params.topic }}</span><span>{{ .Params.evidence }}</span>{{ with .Params.license }}<span>{{ . }}</span>{{ end }}
-  </div>
-  <h2 class="atlas-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ partial "atlas-tile.html" (dict "page" . "size" "tile") }}
+  <div class="atlas-card__meta"><span>{{ .Params.evidence_label }}</span>{{ with .Params.license }}<span>{{ if eq . "NOASSERTION" }}License not stated{{ else }}{{ . }}{{ end }}</span>{{ end }}</div>
+  <h3 class="atlas-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
   <p class="atlas-card__summary">{{ .Params.summary }}</p>
 </article>

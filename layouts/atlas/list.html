@@ -1,21 +1,31 @@
 {{ define "main" }}
-{{- $topics := slice -}}{{- $evidence := slice -}}
-{{- range .Pages }}{{ $topics = $topics | append .Params.topic }}{{ $evidence = $evidence | append .Params.evidence }}{{ end -}}
-{{- $topics = $topics | uniq | sort -}}{{- $evidence = $evidence | uniq | sort -}}
-<section class="container atlas" data-atlas>
-  <h1>{{ .Title }}</h1>
-  <p class="body-lg">{{ .Description }}</p>
+{{- $pages := .Pages.ByTitle -}}
+<div class="container atlas" data-atlas>
+  <header class="fn-page-head">
+    <p class="fn-kicker">Fieldnotes / Atlas</p>
+    <h1>Systems Atlas</h1>
+    <p>{{ .Description }}</p>
+  </header>
+  <p class="atlas__legend"><strong>Read, not run</strong> means I read the project's README and repository and did not install it. <strong>Compared</strong>, <strong>Run</strong> and <strong>In use</strong> mean more, and a record says what was done.</p>
   <div class="atlas__controls" data-atlas-controls hidden>
-    <label>Search<input type="search" data-atlas-search placeholder="Title, summary, tag"></label>
-    <label>Topic<select data-atlas-filter="domain"><option value="">All</option>{{ range $topics }}<option>{{ . }}</option>{{ end }}</select></label>
-    <label>Evidence<select data-atlas-filter="status"><option value="">All</option>{{ range $evidence }}<option>{{ . }}</option>{{ end }}</select></label>
+    <label>Search<input type="search" data-atlas-search placeholder="Name, topic or what it does"></label>
+    <button type="button" data-atlas-clear hidden>Clear search</button>
   </div>
-  <p class="atlas__count" data-atlas-count role="status">{{ len .Pages }} of {{ len .Pages }} records</p>
-  <ul class="atlas__list">
-    {{- range .Pages.ByTitle }}
-    <li data-atlas-item data-domain="{{ .Params.topic }}" data-status="{{ .Params.evidence }}" data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>
+  <p class="atlas__count" data-atlas-count role="status">{{ len $pages }} of {{ len $pages }} systems</p>
+  {{- range site.Data.atlas_meta.groups }}
+    {{- $g := . -}}
+    {{- $in := where $pages "Params.group" $g.title -}}
+    {{- if $in }}
+  <section class="fn-section atlas-group" data-atlas-group aria-labelledby="g-{{ $g.title | urlize }}">
+    <div class="fn-section__head"><h2 id="g-{{ $g.title | urlize }}">{{ $g.title }} <span>{{ len $in }}</span></h2></div>
+    <ul class="atlas__list">
+      {{- range $in }}
+      <li data-atlas-item data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>
+      {{- end }}
+    </ul>
+  </section>
     {{- end }}
-  </ul>
-  <p class="atlas__empty" data-atlas-empty hidden role="status">No records match.</p>
-</section>
+  {{- end }}
+  <p class="atlas__empty" data-atlas-empty hidden role="status">No systems match.</p>
+</div>
 {{ end }}

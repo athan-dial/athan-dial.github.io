@@ -1,0 +1,14 @@
+{{- /* Image tile for an Atlas record. Context: dict "page" . "size" "tile"|"record". Self-hosted only (assets/atlas/). */ -}}
+{{- $p := .page -}}
+{{- $img := $p.Params.image -}}
+{{- $r := "" -}}
+{{- with $img }}{{ $r = resources.Get (printf "atlas/%s" .file) }}{{ end -}}
+{{- if and $img $r -}}
+  {{- $src := $r.RelPermalink -}}
+  {{- $w := 640 -}}{{- if eq .size "record" }}{{ $w = 1200 }}{{ end -}}
+  {{- if and (eq $r.MediaType.SubType "webp") (gt $r.Width $w) }}{{ $src = ($r.Resize (printf "%dx webp q82" $w)).RelPermalink }}{{ end -}}
+  <div class="atlas-tile atlas-tile--{{ $img.kind }}"><img src="{{ $src }}" alt="{{ $img.alt }}" loading="lazy" decoding="async"></div>
+{{- else -}}
+  {{- $name := index (split $p.Title ":") 0 -}}
+  <div class="atlas-tile atlas-tile--type" aria-hidden="true"><span>{{ $name }}</span></div>
+{{- end -}}
