@@ -1,12 +1,12 @@
 schema_version = "atlas-record/1"
 id = "github:nvidia/openshell"
 canonical_url = "https://github.com/NVIDIA/OpenShell"
-title = "OpenShell: sandboxed runtime for agents"
+title = "OpenShell: a locked box for running agents"
 repository_owner = "nvidia"
 repository_name = "openshell"
 date_observed = "2026-10-23"
 topic = "agent-sandboxing"
-mechanism = "Runs each agent in an isolated sandbox with kernel-level controls, routes network connections through a policy check, and verifies policy changes before approval."
+mechanism = "Runs each agent in a locked box. Every network request is checked against rules first, and changes to those rules are checked before they take effect."
 license_spdx = "Apache-2.0"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "The clearest statement in this set of agent containment as a policy engine rather than a prompt."
-limitations = ["Not run. Security claims were not tested or audited."]
+value_judgment = "The README states containment as rules enforced around the agent, not as instructions in its prompt. I like that framing. I have not tested whether the protections hold, so I would drop the view if independent testing shows they do not."
+fit = "Look at it when an agent will run code you do not fully trust. Skip it if a container you already run is enough."
+limitations = ["I did not test or audit any of the security claims."]
 
 [provenance]
 seed_pointer = "seed-index:NVIDIA/OpenShell"
@@ -41,19 +42,19 @@ kind = "api_metadata"
 accessed = "2026-11-04"
 
 [[facts]]
-claim = "The README says each agent runs in an isolated sandbox with kernel controls on file access and system calls."
+claim = "Each agent runs in an isolated sandbox with kernel controls on file access and system calls."
 source_url = "https://github.com/NVIDIA/OpenShell#readme"
 
 [[facts]]
-claim = "The README says every network connection passes a policy check before it leaves the sandbox."
+claim = "Every network connection passes a policy check before it leaves the sandbox."
 source_url = "https://github.com/NVIDIA/OpenShell#readme"
 
 [[facts]]
-claim = "The README says agents never see real credentials."
+claim = "Agents never see real credentials."
 source_url = "https://github.com/NVIDIA/OpenShell#readme"
 
 [[facts]]
-claim = "The README says policy changes are checked with formal verification and risky ones wait for human review."
+claim = "Policy changes are checked with formal verification, and risky ones wait for human review."
 source_url = "https://github.com/NVIDIA/OpenShell#readme"
 
 [image]

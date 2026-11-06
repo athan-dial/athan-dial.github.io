@@ -12,7 +12,7 @@ title = "Agent memory"
 topics = ["agent-memory"]
 
 [[groups]]
-title = "Orchestration and sandboxing"
+title = "Running agents together and safely"
 topics = ["agent-orchestration", "agent-sandboxing"]
 
 [[groups]]
@@ -20,5 +20,5 @@ title = "Data lineage and pipelines"
 topics = ["data-lineage", "data-transformation", "data-pipeline-visualization"]
 
 [[groups]]
-title = "Tooling and registries"
+title = "Tools and directories for agents"
 topics = ["agent-tooling", "code-intelligence", "protocol-registry", "scientific-agent-skills", "web-scraping"]

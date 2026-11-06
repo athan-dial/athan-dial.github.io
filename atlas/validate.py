@@ -122,6 +122,9 @@ def check(path, d):
             e.append("fact with empty claim")
         if f.get("source_url") not in urls:
             e.append(f"fact source_url '{f.get('source_url')}' is not listed in [[sources]]")
+    fit = d["opinion"].get("fit")
+    if fit is not None and (not isinstance(fit, str) or len(fit) < 20):
+        e.append("opinion.fit must be a sentence when present")
     img = d.get("image")
     if img is not None:
         for k in ("file", "kind", "alt", "credit", "source_url"):

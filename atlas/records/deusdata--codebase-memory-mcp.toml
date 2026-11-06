@@ -1,12 +1,12 @@
 schema_version = "atlas-record/1"
 id = "github:deusdata/codebase-memory-mcp"
 canonical_url = "https://github.com/DeusData/codebase-memory-mcp"
-title = "codebase-memory-mcp: local code knowledge graph over MCP"
+title = "codebase-memory-mcp: a local map of a codebase for agents"
 repository_owner = "deusdata"
 repository_name = "codebase-memory-mcp"
 date_observed = "date_not_recovered"
 topic = "code-intelligence"
-mechanism = "An MCP server that builds a persistent local knowledge graph of code, docs, configuration and infrastructure and exposes it through MCP tools."
+mechanism = "Builds a lasting local map of code, docs, configuration and infrastructure as linked facts, and lets AI agents query it through MCP."
 license_spdx = "MIT"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "A concrete take on codebase-as-graph for agents, local rather than hosted."
-limitations = ["Not run. The README is long and promotional in places; language-count and tool-count claims were not verified."]
+value_judgment = "It gives an agent a structured local map of a codebase instead of making it search files each time. I would borrow the idea. I would doubt it if the map goes stale faster than it is rebuilt, which I did not check."
+fit = "Use it when an agent keeps re-reading the same large codebase. Skip it if the project is small enough to search directly."
+limitations = ["The README is long and promotional in places. I did not verify its language count or tool count."]
 
 [provenance]
 seed_pointer = "seed-index:DeusData/codebase-memory-mcp"
@@ -41,11 +42,11 @@ kind = "api_metadata"
 accessed = "2026-11-04"
 
 [[facts]]
-claim = "The README says it is an MCP server connecting code, documentation, configuration and infrastructure in a persistent local knowledge graph."
+claim = "It is an MCP server that connects code, documentation, configuration and infrastructure in a persistent local knowledge graph."
 source_url = "https://github.com/DeusData/codebase-memory-mcp#readme"
 
 [[facts]]
-claim = "The README says the native C backend exposes 17 MCP tools and parses languages with vendored grammars."
+claim = "The project says its native C backend exposes 17 MCP tools and parses languages with bundled grammars."
 source_url = "https://github.com/DeusData/codebase-memory-mcp#readme"
 
 [image]

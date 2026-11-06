@@ -1,12 +1,12 @@
 schema_version = "atlas-record/1"
 id = "github:getzep/graphiti"
 canonical_url = "https://github.com/getzep/graphiti"
-title = "Graphiti: temporal knowledge graphs for agents"
+title = "Graphiti: agent memory that tracks when facts were true"
 repository_owner = "getzep"
 repository_name = "graphiti"
 date_observed = "date_not_recovered"
 topic = "agent-memory"
-mechanism = "Agent memory stored as a knowledge graph whose facts carry time, so changing facts can be queried over time."
+mechanism = "Stores an agent's memory as linked facts, each with a time, so you can ask what was true at a given date."
 license_spdx = "Apache-2.0"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "A clear example of memory as a graph with a time dimension instead of a flat vector store. Worth reading for how it models change."
-limitations = ["Not run. Mechanism details beyond the README title and description (storage, query model) were not read.", "The README carries a hiring notice; maintainer claims about production use are not verified."]
+value_judgment = "The README frames memory as a graph whose facts carry time. I have not read how it stores or queries that, so treat this as a pointer, not a review. I would change my mind after reading the storage and query design."
+fit = "Look at it if your agent's memory has to cope with facts that change. Skip it for fixed reference data."
+limitations = ["I read only the README title and description, so I cannot say how it stores or queries facts."]
 
 [provenance]
 seed_pointer = "seed-index:getzep/graphiti"
@@ -45,7 +46,7 @@ claim = "The README title calls it a framework for building temporal knowledge g
 source_url = "https://github.com/getzep/graphiti#readme"
 
 [[facts]]
-claim = "The repository description reads \"Build Real-Time Knowledge Graphs for AI Agents\"."
+claim = "The repository description reads \"Build Real-Time Knowledge Graphs for AI Agents\" (the project's own wording)."
 source_url = "https://github.com/getzep/graphiti"
 
 [image]

@@ -18,7 +18,7 @@
       "evidence" $r.evidence_state "evidence_label" $label
       "license" (default "" $r.license_spdx) "canonical_url" $r.canonical_url "reviewed" $r.last_review_date
       "summary" $r.mechanism
-      "read" $r.opinion.value_judgment "limitations" $r.opinion.limitations
+      "read" $r.opinion.value_judgment "fit" (default "" $r.opinion.fit) "limitations" $r.opinion.limitations
       "facts" $r.facts "sources" $r.sources
       "status" "published" "visibility" "public" -}}
   {{- with $r.image }}{{ $params = merge $params (dict "image" .) }}{{ end -}}

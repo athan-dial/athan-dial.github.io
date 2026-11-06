@@ -6,7 +6,7 @@ repository_owner = "mem0ai"
 repository_name = "mem0"
 date_observed = "date_not_recovered"
 topic = "agent-memory"
-mechanism = "Extracts memories from conversations in one pass, links entities across memories, and retrieves by fusing semantic, keyword and entity signals."
+mechanism = "Pulls facts out of conversations and adds them to a store without ever editing old ones. It finds them again by meaning, by keyword and by named thing, then merges the results."
 license_spdx = "Apache-2.0"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "Useful contrast to graph-first memory: append-only memory plus retrieval fusion. The append-only choice is the interesting design bet."
-limitations = ["Not run. Benchmark numbers are vendor-reported and, per the README, describe the managed platform rather than the open-source SDK."]
+value_judgment = "A useful contrast to graph-based memory: it only appends, and leans on search to sort things out. That append-only choice is the design bet to watch. I would revise this if stale or conflicting memories turn out to hurt retrieval, which I did not test."
+fit = "Look at it when you want agent memory without managing a graph. Skip it if memories must be corrected or deleted in place; the README says it only adds."
+limitations = ["Its benchmark numbers are the project's own, and the README says they describe the managed platform, not the open-source SDK."]
 
 [provenance]
 seed_pointer = "seed-index:mem0ai/mem0"
@@ -41,19 +42,19 @@ kind = "api_metadata"
 accessed = "2026-11-04"
 
 [[facts]]
-claim = "The README describes single-pass ADD-only extraction: one LLM call, no UPDATE or DELETE, so memories accumulate."
+claim = "Extraction is a single pass: one call to a language model, adding memories and never updating or deleting them, so memories accumulate."
 source_url = "https://github.com/mem0ai/mem0#readme"
 
 [[facts]]
-claim = "The README says entities are extracted, embedded and linked across memories to boost retrieval."
+claim = "Entities (named things) are extracted, embedded and linked across memories to improve retrieval."
 source_url = "https://github.com/mem0ai/mem0#readme"
 
 [[facts]]
-claim = "The README says retrieval scores semantic, BM25 keyword and entity matches in parallel and fuses them."
+claim = "Retrieval scores meaning, keyword (BM25) and entity matches in parallel and merges them."
 source_url = "https://github.com/mem0ai/mem0#readme"
 
 [[facts]]
-claim = "The README says its benchmark scores reflect the managed platform, which includes optimizations not in the open-source SDK."
+claim = "Its benchmark scores reflect the managed platform, which includes optimizations not in the open-source SDK."
 source_url = "https://github.com/mem0ai/mem0#readme"
 
 [image]

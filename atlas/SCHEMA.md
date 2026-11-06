@@ -34,7 +34,7 @@ All records are **draft candidates**. Nothing here is published.
 | `editorial_review` | string | `pending` until a human approves |
 | `unavailable` | array of string | fields or evidence deliberately not available (for example `tested`) |
 | `[image]` | table, optional | `file` (a `.webp` or `.svg` in `assets/atlas/`), `kind` (screenshot, diagram, banner, logo), `alt` (describes what it shows), `credit` (project name), `source_url` (https page it came from). Shown on the index card and record page with a credit line. |
-| `[opinion]` | table | `value_judgment` (text) and `limitations` (array, at least one). Editorial, not fact. |
+| `[opinion]` | table | `value_judgment` (text, shown as "My read"), `limitations` (array, at least one; shown as "What I did not check") and optional `fit` (a "use it when / skip it when" line). Editorial, not fact. |
 | `[provenance]` | table | `seed_pointer`, `discovery_dates`, `source_types`, `visibility = "public"`, `private_text_included = false` |
 | `[[sources]]` | array | public citations: `url` (https), `kind`, `accessed` |
 | `[[facts]]` | array | verifiable claims: `claim` and `source_url`. `source_url` must appear in `[[sources]]` |

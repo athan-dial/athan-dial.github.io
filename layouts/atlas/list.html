@@ -6,7 +6,16 @@
     <h1>Systems Atlas</h1>
     <p>{{ .Description }}</p>
   </header>
-  <p class="atlas__legend"><strong>Read, not run</strong> means I read the project's README and repository and did not install it. <strong>Compared</strong>, <strong>Run</strong> and <strong>In use</strong> mean more, and a record says what was done.</p>
+  <p class="atlas__legend"><strong>Read, not run</strong>: I read the project's README and repository page and did not install it. Where I read less, the record says so. All 16 are at this level today. The higher levels are <strong>Compared</strong> (set against another project), <strong>Run</strong> (I ran it) and <strong>In use</strong> (part of my own work). Inclusion is not an endorsement.</p>
+  <details class="atlas__terms">
+    <summary>Terms used here</summary>
+    <dl>
+      <dt>Agent</dt><dd>An AI assistant that can take actions, such as running code or calling tools, not only chat.</dd>
+      <dt>MCP</dt><dd>Model Context Protocol, a standard way for AI tools to plug into other software.</dd>
+      <dt>Knowledge graph</dt><dd>Facts stored as linked items, for example a person linked to the company they work at.</dd>
+      <dt>Data lineage</dt><dd>A record of where a table's data came from and what depends on it.</dd>
+    </dl>
+  </details>
   <div class="atlas__controls" data-atlas-controls hidden>
     <label>Search<input type="search" data-atlas-search placeholder="Name, topic or what it does"></label>
     <button type="button" data-atlas-clear hidden>Clear search</button>
@@ -17,7 +26,7 @@
     {{- $in := where $pages "Params.group" $g.title -}}
     {{- if $in }}
   <section class="fn-section atlas-group" data-atlas-group aria-labelledby="g-{{ $g.title | urlize }}">
-    <div class="fn-section__head"><h2 id="g-{{ $g.title | urlize }}">{{ $g.title }} <span>{{ len $in }}</span></h2></div>
+    <div class="fn-section__head"><h2 id="g-{{ $g.title | urlize }}">{{ $g.title }} <span>{{ len $in }} systems</span></h2></div>
     <ul class="atlas__list">
       {{- range $in }}
       <li data-atlas-item data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>

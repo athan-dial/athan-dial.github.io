@@ -1,12 +1,12 @@
 schema_version = "atlas-record/1"
 id = "github:sqlmesh/sqlmesh"
 canonical_url = "https://github.com/SQLMesh/sqlmesh"
-title = "SQLMesh: data transformation framework"
+title = "SQLMesh: a data transformation tool with change previews"
 repository_owner = "sqlmesh"
 repository_name = "sqlmesh"
 date_observed = "date_not_recovered"
 topic = "data-transformation"
-mechanism = "Plan/apply workflow for SQL or Python data transformations with isolated development environments."
+mechanism = "A tool for running data transformations in SQL or Python where you preview what a change will affect before applying it, like Terraform's plan and apply."
 license_spdx = "Apache-2.0"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "The plan/apply idea applied to data changes is the transferable pattern."
-limitations = ["Not run. The dbt compatibility claim comes from the repository description and was not tested."]
+value_judgment = "The plan/apply idea applied to data changes is the pattern worth borrowing: see the effect, then commit to it. I would revise that if the preview proves too slow or too coarse on real pipelines, which I did not test."
+fit = "Look at it when changes to data pipelines are risky to ship blind. Skip it if your team is settled on dbt; compatibility with dbt is claimed, and I did not test it."
+limitations = ["I did not test the dbt compatibility claim, which comes from the repository description."]
 
 [provenance]
 seed_pointer = "seed-index:SQLMesh/sqlmesh"
@@ -41,15 +42,15 @@ kind = "api_metadata"
 accessed = "2026-11-04"
 
 [[facts]]
-claim = "The README describes a data transformation framework for running and deploying SQL or Python transformations."
+claim = "It is a data transformation framework for running and deploying SQL or Python transformations."
 source_url = "https://github.com/SQLMesh/sqlmesh#readme"
 
 [[facts]]
-claim = "The README lists isolated development environments without data warehouse costs and a plan/apply workflow."
+claim = "It lists isolated development environments without data warehouse costs, and a plan/apply workflow."
 source_url = "https://github.com/SQLMesh/sqlmesh#readme"
 
 [[facts]]
-claim = "The README says SQLMesh is a project of the Linux Foundation."
+claim = "SQLMesh is a project of the Linux Foundation."
 source_url = "https://github.com/SQLMesh/sqlmesh#readme"
 
 [[facts]]

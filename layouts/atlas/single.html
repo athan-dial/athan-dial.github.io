@@ -12,26 +12,28 @@
       {{ with .Params.image }}
       <figure class="atlas-figure">
         {{ partial "atlas-tile.html" (dict "page" $ "size" "record") }}
-        <figcaption>Image from the project's README ({{ .credit }}); any figures in it are the project's own. <a href="{{ .source_url }}" rel="noopener">Original</a></figcaption>
+        <figcaption>Image from the {{ .credit }} README; any figures in it are the project's own. <a href="{{ .source_url }}" rel="noopener">View original image</a></figcaption>
       </figure>
       {{ end }}
       <section class="atlas-read" aria-labelledby="read-h">
         <h2 id="read-h">My read</h2>
         <p>{{ .Params.read }}</p>
       </section>
+      {{ with .Params.fit }}<p class="atlas-fit">{{ . }}</p>{{ end }}
       <section aria-labelledby="lim-h">
-        <h2 id="lim-h">Limits of this record</h2>
+        <h2 id="lim-h">What I did not check</h2>
         <ul>{{ range .Params.limitations }}<li>{{ . }}</li>{{ end }}</ul>
       </section>
       <section aria-labelledby="facts-h">
-        <h2 id="facts-h">Stated by the project</h2>
+        <h2 id="facts-h">What the project says about itself</h2>
+        <p class="atlas-note">Taken from the project's own pages. I have not verified these.</p>
         <ol class="atlas-facts">
           {{ range .Params.facts }}<li>{{ .claim }} <a href="#src-{{ index $srcIndex .source_url }}" aria-label="Source {{ index $srcIndex .source_url }}">[{{ index $srcIndex .source_url }}]</a></li>{{ end }}
         </ol>
       </section>
       <section aria-labelledby="src-h">
         <h2 id="src-h">Sources</h2>
-        <p class="atlas-note">All accessed {{ (index .Params.sources 0).accessed }}.</p>
+        <p class="atlas-note">All checked {{ (index .Params.sources 0).accessed }}.</p>
         <ol class="atlas-sources">
           {{ range $i, $s := .Params.sources }}<li id="src-{{ add $i 1 }}"><a href="{{ $s.url }}" rel="noopener">{{ with $s.kind }}{{ if eq . "upstream_repo" }}Repository{{ else if eq . "readme" }}README{{ else if eq . "license_file" }}License file{{ else if eq . "api_metadata" }}Repository metadata{{ else }}{{ . }}{{ end }}{{ end }}</a> <span>{{ $s.url }}</span></li>{{ end }}
         </ol>

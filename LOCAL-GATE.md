@@ -9,9 +9,9 @@ Start from the worktree root. Restart your `hugo server` first (the Atlas mount 
 ## 1. Look (hugo server, 5 min)
 `hugo server -D` (restart it first), then open:
 1. http://localhost:1313/ . Pass: homepage unchanged; only the nav gained "Atlas".
-2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Orchestration and sandboxing 3, Data lineage and pipelines 4, Tooling and registries 5), every card has an image tile (12 real images, 4 typographic tiles: Letta, MCP Registry, Scientific Agent Skills, Scrapling), no broken images, "16 of 16 systems".
+2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Running agents together and safely 3, Data lineage and pipelines 4, Tools and directories for agents 5), every card has an image tile (12 real images, 4 typographic tiles: Letta, MCP Registry, Scientific Agent Skills, Scrapling), no broken images, "16 of 16 systems", an intro that says you read 16 projects and ran none, a legend, and a "Terms used here" disclosure (agent, MCP, knowledge graph, data lineage).
 3. Type "lineage" in Search. Pass: 2 systems, other groups disappear, URL gains `?q=lineage`, "Clear search" restores all 16.
-4. http://localhost:1313/atlas/sqlmesh--sqlmesh/ . Pass: breadcrumb, image with credit line and "Original" link, citrus "My read" block, numbered "Stated by the project" facts whose [n] jump to Sources, rail on the right.
+4. http://localhost:1313/atlas/sqlmesh--sqlmesh/ . Pass: breadcrumb, image with credit line and "View original image" link, citrus "My read" block, a "Use it when / Skip it when" line, "What I did not check", numbered "What the project says about itself" facts whose [n] jump to Sources, rail on the right.
 5. http://localhost:1313/atlas/mksglu--context-mode/ . Pass: license reads "License not stated". Also open /atlas/letta-ai--letta/ (typographic tile, no image).
 6. Evidence: all 16 are "Read, not run". No record exists for Compared, Run or In use yet, so those cannot be seen.
 

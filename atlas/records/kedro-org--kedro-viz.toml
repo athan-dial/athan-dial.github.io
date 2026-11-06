@@ -1,12 +1,12 @@
 schema_version = "atlas-record/1"
 id = "github:kedro-org/kedro-viz"
 canonical_url = "https://github.com/kedro-org/kedro-viz"
-title = "Kedro-Viz: pipeline visualization"
+title = "Kedro-Viz: a picture of a Kedro data pipeline"
 repository_owner = "kedro-org"
 repository_name = "kedro-viz"
 date_observed = "date_not_recovered"
 topic = "data-pipeline-visualization"
-mechanism = "Interactive visualization of a Kedro project and its pipelines, plus experiment tracking."
+mechanism = "Draws a Kedro project's data pipelines as a graph you can click through, and tracks experiments."
 license_spdx = "Apache-2.0"
 evidence_state = "inspected"
 status = "candidate"
@@ -15,8 +15,9 @@ last_review_date = "2026-11-04"
 unavailable = ["tested", "adopted", "independent performance claims"]
 
 [opinion]
-value_judgment = "Shows a pipeline as a graph a person can read. Relevant to how the atlas might draw its own relationships."
-limitations = ["Not run. Tied to the Kedro framework; applicability outside Kedro was not assessed."]
+value_judgment = "It draws a pipeline as a graph a person can read. It helps only if you already use Kedro. I would revise this if it works on pipelines from other tools, which I did not check."
+fit = "Use it when your team builds pipelines with Kedro and wants to see them. Skip it otherwise."
+limitations = ["I did not check whether it is useful outside Kedro."]
 
 [provenance]
 seed_pointer = "seed-index:kedro-org/kedro-viz"
@@ -41,7 +42,7 @@ kind = "api_metadata"
 accessed = "2026-11-04"
 
 [[facts]]
-claim = "The README calls it an interactive development tool for building data science pipelines with Kedro."
+claim = "It is an interactive development tool for building data science pipelines with Kedro."
 source_url = "https://github.com/kedro-org/kedro-viz#readme"
 
 [[facts]]
