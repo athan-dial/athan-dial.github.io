@@ -22,4 +22,14 @@
    beats a bare *), without reaching for !important. */
 /* Four nav items (Work, Fieldnotes, Atlas, About) overflow a 390px header and wrapped About onto a second line. Tighten before wrapping; below about 340px the existing wrap in main.css still applies. */
 @media(max-width:420px){.site-nav{gap:6px}}@media(max-width:380px){.site-nav{gap:2px}.site-nav a{font-size:.75rem}}
+/* Work index: case files (labeled facts left, story right) and the Fieldnotes elsewhere line. */
+.fn-page-head>p.fn-work__summary{font-size:1.125rem;line-height:1.7;max-width:42rem;margin:0}.fn-page-head>p.fn-work__lens{margin-top:1rem;font-size:1rem;line-height:1.6;max-width:36rem}.fn-work__lens a,.fn-elsewhere a{text-underline-offset:.18em}
+.fn-cases{border-top:1px solid var(--field-rule);margin-bottom:4rem}
+.fn-case{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:2rem 4rem;padding:2.5rem 0;border-bottom:1px solid var(--field-rule)}
+.fn-case__facts{margin:0;display:grid;gap:1rem;align-content:start}.fn-case__facts dt{font:400 .75rem/1.5 var(--font-mono);text-transform:uppercase;color:var(--ink-secondary)}.fn-case__facts dd{margin:.15rem 0 0;font-size:.9375rem;line-height:1.5}
+.fn-case__meta{margin:0 0 .75rem;font:400 .75rem/1.5 var(--font-mono);color:var(--ink-secondary)}
+.fn-case__title{margin:0 0 1rem;font:400 clamp(1.9rem,3.2vw,2.75rem)/1.12 var(--font-display);letter-spacing:-.03em;max-width:22ch;text-wrap:balance}.fn-case__title a{color:var(--ink);text-decoration:none}.fn-case__title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
+.fn-case__summary{margin:0 0 1.5rem;max-width:40rem;font-size:1.0625rem;line-height:1.7;color:var(--ink-secondary)}
+.fn-elsewhere{margin:2rem 0 0;font-size:.9375rem;color:var(--ink-secondary)}
+@media(max-width:760px){.fn-case{grid-template-columns:1fr;gap:1.5rem;padding:2rem 0}.fn-case__facts{grid-template-columns:1fr 1fr}.fn-case__facts>div:first-child{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){:root *,:root *::before,:root *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms;scroll-behavior:auto}html{scroll-behavior:auto}}
