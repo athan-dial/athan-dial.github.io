@@ -9,6 +9,12 @@
   {{- if and (eq $r.MediaType.SubType "webp") (gt $r.Width $w) }}{{ $src = ($r.Resize (printf "%dx webp q82" $w)).RelPermalink }}{{ end -}}
   <div class="atlas-tile atlas-tile--{{ $img.kind }}"><img src="{{ $src }}" alt="{{ $img.alt }}" loading="lazy" decoding="async"></div>
 {{- else -}}
+  {{- /* No source image: a catalogue plate built from the record itself (group, name, repo path), no invented content. */ -}}
   {{- $name := index (split $p.Title ":") 0 -}}
-  <div class="atlas-tile atlas-tile--type" aria-hidden="true"><span>{{ $name }}</span></div>
+  <div class="atlas-tile atlas-tile--type" aria-hidden="true">
+    <span class="atlas-plate__initial">{{ substr $name 0 1 }}</span>
+    <span class="atlas-plate__group">{{ replace $p.Params.topic "-" " " }}</span>
+    <span class="atlas-plate__name">{{ $name }}</span>
+    <span class="atlas-plate__path">{{ strings.TrimPrefix "github:" $p.Params.id }}</span>
+  </div>
 {{- end -}}

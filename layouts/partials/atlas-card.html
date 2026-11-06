@@ -1,6 +1,7 @@
 <article class="atlas-card">
   {{ partial "atlas-tile.html" (dict "page" . "size" "tile") }}
-  <div class="atlas-card__meta"><span>{{ .Params.evidence_label }}</span>{{ with .Params.license }}<span>{{ if eq . "NOASSERTION" }}License not stated{{ else }}{{ . }}{{ end }}</span>{{ end }}</div>
+  {{- /* Evidence is stated once in the index legend; a card repeats it only when it differs. */ -}}
+  {{ if ne .Params.evidence "inspected" }}<div class="atlas-card__meta"><span>{{ .Params.evidence_label }}</span></div>{{ end }}
   <h3 class="atlas-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
   <p class="atlas-card__summary">{{ .Params.summary }}</p>
 </article>

@@ -22,8 +22,13 @@
 .atlas-tile img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .atlas-tile--banner img, .atlas-tile--diagram img, .atlas-tile--screenshot img { background: var(--surface); }
 .atlas-tile--logo img { width: 56%; height: 56%; }
-.atlas-tile--type { background: var(--paper); padding: 1.25rem; }
-.atlas-tile--type span { font: 400 clamp(1.5rem, 3vw, 2rem)/1.15 var(--font-display); letter-spacing: -.02em; text-align: center; overflow-wrap: anywhere; }
+.atlas-tile--type { position: relative; container-type: inline-size; background: var(--paper); place-items: stretch; padding: 0; isolation: isolate; }
+.atlas-tile--type::before { content: ""; position: absolute; inset: .6rem; border: 1px solid var(--field-rule); pointer-events: none; }
+.atlas-plate__initial { position: absolute; z-index: -1; right: 6cqw; top: -4cqw; font: 400 78cqw/1 var(--font-display); letter-spacing: -.04em; color: var(--surface-container-high); user-select: none; }
+.atlas-plate__group, .atlas-plate__path { position: absolute; left: 1.25rem; font: 400 .75rem/1.5 var(--font-mono); color: var(--ink-secondary); }
+.atlas-plate__group { top: 1.1rem; text-transform: uppercase; }
+.atlas-plate__path { bottom: 1.1rem; }
+.atlas-plate__name { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 2.9rem; font: 400 clamp(1.5rem, 9cqw, 2.1rem)/1.1 var(--font-display); letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
 
 .atlas-card { position: relative; display: grid; gap: .5rem; align-content: start; }
 .atlas-card__meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .5rem; font: 400 .75rem/1.5 var(--font-mono); text-transform: uppercase; color: var(--ink-secondary); }
