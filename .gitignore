@@ -75,3 +75,4 @@ layouts.blowfish.bak/
 
 # Atlas drafts awaiting review (promoted into atlas/records/ by hand)
 /atlas/staging/
+/atlas/held/

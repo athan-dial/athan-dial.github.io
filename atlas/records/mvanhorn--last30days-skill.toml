@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:mvanhorn/last30days-skill"
+canonical_url = "https://github.com/mvanhorn/last30days-skill"
+title = "last30days: an agent skill for researching recent online talk"
+repository_owner = "mvanhorn"
+repository_name = "last30days-skill"
+date_observed = "date_not_recovered"
+topic = "research-agents"
+mechanism = "An agent skill that searches Reddit, Hacker News, YouTube, X and other sources in parallel for the past 30 days. It ranks results by how much people engaged, then writes one summary."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a recency check built on what people are saying, ranked by engagement. That tells you what is loud, not what is true. Several sources need keys or logins. I would revise this if its summaries cite posts that match the sources on a topic I know, which I did not check."
+fit = "Use it when you want a fast read on recent online discussion before a meeting or a build. Skip it if you need vetted sources or cannot supply the keys and logins some sources need."
+limitations = ["I did not run it, so I do not know how well the ranking or summaries work.", "I read only about the first two thirds of a long README and skipped the rest of the install and configuration sections. The sample results in it are the project's own and I did not verify them."]
+
+[provenance]
+seed_pointer = "reading-list:mvanhorn/last30days-skill"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/mvanhorn/last30days-skill"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/mvanhorn/last30days-skill#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/mvanhorn/last30days-skill"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Reddit, Hacker News, Polymarket and GitHub work with no setup, and a setup wizard unlocks X, YouTube, TikTok and others."
+source_url = "https://github.com/mvanhorn/last30days-skill#readme"
+
+[[facts]]
+claim = "It ranks results by engagement such as upvotes, likes and prediction-market odds."
+source_url = "https://github.com/mvanhorn/last30days-skill#readme"
+
+[[facts]]
+claim = "Which sources work depends on credentials, installed tools and opt-ins, and some sources need an API key or a logged-in tool."
+source_url = "https://github.com/mvanhorn/last30days-skill#readme"
+
+[[facts]]
+claim = "It installs as a Claude Code plugin or through npx skills for other agent hosts."
+source_url = "https://github.com/mvanhorn/last30days-skill#readme"

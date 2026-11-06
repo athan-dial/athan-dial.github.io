@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:run-llama/liteparse"
+canonical_url = "https://github.com/run-llama/liteparse"
+title = "LiteParse: a local parser for PDFs, Office files and images"
+repository_owner = "run-llama"
+repository_name = "liteparse"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Reads PDFs, Office files and images on your machine and outputs text with page positions as Markdown, JSON or plain text. It runs text recognition only on the parts that need it."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a fast first pass over mostly digital documents, not a full parser, since the README itself points to its cloud product for dense tables, charts and scans. I would revise this if its built-in text recognition reads real scans well enough, which I did not check."
+fit = "Use it when you need quick local text and page positions from mostly digital PDFs for an agent or search pipeline. Skip it if your documents are dense tables, charts, handwriting or poor scans, which the README sends to its cloud parser."
+limitations = ["I did not run it or check the benchmark numbers, which are the project's own. I read the README overview, benchmarks and install sections but not the per-language docs."]
+
+[provenance]
+seed_pointer = "reading-list:run-llama/liteparse"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/run-llama/liteparse"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/run-llama/liteparse#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/run-llama/liteparse"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Input can be PDF, DOCX, XLSX, PPTX or images; output can be Markdown, JSON with bounding boxes, plain text or page screenshots."
+source_url = "https://github.com/run-llama/liteparse#readme"
+
+[[facts]]
+claim = "Text comes from PDFium; the built-in OCR (text recognition from images) is Tesseract, and any HTTP OCR server such as EasyOCR or PaddleOCR can be plugged in."
+source_url = "https://github.com/run-llama/liteparse#readme"
+
+[[facts]]
+claim = "A complexity check reports whether a document needs OCR or heavier parsing before you run a full parse."
+source_url = "https://github.com/run-llama/liteparse#readme"
+
+[[facts]]
+claim = "It runs from Rust, Node.js, Python or the browser (WebAssembly), with no ML model and no cloud dependency."
+source_url = "https://github.com/run-llama/liteparse#readme"

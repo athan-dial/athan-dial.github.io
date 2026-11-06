@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:assafelovic/gpt-researcher"
+canonical_url = "https://github.com/assafelovic/gpt-researcher"
+title = "GPT Researcher: a research agent that writes cited reports"
+repository_owner = "assafelovic"
+repository_name = "gpt-researcher"
+date_observed = "date_not_recovered"
+topic = "research-agents"
+mechanism = "Splits a question into sub-questions, searches the web or your own files for each, and assembles the findings into one cited report. Built for a written answer."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a pipeline for report writing more than a chat tool: plan, gather in parallel, filter, publish. It needs a model key and a search key to run, so the quality depends on those choices. I would revise this if reports with citations turn out to hold up on a topic I know well, which I did not test."
+fit = "Use it when you want a multi-page cited report from web or local documents and can supply your own model and search keys. Skip it if you want a quick answer or cannot send queries to outside services."
+limitations = ["I did not run it, so I cannot say how accurate the reports or citations are.", "The README gives its own benchmark table for the context filter and its own cost and time figures; I did not check any of them. I read the whole README but not the linked docs."]
+
+[provenance]
+seed_pointer = "reading-list:assafelovic/gpt-researcher"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/assafelovic/gpt-researcher"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/assafelovic/gpt-researcher#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/assafelovic/gpt-researcher"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The planner writes research questions and separate agents gather information for each one; a publisher then combines the results into a report."
+source_url = "https://github.com/assafelovic/gpt-researcher#readme"
+
+[[facts]]
+claim = "It can research the web or local files such as PDF, Word, Excel, CSV and Markdown."
+source_url = "https://github.com/assafelovic/gpt-researcher#readme"
+
+[[facts]]
+claim = "Setup asks for an OpenAI key and a Tavily search key; the README lists other options, including models behind an OpenAI-compatible address."
+source_url = "https://github.com/assafelovic/gpt-researcher#readme"
+
+[[facts]]
+claim = "The project says a deep research run takes about five minutes and costs about forty cents with one named model."
+source_url = "https://github.com/assafelovic/gpt-researcher#readme"

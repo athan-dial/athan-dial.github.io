@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:ericmjl/agent-autolearn"
+canonical_url = "https://github.com/ericmjl/agent-autolearn"
+title = "agent-autolearn: a self-review loop for coding agents"
+repository_owner = "ericmjl"
+repository_name = "agent-autolearn"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Watches coding agent sessions, periodically starts a second agent run to review the conversation, and saves corrections, preferences and new skills that load into later sessions."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a way to turn repeated corrections into standing instructions, which is the useful part of agent memory. It also writes its own skills and rules, so what it learns needs a human look. I would revise this if the saved rules drift or pile up over weeks of use, which I did not check."
+fit = "Use it when you work in OpenCode or pi and keep correcting the same behaviors. Skip it if you do not want conversation excerpts stored locally and read by a second model run."
+limitations = ["I did not run it or check whether the learned rules improve anything; the README gives no measurements.", "I read only the README, not the design documents it points to, which mark some features as partial or planned."]
+
+[provenance]
+seed_pointer = "reading-list:ericmjl/agent-autolearn"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/ericmjl/agent-autolearn"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/ericmjl/agent-autolearn#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/ericmjl/agent-autolearn"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It supports OpenCode v1, OpenCode v2 beta and pi through separate adapters over one shared core."
+source_url = "https://github.com/ericmjl/agent-autolearn#readme"
+
+[[facts]]
+claim = "A review runs every N user messages (default 5), when a session goes quiet, and at session exit."
+source_url = "https://github.com/ericmjl/agent-autolearn#readme"
+
+[[facts]]
+claim = "Rules seen repeatedly can be promoted into an AGENTS.md file."
+source_url = "https://github.com/ericmjl/agent-autolearn#readme"
+
+[[facts]]
+claim = "Data stays on the machine by default; sync is opt-in and encrypted."
+source_url = "https://github.com/ericmjl/agent-autolearn#readme"

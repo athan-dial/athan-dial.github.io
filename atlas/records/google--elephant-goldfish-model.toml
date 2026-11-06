@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:google/elephant-goldfish-model"
+canonical_url = "https://github.com/google/elephant-goldfish-model"
+title = "EGM: skills for drafting and reviewing software designs"
+repository_owner = "google"
+repository_name = "elephant-goldfish-model"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A plugin of skills (written instructions an AI coding agent follows) that drafts a design spec from your project context, then has fresh reviewer agents with no chat history challenge it before coding."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a way to use fresh-context reviewers to catch assumptions the drafting agent absorbed. I would revise this if the reviewers mostly repeat obvious points on real designs, which I did not test."
+fit = "Use it when a feature needs design decisions before implementation. Skip it if the change is a small, clear bug fix."
+limitations = ["I did not install it or run a review.", "The README says thousands of Google engineers use it; that is the project's claim and I did not check it. The README also says it is not an officially supported Google product."]
+
+[provenance]
+seed_pointer = "reading-list:google/elephant-goldfish-model"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/google/elephant-goldfish-model"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/google/elephant-goldfish-model#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/google/elephant-goldfish-model"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "One agent holds project context and drafts the spec; separate reviewers read the draft without the earlier conversation."
+source_url = "https://github.com/google/elephant-goldfish-model#readme"
+
+[[facts]]
+claim = "The steps are commands such as egm-brainstorm, egm-draft and egm-review."
+source_url = "https://github.com/google/elephant-goldfish-model#readme"
+
+[[facts]]
+claim = "The review stops if the agent cannot create fresh subagent contexts."
+source_url = "https://github.com/google/elephant-goldfish-model#readme"
+
+[[facts]]
+claim = "It installs as a plugin for Claude Code, Codex and Antigravity."
+source_url = "https://github.com/google/elephant-goldfish-model#readme"

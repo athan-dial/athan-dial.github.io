@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:mathews-tom/armory"
+canonical_url = "https://github.com/Mathews-Tom/armory"
+repository_owner = "mathews-tom"
+repository_name = "armory"
+title = "Armory: a catalog of skills, agents and hooks for Claude Code"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A large catalog of packages for Claude Code. Skills are packaged instructions an agent loads for a task. The rest are subagents, hooks, rules and commands, grouped into presets."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "The planning chain, from mapping open decisions to running milestones, is the part I would look at first. I would revise my read if the packages hold up in real use, since the README's eval coverage badge does not show that."
+fit = "Use it when you want a ready bundle of agent workflows such as planning, review and release, with presets to start small. Skip it if you want a handful of skills, not a 158-package catalog."
+limitations = ["I read the README but not the package files, so I did not check quality or how the packages interact.", "I did not check the package count or the 100 percent eval coverage badge; both are the project's own claims, and the README says static checks do not show a skill works."]
+
+[[facts]]
+claim = "The project lists 158 package definitions across skills, agents, hooks, rules, commands, utilities and presets."
+source_url = "https://github.com/Mathews-Tom/armory#readme"
+
+[[facts]]
+claim = "Planning packages are meant to run in sequence, from decision-map through plan-prompts and task-decomposer to milestone-runner."
+source_url = "https://github.com/Mathews-Tom/armory#readme"
+
+[[facts]]
+claim = "Presets bundle packages in one install, for example core, sec-strict and python-strict."
+source_url = "https://github.com/Mathews-Tom/armory#readme"
+
+[provenance]
+seed_pointer = "reading-list:mathews-tom/armory"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/Mathews-Tom/armory"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/Mathews-Tom/armory#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/Mathews-Tom/armory"
+kind = "api_metadata"
+accessed = "2026-11-06"
