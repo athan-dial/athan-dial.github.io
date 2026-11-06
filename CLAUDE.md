@@ -77,6 +77,15 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
 - Browser viewport, 200% text zoom, keyboard focus, JavaScript-disabled behavior, and computed
   colors must be checked locally before merge. Source review is not browser verification.
 
+### Systems Atlas (`/atlas/`, added 2026-11-06)
+
+Source of truth: `atlas/records/*.toml` (schema `atlas/SCHEMA.md`, validator `atlas/validate.py`). Hugo reads
+them through a mount in `config/_default/module.toml` (`atlas/records` to `data/atlas`) and
+`content/atlas/_content.gotmpl` makes one page per record. No generated files. Restart `hugo server` after
+changing the mount. Every card and page shows the record's `candidate`/`reviewed` status. Atlas is kept out
+of the main `/index.xml` (`layouts/rss.xml`); `/atlas/index.xml` has its own feed. Nav: Work, Fieldnotes,
+Atlas, About. Push of `dev/atlas-integration` is blocked until `LOCAL-GATE.md` is signed (`.githooks/pre-push`).
+
 ### Homepage v2: do not regress this order
 
 The homepage is a personal site using Fieldnotes as its surface language. It is not a sparse
