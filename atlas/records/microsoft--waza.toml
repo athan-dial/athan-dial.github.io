@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:microsoft/waza"
+canonical_url = "https://github.com/microsoft/waza"
+title = "Waza: a command-line tool for testing agent skills"
+repository_owner = "microsoft"
+repository_name = "waza"
+date_observed = "date_not_recovered"
+topic = "agent-tooling"
+mechanism = "Runs an agent skill or custom agent against written test tasks, grades each run, and keeps the evidence. Teams can compare models and gate changes in CI."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Skills are usually judged by feel, so a way to write tests and grade runs is overdue. The README is candid that a mock run checks the setup, not skill quality. I would revise this if real grading needs heavy setup or model spend, which I did not check."
+fit = "Use it when you maintain agent skills and want repeatable test tasks with graded results. Skip it if you only need a quick check that a skill file is well formed."
+limitations = ["I read only the opening, install and first command sections of a very long README, so the rest is unchecked.", "I did not check which features need authenticated model access or can incur usage costs, beyond the README's warnings."]
+
+[provenance]
+seed_pointer = "reading-list:microsoft/waza"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/microsoft/waza"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/microsoft/waza#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/microsoft/waza"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It is a Go command-line tool that evaluates agent workflows, skills and custom agents."
+source_url = "https://github.com/microsoft/waza#readme"
+
+[[facts]]
+claim = "A mock run checks the test harness only, not agent quality or live service safety."
+source_url = "https://github.com/microsoft/waza#readme"
+
+[[facts]]
+claim = "Commands include comparing results across models, counting tokens in skill files and checking whether a skill is ready for submission."
+source_url = "https://github.com/microsoft/waza#readme"

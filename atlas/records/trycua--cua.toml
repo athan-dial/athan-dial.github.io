@@ -1,0 +1,62 @@
+schema_version = "atlas-record/1"
+id = "github:trycua/cua"
+canonical_url = "https://github.com/trycua/cua"
+title = "Cua: desktops and sandboxes for computer-use agents"
+repository_owner = "trycua"
+repository_name = "cua"
+date_observed = "date_not_recovered"
+topic = "agent-sandboxing"
+mechanism = "Gives AI agents their own desktops, either virtual machines on a Mac or containers, plus tools to drive apps and a benchmark kit. Agents work there without touching your own screen."
+license_spdx = "MIT"
+license_note = "Most of the repository is MIT. The README says the Cua Spaces app and some components are source-available under FSL-1.1-MIT."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this mainly as a way to give an agent a separate machine so it cannot disturb yours. The isolation is the useful part; the driver and benchmark pieces build on it. I would revise this if the isolation between a Space and the host is weaker than the README suggests, which I did not check."
+fit = "Use it when you want an agent to operate a full desktop or app without taking over your own machine. Skip it if your agents only call APIs or run shell commands."
+limitations = ["I read the README and did not install or run any part, so I cannot say how the pieces fit together.", "I did not check how strong the separation between a sandbox and the host machine is."]
+
+[provenance]
+seed_pointer = "reading-list:trycua/cua"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/trycua/cua"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/trycua/cua#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/trycua/cua"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Cua Spaces runs each desktop as a Space: a macOS virtual machine on your Mac, or a Linux image, on your own computers or your own cloud account."
+source_url = "https://github.com/trycua/cua#readme"
+
+[[facts]]
+claim = "The cua command creates local sandboxes, for example a gVisor container, and runs commands in them."
+source_url = "https://github.com/trycua/cua#readme"
+
+[[facts]]
+claim = "The same repository holds Cua Driver for operating desktop apps on macOS, Windows and Linux, Lume for local virtual machines, and Cua Bench for testing computer-use agents."
+source_url = "https://github.com/trycua/cua#readme"
+
+[image]
+file = "trycua--cua.webp"
+kind = "banner"
+alt = "Cua Spaces card: a macOS desktop with an email app on the left, and the words 'Full desktops for your agents' on the right."
+credit = "Cua"
+source_url = "https://github.com/trycua/cua/blob/HEAD/img/card-cua-spaces-wide.webp"

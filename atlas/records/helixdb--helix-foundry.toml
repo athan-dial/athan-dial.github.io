@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:helixdb/helix-foundry"
+canonical_url = "https://github.com/helixdb/helix-foundry"
+title = "Helix Foundry: company data loaded into one connected graph"
+repository_owner = "helixdb"
+repository_name = "helix-foundry"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Connects databases, tools and documents, has an agent draft a model of the entities and links, and loads it into a graph database with sources kept. You can then browse it or ask questions."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I like that every loaded value keeps a pointer to the row or quote it came from, since that makes answers checkable. The agent-drafted model is the step I would watch, because a wrong draft shapes everything after it. I would revise this if reviewed drafts need few corrections on real data, which I did not check."
+fit = "Use it when you want to connect several company data sources into one graph and ask cited questions. Skip it if you want a retrieval library to embed in your own app."
+limitations = ["I did not run it or try the hosted or local version, so I cannot say how good the drafted models are.", "I read the first part of the README, including setup and the feature list, but not the linked docs."]
+
+[provenance]
+seed_pointer = "reading-list:HelixDB/helix-foundry"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/HelixDB/helix-foundry"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/HelixDB/helix-foundry#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/HelixDB/helix-foundry"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "An agent drafts types, links and rules from your data and goal, and you review them before loading into HelixDB."
+source_url = "https://github.com/HelixDB/helix-foundry#readme"
+
+[[facts]]
+claim = "Loads record where each value came from, either a table row or a quote in a document."
+source_url = "https://github.com/HelixDB/helix-foundry#readme"
+
+[[facts]]
+claim = "Connectors include PostgreSQL, MySQL, S3, Slack, Notion, GitHub and file uploads."
+source_url = "https://github.com/HelixDB/helix-foundry#readme"
+
+[[facts]]
+claim = "The local install has no sign-in and is meant for one person on their own computer."
+source_url = "https://github.com/HelixDB/helix-foundry#readme"

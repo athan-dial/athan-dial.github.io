@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:djolex999/vir"
+canonical_url = "https://github.com/djolex999/vir"
+title = "vir: a notes folder built from your coding-agent sessions"
+repository_owner = "djolex999"
+repository_name = "vir"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Reads your Claude Code and Codex session logs, keeps the lasting decisions and gotchas as plain Markdown notes, and lets agents search them mid-session."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as memory you can audit, since every note is a file you can read, edit or reject. The cost is that a language model writes the notes, so a wrong note could mislead later sessions, which the README admits. I would revise this if its confidence scores and review step catch bad notes in practice, which I did not check."
+fit = "Use it when you rely on Claude Code or Codex heavily and want past decisions kept in files you own. Skip it if you are on Windows, which the README lists as unsupported."
+limitations = ["I did not check the figures about the author's own vault; they are the project's own.", "I did not run it or inspect how it decides which sessions hold something worth keeping."]
+
+[provenance]
+seed_pointer = "reading-list:djolex999/vir"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/djolex999/vir"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/djolex999/vir#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/djolex999/vir"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It reads session transcripts from Claude Code and Codex and writes typed notes: patterns, gotchas, decisions and tools."
+source_url = "https://github.com/djolex999/vir#readme"
+
+[[facts]]
+claim = "Notes are plain Markdown files, and Obsidian is optional."
+source_url = "https://github.com/djolex999/vir#readme"
+
+[[facts]]
+claim = "Each note carries a confidence score, and a review command lets you approve, edit or reject new notes."
+source_url = "https://github.com/djolex999/vir#readme"
+
+[[facts]]
+claim = "Changes to CLAUDE.md are made only after you confirm a diff."
+source_url = "https://github.com/djolex999/vir#readme"
+
+[image]
+file = "djolex999--vir.webp"
+kind = "screenshot"
+alt = "A cloud of white dots joined by thin lines on a black background, the graph view of a vir notes folder."
+credit = "vir"
+source_url = "https://github.com/djolex999/vir/blob/HEAD/docs/graph.png"

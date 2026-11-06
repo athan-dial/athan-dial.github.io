@@ -14,6 +14,8 @@ TOPICS = {
     "agent-memory", "agent-orchestration", "agent-sandboxing", "agent-tooling",
     "data-lineage", "data-transformation", "data-pipeline-visualization",
     "web-scraping", "code-intelligence", "scientific-agent-skills", "protocol-registry",
+    "retrieval-knowledge-graphs", "data-analytics-agents", "computer-use-agents",
+    "research-agents", "agent-skills", "directory-list",
 }
 EVIDENCE = {"inspected", "evaluated", "tested", "adopted"}
 STATUS = {"candidate", "reviewed"}

@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:tankpkg/tank"
+canonical_url = "https://github.com/tankpkg/tank"
+title = "Tank: a package manager for agent skills with security checks"
+repository_owner = "tankpkg"
+repository_name = "tank"
+date_observed = "date_not_recovered"
+topic = "agent-tooling"
+mechanism = "Installs reusable agent skills from a registry, pins exact versions in a lockfile, and scans each skill before install. A project file declares what the skills may touch, such as network or files."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Treating a skill like a dependency with versions, a lockfile and a permission list is a sensible response to skills running with the agent's full access. The weak spot is enforcement, which the README calls planned for sandboxing. I would revise this if declared permissions are not actually enforced at run time, which I did not check."
+fit = "Use it when your team shares agent skills and wants version pinning and a review step when a skill asks for more access. Skip it if you need run-time sandboxing today, which the README lists as planned."
+limitations = ["I read the README only, so I did not check how the six-stage scan works or how well it catches malicious skills.", "I did not verify the README's account of the incident it cites or how it describes other registries."]
+
+[provenance]
+seed_pointer = "reading-list:tankpkg/tank"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/tankpkg/tank"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/tankpkg/tank#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/tankpkg/tank"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Installs are recorded in a skills.lock file with SHA-512 hashes, and versions follow semver."
+source_url = "https://github.com/tankpkg/tank#readme"
+
+[[facts]]
+claim = "A skills.json file sets a permission budget for network, filesystem and subprocess access, and Tank asks for approval when a skill exceeds it."
+source_url = "https://github.com/tankpkg/tank#readme"
+
+[[facts]]
+claim = "Each published skill goes through a six-stage security analysis and gets a 0 to 10 audit score."
+source_url = "https://github.com/tankpkg/tank#readme"
+
+[[facts]]
+claim = "Code signing and sandboxing are listed as planned, not built."
+source_url = "https://github.com/tankpkg/tank#readme"

@@ -72,3 +72,6 @@ layouts.blowfish.bak/
 
 # Local gate sign-off marker (see LOCAL-GATE.md); never commit
 /.local-gate-passed
+
+# Atlas drafts awaiting review (promoted into atlas/records/ by hand)
+/atlas/staging/

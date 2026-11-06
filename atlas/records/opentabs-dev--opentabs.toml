@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:opentabs-dev/opentabs"
+canonical_url = "https://github.com/opentabs-dev/opentabs"
+title = "OpenTabs: a Chrome bridge for agents to call web APIs"
+repository_owner = "opentabs-dev"
+repository_name = "opentabs"
+date_observed = "date_not_recovered"
+topic = "computer-use-agents"
+mechanism = "A Chrome extension and local server that lets an AI agent call a website's own APIs through your signed-in browser session, instead of clicking through the page. Sites are added as plugins."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a trade: the agent gets faster, steadier calls by borrowing your logged-in session, and each plugin gets real access to your accounts in return. The off-by-default permissions help. I would revise this if plugin review and per-tool permissions hold up against a hostile plugin, which I did not check."
+fit = "Use it when you want an agent to act in apps you are already logged into and no API key is available. Skip it if you cannot let an agent use your live sessions or you need a browser other than Chrome."
+limitations = ["I did not install it or read any plugin code, so I cannot say how well the permission model works.", "I read the whole README; it is short and says little about how plugins call each site's APIs."]
+
+[provenance]
+seed_pointer = "reading-list:opentabs-dev/opentabs"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/opentabs-dev/opentabs"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/opentabs-dev/opentabs#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/opentabs-dev/opentabs"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "No tool runs until you enable it; permission levels are Off, Ask and Auto, per plugin or per tool."
+source_url = "https://github.com/opentabs-dev/opentabs#readme"
+
+[[facts]]
+claim = "Permissions reset when a plugin updates."
+source_url = "https://github.com/opentabs-dev/opentabs#readme"
+
+[[facts]]
+claim = "It runs locally and needs Node.js 22 or later and Chrome."
+source_url = "https://github.com/opentabs-dev/opentabs#readme"
+
+[[facts]]
+claim = "It works with any MCP client, and the README also describes a command-line mode."
+source_url = "https://github.com/opentabs-dev/opentabs#readme"
+
+[image]
+file = "opentabs-dev--opentabs.webp"
+kind = "screenshot"
+alt = "Screenshot of the OpenTabs side panel listing plugins such as Browser and Discord, each with an Off, Ask or Auto permission setting."
+credit = "OpenTabs"
+source_url = "https://github.com/opentabs-dev/opentabs/blob/HEAD/assets/demo-hero.gif"
