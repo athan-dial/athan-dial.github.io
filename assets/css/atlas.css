@@ -77,3 +77,10 @@
 .atlas-fit { margin: 1rem 0 0; font-size: 1rem; line-height: 1.65; color: var(--ink-secondary); max-width: 36rem; }
 .fn-section__head h2 span { font-size: .8125rem; }
 @media (max-width: 600px) { .atlas__terms dl { grid-template-columns: 1fr; gap: 0; } .atlas__terms dd { margin-bottom: .5rem; } }
+.atlas__jump { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: 0 0 2.5rem; font-size: .9375rem; }
+.atlas__jump a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: var(--ink); text-underline-offset: .18em; }
+.atlas__jump a span { font: 400 .75rem/1 var(--font-mono); color: var(--ink-secondary); }
+.atlas-more { margin-top: 1.75rem; }
+.atlas-more > summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: .18em; }
+.atlas-more > .atlas__list { margin-top: 1rem; border-top: 0; padding-top: 0; }
+.atlas-group { scroll-margin-top: 1rem; }

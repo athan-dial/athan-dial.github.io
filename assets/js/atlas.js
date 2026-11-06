@@ -6,6 +6,7 @@
   const clear = root.querySelector('[data-atlas-clear]');
   const items = [...root.querySelectorAll('[data-atlas-item]')];
   const groups = [...root.querySelectorAll('[data-atlas-group]')];
+  const mores = [...root.querySelectorAll('[data-atlas-more]')];
   const count = root.querySelector('[data-atlas-count]');
   const empty = root.querySelector('[data-atlas-empty]');
   root.querySelectorAll('[data-atlas-controls]').forEach((c) => (c.hidden = false));
@@ -16,6 +17,7 @@
       li.hidden = !!term && !li.dataset.text.includes(term);
       if (!li.hidden) shown++;
     }
+    for (const m of mores) m.open = !!term;
     for (const g of groups) g.hidden = !g.querySelector('[data-atlas-item]:not([hidden])');
     count.textContent = `${shown} of ${items.length} systems`;
     empty.hidden = shown !== 0;
