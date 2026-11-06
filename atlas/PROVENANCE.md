@@ -55,7 +55,7 @@ Cognee demo frame (it carried a vendor benchmark claim; the wordmark is used ins
 | Maestro | `its-maestro-baby--maestro.webp` | screenshot | MIT | OK permissive | https://github.com/its-maestro-baby/maestro/blob/HEAD/assets/platform_screenshot.png |
 | Scientific Agent Skills | none (no usable README image; plate) | | MIT | | |
 | agent-ctrl | `k4cper-g--agent-ctrl.webp` | logo | Apache-2.0 | OK permissive | https://github.com/k4cper-g/agent-ctrl/blob/HEAD/docs/logo.png |
-| Agentic Context Engine | `kayba-ai--agentic-context-engine.webp` | banner | Apache-2.0 | OK permissive | https://github.com/kayba-ai/agentic-context-engine/blob/HEAD/assets/kayba-banner.png |
+| Agentic Context Engine | none (no usable README image; plate) | | Apache-2.0 | | |
 | Kandev | none (AGPL-3.0 repo, no image; plate) | | AGPL-3.0 | | |
 | Kedro-Viz | `kedro-org--kedro-viz.webp` | screenshot | Apache-2.0 | OK permissive | https://github.com/kedro-org/kedro-viz/blob/main/.github/img/banner.gif |
 | Obsidian Skills | none (no usable README image; plate) | | MIT | | |
@@ -75,7 +75,7 @@ Cognee demo frame (it carried a vendor benchmark claim; the wordmark is used ins
 | SurfSense | none (no usable README image; plate) | | Apache-2.0 | | |
 | REA | none (no usable README image; plate) | | MIT | | |
 | last30days | none (no usable README image; plate) | | MIT | | |
-| NoteBrain | `nmdra--notebrain-cli.webp` | screenshot | MIT | OK permissive | https://github.com/nmdra/notebrain-cli/blob/HEAD/assets/search.png |
+| NoteBrain | none (no usable README image; plate) | | MIT | | |
 | OpenShell | `nvidia--openshell.webp` | logo | Apache-2.0 | OK permissive | https://github.com/NVIDIA/OpenShell/blob/main/docs/brand/assets/openshell-avatar-1024.png |
 | GSD Core | none (no usable README image; plate) | | MIT | | |
 | OpenLineage | `openlineage--openlineage.svg` | diagram | Apache-2.0 | OK permissive | https://github.com/OpenLineage/OpenLineage/blob/main/doc/with-ol.svg |

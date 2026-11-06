@@ -56,10 +56,3 @@ source_url = "https://github.com/nmdra/notebrain-cli#readme"
 [[facts]]
 claim = "Pre-built binaries are for Linux; the author does not test macOS or Windows builds."
 source_url = "https://github.com/nmdra/notebrain-cli#readme"
-
-[image]
-file = "nmdra--notebrain-cli.webp"
-kind = "screenshot"
-alt = "Terminal screenshot of a NoteBrain search for 'how do message brokers work' listing ranked note sections with scores."
-credit = "NoteBrain"
-source_url = "https://github.com/nmdra/notebrain-cli/blob/HEAD/assets/search.png"

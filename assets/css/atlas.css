@@ -24,11 +24,8 @@
 .atlas-tile--logo img { width: 56%; height: 56%; }
 .atlas-tile--type { position: relative; container-type: inline-size; background: var(--paper); place-items: stretch; padding: 0; isolation: isolate; }
 .atlas-tile--type::before { content: ""; position: absolute; inset: .6rem; border: 1px solid var(--field-rule); pointer-events: none; }
-.atlas-plate__initial { position: absolute; z-index: -1; right: 6cqw; top: -4cqw; font: 400 78cqw/1 var(--font-display); letter-spacing: -.04em; color: var(--surface-container-high); user-select: none; }
-.atlas-plate__group, .atlas-plate__path { position: absolute; left: 1.25rem; font: 400 .75rem/1.5 var(--font-mono); color: var(--ink-secondary); }
-.atlas-plate__group { top: 1.1rem; text-transform: uppercase; }
-.atlas-plate__path { bottom: 1.1rem; }
-.atlas-plate__name { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 2.9rem; font: 400 clamp(1.5rem, 9cqw, 2.1rem)/1.1 var(--font-display); letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
+.atlas-plate__initial { position: absolute; z-index: -1; right: 8cqw; top: 2cqw; font: 400 64cqw/1 var(--font-display); letter-spacing: -.04em; color: var(--surface-container); user-select: none; }
+.atlas-plate__path { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.1rem; font: 400 .8125rem/1.5 var(--font-mono); color: var(--ink); overflow-wrap: anywhere; }
 
 .atlas-card { position: relative; display: grid; gap: .5rem; align-content: start; }
 .atlas-card__meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .5rem; font: 400 .75rem/1.5 var(--font-mono); text-transform: uppercase; color: var(--ink-secondary); }
@@ -84,3 +81,21 @@
 .atlas-more > summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: .18em; }
 .atlas-more > .atlas__list { margin-top: 1rem; border-top: 0; padding-top: 0; }
 .atlas-group { scroll-margin-top: 1rem; }
+
+/* Frame every real image like a plate: inset on the tile, so dark screenshots do not bleed to the edge. */
+.atlas-tile img { padding: .5rem; box-sizing: border-box; }
+.atlas-tile--screenshot img { padding: .5rem; filter: saturate(.8); }
+.atlas-figure .atlas-tile { aspect-ratio: auto; display: block; }
+.atlas-figure .atlas-tile img { width: 100%; height: auto; max-height: 30rem; object-fit: contain; }
+.atlas__controls label input[type="search"] { width: min(28rem, 100%); }
+.atlas-fit { color: var(--ink); }
+.atlas .fn-page-head { padding: 2.5rem 0 1.25rem; }
+.atlas .fn-page-head h1 { font-size: clamp(2.75rem, 5.5vw, 4.5rem); margin-bottom: 1rem; }
+.atlas .fn-page-head > p:last-child { font-size: 1rem; line-height: 1.6; max-width: 40rem; }
+.atlas__terms { margin-bottom: 1.25rem; }
+.atlas__terms .atlas__legend { margin: .75rem 0 1rem; }
+.atlas__controls label { flex: 0 1 28rem; }
+.atlas__controls { margin-bottom: .5rem; }
+.atlas__count { margin-bottom: .75rem; }
+.atlas__jump { margin-bottom: 1.25rem; gap: 0 1.25rem; }
+@media (min-width: 900px) { .atlas__jump a { min-height: 32px; } .atlas .fn-section { padding-top: .5rem; } .atlas .fn-page-head > p:last-child { margin-bottom: 0; } }

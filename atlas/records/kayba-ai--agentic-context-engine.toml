@@ -56,10 +56,3 @@ source_url = "https://github.com/kayba-ai/agentic-context-engine#readme"
 [[facts]]
 claim = "The project says it needs no fine-tuning, training data or vector database."
 source_url = "https://github.com/kayba-ai/agentic-context-engine#readme"
-
-[image]
-file = "kayba-ai--agentic-context-engine.webp"
-kind = "banner"
-alt = "Kayba banner with the line 'Stop fixing agents by hand.' over a soft grey background."
-credit = "Agentic Context Engine"
-source_url = "https://github.com/kayba-ai/agentic-context-engine/blob/HEAD/assets/kayba-banner.png"
