@@ -68,7 +68,8 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
   and explicit human decisions. Color never stands alone as the semantic signal.
 - Hex colors belong in `tokens.css`. Native HTML diagrams inherit tokens, wrap, and reflow.
 - Never animate layout properties. Motion must never gate visibility or reading order.
-- Reduced-motion rules terminate the final CSS layer.
+- Reduced-motion rules terminate the final CSS layer. Site motion lives in `fieldnotes.css` and `atlas.css`
+  inside `no-preference`, with `assets/js/motion.js` as the only script; see `DESIGN.md` Allowed motion.
 - Fieldnotes is the public label at the existing `/thinking/` path. `/notes/` and `/essays/`
   remain archives. Do not redirect or remove existing articles as a redesign side effect.
 - Homepage/list cards include only published/public content; drafts stay excluded.

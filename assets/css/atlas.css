@@ -99,3 +99,19 @@
 .atlas__count { margin-bottom: .75rem; }
 .atlas__jump { margin-bottom: 1.25rem; gap: 0 1.25rem; }
 @media (min-width: 900px) { .atlas__jump a { min-height: 32px; } .atlas .fn-section { padding-top: .5rem; } .atlas .fn-page-head > p:last-child { margin-bottom: 0; } }
+
+/* Atlas motion: the group rule resolves on first entry; cards respond to hover. Transform only. */
+@media (prefers-reduced-motion: no-preference) {
+  .atlas-tile img { transition: transform 360ms var(--ease-out-quart); }
+  .atlas-card:hover .atlas-tile img { transform: scale(1.025); }
+  .atlas-plate__initial { transition: transform 360ms var(--ease-out-quart); }
+  .atlas-card:hover .atlas-plate__initial { transform: translate(-.25rem, .25rem); }
+  .atlas-group > .atlas__list { position: relative; }
+  .atlas-group > .atlas__list::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--ink); transform-origin: left; pointer-events: none; }
+  .fn-motion .atlas-group > .atlas__list::before { transform: scaleX(.08); transition: transform 700ms var(--ease-out-quart); }
+  .fn-motion .atlas-group.is-entered > .atlas__list::before { transform: scaleX(1); }
+  .atlas-more > summary { transition: color var(--duration-base) var(--ease-out-quart); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-tile img, .atlas-plate__initial, .atlas-more > summary, .atlas-group > .atlas__list::before { transition: none; transform: none; }
+}

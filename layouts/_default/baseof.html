@@ -46,6 +46,8 @@
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- $motionJS := resources.Get "js/motion.js" | minify | fingerprint -}}
+  <script src="{{ $motionJS.RelPermalink }}" integrity="{{ $motionJS.Data.Integrity }}" defer></script>
   {{- if .IsHome -}}
     {{- $fieldnotesHomeJS := resources.Get "js/fieldnotes-home.js" | minify | fingerprint -}}
     <script src="{{ $fieldnotesHomeJS.RelPermalink }}" integrity="{{ $fieldnotesHomeJS.Data.Integrity }}" defer></script>

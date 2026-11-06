@@ -32,4 +32,19 @@
 .fn-case__summary{margin:0 0 1.5rem;max-width:40rem;font-size:1.0625rem;line-height:1.7;color:var(--ink-secondary)}
 .fn-elsewhere{margin:2rem 0 0;font-size:.9375rem;color:var(--ink-secondary)}
 @media(max-width:760px){.fn-case{grid-template-columns:1fr;gap:1.5rem;padding:2rem 0}.fn-case__facts{grid-template-columns:1fr 1fr}.fn-case__facts>div:first-child{grid-column:1/-1}}
+/* Site motion (2026-11). Transform, opacity and paint only; never layout. Everything is inside no-preference. */
+@media(prefers-reduced-motion:no-preference){
+@view-transition{navigation:auto}
+.site-header{view-transition-name:site-header}
+::view-transition-old(root),::view-transition-new(root){animation-duration:200ms;animation-timing-function:var(--ease-out-quart)}
+::view-transition-group(site-header){animation:none}
+html{scroll-behavior:smooth}
+.fn-text-link>span[aria-hidden],.fn-note-card__foot span[aria-hidden]{display:inline-block;transition:transform var(--duration-base) var(--ease-out-quart)}
+.fn-text-link:hover>span[aria-hidden],.fn-note-card a:hover .fn-note-card__foot span[aria-hidden]{transform:translate(2px,-2px)}
+.fn-case__title a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 300ms var(--ease-out-quart)}
+.fn-case__title a:hover{background-size:100% 1px;text-decoration:none}
+.fn-case{position:relative}.fn-case::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--ink);transform-origin:left;pointer-events:none}
+.fn-motion .fn-case::before{transform:scaleX(.08);transition:transform 700ms var(--ease-out-quart)}
+.fn-motion .fn-case.is-entered::before{transform:scaleX(1)}
+}
 @media(prefers-reduced-motion:reduce){:root *,:root *::before,:root *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms;scroll-behavior:auto}html{scroll-behavior:auto}}
