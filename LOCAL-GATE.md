@@ -7,13 +7,13 @@ One-time per clone: `git config --local core.hooksPath .githooks`
 Start from the worktree root. Restart your `hugo server` first (the Atlas mount in `module.toml` needs a restart; a running server shows an old page).
 
 ## 1. Look (hugo server, 5 min)
-`hugo server -D` then open:
-1. http://localhost:1313/ . Pass: homepage looks the same as main; only the nav gained "Atlas".
-2. http://localhost:1313/atlas/ . Pass: "16 of 16 records", Topic/Evidence filters and search narrow the list.
-3. http://localhost:1313/atlas/mem0ai--mem0/ . Pass: repo link, license, limitations, facts, sources render.
-4. A record with `NOASSERTION` license: /atlas/mksglu--context-mode/ . Pass: license shows NOASSERTION, nothing blank.
-5. Evidence states: all 16 records are `inspected`. No record exists for evaluated, tested or adopted, so those states cannot be eyeballed yet. Pass: the filter lists only "inspected".
-6. Nav "Atlas" link is current-page highlighted on /atlas/ and record pages.
+`hugo server -D` (restart it first), then open:
+1. http://localhost:1313/ . Pass: homepage unchanged; only the nav gained "Atlas".
+2. http://localhost:1313/atlas/ . Pass: four headed groups (Agent memory 4, Orchestration and sandboxing 3, Data lineage and pipelines 4, Tooling and registries 5), every card has an image tile (12 real images, 4 typographic tiles: Letta, MCP Registry, Scientific Agent Skills, Scrapling), no broken images, "16 of 16 systems".
+3. Type "lineage" in Search. Pass: 2 systems, other groups disappear, URL gains `?q=lineage`, "Clear search" restores all 16.
+4. http://localhost:1313/atlas/sqlmesh--sqlmesh/ . Pass: breadcrumb, image with credit line and "Original" link, citrus "My read" block, numbered "Stated by the project" facts whose [n] jump to Sources, rail on the right.
+5. http://localhost:1313/atlas/mksglu--context-mode/ . Pass: license reads "License not stated". Also open /atlas/letta-ai--letta/ (typographic tile, no image).
+6. Evidence: all 16 are "Read, not run". No record exists for Compared, Run or In use yet, so those cannot be seen.
 
 ## 2. Stress (3 min)
 - 200% zoom (Cmd +) on /atlas/ and a record. Pass: no overlap, no sideways scroll.
@@ -31,12 +31,15 @@ bash scripts/verify-content-safety.sh       # pass is structural only: denylist 
 Content safety limit: `.planning/private/denylist.txt` does not exist here, so name-based scanning is off. A
 "PASS" does not clear names. Read the 16 records once for private or employer content yourself.
 
-## 4. Review the diff (3 min)
-`git diff --stat origin/main...HEAD` (about 90 files: atlas/, out/ evidence, the site wiring; `out/` is local-only for now). Ask:
+## 4. Image provenance (3 min)
+Open `atlas/PROVENANCE.md`. You decided to include every licence class and logos and banners, so you own the risk. Check the REVIEW rows (Claude Squad AGPL-3.0, Context Mode no licence stated) and decide keep or drop; to drop one, delete its `[image]` table in the record. Pass: you are comfortable with each image, including logos (trademarked) on the permissive repos.
+
+## 5. Review the diff (3 min)
+`git diff --stat origin/main...HEAD` (about 110 files: atlas/, 12 images in assets/atlas/, out/ evidence, the site wiring; `out/` is local-only for now). Ask:
 - Should `out/` (Hugo vs Astro evidence, audit) ship to a public repo? `.planning/` and `out/` are public once pushed.
 - Any file you did not expect under `content/`, `data/`, `layouts/`?
 
-## 5. Rebase check (already run, 1 min to repeat)
+## 6. Rebase check (already run, 1 min to repeat)
 ```
 git worktree add --detach /tmp/rb-check HEAD && (cd /tmp/rb-check && git rebase origin/main); git worktree remove --force /tmp/rb-check
 ```
@@ -44,6 +47,7 @@ Last result (origin/main 3640e693, 2 commits ahead of merge base): clean, no con
 
 ## Decisions taken (2026-11-06)
 - Candidate/reviewed label is not rendered. Records are treated as approved for the site; the TOML `status` field is unchanged.
+- Images self-hosted from the READMEs, all licence classes (2026-11-06). See step 4.
 - Atlas records are in the main `/index.xml` and the sitemap (about 46 feed items).
 - `out/` stays committed on this branch and local only; decide before any push whether it ships to the public repo.
 
