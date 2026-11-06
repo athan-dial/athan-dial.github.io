@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{- $topics := slice -}}{{- $evidence := slice -}}
+{{- range .Pages }}{{ $topics = $topics | append .Params.topic }}{{ $evidence = $evidence | append .Params.evidence }}{{ end -}}
+{{- $topics = $topics | uniq | sort -}}{{- $evidence = $evidence | uniq | sort -}}
+<section class="container atlas" data-atlas>
+  <h1>{{ .Title }}</h1>
+  <p class="body-lg">{{ .Description }}</p>
+  <div class="atlas__controls" data-atlas-controls hidden>
+    <label>Search<input type="search" data-atlas-search placeholder="Title, summary, tag"></label>
+    <label>Topic<select data-atlas-filter="domain"><option value="">All</option>{{ range $topics }}<option>{{ . }}</option>{{ end }}</select></label>
+    <label>Evidence<select data-atlas-filter="status"><option value="">All</option>{{ range $evidence }}<option>{{ . }}</option>{{ end }}</select></label>
+  </div>
+  <p class="atlas__count" data-atlas-count role="status">{{ len .Pages }} of {{ len .Pages }} records</p>
+  <ul class="atlas__list">
+    {{- range .Pages.ByTitle }}
+    <li data-atlas-item data-domain="{{ .Params.topic }}" data-status="{{ .Params.evidence }}" data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>
+    {{- end }}
+  </ul>
+  <p class="atlas__empty" data-atlas-empty hidden role="status">No records match.</p>
+</section>
+{{ end }}

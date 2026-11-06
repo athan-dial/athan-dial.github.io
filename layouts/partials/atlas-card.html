@@ -1,0 +1,7 @@
+<article class="atlas-card">
+  <div class="atlas-card__meta">
+    <span class="atlas-badge" data-lifecycle="{{ .Params.lifecycle }}">{{ .Params.lifecycle | title }}</span><span>{{ .Params.topic }}</span><span>{{ .Params.evidence }}</span>{{ with .Params.license }}<span>{{ . }}</span>{{ end }}
+  </div>
+  <h2 class="atlas-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  <p class="atlas-card__summary">{{ .Params.summary }}</p>
+</article>

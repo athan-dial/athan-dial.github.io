@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="container">
+<article class="atlas-detail">
+  <a href="{{ "/atlas/" | relURL }}">&larr; All records</a>
+  <h1>{{ .Title }}</h1>
+  <dl>
+    <dt>Repository</dt><dd><a href="{{ .Params.canonical_url }}" rel="noopener">{{ .Params.id }}</a></dd>
+    <dt>Status</dt><dd><strong>{{ .Params.lifecycle | title }}</strong>{{ if eq .Params.lifecycle "candidate" }} (draft: not yet human-reviewed){{ end }}</dd>
+    <dt>Topic</dt><dd>{{ .Params.topic }}</dd>
+    <dt>Evidence</dt><dd>{{ .Params.evidence }}</dd>
+    <dt>License</dt><dd>{{ .Params.license }}</dd>
+    <dt>Last checked</dt><dd>{{ .Params.reviewed }}</dd>
+  </dl>
+  {{ .Content }}
+</article>
+</div>
+{{ end }}
