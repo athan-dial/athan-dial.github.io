@@ -1,0 +1,170 @@
+[
+ {
+  "id": "S01",
+  "slug": "sample-alpha",
+  "title": "Sample project alpha: search ranking notes",
+  "summary": "Synthetic sample record 1. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Data",
+  "status": "Shipped",
+  "year": 2024,
+  "tags": [
+   "search",
+   "evaluation"
+  ],
+  "body": "This is the detail page for sample record 1. The record is synthetic and public-safe. It carries a domain (Data), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S02",
+  "slug": "sample-beta",
+  "title": "Sample project beta: onboarding flow rewrite",
+  "summary": "Synthetic sample record 2. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Product",
+  "status": "Shipped",
+  "year": 2024,
+  "tags": [
+   "onboarding",
+   "research"
+  ],
+  "body": "This is the detail page for sample record 2. The record is synthetic and public-safe. It carries a domain (Product), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S03",
+  "slug": "sample-gamma",
+  "title": "Sample project gamma: build pipeline audit",
+  "summary": "Synthetic sample record 3. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Systems",
+  "status": "In progress",
+  "year": 2025,
+  "tags": [
+   "ci",
+   "tooling"
+  ],
+  "body": "This is the detail page for sample record 3. The record is synthetic and public-safe. It carries a domain (Systems), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S04",
+  "slug": "sample-delta",
+  "title": "Sample project delta: field guide draft",
+  "summary": "Synthetic sample record 4. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Writing",
+  "status": "In progress",
+  "year": 2025,
+  "tags": [
+   "essay",
+   "draft"
+  ],
+  "body": "This is the detail page for sample record 4. The record is synthetic and public-safe. It carries a domain (Writing), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S05",
+  "slug": "sample-epsilon",
+  "title": "Sample project epsilon: metrics glossary",
+  "summary": "Synthetic sample record 5. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Data",
+  "status": "Shipped",
+  "year": 2023,
+  "tags": [
+   "metrics",
+   "docs"
+  ],
+  "body": "This is the detail page for sample record 5. The record is synthetic and public-safe. It carries a domain (Data), a status (Shipped) and a year (2023) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S06",
+  "slug": "sample-zeta",
+  "title": "Sample project zeta: pricing page test",
+  "summary": "Synthetic sample record 6. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Product",
+  "status": "Archived",
+  "year": 2023,
+  "tags": [
+   "experiment",
+   "pricing"
+  ],
+  "body": "This is the detail page for sample record 6. The record is synthetic and public-safe. It carries a domain (Product), a status (Archived) and a year (2023) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S07",
+  "slug": "sample-eta",
+  "title": "Sample project eta: cache layer review",
+  "summary": "Synthetic sample record 7. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Systems",
+  "status": "Shipped",
+  "year": 2025,
+  "tags": [
+   "performance",
+   "cache"
+  ],
+  "body": "This is the detail page for sample record 7. The record is synthetic and public-safe. It carries a domain (Systems), a status (Shipped) and a year (2025) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S08",
+  "slug": "sample-theta",
+  "title": "Sample project theta: reading list essay",
+  "summary": "Synthetic sample record 8. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Writing",
+  "status": "Shipped",
+  "year": 2024,
+  "tags": [
+   "essay",
+   "reading"
+  ],
+  "body": "This is the detail page for sample record 8. The record is synthetic and public-safe. It carries a domain (Writing), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S09",
+  "slug": "sample-iota",
+  "title": "Sample project iota: dashboard cleanup",
+  "summary": "Synthetic sample record 9. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Data",
+  "status": "In progress",
+  "year": 2025,
+  "tags": [
+   "dashboard",
+   "cleanup"
+  ],
+  "body": "This is the detail page for sample record 9. The record is synthetic and public-safe. It carries a domain (Data), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S10",
+  "slug": "sample-kappa",
+  "title": "Sample project kappa: feature brief template",
+  "summary": "Synthetic sample record 10. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Product",
+  "status": "Shipped",
+  "year": 2022,
+  "tags": [
+   "template",
+   "brief"
+  ],
+  "body": "This is the detail page for sample record 10. The record is synthetic and public-safe. It carries a domain (Product), a status (Shipped) and a year (2022) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S11",
+  "slug": "sample-lambda",
+  "title": "Sample project lambda: migration checklist",
+  "summary": "Synthetic sample record 11. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Systems",
+  "status": "Archived",
+  "year": 2022,
+  "tags": [
+   "migration",
+   "checklist"
+  ],
+  "body": "This is the detail page for sample record 11. The record is synthetic and public-safe. It carries a domain (Systems), a status (Archived) and a year (2022) so that two filters and a search box have something real to act on."
+ },
+ {
+  "id": "S12",
+  "slug": "sample-mu",
+  "title": "Sample project mu: interview notes digest",
+  "summary": "Synthetic sample record 12. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
+  "domain": "Writing",
+  "status": "Archived",
+  "year": 2023,
+  "tags": [
+   "interviews",
+   "digest"
+  ],
+  "body": "This is the detail page for sample record 12. The record is synthetic and public-safe. It carries a domain (Writing), a status (Archived) and a year (2023) so that two filters and a search box have something real to act on."
+ }
+]

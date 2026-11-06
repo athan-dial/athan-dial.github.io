@@ -1,0 +1,5 @@
+Pixel diff, Hugo vs Astro screenshots (Playwright Chromium, same machine). Astro footer is simplified on purpose (no LinkedIn/email links), so detail pages are compared above the footer rule.
+list-1440 region (1440, 900) differing bbox: None
+list-390 region (780, 1688) differing bbox: None
+detail-1440 region (1440, 683) differing bbox: None
+detail-390 region (780, 1248) differing bbox: (32, 59, 741, 89)

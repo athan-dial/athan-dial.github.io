@@ -1,0 +1,19 @@
+## Hugo full-site build (this repo + slice): hugo --gc --minify
+hugo v0.168.0+extended+withdeploy darwin
+runs(s): [0.31, 0.45, 0.29, 0.3, 0.27] median: 0.3
+## Astro slice build: npx astro build (rm -rf dist node_modules/.astro first = cold cache)
+   astro  v7.4.5
+runs(s): [9.96, 15.05, 4.01, 11.49, 7.79] median: 9.96
+## Output size
+hugo public/ KB: 1020
+astro dist/ KB: 176
+## Slice asset bytes (raw / gzip)
+hugo | inline <script> bytes in list html: 0
+  list html: 12144 raw, 2366 gzip
+  detail html: 4107 raw, 1521 gzip
+  css /css/editorial-atlas.min.ff2381d10839a494e327e755d8c88e2419a05d8caabdc4a85f9dbf301051b54e.css: 41062 raw, 7731 gzip
+  js /js/atlas.min.bac673e4a62957976afe5b4a29ee382bab7099b8ae55f1f15b2af3016df1dd11.js: 707 raw, 354 gzip
+astro | inline <script> bytes in list html: 823
+  list html: 11237 raw, 2151 gzip
+  detail html: 1941 raw, 901 gzip
+  css /_astro/Base.DqALBAzZ.css: 40916 raw, 7755 gzip

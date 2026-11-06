@@ -1,0 +1,155 @@
+{
+ "hugo": {
+  "js_off_items": 12,
+  "js_off_controls_hidden": true,
+  "js_off_detail_url": "/atlas/sample-alpha/",
+  "requests": 6,
+  "request_types": [
+   "document",
+   "font",
+   "script",
+   "stylesheet"
+  ],
+  "initial_count_text": "12 of 12 records",
+  "search_alpha": 1,
+  "search_tag_essay": 2,
+  "search_none": 0,
+  "empty_state_shown": true,
+  "filter_domain_data": 3,
+  "filter_data_and_shipped": 2,
+  "filter_plus_search": 1,
+  "count_text_after": "1 of 12 records",
+  "reset_count": 12,
+  "console_messages": [],
+  "tab_sequence": [
+   "A:Skip to main content",
+   "A:Athan Dial",
+   "A:Work",
+   "A:Fieldnotes",
+   "A:About",
+   "INPUT:Title, summary, tag",
+   "SELECT:AllDataProductSystemsWri",
+   "SELECT:AllShippedIn progressArc"
+  ],
+  "axe_list": {
+   "violations": [],
+   "passes": 38
+  },
+  "axe_detail": {
+   "violations": [],
+   "passes": 31
+  },
+  "geometry_list_1440": {
+   "h1": [
+    100,
+    1240,
+    64
+   ],
+   "controls": [
+    100,
+    1240,
+    72
+   ],
+   "list": [
+    100,
+    1240,
+    2021
+   ],
+   "firstCard": [
+    100,
+    1240,
+    160
+   ]
+  },
+  "fonts_loaded": [
+   "archivo 100 900",
+   "ibm plex mono 400",
+   "ibm plex mono 500"
+  ],
+  "geometry_detail_1440": [
+   100,
+   720,
+   508
+  ],
+  "mobile_overflow_list": false,
+  "mobile_overflow_detail": false,
+  "mobile_search_alpha": 1,
+  "zoom200_overflow": false
+ },
+ "astro": {
+  "js_off_items": 12,
+  "js_off_controls_hidden": true,
+  "js_off_detail_url": "/atlas/sample-alpha/",
+  "requests": 5,
+  "request_types": [
+   "document",
+   "font",
+   "stylesheet"
+  ],
+  "initial_count_text": "12 of 12 records",
+  "search_alpha": 1,
+  "search_tag_essay": 2,
+  "search_none": 0,
+  "empty_state_shown": true,
+  "filter_domain_data": 3,
+  "filter_data_and_shipped": 2,
+  "filter_plus_search": 1,
+  "count_text_after": "1 of 12 records",
+  "reset_count": 12,
+  "console_messages": [],
+  "tab_sequence": [
+   "A:Skip to main content",
+   "A:Athan Dial",
+   "A:Work",
+   "A:Fieldnotes",
+   "A:About",
+   "INPUT:Title, summary, tag",
+   "SELECT:AllDataProductSystemsWri",
+   "SELECT:AllShippedIn progressArc"
+  ],
+  "axe_list": {
+   "violations": [],
+   "passes": 38
+  },
+  "axe_detail": {
+   "violations": [],
+   "passes": 29
+  },
+  "geometry_list_1440": {
+   "h1": [
+    100,
+    1240,
+    64
+   ],
+   "controls": [
+    100,
+    1240,
+    72
+   ],
+   "list": [
+    100,
+    1240,
+    2021
+   ],
+   "firstCard": [
+    100,
+    1240,
+    160
+   ]
+  },
+  "fonts_loaded": [
+   "Archivo 100 900",
+   "IBM Plex Mono 400",
+   "IBM Plex Mono 500"
+  ],
+  "geometry_detail_1440": [
+   100,
+   720,
+   508
+  ],
+  "mobile_overflow_list": false,
+  "mobile_overflow_detail": false,
+  "mobile_search_alpha": 1,
+  "zoom200_overflow": false
+ }
+}
