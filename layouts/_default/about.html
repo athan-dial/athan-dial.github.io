@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{- $profile := .Site.Data.profile -}}
+<div class="container fn-notebook fn-about-page">
+  <header class="fn-page-head">
+    <p class="fn-kicker">Athan Dial / About</p>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </header>
+  <article class="prose prose--editorial fn-about-page__prose">
+    {{ .Content }}
+  </article>
+  <nav class="fn-about-page__contact" aria-label="Contact">
+    <a class="fn-text-link" href="mailto:{{ $profile.email }}">Send a note <span aria-hidden="true">↗</span></a>
+    <a class="fn-text-link" href="{{ $profile.links.linkedin }}" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+  </nav>
+</div>
+{{ end }}

@@ -32,6 +32,8 @@
 .fn-case__summary{margin:0 0 1.5rem;max-width:40rem;font-size:1.0625rem;line-height:1.7;color:var(--ink-secondary)}
 .fn-elsewhere{margin:2rem 0 0;font-size:.9375rem;color:var(--ink-secondary)}
 @media(max-width:760px){.fn-case{grid-template-columns:1fr;gap:1.5rem;padding:2rem 0}.fn-case__facts{grid-template-columns:1fr 1fr}.fn-case__facts>div:first-child{grid-column:1/-1}}
+/* /about/: fn-page-head chrome plus editorial body; not the homepage .fn-about chapter grid. */
+.fn-about-page__prose{max-width:none;margin:0}.fn-about-page__contact{display:flex;flex-wrap:wrap;gap:1.25rem 2.5rem;margin-top:var(--stack-sm);padding-bottom:3rem}
 /* Site motion (2026-11). Transform, opacity and paint only; never layout. Everything is inside no-preference. */
 @media(prefers-reduced-motion:no-preference){
 @view-transition{navigation:auto}
