@@ -1,0 +1,29 @@
+ok   records/awslabs--cli-agent-orchestrator.toml
+ok   records/d4vinci--scrapling.toml
+ok   records/deusdata--codebase-memory-mcp.toml
+ok   records/getzep--graphiti.toml
+ok   records/k-dense-ai--scientific-agent-skills.toml
+ok   records/kedro-org--kedro-viz.toml
+ok   records/letta-ai--letta.toml
+ok   records/mem0ai--mem0.toml
+ok   records/mksglu--context-mode.toml
+ok   records/modelcontextprotocol--registry.toml
+ok   records/nvidia--openshell.toml
+ok   records/openlineage--openlineage.toml
+ok   records/reata--sqllineage.toml
+ok   records/smtg-ai--claude-squad.toml
+ok   records/sqlmesh--sqlmesh.toml
+ok   records/topoteretes--cognee.toml
+16 valid, 0 invalid, 16 total
+PASS (failed as expected: bad topic enum)
+FAIL tests/invalid/getzep--graphiti.toml: topic 'not-a-topic' not in allowed list
+PASS (failed as expected: tested without evidence_note)
+FAIL tests/invalid2/getzep--graphiti.toml: evidence_state 'tested' requires evidence_note
+PASS (failed as expected: missing required field)
+FAIL tests/invalid3/getzep--graphiti.toml: missing required field 'mechanism'
+PASS (failed as expected: canonical_url/id mismatch)
+FAIL tests/invalid4/getzep--graphiti.toml: canonical_url 'https://github.com/someone-else/graphiti' does not resolve to id owner/repo (case-insensitive)
+PASS (failed as expected: email in text (safety scan))
+FAIL tests/invalid5/getzep--graphiti.toml: safety deny-list hit (email address): 'Ask me at someone@example.com'
+PASS (failed as expected: duplicate canonical identity)
+FAIL tests/duplicate/b/getzep--graphiti.toml: duplicate canonical identity 'github:getzep/graphiti' also in getzep--graphiti.toml

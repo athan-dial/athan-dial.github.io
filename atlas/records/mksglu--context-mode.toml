@@ -1,0 +1,67 @@
+schema_version = "atlas-record/1"
+id = "github:mksglu/context-mode"
+canonical_url = "https://github.com/mksglu/context-mode"
+title = "Context Mode: a local filter for tool output"
+repository_owner = "mksglu"
+repository_name = "context-mode"
+date_observed = "2026-10-31"
+topic = "agent-tooling"
+mechanism = "Runs a tool for the agent in a local sandbox, keeps the full output in a local database, and gives the agent only the part it asks for."
+license_spdx = "NOASSERTION"
+license_note = "Elastic License 2.0 (ELv2), read from the repository LICENSE file. Source-available, not OSI open source."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "A local answer to tool output filling the limited text an AI can read at once (its context window). I looked only at the free plugin, not the paid hosted service. I would revise this if the agent often asks for the wrong part and has to go back, which I did not test."
+fit = "Look at it when tool output keeps crowding out the work. Skip it if you need everything kept in front of the model."
+limitations = ["The README's star and download figures are the project's own claims, so I did not record them.", "The README describes a free local plugin and a separate paid hosted service. I covered only the plugin."]
+
+[provenance]
+seed_pointer = "seed-index:mksglu/context-mode"
+discovery_dates = "2026-10-31"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/mksglu/context-mode"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/mksglu/context-mode/blob/main/LICENSE"
+kind = "license_file"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The plugin runs tool work in a local sandbox and keeps the full output in a SQLite database on the machine."
+source_url = "https://github.com/mksglu/context-mode#readme"
+
+[[facts]]
+claim = "The agent is given the part it asks for."
+source_url = "https://github.com/mksglu/context-mode#readme"
+
+[[facts]]
+claim = "The plugin is free and local; a separate hosted Gateway service has its own account and subscription."
+source_url = "https://github.com/mksglu/context-mode#readme"
+
+[image]
+file = "mksglu--context-mode.webp"
+kind = "banner"
+alt = "Context Mode project card with the headline 'Tool output stays out of context. Only the answer comes back.' and three figures the project reports."
+credit = "Context Mode"
+source_url = "https://github.com/mksglu/context-mode/blob/main/docs/assets/readme/hero-light.png"

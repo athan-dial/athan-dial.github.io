@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:awslabs/cli-agent-orchestrator"
+canonical_url = "https://github.com/awslabs/cli-agent-orchestrator"
+title = "CLI Agent Orchestrator: one supervisor agent delegating to workers"
+repository_owner = "awslabs"
+repository_name = "cli-agent-orchestrator"
+date_observed = "2026-09-06/2026-09-09"
+topic = "agent-orchestration"
+mechanism = "Runs coding-assistant command-line tools in separate terminal sessions, and lets one supervisor agent hand work to the others."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "The README describes one supervisor delegating to workers in separate tmux sessions, with a small local server in between. I would borrow that shape for small jobs. I would drop it if delegating in parallel turns out to need tool-specific glue, which I did not check."
+fit = "Use it when you want a supervisor agent to split work across several command-line assistants on one machine. Skip it if you want hosted or cross-machine orchestration; the README describes a local server."
+limitations = ["I did not check which tools it supports beyond the repository description."]
+
+[provenance]
+seed_pointer = "seed-index:awslabs/cli-agent-orchestrator"
+discovery_dates = "2026-09-06_to_2026-09-09"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/awslabs/cli-agent-orchestrator"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/awslabs/cli-agent-orchestrator#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/awslabs/cli-agent-orchestrator"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "A supervisor can delegate work to specialist agents in parallel or in sequence."
+source_url = "https://github.com/awslabs/cli-agent-orchestrator#readme"
+
+[[facts]]
+claim = "CAO runs a local cao-server and starts the provider command-line tools in isolated terminal sessions."
+source_url = "https://github.com/awslabs/cli-agent-orchestrator#readme"
+
+[[facts]]
+claim = "tmux 3.3 or later is required."
+source_url = "https://github.com/awslabs/cli-agent-orchestrator#readme"
+
+[[facts]]
+claim = "The repository description names Claude Code, Kiro and Codex as supported command-line tools."
+source_url = "https://github.com/awslabs/cli-agent-orchestrator"
+
+[image]
+file = "awslabs--cli-agent-orchestrator.webp"
+kind = "banner"
+alt = "CLI Agent Orchestrator logo: a blue hexagon with a node graph, beside the name and the line 'Lightweight orchestration for multi-agent AI workflows'."
+credit = "CLI Agent Orchestrator"
+source_url = "https://github.com/awslabs/cli-agent-orchestrator/blob/main/docusaurus/static/img/cao-social-card.png"

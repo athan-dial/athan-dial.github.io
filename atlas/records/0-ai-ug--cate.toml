@@ -1,0 +1,61 @@
+schema_version = "atlas-record/1"
+id = "github:0-ai-ug/cate"
+canonical_url = "https://github.com/0-ai-ug/cate"
+title = "Cate: a canvas workspace for running coding agents side by side"
+repository_owner = "0-ai-ug"
+repository_name = "cate"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A desktop app where each coding agent runs in its own terminal on a shared canvas. It shows which agents are working, waiting or finished, and puts each branch in its own git worktree."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a supervision screen for people who already run several coding agents by hand, with an editor attached. I would revise that if the status signals turn out to be unreliable for agents beyond the supported ones, which I did not check."
+fit = "Use it when you run several agent command-line tools at once and want one view of which ones need you. Skip it if you run one agent at a time and your current editor already works."
+limitations = ["I did not check how the status reporting works or which agent command-line tools are supported, beyond the README naming Claude Code and Codex.", "I did not run it, including the shared and remote workspace features, so I cannot say how well they hold up."]
+
+[provenance]
+seed_pointer = "reading-list:0-ai-ug/cate"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/0-ai-ug/cate"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/0-ai-ug/cate#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/0-ai-ug/cate"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Supported agent command-line tools report when a turn starts, when it ends and when they ask for permission, so each terminal panel shows running, waiting or finished."
+source_url = "https://github.com/0-ai-ug/cate#readme"
+
+[[facts]]
+claim = "A new git worktree and branch can be created from a short description, and each gets its own colored area on the canvas."
+source_url = "https://github.com/0-ai-ug/cate#readme"
+
+[[facts]]
+claim = "Several devices, including an iPhone app, can connect to the same running workspace and see the same terminals and agent conversations."
+source_url = "https://github.com/0-ai-ug/cate#readme"
+
+[image]
+file = "0-ai-ug--cate.webp"
+kind = "screenshot"
+alt = "Screenshot of the Cate canvas: several terminal panels and a browser panel laid out side by side in a light-themed desktop window."
+credit = "Cate"
+source_url = "https://github.com/0-AI-UG/cate/blob/HEAD/assets/demo-canvas.gif"

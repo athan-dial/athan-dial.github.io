@@ -1,0 +1,24 @@
+### hugo / bad_domain: exit=1
+ERROR atlas record S03: domain "Bogus" not in [Data Product Systems Writing]
+ERROR error building site: logged 1 error(s)
+### astro / bad_domain: exit=1
+[InvalidContentEntryDataError] atlas → sample-gamma data does not match collection schema.
+domain: Invalid option: expected one of "Data"|"Product"|"Systems"|"Writing"
+Error reference:
+https://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/
+### hugo / missing_summary: exit=1
+ERROR atlas record S05: missing required field "summary"
+ERROR error building site: logged 1 error(s)
+### astro / missing_summary: exit=1
+[InvalidContentEntryDataError] atlas → sample-epsilon data does not match collection schema.
+summary**: **summary: Required
+Error reference:
+https://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/
+### hugo / year_as_string: exit=1
+ERROR atlas record S07: year must be a number
+ERROR error building site: logged 1 error(s)
+### astro / year_as_string: exit=1
+[InvalidContentEntryDataError] atlas → sample-eta data does not match collection schema.
+year**: **year: Expected type `"number"`, received `"string"`
+Error reference:
+https://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/

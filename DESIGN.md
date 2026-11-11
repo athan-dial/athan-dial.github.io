@@ -87,7 +87,11 @@ book marginalia, not application navigation.
 - section rules resolving from a short mark to a full divider on first entry;
 - one-time connector emphasis that clarifies diagram direction;
 - active-state movement in the chapter index;
-- small emphasis shifts that reinforce the move from capability to human judgment.
+- small emphasis shifts that reinforce the move from capability to human judgment;
+- site-wide (added 2026-11): a 200ms cross-page crossfade (CSS View Transitions, header held still), the
+  ink rule above Atlas groups and Work case files resolving once on first entry (`assets/js/motion.js`),
+  link-arrow nudges, a Work-title underline that draws on hover, and Atlas image or plate nudges on card
+  hover. Transform, opacity and paint only. All of it sits inside `prefers-reduced-motion: no-preference`.
 
 ### Forbidden motion
 

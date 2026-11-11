@@ -66,7 +66,9 @@
   <section id="fieldnotes" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="notebook-title">
     <div class="fn-section__head"><h2 id="notebook-title">Fieldnotes <span>/ {{ len $writing }}</span></h2><a href="/thinking/">All writing ↗</a></div>
     <p class="fn-section__standfirst">Working notes on AI, product judgment, expert workflows, verification, and the places where the boundary between a tool and its user keeps moving.</p>
-    <div class="fn-note-grid">{{ range first 3 (sort $writing "Date" "desc") }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+    {{- /* The featured essay already has its own chapter above; do not list it twice. */ -}}
+    {{- $rest := sort $writing "Date" "desc" -}}{{- range $featured }}{{ $f := . }}{{ $rest = where $rest "Permalink" "ne" $f.Permalink }}{{ end -}}
+    <div class="{{ if le (len $rest) 2 }}fn-work-grid{{ else }}fn-note-grid{{ end }}">{{ range first 3 $rest }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
   </section>
 
   <section id="trajectory" class="fn-trajectory fn-chapter" data-fn-chapter aria-labelledby="trajectory-title">

@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:morluto/rea"
+canonical_url = "https://github.com/morluto/rea"
+title = "REA: reverse engineering tools for coding agents"
+repository_owner = "morluto"
+repository_name = "rea"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A standalone tool and MCP server (a standard way to give agents tools), not a skill collection. It lets an agent inspect apps, binaries and websites, and returns findings with the evidence behind them."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a toolbox first, with its skill (written instructions) as setup glue. Returning evidence with every finding is the part I value. I would revise this if the findings fail to match what the target really does, which I did not test."
+fit = "Use it when you want an agent to explain how an app or binary works from the shipped files. Skip it if you have the source code, where ordinary code reading is enough."
+limitations = ["I did not run it against any target.", "I read the first part of a long README and skimmed the target table; I did not read the linked docs, and some targets need outside tools such as Hopper or Ghidra."]
+
+[provenance]
+seed_pointer = "reading-list:morluto/rea"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/morluto/rea"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/morluto/rea#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/morluto/rea"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Setup registers the MCP server with agents such as Claude Code, Codex, Cursor and Gemini CLI, and installs matching instructions."
+source_url = "https://github.com/morluto/rea#readme"
+
+[[facts]]
+claim = "Targets include native binaries, JavaScript and Electron apps, model files and websites."
+source_url = "https://github.com/morluto/rea#readme"
+
+[[facts]]
+claim = "The project says analysis runs locally and results include their evidence and limits."
+source_url = "https://github.com/morluto/rea#readme"
+
+[[facts]]
+claim = "It needs Node.js and npm."
+source_url = "https://github.com/morluto/rea#readme"

@@ -20,4 +20,33 @@
 @media(max-width:600px){.fn-intro{grid-template-columns:minmax(0,1fr);padding:2.5rem 0;gap:1.5rem}.fn-intro h1{font-size:clamp(3rem,13vw,4.5rem)}.fn-portrait{display:grid;grid-template-columns:70px 1fr;align-items:center;gap:1rem;margin:0}.fn-portrait img{width:70px}.fn-portrait figcaption{display:block;font-size:.8125rem;padding:0}.fn-portrait figcaption span{display:block;margin:.3rem 0}.fn-feature{grid-template-columns:1fr;margin-bottom:2.5rem}.fn-feature__diagram{margin:0 1.5rem 1.5rem}.fn-feature h2{font-size:3rem}.fn-feature__question{font-size:2rem}.fn-section__head h2{font-size:2rem}.fn-section__head{flex-wrap:wrap;gap:.75rem}.fn-note-grid,.fn-work-grid{grid-template-columns:1fr}.fn-note-grid .fn-note-card:nth-child(n),.fn-work-grid .fn-note-card:nth-child(n){padding:1.5rem 0;border-right:0}.fn-about{grid-template-columns:1fr;gap:1.5rem;padding-bottom:3rem}.fn-about h2{font-size:2.5rem}.fn-page-head{padding:2.5rem 0 2rem}.fn-archive-nav{flex-wrap:wrap;gap:1rem}.fn-archive-nav>span{flex-basis:100%}.fn-schematic{padding:1rem}.fn-schematic__branches{grid-template-columns:1fr}.fn-schematic h3{font-size:1.6rem}.site-header__inner{gap:1rem}.site-nav{gap:1rem}}
 /* :root-prefixed so the reset outranks element-selector transitions (a{transition:...}
    beats a bare *), without reaching for !important. */
+/* Four nav items (Work, Fieldnotes, Atlas, About) overflow a 390px header and wrapped About onto a second line. Tighten before wrapping; below about 340px the existing wrap in main.css still applies. */
+@media(max-width:420px){.site-nav{gap:6px}}@media(max-width:380px){.site-nav{gap:2px}.site-nav a{font-size:.75rem}}
+/* Work index: case files (labeled facts left, story right) and the Fieldnotes elsewhere line. */
+.fn-page-head>p.fn-work__summary{font-size:1.125rem;line-height:1.7;max-width:42rem;margin:0}.fn-page-head>p.fn-work__lens{margin-top:1rem;font-size:1rem;line-height:1.6;max-width:36rem}.fn-work__lens a,.fn-elsewhere a{text-underline-offset:.18em}
+.fn-cases{border-top:1px solid var(--field-rule);margin-bottom:4rem}
+.fn-case{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:2rem 4rem;padding:2.5rem 0;border-bottom:1px solid var(--field-rule)}
+.fn-case__facts{margin:0;display:grid;gap:1rem;align-content:start}.fn-case__facts dt{font:400 .75rem/1.5 var(--font-mono);text-transform:uppercase;color:var(--ink-secondary)}.fn-case__facts dd{margin:.15rem 0 0;font-size:.9375rem;line-height:1.5}
+.fn-case__meta{margin:0 0 .75rem;font:400 .75rem/1.5 var(--font-mono);color:var(--ink-secondary)}
+.fn-case__title{margin:0 0 1rem;font:400 clamp(1.9rem,3.2vw,2.75rem)/1.12 var(--font-display);letter-spacing:-.03em;max-width:22ch;text-wrap:balance}.fn-case__title a{color:var(--ink);text-decoration:none}.fn-case__title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
+.fn-case__summary{margin:0 0 1.5rem;max-width:40rem;font-size:1.0625rem;line-height:1.7;color:var(--ink-secondary)}
+.fn-elsewhere{margin:2rem 0 0;font-size:.9375rem;color:var(--ink-secondary)}
+@media(max-width:760px){.fn-case{grid-template-columns:1fr;gap:1.5rem;padding:2rem 0}.fn-case__facts{grid-template-columns:1fr 1fr}.fn-case__facts>div:first-child{grid-column:1/-1}}
+/* /about/: fn-page-head chrome plus editorial body; not the homepage .fn-about chapter grid. */
+.fn-about-page__prose{max-width:none;margin:0}.fn-about-page__contact{display:flex;flex-wrap:wrap;gap:1.25rem 2.5rem;margin-top:var(--stack-sm);padding-bottom:3rem}
+/* Site motion (2026-11). Transform, opacity and paint only; never layout. Everything is inside no-preference. */
+@media(prefers-reduced-motion:no-preference){
+@view-transition{navigation:auto}
+.site-header{view-transition-name:site-header}
+::view-transition-old(root),::view-transition-new(root){animation-duration:200ms;animation-timing-function:var(--ease-out-quart)}
+::view-transition-group(site-header){animation:none}
+html{scroll-behavior:smooth}
+.fn-text-link>span[aria-hidden],.fn-note-card__foot span[aria-hidden]{display:inline-block;transition:transform var(--duration-base) var(--ease-out-quart)}
+.fn-text-link:hover>span[aria-hidden],.fn-note-card a:hover .fn-note-card__foot span[aria-hidden]{transform:translate(2px,-2px)}
+.fn-case__title a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size 300ms var(--ease-out-quart)}
+.fn-case__title a:hover{background-size:100% 1px;text-decoration:none}
+.fn-case{position:relative}.fn-case::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--ink);transform-origin:left;pointer-events:none}
+.fn-motion .fn-case::before{transform:scaleX(.08);transition:transform 700ms var(--ease-out-quart)}
+.fn-motion .fn-case.is-entered::before{transform:scaleX(1)}
+}
 @media(prefers-reduced-motion:reduce){:root *,:root *::before,:root *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms;scroll-behavior:auto}html{scroll-behavior:auto}}

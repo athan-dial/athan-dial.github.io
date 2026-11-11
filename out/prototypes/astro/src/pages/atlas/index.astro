@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import AtlasCard from '../../components/AtlasCard.astro';
+const records = (await getCollection('atlas')).sort((a, b) => a.data.recordId.localeCompare(b.data.recordId));
+const domains = ['Data', 'Product', 'Systems', 'Writing'];
+const statuses = ['Shipped', 'In progress', 'Archived'];
+---
+<Base title="Atlas (sample slice)" description="Prototype list of synthetic sample records.">
+  <section class="container atlas" data-atlas>
+    <h1>Atlas (sample slice)</h1>
+    <p class="body-lg">Prototype list of synthetic sample records.</p>
+    <div class="atlas__controls" data-atlas-controls hidden>
+      <label>Search<input type="search" data-atlas-search placeholder="Title, summary, tag" /></label>
+      <label>Domain<select data-atlas-filter="domain"><option value="">All</option>{domains.map((d) => <option>{d}</option>)}</select></label>
+      <label>Status<select data-atlas-filter="status"><option value="">All</option>{statuses.map((s) => <option>{s}</option>)}</select></label>
+    </div>
+    <p class="atlas__count" data-atlas-count role="status">{records.length} of {records.length} records</p>
+    <ul class="atlas__list">
+      {records.map((r) => (
+        <li data-atlas-item data-domain={r.data.domain} data-status={r.data.status} data-text={`${r.data.title} ${r.data.summary} ${r.data.tags.join(' ')}`.toLowerCase()}>
+          <AtlasCard record={r} />
+        </li>
+      ))}
+    </ul>
+    <p class="atlas__empty" data-atlas-empty hidden role="status">No records match.</p>
+  </section>
+  <script>import '../../scripts/atlas.js';</script>
+</Base>

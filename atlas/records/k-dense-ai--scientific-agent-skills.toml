@@ -1,0 +1,50 @@
+schema_version = "atlas-record/1"
+id = "github:k-dense-ai/scientific-agent-skills"
+canonical_url = "https://github.com/K-Dense-AI/scientific-agent-skills"
+title = "Scientific Agent Skills: a library of skills for science work"
+repository_owner = "k-dense-ai"
+repository_name = "scientific-agent-skills"
+date_observed = "2026-10-20"
+topic = "scientific-agent-skills"
+mechanism = "A collection of ready-made agent skills and pointers to scientific databases, in the open Agent Skills format."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Useful as a look at how a skills library is organised for one field. The counts and adoption figures are the project's own, so I do not rely on them. I would revise this if the skills turn out to be thin prompts, which I did not check."
+fit = "Use it when you want examples of domain skills for an agent that supports the Agent Skills format. Skip it if you need verified science workflows; I did not test any skill."
+limitations = ["I did not verify the 177-skill count or any user numbers, and I do not state them as fact."]
+
+[provenance]
+seed_pointer = "seed-index:K-Dense-AI/scientific-agent-skills"
+discovery_dates = "2026-10-20;2026-10-23"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/K-Dense-AI/scientific-agent-skills"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/K-Dense-AI/scientific-agent-skills#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "The project was renamed from Claude Scientific Skills to Scientific Agent Skills and works with any agent supporting the open Agent Skills standard."
+source_url = "https://github.com/K-Dense-AI/scientific-agent-skills#readme"
+
+[[facts]]
+claim = "The repository description claims 177 skills plus 100+ scientific databases."
+source_url = "https://github.com/K-Dense-AI/scientific-agent-skills"

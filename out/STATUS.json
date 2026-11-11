@@ -1,0 +1,18 @@
+{
+ "schema": 1,
+ "runner": "claude",
+ "state": "done",
+ "summary": "Hugo vs Astro slice built twice and measured; recommend keep Hugo, migration triggers set, decision gate open. Ready for independent verification.",
+ "next": "Independent verifier re-runs out/reproduce.sh; Athan decides platform.",
+ "needs_athan": [],
+ "last_report": "out/REPORT.md",
+ "evidence": [
+  "out/REPORT.md",
+  "out/VERIFICATION.md",
+  "out/DECISION-GATE.md",
+  "out/evidence/results.json",
+  "out/evidence/build_metrics.txt",
+  "out/reproduce.sh"
+ ],
+ "updated_at": "2026-11-04T18:39:32-05:00"
+}

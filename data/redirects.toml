@@ -79,13 +79,13 @@
 # editing that file's frontmatter (owned by another track).
 [[redirects]]
   from = "/advisory/"
-  to = "/about/#conversations"
+  to = "/about/#compare-notes"
   permanent = true
   path = "advisory"
 
 [[redirects]]
   from = "/consulting/"
-  to = "/about/#conversations"
+  to = "/about/#compare-notes"
   permanent = true
   path = "redirects/consulting"
 

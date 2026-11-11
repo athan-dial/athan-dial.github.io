@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Local gate guard. Refuses to push dev/atlas-integration unless .local-gate-passed (untracked,
+# gitignored) holds the exact SHA being pushed. Athan creates that file after LOCAL-GATE.md.
+# Enable per clone: git config --local core.hooksPath .githooks
+root="$(git rev-parse --show-toplevel)"
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [[ "$local_ref" == "refs/heads/dev/atlas-integration" ]] || continue
+  [[ "$local_sha" =~ ^0+$ ]] && continue   # branch deletion
+  want="$(tr -d '[:space:]' < "$root/.local-gate-passed" 2>/dev/null)"
+  if [[ -z "$want" ]]; then
+    echo "pre-push: BLOCKED. dev/atlas-integration has not passed the local gate." >&2
+    echo "  Do LOCAL-GATE.md, then: git rev-parse HEAD > .local-gate-passed" >&2
+    exit 1
+  fi
+  if [[ "$want" != "$local_sha" ]]; then
+    echo "pre-push: BLOCKED. .local-gate-passed holds ${want:0:12}, pushing ${local_sha:0:12}." >&2
+    echo "  New commits since the gate. Re-run LOCAL-GATE.md, then: git rev-parse HEAD > .local-gate-passed" >&2
+    exit 1
+  fi
+done
+exit 0

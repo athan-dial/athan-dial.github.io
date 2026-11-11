@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:k4cper-g/agent-ctrl"
+canonical_url = "https://github.com/k4cper-g/agent-ctrl"
+title = "agent-ctrl: a command line tool for driving desktop apps"
+repository_owner = "k4cper-g"
+repository_name = "agent-ctrl"
+date_observed = "date_not_recovered"
+topic = "computer-use-agents"
+mechanism = "Lets an AI agent operate native desktop apps from a command line. It lists the on-screen elements once, then clicks, types or presses keys on them by reference. Browsers are out of scope."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a way to give an agent a stable handle on desktop controls: look once, then act on named references. I would revise this if the references prove brittle on apps whose element list fills in late, which the README flags for Chromium-based apps and I did not test."
+fit = "Use it when an agent has to operate a native Windows or macOS app that has no API. Skip it if you need actions on Linux, where only reading is supported, or if you need browser automation, which it leaves out."
+limitations = ["I did not run it on any operating system or check the macOS permission setup. I read the install, commands, platform and known-limitations sections, not the linked docs or example scripts."]
+
+[provenance]
+seed_pointer = "reading-list:k4cper-g/agent-ctrl"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/k4cper-g/agent-ctrl"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/k4cper-g/agent-ctrl#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/k4cper-g/agent-ctrl"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Windows uses UI Automation and macOS uses its Accessibility interface, both with the full set of actions; Linux supports snapshot, find and window listing only."
+source_url = "https://github.com/k4cper-g/agent-ctrl#readme"
+
+[[facts]]
+claim = "A snapshot lists elements with references like @e4, and a reference is valid only for the snapshot that produced it."
+source_url = "https://github.com/k4cper-g/agent-ctrl#readme"
+
+[[facts]]
+claim = "A long-running background process per session handles requests, and a TypeScript client is available."
+source_url = "https://github.com/k4cper-g/agent-ctrl#readme"
+
+[[facts]]
+claim = "Windows and macOS builds are installed through npm or release binaries; Linux has no prebuilt release."
+source_url = "https://github.com/k4cper-g/agent-ctrl#readme"
+
+[image]
+file = "k4cper-g--agent-ctrl.webp"
+kind = "logo"
+alt = "agent-ctrl logo: a grey keyboard key labelled Ctrl on a white background."
+credit = "agent-ctrl"
+source_url = "https://github.com/k4cper-g/agent-ctrl/blob/HEAD/docs/logo.png"

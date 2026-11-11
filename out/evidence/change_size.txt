@@ -1,0 +1,28 @@
+Change size of the slice (authored files only; shared records.json, atlas.css, atlas.js excluded from both sides).
+
+HUGO (patch against the real site):
+  assets/css/atlas.css: +23 -0  (shared, excluded)
+  assets/js/atlas.js: +25 -0  (shared, excluded)
+  content/atlas/_content.gotmpl: +20 -0
+  content/atlas/_index.md: +6 -0
+  data/atlas_sample.json: +170 -0  (shared, excluded)
+  layouts/_default/baseof.html: +8 -0
+  layouts/atlas/list.html: +18 -0
+  layouts/atlas/single.html: +16 -0
+  layouts/partials/atlas-card.html: +7 -0
+  authored files: 6 | authored lines changed (add+remove): 75 | existing files edited: 1
+
+ASTRO (new project):
+  astro.config.mjs: 7
+  package-lock.json: 3891 lines (generated lockfile, excluded from total)
+  package.json: 10
+  public/robots.txt: 4
+  src/content.config.ts: 22
+  src/components/AtlasCard.astro: 11
+  src/layouts/Base.astro: 38
+  src/pages/sitemap.xml.ts: 7
+  src/pages/index.xml.ts: 14
+  src/pages/atlas/index.astro: 29
+  src/pages/atlas/[slug].astro: 25
+  authored files: 10 | authored lines: 167
+

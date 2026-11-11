@@ -1,0 +1,11 @@
+---
+const { record } = Astro.props;
+const d = record.data;
+---
+<article class="atlas-card">
+  <div class="atlas-card__meta">
+    <span>{d.recordId}</span><span>{d.domain}</span><span>{d.status}</span><span>{d.year}</span>
+  </div>
+  <h2 class="atlas-card__title"><a href={`/atlas/${record.id}/`}>{d.title}</a></h2>
+  <p class="atlas-card__summary">{d.summary}</p>
+</article>

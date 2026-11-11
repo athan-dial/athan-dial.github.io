@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:slothflowlabs/duckle"
+canonical_url = "https://github.com/slothflowlabs/duckle"
+title = "Duckle: a self-hosted pipeline builder agents can drive"
+repository_owner = "slothflowlabs"
+repository_name = "duckle"
+date_observed = "date_not_recovered"
+topic = "data-analytics-agents"
+mechanism = "Builds and runs data pipelines on DuckDB, from a visual canvas or SQL. A plug-in server (MCP) lets an AI agent write, check and run them."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a pipeline tool first and an analytics agent second: the agent's job is writing and checking pipelines, with a compile check before anything runs. I would revise this if agents do more than pipeline building here, which I did not test."
+fit = "Use it when you want to run your own data pipelines on one machine and let an agent draft and validate them. Skip it if one job must be split across a cluster, which the README says it will not do."
+limitations = ["I read the opening, assistant, status and MCP sections of a very long README, not all of it.", "I did not run it or check its speed figures, which are the project's own."]
+
+[provenance]
+seed_pointer = "reading-list:slothflowlabs/duckle"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/slothflowlabs/duckle"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/slothflowlabs/duckle#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/slothflowlabs/duckle"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It ships an MCP server so an agent can list components, generate a pipeline, check it without running it, and run it."
+source_url = "https://github.com/slothflowlabs/duckle#readme"
+
+[[facts]]
+claim = "Pipelines, connections and settings are saved as plain files in a folder, so they can go in git."
+source_url = "https://github.com/slothflowlabs/duckle#readme"
+
+[[facts]]
+claim = "The project calls it a public beta."
+source_url = "https://github.com/slothflowlabs/duckle#readme"
+
+[[facts]]
+claim = "It runs on a single machine and does not split one query across a cluster."
+source_url = "https://github.com/slothflowlabs/duckle#readme"
+
+[image]
+file = "slothflowlabs--duckle.webp"
+kind = "screenshot"
+alt = "Screenshot of the Duckle visual pipeline canvas with connected nodes and a settings panel."
+credit = "Duckle"
+source_url = "https://github.com/slothflowlabs/duckle/blob/HEAD/docs/assets/real-life-screenshot/mega-pipeline-join.png"

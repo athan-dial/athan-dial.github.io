@@ -1,0 +1,10 @@
+{
+  "name": "atlas-slice-astro",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "astro build" },
+  "dependencies": {
+    "@astrojs/rss": "4.0.19",
+    "astro": "7.4.5"
+  }
+}

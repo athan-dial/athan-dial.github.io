@@ -1,0 +1,5 @@
+Lighthouse 13.6.0, headless Chrome, default mobile emulation + simulated throttling, local static server (no compression, HTTP/1.0), ONE run per page (noise ~0.1-0.2s on LCP; do not rank on it).
+astro-atlas {'performance': 100, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 0.9 s TBT 0 ms CLS 0 Total size was 106 KiB
+astro-atlas_sample-alpha {'performance': 100, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 0.9 s TBT 0 ms CLS 0 Total size was 97 KiB
+hugo-atlas {'performance': 100, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 1.1 s TBT 0 ms CLS 0 Total size was 109 KiB
+hugo-atlas_sample-alpha {'performance': 100, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 0.9 s TBT 0 ms CLS 0 Total size was 101 KiB

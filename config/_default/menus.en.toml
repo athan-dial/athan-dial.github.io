@@ -19,7 +19,12 @@
   weight = 2
 
 [[main]]
+  name = "Atlas"
+  url = "/atlas/"
+  weight = 3
+
+[[main]]
   name = "About"
   url = "/about/"
-  weight = 3
+  weight = 4
 

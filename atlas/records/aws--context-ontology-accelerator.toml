@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:aws/context-ontology-accelerator"
+canonical_url = "https://github.com/aws/context-ontology-accelerator"
+title = "Context Ontology Accelerator: a context layer for AI agents on AWS"
+repository_owner = "aws"
+repository_name = "context-ontology-accelerator"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Connects data sources, builds a formal model of business concepts and rules over them, and serves that context to AI agents through MCP so they can check actions against the rules."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read it as an attempt to give agents business rules to check against, not only documents to retrieve. That is a bigger build than a search index, and the README shows a full AWS stack. I would revise this if the ontology can be set up in days and not weeks, which I did not check."
+fit = "Look at it when agents must follow explicit business rules and you already run on AWS. Skip it if you want a small retrieval library, since it deploys a multi-service system."
+limitations = ["I did not deploy it or check whether the rules improve agent decisions.", "I read the README overview and structure but none of the package docs, and I do not know how much of it works without AWS."]
+
+[provenance]
+seed_pointer = "reading-list:aws/context-ontology-accelerator"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/aws/context-ontology-accelerator"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/aws/context-ontology-accelerator#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/aws/context-ontology-accelerator"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Its workflow is Scan, Model, Serve: connect and ingest data, build ontologies and a semantic graph, then serve context to agents over MCP."
+source_url = "https://github.com/aws/context-ontology-accelerator#readme"
+
+[[facts]]
+claim = "Queries go through SPARQL federation over a virtual knowledge graph, and access uses namespace-scoped roles."
+source_url = "https://github.com/aws/context-ontology-accelerator#readme"
+
+[[facts]]
+claim = "It is built with Python, TypeScript, AWS CDK and Smithy API models."
+source_url = "https://github.com/aws/context-ontology-accelerator#readme"
+
+[[facts]]
+claim = "The repository is a read-only mirror that does not accept pull requests."
+source_url = "https://github.com/aws/context-ontology-accelerator#readme"

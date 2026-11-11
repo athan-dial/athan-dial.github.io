@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:learningmatter-mit/atomisticskills"
+canonical_url = "https://github.com/learningmatter-mit/AtomisticSkills"
+title = "AtomisticSkills: skills for materials and chemistry research agents"
+repository_owner = "learningmatter-mit"
+repository_name = "AtomisticSkills"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A set of skills (written instructions an AI coding agent follows) plus simulation tools. Lets an agent run materials, chemistry and drug-discovery calculations, such as stability checks and molecular docking."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a domain skill library for scientists, with a clear split between fixed tools, flexible skills and goal-level workflows. I would revise this if agents using it get simulations wrong in ways the README does not show, which I did not test."
+fit = "Look at it when you want a coding agent to run atomistic simulations with ready-made skills. Skip it if you lack Linux, a GPU or the simulation software it expects; the README names macOS only as a container fallback."
+limitations = ["I did not run any simulation or check the scientific output.", "The project's benchmark leaderboard is linked from the README and I did not read it, so I make no claim about how well the skills work."]
+
+[provenance]
+seed_pointer = "reading-list:learningmatter-mit/atomisticskills"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/learningmatter-mit/AtomisticSkills"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/learningmatter-mit/AtomisticSkills#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/learningmatter-mit/AtomisticSkills"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The skills sit in three layers: tools (fixed-signature functions served over MCP), skills (step-by-step tutorials the agent adapts) and workflows (high-level research goals)."
+source_url = "https://github.com/learningmatter-mit/AtomisticSkills#readme"
+
+[[facts]]
+claim = "It can be installed as a Claude Code plugin or cloned for use with Codex, Cursor, Antigravity, Gemini and Windsurf."
+source_url = "https://github.com/learningmatter-mit/AtomisticSkills#readme"
+
+[[facts]]
+claim = "It covers simulation, database lookups (Materials Project, ChEMBL, PDB, PubChem, ArXiv) and docking with AutoDock Vina."
+source_url = "https://github.com/learningmatter-mit/AtomisticSkills#readme"
+
+[[facts]]
+claim = "The project's companion benchmark has 31 tasks across chemistry, drug discovery and materials science."
+source_url = "https://github.com/learningmatter-mit/AtomisticSkills#readme"

@@ -1,0 +1,48 @@
+# Display vocabulary for the Atlas. A record whose topic has no group, or whose evidence
+# state has no label, fails the build (content/atlas/_content.gotmpl).
+
+[evidence]
+inspected = "Read, not run"
+evaluated = "Compared"
+tested = "Run"
+adopted = "In use"
+
+[[groups]]
+title = "Agent memory"
+topics = ["agent-memory"]
+
+[[groups]]
+title = "Running agents together and safely"
+topics = ["agent-orchestration", "agent-sandboxing"]
+
+[[groups]]
+title = "Data lineage and pipelines"
+topics = ["data-lineage", "data-transformation", "data-pipeline-visualization"]
+
+[[groups]]
+title = "Tools and directories for agents"
+topics = ["agent-tooling", "code-intelligence", "protocol-registry", "scientific-agent-skills", "web-scraping"]
+
+[[groups]]
+title = "Retrieval and knowledge graphs"
+topics = ["retrieval-knowledge-graphs"]
+
+[[groups]]
+title = "Data and analytics agents"
+topics = ["data-analytics-agents"]
+
+[[groups]]
+title = "Agents that use computers and browsers"
+topics = ["computer-use-agents"]
+
+[[groups]]
+title = "Research agents"
+topics = ["research-agents"]
+
+[[groups]]
+title = "Agent skills and harnesses"
+topics = ["agent-skills"]
+
+[[groups]]
+title = "Directories and lists"
+topics = ["directory-list"]

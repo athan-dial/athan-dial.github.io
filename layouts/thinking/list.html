@@ -4,10 +4,6 @@
   <header class="fn-page-head"><p class="fn-kicker">Athan Dial / Fieldnotes</p><h1>The notebook.</h1><p>{{ .Params.summary }}</p></header>
   <nav class="fn-archive-nav" aria-label="Writing archives"><span>Browse the writing</span><a href="/essays/">Essays ↗</a><a href="/notes/">Field notes ↗</a></nav>
   <div class="fn-note-grid">{{ range sort $writing "Date" "desc" }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
-  {{ with site.Data.linkedin.posts }}
-  <section class="fn-section" aria-labelledby="linkedin-title"><div class="fn-section__head"><h2 id="linkedin-title">Also on LinkedIn</h2><a href="{{ site.Data.profile.links.linkedin }}" rel="me noopener" target="_blank">Follow along ↗</a></div>
-    <div class="fn-linkedin">{{ range first 5 (sort . "date" "desc") }}{{ partial "linkedin-card.html" . }}{{ end }}</div>
-  </section>
-  {{ end }}
+  <p class="fn-elsewhere">Shorter posts and updates go on <a href="{{ site.Data.profile.links.linkedin }}" rel="me noopener" target="_blank">LinkedIn ↗</a>.</p>
 </div>
 {{ end }}

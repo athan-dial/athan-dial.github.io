@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:smtg-ai/claude-squad"
+canonical_url = "https://github.com/smtg-ai/claude-squad"
+title = "Claude Squad: several coding agents in one terminal"
+repository_owner = "smtg-ai"
+repository_name = "claude-squad"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A terminal app that runs several coding agents at once, each working in its own separate copy of the code."
+license_spdx = "AGPL-3.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Each task gets its own copy of the code (a git workspace), so agents cannot overwrite each other. CAO describes isolated terminal sessions, a related idea. I would drop it as a model if side-by-side agents need to coordinate, which the README does not describe."
+fit = "Use it to run several coding agents side by side without them colliding. Skip it if you want agents that coordinate with each other; the README describes separation, not coordination."
+limitations = ["I only read the README, so I cannot say how well the isolation works in practice."]
+
+[provenance]
+seed_pointer = "seed-index:smtg-ai/claude-squad"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/smtg-ai/claude-squad"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/smtg-ai/claude-squad#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/smtg-ai/claude-squad"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "It manages multiple local terminal agents in separate workspaces so tasks run simultaneously."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"
+
+[[facts]]
+claim = "Each task gets its own isolated git workspace."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"
+
+[[facts]]
+claim = "Changes can be reviewed before applying."
+source_url = "https://github.com/smtg-ai/claude-squad#readme"

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "runner": "claude",
+  "state": "done",
+  "summary": "Schema, validator, 16 inspected candidate records, ledger, checklist and coverage statement are committed locally; ready for independent verification.",
+  "next": "Independent verifier re-runs validate.py, tests/run.sh and check_links.py; Athan reviews the 16-record selection.",
+  "needs_athan": [],
+  "last_report": "out/VERIFICATION.md",
+  "evidence": [
+    "out/VERIFICATION.md",
+    "out/link-check.log",
+    "out/validator-run.log",
+    "atlas/"
+  ],
+  "updated_at": "2026-11-04T18:26:08-05:00"
+}

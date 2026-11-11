@@ -68,7 +68,8 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
   and explicit human decisions. Color never stands alone as the semantic signal.
 - Hex colors belong in `tokens.css`. Native HTML diagrams inherit tokens, wrap, and reflow.
 - Never animate layout properties. Motion must never gate visibility or reading order.
-- Reduced-motion rules terminate the final CSS layer.
+- Reduced-motion rules terminate the final CSS layer. Site motion lives in `fieldnotes.css` and `atlas.css`
+  inside `no-preference`, with `assets/js/motion.js` as the only script; see `DESIGN.md` Allowed motion.
 - Fieldnotes is the public label at the existing `/thinking/` path. `/notes/` and `/essays/`
   remain archives. Do not redirect or remove existing articles as a redesign side effect.
 - Homepage/list cards include only published/public content; drafts stay excluded.
@@ -76,6 +77,15 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
   `boundary-diagram` remains supported for existing work. See `DIAGRAMS.md` for authoring.
 - Browser viewport, 200% text zoom, keyboard focus, JavaScript-disabled behavior, and computed
   colors must be checked locally before merge. Source review is not browser verification.
+
+### Systems Atlas (`/atlas/`, added 2026-11-06)
+
+Source of truth: `atlas/records/*.toml` (schema `atlas/SCHEMA.md`, validator `atlas/validate.py`). Hugo reads
+them through a mount in `config/_default/module.toml` (`atlas/records` to `data/atlas`) and
+`content/atlas/_content.gotmpl` makes one page per record; display labels and the four index groups live in `data/atlas_meta.toml`. Images are self-hosted in `assets/atlas/` (never hotlinked), pointed at by each record's `[image]` table; provenance in `atlas/PROVENANCE.md`. No generated files. Restart `hugo server` after
+changing the mount. Atlas records appear in the main `/index.xml` and sitemap; `/atlas/index.xml` has its own feed. The
+`candidate`/`reviewed` status is not rendered (decision 2026-11-06). Nav: Work, Fieldnotes,
+Atlas, About. Push of `dev/atlas-integration` is blocked until `LOCAL-GATE.md` is signed (`.githooks/pre-push`).
 
 ### Homepage v2: do not regress this order
 

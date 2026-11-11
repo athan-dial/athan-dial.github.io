@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:nvidia/openshell"
+canonical_url = "https://github.com/NVIDIA/OpenShell"
+title = "OpenShell: a locked box for running agents"
+repository_owner = "nvidia"
+repository_name = "openshell"
+date_observed = "2026-10-23"
+topic = "agent-sandboxing"
+mechanism = "Runs each agent in a locked box. Every network request is checked against rules first, and changes to those rules are checked before they take effect."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "The README states containment as rules enforced around the agent, not as instructions in its prompt. I like that framing. I have not tested whether the protections hold, so I would drop the view if independent testing shows they do not."
+fit = "Look at it when an agent will run code you do not fully trust. Skip it if a container you already run is enough."
+limitations = ["I did not test or audit any of the security claims."]
+
+[provenance]
+seed_pointer = "seed-index:NVIDIA/OpenShell"
+discovery_dates = "2026-10-23"
+source_types = "morning_digest"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/NVIDIA/OpenShell"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/NVIDIA/OpenShell#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/NVIDIA/OpenShell"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "Each agent runs in an isolated sandbox with kernel controls on file access and system calls."
+source_url = "https://github.com/NVIDIA/OpenShell#readme"
+
+[[facts]]
+claim = "Every network connection passes a policy check before it leaves the sandbox."
+source_url = "https://github.com/NVIDIA/OpenShell#readme"
+
+[[facts]]
+claim = "Agents never see real credentials."
+source_url = "https://github.com/NVIDIA/OpenShell#readme"
+
+[[facts]]
+claim = "Policy changes are checked with formal verification, and risky ones wait for human review."
+source_url = "https://github.com/NVIDIA/OpenShell#readme"
+
+[image]
+file = "nvidia--openshell.webp"
+kind = "logo"
+alt = "OpenShell logo: a green shield containing a terminal prompt."
+credit = "OpenShell"
+source_url = "https://github.com/NVIDIA/OpenShell/blob/main/docs/brand/assets/openshell-avatar-1024.png"

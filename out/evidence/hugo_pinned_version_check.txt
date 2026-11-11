@@ -1,0 +1,4 @@
+Slice built with the CI-pinned Hugo 0.154.3 extended (extracted from the official release .pkg into a scratch dir) and with local Hugo 0.168.0 extended.
+Both: 64 pages, no errors. atlas/index.html, atlas/sample-alpha/index.html and sitemap.xml are byte-identical after stripping asset hashes and the generator version.
+index.xml differs only in how a newline inside one existing <description> is encoded (literal newline in 0.154.3, &#10; in 0.168.0). Not caused by the slice.
+Item count in /index.xml: 42 on both (30 existing + 12 sample records).

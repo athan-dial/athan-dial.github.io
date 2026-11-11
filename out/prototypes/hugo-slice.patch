@@ -1,0 +1,359 @@
+diff --git a/assets/css/atlas.css b/assets/css/atlas.css
+new file mode 100644
+index 0000000..0d7fa96
+--- /dev/null
++++ b/assets/css/atlas.css
+@@ -0,0 +1,23 @@
++/* Slice-only styles. Consumes tokens.css only; no new hex. */
++.atlas { padding-block: 48px; }
++.atlas__controls { display: flex; flex-wrap: wrap; gap: 16px; margin-block: 24px; align-items: end; }
++.atlas__controls label { display: grid; gap: 4px; font-family: var(--font-mono); font-size: var(--label-mono-size); }
++.atlas__controls input, .atlas__controls select { font: inherit; padding: 8px 10px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); min-width: 180px; }
++.atlas__controls input:focus-visible, .atlas__controls select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
++.atlas__controls[hidden], .atlas__empty[hidden] { display: none; }
++.atlas__count { font-family: var(--font-mono); font-size: var(--label-mono-size); color: var(--ink-secondary); }
++.atlas__list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--field-rule); }
++.atlas__list > li { border-bottom: 1px solid var(--field-rule); }
++.atlas__list > li[hidden] { display: none; }
++.atlas-card { display: grid; gap: 8px; padding: 20px 0; }
++.atlas-card__meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-family: var(--font-mono); font-size: var(--label-mono-size); color: var(--ink-secondary); }
++.atlas-card__title { margin: 0; font-size: var(--headline-sm-size); line-height: var(--headline-sm-line-height); }
++.atlas-card__title a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
++.atlas-card__title a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
++.atlas-card__summary { margin: 0; color: var(--ink-secondary); max-width: var(--reading-column); }
++.atlas__empty { padding: 24px 0; color: var(--ink-secondary); }
++.atlas-detail { max-width: var(--reading-column); padding-block: 48px; }
++.atlas-detail dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; font-family: var(--font-mono); font-size: var(--label-mono-size); }
++.atlas-detail dt { color: var(--ink-secondary); }
++.atlas-detail dd { margin: 0; }
++@media (max-width: 600px) { .atlas__controls input, .atlas__controls select { min-width: 0; width: 100%; } .atlas__controls label { flex: 1 1 100%; } }
+diff --git a/assets/js/atlas.js b/assets/js/atlas.js
+new file mode 100644
+index 0000000..058df17
+--- /dev/null
++++ b/assets/js/atlas.js
+@@ -0,0 +1,25 @@
++// Shared by both prototypes. Progressive enhancement only: the list is complete without it.
++(() => {
++  const root = document.querySelector('[data-atlas]');
++  if (!root) return;
++  const q = root.querySelector('[data-atlas-search]');
++  const selects = [...root.querySelectorAll('[data-atlas-filter]')];
++  const items = [...root.querySelectorAll('[data-atlas-item]')];
++  const count = root.querySelector('[data-atlas-count]');
++  const empty = root.querySelector('[data-atlas-empty]');
++  root.querySelectorAll('[data-atlas-controls]').forEach((c) => (c.hidden = false));
++  const apply = () => {
++    const term = q.value.trim().toLowerCase();
++    let shown = 0;
++    for (const li of items) {
++      const okText = !term || li.dataset.text.includes(term);
++      const okFilter = selects.every((s) => !s.value || li.dataset[s.dataset.atlasFilter] === s.value);
++      li.hidden = !(okText && okFilter);
++      if (!li.hidden) shown++;
++    }
++    count.textContent = `${shown} of ${items.length} records`;
++    empty.hidden = shown !== 0;
++  };
++  q.addEventListener('input', apply);
++  selects.forEach((s) => s.addEventListener('change', apply));
++})();
+diff --git a/content/atlas/_content.gotmpl b/content/atlas/_content.gotmpl
+new file mode 100644
+index 0000000..263583b
+--- /dev/null
++++ b/content/atlas/_content.gotmpl
+@@ -0,0 +1,20 @@
++{{- /* Generate one page per record in data/atlas_sample.json, validating each. */ -}}
++{{- $domains := slice "Data" "Product" "Systems" "Writing" -}}
++{{- $statuses := slice "Shipped" "In progress" "Archived" -}}
++{{- range site.Data.atlas_sample -}}
++  {{- $r := . -}}
++  {{- range slice "id" "slug" "title" "summary" "domain" "status" "year" "body" -}}
++    {{- if not (isset $r .) }}{{ errorf "atlas record %v: missing required field %q" $r.id . }}{{ end -}}
++  {{- end -}}
++  {{- if not (in $domains .domain) }}{{ errorf "atlas record %s: domain %q not in %v" .id .domain $domains }}{{ end -}}
++  {{- if not (in $statuses .status) }}{{ errorf "atlas record %s: status %q not in %v" .id .status $statuses }}{{ end -}}
++  {{- if not (eq (printf "%T" .year) "float64") }}{{ errorf "atlas record %s: year must be a number" .id }}{{ end -}}
++  {{- $.AddPage (dict
++    "path" .slug
++    "title" .title
++    "description" .summary
++    "kind" "page"
++    "content" (dict "mediaType" "text/markdown" "value" .body)
++    "params" (dict "id" .id "domain" .domain "lifecycle" .status "status" "published" "visibility" "public" "year" (int .year) "tags" .tags "summary" .summary)
++  ) -}}
++{{- end -}}
+diff --git a/content/atlas/_index.md b/content/atlas/_index.md
+new file mode 100644
+index 0000000..5c8ccda
+--- /dev/null
++++ b/content/atlas/_index.md
+@@ -0,0 +1,6 @@
++---
++title: "Atlas (sample slice)"
++description: "Prototype list of synthetic sample records."
++status: published
++visibility: public
++---
+diff --git a/data/atlas_sample.json b/data/atlas_sample.json
+new file mode 100644
+index 0000000..3184987
+--- /dev/null
++++ b/data/atlas_sample.json
+@@ -0,0 +1,170 @@
++[
++ {
++  "id": "S01",
++  "slug": "sample-alpha",
++  "title": "Sample project alpha: search ranking notes",
++  "summary": "Synthetic sample record 1. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Data",
++  "status": "Shipped",
++  "year": 2024,
++  "tags": [
++   "search",
++   "evaluation"
++  ],
++  "body": "This is the detail page for sample record 1. The record is synthetic and public-safe. It carries a domain (Data), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S02",
++  "slug": "sample-beta",
++  "title": "Sample project beta: onboarding flow rewrite",
++  "summary": "Synthetic sample record 2. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Product",
++  "status": "Shipped",
++  "year": 2024,
++  "tags": [
++   "onboarding",
++   "research"
++  ],
++  "body": "This is the detail page for sample record 2. The record is synthetic and public-safe. It carries a domain (Product), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S03",
++  "slug": "sample-gamma",
++  "title": "Sample project gamma: build pipeline audit",
++  "summary": "Synthetic sample record 3. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Systems",
++  "status": "In progress",
++  "year": 2025,
++  "tags": [
++   "ci",
++   "tooling"
++  ],
++  "body": "This is the detail page for sample record 3. The record is synthetic and public-safe. It carries a domain (Systems), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S04",
++  "slug": "sample-delta",
++  "title": "Sample project delta: field guide draft",
++  "summary": "Synthetic sample record 4. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Writing",
++  "status": "In progress",
++  "year": 2025,
++  "tags": [
++   "essay",
++   "draft"
++  ],
++  "body": "This is the detail page for sample record 4. The record is synthetic and public-safe. It carries a domain (Writing), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S05",
++  "slug": "sample-epsilon",
++  "title": "Sample project epsilon: metrics glossary",
++  "summary": "Synthetic sample record 5. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Data",
++  "status": "Shipped",
++  "year": 2023,
++  "tags": [
++   "metrics",
++   "docs"
++  ],
++  "body": "This is the detail page for sample record 5. The record is synthetic and public-safe. It carries a domain (Data), a status (Shipped) and a year (2023) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S06",
++  "slug": "sample-zeta",
++  "title": "Sample project zeta: pricing page test",
++  "summary": "Synthetic sample record 6. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Product",
++  "status": "Archived",
++  "year": 2023,
++  "tags": [
++   "experiment",
++   "pricing"
++  ],
++  "body": "This is the detail page for sample record 6. The record is synthetic and public-safe. It carries a domain (Product), a status (Archived) and a year (2023) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S07",
++  "slug": "sample-eta",
++  "title": "Sample project eta: cache layer review",
++  "summary": "Synthetic sample record 7. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Systems",
++  "status": "Shipped",
++  "year": 2025,
++  "tags": [
++   "performance",
++   "cache"
++  ],
++  "body": "This is the detail page for sample record 7. The record is synthetic and public-safe. It carries a domain (Systems), a status (Shipped) and a year (2025) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S08",
++  "slug": "sample-theta",
++  "title": "Sample project theta: reading list essay",
++  "summary": "Synthetic sample record 8. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Writing",
++  "status": "Shipped",
++  "year": 2024,
++  "tags": [
++   "essay",
++   "reading"
++  ],
++  "body": "This is the detail page for sample record 8. The record is synthetic and public-safe. It carries a domain (Writing), a status (Shipped) and a year (2024) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S09",
++  "slug": "sample-iota",
++  "title": "Sample project iota: dashboard cleanup",
++  "summary": "Synthetic sample record 9. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Data",
++  "status": "In progress",
++  "year": 2025,
++  "tags": [
++   "dashboard",
++   "cleanup"
++  ],
++  "body": "This is the detail page for sample record 9. The record is synthetic and public-safe. It carries a domain (Data), a status (In progress) and a year (2025) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S10",
++  "slug": "sample-kappa",
++  "title": "Sample project kappa: feature brief template",
++  "summary": "Synthetic sample record 10. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Product",
++  "status": "Shipped",
++  "year": 2022,
++  "tags": [
++   "template",
++   "brief"
++  ],
++  "body": "This is the detail page for sample record 10. The record is synthetic and public-safe. It carries a domain (Product), a status (Shipped) and a year (2022) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S11",
++  "slug": "sample-lambda",
++  "title": "Sample project lambda: migration checklist",
++  "summary": "Synthetic sample record 11. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Systems",
++  "status": "Archived",
++  "year": 2022,
++  "tags": [
++   "migration",
++   "checklist"
++  ],
++  "body": "This is the detail page for sample record 11. The record is synthetic and public-safe. It carries a domain (Systems), a status (Archived) and a year (2022) so that two filters and a search box have something real to act on."
++ },
++ {
++  "id": "S12",
++  "slug": "sample-mu",
++  "title": "Sample project mu: interview notes digest",
++  "summary": "Synthetic sample record 12. It exists only to exercise search, filters, the card and the detail page. It describes no real work.",
++  "domain": "Writing",
++  "status": "Archived",
++  "year": 2023,
++  "tags": [
++   "interviews",
++   "digest"
++  ],
++  "body": "This is the detail page for sample record 12. The record is synthetic and public-safe. It carries a domain (Writing), a status (Archived) and a year (2023) so that two filters and a search box have something real to act on."
++ }
++]
+\ No newline at end of file
+diff --git a/layouts/_default/baseof.html b/layouts/_default/baseof.html
+index 9f873fd..76b48e8 100644
+--- a/layouts/_default/baseof.html
++++ b/layouts/_default/baseof.html
+@@ -29,6 +29,10 @@
+     {{- $styles = $styles | append $fieldnotesHome -}}
+     {{- $bundle = "css/editorial-home.css" -}}
+   {{- end -}}
++  {{- if eq .Section "atlas" -}}
++    {{- $styles = $styles | append (resources.Get "css/atlas.css") -}}
++    {{- $bundle = "css/editorial-atlas.css" -}}
++  {{- end -}}
+   {{- $css := $styles | resources.Concat $bundle | minify | fingerprint -}}
+   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+   {{ hugo.Generator }}
+@@ -46,5 +50,9 @@
+     {{- $fieldnotesHomeJS := resources.Get "js/fieldnotes-home.js" | minify | fingerprint -}}
+     <script src="{{ $fieldnotesHomeJS.RelPermalink }}" integrity="{{ $fieldnotesHomeJS.Data.Integrity }}" defer></script>
+   {{- end -}}
++  {{- if eq .Section "atlas" -}}
++    {{- $atlasJS := resources.Get "js/atlas.js" | minify | fingerprint -}}
++    <script src="{{ $atlasJS.RelPermalink }}" integrity="{{ $atlasJS.Data.Integrity }}" defer></script>
++  {{- end -}}
+ </body>
+ </html>
+diff --git a/layouts/atlas/list.html b/layouts/atlas/list.html
+new file mode 100644
+index 0000000..4940318
+--- /dev/null
++++ b/layouts/atlas/list.html
+@@ -0,0 +1,18 @@
++{{ define "main" }}
++<section class="container atlas" data-atlas>
++  <h1>{{ .Title }}</h1>
++  <p class="body-lg">{{ .Description }}</p>
++  <div class="atlas__controls" data-atlas-controls hidden>
++    <label>Search<input type="search" data-atlas-search placeholder="Title, summary, tag"></label>
++    <label>Domain<select data-atlas-filter="domain"><option value="">All</option>{{ range slice "Data" "Product" "Systems" "Writing" }}<option>{{ . }}</option>{{ end }}</select></label>
++    <label>Status<select data-atlas-filter="status"><option value="">All</option>{{ range slice "Shipped" "In progress" "Archived" }}<option>{{ . }}</option>{{ end }}</select></label>
++  </div>
++  <p class="atlas__count" data-atlas-count role="status">{{ len .Pages }} of {{ len .Pages }} records</p>
++  <ul class="atlas__list">
++    {{- range .Pages.ByParam "id" }}
++    <li data-atlas-item data-domain="{{ .Params.domain }}" data-status="{{ .Params.lifecycle }}" data-text="{{ lower (printf "%s %s %s" .Title .Params.summary (delimit .Params.tags " ")) }}">{{ partial "atlas-card.html" . }}</li>
++    {{- end }}
++  </ul>
++  <p class="atlas__empty" data-atlas-empty hidden role="status">No records match.</p>
++</section>
++{{ end }}
+diff --git a/layouts/atlas/single.html b/layouts/atlas/single.html
+new file mode 100644
+index 0000000..b828cf1
+--- /dev/null
++++ b/layouts/atlas/single.html
+@@ -0,0 +1,16 @@
++{{ define "main" }}
++<div class="container">
++<article class="atlas-detail">
++  <a href="{{ "/atlas/" | relURL }}">&larr; All records</a>
++  <h1>{{ .Title }}</h1>
++  <dl>
++    <dt>ID</dt><dd>{{ .Params.id }}</dd>
++    <dt>Domain</dt><dd>{{ .Params.domain }}</dd>
++    <dt>Status</dt><dd>{{ .Params.lifecycle }}</dd>
++    <dt>Year</dt><dd>{{ .Params.year }}</dd>
++    <dt>Tags</dt><dd>{{ delimit .Params.tags ", " }}</dd>
++  </dl>
++  {{ .Content }}
++</article>
++</div>
++{{ end }}
+diff --git a/layouts/partials/atlas-card.html b/layouts/partials/atlas-card.html
+new file mode 100644
+index 0000000..8fe430d
+--- /dev/null
++++ b/layouts/partials/atlas-card.html
+@@ -0,0 +1,7 @@
++<article class="atlas-card">
++  <div class="atlas-card__meta">
++    <span>{{ .Params.id }}</span><span>{{ .Params.domain }}</span><span>{{ .Params.lifecycle }}</span><span>{{ .Params.year }}</span>
++  </div>
++  <h2 class="atlas-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
++  <p class="atlas-card__summary">{{ .Params.summary }}</p>
++</article>

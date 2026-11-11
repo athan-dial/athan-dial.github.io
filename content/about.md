@@ -1,8 +1,8 @@
 ---
 title: "About"
+layout: about
 date: 2026-01-20
-description: "Athan Dial. Data scientist and product leader with a background in medical research."
-show_profile_links: true
+description: "Data scientist and product leader with a background in medical research."
 ---
 
 I’m Athan. I work across data science and product at Montai Therapeutics, where the people using our tools know a great deal about the problems they are trying to solve.
@@ -37,4 +37,4 @@ Analytics strategy for small and mid-size biotech clients.
 
 ## Compare notes
 
-I’m always interested in how other people are using these tools, especially when the first attempt didn’t work as expected. If you’re wrestling with a similar question, [send me a note](mailto:athandial@gmail.com) or [find me on LinkedIn](https://www.linkedin.com/in/athandial/).
+I’m always interested in how other people are using these tools, especially when the first attempt didn’t work as expected. If you’re wrestling with a similar question, say hello below.
