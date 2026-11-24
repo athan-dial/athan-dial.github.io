@@ -680,7 +680,8 @@
 .site-nav a{padding-inline:2px}
 }
 @media(max-width:359px){.site-nav{gap:0}.site-nav a{font-size:.6875rem;letter-spacing:.03em;padding-inline:0}}
-.atlas-link{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--field-rule)}.atlas-link__note{color:var(--ink-secondary)}.fn-system{margin:0 0 2rem;padding:1.5rem 1.75rem 1.75rem;border:1px solid var(--field-rule);border-top:4px solid var(--accent);background:var(--surface)}.fn-system h3{font:400 2rem/1.15 var(--font-display);letter-spacing:-.02em;margin:.25rem 0 .75rem}.fn-system h3 a{text-decoration:none}.fn-system h3 a:hover{color:var(--accent)}.fn-system p{max-width:48rem}.fn-system .fn-text-link{margin-top:.5rem}
+.fn-work-grid>:only-child{grid-column:1/-1}
+.atlas-link{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--field-rule)}.atlas-link__note{display:block;color:var(--ink-secondary)}.fn-system{margin:0 0 2rem;padding:1.5rem 1.75rem 1.75rem;border:1px solid var(--field-rule);border-top:4px solid var(--accent);background:var(--surface)}.fn-system h3{font:400 2rem/1.15 var(--font-display);letter-spacing:-.02em;margin:.25rem 0 .75rem}.fn-system h3 a{text-decoration:none}.fn-system h3 a:hover{color:var(--accent)}.fn-system p{max-width:48rem}.fn-system .fn-text-link{margin-top:.5rem}
 .fn-system__limits{color:var(--ink-secondary);font-size:.9375rem}
 /* Site motion (2026-11). Transform, opacity and paint only; never layout. Everything is inside no-preference. */
 @media(prefers-reduced-motion:no-preference){

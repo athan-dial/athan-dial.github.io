@@ -60,10 +60,9 @@ conversations_intro: "If you are working through something similar, I would like
 conversations_note: "Talks, panels and guest sessions are welcome, and so is a longer conversation with no agenda attached. Most of my time goes to the day job. This is not a business and there is nothing to buy."
 ---
 
-I work on AI enablement for expert work: getting people who are very good at something hard to use
-AI without losing the part that makes them good. Right now that means data science and product at
-Montai Therapeutics, where the people using what we build know considerably more about their problem
-than the software does.
+I work on AI enablement for expert work, which in practice has meant directing data science and product
+for scientists: people who know more about their problem than the software does, and who will not rely
+on a tool they cannot check. Right now that means Montai Therapeutics.
 
 That constraint is the interesting part. A tool for an expert has to fit a practice that already
 works, show enough of its reasoning to be checked, and leave room for what the person knows and the
@@ -99,8 +98,5 @@ knowledge, which is the kind of knowledge a verification layer should make expli
 product because the implementation was fast. A retrospective result is not a production rule because it
 survived one analysis. The Work pages name those gaps on purpose, so the edge of the evidence is visible
 before the story gets smoother than the record deserves.
-
-I also run my own agent-enabled work through a system I have drawn out in seven views, including where
-a person has to decide and what gets recorded for next time.
 
 {{< atlas-link >}}

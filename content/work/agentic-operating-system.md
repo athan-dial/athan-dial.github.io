@@ -1,7 +1,7 @@
 ---
 title: "The Agentic Operating System"
-summary: "A personal operating system for agent-enabled work, drawn in seven views: where I decide, where agents carry the load, and what gets recorded for next time. It shows principles that carry over to other expert teams."
-card_summary: "How I run my own agent-enabled work, from a one-minute overview to the mechanics of governed execution."
+summary: "How I run work with AI agents: what an agent may do alone, what waits for my approval, and how the next task starts from what the last one taught me. Seven views, from a one-minute overview to the mechanics."
+card_summary: "What an agent may do alone, what waits for my approval, and how one task teaches the next."
 system_limits: "It is one person's working method. It is not a product, not a company system, and not evidence of an enterprise deployment."
 layout: atlas
 work_kind: system
@@ -15,22 +15,13 @@ themes: [agent-enabled-work, governed-execution, product-judgment]
 draft: true
 ---
 
-This is a map of how I work with AI agents. It is a personal operating system for agent-enabled work. It
-is not a company product, and nobody should read it as a claim that an organization runs this way.
+Most of what an agent does for me is reversible and local: read, search, edit a working copy, run a
+check. Anything that leaves my machine or is hard to undo, such as a message or a pull request, is
+drafted and held until I approve that one item. This page draws the rest of the system around that
+boundary.
 
-I drew it because the principles seem to carry beyond my own desk. A person keeps the question and the
-decision. Capability gets reused instead of rebuilt. Anything autonomous is admitted by rules and checked
-by someone other than the builder. What was learned gets written down, so the next piece of work starts
-further along. Those four habits would apply to any team where experts and agents share a task.
-
-## Start with the overview, then go as deep as you like.
-
-[The Outer Loop](/essays/the-outer-loop/) argues that a faster plan, build and verify loop makes it easier
-to perfect the wrong thing. This is the concrete companion to that essay. The first view is the whole
-system in a minute. Thinking, Making and Sharing each open into more detail. Three of those views go
-deeper where the mechanism matters most: how autonomous work is admitted and checked, where agent
-autonomy ends, and how context survives from one session to the next.
-
-Each view states its claim, what it is based on, and what it does not claim. They describe a working
-method as it stands today. They are not an audited runtime, and they leave out older designs that have
-since been retired.
+It is one person's method, not a product and not a claim that any organization runs this way. The
+habits would carry to any team where experts and agents share a task: a person keeps the decision,
+autonomous work is checked by someone other than the builder, and what was learned gets written down.
+Each view says what it claims and what it does not. The essay behind it is
+[The Outer Loop](/essays/the-outer-loop/).

@@ -22,7 +22,7 @@ short_bio = "Works on AI enablement for expert work, mostly in scientific R&D. A
 # than a generic motto; see .planning/design/PERSONAL-FIELDNOTES-UPDATE-2026-09-09.md.
 positioning_eyebrow = "AI enablement for expert work"
 positioning_headline = "I build AI and data products for people whose work depends on judgment."
-positioning_support = "I work on getting AI into expert workflows without losing the expertise. Most of it comes down to three questions: which problem deserves a tool, where a person’s judgment has to stay, and how anyone checks what the machine produced. I came to it through medical research, then data science and product, mostly in scientific R&D."
+positioning_support = "I work on getting AI into expert workflows without losing the expertise. In practice that means three questions: which problem deserves a tool, where a person’s judgment has to stay, and how anyone checks what the machine produced."
 
 [links]
 linkedin = "https://www.linkedin.com/in/athandial/"
