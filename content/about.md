@@ -19,11 +19,11 @@ layout: about
 trajectory:
   - role: "Associate Director, Data Science & Product Management"
     company: "Montai Therapeutics"
-    range: "2026 – present"
+    range: "2025 – present"
     note: "Data science, product direction, and applied AI for scientific work."
   - role: "Data Research Lead"
     company: "Montai Therapeutics"
-    range: "2022 – 2026"
+    range: "2022 – 2025"
     evidence: "The Work section carries product narratives from this period."
   - role: "Data Scientist"
     company: "Replica Analytics"
