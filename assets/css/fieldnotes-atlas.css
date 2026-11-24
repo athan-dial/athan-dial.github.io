@@ -137,6 +137,7 @@
 .wf-table tbody th { width: 22%; font-weight: 700; }
 @media (max-width: 639px) {
   .wf-table, .wf-table tbody, .wf-table tr, .wf-table th, .wf-table td { display: block; width: auto; }
+  .wf-table tbody th { width: auto; }
   .wf-table thead { position: absolute; left: -9999px; }
   .wf-table tr { border-top: 1px solid var(--field-rule); padding: .6rem 0; }
   .wf-table th, .wf-table td { border: 0; padding: .15rem 0; }
