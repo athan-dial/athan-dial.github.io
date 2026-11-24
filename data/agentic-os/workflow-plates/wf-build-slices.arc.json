@@ -6,12 +6,12 @@
   },
   "layout": {
     "width": 1102,
-    "height": 542
+    "height": 667
   },
   "nodes": {
     "s1": {
       "x": 40,
-      "y": 70,
+      "y": 195,
       "size": "m",
       "width": 232,
       "height": 112
@@ -23,23 +23,23 @@
       "width": 232,
       "height": 112
     },
-    "s4": {
-      "x": 40,
+    "s3": {
+      "x": 380,
       "y": 320,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "s3": {
+    "s4": {
       "x": 720,
-      "y": 70,
+      "y": 195,
       "size": "m",
       "width": 232,
       "height": 112
     },
     "s5": {
       "x": 720,
-      "y": 320,
+      "y": 445,
       "size": "m",
       "width": 232,
       "height": 112
@@ -47,44 +47,44 @@
   },
   "nodeData": {
     "s1": {
-      "name": "Post a report",
+      "name": "S1 Import instrument A export",
       "color": "emerald",
-      "icon": "PenLine",
+      "icon": "FileInput",
       "shape": "rounded",
-      "subtitle": "Check: round trip",
-      "description": "Slice 1. A hiker posts a report and it shows on that trail page. Nothing blocks it, so it starts first. The check posts a report and reads it back."
+      "subtitle": "Check: raw wells show",
+      "description": "Slice 1. An instrument A export is imported and every well shows its raw value. Nothing blocks it, so it starts first. The check imports a fixture export and counts the wells shown."
     },
     "s2": {
-      "name": "List a trail's reports",
+      "name": "S2 Import instrument B export",
       "color": "emerald",
-      "icon": "List",
+      "icon": "FileInput",
       "shape": "rounded",
-      "subtitle": "Check: newest first",
-      "description": "Slice 2. A trail page lists its reports, newest first. It waits for slice 1. The check seeds three reports and reads the order."
+      "subtitle": "Check: same well table",
+      "description": "Slice 2. An instrument B export, with its own column layout, is imported. It waits for slice 1. The check compares its well table with the equivalent instrument A fixture."
+    },
+    "s3": {
+      "name": "S3 Normalise to % of control",
+      "color": "emerald",
+      "icon": "Percent",
+      "shape": "rounded",
+      "subtitle": "Check: worked plate",
+      "description": "Slice 3. Each well is shown as a percentage of its plate's control wells. It waits for slice 1 only, so it can run beside slice 2. The check uses a plate with known control wells."
     },
     "s4": {
-      "name": "Flag a wrong report",
+      "name": "S4 Compare with the reference run",
+      "color": "emerald",
+      "icon": "Layers",
+      "shape": "rounded",
+      "subtitle": "Check: overlay values",
+      "description": "Slice 4. A run is overlaid on the reference run for its protocol version. It waits for slices 2 and 3. The check overlays two fixture runs and reads the differences."
+    },
+    "s5": {
+      "name": "S5 Flag wells outside tolerance",
       "color": "emerald",
       "icon": "Flag",
       "shape": "rounded",
-      "subtitle": "Check: two flags hide it",
-      "description": "Slice 4. Two flags hide a report. It waits for slice 1 only, so it can run beside slice 2. The check flags a stored report twice."
-    },
-    "s3": {
-      "name": "Hide old reports",
-      "color": "emerald",
-      "icon": "CalendarX",
-      "shape": "rounded",
-      "subtitle": "Check: fixed clock",
-      "description": "Slice 3. Reports older than 14 days drop off the page. It waits for slice 2. The check runs with a fixed clock."
-    },
-    "s5": {
-      "name": "Weekly digest",
-      "color": "emerald",
-      "icon": "Mail",
-      "shape": "rounded",
-      "subtitle": "Check: fixed sample",
-      "description": "Slice 5. A weekly text summary of recent reports. It waits for slices 2 and 3. The check compares the digest of fixed sample data with the expected text."
+      "subtitle": "Check: the exact limit",
+      "description": "Slice 5. Wells outside tolerance are flagged. It waits for slice 4. The check includes a well exactly at the limit, which must not flag."
     }
   },
   "connectorStyles": {
@@ -103,47 +103,47 @@
       "toAnchor": "left",
       "style": "normal",
       "label": "blocks",
-      "curve": "direct"
+      "curve": "step"
     },
     {
       "id": "e1",
       "from": "s1",
-      "to": "s4",
-      "fromAnchor": "bottom",
-      "toAnchor": "top",
-      "style": "normal",
-      "label": "blocks",
-      "curve": "direct"
-    },
-    {
-      "id": "e2",
-      "from": "s2",
       "to": "s3",
       "fromAnchor": "right",
       "toAnchor": "left",
       "style": "normal",
       "label": "blocks",
-      "curve": "direct"
+      "curve": "step"
+    },
+    {
+      "id": "e2",
+      "from": "s2",
+      "to": "s4",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
     },
     {
       "id": "e3",
       "from": "s3",
+      "to": "s4",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
+    },
+    {
+      "id": "e4",
+      "from": "s4",
       "to": "s5",
       "fromAnchor": "bottom",
       "toAnchor": "top",
       "style": "normal",
       "label": "blocks",
       "curve": "direct"
-    },
-    {
-      "id": "e4",
-      "from": "s2",
-      "to": "s5",
-      "fromAnchor": "bottom",
-      "toAnchor": "left",
-      "style": "normal",
-      "label": "blocks",
-      "curve": "step"
     }
   ],
   "groups": [],
