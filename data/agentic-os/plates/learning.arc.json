@@ -5,65 +5,65 @@
     "code": "AOS-07"
   },
   "layout": {
-    "width": 1642,
-    "height": 882
+    "width": 1782,
+    "height": 952
   },
   "nodes": {
     "work": {
       "x": 40,
-      "y": 455,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "kind": {
-      "x": 338,
-      "y": 421,
+      "y": 480,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "kind": {
+      "x": 370,
+      "y": 448,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "decisions": {
-      "x": 664,
+      "x": 720,
       "y": 230,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "hypotheses": {
-      "x": 664,
-      "y": 455,
+      "x": 720,
+      "y": 480,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "ledger": {
-      "x": 664,
-      "y": 680,
+      "x": 720,
+      "y": 730,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "rules": {
-      "x": 976,
-      "y": 455,
+      "x": 1060,
+      "y": 480,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "handoff": {
-      "x": 976,
-      "y": 680,
+      "x": 1060,
+      "y": 730,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "next": {
-      "x": 1288,
-      "y": 455,
+      "x": 1400,
+      "y": 480,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {

@@ -5,72 +5,72 @@
     "code": "AOS-01"
   },
   "layout": {
-    "width": 1642,
-    "height": 772
+    "width": 1782,
+    "height": 842
   },
   "nodes": {
     "human": {
       "x": 40,
       "y": 120,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "thinking": {
-      "x": 352,
+      "x": 380,
       "y": 120,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "decide": {
-      "x": 650,
-      "y": 86,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "decide": {
+      "x": 710,
+      "y": 88,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "making": {
-      "x": 976,
+      "x": 1060,
       "y": 120,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "sharing": {
-      "x": 1288,
+      "x": 1400,
       "y": 120,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "lessons": {
-      "x": 1288,
-      "y": 345,
+      "x": 1400,
+      "y": 370,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "knowledge": {
-      "x": 352,
-      "y": 570,
+      "x": 380,
+      "y": 620,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "governance": {
-      "x": 664,
-      "y": 570,
+      "x": 720,
+      "y": 620,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "substrate": {
-      "x": 976,
-      "y": 570,
+      "x": 1060,
+      "y": 620,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {
@@ -246,10 +246,10 @@
       "id": "g0",
       "type": "rect",
       "label": "Cross-cutting: available to every stage",
-      "x": 336,
-      "y": 538,
-      "width": 860,
-      "height": 138,
+      "x": 364,
+      "y": 588,
+      "width": 944,
+      "height": 158,
       "color": "zinc"
     }
   ],

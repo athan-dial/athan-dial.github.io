@@ -5,72 +5,72 @@
     "code": "AOS-06"
   },
   "layout": {
-    "width": 1642,
-    "height": 722
+    "width": 1782,
+    "height": 792
   },
   "nodes": {
     "propose": {
       "x": 40,
-      "y": 295,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "local": {
-      "x": 338,
-      "y": 261,
+      "y": 320,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "local": {
+      "x": 370,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "proceed": {
-      "x": 352,
-      "y": 520,
+      "x": 380,
+      "y": 570,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "reserved": {
-      "x": 664,
+      "x": 720,
       "y": 70,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "draft": {
-      "x": 664,
-      "y": 295,
+      "x": 720,
+      "y": 320,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "decide": {
-      "x": 976,
-      "y": 295,
+      "x": 1060,
+      "y": 320,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "stop": {
-      "x": 976,
+      "x": 1060,
       "y": 70,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "act": {
-      "x": 1288,
-      "y": 295,
+      "x": 1400,
+      "y": 320,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "record": {
-      "x": 1288,
-      "y": 520,
+      "x": 1400,
+      "y": 570,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {

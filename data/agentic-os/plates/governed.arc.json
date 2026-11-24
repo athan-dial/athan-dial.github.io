@@ -5,79 +5,79 @@
     "code": "AOS-05"
   },
   "layout": {
-    "width": 1642,
-    "height": 591
+    "width": 1782,
+    "height": 634
   },
   "nodes": {
     "contract": {
       "x": 40,
       "y": 130,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "certify": {
-      "x": 352,
+      "x": 380,
       "y": 130,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "certified": {
-      "x": 650,
-      "y": 96,
+      "x": 710,
+      "y": 98,
       "size": "m",
-      "width": 232,
-      "height": 160
+      "width": 252,
+      "height": 176
     },
     "admit": {
-      "x": 976,
+      "x": 1060,
       "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "dispatch": {
-      "x": 1288,
-      "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "execute": {
-      "x": 1288,
-      "y": 355,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "evidence": {
-      "x": 976,
-      "y": 355,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "review": {
-      "x": 664,
-      "y": 355,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "verify": {
-      "x": 338,
-      "y": 321,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "dispatch": {
+      "x": 1400,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "execute": {
+      "x": 1400,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "evidence": {
+      "x": 1060,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "review": {
+      "x": 720,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "verify": {
+      "x": 370,
+      "y": 348,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "human": {
       "x": 40,
-      "y": 355,
+      "y": 380,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {
@@ -294,29 +294,29 @@
       "type": "rect",
       "label": "Planning and certification",
       "x": 24,
-      "y": 64,
-      "width": 874,
-      "height": 206,
+      "y": 66,
+      "width": 954,
+      "height": 222,
       "color": "blue"
     },
     {
       "id": "g1",
       "type": "rect",
       "label": "Supervisor: enforces transitions",
-      "x": 960,
+      "x": 1044,
       "y": 98,
-      "width": 548,
-      "height": 138,
+      "width": 604,
+      "height": 158,
       "color": "zinc"
     },
     {
       "id": "g2",
       "type": "rect",
       "label": "Executor and reviewers",
-      "x": 322,
-      "y": 289,
-      "width": 1186,
-      "height": 206,
+      "x": 354,
+      "y": 316,
+      "width": 1294,
+      "height": 222,
       "color": "emerald"
     }
   ],

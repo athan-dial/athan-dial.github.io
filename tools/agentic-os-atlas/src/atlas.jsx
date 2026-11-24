@@ -51,7 +51,7 @@ function Atlas() {
   useEffect(() => {
     const el = scroller.current
     if (!el) return undefined
-    const sync = () => { if (el.scrollWidth > el.clientWidth + 1) el.setAttribute('tabindex', '0'); else el.removeAttribute('tabindex') }
+    const sync = () => { const scrolls = getComputedStyle(el).overflowX === 'auto' && el.scrollWidth > el.clientWidth + 1; if (scrolls) el.setAttribute('tabindex', '0'); else el.removeAttribute('tabindex') }
     sync()
     const ro = new ResizeObserver(sync); ro.observe(el)
     return () => ro.disconnect()
@@ -103,6 +103,7 @@ function Atlas() {
           </li>
         ))}
       </ol>
+      <p className="visually-hidden" role="status" aria-live="polite">{'Showing view ' + (views.views.findIndex(v => v.id === view) + 1) + ' of ' + views.views.length + ': ' + meta.short + '. ' + meta.claim}</p>
       <div className="atlas__head">
         <h2 className="atlas__title">{meta.title}</h2>
         <p className="atlas__claim">{meta.claim}</p>

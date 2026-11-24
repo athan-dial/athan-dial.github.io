@@ -16,11 +16,11 @@ ROLE = {  # role -> (color, icon, shape)
     'control': ('blue',    'Route',       'rounded'),
     'review':  ('emerald', 'ShieldCheck', 'rounded'),
 }
-W, H, GATE_H, GATE_W, COL, X0, Y0 = 176, 92, 136, 196, 262, 40, 56
+W, H, GATE_H, GATE_W, COL, X0, Y0 = 224, 120, 168, 236, 310, 40, 56
 pos = {  # key -> (col, y)
     'request': (0, 250), 'scan': (1, 250), 'frame': (2, 250), 'spec': (3, 250), 'gate': (4, 250),
     'implement': (5, 250), 'verify': (6, 250), 'peer': (7, 250), 'release': (8, 250),
-    'approval': (4, Y0), 'rework': (6, 430), 'backlog': (2, 560), 'retro': (8, 560)}
+    'approval': (4, Y0), 'rework': (6, 490), 'backlog': (2, 650), 'retro': (8, 650)}
 nodes, data = {}, {}
 for key, (label, role, *_rest) in fx['nodes'].items():
     color, icon, shape = ROLE[role]
@@ -68,7 +68,7 @@ for i, (f, t, label) in enumerate(fx['edges']):
 assert len(conns) == 17 and len(nodes) == 13
 plate = dict(
     id='fixture-workflow', figure=dict(title='Product delivery workflow', code='BM-02'),
-    layout=dict(width=X0 * 2 + 8 * COL + W, height=680), nodes=nodes, nodeData=data,
+    layout=dict(width=X0 * 2 + 8 * COL + W, height=800), nodes=nodes, nodeData=data,
     connectorStyles={
         'normal': dict(color='zinc', strokeWidth=1.7, toArrow='arrow'),
         'pass': dict(color='emerald', strokeWidth=1.9, toArrow='arrow'),

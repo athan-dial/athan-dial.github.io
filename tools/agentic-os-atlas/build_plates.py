@@ -16,9 +16,9 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parents[2] / 'data' / 'agentic-os'
 (OUT / 'plates').mkdir(parents=True, exist_ok=True)
 
-W, H = 204, 92            # standard node
-GW, GH = 232, 160         # decision diamond
-COL, ROW, X0 = 312, 225, 40
+W, H = 232, 112            # standard node
+GW, GH = 252, 176         # decision diamond
+COL, ROW, X0 = 340, 250, 40
 
 KIND = {  # kind -> (palette colour, icon, silhouette)
     'human':  ('amber',   'UserRound',   'pill'),      # human judgment / authorization (citrus)

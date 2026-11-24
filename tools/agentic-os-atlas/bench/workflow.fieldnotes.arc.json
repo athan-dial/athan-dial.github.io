@@ -5,100 +5,100 @@
     "code": "BM-02"
   },
   "layout": {
-    "width": 2352,
-    "height": 680
+    "width": 2784,
+    "height": 800
   },
   "nodes": {
     "request": {
       "x": 40,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "scan": {
-      "x": 302,
+      "x": 350,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "frame": {
-      "x": 564,
+      "x": 660,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "spec": {
-      "x": 826,
+      "x": 970,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "gate": {
-      "x": 1078,
-      "y": 228,
+      "x": 1274,
+      "y": 226,
       "size": "m",
-      "width": 196,
-      "height": 136
+      "width": 236,
+      "height": 168
     },
     "approval": {
-      "x": 1088,
+      "x": 1280,
       "y": 56,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "implement": {
-      "x": 1350,
+      "x": 1590,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "verify": {
-      "x": 1612,
+      "x": 1900,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "peer": {
-      "x": 1874,
+      "x": 2210,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "release": {
-      "x": 2136,
+      "x": 2520,
       "y": 250,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "retro": {
-      "x": 2136,
-      "y": 560,
+      "x": 2520,
+      "y": 650,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "backlog": {
-      "x": 564,
-      "y": 560,
+      "x": 660,
+      "y": 650,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     },
     "rework": {
-      "x": 1612,
-      "y": 430,
+      "x": 1900,
+      "y": 490,
       "size": "m",
-      "width": 176,
-      "height": 92
+      "width": 224,
+      "height": 120
     }
   },
   "nodeData": {

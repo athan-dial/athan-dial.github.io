@@ -5,58 +5,58 @@
     "code": "AOS-02"
   },
   "layout": {
-    "width": 1642,
-    "height": 722
+    "width": 1782,
+    "height": 792
   },
   "nodes": {
     "question": {
       "x": 40,
       "y": 70,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "research": {
-      "x": 352,
+      "x": 380,
       "y": 70,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "evidence": {
-      "x": 664,
-      "y": 70,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "challenge": {
-      "x": 976,
-      "y": 70,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "decision": {
-      "x": 962,
-      "y": 261,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "evidence": {
+      "x": 720,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "challenge": {
+      "x": 1060,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "decision": {
+      "x": 1050,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "spec": {
-      "x": 1288,
-      "y": 295,
+      "x": 1400,
+      "y": 320,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "parked": {
-      "x": 976,
-      "y": 520,
+      "x": 1060,
+      "y": 570,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {

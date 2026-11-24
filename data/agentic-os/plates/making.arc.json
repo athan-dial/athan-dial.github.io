@@ -5,65 +5,65 @@
     "code": "AOS-03"
   },
   "layout": {
-    "width": 1642,
-    "height": 591
+    "width": 1782,
+    "height": 634
   },
   "nodes": {
     "spec": {
       "x": 40,
       "y": 130,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "tickets": {
-      "x": 352,
+      "x": 380,
       "y": 130,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "ready": {
-      "x": 650,
-      "y": 96,
+      "x": 710,
+      "y": 98,
       "size": "m",
-      "width": 232,
-      "height": 160
+      "width": 252,
+      "height": 176
     },
     "dispatch": {
-      "x": 976,
+      "x": 1060,
       "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "implement": {
-      "x": 1288,
-      "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "review": {
-      "x": 1288,
-      "y": 355,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "verify": {
-      "x": 962,
-      "y": 321,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "implement": {
+      "x": 1400,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "review": {
+      "x": 1400,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "verify": {
+      "x": 1050,
+      "y": 348,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "human": {
-      "x": 352,
-      "y": 355,
+      "x": 380,
+      "y": 380,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {
@@ -266,10 +266,10 @@
       "id": "g0",
       "type": "rect",
       "label": "Governed execution",
-      "x": 634,
-      "y": 64,
-      "width": 874,
-      "height": 431,
+      "x": 694,
+      "y": 66,
+      "width": 954,
+      "height": 472,
       "color": "emerald"
     }
   ],

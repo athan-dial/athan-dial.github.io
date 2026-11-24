@@ -5,65 +5,65 @@
     "code": "AOS-04"
   },
   "layout": {
-    "width": 1656,
-    "height": 557
+    "width": 1792,
+    "height": 602
   },
   "nodes": {
     "work": {
       "x": 40,
       "y": 130,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "audience": {
-      "x": 352,
+      "x": 380,
       "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "draft": {
-      "x": 664,
-      "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "fresh": {
-      "x": 976,
-      "y": 130,
-      "size": "m",
-      "width": 204,
-      "height": 92
-    },
-    "ready": {
-      "x": 1274,
-      "y": 96,
       "size": "m",
       "width": 232,
-      "height": 160
+      "height": 112
+    },
+    "draft": {
+      "x": 720,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fresh": {
+      "x": 1060,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "ready": {
+      "x": 1390,
+      "y": 98,
+      "size": "m",
+      "width": 252,
+      "height": 176
     },
     "authorize": {
-      "x": 1288,
-      "y": 355,
+      "x": 1400,
+      "y": 380,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "share": {
-      "x": 976,
-      "y": 355,
+      "x": 1060,
+      "y": 380,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     },
     "learn": {
-      "x": 664,
-      "y": 355,
+      "x": 720,
+      "y": 380,
       "size": "m",
-      "width": 204,
-      "height": 92
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {
