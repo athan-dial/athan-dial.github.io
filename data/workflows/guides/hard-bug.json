@@ -1,84 +1,85 @@
 {
   "id": "hard-bug",
   "title": "Finding a bug you cannot make happen",
-  "lead": "Most bugs do not need this. If you can see it fail, write a test that fails the same way, fix it and move on. This guide is for the other kind: it happens to someone else, only sometimes, and never on your machine. The method is to make it fail on demand before you try to fix anything.",
-  "scenario": "Pottery Studio Booking is an invented app. A few people say their class shows on the wrong day. The app, the three reports and the results are invented; the command output below was produced by a short script written for this example, so it is genuine output from invented data.",
-  "input": "Some people see their pottery class on the wrong day. I cannot make it happen on any of our machines. Diagnose this.",
+  "lead": "Use it when something is wrong in data you cannot see failing on your own machine, and you do not yet know why.",
+  "produces": "A command that fails on demand, a cause that survived a test meant to disprove it, a fix, and a regression test that failed before the fix and passes after it.",
+  "scenario": "Assay Compare imports instrument B exports from two sites. The assay lead at site 2 says the control wells on some plates look about ten times too high, and plates from site 1 look fine.",
+  "input": "Site 2's control wells look about ten times too high on some plates, and I cannot reproduce it with site 1 data. Diagnose this.",
   "steps": [
     {
       "actor": "human",
       "label": "Check that this is the hard kind",
-      "text": "Ask one question first: can you make it fail right now? A typo on a button, a crash with a stack trace and a failing test someone already wrote are all easy, and they need a test and a fix, not this loop. Here, three people out of about four hundred report a wrong day and nobody on the team can see it. That is the hard kind."
+      "text": "Ask one thing first: can you make it fail right now? A crash with a stack trace, a typo or a test someone already wrote does not need this loop. Write a failing test, fix it and move on. Here you cannot see the fault in your own data, so the loop applies."
     },
     {
       "actor": "skill",
       "skill": "diagnosing-bugs",
       "label": "Build a signal that fails on demand",
-      "text": "Before any theory, make a command that fails every time. The three reports share two things: the people are in Europe or Australia, and the studio is in Denver. The team all sit in Denver. So the loop takes a stored class time and a viewer's time zone and prints the label the page would show. For a 19:00 class on 3 March, run from Denver, it prints the right day. Run from London, it does not."
+      "text": "Before any theory, get one command that fails every time. The affected plates all come from site 2, so you take two small exports, one per site, and write a check that parses each and compares the control well with the value you expect. The command output further down is genuine: it came from a short script run against two invented three-line exports. The check exits with an error on the site 2 file."
     },
     {
       "actor": "skill",
       "skill": "diagnosing-bugs",
       "label": "Shrink it to the smallest failure",
-      "text": "Strip away everything the failure does not need: the login, the database, the page, the cache. What is left is one function with two inputs, a stored instant and a viewer zone. Then find the edge. In London a class that starts at 16:59 studio time shows the right day, and one at 17:00 shows the next day. A bug with a sharp edge is easier to explain than one that happens sometimes."
+      "text": "Cut everything the failure does not need: the database, the overlay, the reference run. What is left is two files and a parser. The site 1 export writes 1.2 and the site 2 export writes 1,2, with semicolons between columns. The parser reads the first as 1.2 and the second as 12."
     },
     {
       "actor": "skill",
       "skill": "diagnosing-bugs",
-      "label": "Rank guesses you can disprove",
-      "text": "Write four guesses, each with what it predicts and a test that would kill it. One: the day comes from the viewer's clock while the time comes from the studio's. Two: daylight saving shifts the hour. Three: the stored time is already wrong. Four: a cached page is served to the wrong viewer. Order them by how likely and how cheap to test."
+      "label": "Rank four guesses you can disprove",
+      "text": "Each guess gets a prediction and a test that would kill it. One: the parser treats the comma as a thousands separator. Two: site 2 has a different plate layout, so the wrong wells count as controls. Three: the instrument at site 2 really reports larger numbers. Four: normalisation divides by another plate's controls. Order them by how likely each is and how cheap it is to test."
     },
     {
       "actor": "human",
-      "label": "Look at the list before anything runs",
-      "text": "You may know something the list does not. Here you add that the studio's own staff never see it and that the clocks changed in neither country that week. That strengthens guess one and weakens guess two before a single test runs. You can also add a guess; you cannot let the agent pick the fix by itself."
+      "label": "Review the list before anything runs",
+      "text": "You may know what the list cannot. Here the assay lead mentions that only plates exported since site 2 changed its instrument's regional setting are wrong. That strengthens guess one and weakens the other three before a test runs. You can also add a guess. You do not let the agent choose the fix alone."
     },
     {
       "actor": "skill",
       "skill": "diagnosing-bugs",
       "label": "Test the guesses, one change at a time",
-      "text": "Each guess gets one test that changes one thing. Guess two dies: the failure shows up on 3 March, weeks from any clock change. Guess three dies: the stored times for the three bookings match their classes. Guess four dies: the same wrong day appears with the cache bypassed. Guess one makes a prediction nobody else made, that a New York viewer sees the right day, and it holds."
+      "text": "Each test changes one thing. Open the raw site 2 export: the control is 1,2, the same size as site 1's 1.2, so guess three dies. The error is exactly a factor of ten on every affected plate, not an uneven one, so guesses two and four die. Switch off only the thousands-separator setting in the parser and the site 2 control reads 1.2. Guess one holds, and a plate in the old format from site 2 still parses correctly, which it also predicted."
     },
     {
       "actor": "skill",
       "skill": "tdd",
       "label": "Fix it with a test that fails first",
-      "text": "The failing case becomes the regression test: a London viewer and a 19:00 Denver class must show Tuesday. Watch it fail for the right reason. Then change the function to take the day from the studio's zone, the same zone the time already uses, and watch it pass. Add the 16:59 case beside it. This is the whole of the tdd step here; a small, clear fix would need nothing more."
+      "text": "The failing case becomes the regression test: a site 2 export with a comma decimal must give a control of 1.2. Watch it fail for the right reason, then make the parser read the comma as the decimal mark when the delimiter is a semicolon, and watch it pass. Add a test for a value with a comma and two decimals, since 1,25 would have read as 125 and been a hundred times too high."
     },
     {
       "actor": "artifact",
       "label": "The bug note",
-      "text": "Four lines a later reader can use: what failed, the command that shows it, the cause and the test that now guards it."
+      "text": "Four lines for a later reader: what failed, the command that shows it, the cause and the tests that now guard it."
     },
     {
       "actor": "open",
       "label": "When no signal can be built",
-      "text": "Suppose none of the three people could say where they were, and no stored value for their bookings could be read. Then no honest signal exists yet. Stop and ask for one thing: one raw booking record, one affected person's time zone setting, or permission to add temporary logging. Do not guess a fix and call it done. Remove any secrets before sharing a record."
+      "text": "Suppose site 2 could not send you a single affected export and no stored plate could be read. Then there is nothing honest to test. Stop and ask for one thing: one raw export, the regional setting on the instrument, or permission to log what the parser receives. Do not ship a guess as a fix. Remove anything sensitive from a file before it is shared."
     }
   ],
   "ledger": {
     "settled": [
-      "The day label and the time label use different time zones.",
-      "Daylight saving, the stored data and the cache are not the cause."
+      "The parser reads a comma decimal as a thousands separator.",
+      "The raw site 2 exports are correct, and the plate layout and normalisation are not at fault."
     ],
     "open": [
-      "Why only three of four hundred people reported it. A guess: most did not notice.",
-      "Whether any other page builds a label the same way."
+      "Whether other places in the product parse numbers the same way.",
+      "Whether instrument A ever exports a comma decimal."
     ]
   },
   "artifact": {
-    "title": "Bug note (invented example)",
+    "title": "Bug note",
     "lines": [
-      "Failed: a 19:00 Denver class on Tuesday 3 March showed as Wednesday 4 March to viewers in London and Sydney.",
-      "Signal: TZ=Europe/London node label.js 2026-03-04T02:00:00Z printed 'Wed 4 Mar, 19:00'. The same run with TZ=America/Denver printed 'Tue 3 Mar, 19:00'.",
-      "Cause: the day was formatted in the viewer's time zone and the time in the studio's.",
-      "Guard: two tests, a London viewer at 16:59 and at 17:00 studio time, both expecting Tuesday."
+      "Failed: control wells on some site 2 plates read ten times too high after import.",
+      "Signal: python3 check_parse.py old printed 'site2_export.csv: control=12 sample=6 ... FAIL expected control 1.2' and exited 1.",
+      "Cause: the parser removed every comma before converting the number, so 1,2 became 12.",
+      "Guard: two tests. A semicolon-delimited export with 1,2 gives 1.2. One with 1,25 gives 1.25."
     ]
   },
-  "stop": "You are done when the command that failed now passes, the regression test fails on the old code and passes on the new, and the rest of the tests still pass. Stop earlier if you cannot build a failing signal: ask for access or an artifact instead of fixing a guess. A theory you like is not a stopping point.",
-  "limits": "The app and its reports are invented, and the fix is a small one. A real fault may have several causes, may need data you cannot get, or may change when you observe it. This method does not make hard bugs easy; it stops you from fixing a bug you have not seen. diagnosing-bugs is the published skill, unchanged. My tdd copy differs slightly, and the registry says how. Most bugs need only a failing test and a fix.",
+  "stop": "You are done when the command that failed now passes, the regression test fails on the old parser and passes on the new one, and the rest of the tests still pass. Stop earlier if you cannot build a failing signal and ask for access or an artifact. A theory you like is not a stopping point.",
+  "limits": "Most bugs need only a failing test and a fix, and this loop is overhead for them. The sample output came from a short script on invented files, so it shows the shape of the loop and says nothing about a real instrument. A real fault can have several causes, need data you cannot get, or change when you look at it.",
   "next": {
-    "label": "The fix grew into a feature-sized job?",
+    "label": "Did the fix grow into a feature-sized job?",
     "guide": "spec-to-build"
   },
   "order": "result-first"
