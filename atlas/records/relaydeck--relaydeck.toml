@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:relaydeck/relaydeck"
+canonical_url = "https://github.com/relaydeck/relaydeck"
+title = "relaydeck: a local daemon for running a fleet of coding agents"
+repository_owner = "relaydeck"
+repository_name = "relaydeck"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "Runs the coding agent command-line tools you already use, side by side in terminals, under one local background service. Agents send each other durable messages, and you watch them in a dashboard or terminal view."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a way to run several different agents as a team on one machine, with messaging built in. I would revise that if the agent-to-agent messaging proves fragile in real use, since the README flags it as early beta and I ran nothing."
+fit = "Use it when you want planner and coder agents from different vendors to pass work to each other on your own machine. Skip it if you want a hosted service or a single agent."
+limitations = ["I did not check the plugin system or any of the bundled plugins beyond reading their names.", "I did not run it, and the README calls it an early beta with possible breaking changes."]
+
+[provenance]
+seed_pointer = "reading-list:relaydeck/relaydeck"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/relaydeck/relaydeck"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/relaydeck/relaydeck#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/relaydeck/relaydeck"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It wraps vendor agent command-line tools such as Claude Code, Codex, Cursor and OpenCode and runs them unattended in terminals."
+source_url = "https://github.com/relaydeck/relaydeck#readme"
+
+[[facts]]
+claim = "Messages between agents are stored in a local SQLite database, delivered to a live agent immediately and to a stopped one when it starts."
+source_url = "https://github.com/relaydeck/relaydeck#readme"
+
+[[facts]]
+claim = "State lives in a local folder and database. The README says there is no cloud account and no telemetry."
+source_url = "https://github.com/relaydeck/relaydeck#readme"
+
+[[facts]]
+claim = "The README marks it as an early beta release with possible breaking changes."
+source_url = "https://github.com/relaydeck/relaydeck#readme"

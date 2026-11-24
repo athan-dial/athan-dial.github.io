@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:vectorize-io/hindsight"
+canonical_url = "https://github.com/vectorize-io/hindsight"
+title = "Hindsight: an agent memory system that learns over time"
+repository_owner = "vectorize-io"
+repository_name = "hindsight"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Stores what an agent is told as facts, experiences and beliefs, and searches them four ways at once. A background step turns related facts into beliefs that are refined as new evidence arrives."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a heavier, more structured memory than a plain search store, aimed at agents that must change behavior over many sessions. The README is also a product page, so I treat its accuracy claims as unproven. I would revise this if an independent test on my kind of data matched them."
+fit = "Use it when an agent must learn from feedback over many sessions and you can run a server with a database. Skip it if you only need simple per-user recall; the README itself says it may be overkill for simple workflows."
+limitations = ["I did not check the benchmark claims or the independent reproduction the README cites.", "I did not run it or read the linked docs, so how beliefs get refined is only as clear as the README makes it."]
+
+[provenance]
+seed_pointer = "reading-list:vectorize-io/hindsight"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/vectorize-io/hindsight"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/vectorize-io/hindsight#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/vectorize-io/hindsight"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Memories live in banks, each an isolated store for one user, agent or project."
+source_url = "https://github.com/vectorize-io/hindsight#readme"
+
+[[facts]]
+claim = "Recall runs meaning, keyword, entity-link and time-range searches in parallel, then merges and reranks the results."
+source_url = "https://github.com/vectorize-io/hindsight#readme"
+
+[[facts]]
+claim = "Related facts are consolidated into observations, which are refined rather than overwritten when new evidence arrives."
+source_url = "https://github.com/vectorize-io/hindsight#readme"
+
+[[facts]]
+claim = "Storing a memory uses a language model to extract facts, entities and relationships; storage is PostgreSQL with pgvector."
+source_url = "https://github.com/vectorize-io/hindsight#readme"
+
+[image]
+file = "vectorize-io--hindsight.webp"
+kind = "diagram"
+alt = "Diagram of Hindsight's memory loop: retain, recall and reflect arrows around a circle labelled Hindsight Memory Networks, with world facts, experiences, opinions and observations."
+credit = "Hindsight"
+source_url = "https://github.com/vectorize-io/hindsight/blob/HEAD/hindsight-docs/static/img/hindsight-overview.webp"

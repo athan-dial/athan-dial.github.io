@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:modsetter/surfsense"
+canonical_url = "https://github.com/MODSetter/SurfSense"
+title = "SurfSense: a desktop app for researching and editing your documents"
+repository_owner = "MODSetter"
+repository_name = "SurfSense"
+date_observed = "date_not_recovered"
+topic = "research-agents"
+mechanism = "A desktop app where an agent answers questions about your files with citations and can also create or edit documents as new copies. You choose the model, local or remote."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a NotebookLM-style tool that also edits files, with the index kept on your own disk. The privacy story depends on the model you pick, since a remote model sees your text. I would revise this if the edit features hold up on real contracts and spreadsheets, which I did not test."
+fit = "Use it when you have documents you cannot upload to a hosted service and want cited answers plus file edits. Skip it if you want a hosted service, or if you need the web plugins without a SurfSense license."
+limitations = ["I did not install or run it, so I cannot say how well the edits or answers work.", "The README says the web plugins need a SurfSense license, with a free 14-day trial, and I did not check the terms. The comparison table with another product is the project's own claim."]
+
+[provenance]
+seed_pointer = "reading-list:modsetter/surfsense"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/MODSetter/SurfSense"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/MODSetter/SurfSense#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/MODSetter/SurfSense"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The project says the index stays on your disk, there is no account, and you pick the model, local or remote."
+source_url = "https://github.com/MODSetter/SurfSense#readme"
+
+[[facts]]
+claim = "It reads and answers from PDF, Word, Excel, PowerPoint, CSV, images, Markdown, HTML, e-books and audio recordings."
+source_url = "https://github.com/MODSetter/SurfSense#readme"
+
+[[facts]]
+claim = "Edits and conversions always make a new file and leave the original unchanged."
+source_url = "https://github.com/MODSetter/SurfSense#readme"
+
+[[facts]]
+claim = "Plugins that read public web pages need a SurfSense license; third-party MCP plugins need none and stay off until you allow them."
+source_url = "https://github.com/MODSetter/SurfSense#readme"

@@ -90,11 +90,34 @@ fi
 if [[ $PII -eq 0 ]]; then ok G5 "no phone patterns, no PDF, no private tree in build"
 else bad G5 "possible PII in build output — inspect before publishing"; fi
 
+# Hugo --minify drops quote marks on attributes (href=/path/, http-equiv=refresh).
+collect_internal_paths() {
+  local which="${1:-href}" # href | href-src
+  if [[ "$which" == "href-src" ]]; then
+    { grep -rEoh '(href|src)="/[^"#?]*"' "$BUILD_DIR" --include='*.html' 2>/dev/null \
+        | sed -E 's/^(href|src)="//; s/"$//'
+      grep -rEoh '(href|src)=/[^ >"#?]*' "$BUILD_DIR" --include='*.html' 2>/dev/null \
+        | sed -E 's/^(href|src)=//'
+    }
+  else
+    { grep -rEoh 'href="/[^"#?]*"' "$BUILD_DIR" --include='*.html' 2>/dev/null \
+        | sed -E 's/^href="//; s/"$//'
+      grep -rEoh 'href=/[^ >"#?]*' "$BUILD_DIR" --include='*.html' 2>/dev/null \
+        | sed -E 's/^href=//'
+    }
+  fi | sort -u
+}
+
+is_redirect_stub() {
+  local page="$1"
+  # Quoted attrs and Hugo --minify (http-equiv=refresh); verify-build uses a GNU-specific pattern.
+  grep -qiE 'http-equiv=["'\'']?refresh' "${BUILD_DIR}${page}index.html" 2>/dev/null
+}
+
 # ------------------------------------------------- G6  no dead internal links
 # Resolve every root-relative href/src against the build. Skips anchors, mailto, external,
 # and query strings. A link to /foo/ resolves if public/foo/index.html exists.
-DEAD=$(grep -rEoh '(href|src)="/[^"#?]*"' "$BUILD_DIR" --include='*.html' 2>/dev/null \
-  | sed -E 's/^(href|src)="//; s/"$//' | sort -u | while read -r p; do
+DEAD=$(collect_internal_paths href-src | while read -r p; do
       [[ -z "$p" || "$p" == "/" ]] && continue
       t="${BUILD_DIR}${p}"
       [[ -e "$t" ]] && continue
@@ -111,14 +134,13 @@ fi
 # A built page nobody links to is a page no reader finds. Exclusions live in the goal doc;
 # taxonomy shells and redirect stubs are structural, not orphans.
 ALL_PAGES=$(cd "$BUILD_DIR" && find . -name index.html | sed 's|^\./||; s|index\.html$||; s|^|/|' | sort -u)
-LINKED=$(grep -rEoh 'href="/[^"#?]*"' "$BUILD_DIR" --include='*.html' 2>/dev/null \
-  | sed -E 's/^href="//; s/"$//' | sort -u)
+LINKED=$(collect_internal_paths href)
 UNREACHED=$(comm -23 <(echo "$ALL_PAGES") <(echo "$LINKED") \
   | grep -vE '^/(categories|tags|themes)/' | grep -v '^/$')
 # Redirect stubs are reachable by inbound link only — they carry a refresh meta.
 UNREACHED=$(echo "$UNREACHED" | while read -r p; do
       [[ -z "$p" ]] && continue
-      grep -qi 'http-equiv="refresh"' "${BUILD_DIR}${p}index.html" 2>/dev/null && continue
+      is_redirect_stub "$p" && continue
       echo "$p"
     done)
 if [[ -z "$UNREACHED" ]]; then ok G8 "no unreachable pages"
@@ -145,7 +167,7 @@ else
   MISSING=$(comm -23 <(echo "$ALL_PAGES") <(echo "$MAPPED") \
     | grep -vE '^/(categories|tags)/' | while read -r p; do
         [[ -z "$p" ]] && continue
-        grep -qi 'http-equiv="refresh"' "${BUILD_DIR}${p}index.html" 2>/dev/null && continue
+        is_redirect_stub "$p" && continue
         echo "$p"
       done)
   if [[ -z "$MISSING" ]]; then ok G9 "sitemap covers every built page"

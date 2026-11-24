@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:generated-computers/locals"
+canonical_url = "https://github.com/Generated-Computers/Locals"
+title = "Locals: a local model server for many agents at once"
+repository_owner = "Generated-Computers"
+repository_name = "Locals"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "Runs AI models on a Mac and answers many agents' requests together. It also splits a task across several agents, each in its own copy of your project."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as an inference server first and an orchestration tool second: the speed claims are about serving many agents from one Mac. The `locals run` team feature is the part that touches orchestration. I would revise this if that feature turns out to be thin next to the server, which I did not check."
+fit = "Use it when you want several coding agents to share one local model on an Apple silicon Mac. Skip it if you use hosted models or do not have a Mac."
+limitations = ["I read the README and did not run it. All speed figures are the project's own, measured on its machines.", "I did not read how `locals run` divides work or how tests decide between agents."]
+
+[provenance]
+seed_pointer = "reading-list:Generated-Computers/Locals"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/Generated-Computers/Locals"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/Generated-Computers/Locals#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/Generated-Computers/Locals"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It serves requests from many agents together on the Mac's GPU and works with OpenCode, Cline, Aider, OpenHands, Claude Code and apps that speak the OpenAI, Anthropic or Ollama formats."
+source_url = "https://github.com/Generated-Computers/Locals#readme"
+
+[[facts]]
+claim = "Replies are written under a grammar so tool calls always parse and only use the tools an agent offered."
+source_url = "https://github.com/Generated-Computers/Locals#readme"
+
+[[facts]]
+claim = "The `locals run` command splits a task into parts, gives each part to several agents in their own copy of the project, and lets your tests decide."
+source_url = "https://github.com/Generated-Computers/Locals#readme"
+
+[[facts]]
+claim = "The project says it is up to 3x faster than mlx-lm with eight requests at once."
+source_url = "https://github.com/Generated-Computers/Locals#readme"

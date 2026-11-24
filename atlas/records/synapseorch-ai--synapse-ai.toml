@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:synapseorch-ai/synapse-ai"
+canonical_url = "https://github.com/synapseorch-ai/synapse-ai"
+title = "Synapse AI: agents wired into fixed step-by-step workflows"
+repository_owner = "synapseorch-ai"
+repository_name = "synapse-ai"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A self-hosted tool for building AI agents and chaining them into workflows drawn as a directed graph of steps, with branching, loops, human approval pauses and a different model at each step."
+license_spdx = "AGPL-3.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I think the choice of a fixed graph over free-form agent chat is the real position: you decide the path, and the model only fills in steps. I would revise this if the README's own scale and reliability claims, which I did not test, do not hold up under load."
+fit = "Use it when you want a repeatable multi-step agent pipeline you design in advance. Skip it if you want agents to decide their own plan at run time."
+limitations = ["I did not run it, and I read only the README, so the workflow builder and scale layer are unverified.", "The README lists agents spawning sub-agents as roadmap, so I treated dynamic delegation as absent."]
+
+[provenance]
+seed_pointer = "reading-list:synapseorch-ai/synapse-ai"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/synapseorch-ai/synapse-ai"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/synapseorch-ai/synapse-ai#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/synapseorch-ai/synapse-ai"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Workflows are graphs of steps with routing, parallel branches, loops and human approval gates."
+source_url = "https://github.com/synapseorch-ai/synapse-ai#readme"
+
+[[facts]]
+claim = "Each step can use a different model, from local models to cloud providers."
+source_url = "https://github.com/synapseorch-ai/synapse-ai#readme"
+
+[[facts]]
+claim = "Python scripts, REST APIs, webhooks and MCP servers can be exposed to agents as tools."
+source_url = "https://github.com/synapseorch-ai/synapse-ai#readme"
+
+[[facts]]
+claim = "The project says an optional scale mode adds a job queue and a pool of worker processes."
+source_url = "https://github.com/synapseorch-ai/synapse-ai#readme"

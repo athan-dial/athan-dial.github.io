@@ -1,0 +1,61 @@
+schema_version = "atlas-record/1"
+id = "github:vectifyai/pageindex"
+canonical_url = "https://github.com/vectifyai/pageindex"
+title = "PageIndex: tree-based retrieval for long documents"
+repository_owner = "vectifyai"
+repository_name = "pageindex"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Builds a table-of-contents-style tree of a long document, then has a language model read down the tree to find the right section. It uses no vector database and no chunking."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read it as a bet that for long, structured documents, a model reasoning over an outline finds relevant passages better than similarity search does. The search step depends on a strong model at query time, so cost and speed shift there. I would revise this if it holds up against vector search on my own documents, which I did not check."
+fit = "Use it when your documents are long and well structured, such as reports and filings. Skip it if you search many short, loosely structured texts, where an outline gives the model little to follow."
+limitations = ["I did not run it, and the benchmark and cost figures in the README are the project's own, so I did not check them.", "I read the introduction, quickstart and the start of the benchmarks but not the rest."]
+
+[provenance]
+seed_pointer = "reading-list:VectifyAI/PageIndex"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/VectifyAI/PageIndex"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/VectifyAI/PageIndex#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/VectifyAI/PageIndex"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It replaces the vector index with a hierarchical tree index that a language model searches by reasoning."
+source_url = "https://github.com/VectifyAI/PageIndex#readme"
+
+[[facts]]
+claim = "The project says the tree structure is extracted from the document layout without a language model, and the index model only summarizes it."
+source_url = "https://github.com/VectifyAI/PageIndex#readme"
+
+[[facts]]
+claim = "It runs locally with your own model key or against a hosted cloud service."
+source_url = "https://github.com/VectifyAI/PageIndex#readme"
+
+[image]
+file = "vectifyai--pageindex.webp"
+kind = "diagram"
+alt = "Diagram titled 'Vectorless RAG with PageIndex': a document becomes a tree, a language model reasons down it, and an answer comes out."
+credit = "PageIndex"
+source_url = "https://docs.pageindex.ai/images/cookbook/vectorless-rag.png"

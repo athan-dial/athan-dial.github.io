@@ -174,8 +174,17 @@ WORK_CASES="$(find "$BUILD_OUT/work" -mindepth 2 -maxdepth 2 -name index.html 2>
 [ -n "$WORK_CASES" ] || fail 1 "no /work/<case>/ pages in throwaway build"
 
 OUTLINE_MISSING=""
+CASE_N=0
 while IFS= read -r f; do
   [ -n "$f" ] || continue
+  if [ "$f" = "$BUILD_OUT/work/intelligence-platform-for-an-absent-user/index.html" ]; then
+    # Only this explicitly withheld case is allowed to be a redirect instead of an article.
+    if grep -qiE 'http-equiv=["]?refresh' "$f" && grep -qF 'noindex' "$f" && grep -qF '/work/' "$f" && ! grep -qF 'site-header' "$f"; then
+      continue
+    fi
+    fail 1 "withheld case URL is not a redirect-only page"
+  fi
+  CASE_N=$((CASE_N + 1))
   if ! grep -q 'work-article__outline' "$f"; then
     OUTLINE_MISSING="${OUTLINE_MISSING}${f#"$BUILD_OUT"}\n"
   fi
@@ -187,7 +196,7 @@ if [ -n "$OUTLINE_MISSING" ]; then
   printf 'verify-render: work pages missing work-article__outline:\n%b' "$OUTLINE_MISSING" >&2
   fail 1 "case outline missing from one or more /work/<case>/ pages"
 fi
-CASE_N="$(printf '%s\n' "$WORK_CASES" | grep -c . || true)"
+[ "$CASE_N" -ge 1 ] || fail 1 "no real Work case pages in throwaway build"
 ok "work-article__outline present on every /work/<case>/ page ($CASE_N)"
 
 # ---------------------------------------------------------------------------

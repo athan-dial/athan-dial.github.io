@@ -1,0 +1,66 @@
+schema_version = "atlas-record/1"
+id = "github:prassanna-ravishankar/repowire"
+canonical_url = "https://github.com/prassanna-ravishankar/repowire"
+title = "Repowire: a message mesh for running coding agents"
+repository_owner = "prassanna-ravishankar"
+repository_name = "repowire"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A local background service that lets coding agents already open in different repos find each other and pass questions and replies. You can also reach them from a browser dashboard, Telegram or Slack."
+license_spdx = "none"
+license_note = "GitHub reports no license and the repository has no LICENSE file in its top folder, but the README ends with a License section that says MIT."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "It leaves planning and merging to you and only connects sessions you already run, which keeps its job small. I would revise this if asks between agents get lost or stall in practice, which I did not test."
+fit = "Use it when agents in separate repos need to ask each other concrete questions, or you want to nudge them from your phone. Skip it if you want a tool that splits goals into tasks and merges the results."
+limitations = ["I only read the README. I did not run the daemon or connect any agents.", "The README lists several change-prone parts as experimental or in transition, and I did not check which ones are stable."]
+
+[provenance]
+seed_pointer = "reading-list:prassanna-ravishankar/repowire"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/prassanna-ravishankar/repowire"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/prassanna-ravishankar/repowire#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/prassanna-ravishankar/repowire"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Agents connect to a local daemon that keeps the registry and routes questions, notifications and schedules."
+source_url = "https://github.com/prassanna-ravishankar/repowire#readme"
+
+[[facts]]
+claim = "It connects Claude Code, Codex, OpenCode and Pi, each through its own connection path."
+source_url = "https://github.com/prassanna-ravishankar/repowire#readme"
+
+[[facts]]
+claim = "Agent commits made through it carry Git trailers, and the repowire why command replays the conversations behind a commit."
+source_url = "https://github.com/prassanna-ravishankar/repowire#readme"
+
+[[facts]]
+claim = "An optional hosted relay gives remote dashboard access, but the README says agents on different machines do not message each other."
+source_url = "https://github.com/prassanna-ravishankar/repowire#readme"
+
+[image]
+file = "prassanna-ravishankar--repowire.webp"
+kind = "diagram"
+alt = "Diagram of Repowire: coding agents connect to a local daemon, which links to a dashboard, Telegram and Slack, with an optional hosted relay."
+credit = "Repowire"
+source_url = "https://github.com/prassanna-ravishankar/repowire/blob/HEAD/images/repowire-arch.webp"

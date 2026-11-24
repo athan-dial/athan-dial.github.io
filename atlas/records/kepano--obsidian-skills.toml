@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:kepano/obsidian-skills"
+canonical_url = "https://github.com/kepano/obsidian-skills"
+repository_owner = "kepano"
+repository_name = "obsidian-skills"
+title = "Obsidian Skills: agent skills for Obsidian notes"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "Skills, meaning packaged instructions an agent loads for a task, that teach a coding agent to write Obsidian Markdown, Bases and canvas files, and to drive the Obsidian command line tool."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "This reads as a small, focused set that fixes a real gap: agents get Obsidian's own syntax wrong without help. I would revise this if the skills drift behind Obsidian releases, which I did not check."
+fit = "Use it when you keep notes in an Obsidian vault and want an agent to edit them in the right formats. Skip it if you do not use Obsidian."
+limitations = ["I read the README only, not the skill files, so I did not check how complete the syntax coverage is.", "I did not run the Obsidian command line tool these skills rely on."]
+
+[[facts]]
+claim = "It lists six skills: obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle and knap."
+source_url = "https://github.com/kepano/obsidian-skills#readme"
+
+[[facts]]
+claim = "The skills follow the Agent Skills specification and can be used with Claude Code, Codex and OpenCode."
+source_url = "https://github.com/kepano/obsidian-skills#readme"
+
+[[facts]]
+claim = "One skill, defuddle, extracts clean Markdown from web pages to save tokens."
+source_url = "https://github.com/kepano/obsidian-skills#readme"
+
+[provenance]
+seed_pointer = "reading-list:kepano/obsidian-skills"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/kepano/obsidian-skills"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/kepano/obsidian-skills#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/kepano/obsidian-skills"
+kind = "api_metadata"
+accessed = "2026-11-06"

@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:domleca/llm-wiki"
+canonical_url = "https://github.com/domleca/llm-wiki"
+title = "LM Wiki: an Obsidian plugin that answers from your notes"
+repository_owner = "domleca"
+repository_name = "llm-wiki"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Reads each note in an Obsidian vault with a language model, builds a store of people, ideas and links between them, and answers questions with links back to the source notes."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as search over a pre-built index of your notes, not as memory that an agent writes to. The extraction pass is the cost: the README says about four hours for a 600-note vault on a laptop. I would revise this if the extracted people and ideas answer questions better than plain search over the notes, which I did not check."
+fit = "Use it when you keep notes in Obsidian and want private question answering with a local model. Skip it if you need a store that an agent adds new memories to during a session."
+limitations = ["I did not run it or check answer quality, and the README gives no accuracy measures.", "I did not check how it behaves on notes that change often beyond the README's description of re-extracting a note when it is saved."]
+
+[provenance]
+seed_pointer = "reading-list:domleca/llm-wiki"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/domleca/llm-wiki"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/domleca/llm-wiki#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/domleca/llm-wiki"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Your original notes are not modified; generated pages go in a single wiki folder."
+source_url = "https://github.com/domleca/llm-wiki#readme"
+
+[[facts]]
+claim = "It uses a local Ollama model by default; OpenAI, Anthropic and Google are optional and send note content to their APIs."
+source_url = "https://github.com/domleca/llm-wiki#readme"
+
+[[facts]]
+claim = "Search mixes keyword matching, matching by meaning and vault structure, and merges the ranked lists with Reciprocal Rank Fusion."
+source_url = "https://github.com/domleca/llm-wiki#readme"
+
+[[facts]]
+claim = "After the first full pass, saving a note re-extracts only that note."
+source_url = "https://github.com/domleca/llm-wiki#readme"
+
+[image]
+file = "domleca--llm-wiki.webp"
+kind = "screenshot"
+alt = "Screenshot of an Obsidian note with a search box open over it, listing matching notes for a question."
+credit = "LM Wiki"
+source_url = "https://github.com/domleca/llm-wiki/blob/HEAD/docs/assets/query-modal.png"

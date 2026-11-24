@@ -1,0 +1,71 @@
+schema_version = "atlas-record/1"
+id = "github:storybloq/storybloq"
+canonical_url = "https://github.com/Storybloq/storybloq"
+title = "Storybloq: project memory kept in your repo for coding agents"
+repository_owner = "Storybloq"
+repository_name = "storybloq"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Keeps tickets, decisions, lessons and session handovers as files in a .story folder, so a coding agent can pick up where the last session stopped. Works with Claude Code and Codex."
+license_spdx = "NOASSERTION"
+license_note = "The README and the LICENSE file state PolyForm Shield 1.0.0, a source-available license that is not OSI open source; it bars using the software to build a competing product."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a project notebook for agents more than a memory store: the value is in written handovers and decisions you can inspect in git. I would revise this if a fresh session that loads these files really avoids repeated mistakes, which I did not test."
+fit = "Use it when you work with Claude Code or Codex across many sessions and want plans and decisions kept in the repo. Skip it if a single notes file already covers your handoffs."
+limitations = ["I read the opening, install and workflow sections but skipped most of the command and server reference, so I cannot say how much of the workflow is optional.", "The README says its review records do not guarantee correct code, and I did not check how reliable they are."]
+
+[provenance]
+seed_pointer = "reading-list:storybloq/storybloq"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/Storybloq/storybloq"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/Storybloq/storybloq#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/Storybloq/storybloq"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/Storybloq/storybloq/blob/main/LICENSE"
+kind = "license_file"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Project state lives in a .story folder of JSON and Markdown files that can be tracked in Git."
+source_url = "https://github.com/Storybloq/storybloq#readme"
+
+[[facts]]
+claim = "It ships a command-line tool, an MCP server (a way for agents to call tools) and a skill for Claude Code and Codex."
+source_url = "https://github.com/Storybloq/storybloq#readme"
+
+[[facts]]
+claim = "A handover is a note written at the end of a session so the next session can resume."
+source_url = "https://github.com/Storybloq/storybloq#readme"
+
+[[facts]]
+claim = "An optional Mac app shows the same files and updates live."
+source_url = "https://github.com/Storybloq/storybloq#readme"
+
+[image]
+file = "storybloq--storybloq.webp"
+kind = "screenshot"
+alt = "Screenshot of the Storybloq board under the headline 'See every ticket, issue, and handover', with columns of open and in-progress cards."
+credit = "Storybloq"
+source_url = "https://github.com/Storybloq/storybloq/blob/HEAD/assets/board.png"

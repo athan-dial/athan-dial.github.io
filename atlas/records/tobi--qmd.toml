@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:tobi/qmd"
+canonical_url = "https://github.com/tobi/qmd"
+title = "QMD: a local search engine for notes and documents"
+repository_owner = "tobi"
+repository_name = "qmd"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Indexes your markdown notes and transcripts on your own machine, then searches them by keyword, by meaning, or both with a reranking step. It can serve results to AI agents."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read it as a sensible way to give an agent searchable memory of your own files without sending them to a hosted service. The folder-level context notes look like the part that matters most. I would revise this if the results are no better than plain keyword search on a real note collection, which I did not check."
+fit = "Use it when you want an agent to search your own notes and transcripts locally. Skip it if you need search across shared or team-hosted content, since the HTTP server has no authentication of its own."
+limitations = ["I did not run it or check how well its search ranks results.", "I read the README only down to the MCP server section and did not read the later sections."]
+
+[provenance]
+seed_pointer = "reading-list:tobi/qmd"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/tobi/qmd"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/tobi/qmd#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/tobi/qmd"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It combines keyword search (BM25), vector search and a language-model reranker, all run locally."
+source_url = "https://github.com/tobi/qmd#readme"
+
+[[facts]]
+claim = "You attach short context notes to collections, and they are returned with matching documents."
+source_url = "https://github.com/tobi/qmd#readme"
+
+[[facts]]
+claim = "It offers an MCP server over stdio or HTTP so agents can query it."
+source_url = "https://github.com/tobi/qmd#readme"
+
+[[facts]]
+claim = "The HTTP endpoints are unauthenticated; the README says to put your own auth in front of anything reachable off-host."
+source_url = "https://github.com/tobi/qmd#readme"

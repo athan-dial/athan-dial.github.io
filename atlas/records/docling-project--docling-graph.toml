@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:docling-project/docling-graph"
+canonical_url = "https://github.com/docling-project/docling-graph"
+title = "Docling Graph: documents turned into a linked-fact graph"
+repository_owner = "docling-project"
+repository_name = "docling-graph"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Extracts structured objects from documents such as PDFs with a language model, checks them against a schema you define, then builds a directed graph of the entities and relationships."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I like that the schema comes first: you define what a valid entity looks like, and extraction has to fit it. That suits fields where exact links between things matter. I would revise this if the checked output still needs heavy manual cleanup on real documents, which I did not test."
+fit = "Use it when you need exact entity links from documents and can write a schema up front. Skip it if approximate search over text is enough for your questions."
+limitations = ["I did not run it or check extraction accuracy on any document.", "I read the capabilities and quick start but not the linked docs site."]
+
+[provenance]
+seed_pointer = "reading-list:docling-project/docling-graph"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/docling-project/docling-graph"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/docling-project/docling-graph#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/docling-project/docling-graph"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It turns documents into validated Pydantic objects, then into a directed graph with explicit relationships."
+source_url = "https://github.com/docling-project/docling-graph#readme"
+
+[[facts]]
+claim = "Extraction runs either through a local vision-language model via Docling or through language models routed with LiteLLM."
+source_url = "https://github.com/docling-project/docling-graph#readme"
+
+[[facts]]
+claim = "Graphs export to CSV and Cypher, and can be viewed as interactive HTML."
+source_url = "https://github.com/docling-project/docling-graph#readme"
+
+[[facts]]
+claim = "It can merge several graphs into one without calling a language model."
+source_url = "https://github.com/docling-project/docling-graph#readme"
+
+[image]
+file = "docling-project--docling-graph.webp"
+kind = "logo"
+alt = "Docling Graph logo: a cartoon duck holding a small network of linked nodes."
+credit = "Docling Graph"
+source_url = "https://github.com/docling-project/docling-graph/blob/HEAD/docs/assets/logo.png"

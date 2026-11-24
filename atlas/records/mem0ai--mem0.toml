@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:mem0ai/mem0"
+canonical_url = "https://github.com/mem0ai/mem0"
+title = "Mem0: a memory layer for agents"
+repository_owner = "mem0ai"
+repository_name = "mem0"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Pulls facts out of conversations and adds them to a store without ever editing old ones. It finds them again by meaning, by keyword and by named thing, then merges the results."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "A useful contrast to graph-based memory: it only appends, and leans on search to sort things out. That append-only choice is the design bet to watch. I would revise this if stale or conflicting memories turn out to hurt retrieval, which I did not test."
+fit = "Look at it when you want agent memory without managing a graph. Skip it if memories must be corrected or deleted in place; the README says it only adds."
+limitations = ["Its benchmark numbers are the project's own, and the README says they describe the managed platform, not the open-source SDK."]
+
+[provenance]
+seed_pointer = "seed-index:mem0ai/mem0"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/mem0ai/mem0"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/mem0ai/mem0#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/mem0ai/mem0"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "Extraction is a single pass: one call to a language model, adding memories and never updating or deleting them, so memories accumulate."
+source_url = "https://github.com/mem0ai/mem0#readme"
+
+[[facts]]
+claim = "Entities (named things) are extracted, embedded and linked across memories to improve retrieval."
+source_url = "https://github.com/mem0ai/mem0#readme"
+
+[[facts]]
+claim = "Retrieval scores meaning, keyword (BM25) and entity matches in parallel and merges them."
+source_url = "https://github.com/mem0ai/mem0#readme"
+
+[[facts]]
+claim = "Its benchmark scores reflect the managed platform, which includes optimizations not in the open-source SDK."
+source_url = "https://github.com/mem0ai/mem0#readme"
+
+[image]
+file = "mem0ai--mem0.webp"
+kind = "banner"
+alt = "Mem0 banner: the Mem0 mark and the words 'Memory For AI Agents' on a lavender background."
+credit = "Mem0"
+source_url = "https://github.com/mem0ai/mem0/blob/main/docs/images/banner-sm.png"

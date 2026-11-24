@@ -81,7 +81,7 @@
   from = "/advisory/"
   to = "/about/#conversations"
   permanent = true
-  path = "advisory"
+  path = "redirects/advisory"
 
 [[redirects]]
   from = "/consulting/"
@@ -94,7 +94,7 @@
   from = "/writing/"
   to = "/thinking/"
   permanent = true
-  path = "writing"
+  path = "redirects/writing"
 
 # The committed docs/agency/ static tree was removed (2026-08-12). These stubs keep the
 # externally-linkable Agency URLs resolving to somewhere real instead of 404ing.
@@ -193,3 +193,10 @@
   to = "/thinking/"
   permanent = true
   path = "redirects/skills-case-studies"
+
+# The former case is withheld pending source reconciliation. Keep inbound links useful.
+[[redirects]]
+  from = "/work/intelligence-platform-for-an-absent-user/"
+  to = "/work/"
+  permanent = false
+  path = "redirects/withheld-intelligence-case"

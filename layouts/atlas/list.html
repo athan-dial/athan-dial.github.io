@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{- $pages := .Pages.ByTitle -}}
+<div class="container atlas" data-atlas>
+  <header class="fn-page-head">
+    <p class="fn-kicker">Fieldnotes / Atlas</p>
+    <h1>Systems Atlas</h1>
+    <p>{{ .Description }}</p>
+  </header>
+  <details class="atlas__terms">
+    <summary>How to read this, and terms used</summary>
+    <p class="atlas__legend"><strong>Read, not run</strong>: I read the project's README and repository page and did not install it. Where I read less, the record says so. All {{ len $pages }} are at this level today. The higher levels are <strong>Compared</strong> (set against another project), <strong>Run</strong> (I ran it) and <strong>In use</strong> (part of my own work). Inclusion is not an endorsement.</p>
+    <dl>
+      <dt>Agent</dt><dd>An AI assistant that can take actions, such as running code or calling tools, not only chat.</dd>
+      <dt>MCP</dt><dd>Model Context Protocol, a standard way for AI tools to plug into other software.</dd>
+      <dt>Knowledge graph</dt><dd>Facts stored as linked items, for example a person linked to the company they work at.</dd>
+      <dt>Source-available</dt><dd>Code you can read, but whose licence limits some uses, so it is not open source in the strict sense.</dd>
+      <dt>Data lineage</dt><dd>A record of where a table's data came from and what depends on it.</dd>
+    </dl>
+  </details>
+  <div class="atlas__controls" data-atlas-controls hidden>
+    <label>Search<input type="search" data-atlas-search placeholder="Name, topic or what it does"></label>
+    <button type="button" data-atlas-clear hidden>Clear search</button>
+  </div>
+  <p class="atlas__count" data-atlas-count role="status">{{ len $pages }} of {{ len $pages }} systems</p>
+  <nav class="atlas__jump" aria-label="Jump to a group">
+    {{- range site.Data.atlas_meta.groups }}{{ $g := . }}{{ $n := len (where $pages "Params.group" $g.title) }}{{ if $n }}<a href="#g-{{ $g.title | urlize }}">{{ $g.title }} <span>{{ $n }}</span></a>{{ end }}{{ end }}
+  </nav>
+  {{- range site.Data.atlas_meta.groups }}
+    {{- $g := . -}}
+    {{- $in := where $pages "Params.group" $g.title -}}
+    {{- if $in }}
+  <section class="fn-section atlas-group" data-atlas-group id="g-{{ $g.title | urlize }}" aria-labelledby="gh-{{ $g.title | urlize }}">
+    <div class="fn-section__head"><h2 id="gh-{{ $g.title | urlize }}">{{ $g.title }} <span>{{ len $in }} systems</span></h2></div>
+    <ul class="atlas__list">
+      {{- range first 6 $in }}
+      <li data-atlas-item data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>
+      {{- end }}
+    </ul>
+    {{- with after 6 $in }}
+    <details class="atlas-more" data-atlas-more>
+      <summary>Show {{ len . }} more in {{ $g.title }}</summary>
+      <ul class="atlas__list">
+        {{- range . }}
+        <li data-atlas-item data-text="{{ lower (printf "%s %s %s" .Title .Params.summary .Params.topic) }}">{{ partial "atlas-card.html" . }}</li>
+        {{- end }}
+      </ul>
+    </details>
+    {{- end }}
+  </section>
+    {{- end }}
+  {{- end }}
+  <p class="atlas__empty" data-atlas-empty hidden role="status">No systems match.</p>
+</div>
+{{ end }}

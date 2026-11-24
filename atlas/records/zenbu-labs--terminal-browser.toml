@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:zenbu-labs/terminal-browser"
+canonical_url = "https://github.com/zenbu-labs/terminal-browser"
+title = "terminal-browser: a web browser that renders inside a terminal"
+repository_owner = "zenbu-labs"
+repository_name = "terminal-browser"
+date_observed = "date_not_recovered"
+topic = "computer-use-agents"
+mechanism = "Shows a real Chromium-based browser inside terminals that can draw images, so a coding agent in the same tab can open pages, click and read them. It also works over SSH."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a way to keep a browser and an agent side by side in one terminal tab, most useful for previewing HTML an agent just wrote. I would revise this if drawing or input lags in daily use, which I did not try."
+fit = "Use it when you work in a terminal that can display images (the kitty graphics protocol) and want your agent and a browser in the same tab. Skip it if your terminal lacks that support; the README lists Windows only through WSL."
+limitations = ["I did not run it or check how well an agent can control pages, since the README covers that in one command and a plugin guide I did not read."]
+
+[provenance]
+seed_pointer = "reading-list:zenbu-labs/terminal-browser"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/zenbu-labs/terminal-browser"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/zenbu-labs/terminal-browser#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/zenbu-labs/terminal-browser"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It reads pixels from Electron's offscreen rendering and sends only the changed regions to the terminal."
+source_url = "https://github.com/zenbu-labs/terminal-browser#readme"
+
+[[facts]]
+claim = "With the ssh option, the browser runs on your local machine while network requests go through the remote host."
+source_url = "https://github.com/zenbu-labs/terminal-browser#readme"
+
+[[facts]]
+claim = "The terminal-browser action command is an agent-browser compatible interface for working with open browsers."
+source_url = "https://github.com/zenbu-labs/terminal-browser#readme"
+
+[[facts]]
+claim = "It sends usage events and crash reports by default; DO_NOT_TRACK=1 or a config setting turns them off."
+source_url = "https://github.com/zenbu-labs/terminal-browser#readme"

@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:repowise-dev/repowise"
+canonical_url = "https://github.com/repowise-dev/repowise"
+title = "Repowise: a local code index that coding agents can query"
+repository_owner = "repowise-dev"
+repository_name = "repowise"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Builds an index of your code, git history and past decisions on your machine. A coding agent asks the index through ten tools instead of opening files, and a dashboard shows the same answers."
+license_spdx = "AGPL-3.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as an attempt to move repeated file searching out of the agent and into a one-time index. Its savings figures come from the project's own test runs, and I would revise this if the index goes stale and misleads an agent on a fast-changing repository, which I did not test."
+fit = "Use it when a coding agent keeps re-reading the same large repository and you want callers, change risk and tests answered from a local index. Skip it if you cannot run a local index and dashboard server, since the dashboard needs Node 20 or later."
+limitations = ["I did not run it or check whether its answers are correct. I read the main README and not the linked docs behind each feature."]
+
+[provenance]
+seed_pointer = "reading-list:repowise-dev/repowise"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/repowise-dev/repowise"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/repowise-dev/repowise#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/repowise-dev/repowise"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Graph, risk, health, tests and dead code checks make no calls to a language model, and indexing needs no API key."
+source_url = "https://github.com/repowise-dev/repowise#readme"
+
+[[facts]]
+claim = "It builds a call graph (a map of what calls what) across 28 languages and generates a wiki page for each module and file."
+source_url = "https://github.com/repowise-dev/repowise#readme"
+
+[[facts]]
+claim = "It exposes ten task-shaped tools to agents such as Claude Code, Codex and Cursor over the Model Context Protocol (MCP)."
+source_url = "https://github.com/repowise-dev/repowise#readme"
+
+[[facts]]
+claim = "A separate hosted service sends your code to the vendor's platform; the open-source version reads code on your machine."
+source_url = "https://github.com/repowise-dev/repowise#readme"

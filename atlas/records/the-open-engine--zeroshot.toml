@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:the-open-engine/zeroshot"
+canonical_url = "https://github.com/the-open-engine/zeroshot"
+title = "zeroshot: a review-gated graph of coding agents"
+repository_owner = "the-open-engine"
+repository_name = "zeroshot"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "Runs coding agents as a graph you define: a worker, independent reviewers, tests and CI. The engine only lets work move to delivery after the required approvals."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I find the core idea sound: a reviewer that starts with fresh context and is paid to find faults is a real check on a worker that drifts. The graph makes the review gates explicit rather than a habit. I would revise this if the reviewers mostly rubber-stamp the worker's output, which I did not test."
+fit = "Use it when you want unattended coding runs where tests and independent review must pass before a pull request merges. Skip it if you prefer to steer a single agent by hand."
+limitations = ["I read the README and did not run a graph, so I cannot say how well rejection and repair loops converge.", "I did not read the engine docs, so I do not know how it enforces approvals beyond what the README states."]
+
+[provenance]
+seed_pointer = "reading-list:the-open-engine/zeroshot"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/the-open-engine/zeroshot"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/the-open-engine/zeroshot#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/the-open-engine/zeroshot"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "You define the agents, models and review gates as a graph, and the engine enforces that independent approval happens before delivery."
+source_url = "https://github.com/the-open-engine/zeroshot#readme"
+
+[[facts]]
+claim = "A rejection from a reviewer turns into repair tasks for the worker, and each revision is reviewed again."
+source_url = "https://github.com/the-open-engine/zeroshot#readme"
+
+[[facts]]
+claim = "It installs as an npm package with skills for Claude Code, Codex, Copilot CLI and Pi, and runs locally on your existing agent login."
+source_url = "https://github.com/the-open-engine/zeroshot#readme"

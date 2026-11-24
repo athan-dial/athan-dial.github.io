@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:kdlbs/kandev"
+canonical_url = "https://github.com/kdlbs/kandev"
+title = "Kandev: a kanban board that runs coding agents"
+repository_owner = "kdlbs"
+repository_name = "kandev"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A self-hosted task board that assigns work to coding agents from many vendors, runs each in an isolated worktree, and gives you a place to review their changes before a pull request."
+license_spdx = "AGPL-3.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I think the review-first stance is the point: it treats agents as workers whose output a person approves, not as an autonomous team. I would revise this if its experimental Office mode, which aims at persistent agent teams, proves stable, which I did not check."
+fit = "Use it when you want many agent CLIs behind one board with a review step. Skip it if you want agents to plan and run work with no human gate."
+limitations = ["I did not run it, and I read the README but none of the linked docs, so how workflows and gates are configured is unverified.", "The README marks Office mode as experimental and off by default, and I did not look at it."]
+
+[provenance]
+seed_pointer = "reading-list:kdlbs/kandev"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/kdlbs/kandev"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/kdlbs/kandev#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/kdlbs/kandev"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Tasks can mix agents per step, for example one agent to plan, another to implement and a third to review."
+source_url = "https://github.com/kdlbs/kandev#readme"
+
+[[facts]]
+claim = "Agents run as local processes, in Docker containers, in Kubernetes pods, over SSH or in a cloud sandbox."
+source_url = "https://github.com/kdlbs/kandev#readme"
+
+[[facts]]
+claim = "Agents can create subtasks and message other tasks through a built-in MCP interface."
+source_url = "https://github.com/kdlbs/kandev#readme"
+
+[[facts]]
+claim = "The project says it sends no telemetry and is not tied to a cloud."
+source_url = "https://github.com/kdlbs/kandev#readme"

@@ -1,0 +1,61 @@
+schema_version = "atlas-record/1"
+id = "github:affaan-m/ecc"
+canonical_url = "https://github.com/affaan-m/ECC"
+repository_owner = "affaan-m"
+repository_name = "ecc"
+title = "ECC: a skills and hooks harness for coding agents"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A bundle for coding agents of skills (packaged instructions loaded per task), subagents, hooks and rules. It adds plans, test-first steps and fresh-context review, and installs across several agent tools."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "It is a heavy system, and the draw is that hooks enforce checks outside the model's prompt. I would revise my read if running its full install costs more context and setup than it saves, which I did not test."
+fit = "Use it when you want enforced workflows, such as test-first gates and a separate reviewer, across more than one agent tool. Skip it if you want a few light skills, since the README itself warns to install rules selectively."
+limitations = ["I read only part of this very long README, and none of the code or skill files.", "The counts of agents, skills and commands are the project's own, and I did not check them or the optional paid tier it mentions."]
+
+[[facts]]
+claim = "The project says it ships 71 subagents, 314 skills and 98 slash commands."
+source_url = "https://github.com/affaan-m/ECC#readme"
+
+[[facts]]
+claim = "Hooks run on tool events outside the model's context, and rules are always-loaded standards."
+source_url = "https://github.com/affaan-m/ECC#readme"
+
+[[facts]]
+claim = "The install is described as one plugin, ecc@ecc, with adapters for Codex, OpenCode, Cursor and other tools."
+source_url = "https://github.com/affaan-m/ECC#readme"
+
+[provenance]
+seed_pointer = "reading-list:affaan-m/ecc"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/affaan-m/ECC"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/affaan-m/ECC#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/affaan-m/ECC"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[image]
+file = "affaan-m--ecc.webp"
+kind = "banner"
+alt = "ECC banner on a dark background: 'The operating system for AI agent harnesses', beside lists of skills, agents and commands."
+credit = "ECC"
+source_url = "https://github.com/affaan-m/ECC/blob/HEAD/assets/hero.png"

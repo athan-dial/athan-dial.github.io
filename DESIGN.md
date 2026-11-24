@@ -1,8 +1,24 @@
 # Personal Fieldnotes
 
-Current design authority · 2026-09-09. This replaces Hybrid + book architecture as the current
-visual direction, following Athan's request to adapt the Fieldnotes aesthetic to his personal site.
-The existing book reading structure remains useful and is retained.
+Current design authority · 2026-09-09, extended 2026-09-10. This replaces Hybrid + book
+architecture as the current visual direction, following Athan's request to adapt the Fieldnotes
+aesthetic to his personal site. The existing book reading structure remains useful and is retained.
+
+## Retired systems — do not revive
+
+Two earlier visual systems exist in this repository's history and one of them still exists as a
+file. Neither is authority.
+
+- **The pre-Fieldnotes "Editorial Data Intelligence" asset system** — teal `#2E5C8A`, terracotta
+  `#C17A47`, sage, purple, and a 35-asset icon programme. Its plan is archived at
+  `.planning/archive/ASSET_GENERATION_PLAN-legacy.md` with a retirement notice on line 1. It is
+  kept only as a record of what was rejected. `scripts/verify-proof-layer.sh` asserts those hexes
+  stay out of `tokens.css`.
+- **Clinical Architect** — teal, Manrope, glassmorphic, dark mode. Removed earlier; CLAUDE.md
+  records the damage a stale description of it caused.
+
+If a file in this repository describes a palette that is not warm paper, ink, forest, and citrus,
+it is history. `assets/css/tokens.css` is the only place a colour is defined.
 
 ## Identity
 
@@ -35,9 +51,13 @@ Canonical homepage sequence:
 - Archivo: wordmark, body and interface. IBM Plex Mono: metadata. Georgia/system serif:
   display and editorial headings via `--font-display`. `--font-serif` is a legacy Archivo token
   retained for existing layouts; do not silently change every consumer.
-- `fieldnotes.css` follows the legacy base stylesheet and owns the shared notebook components.
+- `fieldnotes.css` follows the legacy base stylesheet and owns the shared notebook components,
+  plus the proof-layer components for About and the Work index (`.about__*`,
+  `.work-card__evidence`, `.work-index__*`). Its reduced-motion block must remain last, so new
+  rules go BEFORE it, never appended after.
 - `fieldnotes-home.css` is home-only and owns the chapter index, trajectory, territory layout,
-  and homepage progressive motion. Its reduced-motion block must remain last.
+  the Outer Loop plate, and homepage progressive motion. Its reduced-motion block must remain
+  last.
 
 ## Homepage composition
 
@@ -89,6 +109,8 @@ book marginalia, not application navigation.
 - active-state movement in the chapter index;
 - small emphasis shifts that reinforce the move from capability to human judgment.
 
+- Atlas navigation and group entry may use the existing reduced-motion-aware enhancement; content remains visible without it. The cross-page transition holds the header still. Work keeps the proof-layer row presentation.
+
 ### Forbidden motion
 
 - parallax;
@@ -124,6 +146,56 @@ supported, with the expert layer highlighted and the shared tool layer in forest
 Schematics are a brand primitive and may appear in articles, work pages, or homepage concept
 sections when they make a relationship more legible. They are not decorative filler.
 
+## About and the Work index
+
+Added by the proof-layer pass, 2026-09-10. Authority:
+`.planning/specs/2026-09-10-personal-brand-proof-layer-design.md`.
+
+About is the site's proof surface. It renders through `layouts/_default/about.html`, selected by
+`layout: about` in `content/about.md`, in seven fixed sections: opening classification, how I work,
+trajectory, selected work evidence, research foundation, current territory, conversations. The
+`#conversations` anchor is load-bearing beyond the page — `/advisory/` and `/consulting/` both
+redirect to it.
+
+Two rules on that page are content boundaries wearing design clothes:
+
+- **The trajectory renders role, company, range, and only already-cleared notes.** The
+  `summary` fields in `data/experience.json` are banned here for the same reason DESIGN.md bans
+  them from the homepage: they claim unhedged ownership of shared systems. The Data Research Lead
+  row deliberately carries no description and points at the Work narratives instead.
+- **The research record is computed, never typed.** Totals come from `data/publications.json` at
+  build time; the page selects three papers by DOI. A full bibliography inline would turn the page
+  into a CV and bury the product argument above it.
+
+The Work index states its evidence model once, above the cases, then each card carries what Athan
+owned, what was measured, and what was never measured. Evidence class renders as words —
+"Measured, published as a range", not a colour.
+
+Work renders **two depths**, named by `work_kind` (see `.planning/CONTENT-MODEL.md`): full
+**Cases**, and narrower **Proof notes** that carry one artifact, one decision, one boundary. They
+are separate labelled groups, divided by a dashed rule rather than a solid one, because a proof
+note in a flat list beside a full case reads as a case that ran out of material. A group with no
+published items does not render at all.
+
+An earlier version of this file said "two published narratives is the whole set on purpose" and the
+gate asserted exactly two. Both were retired 2026-09-10: the collection is no longer a fixed pair,
+and a count is the wrong invariant — it fails identically whether someone invented a case or
+legitimately published one. The gate now derives the expected number from the source frontmatter
+and requires the index to agree exactly, which catches a draft leaking onto the page *and* a
+published page falling off it.
+
+The Outer Loop plate on the homepage is a finished 1254x1254 lossless artwork with its own
+masthead and caption. It is never redrawn, cropped, or captioned by the site, never upscaled past
+native, and never squeezed below the width where its inner labels stop being legible. Below 700px
+it scrolls inside its own container rather than shrinking.
+
+## No GitHub proof module
+
+Decided 2026-09-10 after inspecting every public non-fork repository. None strengthens the current
+positioning: `folio` is archived and points at a deleted repo, `model-citizen` is an unmodified
+Quartz v4 tree, and the rest are learning-era. The profile link is sufficient. The full inspection
+is recorded in the spec's implementation notes — read it before revisiting.
+
 ## Responsive behavior
 
 At 900px the notebook drops to two columns; at 600px it becomes one. The portrait becomes a compact
@@ -142,3 +214,7 @@ Hugo production builds and repository publication checks are required. New palet
 calculated from sRGB values and recorded in `.planning/ACCESSIBILITY-CHECKS.md`. Browser layout,
 200% text zoom, keyboard focus, JavaScript-disabled behavior, and computed-color verification require
 visual review. Do not present source inspection or historical measurements as browser verification.
+
+## Systems Atlas integration
+
+The catalogue uses the Fieldnotes paper, type, rules, and existing tokens. Atlas styles are scoped to its section via Hugo Pipes. The four-item navigation must be checked at narrow widths. Image provenance and the current-head human review remain required. See LOCAL-GATE.md; no historical browser result is current verification.

@@ -1,1 +1,28 @@
 # No theme imports — custom layouts only
+
+# Explicit mounts: custom mounts replace Hugo's defaults, so all seven are listed.
+# The last one exposes atlas/records/*.toml to templates as site.Data.atlas (no copy, no symlink).
+[[mounts]]
+  source = "archetypes"
+  target = "archetypes"
+[[mounts]]
+  source = "assets"
+  target = "assets"
+[[mounts]]
+  source = "content"
+  target = "content"
+[[mounts]]
+  source = "data"
+  target = "data"
+[[mounts]]
+  source = "i18n"
+  target = "i18n"
+[[mounts]]
+  source = "layouts"
+  target = "layouts"
+[[mounts]]
+  source = "static"
+  target = "static"
+[[mounts]]
+  source = "atlas/records"
+  target = "data/atlas"

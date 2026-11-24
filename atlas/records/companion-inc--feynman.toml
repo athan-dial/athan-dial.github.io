@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:companion-inc/feynman"
+canonical_url = "https://github.com/companion-inc/feynman"
+title = "Feynman: a command-line agent for literature research"
+repository_owner = "companion-inc"
+repository_name = "feynman"
+date_observed = "date_not_recovered"
+topic = "research-agents"
+mechanism = "A command-line agent that runs research workflows such as literature reviews and paper critiques. It searches paper sources and the web, then saves cited results and a list of sources to a folder."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a research-paper workflow tool, with fixed commands for review, audit and replication planning. Its main promise is source tracking, which I could not check. It also sends anonymous usage data unless you turn that off. I would revise this if its source lists match what it actually used, which I did not test."
+fit = "Use it when you read academic papers and want a repeatable literature review with a source list. Skip it if you cannot use a model provider login or do not want usage data sent unless you opt out."
+limitations = ["I did not run it, so I cannot say how reliable the reviews or citation checks are.", "I read the whole README but not the linked docs. The README says it needs a model provider sign-in; I did not check the cost or which providers work."]
+
+[provenance]
+seed_pointer = "reading-list:companion-inc/feynman"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/companion-inc/feynman"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/companion-inc/feynman#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/companion-inc/feynman"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It has named workflows such as /deepresearch, /lit, /review, /audit and /replicate, and saves results to an outputs folder."
+source_url = "https://github.com/companion-inc/feynman#readme"
+
+[[facts]]
+claim = "It searches alphaXiv, Semantic Scholar, OpenAlex, arXiv, PubMed, Europe PMC, bioRxiv, medRxiv, Crossref, the web and Hugging Face."
+source_url = "https://github.com/companion-inc/feynman#readme"
+
+[[facts]]
+claim = "It runs four agents named researcher, verifier, reviewer and writer, on a coding agent called Pi."
+source_url = "https://github.com/companion-inc/feynman#readme"
+
+[[facts]]
+claim = "It sends anonymous usage data, such as commands, models and token counts, and never prompts or paper content; setting FEYNMAN_TELEMETRY=off turns it off."
+source_url = "https://github.com/companion-inc/feynman#readme"
+
+[image]
+file = "companion-inc--feynman.webp"
+kind = "screenshot"
+alt = "Terminal screenshot of Feynman: the name in large green pixel letters above a panel of research output on a pale green background."
+credit = "Feynman"
+source_url = "https://github.com/Companion-Inc/feynman/blob/HEAD/assets/hero.png"

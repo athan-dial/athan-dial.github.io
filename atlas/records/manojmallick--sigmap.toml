@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:manojmallick/sigmap"
+canonical_url = "https://github.com/manojmallick/sigmap"
+title = "SigMap: a repeatable code map that checks AI answers"
+repository_owner = "manojmallick"
+repository_name = "sigmap"
+date_observed = "date_not_recovered"
+topic = "agent-tooling"
+mechanism = "Scans a codebase without calling any AI model and writes a list of its files and function signatures. Agents use it as context, and it flags files or functions an AI answer invented."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "The strongest idea here is the check, not the map: comparing an AI answer against the real repo catches invented file names and calls cheaply. But the check covers only names it can look up. I would revise this if it misses most real errors, which I did not test."
+fit = "Use it when you want the same context file every run and a quick check that an AI answer names real files and functions. Skip it if you need to confirm that library APIs or methods exist, which the README says it cannot do."
+limitations = ["I read the README but did not run it or open the linked limitations file, so I do not know how often its checks miss errors.", "Its retrieval and size figures are the project's own and I did not reproduce them."]
+
+[provenance]
+seed_pointer = "reading-list:manojmallick/sigmap"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/manojmallick/sigmap"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/manojmallick/sigmap#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/manojmallick/sigmap"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It makes no model calls and no embeddings; the same repo is meant to give the same map every time."
+source_url = "https://github.com/manojmallick/sigmap#readme"
+
+[[facts]]
+claim = "The sigmap verify command checks an AI answer for invented files, imports, functions and npm scripts, and prints what it did not check."
+source_url = "https://github.com/manojmallick/sigmap#readme"
+
+[[facts]]
+claim = "It cannot confirm that a method, option or library API exists, according to the project."
+source_url = "https://github.com/manojmallick/sigmap#readme"
+
+[[facts]]
+claim = "It can run as an MCP server and write context files for several assistants, including Claude, Cursor and Copilot."
+source_url = "https://github.com/manojmallick/sigmap#readme"
+
+[image]
+file = "manojmallick--sigmap.webp"
+kind = "logo"
+alt = "SigMap logo: a purple rounded square with a wave line and the letters sm."
+credit = "SigMap"
+source_url = "https://github.com/manojmallick/sigmap/blob/HEAD/assets/logo.png"

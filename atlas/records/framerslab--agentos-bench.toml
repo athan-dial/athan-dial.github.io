@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:framerslab/agentos-bench"
+canonical_url = "https://github.com/framerslab/agentos-bench"
+title = "agentos-bench: a test harness for agent memory systems"
+repository_owner = "framerslab"
+repository_name = "agentos-bench"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "Runs agent memory code against public memory benchmarks and records accuracy, cost and speed for each run. It is a measuring tool for the AgentOS memory code, not a memory system."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "This is a benchmark harness, so I read it as a way to check memory claims, not as a memory product. Its habit of listing failed experiments next to the headline numbers is the part I trust most. I would revise this if the runs reproduce without the author's setup, which I did not try."
+fit = "Look at it when you want to see how memory claims are measured on LongMemEval and LOCOMO. Skip it if you want a memory store to build on; the memory code lives in a separate package."
+limitations = ["I did not run it. Every accuracy and cost figure in the README is the author's own, and I did not verify them or the comparisons to other vendors.", "Several vendor reproduction adapters are marked as queued, and I did not check how much of the harness is finished."]
+
+[provenance]
+seed_pointer = "reading-list:framerslab/agentos-bench"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/framerslab/agentos-bench"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/framerslab/agentos-bench#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/framerslab/agentos-bench"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It is a source-only repository and is not published to npm."
+source_url = "https://github.com/framerslab/agentos-bench#readme"
+
+[[facts]]
+claim = "It covers LongMemEval, LOCOMO, BEAM and a set of small tests of individual memory mechanisms."
+source_url = "https://github.com/framerslab/agentos-bench#readme"
+
+[[facts]]
+claim = "The project says each reported number ships with a per-run JSON file and a 95% confidence interval."
+source_url = "https://github.com/framerslab/agentos-bench#readme"
+
+[[facts]]
+claim = "Its memory routing code ships in the separate @framers/agentos package."
+source_url = "https://github.com/framerslab/agentos-bench#readme"
