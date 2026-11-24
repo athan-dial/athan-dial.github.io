@@ -34,7 +34,7 @@
     {
       "actor": "skill",
       "label": "Pick it up with a fixed check",
-      "text": "When a builder is about to start, a fixed rule with no judgment re-checks the basics: the work is marked ready, the certification still matches the contract's wording, and nothing it depends on is unfinished. This check is separate from promotion, so a contract edited after promotion is caught here."
+      "text": "When a builder is about to start, a fixed rule with no judgment re-checks the basics: the work is still marked ready (a material edit to the contract removes that mark), nothing it depends on is unfinished and attempts remain. This check is separate from promotion, so a contract edited after promotion is caught here."
     },
     {
       "actor": "skill",
@@ -50,7 +50,7 @@
     {
       "actor": "skill",
       "label": "Verify the evidence against the contract",
-      "text": "Each requirement is checked against the evidence recorded for its id. R1 has a diff touching two allowed files. R3 has tests for values inside and outside the range. R2, the rule that a well exactly at tolerance is not flagged, has no evidence. Missing counts as unmet, so the result is not all met. Once every requirement is met and the independent review is in, an agent may move the work to review. It cannot mark it finished, merge it or publish it."
+      "text": "Each requirement is checked against the evidence recorded for its id. R1 has a diff touching two allowed files. R3 has nothing recorded yet. R2, the rule that a well exactly at tolerance is not flagged, has no evidence. Missing counts as unmet, so the result is not all met. Once every requirement is met and the independent review is in, an agent may move the work to review. It cannot mark it finished, merge it or publish it."
     },
     {
       "actor": "artifact",

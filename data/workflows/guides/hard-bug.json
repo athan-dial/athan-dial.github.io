@@ -9,13 +9,13 @@
     {
       "actor": "human",
       "label": "Check that this is the hard kind",
-      "text": "Ask one thing first: can you make it fail right now? A crash with a stack trace, a typo or a test someone already wrote does not need this loop. Write a failing test, fix it and move on. Here you cannot see the fault in your own data, so the loop applies."
+      "text": "Ask one thing first: can you make it fail right now? In my experience a crash with a stack trace, a typo or a test someone already wrote does not need this loop. Write a failing test, fix it and move on. Here you cannot see the fault in your own data, so the loop applies."
     },
     {
       "actor": "skill",
       "skill": "diagnosing-bugs",
       "label": "Build a signal that fails on demand",
-      "text": "Before any theory, get one command that fails every time. The affected plates all come from site 2, so you take two small exports, one per site, and write a check that parses each and compares the control well with the value you expect. The command output further down is genuine: it came from a short script run against two invented three-line exports. The check exits with an error on the site 2 file."
+      "text": "Before any theory, get one command that fails every time. The affected plates all come from site 2, so you take two small exports, one per site, and write a check that parses each and compares the control well with the value you expect. The check exits with an error on the site 2 file. The output shown below is what such a check prints, illustrated on two invented three-line exports."
     },
     {
       "actor": "skill",
@@ -32,7 +32,7 @@
     {
       "actor": "human",
       "label": "Review the list before anything runs",
-      "text": "You may know what the list cannot. Here the assay lead mentions that only plates exported since site 2 changed its instrument's regional setting are wrong. That strengthens guess one and weakens the other three before a test runs. You can also add a guess. You do not let the agent choose the fix alone."
+      "text": "You may know what the list cannot. Here the assay lead mentions that only plates exported since site 2 changed its instrument's regional setting are wrong. That strengthens guess one and weakens the other three before a test runs. You can also add a guess. The skill shows you the ranked list before it tests anything, but it does not wait if you are away, so look early."
     },
     {
       "actor": "skill",
@@ -44,7 +44,7 @@
       "actor": "skill",
       "skill": "tdd",
       "label": "Fix it with a test that fails first",
-      "text": "The failing case becomes the regression test: a site 2 export with a comma decimal must give a control of 1.2. Watch it fail for the right reason, then make the parser read the comma as the decimal mark when the delimiter is a semicolon, and watch it pass. Add a test for a value with a comma and two decimals, since 1,25 would have read as 125 and been a hundred times too high."
+      "text": "The failing case becomes the regression test: a site 2 export with a comma decimal must give a control of 1.2. Watch it fail for the right reason, then make the parser read the comma as the decimal mark when the delimiter is a semicolon, and watch it pass. If there is no correct place to put the test, that missing seam is itself a finding. Add a test for a value with a comma and two decimals, since 1,25 would have read as 125 and been a hundred times too high."
     },
     {
       "actor": "artifact",
@@ -71,7 +71,7 @@
     "title": "Bug note",
     "lines": [
       "Failed: control wells on some site 2 plates read ten times too high after import.",
-      "Signal: python3 check_parse.py old printed 'site2_export.csv: control=12 sample=6 ... FAIL expected control 1.2' and exited 1.",
+      "Signal: running the check printed something like 'site2_export.csv: control=12 sample=6 ... FAIL expected control 1.2' and exited 1.",
       "Cause: the parser removed every comma before converting the number, so 1,2 became 12.",
       "Guard: two tests. A semicolon-delimited export with 1,2 gives 1.2. One with 1,25 gives 1.25."
     ]

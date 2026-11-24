@@ -16,7 +16,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "My own skill, built from upstream's grilling. Not published; the upstream skill of the same name is a three-line stub, so it is not linked."
+      "status_note": "My own skill, built from upstream's grilling. Not published; the upstream skill of the same name is a one-line stub that calls grilling, so it is not linked."
     },
     {
       "id": "grilling",
@@ -78,7 +78,7 @@
     {
       "id": "implement",
       "name": "implement",
-      "job": "Build one ticket in one session, test-first, then review.",
+      "job": "Build a piece of work from a spec or ticket in one session, test-first where possible, then review.",
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/implement/SKILL.md",
       "customized": false
@@ -86,7 +86,7 @@
     {
       "id": "tdd",
       "name": "tdd",
-      "job": "Red, green, refactor at agreed seams.",
+      "job": "Red, then green, one test at a time at agreed seams. Refactoring waits for review.",
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/tdd/SKILL.md",
       "customized": true,
@@ -112,7 +112,7 @@
     {
       "id": "prototype",
       "name": "prototype",
-      "job": "Build a throwaway to answer one design question, then keep only the decision.",
+      "job": "Build a throwaway to answer one design question. The sketch stays on a throwaway branch and only the decision goes into the real work.",
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/prototype/SKILL.md",
       "customized": false
@@ -129,7 +129,7 @@
     {
       "id": "pm-cold-reader",
       "name": "pm-cold-reader",
-      "job": "Have a reader with no context test a shareable document, in fresh contexts, until the findings stop changing.",
+      "job": "Have fresh-context readers, each judging a different quality, score a shareable document until the scores clear fixed bars or four rounds pass.",
       "source_kind": "private",
       "url": null,
       "customized": true,
@@ -138,7 +138,7 @@
     {
       "id": "shutdown",
       "name": "shutdown",
-      "job": "Close out a session from a ledger of what happened: check repository sync, record decisions, add evidence to the tickets worked, and move one to review only when independent verification is pinned to the exact commit.",
+      "job": "Close out a session from a ledger of what happened: check repository sync, record decisions, add evidence to the tickets worked, and move a ticket to review only when independent verification is pinned to the exact commit.",
       "source_kind": "private",
       "url": null,
       "customized": true,
@@ -165,7 +165,7 @@
     {
       "id": "handoff",
       "name": "handoff",
-      "job": "Turn the current conversation into a note a fresh agent can continue from, linking specs and commits instead of copying them and redacting secrets.",
+      "job": "Write a note from the current conversation that a fresh agent can continue from, linking specs and commits instead of copying them and redacting secrets.",
       "source_kind": "private",
       "url": null,
       "customized": true,
@@ -242,7 +242,7 @@
         "governed",
         "authorization"
       ],
-      "source_status": "The shape, ready, admit, build, review and verify roles are private and unpublished. This guide is an original explanation; it links no instruction text."
+      "source_status": "The shape, certify, pick up, build, review and verify roles are private and unpublished. This guide is an original explanation; it links no instruction text."
     },
     {
       "id": "research",

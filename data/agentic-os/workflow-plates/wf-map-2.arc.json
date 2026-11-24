@@ -248,6 +248,17 @@
     },
     {
       "id": "e5",
+      "from": "first",
+      "to": "audit",
+      "fromAnchor": "bottom",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "step",
+      "curveDepth": 60
+    },
+    {
+      "id": "e6",
       "from": "input",
       "to": "designate",
       "fromAnchor": "left",

@@ -103,7 +103,7 @@
       "icon": "DoorOpen",
       "shape": "rounded",
       "subtitle": "Fixed check, no judgment",
-      "description": "When a builder is about to start, a fixed rule re-checks that the work is marked ready, the certification still matches the wording, and nothing it depends on is unfinished. No judgment call is made here."
+      "description": "When a builder is about to start, a fixed rule re-checks that the work is still marked ready (a material edit to the contract removes that mark), nothing it depends on is unfinished and attempts remain. No judgment call is made here."
     },
     "build": {
       "name": "Build in isolation",

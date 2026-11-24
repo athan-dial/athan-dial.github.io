@@ -21,7 +21,7 @@
         <span class="wf-step__kind"><span class="wf-step__mark" aria-hidden="true"></span>{{ $kl }}</span>
         <h4 class="wf-step__label">{{ $s.label }}</h4>
         <p class="wf-step__text">{{ $s.text }}</p>
-        {{- with $s.skill }}{{ $sk := index $skills . }}<p class="wf-step__skill"><span class="visually-hidden">Skill: </span><code>{{ $sk.name }}</code>{{ with $s.public_equivalents }}<span class="wf-step__equiv"> Public equivalent: {{ range $j, $e := . }}{{ if $j }}, {{ end }}<code>{{ (index $skills $e).name }}</code>{{ end }}.</span>{{ end }}</p>{{ end }}
+        {{- with $s.skill }}{{ $sk := index $skills . }}<p class="wf-step__skill"><span class="visually-hidden">Skill: </span><code>{{ $sk.name }}</code>{{ with $s.public_equivalents }}<span class="wf-step__equiv"> Closest public skill: {{ range $j, $e := . }}{{ if $j }}, {{ end }}<code>{{ (index $skills $e).name }}</code>{{ end }}.</span>{{ end }}</p>{{ end }}
       </li>
       {{- end }}
     </ol>

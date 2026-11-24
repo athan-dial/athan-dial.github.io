@@ -52,7 +52,7 @@
       "icon": "FileInput",
       "shape": "rounded",
       "subtitle": "Check: raw wells show",
-      "description": "Slice 1. An instrument A export is imported and every well shows its raw value. Nothing blocks it, so it starts first. The check imports a fixture export and counts the wells shown."
+      "description": "Slice 1. An instrument A export is imported and every well shows its raw value. Nothing blocks it, so it starts first. The check imports a fixture export, counts the wells shown and confirms a plate the instrument flagged as failed QC is skipped."
     },
     "s2": {
       "name": "S2 Import instrument B export",
@@ -76,7 +76,7 @@
       "icon": "Layers",
       "shape": "rounded",
       "subtitle": "Check: overlay values",
-      "description": "Slice 4. A run is overlaid on the reference run for its protocol version. It waits for slices 2 and 3. The check overlays two fixture runs and reads the differences."
+      "description": "Slice 4. A run is overlaid on the reference run for its protocol version. It waits for slices 2 and 3. The check overlays two fixture runs, reads the differences and refuses a reference run from a different protocol version."
     },
     "s5": {
       "name": "S5 Flag wells outside tolerance",

@@ -10,13 +10,13 @@
       "actor": "skill",
       "skill": "grilling",
       "label": "Name the destination, then list what is open",
-      "text": "The interview first pins down where this ends. Here it is a specification for the shared results store and the order assays move in. A specification, not software. Then it goes wide instead of deep and lists the open decisions without settling any. If everything fits in one session, there is no map: just do the interview."
+      "text": "The interview first pins down where this ends. Here it is a specification for the shared results store and the order assays move in. A specification, not software. Then it goes wide instead of deep and lists the open decisions without settling any. If everything fits in one session, it stops and asks how you want to proceed instead of making a map."
     },
     {
       "actor": "skill",
       "skill": "wayfinder",
       "label": "Chart the map",
-      "text": "One page holds the destination, a line per decided question, the fog and what is out of scope. The Run comparison v1 specification goes in as input: its decisions, such as one designated reference run per protocol version, are taken as given and not reopened. Each question that can be stated sharply becomes a ticket of one of four types. Grilling and prototype need you, research can be run by an agent, and a task is an errand someone does. Blocking links go in on a second pass. Charting settles nothing and stops there. Here it yields five tickets, two patches of fog and one exclusion: building the store."
+      "text": "One page holds the destination, a line per decided question, the fog and what is out of scope. The Run comparison v1 specification goes in as input: its decisions, such as one designated reference run per protocol version, are taken as given and not reopened. Each question that can be stated sharply becomes a ticket of one of four types. Grilling and prototype need you, research can be run by an agent, and a task is an errand someone does. Blocking links go in on a second pass. Charting settles nothing by hand, though it starts an agent on each research ticket, and then it stops. Here it yields five tickets and two patches of fog, and building the store is ruled out of scope."
     },
     {
       "actor": "human",
@@ -39,18 +39,18 @@
       "actor": "skill",
       "skill": "prototype",
       "label": "Session 3: react to something rough",
-      "text": "Some questions are easier to answer by looking. A throwaway run page takes an hour to sketch. You react: run name, protocol version and reference run at the top, the plate overlay in the middle, flagged wells listed beside it. Only the decision is kept. The sketch is thrown away."
+      "text": "Some questions are easier to answer by looking. A throwaway run page takes an hour to sketch. You react: run name, protocol version and reference run at the top, the plate overlay in the middle, flagged wells listed beside it. Only the decision goes into the real work. The sketch stays on a throwaway branch, linked from the ticket."
     },
     {
       "actor": "human",
       "label": "Read the map again",
-      "text": "The two pictures below are the same map after session 1 and after session 3. Four questions are settled, four are answerable now, one is blocked and one patch of fog remains. The map has grown by four tickets even though four were closed. The edge of what is known moves as you answer."
+      "text": "The two pictures below are the same map after session 1 and after session 3. Four questions are settled, four are answerable now, one is blocked and one patch of fog remains. The map has grown by four tickets even though three more were closed. The edge of what is known moves as you answer."
     },
     {
       "actor": "skill",
       "skill": "to-spec",
       "label": "When nothing is left, write the spec",
-      "text": "The map is finished when no tickets remain and nothing is left to decide before someone could start the work. The specification is written from the decided lines on the map, with no new interview. Cutting that specification into build slices is to-tickets, a separate and later choice that the map does not make for you."
+      "text": "The map is finished when no tickets remain and nothing is left to decide before someone could start the work. Because this map's destination is a specification, it can be written with to-spec from the decided lines on the map, with no new interview. Cutting that specification into build slices is to-tickets, a separate and later choice that the map does not make for you."
     },
     {
       "actor": "artifact",
@@ -251,7 +251,7 @@
         "Decision map",
         "Build graph"
       ],
-      "caption": "The decision map ends in a specification and always has fog. The build graph ends in checked code and every slice is known at the start."
+      "caption": "The decision map ends in a specification and has fog while it is being worked. The build graph ends in checked code and every slice is known at the start."
     }
   },
   "artifact": {
@@ -261,8 +261,8 @@
       "Solution. One results store. Unregulated assays on instruments A and B move first. Run comparison v1 is its first consumer.",
       "Decision. Each protocol version has one designated reference run. Source: the Run comparison v1 specification and the research ticket.",
       "Decision. The run page shows run, protocol version and reference run at the top, the overlay, and flagged wells beside it.",
-      "Open. Reference run retirement, plate layout versioning, decimal and unit conventions, who may designate a reference run, and the audit trail are not decided, so this excerpt is not final.",
-      "Out of scope. Building the store. Instrument C. Retention of failed runs."
+      "Open. Reference run retirement, plate layout versioning, decimal and unit conventions, who may designate a reference run, the audit trail and retention of failed runs are not decided, so this excerpt is not final.",
+      "Out of scope. Building the store. Instrument C."
     ]
   },
   "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing is left to decide before the work could start. Do not stop because you are tired of the map: remaining tickets are the plan.",

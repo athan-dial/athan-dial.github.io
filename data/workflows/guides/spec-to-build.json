@@ -2,7 +2,7 @@
   "id": "spec-to-build",
   "title": "From a settled specification to reviewed code",
   "lead": "You have a specification whose questions are answered, and what is left is work.",
-  "produces": "One integration branch with every slice built and checked on its own, plus a two-part review you can read before you decide to merge.",
+  "produces": "One branch with every slice built and checked on its own (an integration branch if you chose the whole graph), plus a two-part review you can read before you decide to merge.",
   "scenario": "Your team builds Run comparison v1 from the specification written in the first guide: a small web app that imports instrument exports and shows where a run departs from its reference run. Every ticket here is a slice of work. A ticket that asks a question belongs on a decision map.",
   "input": "The Run comparison v1 spec is settled. Break it into tickets and get it built.",
   "steps": [
@@ -20,7 +20,7 @@
     {
       "actor": "human",
       "label": "Choose how to build",
-      "text": "There are two ways to build, and they are different choices. One ticket at a time keeps you in every session and suits a chain of dependent slices or a spec you do not yet trust. The whole graph at once suits a settled spec with slices that can run together. Here two slices can run together after the first, but you want to watch the first import land before trusting the rest. Both ways are described next."
+      "text": "There are two ways to build, and they are different choices. My rule of thumb: One ticket at a time keeps you in every session and suits a chain of dependent slices or a spec you do not yet trust. The whole graph at once suits a settled spec with slices that can run together. Here two slices can run together after the first, but you want to watch the first import land before trusting the rest. Both ways are described next."
     },
     {
       "actor": "skill",
@@ -32,13 +32,13 @@
       "actor": "skill",
       "skill": "implement-spec",
       "label": "Choice B: the whole graph on one branch",
-      "text": "A fresh subagent takes each slice in its own working copy, and a merger folds finished slices onto one integration branch. The first slice goes alone because nothing else is free. When it merges, the normalise slice and the instrument B import start together. Comparing waits for both, and flagging waits for comparing. A review pass and one fixer run at the end, and the result is a draft change marked ready for review. It stops there. Merging is yours."
+      "text": "A fresh subagent takes each slice in its own working copy, and a merger folds finished slices onto one integration branch. The first slice goes alone because nothing else is free. When it merges, the normalise slice and the instrument B import start together. Comparing waits for both, and flagging waits for comparing. A review pass and one fixer run at the end, and if a draft pull request exists it is marked ready for review; otherwise the branch is reported. It stops there. Merging is yours."
     },
     {
       "actor": "skill",
       "skill": "tdd",
       "label": "Inside every slice, check first",
-      "text": "Whichever way you chose, each slice builds the same way. The first slice starts with a test that imports a fixture export and counts the wells shown. It fails because nothing imports yet. Then comes the smallest code that passes, then the next behaviour. The test sits at the module's public interface, so it survives a rewrite of what is behind it."
+      "text": "Whichever way you chose, each slice builds test-first where possible. The first slice starts with a test that imports a fixture export and counts the wells shown. It fails because nothing imports yet. Then comes the smallest code that passes, then the next behaviour. The test sits at the module's public interface, so it survives a rewrite of what is behind it."
     },
     {
       "actor": "skill",
@@ -50,7 +50,7 @@
       "actor": "skill",
       "skill": "code-review",
       "label": "Review on two separate axes",
-      "text": "Two reviewers look at everything since the integration branch left the main line, and their reports stay apart. Standards asks whether the code follows the repository's own written conventions. Spec asks whether it does what the specification says. A change can pass one and fail the other, so a single blended score would hide the problem."
+      "text": "Two reviewers look at everything since the integration branch left the main line, and their reports stay apart. Standards asks whether the code follows the repository's written conventions plus a fixed list of common code smells treated as judgement calls. Spec asks whether it does what the specification says. A change can pass one and fail the other, so a single blended score would hide the problem."
     },
     {
       "actor": "human",
@@ -65,7 +65,7 @@
     {
       "actor": "open",
       "label": "Anything that turns out to be a question",
-      "text": "Per-assay tolerance is out of scope. If a slice cannot be checked because a question is unanswered, it is a decision, not work, and it goes back to a decision map."
+      "text": "Per-assay tolerance is out of scope. If a slice cannot be checked because a question is unanswered, it is a decision, not work. Answer it first; a decision map is one way to do that."
     }
   ],
   "ledger": {
@@ -144,7 +144,7 @@
       "Status: ready for a person to read. Not merged."
     ]
   },
-  "stop": "You are done when every slice's check passes on the integration branch, both reviews exist and every finding is fixed, recorded or sent to a person, and you have read them. Merging is not part of this. If a slice cannot be checked on its own, send it back to be re-cut, because it is hiding a question.",
+  "stop": "You are done when every slice's check passes on the integration branch, both reviews exist and every finding is fixed, recorded or sent to a person, and you have read them. Merging is not part of this. If a slice cannot be checked on its own, it is hiding a question: re-cut it, or answer the question first.",
   "limits": "Slices come from the spec, so a wrong spec gives five tidy slices of the wrong thing. Parallel agents cost more than one and cannot fix a bad edge. Two slices can run together only where the edges allow it.",
   "next": {
     "label": "Something broke and you cannot make it happen again?",

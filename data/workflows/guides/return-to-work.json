@@ -2,7 +2,7 @@
   "id": "return-to-work",
   "title": "Picking a project back up after time away",
   "lead": "Use it when you are about to leave a project for weeks and want to return to it cleanly, or when you are coming back and need to know what was decided and what has moved since.",
-  "produces": "A return note that gives each recovered decision with its source, what changed while you were away, what contradicts what and who owns the fix, and what could not be checked.",
+  "produces": "A return note you assemble from what recall retrieves and reconcile reports: each recovered decision with its source, what changed while you were away, what contradicts what and who owns the fix, and what could not be checked.",
   "scenario": "You are the data engineer on Assay Compare and you are leaving for three weeks. When you return, a colleague has been working in the repository backlog, and your decisions about reference runs have to survive the gap.",
   "input": "I am off for three weeks. Close this session out and leave a note so I or a new agent can continue.",
   "steps": [
@@ -16,7 +16,7 @@
       "actor": "skill",
       "skill": "handoff",
       "label": "Write the continuation note",
-      "text": "Shutdown does not produce this note. Handoff does, separately, and only because you asked. It turns the conversation into a note a fresh agent can continue from: it links the spec and the commits instead of copying them, and redacts anything secret."
+      "text": "Shutdown does not produce this note. Handoff does, separately, and only because you asked. It turns the conversation into a note a fresh agent can continue from: it links the spec and the commits instead of copying them, and redacts anything secret. It saves the note to the system temp directory, so copy it somewhere durable before you leave."
     },
     {
       "actor": "open",
@@ -43,12 +43,12 @@
     {
       "actor": "human",
       "label": "Decide which side stands",
-      "text": "The edited row says to infer the reference run from the most recent run. That contradicts the decision recall found. Reconcile did not choose; you do. You keep the designated rule and ask your colleague why the row changed. The owning skill then updates the row behind its own gate. The open meeting source waits until someone can read the transcripts."
+      "text": "The edited row says to infer the reference run from the most recent run. That contradicts the decision recall found. Reconcile did not choose; you do. You keep the designated rule and ask your colleague why the row changed. Whoever owns the row changes it through their own process; reconcile only reports it. The open meeting source waits until someone can read the transcripts."
     },
     {
       "actor": "artifact",
       "label": "The return note",
-      "text": "One page: the recovered decision with its source, what changed, what contradicts and who owns it, and what is unknown."
+      "text": "You assemble one page from recall's answer and reconcile's report. None of the four skills writes it: the recovered decision with its source, what changed, what contradicts and who owns it, and what is unknown."
     }
   ],
   "ledger": {
@@ -66,7 +66,7 @@
     "lines": [
       "Recovered. A reference run is designated per protocol version (decision record, three weeks ago). The earlier \"use last week's run\" is superseded.",
       "Changed. One backlog row edited by a colleague. One ticket in review while its backlog row still says open.",
-      "Contradicts. The edited row says to infer the reference run from the latest run. That conflicts with the decision above. You chose the decision; the owning skill updates the row.",
+      "Contradicts. The edited row says to infer the reference run from the latest run. That conflicts with the decision above. You chose the decision; whoever owns the row changes it.",
       "Unknown. Meeting transcripts could not be read. No claim is made about them."
     ]
   },

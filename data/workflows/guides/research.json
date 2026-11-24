@@ -27,7 +27,7 @@
       "actor": "skill",
       "skill": "research",
       "label": "A different agent writes it up",
-      "text": "A separate synthesizer reads the files. It writes one report, opens with the missing question, and separates claims the sources agree on from claims they dispute. The agents that gathered the evidence never write the conclusion."
+      "text": "A separate synthesizer reads the files. It writes one report that leads with the answer, then lists findings per question with their sources, where the sources conflict and what is unverified, and names any failed arm. The agents that gathered the evidence never write the conclusion."
     },
     {
       "actor": "human",
@@ -48,6 +48,7 @@
   "artifact": {
     "title": "Synthesis excerpt",
     "lines": [
+      "Answer. No single rule is settled by the evidence. A stated default with a recorded reason is defensible.",
       "Missing. Question 1, published guidance: FAILED, one standards document unreachable. Resolved by a person; see the note at the end.",
       "Agreement. Both analysis tools report the deviation as a percentage of the reference value and keep the underlying wells visible.",
       "Dispute. One source argues for a fixed percentage; another says the bound should follow each control well's own spread. The sources do not settle it.",
@@ -55,7 +56,7 @@
       "Recommendation, for a person: keep 15% as a stated default and record the reason. Whether to change it stays with the assay lead."
     ]
   },
-  "stop": "Stop when every question is either answered with a source or listed as missing, and the report separates agreement from dispute. Stop gathering when new sources repeat what you already have. Do not rerun a failed arm before reading why it failed.",
+  "stop": "Stop when every question is either answered with a source or listed as missing, and the report separates agreement from dispute. In practice, read why an arm failed before you rerun it.",
   "limits": "Parallel agents find more than one agent does, and they can also pick up the same wrong claim from the same weak source. The method reports a question that failed, not an answer that is wrong, so you still check anything you will act on.",
   "next": {
     "label": "You know enough to put the idea on paper?",

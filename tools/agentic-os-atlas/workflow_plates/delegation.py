@@ -15,7 +15,7 @@ p.node('certify', 'Readiness lint', 'check', 1, 0, icon='ClipboardCheck', sub='A
 p.node('ready', 'Ready?', 'rule', 2, 0,
        desc='Yes only if the certification is tied to the current wording and the explicit policy gates pass, which can include an instruction from a person. An agent may promote work to ready then, and cannot mark it finished, merge it or publish it.')
 p.node('admit', 'Pick up', 'check', 2, 1, icon='DoorOpen', sub='Fixed check, no judgment',
-       desc='When a builder is about to start, a fixed rule re-checks that the work is marked ready, the certification still matches the wording, and nothing it depends on is unfinished. No judgment call is made here.')
+       desc='When a builder is about to start, a fixed rule re-checks that the work is still marked ready (a material edit to the contract removes that mark), nothing it depends on is unfinished and attempts remain. No judgment call is made here.')
 p.node('build', 'Build in isolation', 'tool', 1, 1, icon='Code', sub='Own working copy',
        desc='A builder works in its own copy of the project and records evidence against each requirement id as it goes.')
 p.node('review', 'Independent review', 'check', 0, 1, icon='ScanSearch', sub='Not the builder',

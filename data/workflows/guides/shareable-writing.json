@@ -2,7 +2,7 @@
   "id": "shareable-writing",
   "title": "Testing a document on someone who was not there",
   "lead": "Use it when you wrote something for people who were not in the room, because you can no longer judge your own draft: you know what every shortcut means.",
-  "produces": "A document that fresh readers with no context could follow, plus a record of each finding you accepted or rejected and why.",
+  "produces": "A document that independent readers with no context could follow, and your own record of which findings you acted on.",
   "scenario": "You drafted a one-page proposal asking the lab heads' committee to approve a four-week pilot of Run comparison v1. One committee member is a lab head from a different discipline who has never seen a reference run.",
   "input": "Here is my one-pager for the lab heads' committee. Read it cold and tell me what a stranger would not follow.",
   "steps": [
@@ -14,35 +14,35 @@
     {
       "actor": "skill",
       "skill": "pm-cold-reader",
-      "label": "First fresh reader",
-      "text": "A reader with no access to your notes or earlier drafts reads the page once. Four findings come back: \"reference run\" is never defined, \"tolerance\" appears as a percentage and as a count, the pilot's cost to the assay team is in the last line, and nobody is named who can stop the pilot. You wrote the page and found none of these."
+      "label": "A panel of fresh readers",
+      "text": "Three readers with no access to your notes or earlier drafts each judge the page through a different lens: a completeness checklist, a check for machine-sounding prose and a check on voice. Each scores it. Findings that two or more readers raise are fixed; one reader's finding is advice. Round one: \"reference run\" is never defined, \"tolerance\" appears as a percentage and as a count, the pilot's cost to the assay team is in the last line and nobody is named who can stop the pilot. Two or more readers raise each of those. One reader also asks for the full instrument list."
     },
     {
       "actor": "human",
-      "label": "Accept or reject each finding",
-      "text": "You accept three and reject one. The reader wanted the full instrument list; the committee decides on scope, so you say the pilot covers two instruments. You define both terms in one sentence each, move the cost to the top and name who can stop the pilot. A rejection needs a reason."
+      "label": "Decide what you act on",
+      "text": "You act on the four shared findings: define both terms in one sentence each, move the cost to the top and name who can stop the pilot. You leave out the instrument list. Only one reader asked, and the committee decides on scope, not on hardware. You keep a note of what you changed and why; the readers' own output is their reports and scores."
     },
     {
       "actor": "skill",
       "skill": "pm-cold-reader",
-      "label": "A new reader, a new context",
-      "text": "A new reader sees only the revised page. A reader who saw the first version would be checking your fixes instead of reading. This round finds one new problem: the pilot dates do not say which weeks. You fix it and call another round."
+      "label": "A new panel, a new context",
+      "text": "New readers see only the revised page. Readers who saw the first version would be checking your fixes instead of reading. This round raises one new problem: the pilot dates do not say which weeks. You fix it and call another round."
     },
     {
       "actor": "open",
-      "label": "A finding reverses an earlier rejection",
-      "text": "The next reader asks for the instrument list you rejected in round one. Findings that keep changing mean the page is not settled, so you keep going, up to the round limit you set at the start. The limit is a design choice. Without one the loop has no end."
+      "label": "Scores stall",
+      "text": "If a score gets worse after a revision, or the scores stop moving while still short of the bar, the page is probably trying to do two jobs. The method stops after four rounds whatever the scores say and hands the open findings back to you."
     },
     {
       "actor": "skill",
       "skill": "pm-cold-reader",
-      "label": "Repeat until findings stop changing",
-      "text": "You add one line about the instruments. The final reader finds nothing new and repeats no earlier finding. The loop works on a local file throughout, and nothing is published or sent until this gate passes."
+      "label": "Scores clear their bars",
+      "text": "In round three no reader's score has got worse, all three clear their bars and they barely move from the previous round. The loop worked on a local file throughout, and nothing is published or sent until this gate passes."
     },
     {
       "actor": "artifact",
-      "label": "The converged page and the record",
-      "text": "You have the final one-pager and a list of findings by round, each marked accepted, rejected with a reason, or still open. A person sends it. The method never does."
+      "label": "The page and your record",
+      "text": "You have the revised one-pager and your own list of what you acted on and why. A person sends it. The method never does."
     }
   ],
   "ledger": {
@@ -56,15 +56,14 @@
     ]
   },
   "artifact": {
-    "title": "Round record excerpt",
+    "title": "Your record (excerpt)",
     "lines": [
-      "Round 1, finding 1. \"Reference run\" never defined. Accepted: defined in the second sentence.",
-      "Round 1, finding 3. Add the full instrument list. Rejected: the committee decides on scope, not on hardware.",
-      "Round 2, finding 1. Pilot weeks not stated. Accepted: dates added.",
-      "Round 3, finding 1. Instrument list requested again. Accepted in part: one line naming the two instruments.",
-      "Round 4. No new findings; none repeated. Ready for you to send."
+      "Reader brief. A lab head from another discipline, three minutes, decides on a four-week pilot.",
+      "Round 1. Four findings raised by two or more readers, all acted on: both terms defined, cost moved to the top, owner of the stop decision named. Instrument list asked for by one reader only: not added, because the committee decides on scope.",
+      "Round 2. One new finding, pilot weeks missing: dates added.",
+      "Round 3. No score worse, all three above their bars, little movement. Ready for you to send."
     ]
   },
-  "stop": "Stop when a fresh reader finds nothing new and repeats no earlier finding, or when you reach the round limit. If the limit arrives first, the open findings come back to you, and you decide whether the page is good enough to send.",
-  "limits": "The readers are agents. They catch missing context and unclear terms. They cannot tell you whether the committee will approve, and they do not grade the argument. A lab head reading the page once is still the better test of whether it works."
+  "stop": "Stop when no reader's score has got worse, all three scores clear their bars and they barely move from round to round, or after four rounds. Four is the method's ceiling. If it arrives first, the open findings come back to you and you decide whether the page is good enough to send.",
+  "limits": "The readers are models. They catch missing context, unclear terms and machine-sounding prose. They cannot tell you whether the committee will approve, and they do not grade the argument. A lab head reading the page once is still the better test of whether it works."
 }
