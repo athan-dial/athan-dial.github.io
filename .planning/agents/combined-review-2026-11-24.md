@@ -34,3 +34,11 @@ structural safety checks are not a full publication safety review.
 
 Current role details on About; copy approval; image rights; cold-reader pass; physical-device, screen-reader and
 other-browser checks (issue #18); the decision to publish the atlas page (draft until approved).
+
+## Release decisions (owner, 2026-11-24, after CI green on 1207203)
+- Ship without The Agentic Operating System: page stays draft; employer review not done. Adding it later is a draft flip plus review.
+- Copy sign-off by the owner only. The outside cold read in EDITORIAL.md section 7 is waived for this release.
+- No historical draft cases this release: no written confidentiality clearance.
+- Release checks in #18 (physical devices, screen reader, Safari, Firefox) run on the local preview before merge.
+- Owner runs the private-name denylist against the build and branch diff before merge.
+- Owner reviews a local preview first. Merge to main deploys, so the owner merges; no automated deployment approval.
