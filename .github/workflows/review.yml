@@ -31,5 +31,10 @@ jobs:
           bash atlas/tests/run.sh
       - name: Check diff hygiene
         run: git diff --check origin/main...HEAD
+      - name: Browser smoke check
+        run: |
+          npm install --prefix "$RUNNER_TEMP/review-browser" --no-save --no-package-lock playwright@1.65.1
+          "$RUNNER_TEMP/review-browser/node_modules/.bin/playwright" install --with-deps chromium
+          NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-browser.cjs
 # This job deliberately has no Pages, id-token or deployment permissions.
 # A successful run does not replace private-denylist or human publication review.
