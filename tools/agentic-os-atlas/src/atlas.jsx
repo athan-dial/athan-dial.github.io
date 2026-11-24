@@ -127,6 +127,51 @@ function Atlas() {
   )
 }
 
+// Workflow plates: small, single-purpose diagrams embedded in a guide. Each mount lists plate ids
+// (data-workflow-plates="a,b") and optional state labels (data-labels="Day 1|Day 3"); the guide's own
+// text and table are the no-JavaScript equivalent, so these are progressive enhancement.
+const wfFiles = import.meta.glob('../../../data/agentic-os/workflow-plates/*.arc.json', {eager: true, import: 'default'})
+const wfPlates = Object.fromEntries(Object.entries(wfFiles).map(([p, d]) => [p.split('/').pop().replace('.arc.json', ''), d]))
+
+function WorkflowPlate({ids, labels, caption}) {
+  const [i, setI] = useState(0)
+  const id = ids[i]
+  const scroller = useRef(null)
+  useEffect(() => {
+    const el = scroller.current
+    if (!el) return undefined
+    const sync = () => { const scrolls = el.scrollWidth > el.clientWidth + 1; if (scrolls) el.setAttribute('tabindex', '0'); else el.removeAttribute('tabindex') }
+    sync()
+    const ro = new ResizeObserver(sync); ro.observe(el)
+    return () => ro.disconnect()
+  }, [id])
+  return (
+    <div className="wfplate">
+      {ids.length > 1 && (
+        <div className="wfplate__tabs" role="group" aria-label="Show another state of this map">
+          {ids.map((pid, n) => (
+            <button type="button" key={pid} aria-pressed={n === i} onClick={() => setI(n)}>{labels[n] || pid}</button>
+          ))}
+        </div>
+      )}
+      <p className="visually-hidden" role="status" aria-live="polite">{'Showing ' + (labels[i] || id) + '. ' + caption}</p>
+      <div className="wfplate__scroll" ref={scroller} role="region" aria-label={(labels[i] || id) + ' diagram. On a narrow screen it scrolls sideways.'}>
+        <div className="atlas__frame wfplate__frame" role="group" aria-label={(labels[i] || id) + ' diagram. The same content is written out as text beside it.'}>
+          <ArcDiagram key={id} data={wfPlates[id]} style={style} mode="light" defaultZoom="fit" maxFitZoom={1.3}
+            fitPadding={20} label="" showArcToggle={false} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+for (const el of document.querySelectorAll('[data-workflow-plates]')) {
+  const ids = el.dataset.workflowPlates.split(',').filter(id => id in wfPlates)
+  if (!ids.length) continue
+  el.hidden = false
+  createRoot(el).render(<WorkflowPlate ids={ids} labels={(el.dataset.labels || '').split('|')} caption={el.dataset.caption || ''} />)
+}
+
 const mount = document.getElementById('agentic-os-atlas')
 if (mount) {
   mount.hidden = false
