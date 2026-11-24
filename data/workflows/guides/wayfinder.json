@@ -1,4 +1,275 @@
 {
   "id": "wayfinder",
-  "draft_stub": true
+  "title": "A project too big to plan in one sitting",
+  "lead": "Use this when the plan will not fit in one session and you cannot yet see all of it. You chart a map of questions, answer them one at a time across separate sessions, and stop when nothing is left to decide. The map is for planning. It does not do the work.",
+  "scenario": "Three village choirs want to run one shared concert season. The example is invented, so every answer and number in it is too. It is not a live tracker and nothing here was written to one.",
+  "input": "Three village choirs want one shared concert season. It is too big to settle in one chat. Chart it, and we will work it a question at a time.",
+  "steps": [
+    {
+      "actor": "skill",
+      "skill": "grilling",
+      "label": "Name the destination, then list what is open",
+      "text": "The interview first pins down where this ends. Here it is a written specification for the season: how the choirs book halls, share a calendar and split costs. A spec, not software. Then it goes wide instead of deep, listing the open decisions without settling any. If everything fits in one session, there is no map; just do the interview."
+    },
+    {
+      "actor": "skill",
+      "skill": "wayfinder",
+      "label": "Chart the map",
+      "text": "One page holds the destination, a line per decided question, the fog, and what is out of scope. Each question that can be stated sharply becomes its own ticket of one of four types: grilling and prototype need you, research can be run by an agent, and a task is an errand someone does. Blocking links go in on a second pass, once every ticket exists. Charting settles nothing and ends there. Here that gives five tickets, two patches of fog, and one exclusion: building a website."
+    },
+    {
+      "actor": "human",
+      "label": "Session 1: do the errand",
+      "text": "A session claims the first answerable ticket before touching it. This one is a task: collect each choir's rehearsal and hall calendar. It is the only type that does anything. It settles with a finding: all three choirs use Thursday and Saturday evenings, and two already book the same hall. The prototype ticket was waiting on this and is now answerable."
+    },
+    {
+      "actor": "skill",
+      "skill": "grilling",
+      "label": "Session 2: one question for you",
+      "text": "A session takes one grilling ticket and nothing else: who may add a concert to the shared calendar? Each question comes with a recommended answer. You pick: any choir chair may add one, and a second chair must confirm. The answer goes on the ticket, the ticket closes, and one line goes on the map. The clash ticket, which waited on this, becomes answerable. A research ticket may run in parallel the same day, because an agent can answer it without you."
+    },
+    {
+      "actor": "skill",
+      "skill": "wayfinder",
+      "label": "Redraw after every ticket",
+      "text": "Each answer can change the map. The research finding, that most festivals split hall hire evenly, exposes a question nobody could state before: how are shared costs split? It becomes a new ticket and leaves the fog. The calendars exposed another: nine singers appear on two lists. Questions that stay vague stay in the fog, and nothing is sliced before it is sharp. A ticket an answer has made pointless is fixed or dropped. Sessions may overlap, so the map is re-read before each one."
+    },
+    {
+      "actor": "skill",
+      "skill": "prototype",
+      "label": "Session 3: react to something rough",
+      "text": "Some questions are easier to answer by looking. A throwaway calendar page takes an hour to sketch. You react: a month grid, a hall name on each concert, no sign-in. Only the decision is kept. The sketch is thrown away. Its answer exposes one more question, how far ahead the season is published, which waits behind the clash rule."
+    },
+    {
+      "actor": "human",
+      "label": "Look at the map again",
+      "text": "Two pictures of the same map sit below, after session 1 and after session 3. Four questions are settled, three are answerable now, one is blocked, and one patch of fog remains. The map has grown by three tickets even though three more were closed. That is normal. The edge of what is known moves as you answer."
+    },
+    {
+      "actor": "skill",
+      "skill": "to-spec",
+      "label": "When nothing is left, write the spec",
+      "text": "Once no tickets remain and nothing is left to decide before someone could go and do the thing, the map has done its job. The specification is written from the decided lines on the map, with no new interview. Turning that spec into build slices with to-tickets is a separate, later choice. The map does not make that choice for you."
+    },
+    {
+      "actor": "artifact",
+      "label": "The specification",
+      "text": "A document that carries the decisions from the map, with the rejected options and the questions deliberately left out."
+    },
+    {
+      "actor": "open",
+      "label": "Whether to build",
+      "text": "Nobody has decided whether anyone builds a calendar page or runs the season on paper. The map ends at a spec. Execution starts a new piece of work, with its own plan."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "Destination: a written specification for the season.",
+      "Any choir chair may add a concert; a second chair confirms.",
+      "Most festivals split hall hire evenly and keep their own ticket money.",
+      "The calendar page is a month grid with a hall name on each concert, and no sign-in."
+    ],
+    "open": [
+      "How clashes are settled, and how shared costs are split.",
+      "How two-choir singers are counted.",
+      "How far ahead the season is published.",
+      "Whether the choirs share a conductor (still fog)."
+    ]
+  },
+  "map": {
+    "destination": "A written specification for one shared concert season: how the choirs book halls, share a calendar and split costs.",
+    "states": [
+      {
+        "label": "After session 1",
+        "note": "Charting is done and the first ticket is settled. The map has five tickets and two patches of fog.",
+        "tickets": [
+          {
+            "id": "cal",
+            "type": "task",
+            "status": "settled",
+            "title": "Collect each choir's calendar",
+            "answer": "All three choirs use Thursday and Saturday evenings. Two already book the same hall."
+          },
+          {
+            "id": "add",
+            "type": "grilling",
+            "status": "frontier",
+            "title": "Who may add a concert to the shared calendar?"
+          },
+          {
+            "id": "fees",
+            "type": "research",
+            "status": "frontier",
+            "title": "How do other festivals split hall hire?"
+          },
+          {
+            "id": "page",
+            "type": "prototype",
+            "status": "frontier",
+            "title": "What should the calendar page show?",
+            "blocked_by": [
+              "cal"
+            ]
+          },
+          {
+            "id": "clash",
+            "type": "grilling",
+            "status": "blocked",
+            "title": "How are clashes settled?",
+            "blocked_by": [
+              "add"
+            ]
+          }
+        ],
+        "fog": [
+          "How singers who belong to two choirs are counted.",
+          "Who pays for the piano tuner."
+        ]
+      },
+      {
+        "label": "After session 3",
+        "note": "Three sessions later. Four tickets are settled and three new ones have appeared. The fog has changed shape.",
+        "tickets": [
+          {
+            "id": "cal",
+            "type": "task",
+            "status": "settled",
+            "title": "Collect each choir's calendar",
+            "answer": "All three choirs use Thursday and Saturday evenings. Two already book the same hall."
+          },
+          {
+            "id": "add",
+            "type": "grilling",
+            "status": "settled",
+            "title": "Who may add a concert to the shared calendar?",
+            "answer": "Any choir chair may add one. A second chair must confirm."
+          },
+          {
+            "id": "fees",
+            "type": "research",
+            "status": "settled",
+            "title": "How do other festivals split hall hire?",
+            "answer": "Most split hall hire evenly and let each choir keep its own ticket money."
+          },
+          {
+            "id": "page",
+            "type": "prototype",
+            "status": "settled",
+            "title": "What should the calendar page show?",
+            "blocked_by": [
+              "cal"
+            ],
+            "answer": "A month grid, a hall name on each concert, and no sign-in."
+          },
+          {
+            "id": "clash",
+            "type": "grilling",
+            "status": "frontier",
+            "title": "How are clashes settled?",
+            "blocked_by": [
+              "add"
+            ]
+          },
+          {
+            "id": "costs",
+            "type": "grilling",
+            "status": "frontier",
+            "title": "How are shared costs split?",
+            "exposed_by": "fees"
+          },
+          {
+            "id": "mixed",
+            "type": "grilling",
+            "status": "frontier",
+            "title": "How are singers in two choirs counted?",
+            "exposed_by": "cal"
+          },
+          {
+            "id": "notice",
+            "type": "grilling",
+            "status": "blocked",
+            "title": "How far ahead is the season published?",
+            "blocked_by": [
+              "clash"
+            ],
+            "exposed_by": "page"
+          }
+        ],
+        "fog": [
+          "Whether the choirs share a conductor for joint concerts."
+        ]
+      }
+    ],
+    "plates": {
+      "ids": [
+        "wf-map-1",
+        "wf-map-2"
+      ],
+      "labels": [
+        "After session 1",
+        "After session 3"
+      ],
+      "caption": "The same invented map at two points. A square is settled, a pill is answerable now, a rounded box is blocked and a diamond is fog. A solid arrow means one question blocks another. A dashed arrow means an answer exposed a new question."
+    }
+  },
+  "compare": {
+    "title": "A decision map is not a build graph",
+    "lead": "Both are graphs with blocking links and a frontier, so they get mixed up. They hold different things and end in different places.",
+    "rows": [
+      {
+        "aspect": "What a node is",
+        "decision_map": "A question to answer. Grilling, research, prototype or a task that unblocks one.",
+        "build_graph": "A slice of working software that does something end to end."
+      },
+      {
+        "aspect": "How it is drawn",
+        "decision_map": "Found as you go. Answers expose new questions, so the graph is partial and grows.",
+        "build_graph": "Fully drafted up front and approved before work starts."
+      },
+      {
+        "aspect": "What a link means",
+        "decision_map": "You cannot ask this well until that is answered.",
+        "build_graph": "This slice needs that one to be built first."
+      },
+      {
+        "aspect": "Where it ends",
+        "decision_map": "In a specification, when nothing is left to decide.",
+        "build_graph": "In code that has been checked."
+      },
+      {
+        "aspect": "What it shows once finished",
+        "decision_map": "That the way is clear. It does not say who builds what, or in what order.",
+        "build_graph": "That each slice was built and checked."
+      }
+    ],
+    "note": "A resolved map does not dictate an execution path. It clears the way. Whether to build, how to slice it and who builds it are separate choices made afterwards. Turning a spec into build slices is the job of to-tickets, and it is a later choice.",
+    "plates": {
+      "ids": [
+        "wf-compare-decisions",
+        "wf-compare-build"
+      ],
+      "labels": [
+        "Decision map",
+        "Build graph"
+      ],
+      "caption": "Both examples are invented. The decision map ends in a spec and has fog the build graph never has. The build graph ends in verified code and every slice is known at the start."
+    }
+  },
+  "artifact": {
+    "title": "Specification excerpt (invented)",
+    "lines": [
+      "Problem. Three choirs book halls separately, and two already want the same Saturday.",
+      "Solution. One shared calendar. Any choir chair may add a concert; a second chair confirms it.",
+      "Decision. Hall hire is split evenly. Each choir keeps its own ticket money. Source: the research ticket.",
+      "Decision. The calendar page is a month grid with the hall named on each concert. No sign-in.",
+      "Open. Clash rule and publication date are not decided, so this excerpt is not final.",
+      "Out of scope. A ticketing website."
+    ]
+  },
+  "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing is left to decide before someone goes and does the thing. If the whole job would fit in one session, do not draw a map at all.",
+  "limits": "The example is invented, and so is every answer in it. A map plans; it does not do the work, apart from a task ticket, which is an errand. Questions for you, meaning grilling and prototype tickets, need a person. An agent never answers them for you. One ticket per session, except research. My copy of wayfinder differs from the published one only in when it is offered. The map model is the same. The skill text does not itself name a spec step. Going from a finished map to to-spec is the natural handoff when the destination is a spec.",
+  "next": {
+    "label": "The requirements are settled and you need them built?",
+    "guide": "spec-to-build"
+  }
 }

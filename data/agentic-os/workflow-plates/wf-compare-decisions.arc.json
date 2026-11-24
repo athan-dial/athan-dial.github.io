@@ -1,0 +1,115 @@
+{
+  "id": "wf-compare-decisions",
+  "figure": {
+    "title": "Decision map: questions found along the way",
+    "code": "WF-03"
+  },
+  "layout": {
+    "width": 1102,
+    "height": 574
+  },
+  "nodes": {
+    "q1": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "q2": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fog": {
+      "x": 370,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "spec": {
+      "x": 720,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "q1": {
+      "name": "Who may add a concert?",
+      "color": "zinc",
+      "icon": "Scale",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 grilling",
+      "description": "Settled. It exposed the next question."
+    },
+    "q2": {
+      "name": "How are clashes settled?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "Asked after the first answer, not before."
+    },
+    "fog": {
+      "name": "Questions not yet visible",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "The graph is partial. It grows as answers arrive."
+    },
+    "spec": {
+      "name": "A specification",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "The map ends here",
+      "description": "A document someone could build from."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "q1",
+      "to": "q2",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "feedback",
+      "label": "Exposes",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "q2",
+      "to": "spec",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Decision",
+      "curve": "direct"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
