@@ -77,7 +77,7 @@
     ]
   },
   "stop": "You are done when the command that failed now passes, the regression test fails on the old parser and passes on the new one, and the rest of the tests still pass. Stop earlier if you cannot build a failing signal and ask for access or an artifact. A theory you like is not a stopping point.",
-  "limits": "Most bugs need only a failing test and a fix, and this loop is overhead for them. The sample output came from a short script on invented files, so it shows the shape of the loop and says nothing about a real instrument. A real fault can have several causes, need data you cannot get, or change when you look at it.",
+  "limits": "Most bugs need only a failing test and a fix, and this loop is overhead for them. A real fault can have several causes, need data you cannot get, or change when you look at it.",
   "next": {
     "label": "Did the fix grow into a feature-sized job?",
     "guide": "spec-to-build"

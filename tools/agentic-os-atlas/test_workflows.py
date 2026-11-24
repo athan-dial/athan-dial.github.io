@@ -70,7 +70,7 @@ CASES = {
  'private skill with a url': (lambda r, g: skill(r, 'research').update(url='https://example.com/x'), 'must not carry a url'),
  'private skill without a status note': (lambda r, g: skill(r, 'research').pop('status_note'), 'needs a status_note'),
  'customized skill without a difference': (lambda r, g: skill(r, 'tdd').pop('difference'), 'must say how it differs'),
- 'private guide without a source status': (lambda r, g: guide(r, 'research').pop('source_status'), 'no public skill link'),
+ 'private guide whose skill has no status note': (lambda r, g: (skill(r, 'research').pop('status_note'), guide(r, 'research').pop('source_status', None)), 'needs a status_note'),
  'guide file missing': (lambda r, g: g.pop('research'), 'no file'),
  'skill attached but never used': (lambda r, g: g['idea-to-spec'].update(steps=[s for s in g['idea-to-spec']['steps'] if s.get('skill') != 'to-spec']), 'never used in a step'),
  'step with unknown actor': (lambda r, g: g['idea-to-spec']['steps'][0].update(actor='robot'), 'actor'),

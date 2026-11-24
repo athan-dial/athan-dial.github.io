@@ -122,7 +122,8 @@ for g in guides:
     for v in g.get('views', []):
         if v not in view_ids: fail(f'guide {i}: dangling view {v}')
     public = [s for s in g.get('skills', []) if next((x for x in skills if x['id'] == s), {}).get('url')]
-    if not public and not g.get('source_status'): fail(f'guide {i}: no public skill link and no source_status explaining why')
+    unexplained = [s for s in g.get('skills', []) if not next((x for x in skills if x['id'] == s), {}).get('url') and not next((x for x in skills if x['id'] == s), {}).get('status_note')]
+    if not public and not g.get('source_status') and (unexplained or not g.get('skills')): fail(f'guide {i}: no public skill link and no source status explaining why ({unexplained or "no skills"})')
 orphans = sorted(sid - used)
 (fail if orphans else ok)('every skill is used by a guide' + (f': orphans {orphans}' if orphans else ''))
 

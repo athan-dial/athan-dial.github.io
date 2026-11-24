@@ -124,7 +124,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. Upstream has a skill called research that works differently (one background agent, one file); that is not this one."
+      "status_note": "Upstream has a skill called research that works differently (one background agent, one file); that is not this one."
     },
     {
       "id": "pm-cold-reader",
@@ -133,7 +133,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. No public text."
+      "status_note": "Described in my own words in the guides."
     },
     {
       "id": "shutdown",
@@ -142,7 +142,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. No public text. It closes a session; it does not retrieve earlier decisions or reconcile changes."
+      "status_note": "It closes a session; it does not retrieve earlier decisions or reconcile changes."
     },
     {
       "id": "recall",
@@ -151,7 +151,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. No public text. Read-only: it offers to save a durable answer and never writes on its own."
+      "status_note": "Read-only: it offers to save a durable answer and never writes on its own."
     },
     {
       "id": "reconcile",
@@ -160,7 +160,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. No public text. It detects and routes; it resolves nothing itself."
+      "status_note": "It detects and routes; it resolves nothing itself."
     },
     {
       "id": "handoff",
@@ -169,7 +169,7 @@
       "source_kind": "private",
       "url": null,
       "customized": true,
-      "status_note": "Private. No public text. Agent to agent; not the output of a close-out."
+      "status_note": "Agent to agent; not the output of a close-out."
     }
   ],
   "guides": [
@@ -253,8 +253,7 @@
       ],
       "views": [
         "thinking"
-      ],
-      "source_status": "research is a private skill with no public text. Upstream has a skill of the same name that works differently, so it is not linked. This guide is an original explanation."
+      ]
     },
     {
       "id": "shareable-writing",
@@ -265,8 +264,7 @@
       ],
       "views": [
         "sharing"
-      ],
-      "source_status": "pm-cold-reader is a private skill with no public text. This guide is an original explanation of the method."
+      ]
     },
     {
       "id": "return-to-work",
@@ -280,8 +278,7 @@
       ],
       "views": [
         "learning"
-      ],
-      "source_status": "shutdown, handoff, recall and reconcile are private skills with no public text, described here in my own words."
+      ]
     }
   ],
   "intro": {
