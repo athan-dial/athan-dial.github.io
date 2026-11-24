@@ -93,3 +93,4 @@ layouts.blowfish.bak/
 # Local Arc checkout and Studio build used by tools/agentic-os-atlas/build.sh
 /tools/agentic-os-atlas/.arc/
 /tools/agentic-os-atlas/.studio-root/
+tools/agentic-os-atlas/__pycache__/

@@ -35,6 +35,21 @@ view_ids = {v['id'] for v in views['views']}
 plate_dir = data / 'agentic-os/workflow-plates'
 plate_ids = {p.name.replace('.arc.json', '') for p in plate_dir.glob('*.arc.json')} if plate_dir.exists() else set()
 
+# ---- workflow plates: native Arc JSON, same integrity rules as the architecture plates
+for pid in sorted(plate_ids):
+    pl = load(plate_dir / f'{pid}.arc.json')
+    if pl is None: continue
+    nodes = set(pl.get('nodes', {}))
+    if nodes != set(pl.get('nodeData', {})): fail(f'plate {pid}: nodes/nodeData keys differ')
+    for c in pl.get('connectors', []):
+        if c['from'] not in nodes or c['to'] not in nodes: fail(f'plate {pid}: connector {c.get("id")} points at a missing node')
+        if not c.get('label'): fail(f'plate {pid}: connector {c.get("id")} has no label')
+        if c.get('style') not in pl.get('connectorStyles', {}): fail(f'plate {pid}: connector {c.get("id")} uses an undefined style')
+    for nid, nd in pl.get('nodeData', {}).items():
+        if not nd.get('description'): fail(f'plate {pid}.{nid}: no description for the text version')
+    if re.search(r'montai|aops|jira|/home/|/Users/', json.dumps(pl), flags=re.I): fail(f'plate {pid}: public-safety scan hit')
+if plate_ids: ok(f'{len(plate_ids)} workflow plate(s) pass integrity checks')
+
 # ---- registry: identity and source status
 up = reg.get('upstream', {})
 rev, repo = up.get('rev', ''), up.get('repo', '')
