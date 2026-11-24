@@ -448,19 +448,17 @@ hr {
   gap: var(--stack-md);
 }
 
-/* The wordmark is the site's only link home, so it is a standalone action and gets the
-   44px target like the rest. `overflow: hidden` stays — it is the flex truncation guard
-   for narrow headers, and narrow widths are not testable in this sandbox (CLAUDE.md
-   constraint 5), so it is not worth trading a layout regression for. Consequence: the
-   focus ring on this one link is still clipped. Open item, recorded in
-   .planning/ACCESSIBILITY-CHECKS.md rather than fixed blind. */
+/* The wordmark is the site's only link home, so it is a standalone action and gets the 44px
+   target. It never shrinks, never truncates and never clips its own focus ring: the full name
+   is the identity, and narrow widths are handled by wrapping the navigation onto its own row
+   (fieldnotes.css, "Header at narrow widths"), not by squeezing the name. An earlier
+   `overflow: hidden` + `flex-shrink` guard did exactly that and rendered "Athan Di" at 390px
+   once the fourth navigation item was added. scripts/verify-header.cjs fails on that. */
 .site-header__name {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  flex: 0 1 auto;
-  min-width: 0;
-  overflow: hidden;
+  flex: 0 0 auto;
   color: var(--ink);
   font-family: var(--font-serif);
   font-size: 20px;
@@ -468,7 +466,6 @@ hr {
   line-height: 28px;
   letter-spacing: 0;
   text-decoration: none;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

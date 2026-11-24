@@ -669,8 +669,19 @@
   }
 }
 
-/* Four navigation items: preserve the Atlas narrow-header fix. */
-@media(max-width:420px){.site-nav{gap:6px}}@media(max-width:380px){.site-nav{gap:2px}.site-nav a{font-size:.75rem}}
+/* Header at narrow widths. The full wordmark and four primary links do not fit on one row
+   below about 600px, so the navigation takes its own row and spreads across it. Every link stays
+   visible and 44px tall, and wraps rather than clips if a label ever grows. The header also stops
+   being sticky there: two rows would cost a small viewport its reading space. */
+@media(max-width:599px){
+.site-header{position:static}
+.site-header__inner{flex-wrap:wrap;justify-content:flex-start;min-height:0;column-gap:1rem;row-gap:0;padding-top:.25rem}
+.site-nav{flex:1 1 100%;flex-wrap:wrap;justify-content:space-between;gap:0 .5rem;border-top:1px solid var(--field-rule)}
+.site-nav a{padding-inline:2px}
+}
+@media(max-width:359px){.site-nav{gap:0}.site-nav a{font-size:.6875rem;letter-spacing:.03em;padding-inline:0}}
+.atlas-link{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--field-rule)}.atlas-link__note{color:var(--ink-secondary)}.fn-system{margin:0 0 2rem;padding:1.5rem 1.75rem 1.75rem;border:1px solid var(--field-rule);border-top:4px solid var(--accent);background:var(--surface)}.fn-system h3{font:400 2rem/1.15 var(--font-display);letter-spacing:-.02em;margin:.25rem 0 .75rem}.fn-system h3 a{text-decoration:none}.fn-system h3 a:hover{color:var(--accent)}.fn-system p{max-width:48rem}.fn-system .fn-text-link{margin-top:.5rem}
+.fn-system__limits{color:var(--ink-secondary);font-size:.9375rem}
 /* Site motion (2026-11). Transform, opacity and paint only; never layout. Everything is inside no-preference. */
 @media(prefers-reduced-motion:no-preference){
 @view-transition{navigation:auto}
@@ -685,5 +696,3 @@ html{scroll-behavior:smooth}
 /* :root-prefixed so the reset outranks element-selector transitions (a{transition:...}
    beats a bare *), without reaching for !important. */
 @media(prefers-reduced-motion:reduce){:root *,:root *::before,:root *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms;scroll-behavior:auto}html{scroll-behavior:auto}}
-.atlas-link{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--field-rule)}.atlas-link__note{color:var(--ink-secondary)}.fn-system{margin:0 0 2rem;padding:1.5rem 1.75rem 1.75rem;border:1px solid var(--field-rule);border-top:4px solid var(--accent);background:var(--surface)}.fn-system h3{font:400 2rem/1.15 var(--font-display);letter-spacing:-.02em;margin:.25rem 0 .75rem}.fn-system h3 a{text-decoration:none}.fn-system h3 a:hover{color:var(--accent)}.fn-system p{max-width:48rem}.fn-system .fn-text-link{margin-top:.5rem}
-.fn-system__limits{color:var(--ink-secondary);font-size:.9375rem}

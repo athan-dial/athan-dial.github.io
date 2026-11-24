@@ -53,10 +53,11 @@ Target: [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/). Mark each item pass/
   and collide with neighbouring words. Listing titles and standalone actions (archive,
   profile, read-essay) carry the 44px target instead via `.link-action`.
 
-  **Open item — masthead wordmark focus ring.** `.site-header__name` now meets 44px, but it
-  keeps `overflow: hidden` as its flex truncation guard, which clips its 3px focus ring. Fixing
-  that properly means restructuring the header's truncation, and narrow widths are not testable
-  in this sandbox (CLAUDE.md constraint 5). Verify below 768px on real hardware before changing it.
+  **Resolved 2026-11-24 — masthead wordmark.** `overflow: hidden` plus flex-shrink was both clipping the
+  3px focus ring and, once Systems Atlas made the navigation longer, cutting the name to "Athan Di" at 390px
+  with no page overflow to flag it. The wordmark now never shrinks or truncates, the navigation takes its own
+  row below 600px, and `scripts/verify-header.cjs` measures label clipping, the four links, 44px targets and
+  focus-ring visibility at 320, 390, 768 and 1280px (headless emulation, not a physical device).
 
 - [ ] **Descriptive links** — No “click here”; link text makes sense out of context.
 - [ ] **Alt text** — Informative images have descriptive `alt`; decorative images `alt=""`. OG `og:image:alt` set.
