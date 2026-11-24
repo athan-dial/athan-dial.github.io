@@ -1,0 +1,12 @@
+{{- /* Every skill the guides name, with where its instructions can be read. One list, generated from the registry. */ -}}
+{{- $reg := site.Data.workflows.registry -}}
+<section class="wf-sources" id="sources" aria-labelledby="sources-title">
+  <h2 id="sources-title" class="atlas-section__title">Where to read the skills.</h2>
+  <p class="wf-sources__lead">Public links go to <a href="{{ $reg.upstream.repo }}" rel="noopener">{{ $reg.upstream.name }}</a>, pinned to one revision ({{ substr $reg.upstream.rev 0 7 }}), {{ $reg.upstream.license }} licence. That is the upstream text, not necessarily the version I run. Where my copy differs, or exists only privately, the entry says so, and the guide is my own explanation. Nothing from my private copy is published here.</p>
+  <ul class="wf-sources__list">
+    {{- range $reg.skills }}
+    <li>{{ partial "workflow-skill-status.html" (dict "skill" . "reg" $reg) }}<span class="wf-sources__job">{{ .job }}</span></li>
+    {{- end }}
+  </ul>
+  <p class="wf-sources__attr">{{ $reg.upstream.attribution }}</p>
+</section>

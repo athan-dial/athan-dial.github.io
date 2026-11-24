@@ -31,6 +31,8 @@ jobs:
           bash atlas/tests/run.sh
           bash scripts/verify-editorial.sh
           python3 tools/agentic-os-atlas/validate.py
+          python3 tools/agentic-os-atlas/validate_workflows.py
+          python3 tools/agentic-os-atlas/test_workflows.py
       - name: Check diff hygiene
         run: git diff --check origin/main...HEAD
       - name: Browser smoke check

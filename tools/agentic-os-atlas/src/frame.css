@@ -49,3 +49,13 @@
 .atlas__frame button { min-width: 36px; min-height: 36px; justify-content: center; }
 @media (pointer: coarse) { .atlas__frame button { min-width: 44px; min-height: 44px; } }
 .atlas .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* Workflow plates embedded in a guide: shorter than the architecture atlas, tabs for another state. */
+.wfplate { margin: 1rem 0 1.5rem; }
+.wfplate .atlas__frame { height: clamp(300px, 46svh, 460px); }
+.wfplate__tabs { display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 8px; border-top: 1px solid var(--a-ink); border-bottom: 1px solid var(--a-rule); }
+.wfplate__tabs button { all: unset; box-sizing: border-box; cursor: pointer; padding: 8px 14px 9px; font: 600 14px/1.25 Archivo, system-ui, sans-serif; border-right: 1px solid var(--a-rule); }
+.wfplate__tabs button:hover { background: color-mix(in oklab, var(--a-forest) 7%, var(--a-paper)); }
+.wfplate__tabs button:focus-visible { outline: 3px solid var(--a-ink); outline-offset: -3px; }
+.wfplate__tabs button[aria-pressed="true"] { background: var(--a-citrus); box-shadow: inset 0 3px 0 var(--a-ink); }
+.wfplate__scroll { overflow-x: auto; }
+@media (max-width: 640px) { .wfplate .atlas__frame { min-width: 560px; } }

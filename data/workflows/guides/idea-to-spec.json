@@ -1,0 +1,81 @@
+{
+  "id": "idea-to-spec",
+  "title": "From a rough idea to a specification",
+  "lead": "Start here when you know roughly what you want and cannot yet say what it is. The aim is a document someone else could build from, with every open choice either made or written down as open.",
+  "scenario": "A neighbourhood seed library wants people to borrow seeds from the shelf when no volunteer is there. The example is invented, so every outcome in it is too.",
+  "input": "Neighbours should be able to borrow and return seeds from the shelf without a volunteer there. Grill me.",
+  "steps": [
+    {
+      "actor": "skill",
+      "skill": "grill-me",
+      "label": "Name the size of the job",
+      "text": "The interview says out loud how much process this needs. A new borrowing flow with nothing existing to change gets the full version: nine questions, planned in three rounds before the first is asked.",
+      "public_equivalents": [
+        "grilling"
+      ]
+    },
+    {
+      "actor": "human",
+      "label": "Answer the first round",
+      "text": "Who counts as a member? What is a loan when seeds do not come back as the same seeds? Paper or an app? Each question arrives with a recommended answer, so agreeing costs one click and disagreeing costs one sentence."
+    },
+    {
+      "actor": "skill",
+      "skill": "domain-modeling",
+      "label": "Pin the words",
+      "text": "Seeds are not returned, so the word loan is wrong. The interview settles on pledge, a promise to bring back seeds from your own harvest, and writes it into the project glossary. One choice, no accounts and a pickup code instead, is hard to reverse and would surprise a newcomer, so it also gets a short decision record.",
+      "public_equivalents": [
+        "grill-with-docs"
+      ]
+    },
+    {
+      "actor": "human",
+      "label": "Approve the shared understanding",
+      "text": "Nothing is written or built until you say the summary is right. The options you rejected, accounts and a QR code per packet, are recorded with the reason, so nobody reopens them blind."
+    },
+    {
+      "actor": "skill",
+      "skill": "to-spec",
+      "label": "Write the specification",
+      "text": "The conversation becomes a document. This step asks no new questions; if it needs one, the interview was not finished."
+    },
+    {
+      "actor": "artifact",
+      "label": "The specification",
+      "text": "A problem, a solution, numbered user stories, the decisions made, one place to test, and a list of what was left out."
+    },
+    {
+      "actor": "open",
+      "label": "Reminders",
+      "text": "Nobody has decided how pledges are chased. It is not needed to start, so it goes under out of scope until someone needs it."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "A pledge is a promise to return seeds from your own harvest.",
+      "No accounts. A pledge is tied to a pickup code.",
+      "Paper sheet first; an app waits for evidence it is needed."
+    ],
+    "open": [
+      "How pledges are chased.",
+      "Whether three branches should share one shelf list."
+    ]
+  },
+  "artifact": {
+    "title": "Specification excerpt (invented)",
+    "lines": [
+      "Problem. Borrowing seeds needs a volunteer on site, so the shelf is closed most days.",
+      "Solution. A pledge sheet and a pickup code. A neighbour takes seeds, writes a pledge, and later brings back seeds from that harvest.",
+      "User story 4. As a neighbour, I want to see which seeds are on the shelf, so that I do not make a trip for nothing.",
+      "Decision. No accounts. A pledge belongs to a pickup code, not a person. Rejected: accounts; a QR code per packet.",
+      "Testing. One seam, the pledge ledger: record a pledge, list stock, mark a pledge returned.",
+      "Out of scope. Reminders, postage, stock shared across branches."
+    ]
+  },
+  "stop": "You are done when a reader who was not in the conversation can say what will be built, why, and what was left out, and you have approved that summary. Do not start building from the interview alone.",
+  "limits": "The example is invented and so is its result. grill-me is my own front door and its text is not published. The upstream grilling and grill-with-docs skills linked below do the same interviewing job without my classifying and recording steps. A specification is a plan on paper; it does not show the idea is good.",
+  "next": {
+    "label": "The project is too big to plan in one sitting?",
+    "guide": "wayfinder"
+  }
+}

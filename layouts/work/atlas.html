@@ -31,6 +31,17 @@
       </header>
     </div>
 
+    {{ partial "workflow-start.html" . }}
+    {{- $wf := site.Data.workflows -}}
+    {{- $skills := dict -}}{{- range $wf.registry.skills -}}{{- $skills = merge $skills (dict .id .) -}}{{- end -}}
+    <div class="wf-guides">
+      {{- range sort $wf.registry.guides "priority" }}
+      {{- $d := index $wf.guides .id }}
+      {{- if not $d.draft_stub }}{{ partial "workflow-guide.html" (dict "g" . "d" $d "skills" $skills "reg" $wf.registry) }}{{ end }}
+      {{- end }}
+    </div>
+    {{ partial "workflow-sources.html" . }}
+
     <div class="case-study-body section-rail work-article__body">
       {{ partial "section-rail.html" (dict "page" .) }}
       <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
@@ -38,8 +49,10 @@
       </div>
     </div>
 
-    <section class="atlas-section" aria-labelledby="atlas-explore">
-      <h2 id="atlas-explore" class="atlas-section__title">The seven views.</h2>
+
+    <section class="atlas-section" id="views" aria-labelledby="atlas-explore">
+      <h2 id="atlas-explore" class="atlas-section__title">Underneath: the seven views.</h2>
+      <p class="atlas-section__lead">The guides above use the same parts as this map of the whole method. Open a view to see where a guide sits in it.</p>
       <p class="atlas-section__skip"><a href="#atlas-text">Skip to the text version of every view</a></p>
       <div id="agentic-os-atlas" class="atlas-mount" hidden></div>
       <noscript><p class="atlas-nojs">The interactive diagram needs JavaScript. Every view is written out in full below, with the same nodes and relationships.</p></noscript>

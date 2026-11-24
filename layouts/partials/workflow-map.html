@@ -1,0 +1,33 @@
+{{- /* A decision map at two or more states. Text version always; the Arc diagram mounts on top when scripts run.
+       Synthetic: never live tracker state. Input: dict "g" "d" "map". */ -}}
+{{- $m := .map -}}{{- $g := .g -}}
+{{- $type := dict "grilling" "Grilling (you decide)" "research" "Research (an agent runs it)" "prototype" "Prototype (you react)" "task" "Task (someone does it)" -}}
+{{- $status := dict "settled" "Settled" "frontier" "Answerable now" "blocked" "Blocked" -}}
+<div class="wf-map" id="map-{{ $g.id }}">
+  <h4 class="wf-block__h">The map, at {{ len $m.states }} points in time</h4>
+  <p class="wf-block__lead">Destination: <strong>{{ $m.destination }}</strong>. This map is invented for the example. It is not a live tracker.</p>
+  {{- with $m.plates }}
+  <div class="wfplate-mount" data-workflow-plates="{{ delimit .ids "," }}" data-labels="{{ delimit .labels "|" }}" data-caption="{{ $m.plates.caption }}" hidden></div>
+  {{- end }}
+  {{- range $n, $st := $m.states }}
+  <section class="wf-state" aria-labelledby="map-{{ $g.id }}-s{{ $n }}">
+    <h5 id="map-{{ $g.id }}-s{{ $n }}" class="wf-state__h">{{ $st.label }}</h5>
+    {{- with $st.note }}<p class="wf-state__note">{{ . }}</p>{{ end }}
+    <ol class="wf-tickets">
+      {{- range $st.tickets }}
+      <li class="wf-ticket wf-ticket--{{ .status }}">
+        <span class="wf-ticket__status"><span class="wf-ticket__mark" aria-hidden="true"></span>{{ index $status .status }}</span>
+        <span class="wf-ticket__title">{{ .title }}</span>
+        <span class="wf-ticket__type">{{ index $type .type }}</span>
+        {{- if .blocked_by }}<span class="wf-ticket__rel">Waits for {{ range $i, $b := .blocked_by }}{{ if $i }}, {{ end }}{{ range $st.tickets }}{{ if eq .id $b }}{{ .title }}{{ end }}{{ end }}{{ end }}.</span>{{ end }}
+        {{- with .answer }}<span class="wf-ticket__answer">Decided: {{ . }}</span>{{ end }}
+        {{- with .exposed_by }}<span class="wf-ticket__rel">New: raised by {{ $by := . }}{{ range $st.tickets }}{{ if eq .id $by }}{{ .title }}{{ end }}{{ end }}.</span>{{ end }}
+      </li>
+      {{- end }}
+    </ol>
+    {{- if $st.fog }}
+    <div class="wf-fog"><h6 class="wf-fog__h">Not yet specified (fog)</h6><ul>{{ range $st.fog }}<li>{{ . }}</li>{{ end }}</ul></div>
+    {{- end }}
+  </section>
+  {{- end }}
+</div>

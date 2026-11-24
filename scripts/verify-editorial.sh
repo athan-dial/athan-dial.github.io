@@ -25,6 +25,8 @@ files = ["content/_index.md", "content/about.md", "content/work/_index.md", "con
          "content/essays/_index.md", "content/notes/_index.md", "content/atlas/_index.md",
          "content/work/agentic-operating-system.md", "data/profile.toml", "data/agentic-os/views.json"]
 files += sorted(str(p) for p in pathlib.Path("data/agentic-os/plates").glob("*.json"))
+files += sorted(str(p) for p in pathlib.Path("data/agentic-os/workflow-plates").glob("*.json"))
+files += ["data/workflows/registry.json"] + sorted(str(p) for p in pathlib.Path("data/workflows/guides").glob("*.json"))
 text_lines = []                       # (file, line number, text)
 for f in files:
     p = pathlib.Path(f)
@@ -36,7 +38,9 @@ for f in files:
         text_lines.append((f, n, line))
 # Template prose: only lines that carry reader-facing text.
 for f in ["layouts/index.html", "layouts/_default/about.html", "layouts/work/list.html",
-          "layouts/thinking/list.html", "layouts/atlas/list.html", "layouts/work/atlas.html"]:
+          "layouts/thinking/list.html", "layouts/atlas/list.html", "layouts/work/atlas.html",
+          "layouts/partials/workflow-start.html", "layouts/partials/workflow-guide.html", "layouts/partials/workflow-map.html",
+          "layouts/partials/workflow-compare.html", "layouts/partials/workflow-build.html", "layouts/partials/workflow-sources.html"]:
     for n, line in enumerate(pathlib.Path(f).read_text(encoding="utf-8").splitlines(), 1):
         if re.search(r"<(p|h[1-6]|li|summary|strong)\b", line) and not line.lstrip().startswith(("{{-", "{{/*")):
             text_lines.append((f, n, line))

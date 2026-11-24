@@ -1,0 +1,10 @@
+{{- /* One line saying where a skill's instructions can be read and how that relates to the version I use.
+       Input: dict "skill" (registry entry) "reg" (registry). Never links anything but the pinned upstream file. */ -}}
+{{- $s := .skill -}}{{- $u := .reg.upstream -}}
+{{- if eq $s.source_kind "upstream" -}}
+<a href="{{ $s.url }}" rel="noopener"><code>{{ $s.name }}</code></a>
+<span class="wf-status">{{ if $s.customized }}upstream, my copy differs{{ else }}upstream{{ end }}</span>
+{{- if $s.customized }} <span class="wf-status__note">{{ $s.difference }} Its text is not published.</span>{{ else }} <span class="wf-status__note">Matches my copy as of {{ $u.compared_on }}.</span>{{ end -}}
+{{- else -}}
+<code>{{ $s.name }}</code> <span class="wf-status wf-status--private">private, no public text</span> <span class="wf-status__note">{{ $s.status_note }}</span>
+{{- end -}}

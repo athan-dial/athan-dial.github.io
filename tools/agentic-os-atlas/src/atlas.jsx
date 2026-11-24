@@ -146,7 +146,7 @@ function WorkflowPlate({ids, labels, caption}) {
     return () => ro.disconnect()
   }, [id])
   return (
-    <div className="wfplate">
+    <div className="atlas wfplate">
       {ids.length > 1 && (
         <div className="wfplate__tabs" role="group" aria-label="Show another state of this map">
           {ids.map((pid, n) => (

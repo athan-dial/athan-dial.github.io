@@ -15,6 +15,8 @@ themes: [agent-enabled-work, governed-execution, product-judgment]
 draft: true
 ---
 
+## The boundary everything hangs on
+
 Most of what an agent does for me is reversible and local: read, search, edit a working copy, run a
 check. Anything that leaves my machine or is hard to undo, such as a message or a pull request, is
 drafted and held until I approve that one item. This page draws the rest of the system around that

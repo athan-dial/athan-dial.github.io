@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "upstream": {
+    "name": "Matt Pocock's skills",
+    "repo": "https://github.com/mattpocock/skills",
+    "rev": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+    "license": "MIT",
+    "attribution": "Skills by Matt Pocock, MIT licence. Links go to the repository at a pinned revision.",
+    "compared_on": "2026-11-24"
+  },
+  "skills": [
+    {
+      "id": "grill-me",
+      "name": "grill-me",
+      "job": "A front-door interview that classifies the work, plans rounds of questions and records each decision.",
+      "source_kind": "private",
+      "url": null,
+      "customized": true,
+      "status_note": "My own skill, built from upstream's grilling. Not published; the upstream skill of the same name is a three-line stub, so it is not linked."
+    },
+    {
+      "id": "grilling",
+      "name": "grilling",
+      "job": "A relentless interview: walk the open decisions in rounds, each with a recommended answer.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/productivity/grilling/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "grill-with-docs",
+      "name": "grill-with-docs",
+      "job": "The same interview, plus keeping the project's glossary and decision records current.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/grill-with-docs/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "domain-modeling",
+      "name": "domain-modeling",
+      "job": "Sharpen vague terms into a shared glossary and record the few decisions worth an ADR.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/domain-modeling/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "to-spec",
+      "name": "to-spec",
+      "job": "Turn the conversation so far into a written specification. No new interview.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/to-spec/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "to-tickets",
+      "name": "to-tickets",
+      "job": "Break a specification into thin end-to-end slices, each stating what blocks it.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/to-tickets/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "wayfinder",
+      "name": "wayfinder",
+      "job": "Plan work too big for one session as a map of decision tickets, resolved one at a time.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/wayfinder/SKILL.md",
+      "customized": true,
+      "difference": "My copy has small wording changes to when it is offered. The map model is the same."
+    },
+    {
+      "id": "implement-spec",
+      "name": "implement-spec",
+      "job": "Build a whole specification and its tickets on one integration branch with parallel subagents.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/implement-spec/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "implement",
+      "name": "implement",
+      "job": "Build one ticket in one session, test-first, then review.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/implement/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "tdd",
+      "name": "tdd",
+      "job": "Red, green, refactor at agreed seams.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/tdd/SKILL.md",
+      "customized": true,
+      "difference": "My copy relaxes one confirmation step. The loop is the same."
+    },
+    {
+      "id": "code-review",
+      "name": "code-review",
+      "job": "Review a change on two separate axes: repository standards and fidelity to the spec.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/code-review/SKILL.md",
+      "customized": true,
+      "difference": "My copy adds an optional browser-walkthrough mode and loosens a tracker prerequisite. The two-axis review is the same."
+    },
+    {
+      "id": "diagnosing-bugs",
+      "name": "diagnosing-bugs",
+      "job": "Build a fast, repeatable failing signal first, then test ranked hypotheses.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/diagnosing-bugs/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "prototype",
+      "name": "prototype",
+      "job": "Build a throwaway to answer one design question, then keep only the decision.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/prototype/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "research",
+      "name": "research",
+      "job": "Parallel research: one subagent per question, then a separate synthesizer writes one report.",
+      "source_kind": "private",
+      "url": null,
+      "customized": true,
+      "status_note": "Private. Upstream has a skill called research that works differently (one background agent, one file); that is not this one."
+    },
+    {
+      "id": "pm-cold-reader",
+      "name": "pm-cold-reader",
+      "job": "Have a reader with no context test a shareable document, in fresh contexts, until the findings stop changing.",
+      "source_kind": "private",
+      "url": null,
+      "customized": true,
+      "status_note": "Private. No public text."
+    },
+    {
+      "id": "shutdown",
+      "name": "shutdown",
+      "job": "Close out a session from a ledger of what happened: sync state, record decisions, note what is unfinished.",
+      "source_kind": "private",
+      "url": null,
+      "customized": true,
+      "status_note": "Private. No public text."
+    }
+  ],
+  "guides": [
+    {
+      "id": "idea-to-spec",
+      "priority": 1,
+      "task": "I have an idea and I am not sure what to build",
+      "skills": [
+        "grill-me",
+        "grilling",
+        "grill-with-docs",
+        "domain-modeling",
+        "to-spec"
+      ],
+      "views": [
+        "thinking"
+      ]
+    },
+    {
+      "id": "wayfinder",
+      "priority": 1,
+      "task": "The project is too big and too foggy to plan in one sitting",
+      "skills": [
+        "wayfinder",
+        "grilling",
+        "prototype",
+        "to-spec"
+      ],
+      "views": [
+        "thinking",
+        "authorization"
+      ]
+    },
+    {
+      "id": "spec-to-build",
+      "priority": 2,
+      "task": "The requirements are settled and I need them built",
+      "skills": [
+        "to-tickets",
+        "implement-spec",
+        "implement",
+        "tdd",
+        "code-review"
+      ],
+      "views": [
+        "making",
+        "governed"
+      ]
+    },
+    {
+      "id": "hard-bug",
+      "priority": 2,
+      "task": "Something is broken and I cannot reproduce it reliably",
+      "skills": [
+        "diagnosing-bugs",
+        "tdd"
+      ],
+      "views": [
+        "making"
+      ]
+    },
+    {
+      "id": "safe-delegation",
+      "priority": 2,
+      "task": "I want an agent to do real work without handing it the keys",
+      "skills": [
+        "code-review"
+      ],
+      "views": [
+        "governed",
+        "authorization"
+      ],
+      "source_status": "The shape, ready, admit, build, review and verify roles are private and unpublished. This guide is an original explanation; it links no instruction text."
+    },
+    {
+      "id": "research",
+      "priority": 2,
+      "task": "I need to understand a question before I decide anything",
+      "skills": [
+        "research"
+      ],
+      "views": [
+        "thinking"
+      ],
+      "source_status": "research is a private skill with no public text. Upstream has a skill of the same name that works differently, so it is not linked. This guide is an original explanation."
+    },
+    {
+      "id": "shareable-writing",
+      "priority": 2,
+      "task": "I wrote something for people who were not in the room",
+      "skills": [
+        "pm-cold-reader"
+      ],
+      "views": [
+        "sharing"
+      ],
+      "source_status": "pm-cold-reader is a private skill with no public text. This guide is an original explanation of the method."
+    },
+    {
+      "id": "return-to-work",
+      "priority": 2,
+      "task": "I am coming back to a project after time away",
+      "skills": [
+        "shutdown"
+      ],
+      "views": [
+        "learning"
+      ],
+      "source_status": "shutdown is a private skill with no public text. This guide is an original explanation of the method."
+    }
+  ]
+}
