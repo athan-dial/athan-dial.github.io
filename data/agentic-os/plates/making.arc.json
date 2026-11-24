@@ -1,0 +1,280 @@
+{
+  "id": "making",
+  "figure": {
+    "title": "Making",
+    "code": "AOS-03"
+  },
+  "layout": {
+    "width": 1782,
+    "height": 634
+  },
+  "nodes": {
+    "spec": {
+      "x": 40,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "tickets": {
+      "x": 380,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "ready": {
+      "x": 710,
+      "y": 98,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "dispatch": {
+      "x": 1060,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "implement": {
+      "x": 1400,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "review": {
+      "x": 1400,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "verify": {
+      "x": 1050,
+      "y": 348,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "human": {
+      "x": 380,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "spec": {
+      "name": "Written specification",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "description": "The contract: what must be true when the work is done."
+    },
+    "tickets": {
+      "name": "Slice into tickets",
+      "color": "emerald",
+      "icon": "ListTree",
+      "shape": "rounded",
+      "description": "A dependency graph of small slices, each with its own acceptance criteria."
+    },
+    "ready": {
+      "name": "Ready to run?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "subtitle": "Open \u2197",
+      "description": "A deterministic readiness check decides whether a ticket may be admitted.",
+      "child": "governed"
+    },
+    "dispatch": {
+      "name": "Dispatch executors",
+      "color": "emerald",
+      "icon": "Workflow",
+      "shape": "rounded",
+      "description": "Blocking edges decide what can run in parallel: tickets with no unfinished blockers can run side by side."
+    },
+    "implement": {
+      "name": "Implement test-first",
+      "color": "emerald",
+      "icon": "Code",
+      "shape": "rounded",
+      "description": "An executor builds each slice test-first, in an isolated working copy when run under the supervisor."
+    },
+    "review": {
+      "name": "Independent review",
+      "color": "blue",
+      "icon": "ScanSearch",
+      "shape": "rounded",
+      "description": "A different reviewer checks the diff against the standards and the specification."
+    },
+    "verify": {
+      "name": "Meets contract?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "description": "A reviewer checks each requirement against the evidence, and a fixed check on the evidence package gates the move to review."
+    },
+    "human": {
+      "name": "Human closes the work",
+      "color": "amber",
+      "icon": "UserRoundCheck",
+      "shape": "pill",
+      "description": "Accepting the work, merging to the main line and publishing stay with a person."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    },
+    "normalL": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow",
+      "labelAlign": "left"
+    },
+    "feedbackL": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open",
+      "labelAlign": "left"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "spec",
+      "to": "tickets",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Decompose",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "tickets",
+      "to": "ready",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Propose",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "ready",
+      "to": "dispatch",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Admit",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "ready",
+      "to": "tickets",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Not ready",
+      "curve": "step",
+      "curveDepth": 56
+    },
+    {
+      "id": "e4",
+      "from": "dispatch",
+      "to": "implement",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Assign",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "implement",
+      "to": "review",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normalL",
+      "label": "Diff and tests",
+      "curve": "direct"
+    },
+    {
+      "id": "e6",
+      "from": "review",
+      "to": "verify",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Evidence",
+      "curve": "direct"
+    },
+    {
+      "id": "e7",
+      "from": "review",
+      "to": "implement",
+      "fromAnchor": "right",
+      "toAnchor": "right",
+      "style": "feedbackL",
+      "label": "Changes",
+      "curve": "step",
+      "curveDepth": 136
+    },
+    {
+      "id": "e8",
+      "from": "verify",
+      "to": "human",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "pass",
+      "label": "Verified",
+      "curve": "direct"
+    },
+    {
+      "id": "e9",
+      "from": "verify",
+      "to": "dispatch",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Not met: re-dispatch",
+      "curve": "direct"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Governed execution",
+      "x": 694,
+      "y": 66,
+      "width": 954,
+      "height": 472,
+      "color": "emerald"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

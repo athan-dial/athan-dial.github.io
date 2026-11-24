@@ -685,3 +685,4 @@ html{scroll-behavior:smooth}
 /* :root-prefixed so the reset outranks element-selector transitions (a{transition:...}
    beats a bare *), without reaching for !important. */
 @media(prefers-reduced-motion:reduce){:root *,:root *::before,:root *::after{animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms;scroll-behavior:auto}html{scroll-behavior:auto}}
+.atlas-link{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--field-rule)}.atlas-link__note{color:var(--ink-secondary)}.fn-territory__more{margin:1.25rem 0 0;font-family:var(--font-mono);font-size:.875rem}

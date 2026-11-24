@@ -545,7 +545,7 @@ hr {
 .btn,
 .btn-primary,
 .btn-secondary,
-button:not(#theme-toggle),
+button:not(#theme-toggle):not(.atlas *),
 input[type="button"],
 input[type="submit"] {
   display: inline-flex;
@@ -566,7 +566,7 @@ input[type="submit"] {
 }
 
 .btn-primary,
-button:not(#theme-toggle),
+button:not(#theme-toggle):not(.atlas *),
 input[type="button"],
 input[type="submit"] {
   color: var(--paper);
@@ -575,11 +575,11 @@ input[type="submit"] {
 }
 
 .btn-primary:hover,
-button:not(#theme-toggle):hover,
+button:not(#theme-toggle):not(.atlas *):hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 .btn-primary:active,
-button:not(#theme-toggle):active,
+button:not(#theme-toggle):not(.atlas *):active,
 input[type="button"]:active,
 input[type="submit"]:active,
 .btn.is-active,

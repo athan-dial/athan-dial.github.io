@@ -1,0 +1,7 @@
+{
+  "name": "agentic-os-atlas",
+  "private": true,
+  "description": "Page-scoped Arc viewer for /work/agentic-operating-system/. Built by build.sh against a pinned, patched Arc checkout; nothing here is loaded site-wide.",
+  "type": "module",
+  "scripts": { "build": "bash build.sh" }
+}

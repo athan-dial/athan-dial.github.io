@@ -207,6 +207,27 @@ and it is worth more than any particular file path. The proof-layer spec was aut
 `docs/superpowers/specs/` and moved to `.planning/specs/` for exactly this reason; the move is
 recorded at the top of the spec itself.
 
+### Agentic Operating System atlas (the one framework exception)
+
+`/work/agentic-operating-system/` (`content/work/agentic-operating-system.md`, `layouts/work/atlas.html`)
+is an interactive seven-view architecture atlas drawn with Arc (MIT) and loads a **page-scoped**
+React + Arc bundle. It is the only page that does; everything else stays static HTML/CSS. Rules:
+
+- Source of truth is `data/agentic-os/` (native Arc plates + `views.json`). Hugo reads the same files
+  to render the no-JavaScript text version of every view. Edit via `tools/agentic-os-atlas/build_plates.py`
+  or Arc Studio, not both.
+- The bundle lives in `assets/atlas/agentic-os/` (not `static/`) so Hugo publishes it only when the
+  atlas page renders. The page is `draft: true` (cascaded from `content/work/_index.md`) until the owner
+  approves it; do not flip draft/status/visibility to demonstrate it. Use `hugo server -D` to preview.
+- Contextual links (`atlas-link` shortcode, homepage territory chapter) are wrapped in
+  `site.GetPage`, so a production build carries no link to a draft atlas.
+- Rebuild the bundle with `tools/agentic-os-atlas/build.sh` (pinned Arc `2c4945e`, patched by
+  `patches/arc-engine.patch`). Run `python3 tools/agentic-os-atlas/validate.py` after changing plates.
+- Content is a curated, generalised account of a personal working method. No employer, project, ticket,
+  path or account names; private evidence and source traceability live outside this repository.
+- `main.css` excludes `.atlas` from the global `button` styling; the widget hands its own `svg`/`button`
+  properties back with `revert-layer`. Keep Arc's styles out of the rest of the site.
+
 ## Hard Constraints
 
 1. **No PII in committed or published artifacts.** A phone number shipped for months inside

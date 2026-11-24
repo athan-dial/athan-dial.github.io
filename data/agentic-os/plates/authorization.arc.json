@@ -1,0 +1,272 @@
+{
+  "id": "authorization",
+  "figure": {
+    "title": "Human authorization",
+    "code": "AOS-06"
+  },
+  "layout": {
+    "width": 1782,
+    "height": 792
+  },
+  "nodes": {
+    "propose": {
+      "x": 40,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "local": {
+      "x": 370,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "proceed": {
+      "x": 380,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "reserved": {
+      "x": 720,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "draft": {
+      "x": 720,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "decide": {
+      "x": 1060,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "stop": {
+      "x": 1060,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "act": {
+      "x": 1400,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "record": {
+      "x": 1400,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "propose": {
+      "name": "Agent proposes an action",
+      "color": "emerald",
+      "icon": "Bot",
+      "shape": "rounded",
+      "description": "Reading, searching, editing a working copy and running local checks need no extra approval."
+    },
+    "local": {
+      "name": "Reversible?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "description": "Can the action be undone, and does it stay on this machine?"
+    },
+    "proceed": {
+      "name": "Proceed within the task",
+      "color": "emerald",
+      "icon": "Play",
+      "shape": "rounded",
+      "description": "Reversible local work goes ahead and is recorded."
+    },
+    "reserved": {
+      "name": "Reserved for a person",
+      "color": "zinc",
+      "icon": "Lock",
+      "shape": "square",
+      "description": "Push, merge to the main line, deploy, publish, send a message, spend money, use credentials, mark work done, change standing instructions."
+    },
+    "draft": {
+      "name": "Draft and hold",
+      "color": "emerald",
+      "icon": "FilePen",
+      "shape": "rounded",
+      "description": "The agent prepares the item (a draft message, a pull request) and stops."
+    },
+    "decide": {
+      "name": "Human decision",
+      "color": "amber",
+      "icon": "UserRoundCheck",
+      "shape": "pill",
+      "description": "Approve this item, ask for changes, or stop."
+    },
+    "stop": {
+      "name": "Stop and record why",
+      "color": "zinc",
+      "icon": "OctagonX",
+      "shape": "square",
+      "description": "Nothing goes out. The reason is kept."
+    },
+    "act": {
+      "name": "Act once, as approved",
+      "color": "emerald",
+      "icon": "Check",
+      "shape": "rounded",
+      "description": "The approval covers that specific item, not the next one."
+    },
+    "record": {
+      "name": "Record the outcome",
+      "color": "zinc",
+      "icon": "NotebookPen",
+      "shape": "square",
+      "description": "What ran and what was approved, written to the work ledger."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "propose",
+      "to": "local",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Classify",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "local",
+      "to": "proceed",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "Yes",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "local",
+      "to": "draft",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "No",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "reserved",
+      "to": "draft",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normal",
+      "label": "Examples",
+      "curve": "direct"
+    },
+    {
+      "id": "e4",
+      "from": "draft",
+      "to": "decide",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Present",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "decide",
+      "to": "stop",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "normal",
+      "label": "Stop",
+      "curve": "direct"
+    },
+    {
+      "id": "e6",
+      "from": "decide",
+      "to": "act",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Approve",
+      "curve": "direct"
+    },
+    {
+      "id": "e7",
+      "from": "decide",
+      "to": "draft",
+      "fromAnchor": "bottom",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Revise",
+      "curve": "step",
+      "curveDepth": 54
+    },
+    {
+      "id": "e8",
+      "from": "proceed",
+      "to": "record",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Record",
+      "curve": "direct"
+    },
+    {
+      "id": "e9",
+      "from": "act",
+      "to": "record",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normal",
+      "label": "Record",
+      "curve": "direct"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

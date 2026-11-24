@@ -124,6 +124,10 @@
       <p>AI is making more candidate work cheap enough to try. That moves the interesting problems downstream: which work deserves to become real, how we verify it, and where ownership still needs to be explicit.</p>
     </div>
     <div class="fn-territory__diagram">{{ partial "fieldnote-schematic.html" "abundant-execution" }}</div>
+    {{- /* Present only when the atlas page is in the current build (never in a production build while it is a draft). */ -}}
+    {{- with site.GetPage "/work/agentic-operating-system" }}
+    <p class="fn-territory__more"><a href="{{ .RelPermalink }}">{{ .Title }}: the operating model behind this, in seven views</a></p>
+    {{- end }}
     <div class="fn-territory-grid">
       <article><span>01</span><h3>Product judgment</h3><p>What deserves to exist when building gets cheap?</p></article>
       <article><span>02</span><h3>Expert work</h3><p>What should AI do, and what should remain inspectable?</p></article>

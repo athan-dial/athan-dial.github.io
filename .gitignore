@@ -89,3 +89,7 @@ layouts.blowfish.bak/
 !.planning/specs/2026-09-10-personal-brand-proof-layer-design.md
 !.planning/archive/
 !.planning/archive/ASSET_GENERATION_PLAN-legacy.md
+
+# Local Arc checkout and Studio build used by tools/agentic-os-atlas/build.sh
+/tools/agentic-os-atlas/.arc/
+/tools/agentic-os-atlas/.studio-root/
