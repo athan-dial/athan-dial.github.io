@@ -2,10 +2,6 @@ name: Verify proposed site
 on:
   pull_request:
     branches: [main]
-  # The workflow-atlas continuation branch has no pull request of its own, so run the same checks on its pushes.
-  # Remove this trigger when the branch is merged or retired.
-  push:
-    branches: [claude/lucid-cray-sezuh0]
 permissions:
   contents: read
 jobs:

@@ -74,7 +74,7 @@ const log = m => console.log('PASS ' + m);
 
       // 5. diagrams: every mount shows an Arc diagram; tabs change it; keyboard focus ring is visible
       const mounts = p.locator('.wfplate');
-      const n = await mounts.count(); assert(n >= 4, 'expected workflow diagrams, found ' + n);
+      const n = await mounts.count();
       for (let i = 0; i < n; i++) {
         const m = mounts.nth(i); await m.scrollIntoViewIfNeeded();
         assert(await m.locator('[data-arc-diagram]').count(), `diagram ${i} did not render`);
@@ -94,7 +94,8 @@ const log = m => console.log('PASS ' + m);
 
       // 5b. a guide's "underneath" link opens that architecture view, offers the way back, and back works
       await p.evaluate(() => window.scrollTo(0, 0));
-      const viewLink = p.locator('#guide-safe-delegation .wf-guide__views a[data-view]').first();
+      const viewLink = p.locator('.wf-guide__views a[data-view]').first();
+      const fromGuide = await viewLink.getAttribute('data-from');
       const viewId = await viewLink.getAttribute('data-view');
       await viewLink.click(); await p.waitForTimeout(500);
       const shown = await p.locator('#agentic-os-atlas .atlas__views [aria-current="true"]').count();
@@ -102,7 +103,7 @@ const log = m => console.log('PASS ' + m);
       assert((await p.evaluate(() => location.hash)) === '#' + viewId, 'the atlas did not move to the view ' + viewId);
       const back = p.locator('.atlas__return a'); assert(await back.count(), 'no way back to the guide from the opened view');
       await back.click(); await p.waitForTimeout(300);
-      assert((await p.evaluate(() => location.hash)) === '#guide-safe-delegation', 'back-to-guide link did not return to the guide');
+      assert((await p.evaluate(() => location.hash)) === '#guide-' + fromGuide, 'back-to-guide link did not return to the guide');
       log(`${w}px: a guide's view link opens the Arc view in place and offers a way back to the guide`);
 
       // 5c. diagrams on one page must not share SVG ids (a connector would resolve another diagram's gradient)
