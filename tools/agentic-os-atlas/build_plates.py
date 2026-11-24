@@ -16,9 +16,9 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parents[2] / 'data' / 'agentic-os'
 (OUT / 'plates').mkdir(parents=True, exist_ok=True)
 
-W, H = 184, 78            # standard node
-GW, GH = 216, 148         # decision diamond
-COL, ROW, X0 = 292, 205, 40
+W, H = 204, 92            # standard node
+GW, GH = 232, 160         # decision diamond
+COL, ROW, X0 = 312, 225, 40
 
 KIND = {  # kind -> (palette colour, icon, silhouette)
     'human':  ('amber',   'UserRound',   'pill'),      # human judgment / authorization (citrus)
@@ -107,7 +107,7 @@ p.node('knowledge', 'Knowledge and memory', 'state', 1, 2, icon='Library',
 p.node('governance', 'Governance and orchestration', 'check', 2, 2, icon='Landmark',
        desc='Policy, readiness checks and authorization boundaries that apply to every stage.')
 p.node('substrate', 'Execution substrate', 'tool', 3, 2, icon='Cpu',
-       desc='Agent runtimes that do the work: Claude Code, Cursor and Codex. A limited ChatGPT pilot carries a few portable skills only.')
+       desc='Agent runtimes that do the work: Claude Code and Cursor under the supervisor, Codex by delegation. A limited ChatGPT pilot carries a few portable skills only; most of the method does not run there.')
 p.edge('human', 'thinking', 'right', 'left', 'Intent', 'decision')
 p.edge('thinking', 'decide', 'right', 'left', 'Shaped')
 p.edge('decide', 'making', 'right', 'left', 'Yes', 'pass')
@@ -152,15 +152,15 @@ p.node('tickets', 'Slice into tickets', 'tool', 1, 0, icon='ListTree',
 p.node('ready', 'Ready to run?', 'rule', 2, 0, icon='GitFork', child='governed', sub='Open ↗',
        desc='A deterministic readiness check decides whether a ticket may be admitted.')
 p.node('dispatch', 'Dispatch executors', 'tool', 3, 0, icon='Workflow',
-       desc='Shared groundwork first, then parallel tasks that own disjoint files.')
+       desc='Blocking edges decide what can run in parallel: tickets with no unfinished blockers can run side by side.')
 p.node('implement', 'Implement test-first', 'tool', 4, 0, icon='Code',
-       desc='An executor builds each slice in an isolated working copy.')
+       desc='An executor builds each slice test-first, in an isolated working copy when run under the supervisor.')
 p.node('review', 'Independent review', 'check', 4, 1, icon='ScanSearch',
        desc='A different reviewer checks the diff against the standards and the specification.')
 p.node('verify', 'Meets contract?', 'rule', 3, 1, icon='GitFork',
-       desc='Evidence is checked against each acceptance criterion.')
+       desc='A reviewer checks each requirement against the evidence, and a fixed check on the evidence package gates the move to review.')
 p.node('human', 'Human closes the work', 'human', 1, 1, icon='UserRoundCheck',
-       desc='Accepting, merging and publishing stay with a person.')
+       desc='Accepting the work, merging to the main line and publishing stay with a person.')
 p.edge('spec', 'tickets', 'right', 'left', 'Decompose')
 p.edge('tickets', 'ready', 'right', 'left', 'Propose')
 p.edge('ready', 'dispatch', 'right', 'left', 'Admit', 'pass')
@@ -221,9 +221,9 @@ p.node('evidence', 'Evidence package', 'state', 3, 1, icon='FileCheck',
 p.node('review', 'Independent review', 'check', 2, 1, icon='ScanSearch',
        desc='A reviewer other than the executor.')
 p.node('verify', 'Meets contract?', 'rule', 1, 1,
-       desc='Build and evidence are checked against the contract as it was admitted.')
+       desc='An independent reviewer checks each requirement of the admitted contract against the evidence; a fixed check on the evidence package then gates the move to review.')
 p.node('human', 'Human closure', 'human', 0, 1, icon='UserRoundCheck', sub='Accept, merge, publish',
-       desc='Marking work done, merging and publishing are reserved for a person.')
+       desc='Marking work done, merging to the main line and publishing are reserved for a person.')
 p.edge('contract', 'certify', 'right', 'left', 'Certify')
 p.edge('certify', 'certified', 'right', 'left', 'Verdict')
 p.edge('certified', 'admit', 'right', 'left', 'Promote', 'pass')
@@ -249,7 +249,7 @@ p.node('local', 'Reversible?', 'rule', 1, 1,
 p.node('proceed', 'Proceed within the task', 'tool', 1, 2, icon='Play',
        desc='Reversible local work goes ahead and is recorded.')
 p.node('reserved', 'Reserved for a person', 'state', 2, 0, icon='Lock',
-       desc='Push, merge, deploy, publish, send a message, spend money, use credentials, mark work done, change standing instructions.')
+       desc='Push, merge to the main line, deploy, publish, send a message, spend money, use credentials, mark work done, change standing instructions.')
 p.node('draft', 'Draft and hold', 'tool', 2, 1, icon='FilePen',
        desc='The agent prepares the item (a draft message, a pull request) and stops.')
 p.node('decide', 'Human decision', 'human', 3, 1, icon='UserRoundCheck',
@@ -287,7 +287,7 @@ p.node('ledger', 'Work ledger', 'state', 2, 2, icon='NotebookPen',
 p.node('rules', 'Rules', 'state', 3, 1, icon='ListChecks',
        desc='A hypothesis confirmed enough times becomes a rule that changes default behaviour.')
 p.node('handoff', 'Reconcile and hand off', 'tool', 3, 2, icon='RefreshCw',
-       desc='Close-out reads the ledger, fixes drift between notes, repository and board, and leaves a handoff.')
+       desc='Close-out reads the ledger, distils lessons into hypotheses and rules, and leaves a handoff. A separate on-demand pass finds drift between notes, repository and board.')
 p.node('next', 'Next work starts with context', 'tool', 4, 1, icon='Compass',
        desc='The next session begins from decisions, rules and the handoff rather than from memory.')
 p.edge('work', 'kind', 'right', 'left', 'Capture')
@@ -317,23 +317,23 @@ views = dict(
              not_claimed='Does not claim every question follows every step, or that agents ever close a decision.'),
         dict(id='making', short='Making', title='A decision becomes verified work through a governed path.',
              claim='A written specification is sliced, admitted by fixed rules, built by executors and checked by someone other than the builder.',
-             basis='Matches the current build-and-verify workflow as documented in the working repository. Execution details are in the governed execution view.',
+             basis='Matches the current build-and-verify workflow as documented in the working repository. Which tasks run in parallel follows their dependencies. Execution details are in the governed execution view.',
              not_claimed='Does not claim parallel execution for every task, or that review always passes the first time.'),
         dict(id='sharing', short='Sharing', title='Work only counts once someone else can use it.',
              claim='The artifact is chosen for its reader, tested on a reader with no context, and released only with explicit approval.',
-             basis='Describes the working practice for writing and publishing. The reader review is a separate pass by design.',
+             basis='Describes the working practice for writing and publishing. The reader review is a separate pass by design, run on request or before publishing.',
              not_claimed='Does not claim every artifact gets every review, or that sending can ever happen without approval.'),
         dict(id='governed', short='Governed execution', title='Autonomous work is admitted by rules, not by confidence.',
              claim='Shaping, certifying, admitting, building, reviewing and closing are separate roles with separate gates, and only a person closes work.',
-             basis='Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised.',
-             not_claimed='Not an audited runtime. The diagram shows the intended transitions and who may perform them.'),
+             basis='Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised. Promotion to ready is a gated step an agent or a person can take; the supervisor then admits, never closes.',
+             not_claimed='Not an audited runtime. The diagram shows the intended transitions and who may perform them. Not claimed: that the supervisor is the only route to review, or that it re-runs the tests itself.'),
         dict(id='authorization', short='Human authorization', title='Autonomy ends where an action is outward-facing or hard to undo.',
              claim='Reversible local work goes ahead. Anything outward-facing or hard to undo is drafted, held and approved one item at a time.',
              basis='Reflects the standing authorization policy for agent work. The list of reserved actions is representative, not exhaustive.',
              not_claimed='Does not claim every decision is automated, or that a hook catches every violation.'),
         dict(id='learning', short='Durable learning', title='Context carries forward as records, not memory.',
              claim='Decisions, hypotheses and work records are kept separately, so a stranger could resume the work and a lesson earns its way into a rule.',
-             basis='Describes the record types and their intended flow. Thresholds and automatic effects are summarised, not specified.',
+             basis='Describes the record types and their intended flow. Thresholds and automatic effects are summarised, not specified. Commits and decisions are captured by hooks; counting a hypothesis and promoting it happens at close-out, by an agent.',
              not_claimed='Does not claim the capture hooks fire in every repository.'),
     ])
 for v in views['views']:

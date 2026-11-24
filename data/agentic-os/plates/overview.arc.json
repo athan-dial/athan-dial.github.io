@@ -5,72 +5,72 @@
     "code": "AOS-01"
   },
   "layout": {
-    "width": 1542,
-    "height": 718
+    "width": 1642,
+    "height": 772
   },
   "nodes": {
     "human": {
       "x": 40,
       "y": 120,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "thinking": {
-      "x": 332,
+      "x": 352,
       "y": 120,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "decide": {
-      "x": 608,
-      "y": 85,
+      "x": 650,
+      "y": 86,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "making": {
-      "x": 916,
+      "x": 976,
       "y": 120,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "sharing": {
-      "x": 1208,
+      "x": 1288,
       "y": 120,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "lessons": {
-      "x": 1208,
-      "y": 325,
+      "x": 1288,
+      "y": 345,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "knowledge": {
-      "x": 332,
-      "y": 530,
+      "x": 352,
+      "y": 570,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "governance": {
-      "x": 624,
-      "y": 530,
+      "x": 664,
+      "y": 570,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "substrate": {
-      "x": 916,
-      "y": 530,
+      "x": 976,
+      "y": 570,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     }
   },
   "nodeData": {
@@ -142,7 +142,7 @@
       "color": "emerald",
       "icon": "Cpu",
       "shape": "rounded",
-      "description": "Agent runtimes that do the work: Claude Code, Cursor and Codex. A limited ChatGPT pilot carries a few portable skills only."
+      "description": "Agent runtimes that do the work: Claude Code and Cursor under the supervisor, Codex by delegation. A limited ChatGPT pilot carries a few portable skills only; most of the method does not run there."
     }
   },
   "connectorStyles": {
@@ -246,10 +246,10 @@
       "id": "g0",
       "type": "rect",
       "label": "Cross-cutting: available to every stage",
-      "x": 316,
-      "y": 498,
-      "width": 800,
-      "height": 124,
+      "x": 336,
+      "y": 538,
+      "width": 860,
+      "height": 138,
       "color": "zinc"
     }
   ],

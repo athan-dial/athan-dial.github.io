@@ -5,65 +5,65 @@
     "code": "AOS-03"
   },
   "layout": {
-    "width": 1542,
-    "height": 558
+    "width": 1642,
+    "height": 591
   },
   "nodes": {
     "spec": {
       "x": 40,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "tickets": {
-      "x": 332,
+      "x": 352,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "ready": {
-      "x": 608,
-      "y": 95,
+      "x": 650,
+      "y": 96,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "dispatch": {
-      "x": 916,
+      "x": 976,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "implement": {
-      "x": 1208,
+      "x": 1288,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "review": {
-      "x": 1208,
-      "y": 335,
+      "x": 1288,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "verify": {
-      "x": 900,
-      "y": 300,
+      "x": 962,
+      "y": 321,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "human": {
-      "x": 332,
-      "y": 335,
+      "x": 352,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     }
   },
   "nodeData": {
@@ -95,14 +95,14 @@
       "color": "emerald",
       "icon": "Workflow",
       "shape": "rounded",
-      "description": "Shared groundwork first, then parallel tasks that own disjoint files."
+      "description": "Blocking edges decide what can run in parallel: tickets with no unfinished blockers can run side by side."
     },
     "implement": {
       "name": "Implement test-first",
       "color": "emerald",
       "icon": "Code",
       "shape": "rounded",
-      "description": "An executor builds each slice in an isolated working copy."
+      "description": "An executor builds each slice test-first, in an isolated working copy when run under the supervisor."
     },
     "review": {
       "name": "Independent review",
@@ -116,14 +116,14 @@
       "color": "blue",
       "icon": "GitFork",
       "shape": "diamond",
-      "description": "Evidence is checked against each acceptance criterion."
+      "description": "A reviewer checks each requirement against the evidence, and a fixed check on the evidence package gates the move to review."
     },
     "human": {
       "name": "Human closes the work",
       "color": "amber",
       "icon": "UserRoundCheck",
       "shape": "pill",
-      "description": "Accepting, merging and publishing stay with a person."
+      "description": "Accepting the work, merging to the main line and publishing stay with a person."
     }
   },
   "connectorStyles": {
@@ -266,10 +266,10 @@
       "id": "g0",
       "type": "rect",
       "label": "Governed execution",
-      "x": 592,
-      "y": 63,
-      "width": 816,
-      "height": 399,
+      "x": 634,
+      "y": 64,
+      "width": 874,
+      "height": 431,
       "color": "emerald"
     }
   ],

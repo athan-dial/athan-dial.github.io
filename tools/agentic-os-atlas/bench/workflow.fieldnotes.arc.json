@@ -5,7 +5,7 @@
     "code": "BM-02"
   },
   "layout": {
-    "width": 2184,
+    "width": 2352,
     "height": 680
   },
   "nodes": {
@@ -13,92 +13,92 @@
       "x": 40,
       "y": 250,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "scan": {
-      "x": 284,
+      "x": 302,
       "y": 250,
-      "size": "m",
-      "width": 152,
-      "height": 72
-    },
-    "frame": {
-      "x": 528,
-      "y": 250,
-      "size": "m",
-      "width": 152,
-      "height": 72
-    },
-    "spec": {
-      "x": 772,
-      "y": 250,
-      "size": "m",
-      "width": 152,
-      "height": 72
-    },
-    "gate": {
-      "x": 1004,
-      "y": 224,
       "size": "m",
       "width": 176,
-      "height": 124
+      "height": 92
+    },
+    "frame": {
+      "x": 564,
+      "y": 250,
+      "size": "m",
+      "width": 176,
+      "height": 92
+    },
+    "spec": {
+      "x": 826,
+      "y": 250,
+      "size": "m",
+      "width": 176,
+      "height": 92
+    },
+    "gate": {
+      "x": 1078,
+      "y": 228,
+      "size": "m",
+      "width": 196,
+      "height": 136
     },
     "approval": {
-      "x": 1016,
+      "x": 1088,
       "y": 56,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "implement": {
-      "x": 1260,
+      "x": 1350,
       "y": 250,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "verify": {
-      "x": 1504,
+      "x": 1612,
       "y": 250,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "peer": {
-      "x": 1748,
+      "x": 1874,
       "y": 250,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "release": {
-      "x": 1992,
+      "x": 2136,
       "y": 250,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "retro": {
-      "x": 1992,
+      "x": 2136,
       "y": 560,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "backlog": {
-      "x": 528,
+      "x": 564,
       "y": 560,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     },
     "rework": {
-      "x": 1504,
+      "x": 1612,
       "y": 430,
       "size": "m",
-      "width": 152,
-      "height": 72
+      "width": 176,
+      "height": 92
     }
   },
   "nodeData": {

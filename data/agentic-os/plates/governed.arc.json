@@ -5,79 +5,79 @@
     "code": "AOS-05"
   },
   "layout": {
-    "width": 1542,
-    "height": 558
+    "width": 1642,
+    "height": 591
   },
   "nodes": {
     "contract": {
       "x": 40,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "certify": {
-      "x": 332,
+      "x": 352,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "certified": {
-      "x": 608,
-      "y": 95,
+      "x": 650,
+      "y": 96,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "admit": {
-      "x": 916,
+      "x": 976,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "dispatch": {
-      "x": 1208,
+      "x": 1288,
       "y": 130,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "execute": {
-      "x": 1208,
-      "y": 335,
+      "x": 1288,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "evidence": {
-      "x": 916,
-      "y": 335,
+      "x": 976,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "review": {
-      "x": 624,
-      "y": 335,
+      "x": 664,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "verify": {
-      "x": 316,
-      "y": 300,
+      "x": 338,
+      "y": 321,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "human": {
       "x": 40,
-      "y": 335,
+      "y": 355,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     }
   },
   "nodeData": {
@@ -145,7 +145,7 @@
       "color": "blue",
       "icon": "GitFork",
       "shape": "diamond",
-      "description": "Build and evidence are checked against the contract as it was admitted."
+      "description": "An independent reviewer checks each requirement of the admitted contract against the evidence; a fixed check on the evidence package then gates the move to review."
     },
     "human": {
       "name": "Human closure",
@@ -153,7 +153,7 @@
       "icon": "UserRoundCheck",
       "shape": "pill",
       "subtitle": "Accept, merge, publish",
-      "description": "Marking work done, merging and publishing are reserved for a person."
+      "description": "Marking work done, merging to the main line and publishing are reserved for a person."
     }
   },
   "connectorStyles": {
@@ -294,29 +294,29 @@
       "type": "rect",
       "label": "Planning and certification",
       "x": 24,
-      "y": 63,
-      "width": 816,
-      "height": 194,
+      "y": 64,
+      "width": 874,
+      "height": 206,
       "color": "blue"
     },
     {
       "id": "g1",
       "type": "rect",
       "label": "Supervisor: enforces transitions",
-      "x": 900,
+      "x": 960,
       "y": 98,
-      "width": 508,
-      "height": 124,
+      "width": 548,
+      "height": 138,
       "color": "zinc"
     },
     {
       "id": "g2",
       "type": "rect",
       "label": "Executor and reviewers",
-      "x": 300,
-      "y": 268,
-      "width": 1108,
-      "height": 194,
+      "x": 322,
+      "y": 289,
+      "width": 1186,
+      "height": 206,
       "color": "emerald"
     }
   ],

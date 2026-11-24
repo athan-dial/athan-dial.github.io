@@ -23,7 +23,7 @@ index e639a4d..d6d8306 100644
            ],
            "type": "string"
 diff --git a/src/components/ArcDiagram.tsx b/src/components/ArcDiagram.tsx
-index 7a42eaa..2ac5ef1 100644
+index 7a42eaa..c872af6 100644
 --- a/src/components/ArcDiagram.tsx
 +++ b/src/components/ArcDiagram.tsx
 @@ -26,6 +26,7 @@ import {
@@ -34,7 +34,7 @@ index 7a42eaa..2ac5ef1 100644
  } from '../utils/diagramHelpers'
  import { getIsoStyle, type IsoStyleId } from '../utils/isoStyles'
  import { isoContentBounds, isoPlateBounds, buildNodeIndex } from '../utils/isoBlueprint'
-@@ -734,14 +735,14 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
+@@ -734,24 +735,29 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
      <>
        <NodeDecoration decor={decor} stroke={color.stroke} cut={clipPath ? cut : 0} />
        <div
@@ -47,15 +47,19 @@ index 7a42eaa..2ac5ef1 100644
 -          ${isLarge ? 'w-9 h-9' : isSmall ? 'w-6 h-6' : 'w-7 h-7'}
 -          flex items-center justify-center
 -        `} style={{
+-          borderRadius: nodeRadius === '9999px' ? '9999px' : (nodeRadius || '2px'),
 +        <div className="flex-shrink-0 flex items-center justify-center" style={{
 +          // Hosts can enlarge the symbol with --arc-icon-chip / --arc-icon-glyph;
 +          // the fallbacks are the original per-size dimensions.
 +          width: `var(--arc-icon-chip, ${isLarge ? 36 : isSmall ? 24 : 28}px)`,
 +          height: `var(--arc-icon-chip, ${isLarge ? 36 : isSmall ? 24 : 28}px)`,
-           borderRadius: nodeRadius === '9999px' ? '9999px' : (nodeRadius || '2px'),
++          borderRadius: `var(--arc-icon-chip-radius, ${nodeRadius === '9999px' ? '9999px' : (nodeRadius || '2px')})`,
            border: `1px solid ${colorAlpha(color.stroke, '30')}`,
-           background: `${colorAlpha(color.stroke, '12')}`,
-@@ -750,8 +751,12 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
+-          background: `${colorAlpha(color.stroke, '12')}`,
++          // --arc-icon-chip-tint (a percentage) strengthens the role colour of the symbol tile; 7% is the original.
++          background: `color-mix(in srgb, ${color.stroke} var(--arc-icon-chip-tint, 7%), transparent)`,
+           backdropFilter: 'blur(6px)',
+           WebkitBackdropFilter: 'blur(6px)',
            boxShadow: `inset 0 1px 0 ${colorAlpha(color.stroke, '18')}`,
          }}>
            <Icon
@@ -70,7 +74,7 @@ index 7a42eaa..2ac5ef1 100644
              strokeWidth={1.5}
            />
          </div>
-@@ -832,6 +837,10 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
+@@ -832,6 +838,10 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
          style={{
            ...placement,
            height: motionNode?.height ?? size.height,
@@ -81,7 +85,7 @@ index 7a42eaa..2ac5ef1 100644
            filter: hovered && glow ? `drop-shadow(0 4px 12px ${colorAlpha(color.stroke, '55')})` : undefined,
          }}
          data-arc-node
-@@ -840,8 +849,10 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
+@@ -840,8 +850,10 @@ export function Node({ nodeId, node, data, mode, themeColors, brand, hovered, di
          {...handlers}
        >
          <div
@@ -94,7 +98,7 @@ index 7a42eaa..2ac5ef1 100644
          >
            {body}
          </div>
-@@ -905,7 +916,7 @@ function connectorPathGeometry(
+@@ -905,7 +917,7 @@ function connectorPathGeometry(
    connector: Connector,
    from: { x: number; y: number },
    to: { x: number; y: number },
@@ -103,7 +107,7 @@ index 7a42eaa..2ac5ef1 100644
    return connectorGeometry(from, to, connector.fromAnchor, connector.toAnchor, connector.curve, connector.curveDepth ?? 40)
  }
  
-@@ -956,7 +967,15 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
+@@ -956,7 +968,15 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
      const side = connector.curve !== 'natural' && vertical && align !== 'center'
      const offset = side ? { x: align === 'right' ? 8 : -8, y: 4 } : { x: 0, y: -8 }
      const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 }
@@ -120,7 +124,7 @@ index 7a42eaa..2ac5ef1 100644
        // Same sizes the <text> below renders at (10px tracked caps, else 9px).
        const fontPx = brand?.upperLabels ? 10 : 9
        const width = monoLabelWidth(labelText, fontPx, fontPx * (brand?.upperLabels ? 0.08 : 0.02))
-@@ -974,7 +993,7 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
+@@ -974,7 +994,7 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
        fromTransform: `translate(${from.x}px, ${from.y}px) rotate(${route.startAngle + 180}deg)`,
        toTransform: `translate(${to.x}px, ${to.y}px) rotate(${route.endAngle}deg)`,
        label: { x: mid.x + offset.x, y: mid.y + offset.y },
@@ -129,7 +133,7 @@ index 7a42eaa..2ac5ef1 100644
        fromRole: role(from, route.startAngle), toRole: role(to, route.endAngle + 180),
      }
    })
-@@ -1008,13 +1027,13 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
+@@ -1008,13 +1028,13 @@ function ConnectorBody({ connector, connectorIndex, nodes, motionNodes, styles,
      if (!shape) return null
      if (shape.circle) {
        return (

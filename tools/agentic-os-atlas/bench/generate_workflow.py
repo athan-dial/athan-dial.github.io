@@ -16,7 +16,7 @@ ROLE = {  # role -> (color, icon, shape)
     'control': ('blue',    'Route',       'rounded'),
     'review':  ('emerald', 'ShieldCheck', 'rounded'),
 }
-W, H, GATE_H, GATE_W, COL, X0, Y0 = 152, 72, 124, 176, 244, 40, 56
+W, H, GATE_H, GATE_W, COL, X0, Y0 = 176, 92, 136, 196, 262, 40, 56
 pos = {  # key -> (col, y)
     'request': (0, 250), 'scan': (1, 250), 'frame': (2, 250), 'spec': (3, 250), 'gate': (4, 250),
     'implement': (5, 250), 'verify': (6, 250), 'peer': (7, 250), 'release': (8, 250),

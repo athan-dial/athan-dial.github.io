@@ -5,65 +5,65 @@
     "code": "AOS-07"
   },
   "layout": {
-    "width": 1542,
-    "height": 828
+    "width": 1642,
+    "height": 882
   },
   "nodes": {
     "work": {
       "x": 40,
-      "y": 435,
+      "y": 455,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "kind": {
-      "x": 316,
-      "y": 400,
+      "x": 338,
+      "y": 421,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "decisions": {
-      "x": 624,
+      "x": 664,
       "y": 230,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "hypotheses": {
-      "x": 624,
-      "y": 435,
+      "x": 664,
+      "y": 455,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "ledger": {
-      "x": 624,
-      "y": 640,
+      "x": 664,
+      "y": 680,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "rules": {
-      "x": 916,
-      "y": 435,
+      "x": 976,
+      "y": 455,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "handoff": {
-      "x": 916,
-      "y": 640,
+      "x": 976,
+      "y": 680,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "next": {
-      "x": 1208,
-      "y": 435,
+      "x": 1288,
+      "y": 455,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     }
   },
   "nodeData": {
@@ -114,7 +114,7 @@
       "color": "emerald",
       "icon": "RefreshCw",
       "shape": "rounded",
-      "description": "Close-out reads the ledger, fixes drift between notes, repository and board, and leaves a handoff."
+      "description": "Close-out reads the ledger, distils lessons into hypotheses and rules, and leaves a handoff. A separate on-demand pass finds drift between notes, repository and board."
     },
     "next": {
       "name": "Next work starts with context",

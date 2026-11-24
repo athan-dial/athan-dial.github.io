@@ -5,72 +5,72 @@
     "code": "AOS-06"
   },
   "layout": {
-    "width": 1542,
-    "height": 668
+    "width": 1642,
+    "height": 722
   },
   "nodes": {
     "propose": {
       "x": 40,
-      "y": 275,
+      "y": 295,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "local": {
-      "x": 316,
-      "y": 240,
+      "x": 338,
+      "y": 261,
       "size": "m",
-      "width": 216,
-      "height": 148
+      "width": 232,
+      "height": 160
     },
     "proceed": {
-      "x": 332,
-      "y": 480,
+      "x": 352,
+      "y": 520,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "reserved": {
-      "x": 624,
+      "x": 664,
       "y": 70,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "draft": {
-      "x": 624,
-      "y": 275,
+      "x": 664,
+      "y": 295,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "decide": {
-      "x": 916,
-      "y": 275,
+      "x": 976,
+      "y": 295,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "stop": {
-      "x": 916,
+      "x": 976,
       "y": 70,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "act": {
-      "x": 1208,
-      "y": 275,
+      "x": 1288,
+      "y": 295,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     },
     "record": {
-      "x": 1208,
-      "y": 480,
+      "x": 1288,
+      "y": 520,
       "size": "m",
-      "width": 184,
-      "height": 78
+      "width": 204,
+      "height": 92
     }
   },
   "nodeData": {
@@ -100,7 +100,7 @@
       "color": "zinc",
       "icon": "Lock",
       "shape": "square",
-      "description": "Push, merge, deploy, publish, send a message, spend money, use credentials, mark work done, change standing instructions."
+      "description": "Push, merge to the main line, deploy, publish, send a message, spend money, use credentials, mark work done, change standing instructions."
     },
     "draft": {
       "name": "Draft and hold",
