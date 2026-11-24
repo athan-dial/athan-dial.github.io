@@ -1,0 +1,287 @@
+{
+  "id": "wf-map-2",
+  "figure": {
+    "title": "Results store map, after session 3",
+    "code": "Fig W2"
+  },
+  "layout": {
+    "width": 1112,
+    "height": 1042
+  },
+  "nodes": {
+    "exports": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "research": {
+      "x": 40,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "first": {
+      "x": 40,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "proto": {
+      "x": 40,
+      "y": 820,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "decimals": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "layouts": {
+      "x": 380,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "retire": {
+      "x": 380,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "designate": {
+      "x": 380,
+      "y": 820,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fog3": {
+      "x": 710,
+      "y": 38,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "audit": {
+      "x": 720,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "input": {
+      "x": 720,
+      "y": 820,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "exports": {
+      "name": "Collect every instrument's export format",
+      "color": "zinc",
+      "icon": "Hammer",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 task",
+      "description": "Settled in session 1."
+    },
+    "research": {
+      "name": "How do labs version protocols?",
+      "color": "zinc",
+      "icon": "Search",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 research",
+      "description": "Settled by an agent. Of the sources found, most keep one reference run per protocol version, and several version the plate layout separately."
+    },
+    "first": {
+      "name": "Which assays move first?",
+      "color": "zinc",
+      "icon": "Scale",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 grilling",
+      "description": "Settled in session 2. Unregulated assays on instruments A and B move first."
+    },
+    "proto": {
+      "name": "What should a run page show?",
+      "color": "zinc",
+      "icon": "Lightbulb",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 prototype",
+      "description": "Settled in session 3. Run name, protocol version and reference run at the top, the plate overlay, and flagged wells listed beside it."
+    },
+    "decimals": {
+      "name": "Decimal and unit conventions across sites?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. The collected exports showed more than one decimal convention."
+    },
+    "layouts": {
+      "name": "How are plate layouts versioned?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. Raised by the research finding."
+    },
+    "retire": {
+      "name": "How are reference runs retired?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "Unblocked once the first assays were chosen."
+    },
+    "designate": {
+      "name": "Who may designate a reference run?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. Raised by the first-assays decision."
+    },
+    "fog3": {
+      "name": "Retention of failed runs",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    },
+    "audit": {
+      "name": "Audit trail for regulated studies",
+      "color": "blue",
+      "icon": "Scale",
+      "shape": "rounded",
+      "subtitle": "Blocked \u00b7 grilling",
+      "description": "Graduated from fog. It can now be asked, but waits for the retirement rule."
+    },
+    "input": {
+      "name": "Run comparison v1 spec",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "Settled input \u00b7 not a ticket",
+      "description": "The specification from the first guide. Its decisions, such as one designated reference run per protocol version and CSV only, are taken as given and are not reopened on this map."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "exports",
+      "to": "decimals",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "research",
+      "to": "layouts",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "first",
+      "to": "retire",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Unblocked",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "first",
+      "to": "designate",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "step"
+    },
+    {
+      "id": "e4",
+      "from": "retire",
+      "to": "audit",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "first",
+      "to": "audit",
+      "fromAnchor": "bottom",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "step",
+      "curveDepth": 60
+    },
+    {
+      "id": "e6",
+      "from": "input",
+      "to": "designate",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Input to",
+      "curve": "direct"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Not yet specified",
+      "x": 694,
+      "y": 6,
+      "width": 284,
+      "height": 222,
+      "color": "zinc"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

@@ -77,5 +77,9 @@
     ]
   },
   "stop": "You are done when a reader who was not in the conversation can say what will be built, why and what was left out, and you have approved that summary. Do not start building from the interview alone.",
-  "limits": "A specification shows that a plan is clear. It does not show the idea is worth building. The interview also cannot supply facts nobody in the room has, such as how much run-to-run variation the assays really show."
+  "limits": "A specification shows that a plan is clear. It does not show the idea is worth building. The interview also cannot supply facts nobody in the room has, such as how much run-to-run variation the assays really show.",
+  "next": {
+    "label": "Moving every assay off spreadsheets is too big to plan at once?",
+    "guide": "wayfinder"
+  }
 }

@@ -1,0 +1,94 @@
+{
+  "id": "wf-compare-build",
+  "figure": {
+    "title": "Build graph: slices drafted up front",
+    "code": "Fig W4"
+  },
+  "layout": {
+    "width": 1102,
+    "height": 292
+  },
+  "nodes": {
+    "s1": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "s3": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "code": {
+      "x": 720,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "s1": {
+      "name": "Import instrument A export",
+      "color": "emerald",
+      "icon": "Hammer",
+      "shape": "rounded",
+      "subtitle": "Slice \u00b7 unblocked",
+      "description": "Works end to end on its own: an export goes in and raw wells show."
+    },
+    "s3": {
+      "name": "Normalise to % of control",
+      "color": "emerald",
+      "icon": "Hammer",
+      "shape": "rounded",
+      "subtitle": "Slice",
+      "description": "Needs imported wells to normalise."
+    },
+    "code": {
+      "name": "Checked code",
+      "color": "blue",
+      "icon": "ShieldCheck",
+      "shape": "rounded",
+      "subtitle": "The graph ends here",
+      "description": "Each slice was checked on its own."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "s1",
+      "to": "s3",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "s3",
+      "to": "code",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Verified",
+      "curve": "direct"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
