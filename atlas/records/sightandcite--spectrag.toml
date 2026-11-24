@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:sightandcite/spectrag"
+canonical_url = "https://github.com/SightAndCite/SpectRAG"
+title = "SpectRAG: retrieval that adds a chunk graph to vector search"
+repository_owner = "SightAndCite"
+repository_name = "SpectRAG"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Splits documents into chunks, links related chunks in a graph, then expands from the top matches and picks a connected, non-repetitive set of chunks within a size limit for the answer."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a research implementation for questions that need several linked passages, not a drop-in retrieval layer. It uses a language model at indexing time by default, which adds cost and setup. I would revise this if it beats plain vector plus keyword search on my own documents, which I did not check."
+fit = "Use it when you want to study graph-based context selection for multi-hop questions. Skip it if you need a maintained library; the README labels its status as research."
+limitations = ["I did not run it or read the paper, so I cannot say how well the method works.", "The README gives no benchmark results, and I did not look at the code beyond the file layout it lists."]
+
+[provenance]
+seed_pointer = "reading-list:sightandcite/spectrag"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/SightAndCite/SpectRAG"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/SightAndCite/SpectRAG#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/SightAndCite/SpectRAG"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The default setup uses Ollama for embeddings, OpenAI gpt-4o-mini for indexing and answers, FAISS for vectors and Neo4j for the graph."
+source_url = "https://github.com/SightAndCite/SpectRAG#readme"
+
+[[facts]]
+claim = "Chunks are linked by six signals, including similarity of meaning, shared headings, shared concepts and neighboring position."
+source_url = "https://github.com/SightAndCite/SpectRAG#readme"
+
+[[facts]]
+claim = "It can run fully local by changing two settings in config.py."
+source_url = "https://github.com/SightAndCite/SpectRAG#readme"
+
+[[facts]]
+claim = "The README labels the project's status as research."
+source_url = "https://github.com/SightAndCite/SpectRAG#readme"
+
+[image]
+file = "sightandcite--spectrag.webp"
+kind = "diagram"
+alt = "Two-part pipeline diagram: offline indexing that builds a chunk graph, and online retrieval that expands from the top matches and selects a connected set of chunks."
+credit = "SpectRAG"
+source_url = "https://github.com/SightAndCite/SpectRAG/blob/HEAD/assets/online-offline-main-pipeline.png"

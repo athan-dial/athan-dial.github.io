@@ -5,16 +5,22 @@
 {{ $work := where (where (where (where site.RegularPages "Section" "work") "Params.status" "published") "Params.visibility" "public") "Params.featured" true }}
 {{ $featured := first 1 (sort (where $writing "Params.tier" "cornerstone") "Date" "desc") }}
 {{ if not $featured }}{{ $featured = first 1 (sort $writing "Date" "desc") }}{{ end }}
+{{- /* The Agentic Operating System, when its page is part of this build. A draft page exists only
+       under -D, so a production build renders neither the feature nor the links to it. Approval
+       is the owner's: see EDITORIAL.md. */ -}}
+{{ $system := site.GetPage "/work/agentic-operating-system" }}
+{{ $atlas := site.GetPage "/atlas" }}
 
 <nav class="fn-chapter-index" aria-label="Homepage chapters">
-  <span class="fn-chapter-index__mark" aria-hidden="true">A D / 07</span>
+  <span class="fn-chapter-index__mark" aria-hidden="true">A D / 08</span>
   <a href="#identity" data-fn-index-link>01 Identity</a>
   <a href="#current-idea" data-fn-index-link>02 Current idea</a>
   <a href="#work-in-practice" data-fn-index-link>03 Work</a>
   <a href="#fieldnotes" data-fn-index-link>04 Fieldnotes</a>
-  <a href="#trajectory" data-fn-index-link>05 Trajectory</a>
-  <a href="#operating-territory" data-fn-index-link>06 Territory</a>
-  <a href="#context" data-fn-index-link>07 Context</a>
+  <a href="#systems-atlas" data-fn-index-link>05 Systems Atlas</a>
+  <a href="#trajectory" data-fn-index-link>06 Trajectory</a>
+  <a href="#operating-territory" data-fn-index-link>07 Territory</a>
+  <a href="#context" data-fn-index-link>08 Context</a>
 </nav>
 
 <div class="fn-home container">
@@ -30,6 +36,9 @@
       <div class="fn-intro__actions">
         <a class="fn-text-link" href="#work-in-practice">See the work <span aria-hidden="true">↓</span></a>
         <a class="fn-text-link" href="/thinking/">Open Fieldnotes <span aria-hidden="true">↗</span></a>
+        {{- with $system }}
+        <a class="fn-text-link" href="{{ .RelPermalink }}">See how I run agent work <span aria-hidden="true">↗</span></a>
+        {{- end }}
       </div>
     </div>
     <figure class="fn-portrait">
@@ -41,43 +50,89 @@
   {{ range $featured }}
   <section id="current-idea" class="fn-feature fn-chapter" data-fn-chapter aria-labelledby="feature-title">
     <div class="fn-feature__copy">
-      <p class="fn-kicker">A question I keep coming back to</p>
+      <p class="fn-kicker">An idea I keep testing</p>
       <h2 id="feature-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <p>AI makes it faster to build and improve a product. The harder question is whether you are building the right thing, for the right person.</p>
+      <p>I once asked a colleague why a chat agent for an internal tool needed to be an app at all. Their answer was about user friendliness, which I first heard as an argument about implementation. It was really a disagreement about who the user was. A faster build loop would have built either version without asking which one should exist.</p>
       <a class="fn-text-link" href="{{ .RelPermalink }}">Read the essay <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="fn-feature__diagram">
-      <p class="fn-kicker">The outer loop</p>
-      <p class="fn-feature__question">Who is this for?<br>What needs to change?</p>
-      <div class="fn-mini-flow"><span>Plan</span><span aria-hidden="true">→</span><span>Build</span><span aria-hidden="true">→</span><span>Verify</span></div>
-      <p class="fn-feature__return">↶ Revisit the problem, not only the solution.</p>
-    </div>
+    {{- /* The Outer Loop plate. A 600x600 raster that already carries its own masthead,
+           legend, footer rule and body copy — so the site does NOT redraw it, caption over
+           it, or crop it. Two constraints follow from that and are load-bearing:
+
+           1. It is never upscaled. Its innermost labels sit at roughly 7px at native size,
+              so any enlargement softens the type it exists to make readable. `max-width`
+              is pinned at its native 600px.
+           2. It is never squeezed below the width where that type stops being legible.
+              Below the two-column breakpoint the plate takes the full measure instead of a
+              column, and the grid stops splitting.
+
+           The square is preserved by aspect-ratio rather than by object-fit: there is
+           nothing to cover or contain, because the intrinsic ratio is already 1:1 and any
+           object-fit strategy here could only introduce a crop the artwork cannot take. */ -}}
+    <figure class="fn-feature__plate">
+      {{- /* Two densities off one 1254px lossless source. The 600px webp that shipped
+             before was a 1x file in a 600 CSS-pixel box, so every 2x display stretched 600
+             device pixels into 1200 and the plate's 7px labels went soft. The 2x variant is
+             what makes this artwork legible at all; the 1x variant exists so a 1x screen
+             does not pay for it. */ -}}
+      {{- $src := resources.Get "img/outer-loop-highlight.png" -}}
+      {{- $x1 := $src.Resize "600x webp q92" -}}
+      {{- $x2 := $src.Resize "1200x webp q92" -}}
+      <img src="{{ $x1.RelPermalink }}"
+           srcset="{{ $x1.RelPermalink }} 1x, {{ $x2.RelPermalink }} 2x"
+           width="600" height="600"
+           alt="The outer loop: four human-judgment questions — who is this for, what needs to change, where does judgment remain, and what should become shared — circling an inner Plan, Build, Verify, Revise loop accelerated by AI. Evidence from the inner loop changes the next outer question. A faster build loop can perfect the wrong product."
+           loading="lazy" decoding="async">
+    </figure>
   </section>
   {{ end }}
 
-  {{ with $work }}
+  {{ if or $work $system }}
   <section id="work-in-practice" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="work-title">
     <div class="fn-section__head"><h2 id="work-title">Work in practice</h2><a href="/work/">Explore the work ↗</a></div>
-    <p class="fn-section__standfirst">Products and systems where the interesting part was not only whether we could build them, but what should become shared, durable, and trustworthy.</p>
+    <p class="fn-section__standfirst">A search tool that became about ten times faster and still left its expert user unsure the results were complete.{{ if $system }} A system for running agents without losing track of who decided what.{{ end }} In both, building was the easy part.</p>
+    {{- with $system }}
+    <article class="fn-system">
+      <p class="fn-kicker">A working system</p>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Params.card_summary }}</p>
+      <a class="fn-text-link" href="{{ .RelPermalink }}">Explore the seven views <span aria-hidden="true">↗</span></a>
+    </article>
+    {{- end }}
+    {{- with $work }}
     <div class="fn-work-grid">{{ range first 3 . }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+    {{- end }}
   </section>
   {{ end }}
 
   <section id="fieldnotes" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="notebook-title">
     <div class="fn-section__head"><h2 id="notebook-title">Fieldnotes <span>/ {{ len $writing }}</span></h2><a href="/thinking/">All writing ↗</a></div>
-    <p class="fn-section__standfirst">Working notes on AI, product judgment, expert workflows, verification, and the places where the boundary between a tool and its user keeps moving.</p>
-    <div class="fn-note-grid">{{ range first 3 (sort $writing "Date" "desc") }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
+    <p class="fn-section__standfirst">Essays and working notes on AI, product judgment and expert workflows.</p>
+    {{- /* The cornerstone already has its own chapter; do not list it twice. */ -}}
+    {{- $rest := sort $writing "Date" "desc" -}}{{- range $featured }}{{ $f := . }}{{ $rest = where $rest "Permalink" "ne" $f.Permalink }}{{ end -}}
+    <div class="{{ if le (len $rest) 2 }}fn-work-grid{{ else }}fn-note-grid{{ end }}">{{ range first 3 $rest }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
   </section>
+
+  {{ with $atlas }}
+  <section id="systems-atlas" class="fn-section fn-chapter" data-fn-chapter aria-labelledby="atlas-title">
+    <div class="fn-section__head"><h2 id="atlas-title">Systems Atlas <span>/ {{ len .Pages }}</span></h2><a href="{{ .RelPermalink }}">Open the notebook ↗</a></div>
+    <p class="fn-section__standfirst">A research notebook on other people’s software: agent memory, running agents safely, finding things in documents, tracking where data came from. I read each project and did not run it. Each entry says what it does, what I make of it and what I did not check. Inclusion is not an endorsement.</p>
+    {{- $letta := site.GetPage "/atlas/letta-ai--letta" }}{{ $mesh := site.GetPage "/atlas/sqlmesh--sqlmesh" }}
+    {{- if and $letta $mesh }}
+    <p class="fn-section__standfirst">Two places to start: <a href="{{ $letta.RelPermalink }}">{{ $letta.Title }}</a>, and <a href="{{ $mesh.RelPermalink }}">{{ $mesh.Title }}</a>.</p>
+    {{- end }}
+  </section>
+  {{ end }}
 
   <section id="trajectory" class="fn-trajectory fn-chapter" data-fn-chapter aria-labelledby="trajectory-title">
     <div class="fn-section__head">
       <div>
         <p class="fn-kicker">Trajectory</p>
-        <h2 id="trajectory-title">Research depth became a product problem.</h2>
+        <h2 id="trajectory-title">From clinical research to AI enablement, by way of data science and product.</h2>
       </div>
       <a href="/about/">About me ↗</a>
     </div>
-    <p class="fn-section__standfirst">The titles changed. The through-line is closer to translating complex expert work into systems people can actually use, inspect, and improve.</p>
+    <p class="fn-section__standfirst">The titles moved around. Each step kept asking when a result is trustworthy enough for someone to act on.</p>
     <ol class="fn-timeline">
       <li class="fn-timeline__item fn-timeline__item--foundation">
         <span class="fn-timeline__range">Foundation</span>
@@ -95,26 +150,20 @@
   <section id="operating-territory" class="fn-territory fn-chapter" data-fn-chapter aria-labelledby="territory-title">
     <div class="fn-territory__intro">
       <p class="fn-kicker">Operating territory</p>
-      <h2 id="territory-title">The work keeps changing. A few questions keep surviving it.</h2>
-      <p>AI is making more candidate work cheap enough to try. That moves the interesting problems downstream: which work deserves to become real, how we verify it, and where ownership still needs to be explicit.</p>
+      <h2 id="territory-title">Cheap execution moves the hard problems downstream.</h2>
+      <p>A prototype, an analysis or a draft recommendation now takes an afternoon. What takes time is deciding which one deserves to become real, checking it, and knowing who owns it afterwards. The <a href="/about/#territory">four questions I keep returning to</a> are about that.</p>
     </div>
     <div class="fn-territory__diagram">{{ partial "fieldnote-schematic.html" "abundant-execution" }}</div>
-    <div class="fn-territory-grid">
-      <article><span>01</span><h3>Product judgment</h3><p>What deserves to exist when building gets cheap?</p></article>
-      <article><span>02</span><h3>Expert work</h3><p>What should AI do, and what should remain inspectable?</p></article>
-      <article><span>03</span><h3>Verification</h3><p>How do we know when generated work deserves trust?</p></article>
-      <article><span>04</span><h3>Operating models</h3><p>When contribution broadens, who owns what happens next?</p></article>
-    </div>
   </section>
 
   <section id="context" class="fn-about fn-chapter" data-fn-chapter aria-labelledby="about-title">
-    <p class="fn-kicker">A little context</p>
-    <h2 id="about-title">Research roots.<br>A builder’s <em>instinct.</em></h2>
+    <p class="fn-kicker">Conversations</p>
+    <h2 id="about-title">Compare <em>notes.</em></h2>
     <div>
-      <p>I started in medical research. These days, I work across data science and product at {{ $profile.employer }}, building tools for people who bring their own expertise to the problem.</p>
-      <p>This site is the longer version of that work: what I have built, what I am testing, and the questions that keep surviving the tools.</p>
+      <p>This site is the longer version of the headline: the essays, the work behind them, and the questions that outlive the tools. If you are working through something similar, especially if the first attempt did not go the way you expected, I would like to hear about it.</p>
       <div class="fn-context-links">
         <a class="fn-text-link" href="/about/">More about me <span aria-hidden="true">↗</span></a>
+        <a class="fn-text-link" href="/about/#conversations">Start a conversation <span aria-hidden="true">↗</span></a>
         {{ with $profile.links.linkedin }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>{{ end }}
         {{ with $profile.links.github }}<a class="fn-text-link" href="{{ . }}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>{{ end }}
       </div>

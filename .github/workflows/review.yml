@@ -1,0 +1,43 @@
+name: Verify proposed site
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.154.3"
+          extended: true
+      - name: Build and run publication checks
+        run: |
+          hugo --gc --minify --cleanDestinationDir
+          bash scripts/verify-content-safety.sh
+          bash scripts/verify-fieldnotes-home.sh
+          bash scripts/publish-gate.sh --no-build
+      - name: Validate historical content and catalogue
+        run: |
+          bash scripts/verify-proof-layer.sh public
+          bash scripts/verify-documentary-voice.sh
+          python3 atlas/validate.py atlas/records
+          bash atlas/tests/run.sh
+          bash scripts/verify-editorial.sh
+          python3 tools/agentic-os-atlas/validate.py
+      - name: Check diff hygiene
+        run: git diff --check origin/main...HEAD
+      - name: Browser smoke check
+        run: |
+          npm install --prefix "$RUNNER_TEMP/review-browser" --no-save --no-package-lock playwright@1.65.1
+          "$RUNNER_TEMP/review-browser/node_modules/.bin/playwright" install --with-deps chromium
+          NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-browser.cjs
+          NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-header.cjs
+# This job deliberately has no Pages, id-token or deployment permissions.
+# A successful run does not replace private-denylist or human publication review.

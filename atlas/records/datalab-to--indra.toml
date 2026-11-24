@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:datalab-to/indra"
+canonical_url = "https://github.com/datalab-to/indra"
+title = "Indra OCR: a tiny CPU-only model for reading scanned pages"
+repository_owner = "datalab-to"
+repository_name = "indra"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Reads PDFs and images and outputs Markdown, text or JSON with a box and label for each line and block. The model is small enough to run on a CPU with no GPU."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a speed-first reader for clean printed pages, and the README's own limitations list says as much. Its accuracy and speed figures are the project's own, and I would revise this if it holds up on my own scans, which I did not try."
+fit = "Use it when you need quick OCR on a machine with no GPU and your pages are mostly clean print. Skip it if your pages have complex tables, handwriting or degraded scans, which the README lists as weak spots."
+limitations = ["I did not run it or check its accuracy and speed numbers. I read the whole README, including its limitations section, but not the benchmark pages it links."]
+
+[provenance]
+seed_pointer = "reading-list:datalab-to/indra"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/datalab-to/indra"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/datalab-to/indra#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/datalab-to/indra"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The default models are about 76 MB and run on ONNX Runtime, with no PyTorch."
+source_url = "https://github.com/datalab-to/indra#readme"
+
+[[facts]]
+claim = "For PDFs with a text layer it reads that text and runs OCR only on what is missing."
+source_url = "https://github.com/datalab-to/indra#readme"
+
+[[facts]]
+claim = "JSON output gives lines, boxes, layout blocks and confidence scores; Markdown and plain text are also available."
+source_url = "https://github.com/datalab-to/indra#readme"
+
+[[facts]]
+claim = "The code is Apache 2.0, and the model weights use a separate modified OpenRAIL-M license with its own commercial terms."
+source_url = "https://github.com/datalab-to/indra#readme"

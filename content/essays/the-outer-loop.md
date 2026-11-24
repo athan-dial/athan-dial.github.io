@@ -125,3 +125,5 @@ I still ask, "Why is this an app?"
 
 But the outer loop gives me a more precise version of the question:
 > What should experts be free to build, and what should they never have to rebuild?
+
+{{< atlas-link >}}

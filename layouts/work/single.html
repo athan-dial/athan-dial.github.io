@@ -11,6 +11,20 @@
 {{- $role := .Params.role | default "" -}}
 {{- $themes := .Params.themes | default slice -}}
 {{- $bluf := .Params.summary | default "" -}}
+{{- /* Depth, in words, above the title. The content pass ships two lengths under one
+       section: a flagship case runs the full skeleton, a proof note is deliberately
+       narrower — one artifact, one decision, one boundary. Unlabelled, a 900-word proof
+       note reads as a case that stopped early. The label is the difference between
+       "narrow on purpose" and "thin". */ -}}
+{{- $kindLabels := dict
+      "flagship" "Case"
+      "proof-note" "Proof note"
+      "quarantined" "Withheld pending source review" -}}
+{{- $kind := index $kindLabels (.Params.work_kind | default "") -}}
+{{- $kindNotes := dict
+      "proof-note" "Shorter than a full case, on purpose. One artifact, one decision, one boundary."
+      "quarantined" "This page is not published. Its framing did not survive source review." -}}
+{{- $kindNote := index $kindNotes (.Params.work_kind | default "") -}}
 {{- $railNotes := slice -}}
 {{- with $role -}}{{- $railNotes = $railNotes | append (printf "Role · %s" .) -}}{{- end -}}
 {{- with $users -}}{{- $railNotes = $railNotes | append (printf "Users · %s" (delimit . ", ")) -}}{{- end -}}
@@ -30,7 +44,13 @@
     <div class="case-study-intro">
       <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
       <header class="case-study-header">
+        {{- with $kind -}}
+        <p class="case-study-header__kind label-mono">{{ . }}</p>
+        {{- end -}}
         <h1 class="case-study-header__title">{{ .Title }}</h1>
+        {{- with $kindNote -}}
+        <p class="case-study-header__kind-note">{{ . }}</p>
+        {{- end -}}
         {{- /* The metadata row that used to sit here has moved to the colophon.
                A book does not print its production notes above the first line. */ -}}
         {{- /* The standfirst used to render .Params.summary here. With the "## BLUF"
@@ -53,6 +73,7 @@
     <footer class="colophon">
       <p class="colophon__label">Colophon</p>
       <dl class="colophon__list">
+        {{- with $kind }}<dt>Depth</dt><dd>{{ . }}</dd>{{- end }}
         {{- with $role }}<dt>Role</dt><dd>{{ . }}</dd>{{- end }}
         {{- with $users }}<dt>Users</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
         {{- with $themes }}<dt>Themes</dt><dd>{{ delimit . ", " }}</dd>{{- end }}

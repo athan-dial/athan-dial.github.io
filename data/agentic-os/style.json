@@ -1,0 +1,61 @@
+{
+  "id": "fieldnotes",
+  "version": "1.0.0",
+  "modes": {
+    "light": {
+      "background": "#fbfbfa",
+      "foreground": "#0b0b0c",
+      "muted": "#5c6066",
+      "surface": "#ffffff",
+      "border": "#c4c6cc",
+      "line": "#5c6066",
+      "accent": "#14543c",
+      "success": "#14543c",
+      "warning": "#6c7700",
+      "danger": "#5c6066",
+      "colors": {
+        "violet": "#23413a",
+        "emerald": "#14543c",
+        "blue": "#23413a",
+        "amber": "#6c7700",
+        "sky": "#5c6066",
+        "zinc": "#5c6066",
+        "rose": "#5c6066",
+        "orange": "#6c7700"
+      }
+    },
+    "dark": {
+      "background": "#fbfbfa",
+      "foreground": "#0b0b0c",
+      "muted": "#5c6066",
+      "surface": "#ffffff",
+      "border": "#c4c6cc",
+      "line": "#5c6066",
+      "accent": "#14543c",
+      "success": "#14543c",
+      "warning": "#6c7700",
+      "danger": "#5c6066",
+      "colors": {
+        "violet": "#23413a",
+        "emerald": "#14543c",
+        "blue": "#23413a",
+        "amber": "#6c7700",
+        "sky": "#5c6066",
+        "zinc": "#5c6066",
+        "rose": "#5c6066",
+        "orange": "#6c7700"
+      }
+    }
+  },
+  "brand": {
+    "nodeDecor": "none",
+    "nodeRadius": "6px",
+    "frame": "none",
+    "gridType": "none",
+    "arrowhead": "triangle"
+  },
+  "type": {
+    "font": "Archivo, system-ui, sans-serif",
+    "mono": "IBM Plex Mono, ui-monospace, monospace"
+  }
+}

@@ -1,0 +1,32 @@
+{{- /* One page per atlas/records/*.toml, read through the data/atlas mount. Fails the build on a malformed record. */ -}}
+{{- $meta := site.Data.atlas_meta -}}
+{{- $groupOf := newScratch -}}
+{{- range $meta.groups }}{{ $t := .title }}{{ range .topics }}{{ $groupOf.Set . $t }}{{ end }}{{ end -}}
+{{- range $slug, $r := site.Data.atlas -}}
+  {{- range slice "schema_version" "id" "canonical_url" "title" "topic" "mechanism" "evidence_state" "last_review_date" "opinion" "sources" "facts" -}}
+    {{- if not (isset $r .) }}{{ errorf "atlas record %s: missing required field %q" $slug . }}{{ end -}}
+  {{- end -}}
+  {{- if or (findRE `^S[0-9]+$` (string $r.id)) (hasPrefix $slug "sample-") }}{{ errorf "atlas record %s: synthetic sample record cannot ship" $slug }}{{ end -}}
+  {{- if not (hasPrefix $r.id "github:") }}{{ errorf "atlas record %s: id must be github:owner/repo" $slug }}{{ end -}}
+  {{- if ne $r.schema_version "atlas-record/1" }}{{ errorf "atlas record %s: unsupported schema_version %q" $slug $r.schema_version }}{{ end -}}
+  {{- $group := $groupOf.Get $r.topic -}}
+  {{- if not $group }}{{ errorf "atlas record %s: topic %q has no group in data/atlas_meta.toml" $slug $r.topic }}{{ end -}}
+  {{- $label := index $meta.evidence $r.evidence_state -}}
+  {{- if not $label }}{{ errorf "atlas record %s: evidence_state %q has no label in data/atlas_meta.toml" $slug $r.evidence_state }}{{ end -}}
+  {{- $params := dict
+      "id" $r.id "topic" $r.topic "group" $group
+      "evidence" $r.evidence_state "evidence_label" $label
+      "license" (default "" $r.license_spdx) "canonical_url" $r.canonical_url "reviewed" $r.last_review_date
+      "summary" $r.mechanism
+      "read" $r.opinion.value_judgment "fit" (default "" $r.opinion.fit) "limitations" $r.opinion.limitations
+      "facts" $r.facts "sources" $r.sources
+      "status" "published" "visibility" "public" -}}
+  {{- with $r.image }}{{ $params = merge $params (dict "image" .) }}{{ end -}}
+  {{- $.AddPage (dict
+    "path" $slug
+    "title" $r.title
+    "description" $r.mechanism
+    "kind" "page"
+    "params" $params
+  ) -}}
+{{- end -}}

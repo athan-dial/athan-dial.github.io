@@ -16,13 +16,13 @@ email = "athandial@gmail.com"
 foundation = "PhD in Medical Sciences, McMaster University"
 
 # Pronoun-free short bio from existing About page facts only.
-short_bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
+short_bio = "Works on AI enablement for expert work, mostly in scientific R&D. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
 
 # Homepage positioning. The v2 Fieldnotes page leads with the actual problem territory rather
 # than a generic motto; see .planning/design/PERSONAL-FIELDNOTES-UPDATE-2026-09-09.md.
-positioning_eyebrow = "Data science / Product / Applied AI"
+positioning_eyebrow = "AI enablement for expert work"
 positioning_headline = "I build AI and data products for people whose work depends on judgment."
-positioning_support = "I work across data science and product, mostly in scientific R&D. I’m interested in what changes when AI makes more work possible: which problems deserve a product, where expert judgment still matters, and how we verify what the machine produced."
+positioning_support = "I work on getting AI into expert workflows without losing the expertise. In practice that means three questions: which problem deserves a tool, where a person’s judgment has to stay, and how anyone checks what the machine produced."
 
 [links]
 linkedin = "https://www.linkedin.com/in/athandial/"

@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:gastownhall/beads"
+canonical_url = "https://github.com/gastownhall/beads"
+title = "Beads: a dependency-aware task graph for coding agents"
+repository_owner = "gastownhall"
+repository_name = "beads"
+date_observed = "date_not_recovered"
+topic = "agent-memory"
+mechanism = "A command-line issue tracker that stores an agent's tasks and their dependencies in a versioned database, so it can list what is ready and resume long jobs without losing context."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as task memory rather than conversation memory: it tracks what is done and what blocks what, not what was said. Calling that memory is the README's framing. I would revise my read if its stored notes prove useful across sessions, which I did not test."
+fit = "Use it when coding agents run long, multi-step work with dependencies between tasks. Skip it if you want recall of past conversations; it stores tasks and a few remembered notes."
+limitations = ["I did not run it or check how its summaries of old closed tasks behave.", "I read the whole README but not the linked docs, and I did not evaluate its experimental HTTP backend."]
+
+[provenance]
+seed_pointer = "reading-list:gastownhall/beads"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/gastownhall/beads"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/gastownhall/beads#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/gastownhall/beads"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It uses Dolt, a version-controlled SQL database, and syncs between machines with Dolt push and pull."
+source_url = "https://github.com/gastownhall/beads#readme"
+
+[[facts]]
+claim = "Task IDs are hashes, which the README says prevents merge collisions across agents and branches."
+source_url = "https://github.com/gastownhall/beads#readme"
+
+[[facts]]
+claim = "The ready command lists tasks with no open blockers, and the claim option takes a task atomically."
+source_url = "https://github.com/gastownhall/beads#readme"
+
+[[facts]]
+claim = "The remember command stores a note that the prime command injects into later sessions."
+source_url = "https://github.com/gastownhall/beads#readme"

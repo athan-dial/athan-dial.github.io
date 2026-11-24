@@ -1,0 +1,2 @@
+# Patch files carry context lines that end in a space; they are data, not source.
+tools/agentic-os-atlas/patches/*.patch -whitespace

@@ -1,0 +1,61 @@
+schema_version = "atlas-record/1"
+id = "github:tech4242/agenttop"
+canonical_url = "https://github.com/tech4242/agenttop"
+title = "agenttop: a terminal dashboard for watching coding agents"
+repository_owner = "tech4242"
+repository_name = "agenttop"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "A terminal screen, in the style of htop, that shows what running coding agents are doing: their tool calls, token use and session status. It reads the telemetry the agents already emit."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a monitoring view rather than a way to control agents, and its usefulness depends on what each agent chooses to report. I would revise that if the live session panel works for more than Claude Code, which I did not check."
+fit = "Look at it when you run Claude Code or similar agents and want to see tool use, token use and rate limits in one place. Skip it if you use agents that give no telemetry, such as Aider or Cursor."
+limitations = ["I did not run it. The README says results vary by agent, and the full session panel is described for Claude Code only.", "I read the README's agent table but did not check which rows still hold today."]
+
+[provenance]
+seed_pointer = "reading-list:tech4242/agenttop"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/tech4242/agenttop"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/tech4242/agenttop#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/tech4242/agenttop"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It reads OpenTelemetry data from agents such as Claude Code, Codex CLI, Gemini CLI and Cline."
+source_url = "https://github.com/tech4242/agenttop#readme"
+
+[[facts]]
+claim = "For Claude Code, a live session panel shows each session as thinking, executing, waiting or rate limited, with its current tool and any subagents."
+source_url = "https://github.com/tech4242/agenttop#readme"
+
+[[facts]]
+claim = "Cursor, GitHub Copilot CLI and Aider give no usable telemetry, according to the project."
+source_url = "https://github.com/tech4242/agenttop#readme"
+
+[image]
+file = "tech4242--agenttop.webp"
+kind = "screenshot"
+alt = "Terminal screenshot of agenttop: a dense htop-style table of coding-agent sessions with tool calls and token use."
+credit = "agenttop"
+source_url = "https://github.com/tech4242/agenttop/blob/HEAD/docs/preview.png"

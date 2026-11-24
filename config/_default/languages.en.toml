@@ -2,7 +2,7 @@ disabled = false
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Athan Dial — Fieldnotes on AI, data, and expert work"
+title = "Athan Dial: AI enablement for expert work"
 
 [params]
   displayName = "EN"
@@ -12,7 +12,7 @@ title = "Athan Dial — Fieldnotes on AI, data, and expert work"
   # logo = "img/logo.png"
   # secondaryLogo = "img/secondary-logo.png"
   # Drawn from data/profile.toml short_bio (trimmed to ~155 chars). No measured-impact claims.
-  description = "Experiments, working methods, and essays on AI, data, product judgment, and expert work by Athan Dial."
+  description = "Athan Dial works on AI enablement for expert work. Essays, a research notebook on other people's software, and the career path behind them."
   # copyright = "Copy, _right?_ :thinking_face:"
 
 [params.author]
@@ -20,5 +20,5 @@ title = "Athan Dial — Fieldnotes on AI, data, and expert work"
 #   email = "youremail@example.com"
 #   imageQuality = 96
   # Drawn from data/profile.toml positioning_eyebrow and short_bio.
-  headline = "Fieldnotes on AI, data, and expert work"
-  bio = "Builds decision systems and applied AI inside scientific organizations. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."
+  headline = "AI enablement for expert work"
+  bio = "Works on AI enablement for expert work, mostly in scientific R&D. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, McMaster University."

@@ -1,0 +1,66 @@
+schema_version = "atlas-record/1"
+id = "github:alexgreensh/token-optimizer"
+canonical_url = "https://github.com/alexgreensh/token-optimizer"
+title = "Token Optimizer: a plugin that trims wasted AI coding context"
+repository_owner = "alexgreensh"
+repository_name = "token-optimizer"
+date_observed = "date_not_recovered"
+topic = "agent-tooling"
+mechanism = "Hooks into AI coding assistants to shrink command output and repeated file reads, save a checkpoint before the assistant compacts its history, and show a dashboard of where tokens and money went."
+license_spdx = "NOASSERTION"
+license_note = "The LICENSE file is PolyForm Noncommercial 1.0.0, with a separate written permission for businesses under 5 people and $20k a month in revenue."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Saving a checkpoint before the assistant compacts its history looks like the useful part, since compression savings are lost if the work is lost. The pitch covers a lot of ground, so I read it as several tools in one. I would revise this if the compression hides output the assistant needed, which I did not test."
+fit = "Use it when you run long coding sessions and want to see where context goes and keep state across compaction. Skip it if you want a small single-purpose tool or cannot use a noncommercial license."
+limitations = ["I read the first part of a long README and only the section headings after that, not the linked docs or code, so how the hooks work and how they are kept safe is unchecked.", "Its savings examples and comparison tables against other tools are the author's own, and I did not verify them."]
+
+[provenance]
+seed_pointer = "reading-list:alexgreensh/token-optimizer"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/alexgreensh/token-optimizer"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/alexgreensh/token-optimizer#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/alexgreensh/token-optimizer"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It checkpoints session state before auto-compaction and restores it afterward."
+source_url = "https://github.com/alexgreensh/token-optimizer#readme"
+
+[[facts]]
+claim = "It audits config files, skills, memory and tool setup for waste, and scores context quality on seven signals."
+source_url = "https://github.com/alexgreensh/token-optimizer#readme"
+
+[[facts]]
+claim = "It installs as a Claude Code plugin and lists support for Codex, Cursor, Copilot, OpenCode and others."
+source_url = "https://github.com/alexgreensh/token-optimizer#readme"
+
+[[facts]]
+claim = "The project says it has no runtime dependencies and sends no telemetry."
+source_url = "https://github.com/alexgreensh/token-optimizer#readme"
+
+[image]
+file = "alexgreensh--token-optimizer.webp"
+kind = "screenshot"
+alt = "Dark dashboard screenshot from Token Optimizer showing token and cost totals and a model mix bar."
+credit = "Token Optimizer"
+source_url = "https://github.com/alexgreensh/token-optimizer/blob/HEAD/skills/token-optimizer/assets/dashboard-demo.gif"

@@ -1,0 +1,66 @@
+schema_version = "atlas-record/1"
+id = "github:glitterkill/sdl-mcp"
+canonical_url = "https://github.com/GlitterKill/sdl-mcp"
+title = "SDL-MCP: a symbol index that feeds coding agents small slices of code"
+repository_owner = "GlitterKill"
+repository_name = "sdl-mcp"
+date_observed = "date_not_recovered"
+topic = "code-intelligence"
+mechanism = "Indexes a code repository into functions, classes and the links between them. A coding agent then asks for short summaries first and pulls actual source only when a task needs it."
+license_spdx = "NOASSERTION"
+license_note = "The LICENSE file is a custom source-available Community License: free use including internal business use, with a paid commercial license needed to sell, embed or distribute it in a monetized product."
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a deliberate trade: the agent gets less code up front and has to ask for more. That only pays off if the short summaries are good enough to ask well. I would revise this if agents on real tasks end up making more requests than they save, which I did not check."
+fit = "Use it when a coding agent keeps loading whole files and you want it to start from symbols and relationships. Skip it if you cannot accept a source-available license or need a tool with no indexing step."
+limitations = ["I read the README only and did not follow the linked docs, so how the index is built and kept current is unchecked.", "I did not check the README's claims that this saves tokens or improves agent output."]
+
+[provenance]
+seed_pointer = "reading-list:glitterkill/sdl-mcp"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/GlitterKill/sdl-mcp"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/GlitterKill/sdl-mcp#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/GlitterKill/sdl-mcp"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It indexes a repository into a graph of symbols (named code units) and their relationships, using tree-sitter for structure."
+source_url = "https://github.com/GlitterKill/sdl-mcp#readme"
+
+[[facts]]
+claim = "Agents escalate in steps from compact symbol cards to skeletons and hot paths, then to policy-gated source windows."
+source_url = "https://github.com/GlitterKill/sdl-mcp#readme"
+
+[[facts]]
+claim = "It runs locally and speaks the Model Context Protocol over stdio or HTTP."
+source_url = "https://github.com/GlitterKill/sdl-mcp#readme"
+
+[[facts]]
+claim = "Development memories, which store decisions and task notes linked to the repository, are opt-in."
+source_url = "https://github.com/GlitterKill/sdl-mcp#readme"
+
+[image]
+file = "glitterkill--sdl-mcp.webp"
+kind = "banner"
+alt = "SDL-MCP banner: the project name and the words 'the context budget layer' beside a glowing diagram of code layers."
+credit = "SDL-MCP"
+source_url = "https://github.com/GlitterKill/sdl-mcp/blob/HEAD/docs/readme-assets/readme-hero-v10.webp"

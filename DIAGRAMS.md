@@ -59,3 +59,11 @@ arrow could be ambiguous. Make important branches, boundaries and feedback visib
 numbered classification, a claim headline and one takeaway. Implement in semantic HTML with the
 existing diagram classes; let text wrap and recompose the flow on narrow screens. Do not invent
 measurements, outcomes, authority or causal relationships. If prose explains it better, say so.
+
+## Interactive atlas
+
+Relationships that need exploration rather than a single static figure can use the Agentic Operating
+System atlas pattern: native Arc plates in `data/agentic-os/`, drawn with the same semantics (forest = action
+or tool, paper = data or evidence, citrus = human judgment, diamond = a decision gate, dashed = feedback),
+with a complete text version rendered by Hugo for readers without JavaScript. It is a page-scoped exception
+(see `CLAUDE.md`); do not load the bundle anywhere else, and do not use it where a static schematic is enough.

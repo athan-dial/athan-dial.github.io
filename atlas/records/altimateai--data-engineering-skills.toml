@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:altimateai/data-engineering-skills"
+canonical_url = "https://github.com/AltimateAI/data-engineering-skills"
+repository_owner = "altimateai"
+repository_name = "data-engineering-skills"
+title = "Data Engineering Skills: dbt and Snowflake skills for Claude Code"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "Skills, meaning packaged instructions an agent loads for a task, for analytics engineers. They steer Claude through building, testing and debugging dbt models and tuning Snowflake queries."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "The narrow scope is the point: it encodes habits like building and checking output after every change. I would revise my read if the project's own benchmark gains hold up outside its internal setup, which I did not check."
+fit = "Use it when your team already works in dbt and Snowflake and wants an agent to follow a fixed build-and-verify routine. Skip it if your stack is another warehouse or you want skills for general coding."
+limitations = ["I did not read the skill files or run the benchmark, and the README says the evaluation setup is internal and not yet open sourced.", "I did not check how much it relies on the vendor's separate MCP server and command line tool."]
+
+[[facts]]
+claim = "The skills cover dbt model creation, debugging, testing, documentation and incremental models, plus Snowflake query cost and tuning."
+source_url = "https://github.com/AltimateAI/data-engineering-skills#readme"
+
+[[facts]]
+claim = "The project says its skills raised accuracy on a dbt benchmark from 46.5 percent to 53.5 percent, using Claude Sonnet 4.5."
+source_url = "https://github.com/AltimateAI/data-engineering-skills#readme"
+
+[[facts]]
+claim = "One skill hands work to the vendor's altimate-code tool, which must be installed separately."
+source_url = "https://github.com/AltimateAI/data-engineering-skills#readme"
+
+[provenance]
+seed_pointer = "reading-list:altimateai/data-engineering-skills"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/AltimateAI/data-engineering-skills"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/AltimateAI/data-engineering-skills#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/AltimateAI/data-engineering-skills"
+kind = "api_metadata"
+accessed = "2026-11-06"

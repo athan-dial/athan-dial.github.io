@@ -53,10 +53,11 @@ Target: [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/). Mark each item pass/
   and collide with neighbouring words. Listing titles and standalone actions (archive,
   profile, read-essay) carry the 44px target instead via `.link-action`.
 
-  **Open item — masthead wordmark focus ring.** `.site-header__name` now meets 44px, but it
-  keeps `overflow: hidden` as its flex truncation guard, which clips its 3px focus ring. Fixing
-  that properly means restructuring the header's truncation, and narrow widths are not testable
-  in this sandbox (CLAUDE.md constraint 5). Verify below 768px on real hardware before changing it.
+  **Resolved 2026-11-24 — masthead wordmark.** `overflow: hidden` plus flex-shrink was both clipping the
+  3px focus ring and, once Systems Atlas made the navigation longer, cutting the name to "Athan Di" at 390px
+  with no page overflow to flag it. The wordmark now never shrinks or truncates, the navigation takes its own
+  row below 600px, and `scripts/verify-header.cjs` measures label clipping, the four links, 44px targets and
+  focus-ring visibility at 320, 390, 768 and 1280px (headless emulation, not a physical device).
 
 - [ ] **Descriptive links** — No “click here”; link text makes sense out of context.
 - [ ] **Alt text** — Informative images have descriptive `alt`; decorative images `alt=""`. OG `og:image:alt` set.
@@ -301,3 +302,107 @@ Static sRGB contrast calculations for the new layer (not a browser audit):
 All listed text pairs exceed 4.5:1. The new layer uses token colors directly; historical
 computed-color results above do not validate this revision. Browser layout, text enlargement,
 and computed-color checks are pending. Diagrams now use wrapping native HTML and explicit labels.
+
+## Proof layer · 2026-09-10
+
+Browser-run, not calculated. Headless Chrome via Playwright against `hugo server` on
+localhost:1313, plus a DPR-2 WKWebView check for the Outer Loop asset. The script lives at
+`scripts/`-adjacent scratch and its assertions are reproduced below; the durable regression
+subset is in `scripts/verify-proof-layer.sh`.
+
+Pages under test: `/`, `/about/`, `/work/`, `/thinking/`.
+
+| Check | Widths / condition | Result |
+| --- | --- | --- |
+| No horizontal body scroll | 1600, 1440, 1024, 768, 390 px | pass, all 4 pages at all 5 widths |
+| 200% text zoom (`html{font-size:200%}` → 32px root) | 1280 px | pass — no horizontal scroll, no text clipped by `overflow:hidden` |
+| Keyboard-only traversal, visible focus on every stop | 1280 px | pass — 33 stops on `/`, 22 on `/about/`, 13 on `/work/`, 22 on `/thinking/`, each with an outline, box-shadow, or underline |
+| JavaScript disabled | 1280 px | pass — all seven homepage chapters and all five About section anchors present; no section hidden, transparent, or `display:none` at rest; 5,027 chars of text on `/`, 7,234 on `/about/` |
+| `prefers-reduced-motion: reduce` | 1440 px | pass — zero elements with a transition or animation duration above 0.05s, `scroll-behavior: auto`, every section opaque |
+
+Narrow was testable in this environment, unlike earlier passes — 390 px is included above and
+is a real measurement, not an inference.
+
+### Outer Loop asset density
+
+The artwork is a 1254x1254 lossless PNG; Hugo Pipes emits 600 px and 1200 px WebP variants
+behind a `1x, 2x` srcset. Rendered box is 598 CSS px.
+
+| Device pixel ratio | Device pixels needed | Variant chosen | Verdict |
+| --- | --- | --- | --- |
+| 1 | 598 | 600 px | exact |
+| 2 | 1196 | 1200 px | exact — this is the case the pass existed to fix |
+| 3 | 1794 | 1200 px | **under-sampled 1.5x.** A ~1800 px source would close it; the spec names ~1800 as the target and 1200 as the floor. |
+
+### New colour pairs
+
+No new hex was introduced. Pairs used by the new components, from the 2026-09-09 table above:
+
+| Pair | Context | Contrast |
+| --- | --- | --- |
+| ink / citrus | About research-signal strip, Work index evidence rule | 16.09:1 |
+| secondary / paper | standfirsts, mono field labels, "not measured" values | 6.11:1 |
+| forest / paper | territory index numerals, lead-essay title | 8.58:1 |
+
+Colour never carries meaning alone in the new components: the Work index evidence class is
+stated in words ("Measured, published as a range"), and every "not measured" value is labelled
+and additionally marked with a dashed rule.
+
+### Not verified
+
+- Real browser text zoom in Safari and Firefox. The 200% figure above is Chrome with a root
+  font-size override, which is the standard proxy but is not the same code path.
+- Screen-reader traversal. No AT was run.
+- Core Web Vitals at p75. Not measured in this pass.
+
+## Work content render pass · 2026-09-10
+
+Re-run of the proof-layer sweep with the four review-gated Work routes added, after the
+`work_kind` depth grouping, the depth labels, and the draft-only in-review shelf.
+
+Pages under test: `/`, `/about/`, `/work/`, `/thinking/`, and the four gated Work drafts
+(`/work/the-result-got-weaker-after-we-checked-it/`,
+`/work/lock-the-outcome-not-the-prototype/`,
+`/work/before-the-agent-build-the-benchmark/`,
+`/work/automation-was-not-the-whole-bottleneck/`).
+
+| Check | Widths / condition | Result |
+| --- | --- | --- |
+| No horizontal body scroll | 1600, 1440, 1024, 768, 390 px | pass, all 8 pages at all 5 widths |
+| 200% text zoom | 1280 px | pass, all 8 pages — no horizontal scroll, no clipped text |
+| Keyboard-only, visible focus on every stop | 1280 px | pass — 32 stops on `/`, 21 on `/about/`, 17 on `/work/`, 22 on `/thinking/` |
+| JavaScript disabled | `/` and `/about/` | pass — all sections present, nothing hidden at rest |
+| `prefers-reduced-motion: reduce` | `/`, `/about/`, `/thinking/` | pass — zero animating elements |
+
+No new colour pairs. The in-review shelf uses citrus at 45% over paper as a hazard stripe,
+with all its text set on an opaque `--surface` panel rather than on the stripe, so no text
+contrast depends on the pattern. It is draft-build-only and never reaches production.
+
+### Dev-server staleness — worth knowing
+
+The long-running `hugo server -D` on :1313 stopped picking up layout changes partway
+through this pass. A static `hugo -D --destination …` build rendered the new in-review
+shelf; the server returned the old markup for the same template. Restarting the server
+fixed it.
+
+Consequence for review: **a page reviewed at localhost:1313 during a long session may be a
+stale render.** When a template change appears not to have taken effect, restart the server
+before debugging the template. Verified this session, not inferred.
+
+## Dev-server traps · 2026-09-10
+
+Two ways the local `hugo server` produced misleading verification results in one session.
+Both verified, neither inferred.
+
+**1. A running `hugo server -D` pollutes `public/`.** It writes draft pages into
+`publishDir`, so any gate reading `public/` measures a non-production build.
+`verify-proof-layer.sh` failed with "the quarantined absent-user narrative is in the
+production build" while that page's frontmatter was correct and `buildDrafts = false`; a
+clean `hugo --gc --minify --destination /tmp/x` excluded it properly. The same mechanism can
+produce a false PASS, which leaves no trace at all. The gate now warns when a server is
+running and reports two of its failures as a polluted build dir rather than as a content
+fault. Rule: stop the server, `rm -rf public`, rebuild, then gate.
+
+**2. A long-running server goes stale on layout changes.** It served old markup for an
+edited template while a static `-D` build rendered the new one. Restarting fixed it. If a
+template change appears to have done nothing, restart before debugging the template.

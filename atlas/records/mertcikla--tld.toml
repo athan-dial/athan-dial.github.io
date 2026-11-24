@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:mertcikla/tld"
+canonical_url = "https://github.com/Mertcikla/tld"
+title = "tld: software architecture diagrams managed from the shell"
+repository_owner = "Mertcikla"
+repository_name = "tld"
+date_observed = "date_not_recovered"
+topic = "agent-tooling"
+mechanism = "Draws software architecture diagrams from a command line, local YAML files and a web editor, and can map a codebase so an agent can build or update the diagrams."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as diagrams treated like code, which suits agents that need to keep architecture maps current. It also ships a web app, a desktop app and a hosted version, so the surface is wide. I would revise this if agent-built diagrams stay accurate after a few commits, which I did not test."
+fit = "Use it when you want agents or CI to create and update architecture diagrams stored beside code. Skip it if you want a single-file diagram format; it runs a server backed by SQLite or PostgreSQL."
+limitations = ["I did not run it or try the install script, which downloads from the project's own site.", "I did not open the linked example diagrams or the agent skill file."]
+
+[provenance]
+seed_pointer = "reading-list:mertcikla/tld"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/Mertcikla/tld"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/Mertcikla/tld#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/Mertcikla/tld"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "A single binary holds the server and web app, with CLI and desktop options."
+source_url = "https://github.com/Mertcikla/tld#readme"
+
+[[facts]]
+claim = "The CLI can index a repository, compare Git revisions and expose diagram tools to agent clients over MCP."
+source_url = "https://github.com/Mertcikla/tld#readme"
+
+[[facts]]
+claim = "Diagrams sync between local YAML files, the self-hosted UI and the cloud version at tldiagram.com."
+source_url = "https://github.com/Mertcikla/tld#readme"
+
+[[facts]]
+claim = "The design is inspired by the C4 model."
+source_url = "https://github.com/Mertcikla/tld#readme"

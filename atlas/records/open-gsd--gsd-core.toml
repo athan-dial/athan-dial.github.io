@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:open-gsd/gsd-core"
+canonical_url = "https://github.com/open-gsd/gsd-core"
+title = "GSD Core: a phase loop for AI coding agents"
+repository_owner = "open-gsd"
+repository_name = "gsd-core"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "Installs commands into coding agents such as Claude Code, Codex and Cursor. They walk a project through discuss, plan, execute, verify and ship, with heavy work handed to helper agents that start fresh."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a process wrapper more than a tool: it fixes the order of work and keeps decisions in files so a new session can pick up where the last stopped. The fresh-helper design is a good fit for long projects. I would revise this if the extra steps cost more time than they save on small changes, which I did not check."
+fit = "Use it when a project will run across many agent sessions and you want decisions and plans written down. Skip it if your tasks are small one-off edits that a single prompt handles."
+limitations = ["I did not run the installer or any phase, so I cannot say how the loop behaves in a real project.", "I read only the top-level README and not the linked docs, so how the state files work is unchecked."]
+
+[provenance]
+seed_pointer = "reading-list:open-gsd/gsd-core"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/open-gsd/gsd-core"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/open-gsd/gsd-core#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/open-gsd/gsd-core"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Each milestone repeats five steps: discuss, plan, execute, verify and ship."
+source_url = "https://github.com/open-gsd/gsd-core#readme"
+
+[[facts]]
+claim = "Research, planning and execution run in subagents with fresh context, to keep the main session small."
+source_url = "https://github.com/open-gsd/gsd-core#readme"
+
+[[facts]]
+claim = "State files such as STATE.md and CONTEXT.md carry decisions between sessions."
+source_url = "https://github.com/open-gsd/gsd-core#readme"
+
+[[facts]]
+claim = "It installs with npx @opengsd/gsd-core@latest and targets several agent runtimes, including Claude Code, Codex, Cursor and Copilot."
+source_url = "https://github.com/open-gsd/gsd-core#readme"

@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:fabro-sh/fabro"
+canonical_url = "https://github.com/fabro-sh/fabro"
+title = "Fabro: workflow graphs for coding agents"
+repository_owner = "fabro-sh"
+repository_name = "fabro"
+date_observed = "date_not_recovered"
+topic = "agent-orchestration"
+mechanism = "You write the steps of a coding task as a graph, and Fabro has agents carry it out. It supports branching, loops, human approval gates and per-step model choice, and saves each step to Git."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "Writing the process down as a reviewable file, instead of watching an agent chat, is a sensible way to trust agent output. I would revise this if the graphs prove too rigid for work that changes shape midway, which I did not try."
+fit = "Use it when you want repeatable coding workflows with test gates and human approval points. Skip it if you want one agent in a chat session."
+limitations = ["I only read the README and did not open the linked docs or run a workflow.", "I did not check the cost savings and security benefits listed as use cases; they are the project's own claims."]
+
+[provenance]
+seed_pointer = "reading-list:fabro-sh/fabro"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/fabro-sh/fabro"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/fabro-sh/fabro#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/fabro-sh/fabro"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "Workflows are defined in Graphviz DOT files with branching, loops, parallel steps and human approval gates."
+source_url = "https://github.com/fabro-sh/fabro#readme"
+
+[[facts]]
+claim = "A CSS-like stylesheet routes each step to a chosen model and provider, with fallback chains."
+source_url = "https://github.com/fabro-sh/fabro#readme"
+
+[[facts]]
+claim = "Every stage commits code changes and run metadata to Git branches, so runs can be resumed or reverted."
+source_url = "https://github.com/fabro-sh/fabro#readme"
+
+[[facts]]
+claim = "Agents can run in isolated Daytona cloud sandboxes, and Fabro itself is a single Rust binary."
+source_url = "https://github.com/fabro-sh/fabro#readme"
+
+[image]
+file = "fabro-sh--fabro.webp"
+kind = "screenshot"
+alt = "Dark screenshot of the Fabro runs board, with task cards in columns for working, pending, verify and merge."
+credit = "Fabro"
+source_url = "https://github.com/fabro-sh/fabro/blob/HEAD/docs/public/images/runs-board.png"

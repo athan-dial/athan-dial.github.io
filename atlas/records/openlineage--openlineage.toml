@@ -1,0 +1,57 @@
+schema_version = "atlas-record/1"
+id = "github:openlineage/openlineage"
+canonical_url = "https://github.com/OpenLineage/OpenLineage"
+title = "OpenLineage: a shared format for data lineage"
+repository_owner = "openlineage"
+repository_name = "openlineage"
+date_observed = "date_not_recovered"
+topic = "data-lineage"
+mechanism = "A standard format for reporting which jobs ran and which datasets they read and wrote, so different tools can understand each other's records."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-04"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I would start a lineage reading here, because a standard fixes the nouns (run, job, dataset) every other tool has to agree on. That holds only if the other tools in this list emit it, which I did not check. I read the README, not the specification."
+fit = "Use it when several tools need to share lineage records. Skip it if you only need to know which tables one SQL statement touches; SQLLineage covers that."
+limitations = ["I did not read the specification or the list of integrations."]
+
+[provenance]
+seed_pointer = "seed-index:OpenLineage/OpenLineage"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/OpenLineage/OpenLineage"
+kind = "upstream_repo"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://github.com/OpenLineage/OpenLineage#readme"
+kind = "readme"
+accessed = "2026-11-04"
+
+[[sources]]
+url = "https://api.github.com/repos/OpenLineage/OpenLineage"
+kind = "api_metadata"
+accessed = "2026-11-04"
+
+[[facts]]
+claim = "It is an open standard for metadata and lineage collection, designed to instrument jobs as they are running."
+source_url = "https://github.com/OpenLineage/OpenLineage#readme"
+
+[[facts]]
+claim = "It defines a generic model of run, job and dataset entities, identified using consistent naming strategies."
+source_url = "https://github.com/OpenLineage/OpenLineage#readme"
+
+[image]
+file = "openlineage--openlineage.svg"
+kind = "diagram"
+alt = "OpenLineage diagram from the project README."
+credit = "OpenLineage"
+source_url = "https://github.com/OpenLineage/OpenLineage/blob/main/doc/with-ol.svg"

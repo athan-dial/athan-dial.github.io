@@ -32,6 +32,7 @@ ids = [
     "current-idea",
     "work-in-practice",
     "fieldnotes",
+    "systems-atlas",
     "trajectory",
     "operating-territory",
     "context",
@@ -53,7 +54,7 @@ if re.search(r'\{\{[^}]*\.summary\b', text, re.I):
     raise SystemExit("homepage template renders a summary field; trajectory must use safe fields only")
 print("ok")
 PY
-ok "seven chapters and marginal-index anchors are present in canonical order"
+ok "eight chapters and marginal-index anchors are present in canonical order"
 
 grep -Fq 'site.Data.experience' "$INDEX" || fail "trajectory does not consume canonical experience data"
 grep -Fq 'collections.Reverse $experience' "$INDEX" || fail "trajectory is not rendered foundation-to-present"
@@ -81,7 +82,7 @@ ok "home-only CSS and script are bundled through Hugo"
 if [ -f public/index.html ]; then
   HTML="public/index.html"
   # hugo --minify drops attribute quotes, so match both id="x" and id=x.
-  for item in identity current-idea work-in-practice fieldnotes trajectory operating-territory context; do
+  for item in identity current-idea work-in-practice fieldnotes systems-atlas trajectory operating-territory context; do
     grep -Eq "id=\"?$item\"?[ >]" "$HTML" || fail "built homepage missing #$item"
   done
   grep -Fq "$EXPECTED_HEADLINE" "$HTML" || fail "built homepage missing canonical headline"

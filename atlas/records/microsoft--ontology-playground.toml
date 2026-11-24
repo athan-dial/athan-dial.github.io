@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:microsoft/ontology-playground"
+canonical_url = "https://github.com/microsoft/Ontology-Playground"
+title = "Ontology Playground: a web app for designing ontologies"
+repository_owner = "microsoft"
+repository_name = "Ontology-Playground"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "A static web app for learning about ontologies, which are structured maps of things and how they relate. You browse sample ones, draw your own, and export them as RDF/XML."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a teaching and sketching tool for Microsoft Fabric IQ, not a retrieval system. The README calls it a preview and says it was built with AI-assisted coding. I would revise this if its exports load cleanly into other ontology tools, which I did not test."
+fit = "Use it when you want to learn ontology design or sketch one before modeling it for Fabric IQ. Skip it if you need a graph store to query in production; the README describes a static site with no backend."
+limitations = ["I did not open the live site or run it.", "I read the feature sections closely and only skimmed the setup and Azure sections."]
+
+[provenance]
+seed_pointer = "reading-list:microsoft/ontology-playground"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/microsoft/Ontology-Playground"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/microsoft/Ontology-Playground#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/microsoft/Ontology-Playground"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It draws any ontology as an interactive graph you can pan, zoom and search."
+source_url = "https://github.com/microsoft/Ontology-Playground#readme"
+
+[[facts]]
+claim = "It includes a catalogue of ontologies across six domains and a visual designer with RDF/XML and JSON export."
+source_url = "https://github.com/microsoft/Ontology-Playground#readme"
+
+[[facts]]
+claim = "The project describes itself as a preview and says it was built with AI-assisted coding."
+source_url = "https://github.com/microsoft/Ontology-Playground#readme"
+
+[[facts]]
+claim = "It is a fully static site with zero backend dependencies."
+source_url = "https://github.com/microsoft/Ontology-Playground#readme"
+
+[image]
+file = "microsoft--ontology-playground.webp"
+kind = "screenshot"
+alt = "Screenshot of Ontology Playground: a graph of linked circles labelled Product, Shopping Cart, Order and Review, with a sidebar of guided steps."
+credit = "Ontology Playground"
+source_url = "https://github.com/microsoft/Ontology-Playground/blob/HEAD/public/og-image.png"

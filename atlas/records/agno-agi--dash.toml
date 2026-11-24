@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:agno-agi/dash"
+canonical_url = "https://github.com/agno-agi/dash"
+title = "Dash: a data question-answering agent that learns from errors"
+repository_owner = "agno-agi"
+repository_name = "dash"
+date_observed = "date_not_recovered"
+topic = "data-analytics-agents"
+mechanism = "Answers plain-English questions about a Postgres database by writing SQL, and saves the fix whenever a query fails. Reached from Slack, a terminal or a web UI."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a sensible split: the analyst agent reads data with read-only access, and a separate engineer agent writes only to its own schema, enforced by the database rather than the prompt. I would revise this if the saved fixes drift or pile up wrong over time, which I did not test."
+fit = "Use it when you want a text-to-SQL agent over Postgres that you steer with a folder of table notes and proven queries. Skip it if your data is not in Postgres or you cannot run its Agno AgentOS service for production sign-in."
+limitations = ["I did not run it or check that the saved fixes improve later answers.", "I read the README only, including its list of accuracy checks, but not the code or any results."]
+
+[provenance]
+seed_pointer = "reading-list:agno-agi/dash"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/agno-agi/dash"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/agno-agi/dash#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/agno-agi/dash"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "The analyst agent connects to the database with read-only mode on, so the database rejects writes."
+source_url = "https://github.com/agno-agi/dash#readme"
+
+[[facts]]
+claim = "The engineer agent can write only to a separate schema named dash; the README says a code check blocks writes to the public schema."
+source_url = "https://github.com/agno-agi/dash#readme"
+
+[[facts]]
+claim = "Table notes, business rules and proven queries are loaded from JSON and SQL files in a knowledge folder."
+source_url = "https://github.com/agno-agi/dash#readme"
+
+[[facts]]
+claim = "Production use requires sign-in through Agno AgentOS."
+source_url = "https://github.com/agno-agi/dash#readme"

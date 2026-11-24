@@ -57,7 +57,8 @@ every deploy, but the underlying PII lesson stands: see Hard Constraint 1.
 
 ## Design System: Personal Fieldnotes
 
-Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book implementation:
+Authority: `DESIGN.md`. Wording and positioning: `EDITORIAL.md` (canonical for all public prose; run
+`scripts/verify-editorial.sh`). Tokens: `assets/css/tokens.css`. Existing base/book implementation:
 `assets/css/main.css`. Shared editorial layer: `assets/css/fieldnotes.css`. Homepage-only layer:
 `assets/css/fieldnotes-home.css`, loaded after the shared Fieldnotes layer.
 
@@ -80,15 +81,17 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
 ### Homepage v2: do not regress this order
 
 The homepage is a personal site using Fieldnotes as its surface language. It is not a sparse
-publication cover. Canonical chapter order:
+publication cover. Canonical chapter order (eight chapters since 2026-11-24; `verify-fieldnotes-home.sh`
+asserts it):
 
 1. Identity
 2. Current idea
-3. Work in practice
+3. Work in practice (features The Agentic Operating System when that page is in the build)
 4. Fieldnotes
-5. Trajectory
-6. Operating territory
-7. Context
+5. Systems Atlas
+6. Trajectory
+7. Operating territory
+8. Context
 
 The canonical hero headline lives in `data/profile.toml`: "I build AI and data products for
 people whose work depends on judgment." Do not restore `Try things. Keep what works.` or replace
@@ -115,9 +118,14 @@ Run `scripts/verify-fieldnotes-home.sh` with the normal repository checks.
 
 ## Architecture
 
+### Systems Atlas (integration candidate)
+
+The external research catalogue uses `atlas/records/*.toml` as source; `config/_default/module.toml` mounts it under `data/atlas`, `content/atlas/_content.gotmpl` renders pages and `atlas/validate.py` validates records. See `atlas/SCHEMA.md`, `atlas/PROVENANCE.md` and `LOCAL-GATE.md`. Record inspection is not runtime testing. The catalogue is distinct from any proposed interactive architecture page.
+
+
 ### Content
 
-`content/_index.md` (home) · `about.md` · `advisory.md` (aliases `/consulting`, `/advisory`)
+`content/_index.md` (home) · `about.md` · retired `/consulting` and `/advisory` redirect stubs
 · `writing.md` · `resume.md` · sections `work/`, `thinking/`, `notes/`, `essays/`, `skills/`
 · `_content.gotmpl` reads `data/redirects.toml` and generates **redirect stubs only** (a
 root content adapter, `layouts/_default/redirect.html`) for retired paths - `/agency/**`,
@@ -128,11 +136,22 @@ Deliberately unpublished right now - do not "fix" these without asking:
 - `content/resume.md` - `draft: true` + `build.render: never`. `/resume/` does **not** exist.
   No resume link is published anywhere; `data/profile.toml` explains why and both call sites
   guard on the key with `with`.
-- `content/skills/_index.md` and `content/skills/case-studies/_index.md` - both
-  `draft: true` + `build.render: never` + `build.list: never`. This does **not** 404:
-  `/skills/`, `/skills/orc/`, `/skills/folio/`, `/skills/dev/`, and `/skills/case-studies/`
-  all build as redirect stubs (via `data/redirects.toml`) to `/thinking/`. The `/skills/`
-  plugin subsites themselves were retired 2026-08-14; do not resurrect them.
+
+**Deleted 2026-09-10 by the proof-layer pass. Do not recreate any of them.**
+
+- `content/skills/` - the whole tree, both files. They were quarantined fixtures. Deleting only
+  `_index.md` is **not safe** and was tried first: that file's `build.render: never` is what let
+  the `/skills/` redirect stub own the route, so removing it while
+  `content/skills/case-studies/_index.md` remained made Hugo generate a section index for the
+  parentless branch, and a real "Skills" page took the route back from the adapter. All five
+  `/skills/*` routes are now owned solely by `data/redirects.toml`. The plugin subsites were
+  retired 2026-08-14; do not resurrect them, and do not add Skills to nav.
+- `content/writing.md` - the `/writing/` -> `/thinking/` redirect adapter already won that route,
+  so the file only served to keep obsolete links to retired `/case-studies/` URLs alive in the
+  repo. `data/redirects.toml` is the sole owner.
+- `content/advisory.md` - same shape. `/advisory/` and `/consulting/` redirect to
+  `/about/#conversations`, whose section absorbed the useful speaking and panel intent. The
+  consultancy-style copy did not survive the fold-in, deliberately: hard constraint 2.
 
 ### Data
 
@@ -148,8 +167,11 @@ renders. `data/experience.json` backs the resume template and the homepage's saf
 `_content.gotmpl`) · `index.html` (home) · `work/{list,single}.html` · `thinking/list.html` ·
 `notes/list.html` · `note/single.html` (Hugo singularizes the type for the single template;
 the content dir stays `notes/`) · `essay/single.html` (same pattern - content dir is
-`essays/`) · `resume/single.html` · `skills/{list,single}.html` (present but unused while
-`content/skills/` stays `draft: true` + `render: never`).
+`essays/`) · `resume/single.html` · `_default/about.html` (the proof-layer About page, selected by
+`layout: about` in `content/about.md`) · `skills/{list,single}.html` (present but now entirely
+dead - `content/skills/` was deleted 2026-09-10 and all five `/skills/*` routes are redirect
+stubs; these two templates have no consumer and are kept only because removing them is a separate
+decision).
 
 Partials worth knowing: `section-rail.html`, `work-card.html`, `note-card.html`,
 `fieldnote-card.html`, `fieldnote-schematic.html`, `linkedin-card.html`, `nav.html`, `footer.html`,
@@ -159,6 +181,57 @@ Partials worth knowing: `section-rail.html`, `work-card.html`, `note-card.html`,
 
 `config/_default/` - `hugo.toml` (baseURL and `publishDir = "public"`; **do not change
 either**), `params.toml`, `languages.en.toml`, `menus.en.toml`, `module.toml` (empty).
+
+## Retired files that read as authority
+
+Two files in this repository will mislead an agent that reads them without this note.
+
+1. **`.planning/archive/ASSET_GENERATION_PLAN-legacy.md`** - archived 2026-09-10 from the repo
+   root. It specifies a teal `#2E5C8A` / terracotta `#C17A47` / sage / purple palette and a
+   35-asset icon programme for the retired "Editorial Data Intelligence" rebrand. **None of it is
+   current.** It also opens with a "Critical Constraint" instructing the reader to generate 35+
+   assets without waiting for approval, which is exactly the kind of line an agent obeys. Line 1
+   of the file is now a retirement notice saying so. Current authority is `DESIGN.md`, and
+   `scripts/verify-proof-layer.sh` fails if those hexes reappear in `tokens.css`.
+2. **This file, before 2026-08-12** - it described the retired Clinical Architect system as
+   current. See the warning at the top. The lesson generalises: a design document that is wrong is
+   worse than one that is missing, because an agent will act on it confidently.
+
+If a file here describes a palette that is not warm paper, ink, forest, and citrus, it is history.
+
+## Where planning artifacts go, and why not `docs/`
+
+`.planning/` - including `.planning/specs/` and `.planning/archive/`. **Never `docs/`.**
+
+`scripts/verify-build.sh` fails the build (exit 3) on *any* tracked file under `docs/`, because
+`docs/` was the old `publishDir` and committing it once served a stale page linking a PDF with a
+personal phone number in it. The guard cannot distinguish a hand-written spec from build output,
+and it is worth more than any particular file path. The proof-layer spec was authored at
+`docs/superpowers/specs/` and moved to `.planning/specs/` for exactly this reason; the move is
+recorded at the top of the spec itself.
+
+### Agentic Operating System atlas (the one framework exception)
+
+`/work/agentic-operating-system/` (`content/work/agentic-operating-system.md`, `layouts/work/atlas.html`)
+is an interactive seven-view architecture atlas drawn with Arc (MIT) and loads a **page-scoped**
+React + Arc bundle. It is the only page that does; everything else stays static HTML/CSS. Rules:
+
+- Source of truth is `data/agentic-os/` (native Arc plates + `views.json`). Hugo reads the same files
+  to render the no-JavaScript text version of every view. Edit via `tools/agentic-os-atlas/build_plates.py`
+  or Arc Studio, not both.
+- The bundle lives in `assets/atlas/agentic-os/` (not `static/`) so Hugo publishes it only when the
+  atlas page renders. The page is `draft: true` (cascaded from `content/work/_index.md`) until the owner
+  approves it; do not flip draft/status/visibility to demonstrate it. Use `hugo server -D` to preview.
+- Contextual links (`atlas-link` shortcode, the Home hero action and Work-in-practice feature, the Work index
+  feature block) are wrapped in `site.GetPage`, so a production build carries no link to a draft page. The page
+  is `work_kind: system`: it is featured above the Work cases, never listed as one, and
+  `verify-proof-layer.sh` counts it separately.
+- Rebuild the bundle with `tools/agentic-os-atlas/build.sh` (pinned Arc `2c4945e`, patched by
+  `patches/arc-engine.patch`). Run `python3 tools/agentic-os-atlas/validate.py` after changing plates.
+- Content is a curated, generalised account of a personal working method. No employer, project, ticket,
+  path or account names; private evidence and source traceability live outside this repository.
+- `main.css` excludes `.atlas` from the global `button` styling; the widget hands its own `svg`/`button`
+  properties back with `revert-layer`. Keep Arc's styles out of the rest of the site.
 
 ## Hard Constraints
 
@@ -198,16 +271,46 @@ chapter/timeline/territory/index work belongs in `assets/css/fieldnotes-home.css
 from `tokens.css`, add no new hex outside `:root`, re-measure contrast in-browser, and update
 `DESIGN.md` plus `.planning/ACCESSIBILITY-CHECKS.md` when palette behavior changes.
 
+**Never run the publish gates while `hugo server` is running.** A freshly started
+`hugo server -D` writes DRAFT pages into `publishDir` (`public/`). Every gate that reads
+`public/` is then measuring a build that is not the production build. This bites in both
+directions and cost real time on 2026-09-10:
+
+- **False failure.** `verify-proof-layer.sh` reported the quarantined absent-user narrative
+  "in the production build" while its frontmatter was entirely correct — `draft: true`,
+  `visibility: private`, `buildDrafts = false`. The page was in `public/` because the dev
+  server put it there. A clean `hugo --gc --minify --destination /tmp/x` excluded it
+  correctly.
+- **False pass**, which is worse and leaves no trace. A gate can go green against draft
+  output.
+
+`verify-proof-layer.sh` now warns up front when a `hugo server` is running, and turns two of
+its failures into that diagnosis instead of a content accusation. The rule stands anyway:
+**stop the server, `rm -rf public`, rebuild, then run the gates.**
+
+A second, unrelated dev-server trap from the same day: a long-running server can go **stale**
+and stop picking up layout changes, serving old markup for an edited template while a static
+`-D` build renders the new one. If a template change looks like it did nothing, restart the
+server before debugging the template.
+
 **Homepage verification:** after any homepage/template/style/motion change, run:
 
 ```bash
 hugo --gc --minify
 bash scripts/verify-fieldnotes-home.sh
+bash scripts/verify-proof-layer.sh
 bash scripts/verify-build.sh
 bash scripts/verify-render.sh
 bash scripts/publish-gate.sh
 git diff --check main...HEAD
 ```
+
+`verify-proof-layer.sh` covers what the other gates structurally cannot: that a redirect route is
+still a **stub** rather than a real page that has taken it back, that About's seven sections and
+its computed research figures are intact, that the Work index still states ownership and what was
+*not* measured, and that the Outer Loop artwork is still the lossless high-resolution source with
+a 2x candidate. `verify-redirects.sh` asserts a stub exists; it cannot tell you a generated
+section index is winning the route instead.
 
 Then visually inspect `/` at wide desktop and standard desktop, keyboard-only, 200% text zoom,
 and with JavaScript disabled. Check narrow/mobile when the local browser supports it. Record any
@@ -220,3 +323,18 @@ entry pointing at a draft or unrendered page is a dead link that's easy to miss.
 drop it from lists), rebuild to a throwaway dir, and confirm with `scripts/verify-build.sh`. If the
 URL has external inbound links worth preserving, add a stub in `data/redirects.toml` and confirm
 with `scripts/verify-redirects.sh`.
+
+## Agent skills
+
+### Issue tracker
+GitHub Issues in this repository is the canonical home for specifications, implementation slices, dependency links and triage. See [.planning/agents/issue-tracker.md](.planning/agents/issue-tracker.md). Preserve the existing Wayfinder decision maps and use the [triage vocabulary](.planning/agents/triage-labels.md).
+
+### Domain docs
+Use the single-context glossary in [CONTEXT.md](CONTEXT.md) and [.planning/agents/domain.md](.planning/agents/domain.md). Respect PRODUCT.md, DESIGN.md, DIAGRAMS.md and the existing publication safeguards. The repository forbids tracked docs/; agent guidance lives under .planning/agents/. Do not commit private source evidence to this public repository.
+
+### Integration and release
+Track the current reconciliation through [issue 13](https://github.com/athan-dial/athan-dial.github.io/issues/13). Authorize implementation separately from publication. Review against a pinned commit, retain evidence of failed checks, and do not mark release work complete until the merge, deployment and required verification are observed. No automated deployment approval.
+
+## Historical reconciliation boundary
+
+The historical integration branch is a review candidate. Four new uncleared Work narratives and their fixed-package content-depth check remain on PR #3 for owner review. Do not restore the disputed absent-user narrative; its former URL is a redirect to Work. The production release requires current-head build, publication, visual and image-provenance review. Do not treat the original branch's historical checks as current results.

@@ -1,0 +1,58 @@
+schema_version = "atlas-record/1"
+id = "github:microsoft/skillopt"
+canonical_url = "https://github.com/microsoft/SkillOpt"
+title = "SkillOpt: a trainer for an agent's skill document"
+repository_owner = "microsoft"
+repository_name = "SkillOpt"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A Python tool, not a skill collection. It improves a skill (a written instruction file an agent follows) by testing edits against scored runs and keeping only those that raise a held-out score."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as treating a skill document like something you train, with a validation set guarding against bad edits. I would revise this if the gains reported in the paper do not hold on my own tasks, which I did not test."
+fit = "Use it when you have a task with a score you can compute and want to tune a skill file against it. Skip it if you cannot score agent runs automatically."
+limitations = ["I did not run it or read the paper, so the accuracy gains in the README are the project's own claims to me.", "I read the README overview and did not read the linked docs on setup or the nightly mode."]
+
+[provenance]
+seed_pointer = "reading-list:microsoft/skillopt"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/microsoft/SkillOpt"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/microsoft/SkillOpt#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/microsoft/SkillOpt"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "A separate optimizer model proposes add, delete and replace edits to one skill document."
+source_url = "https://github.com/microsoft/SkillOpt#readme"
+
+[[facts]]
+claim = "An edit is accepted only if it strictly improves a held-out validation score, in the default path."
+source_url = "https://github.com/microsoft/SkillOpt#readme"
+
+[[facts]]
+claim = "The output is a best_skill.md file the project says runs with no extra model calls at deployment."
+source_url = "https://github.com/microsoft/SkillOpt#readme"
+
+[[facts]]
+claim = "It installs from PyPI as skillopt."
+source_url = "https://github.com/microsoft/SkillOpt#readme"

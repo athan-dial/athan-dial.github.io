@@ -29,8 +29,14 @@
     {{- $styles = $styles | append $fieldnotesHome -}}
     {{- $bundle = "css/editorial-home.css" -}}
   {{- end -}}
+  {{- if eq .Section "atlas" -}}
+    {{- $styles = $styles | append (resources.Get "css/atlas.css") -}}
+    {{- $bundle = "css/editorial-atlas.css" -}}
+  {{- end -}}
   {{- $css := $styles | resources.Concat $bundle | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- /* Page-scoped head additions. Empty everywhere except layouts that define it. */ -}}
+  {{ block "head" . }}{{ end }}
   {{ hugo.Generator }}
 </head>
 <body>
@@ -42,9 +48,15 @@
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- $motionJS := resources.Get "js/motion.js" | minify | fingerprint -}}
+  <script src="{{ $motionJS.RelPermalink }}" integrity="{{ $motionJS.Data.Integrity }}" defer></script>
   {{- if .IsHome -}}
     {{- $fieldnotesHomeJS := resources.Get "js/fieldnotes-home.js" | minify | fingerprint -}}
     <script src="{{ $fieldnotesHomeJS.RelPermalink }}" integrity="{{ $fieldnotesHomeJS.Data.Integrity }}" defer></script>
+  {{- end -}}
+  {{- if eq .Section "atlas" -}}
+    {{- $atlasJS := resources.Get "js/atlas.js" | minify | fingerprint -}}
+    <script src="{{ $atlasJS.RelPermalink }}" integrity="{{ $atlasJS.Data.Integrity }}" defer></script>
   {{- end -}}
 </body>
 </html>

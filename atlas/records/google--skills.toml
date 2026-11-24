@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:google/skills"
+canonical_url = "https://github.com/google/skills"
+repository_owner = "google"
+repository_name = "skills"
+title = "Google Skills: agent skills for Google products"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "Skills, meaning packaged instructions an agent loads for a task, for Google Cloud, Firebase, ads and analytics. A single command installs chosen skills into the coding agents you use."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "A vendor shipping its own skills is a good sign that the instructions track its real services. I would revise this if the skills lag product changes, which I did not check."
+fit = "Use it when you build on Google Cloud and want an agent to follow current, vendor-written steps. Skip it if you do not use Google products."
+limitations = ["I read the README and its skill list only, not any skill file, so I do not know how deep or accurate they are.", "The README lists many Google Cloud and GKE skills; I did not check which ones are still in preview."]
+
+[[facts]]
+claim = "Skills install with the command npx skills add google/skills, which asks which skills, agents and scope to use."
+source_url = "https://github.com/google/skills#readme"
+
+[[facts]]
+claim = "The list covers Google Cloud, GKE, Cloud Run, Firebase, security operations, advertising and analytics."
+source_url = "https://github.com/google/skills#readme"
+
+[[facts]]
+claim = "The repo also bundles Google product plugins for Claude Code, Codex and Antigravity CLI."
+source_url = "https://github.com/google/skills#readme"
+
+[provenance]
+seed_pointer = "reading-list:google/skills"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/google/skills"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/google/skills#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/google/skills"
+kind = "api_metadata"
+accessed = "2026-11-06"

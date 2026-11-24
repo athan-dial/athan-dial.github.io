@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:hkuds/lightrag"
+canonical_url = "https://github.com/hkuds/lightrag"
+title = "LightRAG: graph-based retrieval over your documents"
+repository_owner = "hkuds"
+repository_name = "lightrag"
+date_observed = "date_not_recovered"
+topic = "retrieval-knowledge-graphs"
+mechanism = "Builds a web of linked facts and a vector index from your documents with a language model, then answers questions by searching both. It runs as a server with a web interface."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read it as the graph approach to retrieval made practical: it supports updating and deleting documents, which graph pipelines often make painful. Indexing sends every chunk through a language model, so the cost matters more than the README suggests. I would revise this if indexing a mid-sized corpus turns out cheap and accurate, which I did not check."
+fit = "Use it when questions span many documents and you want entities and relationships extracted. Skip it if plain vector search already answers your questions, or if you cannot afford a model call per chunk."
+limitations = ["I did not run it or compare its answers with other retrieval methods.", "I read the overview, install and configuration sections but not the full API sections of this long README."]
+
+[provenance]
+seed_pointer = "reading-list:HKUDS/LightRAG"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/HKUDS/LightRAG"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/HKUDS/LightRAG#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/HKUDS/LightRAG"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It manages both a knowledge graph (a web of linked facts) and vector embeddings, and its dual-level retrieval covers detailed facts and abstract concepts."
+source_url = "https://github.com/HKUDS/LightRAG#readme"
+
+[[facts]]
+claim = "Deleting a document triggers a rebuild of the affected entities and relationships using the cached model output."
+source_url = "https://github.com/HKUDS/LightRAG#readme"
+
+[[facts]]
+claim = "The default storage is in memory with local file persistence, and the README says it is only for small-scale testing, not production."
+source_url = "https://github.com/HKUDS/LightRAG#readme"
+
+[[facts]]
+claim = "It offers four text chunking strategies and PostgreSQL is the production backend the README recommends."
+source_url = "https://github.com/HKUDS/LightRAG#readme"
+
+[image]
+file = "hkuds--lightrag.webp"
+kind = "screenshot"
+alt = "Screenshot of the LightRAG web interface showing a knowledge graph of linked nodes beside a properties panel."
+credit = "LightRAG"
+source_url = "https://github.com/HKUDS/LightRAG/blob/HEAD/README.assets/iShot_2025-03-23_12.40.08.png"

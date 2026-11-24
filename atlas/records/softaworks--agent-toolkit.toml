@@ -1,0 +1,54 @@
+schema_version = "atlas-record/1"
+id = "github:softaworks/agent-toolkit"
+canonical_url = "https://github.com/softaworks/agent-toolkit"
+repository_owner = "softaworks"
+repository_name = "agent-toolkit"
+title = "Agent Toolkit: a shared set of coding-agent skills"
+date_observed = "date_not_recovered"
+topic = "agent-skills"
+mechanism = "A catalog of skills, which are packaged instructions and scripts a coding agent loads for a task. It covers code, docs, planning and workplace writing, and installs from a plugin marketplace."
+license_spdx = "MIT"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a personal toolbox shared in public, so its breadth is a menu to pick from, not a system to adopt whole. I would revise this if the skills turn out to be tested against each other, which I did not check."
+fit = "Use it when you want ready-made skills to copy for docs, diagrams, planning or commits. Skip it if you need skills tuned to one stack or backed by evaluation results."
+limitations = ["I read the README and its skills table only, not any SKILL.md, so I do not know how good the individual skills are.", "I did not check whether the skills overlap or conflict when installed together."]
+
+[[facts]]
+claim = "Each skill, agent and slash command can be installed on its own as a separate plugin."
+source_url = "https://github.com/softaworks/agent-toolkit#readme"
+
+[[facts]]
+claim = "A skill folder holds a SKILL.md for the agent, a README for people, and optional scripts and references."
+source_url = "https://github.com/softaworks/agent-toolkit#readme"
+
+[[facts]]
+claim = "The skills follow the Agent Skills format and are described as working with Claude Code, Codex and Cursor."
+source_url = "https://github.com/softaworks/agent-toolkit#readme"
+
+[provenance]
+seed_pointer = "reading-list:softaworks/agent-toolkit"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/softaworks/agent-toolkit"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/softaworks/agent-toolkit#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/softaworks/agent-toolkit"
+kind = "api_metadata"
+accessed = "2026-11-06"

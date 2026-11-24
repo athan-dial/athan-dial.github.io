@@ -1,0 +1,65 @@
+schema_version = "atlas-record/1"
+id = "github:exmergo/dex"
+canonical_url = "https://github.com/exmergo/dex"
+title = "Dex: skills that let an agent build and maintain analytics"
+repository_owner = "exmergo"
+repository_name = "dex"
+date_observed = "date_not_recovered"
+topic = "data-analytics-agents"
+mechanism = "Teaches a coding agent to explore a database, write dbt (SQL modeling) models and metric definitions, and keep them in sync as the data changes. Source data stays read-only."
+license_spdx = "Apache-2.0"
+evidence_state = "inspected"
+status = "candidate"
+editorial_review = "pending"
+last_review_date = "2026-11-06"
+unavailable = ["tested", "adopted", "independent performance claims"]
+
+[opinion]
+value_judgment = "I read this as a careful design: the guardrails (read-only data, cost quotes, a personal-data filter) sit in the engine, not in the prompt. I would revise this if its drift checks miss real schema changes, which I did not check."
+fit = "Use it when you already run dbt on a warehouse and want an agent to help with models and metrics. Skip it if your agent has no local shell; the README says it does not run in claude.ai chat."
+limitations = ["I did not run the demo or check the benchmark badges, which are the project's own.", "I read most of the README, up to the semantic layers section."]
+
+[provenance]
+seed_pointer = "reading-list:exmergo/dex"
+discovery_dates = "date_not_recovered"
+source_types = "standalone_investigation"
+visibility = "public"
+private_text_included = false
+
+[[sources]]
+url = "https://github.com/exmergo/dex"
+kind = "upstream_repo"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://github.com/exmergo/dex#readme"
+kind = "readme"
+accessed = "2026-11-06"
+
+[[sources]]
+url = "https://api.github.com/repos/exmergo/dex"
+kind = "api_metadata"
+accessed = "2026-11-06"
+
+[[facts]]
+claim = "It offers three skills: explore, transform and maintain."
+source_url = "https://github.com/exmergo/dex#readme"
+
+[[facts]]
+claim = "Source data stays read-only, builds run on a dev target, and query costs are quoted before spend."
+source_url = "https://github.com/exmergo/dex#readme"
+
+[[facts]]
+claim = "Supported connectors include Snowflake, BigQuery, Databricks, Redshift, Postgres, DuckDB, ClickHouse and Trino."
+source_url = "https://github.com/exmergo/dex#readme"
+
+[[facts]]
+claim = "It needs uv on the PATH and an agent with a local shell."
+source_url = "https://github.com/exmergo/dex#readme"
+
+[image]
+file = "exmergo--dex.webp"
+kind = "banner"
+alt = "Dex project card: the headline 'Let your agent build your analytics' beside example dbt model and drift-check snippets."
+credit = "Dex"
+source_url = "https://github.com/exmergo/dex/blob/HEAD/assets/preview-light.png"
