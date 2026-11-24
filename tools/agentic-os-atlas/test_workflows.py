@@ -121,6 +121,9 @@ CASES.update({
  'plate labels do not match ids': (lambda r, g: g['wayfinder']['map'].update(plates=dict(ids=['a', 'b'], labels=['x'], caption='c')), 'one label per id'),
  'bad compared_on date': (lambda r, g: r['upstream'].update(compared_on='yesterday'), 'compared_on'),
  'bad upstream revision': (lambda r, g: r['upstream'].update(rev='main'), '40-character'),
+ 'guide without a produces line': (lambda r, g: g['idea-to-spec'].pop('produces'), 'missing produces'),
+ 'registry without the example note': (lambda r, g: r['intro'].pop('examples'), 'intro.examples'),
+ 'registry without the source note': (lambda r, g: r['intro'].pop('sources'), 'intro.sources'),
  '--complete with a stub': (lambda r, g: (g['research'].clear(), g['research'].update(id='research', draft_stub=True)), 'still stubs'),
 })
 PLATE_CASES = {
