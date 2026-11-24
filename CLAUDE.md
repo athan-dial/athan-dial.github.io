@@ -220,3 +220,14 @@ entry pointing at a draft or unrendered page is a dead link that's easy to miss.
 drop it from lists), rebuild to a throwaway dir, and confirm with `scripts/verify-build.sh`. If the
 URL has external inbound links worth preserving, add a stub in `data/redirects.toml` and confirm
 with `scripts/verify-redirects.sh`.
+
+## Agent skills
+
+### Issue tracker
+GitHub Issues in this repository is the canonical home for specifications, implementation slices, dependency links and triage. See [.planning/agents/issue-tracker.md](.planning/agents/issue-tracker.md). Preserve the existing Wayfinder decision maps and use the [triage vocabulary](.planning/agents/triage-labels.md).
+
+### Domain docs
+Use the single-context glossary in [CONTEXT.md](CONTEXT.md) and [.planning/agents/domain.md](.planning/agents/domain.md). Respect PRODUCT.md, DESIGN.md, DIAGRAMS.md and the existing publication safeguards. The repository forbids tracked docs/; agent guidance lives under .planning/agents/. Do not commit private source evidence to this public repository.
+
+### Integration and release
+Track the current reconciliation through [issue 13](https://github.com/athan-dial/athan-dial.github.io/issues/13). Authorize implementation separately from publication. Review against a pinned commit, retain evidence of failed checks, and do not mark release work complete until the merge, deployment and required verification are observed. No automated deployment approval.
