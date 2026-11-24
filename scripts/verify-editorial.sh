@@ -40,7 +40,8 @@ for f in files:
 for f in ["layouts/index.html", "layouts/_default/about.html", "layouts/work/list.html",
           "layouts/thinking/list.html", "layouts/atlas/list.html", "layouts/work/atlas.html",
           "layouts/partials/workflow-start.html", "layouts/partials/workflow-guide.html", "layouts/partials/workflow-map.html",
-          "layouts/partials/workflow-compare.html", "layouts/partials/workflow-build.html", "layouts/partials/workflow-sources.html"]:
+          "layouts/partials/workflow-compare.html", "layouts/partials/workflow-build.html", "layouts/partials/workflow-sources.html",
+          "layouts/partials/workflow-skill-status.html", "layouts/partials/workflow-artifact.html"]:
     for n, line in enumerate(pathlib.Path(f).read_text(encoding="utf-8").splitlines(), 1):
         if re.search(r"<(p|h[1-6]|li|summary|strong)\b", line) and not line.lstrip().startswith(("{{-", "{{/*")):
             text_lines.append((f, n, line))

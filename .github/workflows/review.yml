@@ -45,7 +45,7 @@ jobs:
         run: |
           hugo --gc --minify -D --destination "$RUNNER_TEMP/draft"
           python3 -m http.server 8773 --bind 127.0.0.1 --directory "$RUNNER_TEMP/draft" >/dev/null 2>&1 &
-          sleep 2
+          curl --silent --fail --retry 30 --retry-connrefused --retry-delay 1 http://127.0.0.1:8773/ >/dev/null
           NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-workflows-browser.cjs "$RUNNER_TEMP/draft" public
           NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-atlas-browser.cjs http://127.0.0.1:8773/work/agentic-operating-system/
 # This job deliberately has no Pages, id-token or deployment permissions.

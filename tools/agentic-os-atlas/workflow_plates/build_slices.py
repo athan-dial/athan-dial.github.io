@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from plate_lib import Plate
 
-p = Plate('wf-build-slices', 'WF-BUILD', 'Five slices and what blocks them', folder='workflow-plates')
+p = Plate('wf-build-slices', 'Fig W5', 'Five slices and what blocks them', folder='workflow-plates')
 p.node('s1', 'Post a report', 'tool', 0, 0, icon='PenLine', sub='Check: round trip',
        desc='Slice 1. A hiker posts a report and it shows on that trail page. Nothing blocks it, so it starts first. The check posts a report and reads it back.')
 p.node('s2', 'List a trail\'s reports', 'tool', 1, 0, icon='List', sub='Check: newest first',

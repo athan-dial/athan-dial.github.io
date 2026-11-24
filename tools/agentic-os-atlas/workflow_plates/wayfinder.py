@@ -26,7 +26,7 @@ def fog(p, nid, name, col, row, desc):
 
 
 # ---- map after session 1: one ticket settled, the page ticket unblocked
-p = Plate('wf-map-1', 'WF-01', 'Choir season map, after session 1', folder='workflow-plates')
+p = Plate('wf-map-1', 'Fig W1', 'Choir season map, after session 1', folder='workflow-plates')
 ticket(p, 'cal', "Collect each choir's calendar", 'settled', 'task', 0, 0, 'Done in session 1. All three choirs rehearse Thursday and Saturday evenings; two already book the same hall.')
 ticket(p, 'add', 'Who may add a concert?', 'frontier', 'grilling', 0, 1, 'A question for you, one session. Nothing blocks it.')
 ticket(p, 'fees', 'How do other festivals split hall hire?', 'frontier', 'research', 0, 2, 'An agent can run this alone and report findings.')
@@ -40,7 +40,7 @@ p.group('Not yet specified', ['fog1', 'fog2'], 'zinc')
 p.save()
 
 # ---- map after session 3
-p = Plate('wf-map-2', 'WF-02', 'Choir season map, after session 3', folder='workflow-plates')
+p = Plate('wf-map-2', 'Fig W2', 'Choir season map, after session 3', folder='workflow-plates')
 ticket(p, 'cal', "Collect each choir's calendar", 'settled', 'task', 0, 0, 'Settled in session 1.')
 ticket(p, 'add', 'Who may add a concert?', 'settled', 'grilling', 0, 1, 'Settled in session 2. Any choir chair may add one; a second chair must confirm.')
 ticket(p, 'fees', 'How do other festivals split hall hire?', 'settled', 'research', 0, 2, 'Settled in session 2 by an agent. Most split hall hire evenly and keep their own ticket money.')
@@ -53,21 +53,22 @@ fog(p, 'fog3', 'A shared conductor', 2, 2, 'Sensed, but not yet a sharp question
 p.edge('clash', 'notice', 'right', 'left', 'Blocks', 'decision')
 p.edge('fees', 'costs', 'right', 'left', 'Exposed', 'feedback')
 p.edge('cal', 'mixed', 'top', 'top', 'Exposed', 'feedback', 'step', 56)
+p.edge('page', 'notice', 'bottom', 'top', 'Exposed', 'feedback', 'step')
 p.group('Not yet specified', ['fog3'], 'zinc')
 p.save()
 
 # ---- compare: decision map
-p = Plate('wf-compare-decisions', 'WF-03', 'Decision map: questions found along the way', folder='workflow-plates')
+p = Plate('wf-compare-decisions', 'Fig W3', 'Decision map: questions found along the way', folder='workflow-plates')
 ticket(p, 'q1', 'Who may add a concert?', 'settled', 'grilling', 0, 0, 'Settled. It exposed the next question.')
 ticket(p, 'q2', 'How are clashes settled?', 'frontier', 'grilling', 1, 0, 'Asked after the first answer, not before.')
 fog(p, 'fog', 'Questions not yet visible', 1, 1, 'The graph is partial. It grows as answers arrive.')
 p.node('spec', 'A specification', 'state', 2, 0, icon='ScrollText', sub='The map ends here', desc='A document someone could build from.')
-p.edge('q1', 'q2', 'right', 'left', 'Exposes', 'feedback')
+p.edge('q1', 'q2', 'right', 'left', 'Blocks', 'decision')
 p.edge('q2', 'spec', 'right', 'left', 'Decision')
 p.save()
 
 # ---- compare: build graph
-p = Plate('wf-compare-build', 'WF-04', 'Build graph: slices drafted up front', folder='workflow-plates')
+p = Plate('wf-compare-build', 'Fig W4', 'Build graph: slices drafted up front', folder='workflow-plates')
 p.node('s1', 'Record a booking', 'tool', 0, 0, icon='Hammer', sub='Slice 1 · unblocked', desc='Works end to end on its own.')
 p.node('s2', 'Show the season calendar', 'tool', 1, 0, icon='Hammer', sub='Slice 2', desc='Needs bookings to show.')
 p.node('s3', 'Flag a clash', 'tool', 2, 0, icon='Hammer', sub='Slice 3', desc='Needs the calendar to compare against.')

@@ -20,8 +20,8 @@ const clickNode=async(id)=>{const n=p.locator(`#agentic-os-atlas [data-arc-node-
 await clickNode('making'); ok('click Making node -> Making view', (await heading()).startsWith('A decision becomes'), 'trail='+(await trail()).replace(/\n/g,' '));
 await clickNode('ready'); ok('click Ready-to-run gate -> Governed execution', (await heading()).startsWith('Autonomous work'), 'trail='+(await trail()).replace(/\n/g,' '));
 // breadcrumb back
-const crumbs=await p.locator('#agentic-os-atlas [data-arc-altitude-trail] button, [data-arc-altitude-trail] a').allInnerTexts();ok('breadcrumb has ancestors', crumbs.length>=2, JSON.stringify(crumbs));
-if(crumbs.length){await p.locator('#agentic-os-atlas [data-arc-altitude-trail] button, [data-arc-altitude-trail] a').first().click();await p.waitForTimeout(800);ok('breadcrumb -> root', (await heading()).startsWith('Expert judgment'), await heading());}
+const crumbs=await p.locator('#agentic-os-atlas [data-arc-altitude-trail] button, #agentic-os-atlas [data-arc-altitude-trail] a').allInnerTexts();ok('breadcrumb has ancestors', crumbs.length>=2, JSON.stringify(crumbs));
+{await p.locator('#agentic-os-atlas [data-arc-altitude-trail] button, #agentic-os-atlas [data-arc-altitude-trail] a').first().click();await p.waitForTimeout(800);ok('breadcrumb -> root', (await heading()).startsWith('Expert judgment'), await heading());}
 // thinking -> authorization, sharing -> learning
 await clickNode('thinking');await clickNode('decision');ok('Thinking -> Decide -> Human authorization', (await heading()).startsWith('Autonomy ends'), 'trail='+(await trail()).replace(/\n/g,' '));
 await p.locator('#agentic-os-atlas .atlas__views').getByRole('button',{name:/Overview/}).first().click();await p.waitForTimeout(500);

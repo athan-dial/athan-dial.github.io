@@ -2,7 +2,7 @@
   "id": "wf-compare-decisions",
   "figure": {
     "title": "Decision map: questions found along the way",
-    "code": "WF-03"
+    "code": "Fig W3"
   },
   "layout": {
     "width": 1102,
@@ -78,11 +78,10 @@
       "strokeWidth": 1.7,
       "toArrow": "arrow"
     },
-    "feedback": {
-      "color": "zinc",
-      "strokeWidth": 1.7,
-      "lineStyle": "dashed",
-      "toArrow": "open"
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
     }
   },
   "connectors": [
@@ -92,8 +91,8 @@
       "to": "q2",
       "fromAnchor": "right",
       "toAnchor": "left",
-      "style": "feedback",
-      "label": "Exposes",
+      "style": "decision",
+      "label": "Blocks",
       "curve": "direct"
     },
     {

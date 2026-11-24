@@ -59,5 +59,6 @@
   "next": {
     "label": "You know enough to decide and want a plan on paper?",
     "guide": "idea-to-spec"
-  }
+  },
+  "order": "result-first"
 }

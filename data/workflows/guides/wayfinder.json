@@ -1,6 +1,6 @@
 {
   "id": "wayfinder",
-  "title": "A project too big to plan in one sitting",
+  "title": "Wayfinder: a map of decisions, worked one session at a time",
   "lead": "Use this when the plan will not fit in one session and you cannot yet see all of it. You chart a map of questions, answer them one at a time across separate sessions, and stop when nothing is left to decide. The map is for planning. It does not do the work.",
   "scenario": "Three village choirs want to run one shared concert season. The example is invented, so every answer and number in it is too. It is not a live tracker and nothing here was written to one.",
   "input": "Three village choirs want one shared concert season. It is too big to settle in one chat. Chart it, and we will work it a question at a time.",
@@ -49,7 +49,7 @@
       "actor": "skill",
       "skill": "to-spec",
       "label": "When nothing is left, write the spec",
-      "text": "Once no tickets remain and nothing is left to decide before someone could go and do the thing, the map has done its job. The specification is written from the decided lines on the map, with no new interview. Turning that spec into build slices with to-tickets is a separate, later choice. The map does not make that choice for you."
+      "text": "Once no tickets remain and nothing remains that needs deciding before the work can start, the map has done its job. The specification is written from the decided lines on the map, with no new interview. Turning that spec into build slices with to-tickets is a separate, later choice. The map does not make that choice for you."
     },
     {
       "actor": "artifact",
@@ -266,7 +266,7 @@
       "Out of scope. A ticketing website."
     ]
   },
-  "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing is left to decide before someone goes and does the thing. If the whole job would fit in one session, do not draw a map at all.",
+  "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing remains that needs deciding before the work can start. If the whole job would fit in one session, do not draw a map at all.",
   "limits": "The example is invented, and so is every answer in it. A map plans; it does not do the work, apart from a task ticket, which is an errand. Questions for you, meaning grilling and prototype tickets, need a person. An agent never answers them for you. One ticket per session, except research. My copy of wayfinder differs from the published one only in when it is offered. The map model is the same. The skill text does not itself name a spec step. Going from a finished map to to-spec is the natural handoff when the destination is a spec.",
   "next": {
     "label": "The requirements are settled and you need them built?",

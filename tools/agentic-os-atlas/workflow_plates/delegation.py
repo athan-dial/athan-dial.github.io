@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from plate_lib import Plate
 
-p = Plate('wf-delegation-gates', 'WF-DG', 'Delegation gates', y0=130, folder='workflow-plates')
+p = Plate('wf-delegation-gates', 'Fig W6', 'Delegation gates', y0=130, folder='workflow-plates')
 p.node('contract', 'Shaped contract', 'state', 0, 0, icon='ScrollText', sub='Requirements, checks',
        desc='Requirements with stable ids, each with an acceptance check, written by one pass.')
 p.node('certify', 'Readiness lint', 'check', 1, 0, icon='ClipboardCheck', sub='A separate pass',

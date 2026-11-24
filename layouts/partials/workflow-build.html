@@ -6,7 +6,7 @@
   {{- with $b.plates }}
   <div class="wfplate-mount" data-workflow-plates="{{ delimit .ids "," }}" data-labels="{{ delimit .labels "|" }}" data-caption="{{ .caption }}" hidden></div>
   {{- end }}
-  <ol class="wf-slices">
+  <ol class="wf-slices" role="list">
     {{- range $b.slices }}
     <li class="wf-slice">
       <span class="wf-slice__title">{{ .title }}</span>

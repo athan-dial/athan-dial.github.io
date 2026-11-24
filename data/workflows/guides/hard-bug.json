@@ -2,7 +2,7 @@
   "id": "hard-bug",
   "title": "Finding a bug you cannot make happen",
   "lead": "Most bugs do not need this. If you can see it fail, write a test that fails the same way, fix it and move on. This guide is for the other kind: it happens to someone else, only sometimes, and never on your machine. The method is to make it fail on demand before you try to fix anything.",
-  "scenario": "Pottery Studio Booking is an invented app. A few people say their class shows on the wrong day. The app, the three reports and the results are invented; the command output below came from a real run of a small sample script.",
+  "scenario": "Pottery Studio Booking is an invented app. A few people say their class shows on the wrong day. The app, the three reports and the results are invented; the command output below was produced by a short script written for this example, so it is genuine output from invented data.",
   "input": "Some people see their pottery class on the wrong day. I cannot make it happen on any of our machines. Diagnose this.",
   "steps": [
     {
@@ -80,5 +80,6 @@
   "next": {
     "label": "The fix grew into a feature-sized job?",
     "guide": "spec-to-build"
-  }
+  },
+  "order": "result-first"
 }

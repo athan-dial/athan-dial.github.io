@@ -44,5 +44,6 @@
     ]
   },
   "stop": "You are done when a fresh reader's findings stop changing between rounds and that reader can state the ask and what you want them to decide. If findings keep changing after three rounds, the document is trying to do two jobs and should be split.",
-  "limits": "The example is invented, and so is its result. pm-cold-reader is a private skill with no public text, so this guide explains the idea and does not reproduce the skill. A model reading as a stranger is a good proxy for a stranger and a poor proxy for your particular treasurer. It catches missing definitions and buried asks. It cannot tell you whether the council will say yes."
+  "limits": "The example is invented, and so is its result. pm-cold-reader is a private skill with no public text, so this guide explains the idea and does not reproduce the skill. A model reading as a stranger is a good proxy for a stranger and a poor proxy for your particular treasurer. It catches missing definitions and buried asks. It cannot tell you whether the council will say yes.",
+  "order": "result-first"
 }

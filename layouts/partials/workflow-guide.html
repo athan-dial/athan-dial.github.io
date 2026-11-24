@@ -12,7 +12,8 @@
     <p class="wf-scenario"><span class="wf-label">Worked example</span> {{ $d.scenario }}</p>
     <blockquote class="wf-input"><span class="wf-label">You say</span><p>{{ $d.input }}</p></blockquote>
 
-    <ol class="wf-steps">
+    {{- if eq $d.order "result-first" }}{{ with $d.artifact }}<p class="wf-label wf-label--block">What you end up with</p>{{ partial "workflow-artifact.html" . }}<p class="wf-label wf-label--block">How you get there</p>{{ end }}{{ end }}
+    <ol class="wf-steps" role="list">
       {{- range $i, $s := $d.steps }}
       {{- $kl := index $kind $s.actor -}}{{- if and (eq $s.actor "skill") (not $s.skill) -}}{{- $kl = "Agent role" -}}{{- end }}
       <li class="wf-step wf-step--{{ $s.actor }}">
@@ -35,12 +36,7 @@
     {{- with $d.compare }}{{ partial "workflow-compare.html" (dict "g" $g "d" $d "c" .) }}{{ end }}
     {{- with $d.build }}{{ partial "workflow-build.html" (dict "g" $g "d" $d "b" .) }}{{ end }}
 
-    {{- with $d.artifact }}
-    <figure class="wf-artifact">
-      <figcaption>{{ .title }}</figcaption>
-      <ul class="wf-artifact__lines">{{ range .lines }}<li>{{ . }}</li>{{ end }}</ul>
-    </figure>
-    {{- end }}
+    {{- if ne $d.order "result-first" }}{{ with $d.artifact }}{{ partial "workflow-artifact.html" . }}{{ end }}{{ end }}
 
     <dl class="wf-ends">
       <div><dt>Stop when</dt><dd>{{ $d.stop }}</dd></div>
@@ -55,6 +51,6 @@
       </ul>
     </div>
 
-    <p class="wf-guide__views">Underneath this guide: {{ range $i, $v := $g.views }}{{ if $i }}, {{ end }}<a href="#view-{{ $v }}">{{ (index (where (index site.Data "agentic-os").views.views "id" $v) 0).short }}</a>{{ end }}. {{ with $d.next }}<a href="#guide-{{ .guide }}">{{ .label }}</a>{{ end }}</p>
+    <p class="wf-guide__views">Underneath this guide: {{ range $i, $v := $g.views }}{{ if $i }}, {{ end }}<a href="#view-{{ $v }}" data-view="{{ $v }}" data-from="{{ $g.id }}" data-from-title="{{ $d.title }}">{{ (index (where (index site.Data "agentic-os").views.views "id" $v) 0).short }}</a>{{ end }}. {{ with $d.next }}<a href="#guide-{{ .guide }}">{{ .label }}</a>{{ end }}</p>
   </div>
 </section>

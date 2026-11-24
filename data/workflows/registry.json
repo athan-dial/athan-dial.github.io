@@ -65,7 +65,7 @@
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/wayfinder/SKILL.md",
       "customized": true,
-      "difference": "My copy has small wording changes to when it is offered. The map model is the same."
+      "difference": "My copy differs in small ways. The method is the same."
     },
     {
       "id": "implement-spec",
@@ -90,7 +90,7 @@
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/tdd/SKILL.md",
       "customized": true,
-      "difference": "My copy relaxes one confirmation step. The loop is the same."
+      "difference": "My copy differs in small ways. The method is the same."
     },
     {
       "id": "code-review",
@@ -99,7 +99,7 @@
       "source_kind": "upstream",
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/code-review/SKILL.md",
       "customized": true,
-      "difference": "My copy adds an optional browser-walkthrough mode and loosens a tracker prerequisite. The two-axis review is the same."
+      "difference": "My copy differs in small ways. The method is the same."
     },
     {
       "id": "diagnosing-bugs",

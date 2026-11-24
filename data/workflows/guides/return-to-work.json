@@ -54,5 +54,6 @@
   "next": {
     "label": "The changes raised a question you cannot answer yet?",
     "guide": "research"
-  }
+  },
+  "order": "result-first"
 }

@@ -2,7 +2,7 @@
   "id": "wf-map-2",
   "figure": {
     "title": "Choir season map, after session 3",
-    "code": "WF-02"
+    "code": "Fig W2"
   },
   "layout": {
     "width": 1112,
@@ -191,6 +191,16 @@
       "label": "Exposed",
       "curve": "step",
       "curveDepth": 56
+    },
+    {
+      "id": "e3",
+      "from": "page",
+      "to": "notice",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "step"
     }
   ],
   "groups": [

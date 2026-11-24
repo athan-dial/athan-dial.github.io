@@ -13,11 +13,11 @@ repo = Path(__file__).resolve().parents[2]
 validator = Path(__file__).with_name('validate_workflows.py')
 
 MAP = dict(destination='a spec', states=[
-    dict(fog=['how names are reconciled'], tickets=[
+    dict(label='Session 1', fog=['how names are reconciled'], tickets=[
         dict(id='T1', title='Who may borrow', type='grilling', status='frontier', blocked_by=[]),
         dict(id='T2', title='Get inventories', type='task', status='frontier', blocked_by=[]),
         dict(id='T3', title='Catalogue page', type='prototype', status='blocked', blocked_by=['T2'])]),
-    dict(fog=[], tickets=[
+    dict(label='Session 3', fog=[], tickets=[
         dict(id='T1', title='Who may borrow', type='grilling', status='settled', answer='Members only', blocked_by=[]),
         dict(id='T2', title='Get inventories', type='task', status='frontier', blocked_by=[]),
         dict(id='T3', title='Catalogue page', type='prototype', status='blocked', blocked_by=['T2']),
@@ -29,10 +29,13 @@ STEPS = [dict(actor='skill', skill='wayfinder', label='a', text='b', public_equi
 GUIDE = dict(id='wayfinder', title='t', lead='l', scenario='s', input='i', steps=STEPS, artifact=dict(title='a', lines=['x']),
              stop='s', limits='l', map=MAP, build=BUILD, compare=dict(rows=[]))
 
-def make(mutate):
+def make(mutate, files=None):
     d = Path(tempfile.mkdtemp())
     shutil.copytree(repo / 'data', d / 'data', ignore=shutil.ignore_patterns('plates'))
     shutil.copytree(repo / 'data/agentic-os/plates', d / 'data/agentic-os/plates')
+    (d / 'tools/agentic-os-atlas').mkdir(parents=True)
+    shutil.copytree(repo / 'tools/agentic-os-atlas/src', d / 'tools/agentic-os-atlas/src')
+    shutil.copy(repo / 'tools/agentic-os-atlas/.bundle-digest', d / 'tools/agentic-os-atlas/.bundle-digest')
     reg = json.loads((d / 'data/workflows/registry.json').read_text())
     guides = {p.stem: json.loads(p.read_text()) for p in (d / 'data/workflows/guides').glob('*.json')}
     guides['wayfinder'] = copy.deepcopy(GUIDE)
@@ -41,12 +44,13 @@ def make(mutate):
     (d / 'data/workflows/registry.json').write_text(json.dumps(reg))
     for f in (d / 'data/workflows/guides').glob('*.json'): f.unlink()
     for k, v in guides.items(): (d / f'data/workflows/guides/{k}.json').write_text(json.dumps(v))
+    if files: files(d)
     return d
 
-def run(mutate):
-    d = make(mutate)
+def run(mutate, files=None, flags=()):
+    d = make(mutate, files)
     try:
-        r = subprocess.run([sys.executable, str(validator), '--root', str(d)], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, str(validator), '--root', str(d), *flags], capture_output=True, text=True)
         return r.returncode, r.stdout
     finally:
         shutil.rmtree(d, ignore_errors=True)
@@ -91,10 +95,53 @@ CASES = {
  'wayfinder without a comparison': (lambda r, g: g['wayfinder'].pop('compare'), 'comparison'),
  'unknown plate': (lambda r, g: g['idea-to-spec'].update(plates=['ghost']), 'does not exist'),
 }
+
+def plate_edit(fn):
+    def go(d):
+        f = d / 'data/agentic-os/workflow-plates/wf-map-1.arc.json'
+        if not f.exists(): f = next((d / 'data/agentic-os/workflow-plates').glob('*.arc.json'))
+        doc = json.loads(f.read_text()); fn(doc); f.write_text(json.dumps(doc))
+    return go
+
+def first_plate(d): return next((d / 'data/agentic-os/workflow-plates').glob('*.arc.json'))
+
+CASES.update({
+ 'private name after a newline in a guide': (lambda r, g: g['idea-to-spec'].update(lead='Notes.\nJira board.'), 'public-safety'),
+ 'private name after an em dash in a guide': (lambda r, g: g['idea-to-spec'].update(lead='A note\u2014Slack thread.'), 'public-safety'),
+ 'email in a guide': (lambda r, g: g['idea-to-spec'].update(lead='Write to someone@example.org.'), 'email'),
+ 'token in a guide': (lambda r, g: g['idea-to-spec'].update(lead='key ghp_abcdefghij12345'), 'tokens'),
+ 'ticket key in a guide': (lambda r, g: g['idea-to-spec'].update(lead='See PROJ-1234.'), 'ticket keys'),
+ 'settled ticket still waits for a blocker': (lambda r, g: g['wayfinder']['map']['states'][0]['tickets'][2].update(status='settled', answer='x'), 'settled ticket T3 still waits'),
+ 'map state without a label': (lambda r, g: g['wayfinder']['map']['states'][1].pop('label'), 'needs a label'),
+ 'no later ticket exposed by a decision': (lambda r, g: g['wayfinder']['map']['states'][1]['tickets'][3].update(exposed_by='T1', blocked_by=[]) or g['wayfinder']['map']['states'][1]['tickets'][3].pop('exposed_by'), 'must say which settled decision'),
+ 'next guide does not exist': (lambda r, g: g['idea-to-spec'].update(next=dict(label='x', guide='ghost')), 'next.guide'),
+ 'next guide is a stub': (lambda r, g: (g['idea-to-spec'].update(next=dict(label='x', guide='research')), g['research'].clear(), g['research'].update(id='research', draft_stub=True)), 'next.guide'),
+ 'invalid order value': (lambda r, g: g['idea-to-spec'].update(order='sideways'), 'order must be'),
+ 'plate id with a comma': (lambda r, g: g['wayfinder']['map'].update(plates=dict(ids=['a,b'], labels=['x'], caption='c')), 'comma or bar'),
+ 'plate labels do not match ids': (lambda r, g: g['wayfinder']['map'].update(plates=dict(ids=['a', 'b'], labels=['x'], caption='c')), 'one label per id'),
+ 'bad compared_on date': (lambda r, g: r['upstream'].update(compared_on='yesterday'), 'compared_on'),
+ 'bad upstream revision': (lambda r, g: r['upstream'].update(rev='main'), '40-character'),
+ '--complete with a stub': (lambda r, g: (g['research'].clear(), g['research'].update(id='research', draft_stub=True)), 'still stubs'),
+})
+PLATE_CASES = {
+ 'private name inside a plate': (plate_edit(lambda doc: doc['nodeData'][next(iter(doc['nodeData']))].update(name='Check the Jira board')), 'public-safety'),
+ 'plate node without a description': (plate_edit(lambda doc: doc['nodeData'][next(iter(doc['nodeData']))].update(description='')), 'no description'),
+ 'plate without a layout size': (plate_edit(lambda doc: doc.pop('layout')), 'layout width and height'),
+ 'plate connector without a label': (plate_edit(lambda doc: doc['connectors'][0].update(label='')), 'has no label'),
+ 'plate connector to a missing node': (plate_edit(lambda doc: doc['connectors'][0].update(to='ghost')), 'missing node'),
+ 'plate with duplicate connector ids': (plate_edit(lambda doc: doc['connectors'].append(dict(doc['connectors'][0]))), 'duplicate connector ids'),
+ 'bundle older than the plate data': (plate_edit(lambda doc: doc['figure'].update(title=doc['figure']['title'] + ' edited')), 'bundle is stale'),
+}
 bad = 0
 for name, (mut, expect) in CASES.items():
-    code, out = run(mut or (lambda r, g: None))
+    flags = ('--complete',) if name.startswith('--complete') else ()
+    code, out = run(mut or (lambda r, g: None), flags=flags)
     good = (code == 0 and expect in out) if mut is None else (code != 0 and expect in out)
     print(('ok   ' if good else 'FAIL ') + name + ('' if good else f' (exit {code}; wanted {expect!r})'))
     bad += not good
-print(f'\nRESULT: {"FAIL" if bad else "PASS"} ({len(CASES)} cases)'); sys.exit(1 if bad else 0)
+for name, (files, expect) in PLATE_CASES.items():
+    code, out = run(lambda r, g: None, files)
+    good = code != 0 and expect in out
+    print(('ok   ' if good else 'FAIL ') + name + ('' if good else f' (exit {code}; wanted {expect!r})'))
+    bad += not good
+print(f'\nRESULT: {"FAIL" if bad else "PASS"} ({len(CASES) + len(PLATE_CASES)} cases)'); sys.exit(1 if bad else 0)

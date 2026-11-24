@@ -5,7 +5,7 @@
 {{- $status := dict "settled" "Settled" "frontier" "Answerable now" "blocked" "Blocked" -}}
 <div class="wf-map" id="map-{{ $g.id }}">
   <h4 class="wf-block__h">The map, at {{ len $m.states }} points in time</h4>
-  <p class="wf-block__lead">Destination: <strong>{{ strings.TrimRight "." $m.destination }}</strong>. This map is invented for the example. It is not a live tracker.</p>
+  <p class="wf-block__lead">Destination: <strong>{{ strings.TrimRight "." $m.destination }}</strong>. This map is invented for the example. It is not a live tracker. The fog is what you can sense but cannot yet ask as a sharp question.</p>
   {{- with $m.plates }}
   <div class="wfplate-mount" data-workflow-plates="{{ delimit .ids "," }}" data-labels="{{ delimit .labels "|" }}" data-caption="{{ $m.plates.caption }}" hidden></div>
   {{- end }}
@@ -13,7 +13,7 @@
   <section class="wf-state" aria-labelledby="map-{{ $g.id }}-s{{ $n }}">
     <h5 id="map-{{ $g.id }}-s{{ $n }}" class="wf-state__h">{{ $st.label }}</h5>
     {{- with $st.note }}<p class="wf-state__note">{{ . }}</p>{{ end }}
-    <ol class="wf-tickets">
+    <ol class="wf-tickets" role="list">
       {{- range $st.tickets }}
       <li class="wf-ticket wf-ticket--{{ .status }}">
         <span class="wf-ticket__status"><span class="wf-ticket__mark" aria-hidden="true"></span>{{ index $status .status }}</span>
@@ -26,7 +26,7 @@
       {{- end }}
     </ol>
     {{- if $st.fog }}
-    <div class="wf-fog"><h6 class="wf-fog__h">Not yet specified (fog)</h6><ul>{{ range $st.fog }}<li>{{ . }}</li>{{ end }}</ul></div>
+    <div class="wf-fog"><h6 class="wf-fog__h">Not yet specified</h6><ul>{{ range $st.fog }}<li>{{ . }}</li>{{ end }}</ul></div>
     {{- end }}
   </section>
   {{- end }}

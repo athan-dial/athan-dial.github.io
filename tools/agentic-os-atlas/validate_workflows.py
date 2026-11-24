@@ -24,6 +24,25 @@ failures = []
 def fail(m): failures.append(m); print('FAIL', m)
 def ok(m): print('ok  ', m)
 
+PATTERNS = {'private names and systems': (r'\b(montai|jira|confluence|todoist|slack)\b', re.I),
+            'paths': (r'(/Users/|/home/|~/\.|C:\\|\.mex/|\.dev/)', 0), 'email': (r'[\w.+-]+@[\w-]+\.[\w.]+', 0),
+            'foreign urls': (r'https?://(?!github\.com/mattpocock/skills\b)', 0), 'tokens': (r'(sk-[A-Za-z0-9]{10,}|ghp_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{12,})', 0),
+            'ticket keys': (r'\b[A-Z]{2,6}-\d{2,5}\b', 0)}
+
+def strings(o):
+    """Every decoded string value in a JSON document. Scanning decoded text, not json.dumps output, so a name after
+    a newline or an escaped character is still seen."""
+    if isinstance(o, str): yield o
+    elif isinstance(o, dict):
+        for v in o.values(): yield from strings(v)
+    elif isinstance(o, list):
+        for v in o: yield from strings(v)
+
+def scan(label, doc):
+    for name, (pat, fl) in PATTERNS.items():
+        hits = [m for s in strings(doc) for m in re.findall(pat, s, flags=fl)]
+        if hits: fail(f'{label}: public-safety scan: {name} -> {hits[:3]}')
+
 def load(p):
     try: return json.loads(Path(p).read_text())
     except Exception as e: fail(f'{p}: cannot read ({e})'); return None
@@ -47,7 +66,12 @@ for pid in sorted(plate_ids):
         if c.get('style') not in pl.get('connectorStyles', {}): fail(f'plate {pid}: connector {c.get("id")} uses an undefined style')
     for nid, nd in pl.get('nodeData', {}).items():
         if not nd.get('description'): fail(f'plate {pid}.{nid}: no description for the text version')
-    if re.search(r'montai|aops|jira|/home/|/Users/', json.dumps(pl), flags=re.I): fail(f'plate {pid}: public-safety scan hit')
+    scan(f'plate {pid}', pl)
+    if not (pl.get('layout', {}).get('width') and pl.get('layout', {}).get('height')): fail(f'plate {pid}: layout width and height are required')
+    cids = [c.get('id') for c in pl.get('connectors', [])]
+    if len(cids) != len(set(cids)): fail(f'plate {pid}: duplicate connector ids')
+    if any(not nd.get('name') for nd in pl.get('nodeData', {}).values()): fail(f'plate {pid}: a node has no name')
+    if re.search(r'[,|]', pid): fail(f'plate id {pid} contains a comma or bar')
 if plate_ids: ok(f'{len(plate_ids)} workflow plate(s) pass integrity checks')
 
 # ---- registry: identity and source status
@@ -121,7 +145,9 @@ def check_map(i, m):
     if len(states) < 2: fail(f'guide {i}: a map needs at least two states to show progress')
     prev_settled = set(); prev_ids = set()
     for n, st in enumerate(states):
-        ts = {t['id']: t for t in st.get('tickets', [])}
+        if not st.get('label'): fail(f'guide {i}: map state {n} needs a label')
+        if any('id' not in tk for tk in st.get('tickets', [])): fail(f'guide {i}: state {n} has a ticket with no id'); continue
+        ts = {tk['id']: tk for tk in st.get('tickets', [])}
         if len(ts) != len(st.get('tickets', [])): fail(f'guide {i}: state {n} repeats a ticket id')
         for t in ts.values():
             if t.get('type') not in {'grilling', 'research', 'prototype', 'task'}: fail(f'guide {i}: ticket {t.get("id")} has type {t.get("type")!r}; decision-map tickets are grilling, research, prototype or task')
@@ -133,6 +159,7 @@ def check_map(i, m):
             open_blockers = [b for b in t.get('blocked_by', []) if b in ts and ts[b]['status'] != 'settled']
             if t['status'] == 'frontier' and open_blockers: fail(f'guide {i}: state {n}: frontier ticket {t["id"]} still has open blockers {open_blockers}')
             if t['status'] == 'blocked' and not open_blockers: fail(f'guide {i}: state {n}: ticket {t["id"]} is marked blocked but nothing blocks it')
+            if t['status'] == 'settled' and open_blockers: fail(f'guide {i}: state {n}: settled ticket {t["id"]} still waits for {open_blockers}')
             if t['status'] == 'settled' and not t.get('answer'): fail(f'guide {i}: settled ticket {t["id"]} has no recorded answer')
         if not toposort({k: set(t.get('blocked_by', [])) for k, t in ts.items()}): fail(f'guide {i}: state {n}: blocking edges form a cycle')
         if n and not prev_settled <= settled: fail(f'guide {i}: state {n} un-settles {sorted(prev_settled - settled)}')
@@ -182,25 +209,44 @@ for g in guides:
         pl = (d.get(blk) or {}).get('plates')
         if pl is None: continue
         if len(pl.get('labels', [])) != len(pl.get('ids', [])): fail(f'guide {i}: {blk} plates need one label per id')
+        if any(re.search(r'[,|]', x) for x in pl.get('ids', []) + pl.get('labels', [])): fail(f'guide {i}: {blk} plate ids and labels may not contain a comma or bar')
         plate_refs += pl.get('ids', [])
+    nx = (d.get('next') or {}).get('guide')
+    if d.get('next') and (nx not in gids or nx == i or (data / f'workflows/guides/{nx}.json').exists() and (load(data / f'workflows/guides/{nx}.json') or {}).get('draft_stub')): fail(f'guide {i}: next.guide {nx!r} is not another complete guide')
     for pid in plate_refs:
         if pid not in plate_ids: fail(f'guide {i}: plate {pid} does not exist')
     if 'map' in d: check_map(i, d['map'])
     if 'build' in d: check_build(i, d['build'])
+    if d.get('order', 'steps-first') not in ('steps-first', 'result-first'): fail(f'guide {i}: order must be steps-first or result-first')
     if i == 'wayfinder' and ('map' not in d or 'compare' not in d): fail('guide wayfinder: needs a map and a decision-map versus build-graph comparison')
-    d_text = json.dumps(d)
-    for name, pat in {'private names and systems': r'\b(montai|aops|arwc|jira|jpd|confluence|todoist|slack|steward|supervis\w+|orca|paperclip|cmux|vault|basic[- ]memory|buzz|prime|talos)\b',
-                      'paths': r'(/Users/|/home/|~/\.|C:\\|\.mex/|\.dev/)', 'email': r'[\w.+-]+@[\w-]+\.[\w.]+',
-                      'foreign urls': r'https?://(?!github\.com/mattpocock/skills/)', 'tokens': r'(sk-[A-Za-z0-9]{10,}|ghp_[A-Za-z0-9]{10,}|AKIA[0-9A-Z]{12,})',
-                      'ticket keys': r'\b[A-Z]{2,6}-\d{2,5}\b'}.items():
-        hits = re.findall(pat, d_text, flags=re.I if name == 'private names and systems' else 0)
-        if hits: fail(f'guide {i}: public-safety scan: {name} -> {hits[:3]}')
-reg_text = json.dumps(reg)
-for name, pat in {'private names and systems': r'\b(montai|aops|arwc|jira|jpd|confluence|todoist|slack|steward|supervis\w+|orca|paperclip|cmux|vault|basic[- ]memory|buzz|talos)\b', 'paths': r'(/Users/|/home/|~/\.|\.mex/|\.dev/)', 'ticket keys': r'\b[A-Z]{2,6}-\d{2,5}\b'}.items():
-    hits = re.findall(pat, reg_text, flags=re.I if name.startswith('private') else 0)
-    if hits: fail(f'registry: public-safety scan: {name} -> {hits[:3]}')
+    scan(f'guide {i}', d)
+scan('registry', reg)
 ok(f'{len(guides) - len(stubs)} complete guide(s), {len(stubs)} draft stub(s)' + (f': {stubs}' if stubs else ''))
 if '--complete' in args and stubs: fail(f'--complete: guides still stubs: {stubs}')
+
+# ---- the committed Arc bundle must have been built from the current plate data
+import hashlib
+digest_file = root / 'tools/agentic-os-atlas/.bundle-digest'
+def bundle_inputs():
+    h = hashlib.sha256()
+    for p in sorted((data / 'agentic-os').rglob('*.json')): h.update(p.relative_to(root).as_posix().encode()); h.update(p.read_bytes())
+    for p in ('tools/agentic-os-atlas/src/atlas.jsx', 'tools/agentic-os-atlas/src/frame.css'):
+        if (root / p).exists(): h.update((root / p).read_bytes())
+    return h.hexdigest()
+if digest_file.exists():
+    (ok if digest_file.read_text().strip() == bundle_inputs() else fail)('Arc bundle was built from the current plate data and sources' if digest_file.read_text().strip() == bundle_inputs() else 'Arc bundle is stale: plate data or atlas sources changed since build.sh ran (rebuild it)')
+else:
+    fail('tools/agentic-os-atlas/.bundle-digest is missing: run build.sh')
+
+# ---- optional: private terms kept out of the repository. PRIVATE_TERMS_FILE names a gitignored file, one
+# term per line; any hit in public data fails. Without it only the generic checks above run.
+import os
+tf = os.environ.get('PRIVATE_TERMS_FILE')
+if tf and Path(tf).exists():
+    terms = [x.strip() for x in Path(tf).read_text().splitlines() if x.strip() and not x.startswith('#')]
+    blob = '\n'.join(p.read_text() for p in (data / 'workflows').rglob('*.json')) + '\n'.join(p.read_text() for p in plate_dir.glob('*.json'))
+    hits = [x for x in terms if re.search(r'\b' + re.escape(x) + r'\b', blob, flags=re.I)]
+    (fail if hits else ok)('private terms file: ' + (f'{len(hits)} term(s) found in public data' if hits else 'none found'))
 
 # ---- optional: anonymous availability of each upstream source
 if '--online' in args:
