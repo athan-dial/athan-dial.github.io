@@ -1,49 +1,70 @@
 {
   "id": "shareable-writing",
   "title": "Testing a document on someone who was not there",
-  "lead": "Use this when you wrote something for people who were not in the room. You cannot judge your own draft, because you already know what it means. The method hands it to a reader with no context, then to new readers, until their complaints stop changing.",
-  "scenario": "A food bank volunteer drafts a one-page proposal to move pickup from Saturday to Thursday evening. It goes to a parish council that has never seen the rota. The example is invented, so every finding in it is too.",
-  "input": "Here is my one-pager for the council. Read it cold and tell me what a stranger would not follow.",
+  "lead": "Use it when you wrote something for people who were not in the room, because you can no longer judge your own draft: you know what every shortcut means.",
+  "produces": "A document that fresh readers with no context could follow, plus a record of each finding you accepted or rejected and why.",
+  "scenario": "You drafted a one-page proposal asking the lab heads' committee to approve a four-week pilot of Run comparison v1. One committee member is a lab head from a different discipline who has never seen a reference run.",
+  "input": "Here is my one-pager for the lab heads' committee. Read it cold and tell me what a stranger would not follow.",
   "steps": [
     {
       "actor": "human",
       "label": "Say who reads it and what they decide",
-      "text": "Write one line before the review starts: the council treasurer reads this for two minutes and decides whether to approve a trial month. That line is what the reader is held to. Without it, a reader can only judge style."
+      "text": "You write one line first: a lab head from another discipline reads this for three minutes and decides whether to approve a four-week pilot. Readers are held to that line. Without it they can only comment on style."
     },
     {
       "actor": "skill",
       "skill": "pm-cold-reader",
       "label": "First fresh reader",
-      "text": "A reader with no access to your notes, your history or the earlier drafts reads the page once. Three complaints come back. \"The Thursday trial\" is never explained. \"Pickup window\" means two different things. The ask appears in the last line. The same text read by its author found nothing wrong, which is why the author does not do this step."
+      "text": "A reader with no access to your notes or earlier drafts reads the page once. Four findings come back: \"reference run\" is never defined, \"tolerance\" appears as a percentage and as a count, the pilot's cost to the assay team is in the last line, and nobody is named who can stop the pilot. You wrote the page and found none of these."
     },
     {
       "actor": "human",
       "label": "Accept or reject each finding",
-      "text": "You take two and reject one. The reader wanted the whole rota history added; the council does not need it. You move the ask to the top, define the trial in a sentence, and pick one meaning for \"window\". Rejecting a finding is allowed. Ignoring one without a reason is not."
+      "text": "You accept three and reject one. The reader wanted the full instrument list; the committee decides on scope, so you say the pilot covers two instruments. You define both terms in one sentence each, move the cost to the top and name who can stop the pilot. A rejection needs a reason."
     },
     {
       "actor": "skill",
       "skill": "pm-cold-reader",
-      "label": "Second fresh reader",
-      "text": "A new reader sees only the revised page. A reader who saw the first version would be checking your fixes. This one finds a single new problem: a volunteer count with no date. You fix it. A third reader returns nothing new and repeats nothing."
+      "label": "A new reader, a new context",
+      "text": "A new reader sees only the revised page. A reader who saw the first version would be checking your fixes instead of reading. This round finds one new problem: the pilot dates do not say which weeks. You fix it and call another round."
+    },
+    {
+      "actor": "open",
+      "label": "A finding reverses an earlier rejection",
+      "text": "The next reader asks for the instrument list you rejected in round one. Findings that keep changing mean the page is not settled, so you keep going, up to the round limit you set at the start. The limit is a design choice. Without one the loop has no end."
+    },
+    {
+      "actor": "skill",
+      "skill": "pm-cold-reader",
+      "label": "Repeat until findings stop changing",
+      "text": "You add one line about the instruments. The final reader finds nothing new and repeats no earlier finding. The loop works on a local file throughout, and nothing is published or sent until this gate passes."
     },
     {
       "actor": "artifact",
-      "label": "The page the council receives",
-      "text": "A one-pager that says what you are asking in its first sentence, defines each term at first use, and leaves the rota history out. A short review record sits beside it, saying what each round found and what you decided."
+      "label": "The converged page and the record",
+      "text": "You have the final one-pager and a list of findings by round, each marked accepted, rejected with a reason, or still open. A person sends it. The method never does."
     }
   ],
-  "artifact": {
-    "title": "Review record (invented)",
-    "lines": [
-      "Reader brief. Council treasurer, two minutes, decides on a one-month trial.",
-      "Round 1. Undefined trial, double meaning of \"window\", ask in last line. Accepted 2, rejected 1 (rota history).",
-      "Round 2, new reader. One finding: volunteer count undated. Fixed.",
-      "Round 3, new reader. No new findings, none repeated. Stop.",
-      "Before sending. A person reads it once more and sends it. The review does not send anything."
+  "ledger": {
+    "settled": [
+      "\"Reference run\" and \"tolerance\" are defined where they first appear.",
+      "The pilot's cost to the assay team is in the first paragraph.",
+      "The pilot covers two of the three instruments, and the page says so."
+    ],
+    "open": [
+      "Whether the committee wants the full instrument list. One reader asked twice; the other readers did not."
     ]
   },
-  "stop": "You are done when a fresh reader's findings stop changing between rounds and that reader can state the ask and what you want them to decide. If findings keep changing after three rounds, the document is trying to do two jobs and should be split.",
-  "limits": "The example is invented, and so is its result. pm-cold-reader is a private skill with no public text, so this guide explains the idea and does not reproduce the skill. A model reading as a stranger is a good proxy for a stranger and a poor proxy for your particular treasurer. It catches missing definitions and buried asks. It cannot tell you whether the council will say yes.",
-  "order": "result-first"
+  "artifact": {
+    "title": "Round record excerpt",
+    "lines": [
+      "Round 1, finding 1. \"Reference run\" never defined. Accepted: defined in the second sentence.",
+      "Round 1, finding 3. Add the full instrument list. Rejected: the committee decides on scope, not on hardware.",
+      "Round 2, finding 1. Pilot weeks not stated. Accepted: dates added.",
+      "Round 3, finding 1. Instrument list requested again. Accepted in part: one line naming the two instruments.",
+      "Round 4. No new findings; none repeated. Ready for you to send."
+    ]
+  },
+  "stop": "Stop when a fresh reader finds nothing new and repeats no earlier finding, or when you reach the round limit. If the limit arrives first, the open findings come back to you, and you decide whether the page is good enough to send.",
+  "limits": "The readers are agents. They catch missing context and unclear terms. They cannot tell you whether the committee will approve, and they do not grade the argument. A lab head reading the page once is still the better test of whether it works."
 }
