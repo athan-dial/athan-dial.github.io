@@ -1,0 +1,384 @@
+{
+  "id": "fixture-workflow",
+  "figure": {
+    "title": "Product delivery workflow",
+    "code": "BM-02"
+  },
+  "layout": {
+    "width": 2184,
+    "height": 680
+  },
+  "nodes": {
+    "request": {
+      "x": 40,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "scan": {
+      "x": 284,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "frame": {
+      "x": 528,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "spec": {
+      "x": 772,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "gate": {
+      "x": 1004,
+      "y": 224,
+      "size": "m",
+      "width": 176,
+      "height": 124
+    },
+    "approval": {
+      "x": 1016,
+      "y": 56,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "implement": {
+      "x": 1260,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "verify": {
+      "x": 1504,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "peer": {
+      "x": 1748,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "release": {
+      "x": 1992,
+      "y": 250,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "retro": {
+      "x": 1992,
+      "y": 560,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "backlog": {
+      "x": 528,
+      "y": 560,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    },
+    "rework": {
+      "x": 1504,
+      "y": 430,
+      "size": "m",
+      "width": 152,
+      "height": 72
+    }
+  },
+  "nodeData": {
+    "request": {
+      "name": "Intake Brief",
+      "color": "amber",
+      "icon": "UserRound",
+      "shape": "pill"
+    },
+    "scan": {
+      "name": "Evidence Scan",
+      "color": "blue",
+      "icon": "Layers",
+      "shape": "rounded"
+    },
+    "frame": {
+      "name": "Product Framing",
+      "color": "blue",
+      "icon": "Layers",
+      "shape": "rounded"
+    },
+    "spec": {
+      "name": "Delivery Spec",
+      "color": "blue",
+      "icon": "Layers",
+      "shape": "rounded"
+    },
+    "gate": {
+      "name": "Risk Decision",
+      "color": "amber",
+      "icon": "GitFork",
+      "shape": "diamond"
+    },
+    "approval": {
+      "name": "Human Approval",
+      "color": "amber",
+      "icon": "UserRound",
+      "shape": "pill"
+    },
+    "implement": {
+      "name": "Build Agent",
+      "color": "emerald",
+      "icon": "Bot",
+      "shape": "rounded"
+    },
+    "verify": {
+      "name": "Evidence Check",
+      "color": "emerald",
+      "icon": "ShieldCheck",
+      "shape": "rounded"
+    },
+    "peer": {
+      "name": "Peer Review",
+      "color": "amber",
+      "icon": "UserRoundCheck",
+      "shape": "rounded"
+    },
+    "release": {
+      "name": "Release",
+      "color": "emerald",
+      "icon": "Rocket",
+      "shape": "rounded"
+    },
+    "retro": {
+      "name": "Retro & Feedback",
+      "color": "zinc",
+      "icon": "Database",
+      "shape": "square"
+    },
+    "backlog": {
+      "name": "Learning Backlog",
+      "color": "zinc",
+      "icon": "Database",
+      "shape": "square"
+    },
+    "rework": {
+      "name": "Revision Brief",
+      "color": "blue",
+      "icon": "Route",
+      "shape": "rounded"
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "from": "request",
+      "to": "scan",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Research",
+      "curve": "direct",
+      "id": "e0"
+    },
+    {
+      "from": "scan",
+      "to": "frame",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Findings",
+      "curve": "direct",
+      "id": "e1"
+    },
+    {
+      "from": "frame",
+      "to": "spec",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Acceptance",
+      "curve": "direct",
+      "id": "e2"
+    },
+    {
+      "from": "spec",
+      "to": "gate",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Plan",
+      "curve": "direct",
+      "id": "e3"
+    },
+    {
+      "from": "gate",
+      "to": "implement",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Low risk",
+      "curve": "direct",
+      "id": "e4"
+    },
+    {
+      "from": "gate",
+      "to": "approval",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "decision",
+      "label": "High risk",
+      "curve": "direct",
+      "id": "e5"
+    },
+    {
+      "from": "approval",
+      "to": "implement",
+      "fromAnchor": "right",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "Approved",
+      "curve": "step",
+      "id": "e6"
+    },
+    {
+      "from": "approval",
+      "to": "frame",
+      "fromAnchor": "left",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Revise",
+      "curve": "step",
+      "id": "e7"
+    },
+    {
+      "from": "implement",
+      "to": "verify",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Diff + tests",
+      "curve": "direct",
+      "id": "e8"
+    },
+    {
+      "from": "verify",
+      "to": "peer",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Pass",
+      "curve": "direct",
+      "id": "e9"
+    },
+    {
+      "from": "verify",
+      "to": "rework",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Fail",
+      "curve": "direct",
+      "id": "e10"
+    },
+    {
+      "from": "peer",
+      "to": "release",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Accept",
+      "curve": "direct",
+      "id": "e11"
+    },
+    {
+      "from": "peer",
+      "to": "rework",
+      "fromAnchor": "bottom",
+      "toAnchor": "right",
+      "style": "feedback",
+      "label": "Changes",
+      "curve": "step",
+      "id": "e12"
+    },
+    {
+      "from": "rework",
+      "to": "implement",
+      "fromAnchor": "left",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Retry",
+      "curve": "step",
+      "id": "e13"
+    },
+    {
+      "from": "release",
+      "to": "retro",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normal",
+      "label": "Observe",
+      "curve": "direct",
+      "id": "e14"
+    },
+    {
+      "from": "retro",
+      "to": "backlog",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "feedback",
+      "label": "Record",
+      "curve": "direct",
+      "id": "e15"
+    },
+    {
+      "from": "backlog",
+      "to": "frame",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Next cycle",
+      "curve": "direct",
+      "id": "e16"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

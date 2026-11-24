@@ -1,0 +1,361 @@
+{
+  "navigation": {
+    "overview.delivery": "workflow",
+    "workflow.request": "overview"
+  },
+  "views": {
+    "overview": {
+      "title": "Agent Enablement Atlas",
+      "nodes": {
+        "owner": [
+          "Product Owner",
+          "human",
+          0,
+          2
+        ],
+        "brief": [
+          "Intake Brief",
+          "control",
+          1,
+          2
+        ],
+        "router": [
+          "Run Supervisor",
+          "control",
+          2,
+          2
+        ],
+        "delivery": [
+          "Product Delivery",
+          "skill",
+          3,
+          2
+        ],
+        "research": [
+          "Evidence Research",
+          "skill",
+          3,
+          0
+        ],
+        "design": [
+          "Product Design",
+          "skill",
+          2.25,
+          3.35
+        ],
+        "build": [
+          "Software Build",
+          "skill",
+          3,
+          3
+        ],
+        "agent": [
+          "Execution Agents",
+          "worker",
+          4,
+          2
+        ],
+        "vault": [
+          "Knowledge Vault",
+          "store",
+          4,
+          0
+        ],
+        "registry": [
+          "Skill Registry",
+          "store",
+          2,
+          0
+        ],
+        "tools": [
+          "Tool Gateway",
+          "worker",
+          4,
+          4
+        ],
+        "repo": [
+          "Git Workspace",
+          "store",
+          5,
+          4
+        ],
+        "check": [
+          "Evidence Gate",
+          "review",
+          5,
+          2
+        ],
+        "ledger": [
+          "Run Ledger",
+          "store",
+          6,
+          1
+        ],
+        "approval": [
+          "Human Escalation",
+          "review",
+          6,
+          3
+        ],
+        "release": [
+          "Release Queue",
+          "worker",
+          6,
+          2
+        ]
+      },
+      "edges": [
+        [
+          "owner",
+          "brief",
+          "Sets intent"
+        ],
+        [
+          "brief",
+          "router",
+          "Scopes run"
+        ],
+        [
+          "router",
+          "registry",
+          "Loads policy"
+        ],
+        [
+          "router",
+          "delivery",
+          "Dispatches"
+        ],
+        [
+          "delivery",
+          "research",
+          "Composes"
+        ],
+        [
+          "delivery",
+          "design",
+          "Composes"
+        ],
+        [
+          "delivery",
+          "build",
+          "Composes"
+        ],
+        [
+          "delivery",
+          "agent",
+          "Run brief"
+        ],
+        [
+          "research",
+          "vault",
+          "Reads"
+        ],
+        [
+          "agent",
+          "vault",
+          "Retrieves"
+        ],
+        [
+          "agent",
+          "tools",
+          "Calls"
+        ],
+        [
+          "tools",
+          "repo",
+          "Writes"
+        ],
+        [
+          "agent",
+          "check",
+          "Evidence"
+        ],
+        [
+          "check",
+          "ledger",
+          "Records"
+        ],
+        [
+          "check",
+          "release",
+          "Pass"
+        ],
+        [
+          "check",
+          "approval",
+          "Needs decision"
+        ]
+      ]
+    },
+    "workflow": {
+      "title": "Product Delivery Workflow",
+      "nodes": {
+        "request": [
+          "Intake Brief",
+          "human",
+          0,
+          2
+        ],
+        "scan": [
+          "Evidence Scan",
+          "skill",
+          1,
+          2
+        ],
+        "frame": [
+          "Product Framing",
+          "skill",
+          2,
+          2
+        ],
+        "spec": [
+          "Delivery Spec",
+          "skill",
+          3,
+          2
+        ],
+        "gate": [
+          "Risk Decision",
+          "review",
+          4,
+          2
+        ],
+        "approval": [
+          "Human Approval",
+          "human",
+          4,
+          0
+        ],
+        "implement": [
+          "Build Agent",
+          "worker",
+          5,
+          2
+        ],
+        "verify": [
+          "Evidence Check",
+          "review",
+          6,
+          2
+        ],
+        "peer": [
+          "Peer Review",
+          "review",
+          7,
+          2
+        ],
+        "release": [
+          "Release",
+          "worker",
+          8,
+          2
+        ],
+        "retro": [
+          "Retro & Feedback",
+          "store",
+          8,
+          4
+        ],
+        "backlog": [
+          "Learning Backlog",
+          "store",
+          2,
+          4
+        ],
+        "rework": [
+          "Revision Brief",
+          "control",
+          6,
+          3.6
+        ]
+      },
+      "edges": [
+        [
+          "request",
+          "scan",
+          "Research"
+        ],
+        [
+          "scan",
+          "frame",
+          "Findings"
+        ],
+        [
+          "frame",
+          "spec",
+          "Acceptance"
+        ],
+        [
+          "spec",
+          "gate",
+          "Plan"
+        ],
+        [
+          "gate",
+          "implement",
+          "Low risk"
+        ],
+        [
+          "gate",
+          "approval",
+          "High risk"
+        ],
+        [
+          "approval",
+          "implement",
+          "Approved"
+        ],
+        [
+          "approval",
+          "frame",
+          "Revise"
+        ],
+        [
+          "implement",
+          "verify",
+          "Diff + tests"
+        ],
+        [
+          "verify",
+          "peer",
+          "Pass"
+        ],
+        [
+          "verify",
+          "rework",
+          "Fail"
+        ],
+        [
+          "peer",
+          "release",
+          "Accept"
+        ],
+        [
+          "peer",
+          "rework",
+          "Changes"
+        ],
+        [
+          "rework",
+          "implement",
+          "Retry"
+        ],
+        [
+          "release",
+          "retro",
+          "Observe"
+        ],
+        [
+          "retro",
+          "backlog",
+          "Record"
+        ],
+        [
+          "backlog",
+          "frame",
+          "Next cycle"
+        ]
+      ]
+    }
+  }
+}

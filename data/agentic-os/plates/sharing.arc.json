@@ -1,0 +1,240 @@
+{
+  "id": "sharing",
+  "figure": {
+    "title": "Sharing",
+    "code": "AOS-04"
+  },
+  "layout": {
+    "width": 1558,
+    "height": 523
+  },
+  "nodes": {
+    "work": {
+      "x": 40,
+      "y": 130,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "audience": {
+      "x": 332,
+      "y": 130,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "draft": {
+      "x": 624,
+      "y": 130,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "fresh": {
+      "x": 916,
+      "y": 130,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "ready": {
+      "x": 1192,
+      "y": 95,
+      "size": "m",
+      "width": 216,
+      "height": 148
+    },
+    "authorize": {
+      "x": 1208,
+      "y": 335,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "share": {
+      "x": 916,
+      "y": 335,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "learn": {
+      "x": 624,
+      "y": 335,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    }
+  },
+  "nodeData": {
+    "work": {
+      "name": "Verified work",
+      "color": "zinc",
+      "icon": "BadgeCheck",
+      "shape": "square",
+      "description": "Work that has already passed verification, and its evidence."
+    },
+    "audience": {
+      "name": "Choose artifact and audience",
+      "color": "emerald",
+      "icon": "Users",
+      "shape": "rounded",
+      "description": "A deck, a page, a plain document: whichever the reader will actually use."
+    },
+    "draft": {
+      "name": "Draft for the reader",
+      "color": "emerald",
+      "icon": "PenLine",
+      "shape": "rounded",
+      "description": "Written in the reader's terms, in the author's voice, with figures where a picture helps."
+    },
+    "fresh": {
+      "name": "Fresh-reader review",
+      "color": "blue",
+      "icon": "Eye",
+      "shape": "rounded",
+      "description": "An independent reader with no prior context looks for jargon, gaps and unsupported claims."
+    },
+    "ready": {
+      "name": "Reader-ready?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "diamond",
+      "description": "A person decides whether the artifact is good enough to go out."
+    },
+    "authorize": {
+      "name": "Authorize sharing",
+      "color": "amber",
+      "icon": "UserRoundCheck",
+      "shape": "pill",
+      "description": "Sending, posting or publishing needs explicit approval for that specific item."
+    },
+    "share": {
+      "name": "Share or publish",
+      "color": "emerald",
+      "icon": "Send",
+      "shape": "rounded",
+      "description": "Drafts are prepared for review; the release itself follows the approval."
+    },
+    "learn": {
+      "name": "Lessons captured",
+      "color": "zinc",
+      "icon": "BookMarked",
+      "shape": "square",
+      "subtitle": "How context carries forward \u2197",
+      "description": "What worked, what the reader did with it and what to change next time.",
+      "child": "learning"
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "work",
+      "to": "audience",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Select",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "audience",
+      "to": "draft",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Brief",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "draft",
+      "to": "fresh",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Draft",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "fresh",
+      "to": "ready",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Verdict",
+      "curve": "direct"
+    },
+    {
+      "id": "e4",
+      "from": "ready",
+      "to": "draft",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Revise",
+      "curve": "step",
+      "curveDepth": 56
+    },
+    {
+      "id": "e5",
+      "from": "ready",
+      "to": "authorize",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "decision",
+      "label": "Ready",
+      "curve": "direct"
+    },
+    {
+      "id": "e6",
+      "from": "authorize",
+      "to": "share",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "pass",
+      "label": "Approved",
+      "curve": "direct"
+    },
+    {
+      "id": "e7",
+      "from": "share",
+      "to": "learn",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Record",
+      "curve": "direct"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

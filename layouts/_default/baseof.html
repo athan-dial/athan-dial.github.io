@@ -31,6 +31,8 @@
   {{- end -}}
   {{- $css := $styles | resources.Concat $bundle | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- /* Page-scoped head additions. Empty everywhere except layouts that define it. */ -}}
+  {{ block "head" . }}{{ end }}
   {{ hugo.Generator }}
 </head>
 <body>

@@ -1,0 +1,97 @@
+{{ define "head" }}
+{{- /* The atlas is the one page that loads a framework bundle (React + Arc). It is built from
+       tools/agentic-os-atlas and lives in assets/, not static/: Hugo publishes a resource only
+       when a rendered template asks for its URL, so a draft atlas page ships none of it. */ -}}
+{{- $css := resources.Get "css/fieldnotes-atlas.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- range resources.Match "atlas/agentic-os/*" -}}
+  {{- if eq .MediaType.SubType "css" -}}<link rel="stylesheet" href="{{ .RelPermalink }}">{{- else -}}{{- $_ := .RelPermalink -}}{{- end -}}
+{{- end }}
+{{ end }}
+
+{{ define "main" }}
+{{- $data := index site.Data "agentic-os" -}}
+{{- $views := $data.views -}}
+{{- $plates := $data.plates -}}
+{{- $js := resources.Get "atlas/agentic-os/atlas.js" -}}
+<div class="container page-editorial page-editorial--case-study case-study--book atlas-page">
+  <article class="work-article case-study-article">
+
+    <p class="running-head" aria-hidden="true">
+      <span class="running-head__work">Selected work</span>
+      <span class="running-head__rule"></span>
+      <span class="running-head__title">{{ .Title }}</span>
+    </p>
+
+    <div class="case-study-intro">
+      <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
+      <header class="case-study-header">
+        <h1 class="case-study-header__title">{{ .Title }}</h1>
+        {{- with .Params.summary -}}<p class="case-study-header__lead">{{ . }}</p>{{- end -}}
+      </header>
+    </div>
+
+    <div class="case-study-body section-rail work-article__body">
+      {{ partial "section-rail.html" (dict "page" .) }}
+      <div class="section-rail__content prose prose--editorial prose--case-study case-study-body__prose reading-column">
+        {{ .Content }}
+      </div>
+    </div>
+
+    <section class="atlas-section" aria-labelledby="atlas-explore">
+      <h2 id="atlas-explore" class="atlas-section__title">Open the seven views.</h2>
+      <p class="atlas-section__skip"><a href="#atlas-text">Skip to the text version of every view</a></p>
+      <div id="agentic-os-atlas" class="atlas-mount" hidden></div>
+      <noscript><p class="atlas-nojs">The interactive diagram needs JavaScript. Every view is written out in full below, with the same nodes and relationships.</p></noscript>
+      {{- with $js }}<script type="module" src="{{ .RelPermalink }}"></script>{{ end }}
+    </section>
+
+    <section class="atlas-text" id="atlas-text" aria-labelledby="atlas-text-title">
+      <h2 id="atlas-text-title" class="atlas-section__title">The same seven views, in text.</h2>
+      <p class="atlas-text__lead">Each view lists its nodes in reading order, then its relationships, then what it does not claim. This is generated from the same data as the diagram.</p>
+      {{- range $i, $v := $views.views }}
+      {{- $plate := index $plates (printf "%s.arc" $v.id) -}}
+      <article class="atlas-text__view" id="view-{{ $v.id }}" aria-labelledby="view-{{ $v.id }}-title">
+        <header>
+          <p class="atlas-text__num">View {{ printf "%02d" (add $i 1) }} · {{ $v.short }}</p>
+          <h3 id="view-{{ $v.id }}-title">{{ $v.title }}</h3>
+          <p class="atlas-text__claim">{{ $v.claim }}</p>
+        </header>
+        <div class="atlas-text__cols">
+          <div>
+            <h4>Nodes</h4>
+            <ol class="atlas-text__nodes">
+              {{- range $id := $v.order }}
+              {{- $n := index $plate.nodeData $id }}
+              <li><strong>{{ $n.name }}</strong>{{ with $n.description }}: {{ . }}{{ end }}{{ if $n.child }} <a href="#view-{{ $n.child }}">(opens the {{ (index (where $views.views "id" $n.child) 0).short | lower }} view)</a>{{ end }}</li>
+              {{- end }}
+            </ol>
+          </div>
+          <div>
+            <h4>Relationships</h4>
+            <ul class="atlas-text__edges">
+              {{- range $plate.connectors }}
+              <li>{{ (index $plate.nodeData .from).name }} <span aria-hidden="true">→</span><span class="visually-hidden">to</span> {{ (index $plate.nodeData .to).name }}{{ with .label }} <em>({{ . }})</em>{{ end }}</li>
+              {{- end }}
+            </ul>
+          </div>
+        </div>
+        <p class="atlas-text__basis"><strong>Basis.</strong> {{ $v.basis }}</p>
+        <p class="atlas-text__basis"><strong>Not claimed.</strong> {{ $v.not_claimed }}</p>
+      </article>
+      {{- end }}
+    </section>
+
+    <footer class="colophon">
+      <p class="colophon__label">Colophon</p>
+      <dl class="colophon__list">
+        {{- with .Params.role }}<dt>Role</dt><dd>{{ . }}</dd>{{- end }}
+        {{- with .Params.themes }}<dt>Themes</dt><dd>{{ delimit . ", " }}</dd>{{- end }}
+        {{- with .Date }}<dt>Written</dt><dd><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 January 2006" }}</time></dd>{{- end }}
+        <dt>Diagram</dt><dd>Drawn with <a href="https://github.com/hudsonkit/arc">Arc</a> (MIT), page-scoped. Editable source and the engine patch live in <code>tools/agentic-os-atlas</code>.</dd>
+      </dl>
+    </footer>
+
+  </article>
+</div>
+{{ end }}

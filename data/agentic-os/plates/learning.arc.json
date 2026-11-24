@@ -1,0 +1,264 @@
+{
+  "id": "learning",
+  "figure": {
+    "title": "Durable learning",
+    "code": "AOS-07"
+  },
+  "layout": {
+    "width": 1542,
+    "height": 828
+  },
+  "nodes": {
+    "work": {
+      "x": 40,
+      "y": 435,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "kind": {
+      "x": 316,
+      "y": 400,
+      "size": "m",
+      "width": 216,
+      "height": 148
+    },
+    "decisions": {
+      "x": 624,
+      "y": 230,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "hypotheses": {
+      "x": 624,
+      "y": 435,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "ledger": {
+      "x": 624,
+      "y": 640,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "rules": {
+      "x": 916,
+      "y": 435,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "handoff": {
+      "x": 916,
+      "y": 640,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "next": {
+      "x": 1208,
+      "y": 435,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    }
+  },
+  "nodeData": {
+    "work": {
+      "name": "Work happens",
+      "color": "emerald",
+      "icon": "Hammer",
+      "shape": "rounded",
+      "description": "Anything that produces a decision, a pattern or a change in state."
+    },
+    "kind": {
+      "name": "What kind?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "description": "Each thing worth keeping belongs to exactly one kind of record."
+    },
+    "decisions": {
+      "name": "Decision log",
+      "color": "zinc",
+      "icon": "Scale",
+      "shape": "square",
+      "description": "A choice, why it was made and what was rejected. One project, append-only."
+    },
+    "hypotheses": {
+      "name": "Hypotheses",
+      "color": "zinc",
+      "icon": "FlaskConical",
+      "shape": "square",
+      "description": "A pattern that will recur elsewhere, with a count of confirmations and its evidence."
+    },
+    "ledger": {
+      "name": "Work ledger",
+      "color": "zinc",
+      "icon": "NotebookPen",
+      "shape": "square",
+      "description": "What landed and what changed, recorded at the moment it happens by a hook, not recalled later."
+    },
+    "rules": {
+      "name": "Rules",
+      "color": "zinc",
+      "icon": "ListChecks",
+      "shape": "square",
+      "description": "A hypothesis confirmed enough times becomes a rule that changes default behaviour."
+    },
+    "handoff": {
+      "name": "Reconcile and hand off",
+      "color": "emerald",
+      "icon": "RefreshCw",
+      "shape": "rounded",
+      "description": "Close-out reads the ledger, fixes drift between notes, repository and board, and leaves a handoff."
+    },
+    "next": {
+      "name": "Next work starts with context",
+      "color": "emerald",
+      "icon": "Compass",
+      "shape": "rounded",
+      "description": "The next session begins from decisions, rules and the handoff rather than from memory."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "work",
+      "to": "kind",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Capture",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "kind",
+      "to": "decisions",
+      "fromAnchor": "top",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "A choice was made",
+      "curve": "step"
+    },
+    {
+      "id": "e2",
+      "from": "kind",
+      "to": "hypotheses",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Pattern",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "kind",
+      "to": "ledger",
+      "fromAnchor": "bottom",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Work landed",
+      "curve": "step"
+    },
+    {
+      "id": "e4",
+      "from": "hypotheses",
+      "to": "rules",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Confirmed",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "rules",
+      "to": "hypotheses",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Demote if contradicted",
+      "curve": "step",
+      "curveDepth": 44
+    },
+    {
+      "id": "e6",
+      "from": "ledger",
+      "to": "handoff",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Read at close",
+      "curve": "direct"
+    },
+    {
+      "id": "e7",
+      "from": "decisions",
+      "to": "next",
+      "fromAnchor": "right",
+      "toAnchor": "topLeft",
+      "style": "normal",
+      "label": "Prior choices",
+      "curve": "step"
+    },
+    {
+      "id": "e8",
+      "from": "rules",
+      "to": "next",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Sets defaults",
+      "curve": "direct"
+    },
+    {
+      "id": "e9",
+      "from": "handoff",
+      "to": "next",
+      "fromAnchor": "right",
+      "toAnchor": "bottom",
+      "style": "normal",
+      "label": "Handoff",
+      "curve": "step"
+    },
+    {
+      "id": "e10",
+      "from": "next",
+      "to": "work",
+      "fromAnchor": "topRight",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Next task",
+      "curve": "step",
+      "curveDepth": 200
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "id": "overview",
+  "figure": {
+    "title": "System overview",
+    "code": "AOS-01"
+  },
+  "layout": {
+    "width": 1542,
+    "height": 718
+  },
+  "nodes": {
+    "human": {
+      "x": 40,
+      "y": 120,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "thinking": {
+      "x": 332,
+      "y": 120,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "decide": {
+      "x": 608,
+      "y": 85,
+      "size": "m",
+      "width": 216,
+      "height": 148
+    },
+    "making": {
+      "x": 916,
+      "y": 120,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "sharing": {
+      "x": 1208,
+      "y": 120,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "lessons": {
+      "x": 1208,
+      "y": 325,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "knowledge": {
+      "x": 332,
+      "y": 530,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "governance": {
+      "x": 624,
+      "y": 530,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    },
+    "substrate": {
+      "x": 916,
+      "y": 530,
+      "size": "m",
+      "width": 184,
+      "height": 78
+    }
+  },
+  "nodeData": {
+    "human": {
+      "name": "Human direction",
+      "color": "amber",
+      "icon": "UserRound",
+      "shape": "pill",
+      "subtitle": "Intent, taste, accountability",
+      "description": "A person sets the direction, makes the judgment calls and owns the outcome."
+    },
+    "thinking": {
+      "name": "Thinking",
+      "color": "emerald",
+      "icon": "Lightbulb",
+      "shape": "rounded",
+      "subtitle": "Open \u2197",
+      "description": "Research, discovery, tradeoffs and shaping, ending in a written decision.",
+      "child": "thinking"
+    },
+    "decide": {
+      "name": "Build it?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "diamond",
+      "description": "A person decides whether a shaped idea is worth building."
+    },
+    "making": {
+      "name": "Making",
+      "color": "emerald",
+      "icon": "Hammer",
+      "shape": "rounded",
+      "subtitle": "Open \u2197",
+      "description": "A specification becomes verified work through governed execution.",
+      "child": "making"
+    },
+    "sharing": {
+      "name": "Sharing",
+      "color": "emerald",
+      "icon": "Send",
+      "shape": "rounded",
+      "subtitle": "Open \u2197",
+      "description": "Verified work becomes an artifact a reader can use, shared with authorization.",
+      "child": "sharing"
+    },
+    "lessons": {
+      "name": "Decisions and lessons",
+      "color": "zinc",
+      "icon": "BookMarked",
+      "shape": "square",
+      "description": "What was decided, what was learned and what happened, recorded for reuse."
+    },
+    "knowledge": {
+      "name": "Knowledge and memory",
+      "color": "zinc",
+      "icon": "Library",
+      "shape": "square",
+      "description": "Where decisions, hypotheses and work records live between sessions."
+    },
+    "governance": {
+      "name": "Governance and orchestration",
+      "color": "blue",
+      "icon": "Landmark",
+      "shape": "rounded",
+      "description": "Policy, readiness checks and authorization boundaries that apply to every stage."
+    },
+    "substrate": {
+      "name": "Execution substrate",
+      "color": "emerald",
+      "icon": "Cpu",
+      "shape": "rounded",
+      "description": "Agent runtimes that do the work: Claude Code, Cursor and Codex. A limited ChatGPT pilot carries a few portable skills only."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "human",
+      "to": "thinking",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Intent",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "thinking",
+      "to": "decide",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Shaped",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "decide",
+      "to": "making",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "pass",
+      "label": "Yes",
+      "curve": "direct"
+    },
+    {
+      "id": "e3",
+      "from": "decide",
+      "to": "thinking",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "No, rethink",
+      "curve": "step",
+      "curveDepth": 56
+    },
+    {
+      "id": "e4",
+      "from": "making",
+      "to": "sharing",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Verified",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "sharing",
+      "to": "lessons",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normal",
+      "label": "Record",
+      "curve": "direct"
+    },
+    {
+      "id": "e6",
+      "from": "lessons",
+      "to": "thinking",
+      "fromAnchor": "left",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Informs the next question",
+      "curve": "step"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Cross-cutting: available to every stage",
+      "x": 316,
+      "y": 498,
+      "width": 800,
+      "height": 124,
+      "color": "zinc"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
