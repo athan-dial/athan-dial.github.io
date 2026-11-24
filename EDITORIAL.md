@@ -91,9 +91,10 @@ Rules that follow from it:
 
 - Ownership is split on the page: what I owned, what the team owned, what the record does not support.
 - A role, title, date or employer is public only if it is in `data/profile.toml`, `data/experience.json` or
-  the About trajectory. **The current role has not been re-verified since the 2026-09 profile
-  reconciliation. Before About is released, the owner confirms title, organisation and dates and
-  removes this sentence.**
+  the About trajectory. The current role (Associate Director, Data Science & Product Management, Montai
+  Therapeutics, 2025 to present; Data Research Lead 2022 to 2025) was confirmed by the owner against the
+  master résumé on 2026-11-24. Any second title, metric or figure from the résumé stays unpublished
+  until employer review clears it.
 - No consultancy. Do not imply a business, a service, pricing, a deliverable or availability for hire. Conversations
   with peers are welcome and carry no offer (CLAUDE.md hard constraint 2).
 - Published essays keep their text and URLs. Edit one only with separate owner approval and a recorded
