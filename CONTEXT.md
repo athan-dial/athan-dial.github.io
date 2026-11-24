@@ -14,7 +14,9 @@ A personal website and publication for work on AI, data, product judgment and ex
 | Evidence | Source support for a specific claim; an observed outcome, range, mechanism, hypothesis or unknown must remain distinguishable. |
 | Redirect stub | A retired URL whose only purpose is to direct readers to its canonical successor. |
 | Publication gate | The existing checks and human review required before the built website may be released. |
-| Systems Atlas | Proposed external software research catalogue at /atlas/, currently on an unmerged branch. Inspected software is not necessarily tested or adopted. |
+| Systems Atlas | Curated research notebook on other people's software at /atlas/. The value is selection and judgment; inspected software is not necessarily tested or adopted. It is distinct from The Agentic Operating System. |
+| The Agentic Operating System | Personal operating system for agent-enabled work at /work/agentic-operating-system/, drawn as seven interactive views. Draft until the owner approves it. See `EDITORIAL.md`. |
+| EDITORIAL.md | Canonical authority for all public prose: positioning, voice, claims, page jobs. |
 | Interactive architecture | Proposed navigable explanation of an agentic workflow system, distinct from the external research catalogue. |
 
 ## Boundaries

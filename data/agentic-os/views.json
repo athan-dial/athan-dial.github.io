@@ -78,7 +78,7 @@
       "short": "Governed execution",
       "title": "Autonomous work is admitted by rules, not by confidence.",
       "claim": "Shaping, certifying, admitting, building, reviewing and closing are separate roles with separate gates, and only a person closes work.",
-      "basis": "Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised. Promotion to ready is a gated step an agent or a person can take; the supervisor then admits, never closes.",
+      "basis": "Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised. The owner has confirmed that an agent may promote work to ready when every policy gate passes; the supervisor then admits, and closing stays with a person.",
       "not_claimed": "Not an audited runtime. The diagram shows the intended transitions and who may perform them. Not claimed: that the supervisor is the only route to review, or that it re-runs the tests itself.",
       "order": [
         "contract",
@@ -98,7 +98,7 @@
       "short": "Human authorization",
       "title": "Autonomy ends where an action is outward-facing or hard to undo.",
       "claim": "Reversible local work goes ahead. Anything outward-facing or hard to undo is drafted, held and approved one item at a time.",
-      "basis": "Reflects the standing authorization policy for agent work. The list of reserved actions is representative, not exhaustive.",
+      "basis": "Reflects the standing authorization policy for agent work. Agents may promote work to ready when every policy gate passes; the reserved actions are representative, not exhaustive.",
       "not_claimed": "Does not claim every decision is automated, or that a hook catches every violation.",
       "order": [
         "propose",

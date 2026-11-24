@@ -209,7 +209,7 @@ p.node('contract', 'Shaped contract', 'state', 0, 0, icon='ScrollText',
 p.node('certify', 'Readiness check', 'check', 1, 0, icon='ClipboardCheck', sub='A separate certifier',
        desc='A different pass reads the contract fresh and certifies it. Shaping and certifying never share one pass.')
 p.node('certified', 'Certified?', 'rule', 2, 0,
-       desc='Yes only if the certification still matches the current text of the contract.')
+       desc='Yes only if the certification still matches the current text of the contract. An agent may then promote the work to ready, but only when every policy gate passes. Done, merge and publish stay with a person.')
 p.node('admit', 'Admit', 'check', 3, 0, icon='DoorOpen', sub='Deterministic',
        desc='Fixed predicates, no model judgment: ready state, one executor, no hold, blockers done.')
 p.node('dispatch', 'Dispatch', 'tool', 4, 0, icon='Workflow', sub='Bounded',
@@ -243,7 +243,7 @@ p.save()
 # ---------------------------------------------------------------- 06 human authorization
 p = Plate('authorization', 'AOS-06', 'Human authorization')
 p.node('propose', 'Agent proposes an action', 'tool', 0, 1, icon='Bot',
-       desc='Reading, searching, editing a working copy and running local checks need no extra approval.')
+       desc='Reading, searching, editing a working copy and running local checks need no extra approval. Promoting work to ready is delegated too, but only when every policy gate passes.')
 p.node('local', 'Reversible?', 'rule', 1, 1,
        desc='Can the action be undone, and does it stay on this machine?')
 p.node('proceed', 'Proceed within the task', 'tool', 1, 2, icon='Play',
@@ -325,11 +325,11 @@ views = dict(
              not_claimed='Does not claim every artifact gets every review, or that sending can ever happen without approval.'),
         dict(id='governed', short='Governed execution', title='Autonomous work is admitted by rules, not by confidence.',
              claim='Shaping, certifying, admitting, building, reviewing and closing are separate roles with separate gates, and only a person closes work.',
-             basis='Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised. Promotion to ready is a gated step an agent or a person can take; the supervisor then admits, never closes.',
+             basis='Follows the current lifecycle and supervisor design; older orchestration designs that were retired are not shown. State names are generalised. The owner has confirmed that an agent may promote work to ready when every policy gate passes; the supervisor then admits, and closing stays with a person.',
              not_claimed='Not an audited runtime. The diagram shows the intended transitions and who may perform them. Not claimed: that the supervisor is the only route to review, or that it re-runs the tests itself.'),
         dict(id='authorization', short='Human authorization', title='Autonomy ends where an action is outward-facing or hard to undo.',
              claim='Reversible local work goes ahead. Anything outward-facing or hard to undo is drafted, held and approved one item at a time.',
-             basis='Reflects the standing authorization policy for agent work. The list of reserved actions is representative, not exhaustive.',
+             basis='Reflects the standing authorization policy for agent work. Agents may promote work to ready when every policy gate passes; the reserved actions are representative, not exhaustive.',
              not_claimed='Does not claim every decision is automated, or that a hook catches every violation.'),
         dict(id='learning', short='Durable learning', title='Context carries forward as records, not memory.',
              claim='Decisions, hypotheses and work records are kept separately, so a stranger could resume the work and a lesson earns its way into a rule.',

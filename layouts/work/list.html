@@ -28,6 +28,10 @@
        never fall out of the index just because it is missing the field. */ -}}
 {{- $unclassified := where $public "Params.work_kind" nil -}}
 {{- $cases := $flagship | append $unclassified -}}
+{{- /* The Agentic Operating System is featured above the cases (work_kind: system), not listed
+       as one. GetPage returns it only when the page is in this build, so a production build with
+       the page still draft renders nothing here. */ -}}
+{{- $system := site.GetPage "/work/agentic-operating-system" -}}
 <section class="section work-index">
   <div class="container">
     <header class="work-index__header section-rail">
@@ -59,6 +63,20 @@
       </div>
     </header>
 
+    {{- with $system -}}
+    <section class="work-index__group work-index__system" aria-labelledby="work-system-title">
+      <div class="fn-section__head">
+        <h2 id="work-system-title">A working system</h2>
+      </div>
+      <article class="fn-system">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Params.summary }}</p>
+        <p class="fn-system__limits">{{ .Params.system_limits }}</p>
+        <a class="fn-text-link" href="{{ .RelPermalink }}">Explore the seven views <span aria-hidden="true">↗</span></a>
+      </article>
+    </section>
+    {{- end -}}
+
     {{- if $public -}}
 
     {{- with $cases -}}
@@ -66,7 +84,7 @@
       <div class="fn-section__head">
         <h2 id="work-cases-title">Cases <span>/ {{ len . }}</span></h2>
       </div>
-      <p class="fn-section__standfirst">The full decision: who was doing the work, what was already possible, where the boundary went, what I owned, and what the record does and does not support.</p>
+      <p class="fn-section__standfirst">The full decision: who was doing the work, what was already possible, where the boundary went, what I owned, and what the record does not support.</p>
       <div class="case-studies work-index__list">
         <ul>
           {{- range (sort . "Date" "desc") -}}
@@ -84,7 +102,7 @@
       <div class="fn-section__head">
         <h2 id="work-notes-title">Proof notes <span>/ {{ len . }}</span></h2>
       </div>
-      <p class="fn-section__standfirst">Narrower on purpose. One artifact, one decision, one boundary — the piece of evidence that changed the next move, without a case built around it.</p>
+      <p class="fn-section__standfirst">Narrower on purpose: one artifact, one decision, one boundary. The piece of evidence that changed the next move, without a case built around it.</p>
       <div class="case-studies work-index__list work-index__list--notes">
         <ul>
           {{- range (sort . "Date" "desc") -}}

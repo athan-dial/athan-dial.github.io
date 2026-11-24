@@ -29,6 +29,8 @@ jobs:
           bash scripts/verify-documentary-voice.sh
           python3 atlas/validate.py atlas/records
           bash atlas/tests/run.sh
+          bash scripts/verify-editorial.sh
+          python3 tools/agentic-os-atlas/validate.py
       - name: Check diff hygiene
         run: git diff --check origin/main...HEAD
       - name: Browser smoke check

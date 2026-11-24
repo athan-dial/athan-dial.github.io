@@ -13,4 +13,5 @@ cascade:
     draft: true
 ---
 
-Short notes from the work: what happened, what it revealed, and what I would try next.
+Short notes from the work: what happened, what it showed, and what I would try next. They are part
+of [Fieldnotes](/thinking/).

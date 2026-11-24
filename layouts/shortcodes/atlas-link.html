@@ -1,5 +1,5 @@
-{{- /* Contextual link to the Agentic Operating System atlas. Renders only when that page is part
-       of the current build, so a production build (drafts excluded) carries no link to it. */ -}}
+{{- /* Contextual link to The Agentic Operating System. Renders only when that page is part of the
+       current build, so a production build (drafts excluded) carries no link to it. */ -}}
 {{- with site.GetPage "/work/agentic-operating-system" -}}
-<p class="atlas-link"><a href="{{ .RelPermalink }}">See the working model: {{ .Title }}</a>{{ with .Params.summary }}<span class="atlas-link__note"> — {{ . }}</span>{{ end }}</p>
+<p class="atlas-link"><a href="{{ .RelPermalink }}">See the working model: {{ .Title }}</a>{{ with .Params.card_summary }}<span class="atlas-link__note"> {{ . }}</span>{{ end }}</p>
 {{- end -}}

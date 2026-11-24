@@ -79,7 +79,7 @@
       "color": "emerald",
       "icon": "Bot",
       "shape": "rounded",
-      "description": "Reading, searching, editing a working copy and running local checks need no extra approval."
+      "description": "Reading, searching, editing a working copy and running local checks need no extra approval. Promoting work to ready is delegated too, but only when every policy gate passes."
     },
     "local": {
       "name": "Reversible?",

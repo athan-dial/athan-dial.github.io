@@ -231,6 +231,10 @@ for f in sorted(pathlib.Path(sys.argv[1]).glob("*.md")):
     if len(parts) < 2:
         continue
     fm = parts[1]
+    # work_kind: system is featured above the cases (layouts/work/list.html), not rendered as a
+    # case row, so it is counted by its own check below rather than by the row count.
+    if re.search(r'^work_kind:\s*system\s*$', fm, re.M):
+        continue
     if re.search(r'^status:\s*published\s*$', fm, re.M) and re.search(r'^visibility:\s*public\s*$', fm, re.M):
         n += 1
 print(n)

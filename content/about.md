@@ -1,7 +1,7 @@
 ---
 title: "About"
 date: 2026-01-20
-description: "Athan Dial. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, and a research record that explains how he reasons about evidence."
+description: "Athan Dial works on AI enablement for expert work. Associate Director, Data Science & Product Management at Montai Therapeutics. PhD in Medical Sciences, and a research record that explains how Athan reasons about evidence."
 layout: about
 # show_profile_links is deliberately NOT set. This page ends with its own #conversations
 # section, which carries the contact links with real context around them. The generic
@@ -43,9 +43,9 @@ selected_research:
   - "10.1016/j.tem.2018.02.010"
   - "10.1096/fj.201700868rrr"
 
-research_note: "The research is not a previous life that stopped mattering. It is where the habits came from: what an adequately powered comparison costs, how often a clean result can be a measurement artifact, and why a method section matters more than a confident conclusion. Those habits still show up in product work, mostly as a reflex about what a number is allowed to claim."
+research_note: "The research is where the habits came from: what an adequately powered comparison costs, how often a clean result turns out to be a measurement artifact, and why the method section matters more than a confident conclusion. They still show up in product work, mostly as a reflex about what a number is allowed to claim."
 
-territory_standfirst: "Four questions the work keeps returning to. They are the reason Fieldnotes exists: each one is easier to think through in writing than in a planning document."
+territory_standfirst: "Four questions the work keeps returning to. Fieldnotes exists because each one is easier to think through in writing than in a planning document."
 territory:
   - question: "What deserves to be built when building gets cheap?"
     detail: "A convincing first version now costs an afternoon. That moves the hard part upstream, into deciding which problems earn a product at all."
@@ -56,43 +56,51 @@ territory:
   - question: "When contribution broadens, who owns what happens next?"
     detail: "More people can produce more candidate work. Ownership of what happens to it usually stays where it was."
 
-conversations_intro: "I am interested in how other people are working through these problems, particularly when the first attempt did not go the way they expected. That is the conversation I do not get tired of."
-conversations_note: "Talks, panels, and guest sessions are welcome, and so is a longer conversation with no agenda attached. Most of my time goes to the day job; this is not a business and there is nothing to buy."
+conversations_intro: "If you are working through something similar, I would like to compare notes. I am most interested when the first attempt did not go the way you expected. That is the conversation I do not get tired of."
+conversations_note: "Talks, panels and guest sessions are welcome, and so is a longer conversation with no agenda attached. Most of my time goes to the day job. This is not a business and there is nothing to buy."
 ---
 
-I build AI and data products for people whose work depends on judgment. Right now that
-means data science and product at Montai Therapeutics, where the people using what we
-build know considerably more about their problem than the software does.
+I work on AI enablement for expert work: getting people who are very good at something hard to use
+AI without losing the part that makes them good. Right now that means data science and product at
+Montai Therapeutics, where the people using what we build know considerably more about their problem
+than the software does.
 
-That constraint is the interesting part. A tool for an expert has to fit a practice that
-already works, expose enough of its reasoning to be checked, and leave room for what the
-person knows and the system does not. Get that boundary wrong in either direction and the
-result is the same: the tool gets used once, politely, and then routed around.
+That constraint is the interesting part. A tool for an expert has to fit a practice that already
+works, show enough of its reasoning to be checked, and leave room for what the person knows and the
+system does not. Get that boundary wrong in either direction and the tool gets used once, politely,
+and then routed around.
 
-The route here started in medical research. My PhD measured skeletal muscle function and
-physiology in people with type 1 diabetes, a setting where the effect of interest can be
-small, the measurement noisy, and the honest answer sometimes that the study cannot tell
-you. The same habit follows the product work now: treat the idea as a claim, and keep the
-question of what would change the claim attached to it.
+## Why the science matters here
+
+My PhD measured skeletal muscle function and physiology in people with type 1 diabetes. It is a
+setting where the effect of interest can be small, the measurement noisy, and the honest answer
+sometimes that the study cannot tell you. That training is the habit I use most. Treat an idea as a
+claim. Ask what would change it. Expect a clean result to be an artifact until it survives a harder
+look. None of that is specific to biology. It applies wherever someone has to decide whether a number,
+a model or a demo is allowed to say what it appears to say.
 
 ## How the work tends to move
 
-**Tighten the question before adding the feature.** One case under [Work](/work/) starts
-with an expert saying a faster search tool still feels incomplete. The literal response
-would have been to return more results. The useful question was whether the complaint was
-actually about relevance, coverage, confidence, or control. One comparison established
-that there was a problem. It could not establish which problem it was.
+**Tighten the question before adding the feature.** One case under [Work](/work/) starts with an
+expert saying a faster search tool still feels incomplete. The literal response would have been to
+return more results. The useful question was whether the complaint was about relevance, coverage,
+confidence or control. One comparison showed there was a problem. It could not show which one.
 
-**Keep expert judgment visible.** The recurring design question is which part of the work
-should become consistent and shared, and which part is the expertise itself. Retrieval,
-ranking, and proposal can become systematic without pretending that adjudication has
-stopped requiring the person who understands the domain. The boundary works better when
-it is visible in the product instead of buried in a default setting.
+**Keep expert judgment visible.** The recurring design question is which part of the work should
+become consistent and shared, and which part is the expertise itself. Retrieval, ranking and proposal
+can become systematic. Adjudication still needs the person who understands the domain, and the
+boundary works better when the product shows it than when it hides in a default setting.
 
-**Let verification change the recommendation.** [An all-false column is a legal column](/notes/an-all-false-column-is-a-legal-column/) describes how individually valid steps produced a wrong answer. The check that caught it required domain knowledge. That is the kind of knowledge a verification layer should make explicit.
+**Let verification change the recommendation.** [An all-false column is a legal column](/notes/an-all-false-column-is-a-legal-column/)
+describes individually valid steps producing a wrong answer. The check that caught it needed domain
+knowledge, which is the kind of knowledge a verification layer should make explicit.
 
-**Name what was not measured.** A shipped tool without adoption instrumentation does not
-become a successful product because the implementation was fast. A retrospective result
-does not become a production rule because it survives one analysis. The Work pages name
-those gaps on purpose. The boundary of the evidence should be visible before the story
-gets smoother than the record deserves.
+**Name what was not measured.** A shipped tool with no adoption instrumentation is not a successful
+product because the implementation was fast. A retrospective result is not a production rule because it
+survived one analysis. The Work pages name those gaps on purpose, so the edge of the evidence is visible
+before the story gets smoother than the record deserves.
+
+I also run my own agent-enabled work through a system I have drawn out in seven views, including where
+a person has to decide and what gets recorded for next time.
+
+{{< atlas-link >}}

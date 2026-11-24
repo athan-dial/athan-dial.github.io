@@ -101,7 +101,7 @@
       "color": "blue",
       "icon": "GitFork",
       "shape": "diamond",
-      "description": "Yes only if the certification still matches the current text of the contract."
+      "description": "Yes only if the certification still matches the current text of the contract. An agent may then promote the work to ready, but only when every policy gate passes. Done, merge and publish stay with a person."
     },
     "admit": {
       "name": "Admit",

@@ -57,7 +57,8 @@ every deploy, but the underlying PII lesson stands: see Hard Constraint 1.
 
 ## Design System: Personal Fieldnotes
 
-Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book implementation:
+Authority: `DESIGN.md`. Wording and positioning: `EDITORIAL.md` (canonical for all public prose; run
+`scripts/verify-editorial.sh`). Tokens: `assets/css/tokens.css`. Existing base/book implementation:
 `assets/css/main.css`. Shared editorial layer: `assets/css/fieldnotes.css`. Homepage-only layer:
 `assets/css/fieldnotes-home.css`, loaded after the shared Fieldnotes layer.
 
@@ -80,15 +81,17 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
 ### Homepage v2: do not regress this order
 
 The homepage is a personal site using Fieldnotes as its surface language. It is not a sparse
-publication cover. Canonical chapter order:
+publication cover. Canonical chapter order (eight chapters since 2026-11-24; `verify-fieldnotes-home.sh`
+asserts it):
 
 1. Identity
 2. Current idea
-3. Work in practice
+3. Work in practice (features The Agentic Operating System when that page is in the build)
 4. Fieldnotes
-5. Trajectory
-6. Operating territory
-7. Context
+5. Systems Atlas
+6. Trajectory
+7. Operating territory
+8. Context
 
 The canonical hero headline lives in `data/profile.toml`: "I build AI and data products for
 people whose work depends on judgment." Do not restore `Try things. Keep what works.` or replace
@@ -219,8 +222,10 @@ React + Arc bundle. It is the only page that does; everything else stays static 
 - The bundle lives in `assets/atlas/agentic-os/` (not `static/`) so Hugo publishes it only when the
   atlas page renders. The page is `draft: true` (cascaded from `content/work/_index.md`) until the owner
   approves it; do not flip draft/status/visibility to demonstrate it. Use `hugo server -D` to preview.
-- Contextual links (`atlas-link` shortcode, homepage territory chapter) are wrapped in
-  `site.GetPage`, so a production build carries no link to a draft atlas.
+- Contextual links (`atlas-link` shortcode, the Home hero action and Work-in-practice feature, the Work index
+  feature block) are wrapped in `site.GetPage`, so a production build carries no link to a draft page. The page
+  is `work_kind: system`: it is featured above the Work cases, never listed as one, and
+  `verify-proof-layer.sh` counts it separately.
 - Rebuild the bundle with `tools/agentic-os-atlas/build.sh` (pinned Arc `2c4945e`, patched by
   `patches/arc-engine.patch`). Run `python3 tools/agentic-os-atlas/validate.py` after changing plates.
 - Content is a curated, generalised account of a personal working method. No employer, project, ticket,

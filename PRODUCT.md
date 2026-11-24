@@ -20,15 +20,17 @@ should not require understanding internal names or the history of this website.
 ## Homepage job
 
 The homepage is not a sparse publication cover and not a conventional portfolio grid. It is a
-single-scroll personal profile with seven chapters:
+single-scroll personal profile with eight chapters (the Systems Atlas chapter was added 2026-11-24,
+see `EDITORIAL.md`):
 
 1. identity;
 2. current idea;
-3. work in practice;
+3. work in practice, which features The Agentic Operating System when that page is in the build;
 4. Fieldnotes;
-5. trajectory;
-6. operating territory;
-7. context.
+5. Systems Atlas, the curated research notebook;
+6. trajectory;
+7. operating territory;
+8. context, which ends with the invitation to talk.
 
 This order is intentional. The reader meets Athan, sees one current idea, sees that it is grounded in
 real product work, then gets the broader notebook, career movement, and the questions connecting the
@@ -39,14 +41,16 @@ resume-like.
 
 ## Public destinations
 
-Four, each with a distinct job. Added 2026-09-10; authority
-`.planning/specs/2026-09-10-personal-brand-proof-layer-design.md`.
+Five, each with a distinct job. Added 2026-09-10 (authority
+`.planning/specs/2026-09-10-personal-brand-proof-layer-design.md`); Systems Atlas joined the primary
+navigation in the historical reconciliation. Wording and positioning are governed by `EDITORIAL.md`.
 
 | Destination | Job |
 |---|---|
 | **Home** | Interesting practitioner. One scroll: who Athan is, one current idea, that the idea is grounded in real product work, then the notebook, the movement, and the recurring questions. |
-| **Work** | Credible product leader. Two evidence-disciplined product narratives showing ownership, boundaries, and what the record does not support. |
+| **Work** | Credible product leader. Evidence-disciplined product narratives showing ownership, boundaries, and what the record does not support, plus the featured system, The Agentic Operating System. |
 | **Fieldnotes** | Coherent intellectual territory. Essays, field notes, and selected LinkedIn writing as three deliberate sources in one publication. |
+| **Systems Atlas** | A curated research notebook on other people's software. The value is selection and judgment: what each system is, what I make of it, what I did not check. Not my work, not an endorsement, not coverage. |
 | **About** | Research depth, trajectory, and leadership classification. The proof surface — the place a reader can establish current role, movement, product ownership, and research foundation without a public resume existing. |
 
 The asymmetry is deliberate. The homepage should read as if it is for practitioners while

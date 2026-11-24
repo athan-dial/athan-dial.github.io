@@ -19,7 +19,7 @@
   weight = 2
 
 [[main]]
-  name = "Atlas"
+  name = "Systems Atlas"
   url = "/atlas/"
   weight = 3
 

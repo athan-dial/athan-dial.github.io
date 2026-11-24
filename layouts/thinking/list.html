@@ -28,7 +28,7 @@
 <div class="container fn-notebook">
   <header class="fn-page-head">
     <p class="fn-kicker">Athan Dial / Fieldnotes</p>
-    <h1>The notebook.</h1>
+    <h1>Fieldnotes</h1>
     <p>{{ .Params.summary }}</p>
   </header>
 
@@ -67,7 +67,7 @@
       <h2 id="essays-title">More essays <span>/ {{ len . }}</span></h2>
       <a href="/essays/">All essays ↗</a>
     </div>
-    <p class="fn-section__standfirst">Longer arguments, followed far enough to find where they stop being useful.</p>
+    <p class="fn-section__standfirst">Longer arguments, followed far enough to find where they stop holding.</p>
     {{- /* The grid is three columns. With one item that leaves two empty thirds, which
            reads as two missing cards rather than as a curated section — the under-filled
            archive look this pass exists to remove. The modifier collapses the track count
@@ -82,7 +82,7 @@
       <h2 id="notes-title">Field notes <span>/ {{ len . }}</span></h2>
       <a href="/notes/">All field notes ↗</a>
     </div>
-    <p class="fn-section__standfirst">Shorter entries: one specific failure, one method worth borrowing, one thing the data actually did.</p>
+    <p class="fn-section__standfirst">Shorter entries: one failure, one method worth borrowing, one thing the data did that I did not expect.</p>
     <div class="fn-note-grid fn-note-grid--{{ cond (lt (len .) 3) (len .) 3 }}">{{ range sort . "Date" "desc" }}{{ partial "fieldnote-card.html" . }}{{ end }}</div>
   </section>
   {{- end -}}
@@ -93,7 +93,7 @@
       <h2 id="linkedin-title">From LinkedIn <span>/ {{ len . }}</span></h2>
       <a href="{{ site.Data.profile.links.linkedin }}" rel="me noopener" target="_blank">Follow along ↗</a>
     </div>
-    <p class="fn-section__standfirst">Writing that started as a post. Hand-picked, not a feed — where a post became an essay here, the essay is the first link.</p>
+    <p class="fn-section__standfirst">Writing that started as a post. Hand-picked, not a feed. Where a post grew into an essay here, the essay is the first link.</p>
     <div class="fn-linkedin">{{ range first 5 (sort . "date" "desc") }}{{ partial "linkedin-card.html" . }}{{ end }}</div>
   </section>
   {{- end -}}
