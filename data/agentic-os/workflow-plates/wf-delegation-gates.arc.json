@@ -5,8 +5,8 @@
     "code": "Fig W6"
   },
   "layout": {
-    "width": 1782,
-    "height": 852
+    "width": 1112,
+    "height": 1102
   },
   "nodes": {
     "contract": {
@@ -31,43 +31,43 @@
       "height": 176
     },
     "admit": {
-      "x": 1060,
-      "y": 130,
-      "size": "m",
-      "width": 232,
-      "height": 112
-    },
-    "build": {
-      "x": 1400,
-      "y": 130,
-      "size": "m",
-      "width": 232,
-      "height": 112
-    },
-    "review": {
-      "x": 1400,
-      "y": 380,
-      "size": "m",
-      "width": 232,
-      "height": 112
-    },
-    "verify": {
-      "x": 1050,
-      "y": 348,
-      "size": "m",
-      "width": 252,
-      "height": 176
-    },
-    "accept": {
       "x": 720,
       "y": 380,
       "size": "m",
       "width": 232,
       "height": 112
     },
+    "build": {
+      "x": 380,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "review": {
+      "x": 40,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "verify": {
+      "x": 370,
+      "y": 598,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "accept": {
+      "x": 380,
+      "y": 880,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
     "escalate": {
-      "x": 1060,
-      "y": 630,
+      "x": 720,
+      "y": 880,
       "size": "m",
       "width": 232,
       "height": 112
@@ -88,22 +88,22 @@
       "icon": "ClipboardCheck",
       "shape": "rounded",
       "subtitle": "A separate pass",
-      "description": "A different pass reads the contract fresh and returns ready, needs repair or blocked. The pass that wrote the contract never certifies it."
+      "description": "A different pass reads the contract cold and returns ready, needs repair or blocked. The pass that wrote the contract never certifies it."
     },
     "ready": {
       "name": "Ready?",
       "color": "blue",
       "icon": "GitFork",
       "shape": "diamond",
-      "description": "Yes only if the certification matches the current text of the contract and every explicit policy gate passes. An agent may promote work to ready at that point. Done, merge and publish stay with a person."
+      "description": "Yes only if the certification is tied to the current wording and the explicit policy gates pass, which can include an instruction from a person. An agent may promote work to ready then, and cannot mark it finished, merge it or publish it."
     },
     "admit": {
-      "name": "Admit",
+      "name": "Pick up",
       "color": "blue",
       "icon": "DoorOpen",
       "shape": "rounded",
-      "subtitle": "Deterministic",
-      "description": "A fixed check admits the work: ready, still certified, nothing it needs is blocked. No judgment call is made here."
+      "subtitle": "Fixed check, no judgment",
+      "description": "When a builder is about to start, a fixed rule re-checks that the work is marked ready, the certification still matches the wording, and nothing it depends on is unfinished. No judgment call is made here."
     },
     "build": {
       "name": "Build in isolation",
@@ -111,14 +111,15 @@
       "icon": "Code",
       "shape": "rounded",
       "subtitle": "Own working copy",
-      "description": "A builder works in its own copy and records evidence against each requirement id as it goes."
+      "description": "A builder works in its own copy of the project and records evidence against each requirement id as it goes."
     },
     "review": {
       "name": "Independent review",
       "color": "blue",
       "icon": "ScanSearch",
       "shape": "rounded",
-      "description": "A reviewer who did not build the work checks the diff against the standards and the contract."
+      "subtitle": "Not the builder",
+      "description": "A reviewer who did not build the work checks the diff against the project standards and the spec."
     },
     "verify": {
       "name": "Evidence meets contract?",
@@ -128,20 +129,20 @@
       "description": "Each requirement is checked against recorded evidence. A requirement with no evidence counts as unmet, not as passed."
     },
     "accept": {
-      "name": "Person accepts",
+      "name": "Person finishes",
       "color": "amber",
       "icon": "UserRoundCheck",
       "shape": "pill",
-      "subtitle": "Done, merge, publish",
-      "description": "Accepting the work, merging it and publishing it stay with a person, who reads the evidence first."
+      "subtitle": "Finish, merge, publish",
+      "description": "Marking the work finished, merging it and publishing it stay with a person, who reads the evidence first."
     },
     "escalate": {
       "name": "Person rules",
       "color": "amber",
       "icon": "UserRound",
       "shape": "pill",
-      "subtitle": "Stuck or out of contract",
-      "description": "After the retry limit, or when the contract itself is wrong, a person decides: amend the contract, narrow the scope or drop the work."
+      "subtitle": "Waiting or contradictory",
+      "description": "When attempts run out, or the contract contradicts itself, the work waits for a person, who decides: amend the contract, narrow the scope or drop the work."
     }
   },
   "connectorStyles": {
@@ -165,12 +166,6 @@
       "strokeWidth": 1.7,
       "lineStyle": "dashed",
       "toArrow": "open"
-    },
-    "normalL": {
-      "color": "zinc",
-      "strokeWidth": 1.7,
-      "toArrow": "arrow",
-      "labelAlign": "left"
     }
   },
   "connectors": [
@@ -191,36 +186,36 @@
       "fromAnchor": "right",
       "toAnchor": "left",
       "style": "normal",
-      "label": "Verdict",
+      "label": "Result",
       "curve": "direct"
     },
     {
       "id": "e2",
       "from": "ready",
-      "to": "admit",
-      "fromAnchor": "right",
-      "toAnchor": "left",
-      "style": "pass",
-      "label": "Promote",
-      "curve": "direct"
-    },
-    {
-      "id": "e3",
-      "from": "ready",
       "to": "contract",
       "fromAnchor": "top",
       "toAnchor": "top",
       "style": "feedback",
-      "label": "Repair first",
+      "label": "Needs repair",
       "curve": "step",
       "curveDepth": 56
+    },
+    {
+      "id": "e3",
+      "from": "ready",
+      "to": "admit",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "Promoted",
+      "curve": "direct"
     },
     {
       "id": "e4",
       "from": "admit",
       "to": "build",
-      "fromAnchor": "right",
-      "toAnchor": "left",
+      "fromAnchor": "left",
+      "toAnchor": "right",
       "style": "normal",
       "label": "Assign",
       "curve": "direct"
@@ -229,9 +224,9 @@
       "id": "e5",
       "from": "build",
       "to": "review",
-      "fromAnchor": "bottom",
-      "toAnchor": "top",
-      "style": "normalL",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
       "label": "Diff, evidence",
       "curve": "direct"
     },
@@ -239,51 +234,52 @@
       "id": "e6",
       "from": "review",
       "to": "verify",
-      "fromAnchor": "left",
-      "toAnchor": "right",
+      "fromAnchor": "bottom",
+      "toAnchor": "left",
       "style": "normal",
       "label": "Findings",
-      "curve": "direct"
+      "curve": "step"
     },
     {
       "id": "e7",
       "from": "verify",
-      "to": "accept",
-      "fromAnchor": "left",
-      "toAnchor": "right",
-      "style": "pass",
-      "label": "All met",
+      "to": "build",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Another attempt",
       "curve": "direct"
     },
     {
       "id": "e8",
       "from": "verify",
-      "to": "admit",
-      "fromAnchor": "top",
-      "toAnchor": "bottom",
-      "style": "feedback",
-      "label": "Missing: retry",
+      "to": "accept",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "All met: to review",
       "curve": "direct"
     },
     {
       "id": "e9",
       "from": "verify",
       "to": "escalate",
-      "fromAnchor": "bottom",
+      "fromAnchor": "right",
       "toAnchor": "top",
       "style": "decision",
-      "label": "Retry limit",
-      "curve": "direct"
+      "label": "Attempts used up",
+      "curve": "step"
     },
     {
       "id": "e10",
       "from": "escalate",
-      "to": "contract",
-      "fromAnchor": "left",
-      "toAnchor": "bottom",
+      "to": "ready",
+      "fromAnchor": "right",
+      "toAnchor": "right",
       "style": "feedback",
-      "label": "Amend contract",
-      "curve": "step"
+      "label": "Amend",
+      "curve": "step",
+      "curveDepth": 60
     }
   ],
   "groups": [
@@ -301,11 +297,21 @@
       "id": "g1",
       "type": "rect",
       "label": "Execution",
-      "x": 1034,
-      "y": 98,
-      "width": 614,
+      "x": 24,
+      "y": 348,
+      "width": 944,
       "height": 440,
       "color": "emerald"
+    },
+    {
+      "id": "g2",
+      "type": "rect",
+      "label": "A person decides",
+      "x": 364,
+      "y": 848,
+      "width": 604,
+      "height": 158,
+      "color": "amber"
     }
   ],
   "_meta": {

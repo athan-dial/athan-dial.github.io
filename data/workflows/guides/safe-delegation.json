@@ -1,110 +1,111 @@
 {
   "id": "safe-delegation",
   "title": "Handing real work to an agent without handing over the keys",
-  "lead": "Use this when you want an agent to build something and you want to be able to say, afterwards, what it was allowed to do and what shows it did it. The pattern keeps three things apart: deciding the work is ready, doing the work, and calling it finished. Agents may promote work to ready only when explicit policy gates pass. Done, merge and publish stay with a person.",
-  "scenario": "A neighbourhood seed library keeps its shelf list in a small script. The task is a low-stock warning. The example is invented, so every outcome in it is too, and no agent ran it.",
-  "input": "Add a low-stock warning to the shelf list. Run it as delegated work: contract first, build on its own copy, and nothing merged without me.",
+  "lead": "Use it when you want an agent to build a well-defined change and you need to say afterwards what it was allowed to do and what shows it did it.",
+  "produces": "A contract with checkable requirements, a readiness decision on it, a build done in isolation with evidence recorded per requirement, and a result a person accepts or rejects.",
+  "scenario": "Run comparison v1 flags wells outside a single default tolerance. The data team lists per-assay tolerance overrides, which the spec left out of scope, and wants an agent to build them.",
+  "input": "Make tolerance configurable per assay in the comparison module. Run it as delegated work: contract first, build on its own copy, and nothing merged without me.",
   "steps": [
     {
       "actor": "human",
       "label": "Hand over the task and the limits",
-      "text": "You say what you want and what is off limits. Here: change the shelf-list script only, touch no stored data, and merge nothing. Those limits go into the contract as requirements, so they get checked like everything else."
+      "text": "You say what you want and what is off limits. Here the agent may change the comparison module and its config, nothing else, and it merges nothing. The limits go into the contract as requirements, so they get checked like everything else."
     },
     {
       "actor": "skill",
       "label": "Shape a contract",
-      "text": "One pass turns the request into a contract: requirements with stable ids, and an acceptance check beside each. The ids matter later, because evidence gets attached to an id, and an id with nothing attached shows up as a gap. This is a role, not a published skill."
+      "text": "One pass turns the request into requirements with stable ids and an acceptance check beside each. Evidence is attached to an id later, so an id with nothing attached shows up as a gap. This is a role, not a published skill."
     },
     {
       "actor": "artifact",
       "label": "The contract",
-      "text": "Three requirements, each with a check that a person or a script can run. The excerpt below is the whole contract for this invented task."
+      "text": "Three requirements, each with a check a person or a script can run. The excerpt below is the whole contract for this task."
     },
     {
       "actor": "skill",
-      "label": "Certify readiness",
-      "text": "A different pass reads the contract cold and lints it. It returns one of three verdicts: ready, needs repair, or blocked. The pass that wrote the contract never certifies it, because the author already knows what it meant. Here the first verdict is needs repair: R3 says the warning should be \"clear\" and has no check. Repair adds a check, and the lint runs again on the new text."
-    },
-    {
-      "actor": "artifact",
-      "label": "The readiness decision",
-      "text": "Ready, certified against the exact current text of the contract. If anyone edits the contract afterwards, the certification no longer matches and the work is not ready again until the lint runs again."
+      "label": "Certify readiness in a separate pass",
+      "text": "A different pass reads the contract cold and lints it. It comes back ready, needs repair or blocked. The pass that wrote the contract never certifies it, because the author already knows what it meant. The certification is tied to the exact text it read, so an edit to the contract means certifying again. The first result here is needs repair: R3 says overrides must be sensible and has no check. The author adds a range and a check, and the lint runs again on the new wording."
     },
     {
       "actor": "skill",
-      "label": "Admit the work",
-      "text": "A fixed check, with no judgment in it, asks three things: is it ready, does the certification still match, and do all the explicit policy gates pass. If yes, an agent may mark the work ready to build. That is the furthest an agent can move it. Nothing here lets an agent mark it done, merge it or publish it."
+      "label": "Promote to ready",
+      "text": "Marking the work ready to build is a decision with its own gates. An agent may promote work to ready only when explicit policy gates pass, which can include a person's instruction. Here the gates are a current certification and your instruction to delegate this task."
+    },
+    {
+      "actor": "skill",
+      "label": "Pick it up with a fixed check",
+      "text": "When a builder is about to start, a fixed rule with no judgment re-checks the basics: the work is marked ready, the certification still matches the contract's wording, and nothing it depends on is unfinished. This check is separate from promotion, so a contract edited after promotion is caught here."
     },
     {
       "actor": "skill",
       "label": "Build in isolation",
-      "text": "A builder works in its own copy of the project, so a mistake cannot reach the main line. It records evidence against each requirement id as it goes: the test it wrote, the command it ran, the output it saw."
+      "text": "A builder works in its own copy of the project, so a mistake cannot reach the main line. It records evidence against each requirement id as it goes: the test it wrote, the command it ran, what it saw."
     },
     {
       "actor": "skill",
       "skill": "code-review",
       "label": "Review it independently",
-      "text": "A reviewer who did not build the work reads the diff on two axes, reported separately: does it follow the project's standards, and does it match the contract. The reviewer works from the contract, not from the builder's account of it."
+      "text": "A reviewer who did not build the work reads the diff on two axes, reported separately: does it follow the project's standards, and does it match the spec. The reviewer works from the contract, not from the builder's account of it."
     },
     {
       "actor": "skill",
       "label": "Verify the evidence against the contract",
-      "text": "Each requirement is checked against the evidence recorded for its id. R1 has a passing test. R3 has a test. R2, the rule that exactly five packets is not low, has no evidence at all. Missing counts as unmet, so the verdict is not all met."
+      "text": "Each requirement is checked against the evidence recorded for its id. R1 has a diff touching two allowed files. R3 has tests for values inside and outside the range. R2, the rule that a well exactly at tolerance is not flagged, has no evidence. Missing counts as unmet, so the result is not all met. Once every requirement is met and the independent review is in, an agent may move the work to review. It cannot mark it finished, merge it or publish it."
     },
     {
       "actor": "artifact",
       "label": "Branch one: missing evidence",
-      "text": "The work goes back to the builder with one line: R2 has no evidence. The builder adds the boundary test and runs again. This loop has a limit, a small fixed number of rounds, so an agent that cannot satisfy a requirement cannot keep trying forever."
+      "text": "The work goes back for another attempt, with R2 named as the gap. A fresh attempt adds the boundary test and the work is verified again. Attempts are limited to a small fixed number. After a few failed attempts the work stops being picked up and waits for a person to look, so an agent that cannot satisfy a requirement cannot keep trying."
     },
     {
       "actor": "skill",
-      "label": "Second round exposes a contract problem",
-      "text": "The boundary test passes. But the builder reports that R3 (the warning appears in the printed shelf sheet) cannot be met without changing the sheet layout, and R1 says to change the script only. The contract contradicts itself. More building will not fix a contract that is wrong, so the work stops here and goes to a person."
+      "label": "Branch two: the contract contradicts itself",
+      "text": "The boundary test passes. The builder then reports that R3 cannot be met inside R1. Checking an override against the allowed range needs the range stored in the shared assay settings schema, and that file is outside the two files R1 allows. More building will not fix a contract that asks for two incompatible things, so the work stops and goes to a person."
     },
     {
       "actor": "human",
-      "label": "Branch two: a person rules",
-      "text": "You decide. Options: loosen R1 so the sheet layout may change, drop R3 for now, or abandon the task. Say you drop R3. The contract is amended, the readiness lint runs again on the new text, and the work is admitted again. The agent does not get to settle the contradiction by choosing a reading it likes."
+      "label": "A person rules",
+      "text": "You decide: widen R1 to name that one schema file, move the range check somewhere R1 already allows, or drop R3. Say you widen R1. The contract is amended, the readiness lint runs again on the new wording, and the work is promoted and picked up again. The agent does not get to settle the contradiction by picking the reading it prefers."
     },
     {
       "actor": "human",
-      "label": "Authorize the result",
-      "text": "With R1 and R2 met and R3 dropped by you, the evidence is complete. A person reads it, then accepts the work, merges it and publishes it, or does not. Those three actions are never taken by the agents in this pattern."
+      "label": "Accept or reject the result",
+      "text": "With all three requirements met, you read the evidence. Then you accept the work, merge it and publish it, or you do not. Agents take none of those three actions in this pattern."
     },
     {
       "actor": "open",
-      "label": "Retry limit",
-      "text": "Nobody has decided whether the number of rounds is right. It is a guess for this task, and a riskier task might want an escalation after one."
+      "label": "The attempt limit",
+      "text": "Nobody has decided whether the number of attempts is right. It is a design choice for this task, and a riskier change might wait for a person after the first miss. The example also leaves open how the person finds out the work is waiting."
     }
   ],
   "ledger": {
     "settled": [
-      "Shape, certify, admit, build, review and verify are separate steps with separate owners.",
-      "Missing evidence counts as unmet.",
-      "R3 is dropped by a person. The sheet layout stays as it is."
+      "Shaping, certifying, promoting, building, reviewing and verifying are separate steps with separate owners.",
+      "A requirement with no evidence counts as unmet.",
+      "R1 is widened by a person to name the schema file. R2 and R3 stay as written."
     ],
     "open": [
-      "Whether two retry rounds is the right limit.",
-      "Whether a low-stock threshold of five packets suits every seed type."
+      "Whether the attempt limit suits a riskier change.",
+      "Whether one 5% to 30% range suits every assay."
     ]
   },
   "build": {
     "title": "The gates and what blocks each one",
-    "lead": "Each step waits for the one before it and has its own check. Readiness, execution and completion are separate groups in the diagram, because a pass in one group never stands in for a pass in the next.",
+    "lead": "Each step waits for the one before it and has its own check. Readiness, execution and the final decision are separate groups in the diagram, because a pass in one never stands in for a pass in the next.",
     "plates": {
       "ids": [
         "wf-delegation-gates"
       ],
       "labels": [
-        "Gates and branches"
+        "Gates and loops"
       ],
-      "caption": "Diamonds are yes or no decisions. The citrus pills are people. The dashed line back to the build step is the missing-evidence retry; the line down to a person is the escalation."
+      "caption": "Diamonds are yes or no decisions. Citrus pills are people. Dashed lines go back: repair before readiness, another attempt at the build step, and an amended contract after a person rules."
     },
     "slices": [
       {
         "id": "shape",
         "title": "Shape the contract",
-        "verify": "a separate pass lints it for ids and acceptance checks"
+        "verify": "a separate pass lints it for stable ids and an acceptance check on every requirement"
       },
       {
         "id": "certify",
@@ -112,15 +113,15 @@
         "blocked_by": [
           "shape"
         ],
-        "verify": "the verdict names the exact contract text it covered, and is void if that text changes"
+        "verify": "the certification is tied to the exact text it read, and any edit to the contract means certifying again"
       },
       {
         "id": "admit",
-        "title": "Admit the work",
+        "title": "Promote and pick up",
         "blocked_by": [
           "certify"
         ],
-        "verify": "a fixed rule checks ready, still certified and every policy gate; no agent judgment"
+        "verify": "promotion needs a current certification and explicit policy gates; pickup is a fixed rule with no agent judgment"
       },
       {
         "id": "build",
@@ -128,7 +129,7 @@
         "blocked_by": [
           "admit"
         ],
-        "verify": "an independent reviewer reads the diff against the standards and the contract"
+        "verify": "an independent reviewer reads the diff against the standards and the spec"
       },
       {
         "id": "verify",
@@ -136,7 +137,7 @@
         "blocked_by": [
           "build"
         ],
-        "verify": "every requirement id has recorded evidence; a missing one counts as unmet"
+        "verify": "every requirement id has recorded evidence, and a missing one counts as unmet"
       },
       {
         "id": "authorize",
@@ -144,23 +145,23 @@
         "blocked_by": [
           "verify"
         ],
-        "verify": "a person reads the evidence report; no agent performs this step"
+        "verify": "a person reads the evidence report, and no agent performs this step"
       }
     ],
-    "parallel": "Only one slice can start at a time here, on purpose. Parallel builders are possible for a larger contract, but admission, verification and authorization stay one at a time."
+    "parallel": "Each slice waits for the one before it. A larger contract could be split so several builders work at once, with verification and the final decision still after all of them."
   },
   "artifact": {
-    "title": "Contract excerpt and readiness decision (invented)",
+    "title": "Contract excerpt and readiness decision",
     "lines": [
-      "R1. Change the shelf-list script only. Check: the diff touches one file, and no stored data changes.",
-      "R2. Warn on any seed with fewer than five packets. Exactly five is not low. Check: a test at four, five and six packets.",
-      "R3. Show the warning in the printed shelf sheet. Check: the printed sheet for a four-packet seed contains the text LOW STOCK.",
-      "Readiness decision. Needs repair: R3 first said the warning should be clear, with no check. Repaired and linted again. Ready, against this exact text.",
-      "Admitted. Ready, certification current, policy gates pass. An agent may mark it ready to build and nothing further."
+      "R1. Change only the comparison module and its config file. Check: the diff touches no other file.",
+      "R2. A well exactly at tolerance is not flagged. Check: a test with a well at exactly 15% from the reference value.",
+      "R3. Per-assay overrides must lie between 5% and 30%. An out-of-range override is rejected when config loads. Check: tests at 4%, 5%, 30% and 31%.",
+      "Readiness. Needs repair on the first pass: R3 said overrides must be sensible, with no check. Repaired, linted again, ready for this wording.",
+      "Promoted and picked up. Certified for this wording, and the explicit gates pass, including your instruction. An agent may mark it ready to build. It cannot mark it finished, merge it or publish it."
     ]
   },
-  "stop": "You are done when every requirement has recorded evidence, or a person has amended the contract to drop or change what could not be met, and you have read the evidence and decided to accept. An agent saying it is finished is not the stop. Stop earlier if the contract contradicts itself, or if the same requirement fails twice.",
-  "limits": "The example is invented, and so is the whole run: no agent did this work, and nothing here shows a real deployment or an audited system. The roles for shaping, certifying, admitting and verifying are my own and their instruction text is not published. The only linked skill, code-review, is an upstream one that does the independent review step in its own way; my copy differs, as the status note below says. Independent review and verification reduce the chance of a bad merge. They do not make it zero.",
+  "stop": "You are done when every requirement has recorded evidence, or a person has amended the contract to change what could not be met, and you have read the evidence and decided. An agent saying it finished is not the stop. Stop earlier if the contract contradicts itself or the attempts run out.",
+  "limits": "Independent review and evidence checks lower the chance of a bad merge and do not remove it. A contract can pass every check and still describe the wrong change. The number of attempts is a design choice, and the right number depends on the risk of the work.",
   "next": {
     "label": "Want to see how a specification becomes slices for this kind of build?",
     "guide": "spec-to-build"
