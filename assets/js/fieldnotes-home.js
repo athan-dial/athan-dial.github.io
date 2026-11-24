@@ -72,3 +72,23 @@
   window.addEventListener('resize', onScroll, { passive: true });
   update();
 })();
+
+// The Outer Loop plate keeps its native width so its small type stays legible, which makes it a
+// sideways-scrolling region on narrow screens. Give keyboard users a way to reach it, only where it scrolls.
+(() => {
+  const plate = document.querySelector('.fn-feature__plate');
+  if (!plate) return;
+  const sync = () => {
+    if (plate.scrollWidth > plate.clientWidth + 1) {
+      plate.setAttribute('tabindex', '0');
+      plate.setAttribute('role', 'region');
+      plate.setAttribute('aria-label', 'The Outer Loop diagram. Scrolls sideways on a narrow screen.');
+    } else {
+      plate.removeAttribute('tabindex');
+      plate.removeAttribute('role');
+      plate.removeAttribute('aria-label');
+    }
+  };
+  sync();
+  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(plate);
+})();
