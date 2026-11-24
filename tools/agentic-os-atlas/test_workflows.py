@@ -26,7 +26,7 @@ BUILD = dict(slices=[dict(id='S1', title='Record a pledge', blocked_by=[], verif
                      dict(id='S2', title='List stock', blocked_by=['S1'], verify='stock test')])
 STEPS = [dict(actor='skill', skill='wayfinder', label='a', text='b', public_equivalents=['grilling', 'prototype']), dict(actor='skill', skill='to-spec', label='a2', text='b2'), dict(actor='human', label='c', text='d'),
          dict(actor='artifact', label='e', text='f')]
-GUIDE = dict(id='wayfinder', title='t', lead='l', scenario='s', input='i', steps=STEPS, artifact=dict(title='a', lines=['x']),
+GUIDE = dict(id='wayfinder', title='t', lead='l', produces='p', scenario='s', input='i', steps=STEPS, artifact=dict(title='a', lines=['x']),
              stop='s', limits='l', map=MAP, build=BUILD, compare=dict(rows=[]))
 
 def make(mutate, files=None):
