@@ -1,0 +1,154 @@
+{
+  "id": "wf-build-slices",
+  "figure": {
+    "title": "Five slices and what blocks them",
+    "code": "Fig W5"
+  },
+  "layout": {
+    "width": 1102,
+    "height": 667
+  },
+  "nodes": {
+    "s1": {
+      "x": 40,
+      "y": 195,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "s2": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "s3": {
+      "x": 380,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "s4": {
+      "x": 720,
+      "y": 195,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "s5": {
+      "x": 720,
+      "y": 445,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "s1": {
+      "name": "S1 Import instrument A export",
+      "color": "emerald",
+      "icon": "FileInput",
+      "shape": "rounded",
+      "subtitle": "Check: raw wells show",
+      "description": "Slice 1. An instrument A export is imported and every well shows its raw value. Nothing blocks it, so it starts first. The check imports a fixture export, counts the wells shown and confirms a plate the instrument flagged as failed QC is skipped."
+    },
+    "s2": {
+      "name": "S2 Import instrument B export",
+      "color": "emerald",
+      "icon": "FileInput",
+      "shape": "rounded",
+      "subtitle": "Check: same well table",
+      "description": "Slice 2. An instrument B export, with its own column layout, is imported. It waits for slice 1. The check compares its well table with the equivalent instrument A fixture."
+    },
+    "s3": {
+      "name": "S3 Normalise to % of control",
+      "color": "emerald",
+      "icon": "Percent",
+      "shape": "rounded",
+      "subtitle": "Check: worked plate",
+      "description": "Slice 3. Each well is shown as a percentage of its plate's control wells. It waits for slice 1 only, so it can run beside slice 2. The check uses a plate with known control wells."
+    },
+    "s4": {
+      "name": "S4 Compare with the reference run",
+      "color": "emerald",
+      "icon": "Layers",
+      "shape": "rounded",
+      "subtitle": "Check: overlay values",
+      "description": "Slice 4. A run is overlaid on the reference run for its protocol version. It waits for slices 2 and 3. The check overlays two fixture runs, reads the differences and refuses a reference run from a different protocol version."
+    },
+    "s5": {
+      "name": "S5 Flag wells outside tolerance",
+      "color": "emerald",
+      "icon": "Flag",
+      "shape": "rounded",
+      "subtitle": "Check: the exact limit",
+      "description": "Slice 5. Wells outside tolerance are flagged. It waits for slice 4. The check includes a well exactly at the limit, which must not flag."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "s1",
+      "to": "s2",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
+    },
+    {
+      "id": "e1",
+      "from": "s1",
+      "to": "s3",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
+    },
+    {
+      "id": "e2",
+      "from": "s2",
+      "to": "s4",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
+    },
+    {
+      "id": "e3",
+      "from": "s3",
+      "to": "s4",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "step"
+    },
+    {
+      "id": "e4",
+      "from": "s4",
+      "to": "s5",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "normal",
+      "label": "blocks",
+      "curve": "direct"
+    }
+  ],
+  "groups": [],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

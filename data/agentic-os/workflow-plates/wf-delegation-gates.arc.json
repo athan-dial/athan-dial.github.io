@@ -1,0 +1,321 @@
+{
+  "id": "wf-delegation-gates",
+  "figure": {
+    "title": "Delegation gates",
+    "code": "Fig W6"
+  },
+  "layout": {
+    "width": 1112,
+    "height": 1102
+  },
+  "nodes": {
+    "contract": {
+      "x": 40,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "certify": {
+      "x": 380,
+      "y": 130,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "ready": {
+      "x": 710,
+      "y": 98,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "admit": {
+      "x": 720,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "build": {
+      "x": 380,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "review": {
+      "x": 40,
+      "y": 380,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "verify": {
+      "x": 370,
+      "y": 598,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "accept": {
+      "x": 380,
+      "y": 880,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "escalate": {
+      "x": 720,
+      "y": 880,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    }
+  },
+  "nodeData": {
+    "contract": {
+      "name": "Shaped contract",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "Requirements, checks",
+      "description": "Requirements with stable ids, each with an acceptance check, written by one pass."
+    },
+    "certify": {
+      "name": "Readiness lint",
+      "color": "blue",
+      "icon": "ClipboardCheck",
+      "shape": "rounded",
+      "subtitle": "A separate pass",
+      "description": "A different pass reads the contract cold and returns ready, needs repair or blocked. The pass that wrote the contract never certifies it."
+    },
+    "ready": {
+      "name": "Ready?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "description": "Yes only if the certification is tied to the current wording and the explicit policy gates pass, which can include an instruction from a person. An agent may promote work to ready then, and cannot mark it finished, merge it or publish it."
+    },
+    "admit": {
+      "name": "Pick up",
+      "color": "blue",
+      "icon": "DoorOpen",
+      "shape": "rounded",
+      "subtitle": "Fixed check, no judgment",
+      "description": "When a builder is about to start, a fixed rule re-checks that the work is still marked ready (a material edit to the contract removes that mark), nothing it depends on is unfinished and attempts remain. No judgment call is made here."
+    },
+    "build": {
+      "name": "Build in isolation",
+      "color": "emerald",
+      "icon": "Code",
+      "shape": "rounded",
+      "subtitle": "Own working copy",
+      "description": "A builder works in its own copy of the project and records evidence against each requirement id as it goes."
+    },
+    "review": {
+      "name": "Independent review",
+      "color": "blue",
+      "icon": "ScanSearch",
+      "shape": "rounded",
+      "subtitle": "Not the builder",
+      "description": "A reviewer who did not build the work checks the diff against the project standards and the spec."
+    },
+    "verify": {
+      "name": "Evidence meets contract?",
+      "color": "blue",
+      "icon": "GitFork",
+      "shape": "diamond",
+      "description": "Each requirement is checked against recorded evidence. A requirement with no evidence counts as unmet, not as passed."
+    },
+    "accept": {
+      "name": "Person finishes",
+      "color": "amber",
+      "icon": "UserRoundCheck",
+      "shape": "pill",
+      "subtitle": "Finish, merge, publish",
+      "description": "Marking the work finished, merging it and publishing it stay with a person, who reads the evidence first."
+    },
+    "escalate": {
+      "name": "Person rules",
+      "color": "amber",
+      "icon": "UserRound",
+      "shape": "pill",
+      "subtitle": "Waiting or contradictory",
+      "description": "When attempts run out, or the contract contradicts itself, the work waits for a person, who decides: amend the contract, narrow the scope or drop the work."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "pass": {
+      "color": "emerald",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "contract",
+      "to": "certify",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Lint",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "certify",
+      "to": "ready",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Result",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "ready",
+      "to": "contract",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Needs repair",
+      "curve": "step",
+      "curveDepth": 56
+    },
+    {
+      "id": "e3",
+      "from": "ready",
+      "to": "admit",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "Promoted",
+      "curve": "direct"
+    },
+    {
+      "id": "e4",
+      "from": "admit",
+      "to": "build",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Assign",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "build",
+      "to": "review",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Diff, evidence",
+      "curve": "direct"
+    },
+    {
+      "id": "e6",
+      "from": "review",
+      "to": "verify",
+      "fromAnchor": "bottom",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Findings",
+      "curve": "step"
+    },
+    {
+      "id": "e7",
+      "from": "verify",
+      "to": "build",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "feedback",
+      "label": "Another attempt",
+      "curve": "direct"
+    },
+    {
+      "id": "e8",
+      "from": "verify",
+      "to": "accept",
+      "fromAnchor": "bottom",
+      "toAnchor": "top",
+      "style": "pass",
+      "label": "All met: to review",
+      "curve": "direct"
+    },
+    {
+      "id": "e9",
+      "from": "verify",
+      "to": "escalate",
+      "fromAnchor": "right",
+      "toAnchor": "top",
+      "style": "decision",
+      "label": "Attempts used up",
+      "curve": "step"
+    },
+    {
+      "id": "e10",
+      "from": "escalate",
+      "to": "ready",
+      "fromAnchor": "right",
+      "toAnchor": "right",
+      "style": "feedback",
+      "label": "Amend",
+      "curve": "step",
+      "curveDepth": 60
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Readiness",
+      "x": 24,
+      "y": 66,
+      "width": 954,
+      "height": 222,
+      "color": "zinc"
+    },
+    {
+      "id": "g1",
+      "type": "rect",
+      "label": "Execution",
+      "x": 24,
+      "y": 348,
+      "width": 944,
+      "height": 440,
+      "color": "emerald"
+    },
+    {
+      "id": "g2",
+      "type": "rect",
+      "label": "A person decides",
+      "x": 364,
+      "y": 848,
+      "width": 604,
+      "height": 158,
+      "color": "amber"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
