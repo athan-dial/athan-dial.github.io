@@ -1,0 +1,57 @@
+{{- /* One worked guide. Input: dict "g" (registry guide) "d" (guide file) "skills" (id -> skill) "reg" (registry). */ -}}
+{{- $g := .g -}}{{- $d := .d -}}{{- $skills := .skills -}}{{- $reg := .reg -}}
+{{- $kind := dict "skill" "Skill runs" "human" "You decide" "artifact" "Result" "open" "Still open" -}}
+<section class="wf-guide{{ if eq $g.priority 1 }} wf-guide--primary{{ end }}" id="guide-{{ $g.id }}" aria-labelledby="guide-{{ $g.id }}-title">
+  <header class="wf-guide__head">
+    <p class="wf-guide__task">{{ $g.task }}</p>
+    <h3 id="guide-{{ $g.id }}-title" class="wf-guide__title">{{ $d.title }}</h3>
+    <p class="wf-guide__lead"><span class="wf-label">Use it when</span> {{ strings.TrimPrefix "Use it when " $d.lead }}</p>
+    <p class="wf-guide__lead wf-guide__produces"><span class="wf-label">You get</span> {{ $d.produces }}</p>
+  </header>
+
+  <div class="wf-guide__body">
+    <p class="wf-scenario"><span class="wf-label">Worked example</span> {{ $d.scenario }}</p>
+    <blockquote class="wf-input"><span class="wf-label">You say</span><p>{{ $d.input }}</p></blockquote>
+
+    {{- if eq $d.order "result-first" }}{{ with $d.artifact }}<p class="wf-label wf-label--block">What you end up with</p>{{ partial "workflow-artifact.html" . }}<p class="wf-label wf-label--block">How you get there</p>{{ end }}{{ end }}
+    <ol class="wf-steps" role="list">
+      {{- range $i, $s := $d.steps }}
+      {{- $kl := index $kind $s.actor -}}{{- if and (eq $s.actor "skill") (not $s.skill) -}}{{- $kl = "Agent role" -}}{{- end }}
+      <li class="wf-step wf-step--{{ $s.actor }}">
+        <span class="wf-step__kind"><span class="wf-step__mark" aria-hidden="true"></span>{{ $kl }}</span>
+        <h4 class="wf-step__label">{{ $s.label }}</h4>
+        <p class="wf-step__text">{{ $s.text }}</p>
+        {{- with $s.skill }}{{ $sk := index $skills . }}<p class="wf-step__skill"><span class="visually-hidden">Skill: </span><code>{{ $sk.name }}</code>{{ with $s.public_equivalents }}<span class="wf-step__equiv"> Closest public skill: {{ range $j, $e := . }}{{ if $j }}, {{ end }}<code>{{ (index $skills $e).name }}</code>{{ end }}.</span>{{ end }}</p>{{ end }}
+      </li>
+      {{- end }}
+    </ol>
+
+    {{- with $d.ledger }}
+    <div class="wf-ledger">
+      <div><h4 class="wf-ledger__h">Settled by the end</h4><ul>{{ range .settled }}<li>{{ . }}</li>{{ end }}</ul></div>
+      <div class="wf-ledger__open"><h4 class="wf-ledger__h">Still open</h4><ul>{{ range .open }}<li>{{ . }}</li>{{ end }}</ul></div>
+    </div>
+    {{- end }}
+
+    {{- with $d.map }}{{ partial "workflow-map.html" (dict "g" $g "d" $d "map" .) }}{{ end }}
+    {{- with $d.compare }}{{ partial "workflow-compare.html" (dict "g" $g "d" $d "c" .) }}{{ end }}
+    {{- with $d.build }}{{ partial "workflow-build.html" (dict "g" $g "d" $d "b" .) }}{{ end }}
+
+    {{- if ne $d.order "result-first" }}{{ with $d.artifact }}{{ partial "workflow-artifact.html" . }}{{ end }}{{ end }}
+
+    <dl class="wf-ends">
+      <div><dt>Stop when</dt><dd>{{ $d.stop }}</dd></div>
+      <div><dt>Limits</dt><dd>{{ $d.limits }}</dd></div>
+    </dl>
+
+    <div class="wf-sources-inline">
+      <h4 class="wf-sources-inline__h">Read the instructions</h4>
+      {{- if $g.source_status }}<p class="wf-sources-inline__status">{{ $g.source_status }}</p>{{ end }}
+      <ul>
+        {{- range $g.skills }}{{ $sk := index $skills . }}<li>{{ partial "workflow-skill-status.html" (dict "skill" $sk "reg" $reg) }}</li>{{ end }}
+      </ul>
+    </div>
+
+    <p class="wf-guide__views">Underneath this guide: {{ range $i, $v := $g.views }}{{ if $i }}, {{ end }}<a href="#view-{{ $v }}" data-view="{{ $v }}" data-from="{{ $g.id }}" data-from-title="{{ $d.title }}">{{ (index (where (index site.Data "agentic-os").views.views "id" $v) 0).short }}</a>{{ end }}. {{ with $d.next }}<a href="#guide-{{ .guide }}">{{ .label }}</a>{{ end }}</p>
+  </div>
+</section>

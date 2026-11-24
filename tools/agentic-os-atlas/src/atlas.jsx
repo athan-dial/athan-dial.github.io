@@ -34,9 +34,34 @@ function initialView() {
   return views.views.some(v => v.id === id) ? id : root
 }
 
+// Arc names each connector gradient connector-gradient-N inside every diagram, so two diagrams on one page
+// collide and url(#id) resolves to the first one in the document. Give every diagram its own prefix.
+let diagramCount = 0
+function useUniqueGradients(ref, deps) {
+  useEffect(() => {
+    const root = ref.current
+    if (!root) return undefined
+    const tag = 'd' + (++diagramCount)
+    const fix = () => {
+      root.querySelectorAll('linearGradient[id^="connector-gradient-"]').forEach(g => { g.id = tag + '-' + g.id })
+      for (const el of root.querySelectorAll('[stroke*="url(#connector-gradient-"], [style*="url(#connector-gradient-"]')) {
+        for (const attr of ['stroke', 'style']) {
+          const v = el.getAttribute(attr)
+          if (v && v.includes('url(#connector-gradient-')) el.setAttribute(attr, v.replace(/url\(#connector-gradient-/g, 'url(#' + tag + '-connector-gradient-'))
+        }
+      }
+    }
+    fix()
+    const mo = new MutationObserver(fix)
+    mo.observe(root, {childList: true, subtree: true, attributes: true, attributeFilter: ['stroke', 'style', 'id']})
+    return () => mo.disconnect()
+  }, deps)
+}
+
 function Atlas() {
   const [view, setView] = useState(initialView)
   const [nonce, setNonce] = useState(0)
+  const [from, setFrom] = useState(null)
   const live = useRef(null)
   const meta = views.views.find(v => v.id === view)
   const others = useMemo(() => Object.fromEntries(Object.entries(plates).filter(([id]) => id !== root)), [])
@@ -46,6 +71,7 @@ function Atlas() {
   // the primary keyboard route; this makes the in-diagram route match.
   const frame = useRef(null)
   const scroller = useRef(null)
+  useUniqueGradients(frame, [])
   // On a narrow screen the plate keeps a readable width and the wrapper scrolls sideways; the
   // wrapper is only a keyboard stop when it actually overflows.
   useEffect(() => {
@@ -85,6 +111,24 @@ function Atlas() {
     setView(id); setNonce(n => n + 1)
     try { history.replaceState(null, '', '#' + id) } catch (e) { /* file:// previews */ }
   }, [])
+  // A guide's "underneath" link opens that view here, keeps a way back to the guide, and (without
+  // JavaScript) falls through to the written-out view further down the page.
+  useEffect(() => {
+    const onClick = e => {
+      const a = e.target.closest && e.target.closest('a[data-view]')
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
+      const id = a.dataset.view
+      if (!views.views.some(v => v.id === id)) return
+      e.preventDefault()
+      try { history.pushState(null, '', '#views') } catch (err) { /* file:// previews */ }
+      go(id)
+      setFrom({id: a.dataset.from, title: a.dataset.fromTitle})
+      const target = document.getElementById('views')
+      if (target) target.scrollIntoView()
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [go])
   const onAltitude = useCallback(path => {
     const id = viewAt(path)
     setView(id)
@@ -104,6 +148,7 @@ function Atlas() {
         ))}
       </ol>
       <p className="visually-hidden" role="status" aria-live="polite">{'Showing view ' + (views.views.findIndex(v => v.id === view) + 1) + ' of ' + views.views.length + ': ' + meta.short + '. ' + meta.claim}</p>
+      {from && <p className="atlas__return"><a href={'#guide-' + from.id} onClick={() => setFrom(null)}>&larr; Back to the guide: {from.title}</a></p>}
       <div className="atlas__head">
         <h2 className="atlas__title">{meta.title}</h2>
         <p className="atlas__claim">{meta.claim}</p>
@@ -125,6 +170,56 @@ function Atlas() {
       <p className="atlas__hint">Open a node marked with an arrow to descend; use the breadcrumb to climb back. Drag to pan, use the zoom control to scale.</p>
     </div>
   )
+}
+
+// Workflow plates: small, single-purpose diagrams embedded in a guide. Each mount lists plate ids
+// (data-workflow-plates="a,b") and optional state labels (data-labels="Day 1|Day 3"); the guide's own
+// text and table are the no-JavaScript equivalent, so these are progressive enhancement.
+const wfFiles = import.meta.glob('../../../data/agentic-os/workflow-plates/*.arc.json', {eager: true, import: 'default'})
+const wfPlates = Object.fromEntries(Object.entries(wfFiles).map(([p, d]) => [p.split('/').pop().replace('.arc.json', ''), d]))
+
+function WorkflowPlate({ids, labels, caption}) {
+  const [i, setI] = useState(0)
+  const frameRef = useRef(null)
+  useUniqueGradients(frameRef, [])
+  const id = ids[i]
+  const lay = wfPlates[id].layout
+  const scroller = useRef(null)
+  const [scrolls, setScrolls] = useState(false)
+  useEffect(() => {
+    const el = scroller.current
+    if (!el) return undefined
+    const sync = () => { const s = el.scrollWidth > el.clientWidth + 1; setScrolls(s); if (s) el.setAttribute('tabindex', '0'); else el.removeAttribute('tabindex') }
+    sync()
+    const ro = new ResizeObserver(sync); ro.observe(el)
+    return () => ro.disconnect()
+  }, [id])
+  return (
+    <div className="atlas wfplate">
+      {ids.length > 1 && (
+        <div className="wfplate__tabs" role="group" aria-label="Show another state of this map">
+          {ids.map((pid, n) => (
+            <button type="button" key={pid} aria-pressed={n === i} onClick={() => setI(n)}>{labels[n] || pid}</button>
+          ))}
+        </div>
+      )}
+      <p className="visually-hidden" role="status" aria-live="polite">{'Showing ' + (labels[i] || id) + '. ' + caption}</p>
+      <div className="wfplate__scroll" ref={scroller} role="region" aria-label={(labels[i] || id) + ' diagram. On a narrow screen it scrolls sideways.'}>
+        <div className="atlas__frame wfplate__frame" ref={frameRef} style={{aspectRatio: lay.width + ' / ' + lay.height, '--wf-min': Math.round(lay.width * 0.8) + 'px'}} role="group" aria-label={(labels[i] || id) + ' diagram. The same content is written out as text beside it.'}>
+          <ArcDiagram key={id} data={wfPlates[id]} style={style} mode="light" defaultZoom="fit" maxFitZoom={1.3}
+            fitPadding={20} label="" showArcToggle={false} />
+        </div>
+      </div>
+      {scrolls && <p className="wfplate__hint">Scroll sideways to see the whole diagram. The same content is listed as text.</p>}
+    </div>
+  )
+}
+
+for (const el of document.querySelectorAll('[data-workflow-plates]')) {
+  const ids = el.dataset.workflowPlates.split(',').filter(id => id in wfPlates)
+  if (!ids.length) continue
+  el.hidden = false
+  createRoot(el).render(<WorkflowPlate ids={ids} labels={(el.dataset.labels || '').split('|')} caption={el.dataset.caption || ''} />)
 }
 
 const mount = document.getElementById('agentic-os-atlas')

@@ -27,9 +27,21 @@
       <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
       <header class="case-study-header">
         <h1 class="case-study-header__title">{{ .Title }}</h1>
-        {{- with .Params.summary -}}<p class="case-study-header__lead">{{ . }}</p>{{- end -}}
+        {{- with (.Params.page_lead | default .Params.summary) -}}<p class="case-study-header__lead">{{ . }}</p>{{- end -}}
       </header>
     </div>
+
+    {{ partial "workflow-start.html" . }}
+    {{- $wf := site.Data.workflows -}}
+    {{- $skills := dict -}}{{- range $wf.registry.skills -}}{{- $skills = merge $skills (dict .id .) -}}{{- end -}}
+    <div class="wf-guides">
+      <h2 class="visually-hidden" id="guides-title">The guides</h2>
+      {{- range sort $wf.registry.guides "priority" }}
+      {{- $d := index $wf.guides .id }}
+      {{- if not $d.draft_stub }}{{ partial "workflow-guide.html" (dict "g" . "d" $d "skills" $skills "reg" $wf.registry) }}{{ end }}
+      {{- end }}
+    </div>
+    {{ partial "workflow-sources.html" . }}
 
     <div class="case-study-body section-rail work-article__body">
       {{ partial "section-rail.html" (dict "page" .) }}
@@ -38,8 +50,10 @@
       </div>
     </div>
 
-    <section class="atlas-section" aria-labelledby="atlas-explore">
-      <h2 id="atlas-explore" class="atlas-section__title">The seven views.</h2>
+
+    <section class="atlas-section" id="views" aria-labelledby="atlas-explore">
+      <h2 id="atlas-explore" class="atlas-section__title">Underneath: the seven views.</h2>
+      <p class="atlas-section__lead">The guides above use the same parts as this map of the whole method. Open a view to see where a guide sits in it.</p>
       <p class="atlas-section__skip"><a href="#atlas-text">Skip to the text version of every view</a></p>
       <div id="agentic-os-atlas" class="atlas-mount" hidden></div>
       <noscript><p class="atlas-nojs">The interactive diagram needs JavaScript. Every view is written out in full below, with the same nodes and relationships.</p></noscript>
@@ -56,6 +70,8 @@
           <p class="atlas-text__num">View {{ printf "%02d" (add $i 1) }} · {{ $v.short }}</p>
           <h3 id="view-{{ $v.id }}-title">{{ $v.title }}</h3>
           <p class="atlas-text__claim">{{ $v.claim }}</p>
+          {{- $used := slice }}{{ range $wf.registry.guides }}{{ $gd := index $wf.guides .id }}{{ if and (in .views $v.id) (not $gd.draft_stub) }}{{ $used = $used | append . }}{{ end }}{{ end }}
+          {{- if $used }}<p class="atlas-text__guides">Used in: {{ range $i, $gd := $used }}{{ if $i }}, {{ end }}<a href="#guide-{{ $gd.id }}">{{ (index $wf.guides $gd.id).title }}</a>{{ end }}.</p>{{ end }}
         </header>
         <div class="atlas-text__cols">
           <div>

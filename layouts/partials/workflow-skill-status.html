@@ -1,0 +1,10 @@
+{{- /* Where a skill's instructions can be read, and whose they are. Input: dict "skill" (registry entry) "reg" (registry).
+       Three kinds: upstream and used as published, upstream and adapted by me, and mine and private. Links go only to the pinned upstream file. */ -}}
+{{- $s := .skill -}}{{- $u := .reg.upstream -}}
+{{- if eq $s.source_kind "upstream" -}}
+<a href="{{ $s.url }}" rel="noopener"><code>{{ $s.name }}</code></a>
+<span class="wf-status">{{ if $s.customized }}upstream, adapted by me{{ else }}upstream, used as published{{ end }}</span>
+{{- if $s.customized }} <span class="wf-status__note">{{ $s.difference }}</span>{{ end -}}
+{{- else -}}
+<code>{{ $s.name }}</code> <span class="wf-status wf-status--private">mine, private</span> <span class="wf-status__note">{{ $s.status_note }}</span>
+{{- end -}}

@@ -1,0 +1,19 @@
+{{- /* Decision map versus build dependency graph, side by side as text, with an optional Arc switcher. */ -}}
+{{- $c := .c -}}{{- $g := .g -}}
+<div class="wf-compare" id="compare-{{ $g.id }}">
+  <h4 class="wf-block__h">{{ $c.title }}</h4>
+  {{- with $c.lead }}<p class="wf-block__lead">{{ . }}</p>{{ end }}
+  {{- with $c.plates }}
+  <div class="wfplate-mount" data-workflow-plates="{{ delimit .ids "," }}" data-labels="{{ delimit .labels "|" }}" data-caption="{{ .caption }}" hidden></div>
+  {{- end }}
+  <table class="wf-table" role="table">
+    <caption class="visually-hidden">{{ $c.title }}</caption>
+    <thead><tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th scope="col">Decision map</th><th scope="col">Build dependency graph</th></tr></thead>
+    <tbody>
+      {{- range $c.rows }}
+      <tr><th scope="row">{{ .aspect }}</th><td>{{ .decision_map }}</td><td>{{ .build_graph }}</td></tr>
+      {{- end }}
+    </tbody>
+  </table>
+  {{- with $c.note }}<p class="wf-block__note">{{ . }}</p>{{ end }}
+</div>

@@ -1,0 +1,30 @@
+{{- /* "What are you trying to do?" The task entry point, generated from the registry so the list cannot drift from the guides. */ -}}
+{{- $reg := site.Data.workflows.registry -}}
+{{- $ready := slice -}}
+{{- range $reg.guides -}}{{- $d := index site.Data.workflows.guides .id -}}{{- if not $d.draft_stub -}}{{- $ready = $ready | append . -}}{{- end -}}{{- end -}}
+<section class="wf-start" id="start" aria-labelledby="start-title">
+  <h2 id="start-title" class="wf-start__title">What are you trying to do?</h2>
+  <ol class="wf-start__lead" role="list">
+    {{- range where $ready "priority" 1 }}
+    {{- $d := index site.Data.workflows.guides .id }}
+    <li><a href="#guide-{{ .id }}"><span class="wf-start__task">{{ .task }}</span><span class="wf-start__go">{{ $d.title }}</span></a></li>
+    {{- end }}
+  </ol>
+  {{- $rest := where $ready "priority" "gt" 1 }}
+  {{- if $rest }}
+  <p class="wf-start__more">Or, more narrowly:</p>
+  <ul class="wf-start__list" role="list">
+    {{- range $rest }}
+    <li><a href="#guide-{{ .id }}">{{ .task }}</a></li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- with $reg.intro }}
+  <div class="wf-intro">
+    <h3 class="wf-intro__h">How to read the examples</h3>
+    <p>{{ .examples }}</p>
+    <p>{{ .sources }}</p>
+  </div>
+  {{- end }}
+  <p class="wf-start__skip"><a href="#views">Skip to the seven architecture views</a></p>
+</section>

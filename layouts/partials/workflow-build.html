@@ -1,0 +1,19 @@
+{{- /* A build dependency graph: work slices with blocking edges and an independent check each. */ -}}
+{{- $b := .b -}}{{- $g := .g -}}
+<div class="wf-build" id="build-{{ $g.id }}">
+  <h4 class="wf-block__h">{{ $b.title | default "The slices and what blocks them" }}</h4>
+  {{- with $b.lead }}<p class="wf-block__lead">{{ . }}</p>{{ end }}
+  {{- with $b.plates }}
+  <div class="wfplate-mount" data-workflow-plates="{{ delimit .ids "," }}" data-labels="{{ delimit .labels "|" }}" data-caption="{{ .caption }}" hidden></div>
+  {{- end }}
+  <ol class="wf-slices" role="list">
+    {{- range $b.slices }}
+    <li class="wf-slice">
+      <span class="wf-slice__title">{{ .title }}</span>
+      <span class="wf-slice__rel">{{ if .blocked_by }}Waits for {{ range $i, $x := .blocked_by }}{{ if $i }}, {{ end }}{{ range $b.slices }}{{ if eq .id $x }}{{ .title }}{{ end }}{{ end }}{{ end }}.{{ else }}Can start now.{{ end }}</span>
+      <span class="wf-slice__verify">Checked by: {{ .verify }}</span>
+    </li>
+    {{- end }}
+  </ol>
+  {{- with $b.parallel }}<p class="wf-block__note">{{ . }}</p>{{ end }}
+</div>

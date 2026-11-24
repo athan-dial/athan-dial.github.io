@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "upstream": {
+    "name": "Matt Pocock's skills",
+    "repo": "https://github.com/mattpocock/skills",
+    "rev": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+    "license": "MIT",
+    "attribution": "Skills by Matt Pocock, MIT licence. Links go to the repository at a pinned revision.",
+    "compared_on": "2026-11-24"
+  },
+  "skills": [
+    {
+      "id": "grill-me",
+      "name": "grill-me",
+      "job": "A front-door interview that classifies the work, plans rounds of questions and records each decision.",
+      "source_kind": "private",
+      "url": null,
+      "customized": true,
+      "status_note": "My own skill, built from upstream's grilling. Not published; the upstream skill of the same name is a one-line stub that calls grilling, so it is not linked."
+    },
+    {
+      "id": "grilling",
+      "name": "grilling",
+      "job": "A relentless interview: walk the open decisions in rounds, each with a recommended answer.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/productivity/grilling/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "grill-with-docs",
+      "name": "grill-with-docs",
+      "job": "The same interview, plus keeping the project's glossary and decision records current.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/grill-with-docs/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "domain-modeling",
+      "name": "domain-modeling",
+      "job": "Sharpen vague terms into a shared glossary and record the few decisions worth an ADR.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/domain-modeling/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "to-spec",
+      "name": "to-spec",
+      "job": "Turn the conversation so far into a written specification. No new interview.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/to-spec/SKILL.md",
+      "customized": false
+    }
+  ],
+  "guides": [
+    {
+      "id": "idea-to-spec",
+      "priority": 1,
+      "task": "I have an idea and I am not sure what to build",
+      "skills": [
+        "grill-me",
+        "grilling",
+        "grill-with-docs",
+        "domain-modeling",
+        "to-spec"
+      ],
+      "views": [
+        "thinking"
+      ]
+    }
+  ],
+  "intro": {
+    "examples": "Every example below is synthetic. They follow one invented project, an in-house tool for comparing plate-reader assay runs, so you can see how the methods connect. No outcome, number, person or organisation in them is real.",
+    "sources": "Links go to the public upstream skills at one pinned revision. Where I run a different version, the entry says what I changed. My own versions are private: the guides describe what they do in my own words and publish none of their text."
+  }
+}
