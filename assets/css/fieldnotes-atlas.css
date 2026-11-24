@@ -161,3 +161,11 @@
   .atlas-page .wf-start { margin-top: 2rem; }
   .atlas-page .wf-start__title { margin-bottom: 1rem; }
 }
+
+.wf-intro { margin: 1.75rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--field-rule); max-width: 66ch; }
+.wf-intro__h { margin: 0 0 .4rem; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-secondary); font-weight: 400; }
+.wf-intro p { margin: 0 0 .6rem; color: var(--ink-secondary); font-size: .9375rem; }
+.wf-guide__lead { margin: 0 0 .75rem; max-width: 46ch; color: var(--ink-secondary); }
+.wf-guide__produces { color: var(--ink); }
+.wf-sources__group { margin: 1.75rem 0 .15rem; font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; letter-spacing: -.01em; }
+.wf-sources__note { margin: 0; color: var(--ink-secondary); font-size: .9375rem; }

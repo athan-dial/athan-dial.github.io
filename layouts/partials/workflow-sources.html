@@ -1,12 +1,20 @@
-{{- /* Every skill the guides name, with where its instructions can be read. One list, generated from the registry. */ -}}
+{{- /* Every skill the guides name, grouped by whose instructions they are. One list, generated from the registry. */ -}}
 {{- $reg := site.Data.workflows.registry -}}
+{{- $groups := slice
+  (dict "h" "Upstream, used as published" "note" "Read the real thing. These are the instructions I run." "items" (where (where $reg.skills "source_kind" "upstream") "customized" false))
+  (dict "h" "Upstream, adapted by me" "note" "The link is the original. My version changes what the entry describes." "items" (where (where $reg.skills "source_kind" "upstream") "customized" true))
+  (dict "h" "Mine, private" "note" "Described here in my own words. There is nothing public to link." "items" (where $reg.skills "source_kind" "private")) -}}
 <section class="wf-sources" id="sources" aria-labelledby="sources-title">
   <h2 id="sources-title" class="atlas-section__title">Where to read the skills.</h2>
-  <p class="wf-sources__lead">Public links go to <a href="{{ $reg.upstream.repo }}" rel="noopener">{{ $reg.upstream.name }}</a>, pinned to one revision ({{ substr $reg.upstream.rev 0 7 }}), {{ $reg.upstream.license }} licence. That is the upstream text, not necessarily the version I run. Where my copy differs, or exists only privately, the entry says so, and the guide is my own explanation. Nothing from my private copy is published here.</p>
+  <p class="wf-sources__lead">Links go to <a href="{{ $reg.upstream.repo }}" rel="noopener">{{ $reg.upstream.name }}</a> at one pinned revision ({{ substr $reg.upstream.rev 0 7 }}), {{ $reg.upstream.license }} licence, last compared with my copies on {{ $reg.upstream.compared_on }}.</p>
+  {{- range $groups }}{{ if .items }}
+  <h3 class="wf-sources__group">{{ .h }}</h3>
+  <p class="wf-sources__note">{{ .note }}</p>
   <ul class="wf-sources__list" role="list">
-    {{- range $reg.skills }}
+    {{- range .items }}
     <li>{{ partial "workflow-skill-status.html" (dict "skill" . "reg" $reg) }}<span class="wf-sources__job">{{ .job }}</span></li>
     {{- end }}
   </ul>
+  {{- end }}{{ end }}
   <p class="wf-sources__attr">{{ $reg.upstream.attribution }}</p>
 </section>

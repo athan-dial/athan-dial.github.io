@@ -5,7 +5,8 @@
   <header class="wf-guide__head">
     <p class="wf-guide__task">{{ $g.task }}</p>
     <h3 id="guide-{{ $g.id }}-title" class="wf-guide__title">{{ $d.title }}</h3>
-    <p class="wf-guide__lead">{{ $d.lead }}</p>
+    <p class="wf-guide__lead"><span class="wf-label">Use it when</span> {{ $d.lead }}</p>
+    <p class="wf-guide__lead wf-guide__produces"><span class="wf-label">You get</span> {{ $d.produces }}</p>
   </header>
 
   <div class="wf-guide__body">

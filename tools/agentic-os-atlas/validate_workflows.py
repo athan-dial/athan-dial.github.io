@@ -80,6 +80,8 @@ rev, repo = up.get('rev', ''), up.get('repo', '')
 if not re.fullmatch(r'[0-9a-f]{40}', rev): fail('upstream.rev is not a 40-character commit')
 base = f'{repo}/blob/{rev}/skills/'
 if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', up.get('compared_on', '')): fail('upstream.compared_on must be a date (when the copies were last compared)')
+for k in ('examples', 'sources'):
+    if not (reg.get('intro') or {}).get(k): fail(f'registry intro.{k} is missing: the synthetic-example and source-access notes appear once, near the top')
 skills = reg.get('skills', [])
 ids = [s.get('id') for s in skills]
 dupes = sorted({i for i in ids if ids.count(i) > 1})
@@ -190,7 +192,7 @@ for g in guides:
     if d is None: continue
     if d.get('id') != i: fail(f'guide {i}: file id is {d.get("id")!r}')
     if d.get('draft_stub'): stubs.append(i); continue
-    for k in ('title', 'lead', 'scenario', 'input', 'steps', 'artifact', 'stop', 'limits'):
+    for k in ('title', 'lead', 'produces', 'scenario', 'input', 'steps', 'artifact', 'stop', 'limits'):
         if not d.get(k): fail(f'guide {i}: missing {k}')
     steps = d.get('steps', [])
     if len(steps) < 3: fail(f'guide {i}: fewer than three steps')

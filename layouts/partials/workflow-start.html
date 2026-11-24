@@ -19,5 +19,12 @@
     {{- end }}
   </ul>
   {{- end }}
+  {{- with $reg.intro }}
+  <div class="wf-intro">
+    <h3 class="wf-intro__h">How to read the examples</h3>
+    <p>{{ .examples }}</p>
+    <p>{{ .sources }}</p>
+  </div>
+  {{- end }}
   <p class="wf-start__skip"><a href="#views">Skip to the seven architecture views</a></p>
 </section>
