@@ -1,0 +1,170 @@
+{
+  "id": "wf-map-1",
+  "figure": {
+    "title": "Choir season map, after session 1",
+    "code": "WF-01"
+  },
+  "layout": {
+    "width": 1112,
+    "height": 792
+  },
+  "nodes": {
+    "cal": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "add": {
+      "x": 40,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fees": {
+      "x": 40,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "page": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "clash": {
+      "x": 380,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fog1": {
+      "x": 710,
+      "y": 38,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "fog2": {
+      "x": 710,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    }
+  },
+  "nodeData": {
+    "cal": {
+      "name": "Collect each choir's calendar",
+      "color": "zinc",
+      "icon": "Hammer",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 task",
+      "description": "Done in session 1. All three choirs rehearse Thursday and Saturday evenings; two already book the same hall."
+    },
+    "add": {
+      "name": "Who may add a concert?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "A question for you, one session. Nothing blocks it."
+    },
+    "fees": {
+      "name": "How do other festivals split hall hire?",
+      "color": "amber",
+      "icon": "Search",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 research",
+      "description": "An agent can run this alone and report findings."
+    },
+    "page": {
+      "name": "What should the calendar page show?",
+      "color": "amber",
+      "icon": "Lightbulb",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 prototype",
+      "description": "Was waiting for the calendars. Now answerable."
+    },
+    "clash": {
+      "name": "How are clashes settled?",
+      "color": "blue",
+      "icon": "Scale",
+      "shape": "rounded",
+      "subtitle": "Blocked \u00b7 grilling",
+      "description": "Cannot be asked well until we know who may add a concert."
+    },
+    "fog1": {
+      "name": "Singers in two choirs",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    },
+    "fog2": {
+      "name": "Who pays the piano tuner",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "cal",
+      "to": "page",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Unblocked",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "add",
+      "to": "clash",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Blocks",
+      "curve": "direct"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Not yet specified",
+      "x": 694,
+      "y": 6,
+      "width": 284,
+      "height": 472,
+      "color": "zinc"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}

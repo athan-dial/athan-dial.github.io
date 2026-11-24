@@ -1,0 +1,212 @@
+{
+  "id": "wf-map-2",
+  "figure": {
+    "title": "Choir season map, after session 3",
+    "code": "WF-02"
+  },
+  "layout": {
+    "width": 1112,
+    "height": 824
+  },
+  "nodes": {
+    "cal": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "add": {
+      "x": 40,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fees": {
+      "x": 40,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "page": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "clash": {
+      "x": 380,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "costs": {
+      "x": 380,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "mixed": {
+      "x": 720,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "notice": {
+      "x": 720,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fog3": {
+      "x": 710,
+      "y": 538,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    }
+  },
+  "nodeData": {
+    "cal": {
+      "name": "Collect each choir's calendar",
+      "color": "zinc",
+      "icon": "Hammer",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 task",
+      "description": "Settled in session 1."
+    },
+    "add": {
+      "name": "Who may add a concert?",
+      "color": "zinc",
+      "icon": "Scale",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 grilling",
+      "description": "Settled in session 2. Any choir chair may add one; a second chair must confirm."
+    },
+    "fees": {
+      "name": "How do other festivals split hall hire?",
+      "color": "zinc",
+      "icon": "Search",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 research",
+      "description": "Settled in session 2 by an agent. Most split hall hire evenly and keep their own ticket money."
+    },
+    "page": {
+      "name": "What should the calendar page show?",
+      "color": "zinc",
+      "icon": "Lightbulb",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 prototype",
+      "description": "Settled in session 3. A month grid, a hall name on each concert, no sign-in."
+    },
+    "clash": {
+      "name": "How are clashes settled?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "Unblocked once the first rule was settled."
+    },
+    "costs": {
+      "name": "How are shared costs split?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. Raised by the research finding."
+    },
+    "mixed": {
+      "name": "How are two-choir singers counted?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. The calendars showed nine singers on two lists."
+    },
+    "notice": {
+      "name": "How far ahead is the season published?",
+      "color": "blue",
+      "icon": "Scale",
+      "shape": "rounded",
+      "subtitle": "Blocked \u00b7 grilling",
+      "description": "New, raised by the calendar prototype. Waits for the clash rule."
+    },
+    "fog3": {
+      "name": "A shared conductor",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    }
+  },
+  "connectorStyles": {
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    },
+    "feedback": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "lineStyle": "dashed",
+      "toArrow": "open"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "clash",
+      "to": "notice",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "fees",
+      "to": "costs",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "direct"
+    },
+    {
+      "id": "e2",
+      "from": "cal",
+      "to": "mixed",
+      "fromAnchor": "top",
+      "toAnchor": "top",
+      "style": "feedback",
+      "label": "Exposed",
+      "curve": "step",
+      "curveDepth": 56
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Not yet specified",
+      "x": 694,
+      "y": 506,
+      "width": 284,
+      "height": 222,
+      "color": "zinc"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
