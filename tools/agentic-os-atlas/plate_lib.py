@@ -81,5 +81,3 @@ class Plate:
                    connectors=self.conns, groups=self.groups,
                    _meta=dict(viewMode='2d', colorMode='light'))
         (OUT / self.folder / f'{self.id}.arc.json').write_text(json.dumps(doc, indent=2) + '\n')
-
-

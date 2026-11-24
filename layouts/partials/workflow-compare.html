@@ -8,7 +8,7 @@
   {{- end }}
   <table class="wf-table">
     <caption class="visually-hidden">{{ $c.title }}</caption>
-    <thead><tr><th scope="col"></th><th scope="col">Decision map</th><th scope="col">Build dependency graph</th></tr></thead>
+    <thead><tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th scope="col">Decision map</th><th scope="col">Build dependency graph</th></tr></thead>
     <tbody>
       {{- range $c.rows }}
       <tr><th scope="row">{{ .aspect }}</th><td>{{ .decision_map }}</td><td>{{ .build_graph }}</td></tr>

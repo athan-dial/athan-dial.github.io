@@ -41,5 +41,12 @@ jobs:
           "$RUNNER_TEMP/review-browser/node_modules/.bin/playwright" install --with-deps chromium
           NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-browser.cjs
           NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-header.cjs
+      - name: Draft workflow page check
+        run: |
+          hugo --gc --minify -D --destination "$RUNNER_TEMP/draft"
+          python3 -m http.server 8773 --bind 127.0.0.1 --directory "$RUNNER_TEMP/draft" >/dev/null 2>&1 &
+          sleep 2
+          NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-workflows-browser.cjs "$RUNNER_TEMP/draft" public
+          NODE_PATH="$RUNNER_TEMP/review-browser/node_modules" node scripts/verify-atlas-browser.cjs http://127.0.0.1:8773/work/agentic-operating-system/
 # This job deliberately has no Pages, id-token or deployment permissions.
 # A successful run does not replace private-denylist or human publication review.

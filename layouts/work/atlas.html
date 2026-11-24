@@ -27,7 +27,7 @@
       <a href="{{ "/work/" | relURL }}" class="case-study-back">&larr; All work</a>
       <header class="case-study-header">
         <h1 class="case-study-header__title">{{ .Title }}</h1>
-        {{- with .Params.summary -}}<p class="case-study-header__lead">{{ . }}</p>{{- end -}}
+        {{- with (.Params.page_lead | default .Params.summary) -}}<p class="case-study-header__lead">{{ . }}</p>{{- end -}}
       </header>
     </div>
 

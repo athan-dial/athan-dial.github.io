@@ -136,6 +136,7 @@ const wfPlates = Object.fromEntries(Object.entries(wfFiles).map(([p, d]) => [p.s
 function WorkflowPlate({ids, labels, caption}) {
   const [i, setI] = useState(0)
   const id = ids[i]
+  const lay = wfPlates[id].layout
   const scroller = useRef(null)
   useEffect(() => {
     const el = scroller.current
@@ -156,11 +157,12 @@ function WorkflowPlate({ids, labels, caption}) {
       )}
       <p className="visually-hidden" role="status" aria-live="polite">{'Showing ' + (labels[i] || id) + '. ' + caption}</p>
       <div className="wfplate__scroll" ref={scroller} role="region" aria-label={(labels[i] || id) + ' diagram. On a narrow screen it scrolls sideways.'}>
-        <div className="atlas__frame wfplate__frame" role="group" aria-label={(labels[i] || id) + ' diagram. The same content is written out as text beside it.'}>
+        <div className="atlas__frame wfplate__frame" style={{aspectRatio: lay.width + ' / ' + lay.height, '--wf-min': Math.round(lay.width * 0.8) + 'px'}} role="group" aria-label={(labels[i] || id) + ' diagram. The same content is written out as text beside it.'}>
           <ArcDiagram key={id} data={wfPlates[id]} style={style} mode="light" defaultZoom="fit" maxFitZoom={1.3}
             fitPadding={20} label="" showArcToggle={false} />
         </div>
       </div>
+      <p className="wfplate__hint">Scroll sideways to see the whole diagram. The same content is listed as text.</p>
     </div>
   )
 }

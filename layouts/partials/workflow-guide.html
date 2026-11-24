@@ -47,13 +47,13 @@
       <div><dt>Limits</dt><dd>{{ $d.limits }}</dd></div>
     </dl>
 
-    <aside class="wf-sources-inline" aria-label="Where to read the instructions for this guide">
+    <div class="wf-sources-inline">
       <h4 class="wf-sources-inline__h">Read the instructions</h4>
       {{- if $g.source_status }}<p class="wf-sources-inline__status">{{ $g.source_status }}</p>{{ end }}
       <ul>
         {{- range $g.skills }}{{ $sk := index $skills . }}<li>{{ partial "workflow-skill-status.html" (dict "skill" $sk "reg" $reg) }}</li>{{ end }}
       </ul>
-    </aside>
+    </div>
 
     <p class="wf-guide__views">Underneath this guide: {{ range $i, $v := $g.views }}{{ if $i }}, {{ end }}<a href="#view-{{ $v }}">{{ (index (where (index site.Data "agentic-os").views.views "id" $v) 0).short }}</a>{{ end }}. {{ with $d.next }}<a href="#guide-{{ .guide }}">{{ .label }}</a>{{ end }}</p>
   </div>
