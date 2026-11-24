@@ -1,4 +1,63 @@
 {
   "id": "research",
-  "draft_stub": true
+  "title": "Answering a question from several angles at once",
+  "lead": "Use this when you need to understand something before you decide anything. The method splits one big question into small ones, gives each to its own agent, and has a different agent write the combined answer. A question that did not get answered is reported as missing.",
+  "scenario": "A community garden club wonders whether to buy rain barrels for the shared plots. The example is invented, so every finding in it is too.",
+  "input": "Should the garden club buy rain barrels this spring? Look into it.",
+  "steps": [
+    {
+      "actor": "human",
+      "label": "Split the question",
+      "text": "One agent asked \"should we buy barrels?\" returns a vague essay. You write four narrow questions instead: what do the city's rules say about collecting rainwater, what does a barrel cost per litre next to a tank, how much rain falls on the shed roof in a dry month, and what went wrong for clubs that tried it. Four is plenty; six is the most the method accepts."
+    },
+    {
+      "actor": "skill",
+      "skill": "research",
+      "label": "One agent per question",
+      "text": "Each question goes to its own researcher with a fresh context and one instruction: write your findings to a named file and stop. The files are the only way results come back. Passing results through the chat lost reports often enough that the method stopped relying on it."
+    },
+    {
+      "actor": "artifact",
+      "label": "Four files, one of them empty",
+      "text": "Three questions come back with notes and sources. The city-rules agent could not reach the council's page and wrote nothing. The check that runs after the agents finish lists that file as FAILED. It is not skipped and it is not quietly folded into the others."
+    },
+    {
+      "actor": "skill",
+      "skill": "research",
+      "label": "A different agent writes the summary",
+      "text": "The agent that gathered the findings never writes the conclusion. A separate synthesizer reads the files, compares claims that disagree, and writes one report. Its first section says which question has no answer, so a gap cannot hide inside confident prose."
+    },
+    {
+      "actor": "human",
+      "label": "Decide what to do about the gap",
+      "text": "The report says barrels are cheap and the roof collects enough, and that the rules are unknown. You choose: rerun the one failed question, or read the council page yourself. You read it. Barrels under a size limit need no permit. You add one line to the report by hand."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "A barrel costs less per litre than a tank at this club's size.",
+      "The shed roof collects enough in a dry month.",
+      "Barrels under the city's size limit need no permit (read by a person, not an agent)."
+    ],
+    "open": [
+      "Whether clubs that tried barrels saw mosquito complaints. Two of four sources, both anecdotal.",
+      "Whether the landlord of the plot allows fixtures."
+    ]
+  },
+  "artifact": {
+    "title": "Synthesis excerpt (invented)",
+    "lines": [
+      "Missing. Question 1, city rules: FAILED, source page unreachable. Resolved by hand, see the note at the end.",
+      "Cost. A 200-litre barrel costs less per litre than a 1,000-litre tank. Source: two supplier price lists, checked the same week.",
+      "Supply. The shed roof yields about 160 litres per millimetre of rain; the dry-month average gives roughly two barrels' worth.",
+      "Disagreement. One source blames mosquitoes on open lids; another reports none with screened lids. Not settled.",
+      "Recommendation to a person: buy two barrels with screened lids. The decision stays with the club."
+    ]
+  },
+  "stop": "You are done when every question is either answered with a source or listed as missing, the report separates what the sources agree on from what they dispute, and you have read it. Stop gathering when new sources repeat what you already have.",
+  "limits": "The example is invented, and so is its result. Research is a private skill with no public text, and the upstream skill of the same name works differently, so it is not linked. Parallel agents find more than one agent does, but they also pick up the same wrong claim from the same weak source. The method flags a question that failed, not an answer that is wrong. You still check anything you will act on.",
+  "next": {
+    "label": "You know enough to decide and want a plan on paper?",
+    "guide": "idea-to-spec"
+  }
 }

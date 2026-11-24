@@ -1,4 +1,48 @@
 {
   "id": "shareable-writing",
-  "draft_stub": true
+  "title": "Testing a document on someone who was not there",
+  "lead": "Use this when you wrote something for people who were not in the room. You cannot judge your own draft, because you already know what it means. The method hands it to a reader with no context, then to new readers, until their complaints stop changing.",
+  "scenario": "A food bank volunteer drafts a one-page proposal to move pickup from Saturday to Thursday evening. It goes to a parish council that has never seen the rota. The example is invented, so every finding in it is too.",
+  "input": "Here is my one-pager for the council. Read it cold and tell me what a stranger would not follow.",
+  "steps": [
+    {
+      "actor": "human",
+      "label": "Say who reads it and what they decide",
+      "text": "Write one line before the review starts: the council treasurer reads this for two minutes and decides whether to approve a trial month. That line is what the reader is held to. Without it, a reader can only judge style."
+    },
+    {
+      "actor": "skill",
+      "skill": "pm-cold-reader",
+      "label": "First fresh reader",
+      "text": "A reader with no access to your notes, your history or the earlier drafts reads the page once. Three complaints come back. \"The Thursday trial\" is never explained. \"Pickup window\" means two different things. The ask appears in the last line. The same text read by its author found nothing wrong, which is why the author does not do this step."
+    },
+    {
+      "actor": "human",
+      "label": "Accept or reject each finding",
+      "text": "You take two and reject one. The reader wanted the whole rota history added; the council does not need it. You move the ask to the top, define the trial in a sentence, and pick one meaning for \"window\". Rejecting a finding is allowed. Ignoring one without a reason is not."
+    },
+    {
+      "actor": "skill",
+      "skill": "pm-cold-reader",
+      "label": "Second fresh reader",
+      "text": "A new reader sees only the revised page. A reader who saw the first version would be checking your fixes. This one finds a single new problem: a volunteer count with no date. You fix it. A third reader returns nothing new and repeats nothing."
+    },
+    {
+      "actor": "artifact",
+      "label": "The page the council receives",
+      "text": "A one-pager that says what you are asking in its first sentence, defines each term at first use, and leaves the rota history out. A short review record sits beside it, saying what each round found and what you decided."
+    }
+  ],
+  "artifact": {
+    "title": "Review record (invented)",
+    "lines": [
+      "Reader brief. Council treasurer, two minutes, decides on a one-month trial.",
+      "Round 1. Undefined trial, double meaning of \"window\", ask in last line. Accepted 2, rejected 1 (rota history).",
+      "Round 2, new reader. One finding: volunteer count undated. Fixed.",
+      "Round 3, new reader. No new findings, none repeated. Stop.",
+      "Before sending. A person reads it once more and sends it. The review does not send anything."
+    ]
+  },
+  "stop": "You are done when a fresh reader's findings stop changing between rounds and that reader can state the ask and what you want them to decide. If findings keep changing after three rounds, the document is trying to do two jobs and should be split.",
+  "limits": "The example is invented, and so is its result. pm-cold-reader is a private skill with no public text, so this guide explains the idea and does not reproduce the skill. A model reading as a stranger is a good proxy for a stranger and a poor proxy for your particular treasurer. It catches missing definitions and buried asks. It cannot tell you whether the council will say yes."
 }
