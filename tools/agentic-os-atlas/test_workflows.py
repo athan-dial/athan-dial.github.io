@@ -54,6 +54,24 @@ def ensure_fixture(reg, guides):
     if not any(g['id'] == 'wayfinder' for g in reg['guides']):
         reg['guides'].append(dict(id='wayfinder', priority=1, task='t', skills=['wayfinder', 'grilling', 'prototype', 'to-spec'], views=['thinking']))
 
+MIN_PLATE = dict(id='fx', figure=dict(title='fx', code='F'), layout=dict(width=400, height=200),
+                 nodes=dict(a=dict(x=0, y=0, size='m', width=100, height=50), b=dict(x=200, y=0, size='m', width=100, height=50)),
+                 nodeData=dict(a=dict(name='A', description='a'), b=dict(name='B', description='b')),
+                 connectorStyles=dict(normal=dict(color='zinc')), connectors=[dict(id='e0', **{'from': 'a'}, to='b', style='normal', label='to')])
+
+def ensure_plate(d):
+    """Plate cases need one plate to edit; a partial guide set may have none."""
+    pd = d / 'data/agentic-os/workflow-plates'; pd.mkdir(parents=True, exist_ok=True)
+    if not list(pd.glob('*.arc.json')): (pd / 'wf-fixture.arc.json').write_text(json.dumps(MIN_PLATE))
+
+def write_digest(d):
+    import hashlib
+    h = hashlib.sha256()
+    for p in sorted((d / 'data/agentic-os').rglob('*.json')): h.update(p.relative_to(d).as_posix().encode()); h.update(p.read_bytes())
+    for p in ('tools/agentic-os-atlas/src/atlas.jsx', 'tools/agentic-os-atlas/src/frame.css'):
+        if (d / p).exists(): h.update((d / p).read_bytes())
+    (d / 'tools/agentic-os-atlas/.bundle-digest').write_text(h.hexdigest() + '\n')
+
 def make(mutate, files=None):
     d = Path(tempfile.mkdtemp())
     shutil.copytree(repo / 'data', d / 'data', ignore=shutil.ignore_patterns('plates'))
@@ -70,6 +88,8 @@ def make(mutate, files=None):
     (d / 'data/workflows/registry.json').write_text(json.dumps(reg))
     for f in (d / 'data/workflows/guides').glob('*.json'): f.unlink()
     for k, v in guides.items(): (d / f'data/workflows/guides/{k}.json').write_text(json.dumps(v))
+    ensure_plate(d)
+    write_digest(d)
     if files: files(d)
     return d
 
