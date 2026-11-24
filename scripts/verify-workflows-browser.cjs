@@ -115,7 +115,8 @@ const log = m => console.log('PASS ' + m);
 
       // 6. back navigation: following an in-page link then going back returns to where you were
       await p.goto(base + page, { waitUntil: 'load' }); await p.waitForTimeout(800);
-      await p.locator('.wf-start__lead a').nth(1).click(); await p.waitForTimeout(300);
+      const leadLinks = p.locator('.wf-start__lead a');
+      await leadLinks.nth((await leadLinks.count()) > 1 ? 1 : 0).click(); await p.waitForTimeout(300);
       assert(/#guide-/.test(await p.evaluate(() => location.hash)), 'task link did not move to its guide');
       await p.goBack(); await p.waitForTimeout(300);
       assert.equal(await p.evaluate(() => location.hash), '', 'back did not return to the top of the page');

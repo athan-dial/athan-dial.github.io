@@ -29,6 +29,31 @@ STEPS = [dict(actor='skill', skill='wayfinder', label='a', text='b', public_equi
 GUIDE = dict(id='wayfinder', title='t', lead='l', produces='p', scenario='s', input='i', steps=STEPS, artifact=dict(title='a', lines=['x']),
              stop='s', limits='l', map=MAP, build=BUILD, compare=dict(rows=[]))
 
+def ensure_fixture(reg, guides):
+    """The cases below name skills and guides that may not exist in a partial guide set (a stacked chunk). Add any that
+    are missing so the cases test the validator, not the current contents of the data."""
+    have = {s['id'] for s in reg['skills']}
+    up = reg['upstream']; base = f"{up['repo']}/blob/{up['rev']}/skills/engineering/"
+    want = {
+        'to-tickets': dict(id='to-tickets', name='to-tickets', job='j', source_kind='upstream', url=base + 'to-tickets/SKILL.md', customized=False),
+        'to-spec': dict(id='to-spec', name='to-spec', job='j', source_kind='upstream', url=base + 'to-spec/SKILL.md', customized=False),
+        'tdd': dict(id='tdd', name='tdd', job='j', source_kind='upstream', url=base + 'tdd/SKILL.md', customized=True, difference='d'),
+        'wayfinder': dict(id='wayfinder', name='wayfinder', job='j', source_kind='upstream', url=base + 'wayfinder/SKILL.md', customized=True, difference='d'),
+        'grilling': dict(id='grilling', name='grilling', job='j', source_kind='upstream', url=up['repo'] + '/blob/' + up['rev'] + '/skills/productivity/grilling/SKILL.md', customized=False),
+        'prototype': dict(id='prototype', name='prototype', job='j', source_kind='upstream', url=base + 'prototype/SKILL.md', customized=False),
+        'research': dict(id='research', name='research', job='j', source_kind='private', url=None, customized=True, status_note='n'),
+    }
+    for k, v in want.items():
+        if k not in have: reg['skills'].append(v)
+    if not any(g['id'] == 'research' for g in reg['guides']):
+        reg['guides'].append(dict(id='research', priority=2, task='t', skills=['research', 'tdd', 'to-tickets'], views=['thinking']))
+        guides['research'] = dict(id='research', draft_stub=True)
+    for g in reg['guides']:
+        if g['id'] == 'wayfinder':
+            g['skills'] = ['wayfinder', 'grilling', 'prototype', 'to-spec']
+    if not any(g['id'] == 'wayfinder' for g in reg['guides']):
+        reg['guides'].append(dict(id='wayfinder', priority=1, task='t', skills=['wayfinder', 'grilling', 'prototype', 'to-spec'], views=['thinking']))
+
 def make(mutate, files=None):
     d = Path(tempfile.mkdtemp())
     shutil.copytree(repo / 'data', d / 'data', ignore=shutil.ignore_patterns('plates'))
@@ -39,6 +64,7 @@ def make(mutate, files=None):
     reg = json.loads((d / 'data/workflows/registry.json').read_text())
     guides = {p.stem: json.loads(p.read_text()) for p in (d / 'data/workflows/guides').glob('*.json')}
     guides['wayfinder'] = copy.deepcopy(GUIDE)
+    ensure_fixture(reg, guides)
     reg['guides'] = [g for g in reg['guides']]
     mutate(reg, guides)
     (d / 'data/workflows/registry.json').write_text(json.dumps(reg))
