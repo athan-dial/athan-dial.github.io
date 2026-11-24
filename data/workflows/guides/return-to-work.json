@@ -1,0 +1,75 @@
+{
+  "id": "return-to-work",
+  "title": "Picking a project back up after time away",
+  "lead": "Use it when you are about to leave a project for weeks and want to return to it cleanly, or when you are coming back and need to know what was decided and what has moved since.",
+  "produces": "A return note you assemble from what recall retrieves and reconcile reports: each recovered decision with its source, what changed while you were away, what contradicts what and who owns the fix, and what could not be checked.",
+  "scenario": "You are the data engineer on Assay Compare and you are leaving for three weeks. When you return, a colleague has been working in the repository backlog, and your decisions about reference runs have to survive the gap.",
+  "input": "I am off for three weeks. Close this session out and leave a note so I or a new agent can continue.",
+  "steps": [
+    {
+      "actor": "skill",
+      "skill": "shutdown",
+      "label": "Close the session from its own ledger",
+      "text": "Shutdown reads the running record of what this session did, not your memory of it. It checks the repository is synced, writes the decisions into the decision records, adds evidence to the ticket you worked and holds the tickets whose independent check does not match the final commit. It never marks anything finished."
+    },
+    {
+      "actor": "skill",
+      "skill": "handoff",
+      "label": "Write the continuation note",
+      "text": "Shutdown does not produce this note. Handoff does, separately, and only because you asked. It turns the conversation into a note a fresh agent can continue from: it links the spec and the commits instead of copying them, and redacts anything secret. It saves the note to the system temp directory, so copy it somewhere durable before you leave."
+    },
+    {
+      "actor": "open",
+      "label": "Three weeks pass",
+      "text": "Both records stop on the day you left. Neither knows what a colleague edits afterward. Finding that out is a different job, and it starts when you come back."
+    },
+    {
+      "actor": "human",
+      "label": "Say what you need",
+      "text": "On return you do not start by asking for everything. You ask for two things: what was decided about reference runs, and what moved while you were gone."
+    },
+    {
+      "actor": "skill",
+      "skill": "recall",
+      "label": "Recover the decision",
+      "text": "Recall searches the notes and decision records and finds that a reference run is designated per protocol version. An earlier note says to use last week's run. A newer record supersedes it, so recall drops it unless you ask for history. It answers with sources and writes nothing."
+    },
+    {
+      "actor": "skill",
+      "skill": "reconcile",
+      "label": "Detect what moved",
+      "text": "Reconcile compares the board, task lists, repository backlog and meeting notes against the last baseline. It finds three things: a backlog row for the comparison module was edited, a ticket sits in review while its backlog row still says open, and the meeting transcripts could not be read. That source is reported unknown, not unchanged. It routes each finding to the skill that owns the fix and changes none of them."
+    },
+    {
+      "actor": "human",
+      "label": "Decide which side stands",
+      "text": "The edited row says to infer the reference run from the most recent run. That contradicts the decision recall found. Reconcile did not choose; you do. You keep the designated rule and ask your colleague why the row changed. Whoever owns the row changes it through their own process; reconcile only reports it. The open meeting source waits until someone can read the transcripts."
+    },
+    {
+      "actor": "artifact",
+      "label": "The return note",
+      "text": "You assemble one page from recall's answer and reconcile's report. None of the four skills writes it: the recovered decision with its source, what changed, what contradicts and who owns it, and what is unknown."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "A reference run is designated for each protocol version. It is never inferred from the latest run.",
+      "The superseded \"use last week's run\" note is history, not a rule."
+    ],
+    "open": [
+      "Why the backlog row changed. Your colleague owns the answer.",
+      "What the meeting transcripts say. Unread, not unchanged."
+    ]
+  },
+  "artifact": {
+    "title": "Return note",
+    "lines": [
+      "Recovered. A reference run is designated per protocol version (decision record, three weeks ago). The earlier \"use last week's run\" is superseded.",
+      "Changed. One backlog row edited by a colleague. One ticket in review while its backlog row still says open.",
+      "Contradicts. The edited row says to infer the reference run from the latest run. That conflicts with the decision above. You chose the decision; whoever owns the row changes it.",
+      "Unknown. Meeting transcripts could not be read. No claim is made about them."
+    ]
+  },
+  "stop": "Stop when each change is classed as matching, contradicting or unknown, each contradiction has an owner, and you have decided which side stands. Do not start new work while a contradiction has no owner.",
+  "limits": "Recall answers from the notes that exist, and reconcile sees only the board, task lists, repository backlogs and meeting notes, not what changed in the code. Retrieval is recall's job, detection is reconcile's job, and shutdown does neither. The closing note is only as good as the record it was built from."
+}
