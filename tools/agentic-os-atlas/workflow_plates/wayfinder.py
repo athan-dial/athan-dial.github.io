@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Plates for the wayfinder guide. Synthetic example (three village choirs); not live tracker state.
+"""Plates for the wayfinder guide. Synthetic example (the Assay Compare results-store map); not live tracker state.
 
 Shape grammar, so status never rests on colour alone:
   square  = settled          pill = answerable now (frontier)
   rounded = blocked          diamond = fog (not yet specified)
-  solid arrow = blocks       dashed arrow = a settled decision exposed this question
+  solid arrow = blocks or feeds   dashed arrow = a settled decision exposed this question
 Run: python3 tools/agentic-os-atlas/workflow_plates/wayfinder.py
 """
 import sys
@@ -25,55 +25,63 @@ def fog(p, nid, name, col, row, desc):
     p.node(nid, name, 'rule', col, row, icon='FileStack', sub='Fog · not yet a question', desc=desc)
 
 
-# ---- map after session 1: one ticket settled, the page ticket unblocked
-p = Plate('wf-map-1', 'Fig W1', 'Choir season map, after session 1', folder='workflow-plates')
-ticket(p, 'cal', "Collect each choir's calendar", 'settled', 'task', 0, 0, 'Done in session 1. All three choirs rehearse Thursday and Saturday evenings; two already book the same hall.')
-ticket(p, 'add', 'Who may add a concert?', 'frontier', 'grilling', 0, 1, 'A question for you, one session. Nothing blocks it.')
-ticket(p, 'fees', 'How do other festivals split hall hire?', 'frontier', 'research', 0, 2, 'An agent can run this alone and report findings.')
-ticket(p, 'page', 'What should the calendar page show?', 'frontier', 'prototype', 1, 0, 'Was waiting for the calendars. Now answerable.')
-ticket(p, 'clash', 'How are clashes settled?', 'blocked', 'grilling', 1, 1, 'Cannot be asked well until we know who may add a concert.')
-fog(p, 'fog1', 'Singers in two choirs', 2, 0, 'Sensed, but not yet a sharp question.')
-fog(p, 'fog2', 'Who pays the piano tuner', 2, 1, 'Sensed, but not yet a sharp question.')
-p.edge('cal', 'page', 'right', 'left', 'Unblocked')
-p.edge('add', 'clash', 'right', 'left', 'Blocks', 'decision')
+def spec_input(p, col, row):
+    p.node('input', 'Run comparison v1 spec', 'state', col, row, icon='ScrollText', sub='Settled input · not a ticket',
+           desc='The specification from the first guide. Its decisions, such as one designated reference run per protocol version and CSV only, are taken as given and are not reopened on this map.')
+
+
+# ---- map after session 1
+p = Plate('wf-map-1', 'Fig W1', 'Results store map, after session 1', folder='workflow-plates')
+ticket(p, 'exports', "Collect every instrument's export format", 'settled', 'task', 0, 0, 'Done in session 1. Instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has no usable export.')
+ticket(p, 'first', 'Which assays move first?', 'frontier', 'grilling', 0, 1, 'A question for you, one session. Nothing blocks it.')
+ticket(p, 'research', 'How do labs version protocols?', 'frontier', 'research', 0, 2, 'An agent can run this alone and report findings.')
+ticket(p, 'proto', 'What should a run page show?', 'frontier', 'prototype', 1, 0, 'A rough page to react to. Nothing blocks it.')
+ticket(p, 'retire', 'How are reference runs retired?', 'blocked', 'grilling', 1, 1, 'Cannot be asked well until we know which assays move first.')
+spec_input(p, 1, 2)
+fog(p, 'fog1', 'Retention of failed runs', 2, 0, 'Sensed, but not yet a sharp question.')
+fog(p, 'fog2', 'Regulated-study audit trail', 2, 1, 'Sensed, but not yet a sharp question.')
+p.edge('first', 'retire', 'right', 'left', 'Blocks', 'decision')
+p.edge('input', 'retire', 'top', 'bottom', 'Input to')
 p.group('Not yet specified', ['fog1', 'fog2'], 'zinc')
 p.save()
 
 # ---- map after session 3
-p = Plate('wf-map-2', 'Fig W2', 'Choir season map, after session 3', folder='workflow-plates')
-ticket(p, 'cal', "Collect each choir's calendar", 'settled', 'task', 0, 0, 'Settled in session 1.')
-ticket(p, 'add', 'Who may add a concert?', 'settled', 'grilling', 0, 1, 'Settled in session 2. Any choir chair may add one; a second chair must confirm.')
-ticket(p, 'fees', 'How do other festivals split hall hire?', 'settled', 'research', 0, 2, 'Settled in session 2 by an agent. Most split hall hire evenly and keep their own ticket money.')
-ticket(p, 'page', 'What should the calendar page show?', 'settled', 'prototype', 1, 0, 'Settled in session 3. A month grid, a hall name on each concert, no sign-in.')
-ticket(p, 'clash', 'How are clashes settled?', 'frontier', 'grilling', 1, 1, 'Unblocked once the first rule was settled.')
-ticket(p, 'costs', 'How are shared costs split?', 'frontier', 'grilling', 1, 2, 'New. Raised by the research finding.')
-ticket(p, 'mixed', 'How are two-choir singers counted?', 'frontier', 'grilling', 2, 0, 'New. The calendars showed nine singers on two lists.')
-ticket(p, 'notice', 'How far ahead is the season published?', 'blocked', 'grilling', 2, 1, 'New, raised by the calendar prototype. Waits for the clash rule.')
-fog(p, 'fog3', 'A shared conductor', 2, 2, 'Sensed, but not yet a sharp question.')
-p.edge('clash', 'notice', 'right', 'left', 'Blocks', 'decision')
-p.edge('fees', 'costs', 'right', 'left', 'Exposed', 'feedback')
-p.edge('cal', 'mixed', 'top', 'top', 'Exposed', 'feedback', 'step', 56)
-p.edge('page', 'notice', 'bottom', 'top', 'Exposed', 'feedback', 'step')
+p = Plate('wf-map-2', 'Fig W2', 'Results store map, after session 3', folder='workflow-plates')
+ticket(p, 'exports', "Collect every instrument's export format", 'settled', 'task', 0, 0, 'Settled in session 1.')
+ticket(p, 'research', 'How do labs version protocols?', 'settled', 'research', 0, 1, 'Settled by an agent. Of the sources found, most keep one reference run per protocol version, and several version the plate layout separately.')
+ticket(p, 'first', 'Which assays move first?', 'settled', 'grilling', 0, 2, 'Settled in session 2. Unregulated assays on instruments A and B move first.')
+ticket(p, 'proto', 'What should a run page show?', 'settled', 'prototype', 0, 3, 'Settled in session 3. Run name, protocol version and reference run at the top, the plate overlay, and flagged wells listed beside it.')
+ticket(p, 'decimals', 'Decimal and unit conventions across sites?', 'frontier', 'grilling', 1, 0, 'New. The collected exports showed more than one decimal convention.')
+ticket(p, 'layouts', 'How are plate layouts versioned?', 'frontier', 'grilling', 1, 1, 'New. Raised by the research finding.')
+ticket(p, 'retire', 'How are reference runs retired?', 'frontier', 'grilling', 1, 2, 'Unblocked once the first assays were chosen.')
+ticket(p, 'designate', 'Who may designate a reference run?', 'frontier', 'grilling', 1, 3, 'New. Raised by the first-assays decision.')
+fog(p, 'fog3', 'Retention of failed runs', 2, 0, 'Sensed, but not yet a sharp question.')
+ticket(p, 'audit', 'Audit trail for regulated studies', 'blocked', 'grilling', 2, 2, 'Graduated from fog. It can now be asked, but waits for the retirement rule.')
+spec_input(p, 2, 3)
+p.edge('exports', 'decimals', 'right', 'left', 'Exposed', 'feedback')
+p.edge('research', 'layouts', 'right', 'left', 'Exposed', 'feedback')
+p.edge('first', 'retire', 'right', 'left', 'Unblocked')
+p.edge('first', 'designate', 'right', 'left', 'Exposed', 'feedback', 'step')
+p.edge('retire', 'audit', 'right', 'left', 'Blocks', 'decision')
+p.edge('input', 'designate', 'left', 'right', 'Input to')
 p.group('Not yet specified', ['fog3'], 'zinc')
 p.save()
 
 # ---- compare: decision map
 p = Plate('wf-compare-decisions', 'Fig W3', 'Decision map: questions found along the way', folder='workflow-plates')
-ticket(p, 'q1', 'Who may add a concert?', 'settled', 'grilling', 0, 0, 'Settled. It exposed the next question.')
-ticket(p, 'q2', 'How are clashes settled?', 'frontier', 'grilling', 1, 0, 'Asked after the first answer, not before.')
-fog(p, 'fog', 'Questions not yet visible', 1, 1, 'The graph is partial. It grows as answers arrive.')
+ticket(p, 'q1', 'Which assays move first?', 'settled', 'grilling', 0, 0, 'Settled. The answer exposed the next question.')
+ticket(p, 'q2', 'Who may designate a reference run?', 'frontier', 'grilling', 1, 0, 'Asked after the first answer, not before.')
+fog(p, 'fog', 'Questions not yet visible', 1, 0.8, 'The graph is partial. It grows as answers arrive.')
 p.node('spec', 'A specification', 'state', 2, 0, icon='ScrollText', sub='The map ends here', desc='A document someone could build from.')
-p.edge('q1', 'q2', 'right', 'left', 'Blocks', 'decision')
+p.edge('q1', 'q2', 'right', 'left', 'Exposed', 'feedback')
 p.edge('q2', 'spec', 'right', 'left', 'Decision')
 p.save()
 
 # ---- compare: build graph
 p = Plate('wf-compare-build', 'Fig W4', 'Build graph: slices drafted up front', folder='workflow-plates')
-p.node('s1', 'Record a booking', 'tool', 0, 0, icon='Hammer', sub='Slice 1 · unblocked', desc='Works end to end on its own.')
-p.node('s2', 'Show the season calendar', 'tool', 1, 0, icon='Hammer', sub='Slice 2', desc='Needs bookings to show.')
-p.node('s3', 'Flag a clash', 'tool', 2, 0, icon='Hammer', sub='Slice 3', desc='Needs the calendar to compare against.')
-p.node('code', 'Working calendar', 'check', 3, 0, icon='ShieldCheck', sub='The graph ends here', desc='Each slice was checked on its own.')
-p.edge('s1', 's2', 'right', 'left', 'Blocks')
-p.edge('s2', 's3', 'right', 'left', 'Blocks')
+p.node('s1', 'Import instrument A export', 'tool', 0, 0, icon='Hammer', sub='Slice · unblocked', desc='Works end to end on its own: an export goes in and raw wells show.')
+p.node('s3', 'Normalise to % of control', 'tool', 1, 0, icon='Hammer', sub='Slice', desc='Needs imported wells to normalise.')
+p.node('code', 'Checked code', 'check', 2, 0, icon='ShieldCheck', sub='The graph ends here', desc='Each slice was checked on its own.')
+p.edge('s1', 's3', 'right', 'left', 'Blocks')
 p.edge('s3', 'code', 'right', 'left', 'Verified')
 p.save()

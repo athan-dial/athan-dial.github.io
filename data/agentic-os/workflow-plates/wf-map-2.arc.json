@@ -1,153 +1,188 @@
 {
   "id": "wf-map-2",
   "figure": {
-    "title": "Choir season map, after session 3",
+    "title": "Results store map, after session 3",
     "code": "Fig W2"
   },
   "layout": {
     "width": 1112,
-    "height": 824
+    "height": 1042
   },
   "nodes": {
-    "cal": {
+    "exports": {
       "x": 40,
       "y": 70,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "add": {
+    "research": {
       "x": 40,
       "y": 320,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "fees": {
+    "first": {
       "x": 40,
       "y": 570,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "page": {
+    "proto": {
+      "x": 40,
+      "y": 820,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "decimals": {
       "x": 380,
       "y": 70,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "clash": {
+    "layouts": {
       "x": 380,
       "y": 320,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "costs": {
+    "retire": {
       "x": 380,
       "y": 570,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "mixed": {
-      "x": 720,
-      "y": 70,
-      "size": "m",
-      "width": 232,
-      "height": 112
-    },
-    "notice": {
-      "x": 720,
-      "y": 320,
+    "designate": {
+      "x": 380,
+      "y": 820,
       "size": "m",
       "width": 232,
       "height": 112
     },
     "fog3": {
       "x": 710,
-      "y": 538,
+      "y": 38,
       "size": "m",
       "width": 252,
       "height": 176
+    },
+    "audit": {
+      "x": 720,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "input": {
+      "x": 720,
+      "y": 820,
+      "size": "m",
+      "width": 232,
+      "height": 112
     }
   },
   "nodeData": {
-    "cal": {
-      "name": "Collect each choir's calendar",
+    "exports": {
+      "name": "Collect every instrument's export format",
       "color": "zinc",
       "icon": "Hammer",
       "shape": "square",
       "subtitle": "Settled \u00b7 task",
       "description": "Settled in session 1."
     },
-    "add": {
-      "name": "Who may add a concert?",
-      "color": "zinc",
-      "icon": "Scale",
-      "shape": "square",
-      "subtitle": "Settled \u00b7 grilling",
-      "description": "Settled in session 2. Any choir chair may add one; a second chair must confirm."
-    },
-    "fees": {
-      "name": "How do other festivals split hall hire?",
+    "research": {
+      "name": "How do labs version protocols?",
       "color": "zinc",
       "icon": "Search",
       "shape": "square",
       "subtitle": "Settled \u00b7 research",
-      "description": "Settled in session 2 by an agent. Most split hall hire evenly and keep their own ticket money."
+      "description": "Settled by an agent. Of the sources found, most keep one reference run per protocol version, and several version the plate layout separately."
     },
-    "page": {
-      "name": "What should the calendar page show?",
+    "first": {
+      "name": "Which assays move first?",
+      "color": "zinc",
+      "icon": "Scale",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 grilling",
+      "description": "Settled in session 2. Unregulated assays on instruments A and B move first."
+    },
+    "proto": {
+      "name": "What should a run page show?",
       "color": "zinc",
       "icon": "Lightbulb",
       "shape": "square",
       "subtitle": "Settled \u00b7 prototype",
-      "description": "Settled in session 3. A month grid, a hall name on each concert, no sign-in."
+      "description": "Settled in session 3. Run name, protocol version and reference run at the top, the plate overlay, and flagged wells listed beside it."
     },
-    "clash": {
-      "name": "How are clashes settled?",
+    "decimals": {
+      "name": "Decimal and unit conventions across sites?",
       "color": "amber",
       "icon": "Scale",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 grilling",
-      "description": "Unblocked once the first rule was settled."
+      "description": "New. The collected exports showed more than one decimal convention."
     },
-    "costs": {
-      "name": "How are shared costs split?",
+    "layouts": {
+      "name": "How are plate layouts versioned?",
       "color": "amber",
       "icon": "Scale",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 grilling",
       "description": "New. Raised by the research finding."
     },
-    "mixed": {
-      "name": "How are two-choir singers counted?",
+    "retire": {
+      "name": "How are reference runs retired?",
       "color": "amber",
       "icon": "Scale",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 grilling",
-      "description": "New. The calendars showed nine singers on two lists."
+      "description": "Unblocked once the first assays were chosen."
     },
-    "notice": {
-      "name": "How far ahead is the season published?",
-      "color": "blue",
+    "designate": {
+      "name": "Who may designate a reference run?",
+      "color": "amber",
       "icon": "Scale",
-      "shape": "rounded",
-      "subtitle": "Blocked \u00b7 grilling",
-      "description": "New, raised by the calendar prototype. Waits for the clash rule."
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "New. Raised by the first-assays decision."
     },
     "fog3": {
-      "name": "A shared conductor",
+      "name": "Retention of failed runs",
       "color": "blue",
       "icon": "FileStack",
       "shape": "diamond",
       "subtitle": "Fog \u00b7 not yet a question",
       "description": "Sensed, but not yet a sharp question."
+    },
+    "audit": {
+      "name": "Audit trail for regulated studies",
+      "color": "blue",
+      "icon": "Scale",
+      "shape": "rounded",
+      "subtitle": "Blocked \u00b7 grilling",
+      "description": "Graduated from fog. It can now be asked, but waits for the retirement rule."
+    },
+    "input": {
+      "name": "Run comparison v1 spec",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "Settled input \u00b7 not a ticket",
+      "description": "The specification from the first guide. Its decisions, such as one designated reference run per protocol version and CSV only, are taken as given and are not reopened on this map."
     }
   },
   "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
     "decision": {
       "color": "amber",
       "strokeWidth": 1.9,
@@ -163,18 +198,18 @@
   "connectors": [
     {
       "id": "e0",
-      "from": "clash",
-      "to": "notice",
+      "from": "exports",
+      "to": "decimals",
       "fromAnchor": "right",
       "toAnchor": "left",
-      "style": "decision",
-      "label": "Blocks",
+      "style": "feedback",
+      "label": "Exposed",
       "curve": "direct"
     },
     {
       "id": "e1",
-      "from": "fees",
-      "to": "costs",
+      "from": "research",
+      "to": "layouts",
       "fromAnchor": "right",
       "toAnchor": "left",
       "style": "feedback",
@@ -183,24 +218,43 @@
     },
     {
       "id": "e2",
-      "from": "cal",
-      "to": "mixed",
-      "fromAnchor": "top",
-      "toAnchor": "top",
-      "style": "feedback",
-      "label": "Exposed",
-      "curve": "step",
-      "curveDepth": 56
+      "from": "first",
+      "to": "retire",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "normal",
+      "label": "Unblocked",
+      "curve": "direct"
     },
     {
       "id": "e3",
-      "from": "page",
-      "to": "notice",
-      "fromAnchor": "bottom",
-      "toAnchor": "top",
+      "from": "first",
+      "to": "designate",
+      "fromAnchor": "right",
+      "toAnchor": "left",
       "style": "feedback",
       "label": "Exposed",
       "curve": "step"
+    },
+    {
+      "id": "e4",
+      "from": "retire",
+      "to": "audit",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e5",
+      "from": "input",
+      "to": "designate",
+      "fromAnchor": "left",
+      "toAnchor": "right",
+      "style": "normal",
+      "label": "Input to",
+      "curve": "direct"
     }
   ],
   "groups": [
@@ -209,7 +263,7 @@
       "type": "rect",
       "label": "Not yet specified",
       "x": 694,
-      "y": 506,
+      "y": 6,
       "width": 284,
       "height": 222,
       "color": "zinc"

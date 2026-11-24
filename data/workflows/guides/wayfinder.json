@@ -1,202 +1,201 @@
 {
   "id": "wayfinder",
   "title": "Wayfinder: a map of decisions, worked one session at a time",
-  "lead": "Use this when the plan will not fit in one session and you cannot yet see all of it. You chart a map of questions, answer them one at a time across separate sessions, and stop when nothing is left to decide. The map is for planning. It does not do the work.",
-  "scenario": "Three village choirs want to run one shared concert season. The example is invented, so every answer and number in it is too. It is not a live tracker and nothing here was written to one.",
-  "input": "Three village choirs want one shared concert season. It is too big to settle in one chat. Chart it, and we will work it a question at a time.",
+  "lead": "You have a piece of planning too big for one session, and you cannot yet see all of it.",
+  "produces": "A map of decision tickets worked one at a time until nothing is left to decide, and from it a specification for the whole piece of work. The map settles questions and builds nothing.",
+  "scenario": "The assay team wants every assay's results out of spreadsheets and into one results store, across three instruments and two sites, with some studies regulated. Run comparison v1, specified in the previous guide, is one small piece of that. It counts as a settled input to this map, not a ticket on it.",
+  "input": "We want every assay's results out of spreadsheets and into one results store: three instruments, two sites, some studies regulated. Too big to plan at once. Chart it.",
   "steps": [
     {
       "actor": "skill",
       "skill": "grilling",
       "label": "Name the destination, then list what is open",
-      "text": "The interview first pins down where this ends. Here it is a written specification for the season: how the choirs book halls, share a calendar and split costs. A spec, not software. Then it goes wide instead of deep, listing the open decisions without settling any. If everything fits in one session, there is no map; just do the interview."
+      "text": "The interview first pins down where this ends. Here it is a specification for the shared results store and the order assays move in. A specification, not software. Then it goes wide instead of deep and lists the open decisions without settling any. If everything fits in one session, there is no map: just do the interview."
     },
     {
       "actor": "skill",
       "skill": "wayfinder",
       "label": "Chart the map",
-      "text": "One page holds the destination, a line per decided question, the fog, and what is out of scope. Each question that can be stated sharply becomes its own ticket of one of four types: grilling and prototype need you, research can be run by an agent, and a task is an errand someone does. Blocking links go in on a second pass, once every ticket exists. Charting settles nothing and ends there. Here that gives five tickets, two patches of fog, and one exclusion: building a website."
+      "text": "One page holds the destination, a line per decided question, the fog and what is out of scope. The Run comparison v1 specification goes in as input: its decisions, such as one designated reference run per protocol version, are taken as given and not reopened. Each question that can be stated sharply becomes a ticket of one of four types. Grilling and prototype need you, research can be run by an agent, and a task is an errand someone does. Blocking links go in on a second pass. Charting settles nothing and stops there. Here it yields five tickets, two patches of fog and one exclusion: building the store."
     },
     {
       "actor": "human",
       "label": "Session 1: do the errand",
-      "text": "A session claims the first answerable ticket before touching it. This one is a task: collect each choir's rehearsal and hall calendar. It is the only type that does anything. It settles with a finding: all three choirs use Thursday and Saturday evenings, and two already book the same hall. The prototype ticket was waiting on this and is now answerable."
+      "text": "A session claims the ticket before touching it, then does it. This one is a task: collect the export format from every instrument. It is the only type that does something. The finding: instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has nothing usable."
     },
     {
       "actor": "skill",
       "skill": "grilling",
       "label": "Session 2: one question for you",
-      "text": "A session takes one grilling ticket and nothing else: who may add a concert to the shared calendar? Each question comes with a recommended answer. You pick: any choir chair may add one, and a second chair must confirm. The answer goes on the ticket, the ticket closes, and one line goes on the map. The clash ticket, which waited on this, becomes answerable. A research ticket may run in parallel the same day, because an agent can answer it without you."
+      "text": "A session takes one grilling ticket and nothing else: which assays move first? Each question comes with a recommended answer. You choose unregulated assays on instruments A and B. The answer goes on the ticket, the ticket closes and one line goes on the map. The retirement question, which waited on this, is now answerable. A research ticket can run the same day, because an agent can answer it without you."
     },
     {
       "actor": "skill",
       "skill": "wayfinder",
       "label": "Redraw after every ticket",
-      "text": "Each answer can change the map. The research finding, that most festivals split hall hire evenly, exposes a question nobody could state before: how are shared costs split? It becomes a new ticket and leaves the fog. The calendars exposed another: nine singers appear on two lists. Questions that stay vague stay in the fog, and nothing is sliced before it is sharp. A ticket an answer has made pointless is fixed or dropped. Sessions may overlap, so the map is re-read before each one."
+      "text": "Each answer can change the map. The research finding, that comparable labs version the plate layout separately, exposes a question nobody could state before: how are plate layouts versioned? The collected exports expose another: which decimal and unit conventions apply across sites? Choosing the first assays exposes a third: who may designate a reference run? It also makes the audit trail for regulated studies sharp enough to ask, so that patch of fog becomes a ticket. It waits for the retirement rule. Failed-run retention stays fog, because nobody can yet say what the question is. A ticket an answer has made pointless is fixed or dropped. Sessions may overlap, so the map is re-read before each one."
     },
     {
       "actor": "skill",
       "skill": "prototype",
       "label": "Session 3: react to something rough",
-      "text": "Some questions are easier to answer by looking. A throwaway calendar page takes an hour to sketch. You react: a month grid, a hall name on each concert, no sign-in. Only the decision is kept. The sketch is thrown away. Its answer exposes one more question, how far ahead the season is published, which waits behind the clash rule."
+      "text": "Some questions are easier to answer by looking. A throwaway run page takes an hour to sketch. You react: run name, protocol version and reference run at the top, the plate overlay in the middle, flagged wells listed beside it. Only the decision is kept. The sketch is thrown away."
     },
     {
       "actor": "human",
-      "label": "Look at the map again",
-      "text": "Two pictures of the same map sit below, after session 1 and after session 3. Four questions are settled, three are answerable now, one is blocked, and one patch of fog remains. The map has grown by three tickets even though three more were closed. That is normal. The edge of what is known moves as you answer."
+      "label": "Read the map again",
+      "text": "The two pictures below are the same map after session 1 and after session 3. Four questions are settled, four are answerable now, one is blocked and one patch of fog remains. The map has grown by four tickets even though four were closed. The edge of what is known moves as you answer."
     },
     {
       "actor": "skill",
       "skill": "to-spec",
       "label": "When nothing is left, write the spec",
-      "text": "Once no tickets remain and nothing remains that needs deciding before the work can start, the map has done its job. The specification is written from the decided lines on the map, with no new interview. Turning that spec into build slices with to-tickets is a separate, later choice. The map does not make that choice for you."
+      "text": "The map is finished when no tickets remain and nothing is left to decide before someone could start the work. The specification is written from the decided lines on the map, with no new interview. Cutting that specification into build slices is to-tickets, a separate and later choice that the map does not make for you."
     },
     {
       "actor": "artifact",
       "label": "The specification",
-      "text": "A document that carries the decisions from the map, with the rejected options and the questions deliberately left out."
+      "text": "A document that carries the decisions from the map, the options rejected and the questions deliberately left out."
     },
     {
       "actor": "open",
-      "label": "Whether to build",
-      "text": "Nobody has decided whether anyone builds a calendar page or runs the season on paper. The map ends at a spec. Execution starts a new piece of work, with its own plan."
+      "label": "Whether to build, and in what order",
+      "text": "The map ends at a specification. Whether anyone builds the store, how it is sliced and who builds it are separate decisions made afterwards."
     }
   ],
   "ledger": {
     "settled": [
-      "Destination: a written specification for the season.",
-      "Any choir chair may add a concert; a second chair confirms.",
-      "Most festivals split hall hire evenly and keep their own ticket money.",
-      "The calendar page is a month grid with a hall name on each concert, and no sign-in."
+      "Destination: a specification for the shared results store and the order assays move in.",
+      "Instruments A and B export CSV with different layouts. Instrument C has no usable export.",
+      "Unregulated assays on instruments A and B move first.",
+      "Run page: run, protocol version and reference run at the top, the overlay, flagged wells beside it."
     ],
     "open": [
-      "How clashes are settled, and how shared costs are split.",
-      "How two-choir singers are counted.",
-      "How far ahead the season is published.",
-      "Whether the choirs share a conductor (still fog)."
+      "How reference runs are retired when a protocol changes.",
+      "How plate layouts are versioned, and which decimal and unit conventions apply.",
+      "Who may designate a reference run.",
+      "The audit trail for regulated studies (blocked), and failed-run retention (still fog)."
     ]
   },
   "map": {
-    "destination": "A written specification for one shared concert season: how the choirs book halls, share a calendar and split costs.",
+    "destination": "A specification for the shared results store and the order assays move in.",
     "states": [
       {
         "label": "After session 1",
-        "note": "Charting is done and the first ticket is settled. The map has five tickets and two patches of fog.",
+        "note": "Charting is done and the first ticket is settled. The map has five tickets and two patches of fog. The Run comparison v1 specification is a settled input, not a ticket.",
         "tickets": [
           {
-            "id": "cal",
+            "id": "exports",
             "type": "task",
             "status": "settled",
-            "title": "Collect each choir's calendar",
-            "answer": "All three choirs use Thursday and Saturday evenings. Two already book the same hall."
+            "title": "Collect the export format from every instrument",
+            "answer": "Instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has no usable export."
           },
           {
-            "id": "add",
+            "id": "first",
             "type": "grilling",
             "status": "frontier",
-            "title": "Who may add a concert to the shared calendar?"
+            "title": "Which assays move first?"
           },
           {
-            "id": "fees",
+            "id": "research",
             "type": "research",
             "status": "frontier",
-            "title": "How do other festivals split hall hire?"
+            "title": "How do comparable labs version protocols and reference runs?"
           },
           {
-            "id": "page",
+            "id": "proto",
             "type": "prototype",
             "status": "frontier",
-            "title": "What should the calendar page show?",
-            "blocked_by": [
-              "cal"
-            ]
+            "title": "What should a run page show?"
           },
           {
-            "id": "clash",
+            "id": "retire",
             "type": "grilling",
             "status": "blocked",
-            "title": "How are clashes settled?",
+            "title": "How are reference runs retired when a protocol changes?",
             "blocked_by": [
-              "add"
+              "first"
             ]
           }
         ],
         "fog": [
-          "How singers who belong to two choirs are counted.",
-          "Who pays for the piano tuner."
+          "Retention of failed runs.",
+          "Audit trail for regulated studies."
         ]
       },
       {
         "label": "After session 3",
-        "note": "Three sessions later. Four tickets are settled and three new ones have appeared. The fog has changed shape.",
+        "note": "Four tickets are settled and four new ones have appeared, one of them graduated from the fog. One patch of fog remains.",
         "tickets": [
           {
-            "id": "cal",
+            "id": "exports",
             "type": "task",
             "status": "settled",
-            "title": "Collect each choir's calendar",
-            "answer": "All three choirs use Thursday and Saturday evenings. Two already book the same hall."
+            "title": "Collect the export format from every instrument",
+            "answer": "Instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has no usable export."
           },
           {
-            "id": "add",
+            "id": "first",
             "type": "grilling",
             "status": "settled",
-            "title": "Who may add a concert to the shared calendar?",
-            "answer": "Any choir chair may add one. A second chair must confirm."
+            "title": "Which assays move first?",
+            "answer": "Unregulated assays on instruments A and B. Regulated studies and instrument C wait."
           },
           {
-            "id": "fees",
+            "id": "research",
             "type": "research",
             "status": "settled",
-            "title": "How do other festivals split hall hire?",
-            "answer": "Most split hall hire evenly and let each choir keep its own ticket money."
+            "title": "How do comparable labs version protocols and reference runs?",
+            "answer": "Of the sources found, most keep one reference run per protocol version, and several version the plate layout separately."
           },
           {
-            "id": "page",
+            "id": "proto",
             "type": "prototype",
             "status": "settled",
-            "title": "What should the calendar page show?",
-            "blocked_by": [
-              "cal"
-            ],
-            "answer": "A month grid, a hall name on each concert, and no sign-in."
+            "title": "What should a run page show?",
+            "answer": "Run name, protocol version and reference run at the top, the plate overlay, and flagged wells listed beside it."
           },
           {
-            "id": "clash",
+            "id": "retire",
             "type": "grilling",
             "status": "frontier",
-            "title": "How are clashes settled?",
-            "blocked_by": [
-              "add"
-            ]
+            "title": "How are reference runs retired when a protocol changes?"
           },
           {
-            "id": "costs",
+            "id": "layouts",
             "type": "grilling",
             "status": "frontier",
-            "title": "How are shared costs split?",
-            "exposed_by": "fees"
+            "title": "How are plate layouts versioned?",
+            "exposed_by": "research"
           },
           {
-            "id": "mixed",
+            "id": "decimals",
             "type": "grilling",
             "status": "frontier",
-            "title": "How are singers in two choirs counted?",
-            "exposed_by": "cal"
+            "title": "Which decimal and unit conventions apply across sites?",
+            "exposed_by": "exports"
           },
           {
-            "id": "notice",
+            "id": "designate",
+            "type": "grilling",
+            "status": "frontier",
+            "title": "Who may designate a reference run?",
+            "exposed_by": "first"
+          },
+          {
+            "id": "audit",
             "type": "grilling",
             "status": "blocked",
-            "title": "How far ahead is the season published?",
+            "title": "Audit trail for regulated studies",
             "blocked_by": [
-              "clash"
+              "retire"
             ],
-            "exposed_by": "page"
+            "exposed_by": "first"
           }
         ],
         "fog": [
-          "Whether the choirs share a conductor for joint concerts."
+          "Retention of failed runs."
         ]
       }
     ],
@@ -209,7 +208,7 @@
         "After session 1",
         "After session 3"
       ],
-      "caption": "The same invented map at two points. A square is settled, a pill is answerable now, a rounded box is blocked and a diamond is fog. A solid arrow means one question blocks another. A dashed arrow means an answer exposed a new question."
+      "caption": "The same map at two points. A square is settled, a pill is answerable now, a rounded box is blocked and a diamond is fog. A solid arrow means one question blocks another or feeds it. A dashed arrow means an answer exposed a new question. The Run comparison v1 specification is an input, not a ticket."
     }
   },
   "compare": {
@@ -218,18 +217,18 @@
     "rows": [
       {
         "aspect": "What a node is",
-        "decision_map": "A question to answer. Grilling, research, prototype or a task that unblocks one.",
-        "build_graph": "A slice of working software that does something end to end."
+        "decision_map": "A question to answer, such as who may designate a reference run. Grilling, research, prototype, or a task that unblocks one.",
+        "build_graph": "A slice of working software that does something end to end, such as importing an instrument A export."
       },
       {
         "aspect": "How it is drawn",
         "decision_map": "Found as you go. Answers expose new questions, so the graph is partial and grows.",
-        "build_graph": "Fully drafted up front and approved before work starts."
+        "build_graph": "Drafted in full before work starts and approved."
       },
       {
         "aspect": "What a link means",
-        "decision_map": "You cannot ask this well until that is answered.",
-        "build_graph": "This slice needs that one to be built first."
+        "decision_map": "You cannot ask this well until that is answered. Retiring a reference run waits for which assays move first.",
+        "build_graph": "This slice cannot start until that one is built. Comparing with the reference run waits for the imports and normalisation."
       },
       {
         "aspect": "Where it ends",
@@ -239,10 +238,10 @@
       {
         "aspect": "What it shows once finished",
         "decision_map": "That the way is clear. It does not say who builds what, or in what order.",
-        "build_graph": "That each slice was built and checked."
+        "build_graph": "That each slice was built and checked on its own."
       }
     ],
-    "note": "A resolved map does not dictate an execution path. It clears the way. Whether to build, how to slice it and who builds it are separate choices made afterwards. Turning a spec into build slices is the job of to-tickets, and it is a later choice.",
+    "note": "A resolved map leads to to-spec: the specification is written from the decisions on the map. Cutting that specification into build slices is to-tickets, and whether to do it at all is a separate, later choice. The next guide takes that step with Run comparison v1. The reverse also happens: a slice that turns out to hide a question goes back to a map, not to the builder.",
     "plates": {
       "ids": [
         "wf-compare-decisions",
@@ -252,24 +251,24 @@
         "Decision map",
         "Build graph"
       ],
-      "caption": "Both examples are invented. The decision map ends in a spec and has fog the build graph never has. The build graph ends in verified code and every slice is known at the start."
+      "caption": "The decision map ends in a specification and always has fog. The build graph ends in checked code and every slice is known at the start."
     }
   },
   "artifact": {
-    "title": "Specification excerpt (invented)",
+    "title": "Specification excerpt: shared results store",
     "lines": [
-      "Problem. Three choirs book halls separately, and two already want the same Saturday.",
-      "Solution. One shared calendar. Any choir chair may add a concert; a second chair confirms it.",
-      "Decision. Hall hire is split evenly. Each choir keeps its own ticket money. Source: the research ticket.",
-      "Decision. The calendar page is a month grid with the hall named on each concert. No sign-in.",
-      "Open. Clash rule and publication date are not decided, so this excerpt is not final.",
-      "Out of scope. A ticketing website."
+      "Problem. Results from three instruments at two sites live in spreadsheets, and every comparison is rebuilt by hand.",
+      "Solution. One results store. Unregulated assays on instruments A and B move first. Run comparison v1 is its first consumer.",
+      "Decision. Each protocol version has one designated reference run. Source: the Run comparison v1 specification and the research ticket.",
+      "Decision. The run page shows run, protocol version and reference run at the top, the overlay, and flagged wells beside it.",
+      "Open. Reference run retirement, plate layout versioning, decimal and unit conventions, who may designate a reference run, and the audit trail are not decided, so this excerpt is not final.",
+      "Out of scope. Building the store. Instrument C. Retention of failed runs."
     ]
   },
-  "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing remains that needs deciding before the work can start. If the whole job would fit in one session, do not draw a map at all.",
-  "limits": "The example is invented, and so is every answer in it. A map plans; it does not do the work, apart from a task ticket, which is an errand. Questions for you, meaning grilling and prototype tickets, need a person. An agent never answers them for you. One ticket per session, except research. My copy of wayfinder differs from the published one only in when it is offered. The map model is the same. The skill text does not itself name a spec step. Going from a finished map to to-spec is the natural handoff when the destination is a spec.",
+  "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing is left to decide before the work could start. Do not stop because you are tired of the map: remaining tickets are the plan.",
+  "limits": "One ticket per session is a deliberate rule, so a map is slow by design. Research can run in parallel, but a question that needs you cannot be delegated. A map settles decisions only. It does not show the store can be built or that the decisions are right.",
   "next": {
-    "label": "The requirements are settled and you need them built?",
+    "label": "A specification is settled and ready to build?",
     "guide": "spec-to-build"
   }
 }

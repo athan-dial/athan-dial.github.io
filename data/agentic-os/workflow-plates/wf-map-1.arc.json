@@ -1,7 +1,7 @@
 {
   "id": "wf-map-1",
   "figure": {
-    "title": "Choir season map, after session 1",
+    "title": "Results store map, after session 1",
     "code": "Fig W1"
   },
   "layout": {
@@ -9,37 +9,44 @@
     "height": 792
   },
   "nodes": {
-    "cal": {
+    "exports": {
       "x": 40,
       "y": 70,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "add": {
+    "first": {
       "x": 40,
       "y": 320,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "fees": {
+    "research": {
       "x": 40,
       "y": 570,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "page": {
+    "proto": {
       "x": 380,
       "y": 70,
       "size": "m",
       "width": 232,
       "height": 112
     },
-    "clash": {
+    "retire": {
       "x": 380,
       "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "input": {
+      "x": 380,
+      "y": 570,
       "size": "m",
       "width": 232,
       "height": 112
@@ -60,48 +67,56 @@
     }
   },
   "nodeData": {
-    "cal": {
-      "name": "Collect each choir's calendar",
+    "exports": {
+      "name": "Collect every instrument's export format",
       "color": "zinc",
       "icon": "Hammer",
       "shape": "square",
       "subtitle": "Settled \u00b7 task",
-      "description": "Done in session 1. All three choirs rehearse Thursday and Saturday evenings; two already book the same hall."
+      "description": "Done in session 1. Instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has no usable export."
     },
-    "add": {
-      "name": "Who may add a concert?",
+    "first": {
+      "name": "Which assays move first?",
       "color": "amber",
       "icon": "Scale",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 grilling",
       "description": "A question for you, one session. Nothing blocks it."
     },
-    "fees": {
-      "name": "How do other festivals split hall hire?",
+    "research": {
+      "name": "How do labs version protocols?",
       "color": "amber",
       "icon": "Search",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 research",
       "description": "An agent can run this alone and report findings."
     },
-    "page": {
-      "name": "What should the calendar page show?",
+    "proto": {
+      "name": "What should a run page show?",
       "color": "amber",
       "icon": "Lightbulb",
       "shape": "pill",
       "subtitle": "Answerable now \u00b7 prototype",
-      "description": "Was waiting for the calendars. Now answerable."
+      "description": "A rough page to react to. Nothing blocks it."
     },
-    "clash": {
-      "name": "How are clashes settled?",
+    "retire": {
+      "name": "How are reference runs retired?",
       "color": "blue",
       "icon": "Scale",
       "shape": "rounded",
       "subtitle": "Blocked \u00b7 grilling",
-      "description": "Cannot be asked well until we know who may add a concert."
+      "description": "Cannot be asked well until we know which assays move first."
+    },
+    "input": {
+      "name": "Run comparison v1 spec",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "Settled input \u00b7 not a ticket",
+      "description": "The specification from the first guide. Its decisions, such as one designated reference run per protocol version and CSV only, are taken as given and are not reopened on this map."
     },
     "fog1": {
-      "name": "Singers in two choirs",
+      "name": "Retention of failed runs",
       "color": "blue",
       "icon": "FileStack",
       "shape": "diamond",
@@ -109,7 +124,7 @@
       "description": "Sensed, but not yet a sharp question."
     },
     "fog2": {
-      "name": "Who pays the piano tuner",
+      "name": "Regulated-study audit trail",
       "color": "blue",
       "icon": "FileStack",
       "shape": "diamond",
@@ -132,22 +147,22 @@
   "connectors": [
     {
       "id": "e0",
-      "from": "cal",
-      "to": "page",
-      "fromAnchor": "right",
-      "toAnchor": "left",
-      "style": "normal",
-      "label": "Unblocked",
-      "curve": "direct"
-    },
-    {
-      "id": "e1",
-      "from": "add",
-      "to": "clash",
+      "from": "first",
+      "to": "retire",
       "fromAnchor": "right",
       "toAnchor": "left",
       "style": "decision",
       "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "input",
+      "to": "retire",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "normal",
+      "label": "Input to",
       "curve": "direct"
     }
   ],
