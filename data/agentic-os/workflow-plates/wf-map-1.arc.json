@@ -1,0 +1,185 @@
+{
+  "id": "wf-map-1",
+  "figure": {
+    "title": "Results store map, after session 1",
+    "code": "Fig W1"
+  },
+  "layout": {
+    "width": 1112,
+    "height": 792
+  },
+  "nodes": {
+    "exports": {
+      "x": 40,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "first": {
+      "x": 40,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "research": {
+      "x": 40,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "proto": {
+      "x": 380,
+      "y": 70,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "retire": {
+      "x": 380,
+      "y": 320,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "input": {
+      "x": 380,
+      "y": 570,
+      "size": "m",
+      "width": 232,
+      "height": 112
+    },
+    "fog1": {
+      "x": 710,
+      "y": 38,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    },
+    "fog2": {
+      "x": 710,
+      "y": 288,
+      "size": "m",
+      "width": 252,
+      "height": 176
+    }
+  },
+  "nodeData": {
+    "exports": {
+      "name": "Collect every instrument's export format",
+      "color": "zinc",
+      "icon": "Hammer",
+      "shape": "square",
+      "subtitle": "Settled \u00b7 task",
+      "description": "Done in session 1. Instruments A and B export CSV with different column layouts, some site 2 files use a decimal comma, and instrument C has no usable export."
+    },
+    "first": {
+      "name": "Which assays move first?",
+      "color": "amber",
+      "icon": "Scale",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 grilling",
+      "description": "A question for you, one session. Nothing blocks it."
+    },
+    "research": {
+      "name": "How do labs version protocols?",
+      "color": "amber",
+      "icon": "Search",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 research",
+      "description": "An agent can run this alone and report findings."
+    },
+    "proto": {
+      "name": "What should a run page show?",
+      "color": "amber",
+      "icon": "Lightbulb",
+      "shape": "pill",
+      "subtitle": "Answerable now \u00b7 prototype",
+      "description": "A rough page to react to. Nothing blocks it."
+    },
+    "retire": {
+      "name": "How are reference runs retired?",
+      "color": "blue",
+      "icon": "Scale",
+      "shape": "rounded",
+      "subtitle": "Blocked \u00b7 grilling",
+      "description": "Cannot be asked well until we know which assays move first."
+    },
+    "input": {
+      "name": "Run comparison v1 spec",
+      "color": "zinc",
+      "icon": "ScrollText",
+      "shape": "square",
+      "subtitle": "Settled input \u00b7 not a ticket",
+      "description": "The specification from the first guide. Its decisions, such as one designated reference run per protocol version and CSV only, are taken as given and are not reopened on this map."
+    },
+    "fog1": {
+      "name": "Retention of failed runs",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    },
+    "fog2": {
+      "name": "Regulated-study audit trail",
+      "color": "blue",
+      "icon": "FileStack",
+      "shape": "diamond",
+      "subtitle": "Fog \u00b7 not yet a question",
+      "description": "Sensed, but not yet a sharp question."
+    }
+  },
+  "connectorStyles": {
+    "normal": {
+      "color": "zinc",
+      "strokeWidth": 1.7,
+      "toArrow": "arrow"
+    },
+    "decision": {
+      "color": "amber",
+      "strokeWidth": 1.9,
+      "toArrow": "arrow"
+    }
+  },
+  "connectors": [
+    {
+      "id": "e0",
+      "from": "first",
+      "to": "retire",
+      "fromAnchor": "right",
+      "toAnchor": "left",
+      "style": "decision",
+      "label": "Blocks",
+      "curve": "direct"
+    },
+    {
+      "id": "e1",
+      "from": "input",
+      "to": "retire",
+      "fromAnchor": "top",
+      "toAnchor": "bottom",
+      "style": "normal",
+      "label": "Input to",
+      "curve": "direct"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g0",
+      "type": "rect",
+      "label": "Not yet specified",
+      "x": 694,
+      "y": 6,
+      "width": 284,
+      "height": 472,
+      "color": "zinc"
+    }
+  ],
+  "_meta": {
+    "viewMode": "2d",
+    "colorMode": "light"
+  }
+}
