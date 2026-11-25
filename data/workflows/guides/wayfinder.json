@@ -266,5 +266,9 @@
     ]
   },
   "stop": "You are done charting when the destination is named and the first tickets exist. You are done working when no tickets remain and nothing is left to decide before the work could start. Do not stop because you are tired of the map: remaining tickets are the plan.",
-  "limits": "One ticket per session is a deliberate rule, so a map is slow by design. Research can run in parallel, but a question that needs you cannot be delegated. A map settles decisions only. It does not show the store can be built or that the decisions are right."
+  "limits": "One ticket per session is a deliberate rule, so a map is slow by design. Research can run in parallel, but a question that needs you cannot be delegated. A map settles decisions only. It does not show the store can be built or that the decisions are right.",
+  "next": {
+    "label": "A specification is settled and ready to build?",
+    "guide": "spec-to-build"
+  }
 }

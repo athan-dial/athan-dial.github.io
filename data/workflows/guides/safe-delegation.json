@@ -1,0 +1,169 @@
+{
+  "id": "safe-delegation",
+  "title": "Handing real work to an agent without handing over the keys",
+  "lead": "Use it when you want an agent to build a well-defined change and you need to say afterwards what it was allowed to do and what shows it did it.",
+  "produces": "A contract with checkable requirements, a readiness decision on it, a build done in isolation with evidence recorded per requirement, and a result a person accepts or rejects.",
+  "scenario": "Run comparison v1 flags wells outside a single default tolerance. The data team lists per-assay tolerance overrides, which the spec left out of scope, and wants an agent to build them.",
+  "input": "Make tolerance configurable per assay in the comparison module. Run it as delegated work: contract first, build on its own copy, and nothing merged without me.",
+  "steps": [
+    {
+      "actor": "human",
+      "label": "Hand over the task and the limits",
+      "text": "You say what you want and what is off limits. Here the agent may change the comparison module and its config, nothing else, and it merges nothing. The limits go into the contract as requirements, so they get checked like everything else."
+    },
+    {
+      "actor": "skill",
+      "label": "Shape a contract",
+      "text": "One pass turns the request into requirements with stable ids and an acceptance check beside each. Evidence is attached to an id later, so an id with nothing attached shows up as a gap. This is a role, not a published skill."
+    },
+    {
+      "actor": "artifact",
+      "label": "The contract",
+      "text": "Three requirements, each with a check a person or a script can run. The excerpt below is the whole contract for this task."
+    },
+    {
+      "actor": "skill",
+      "label": "Certify readiness in a separate pass",
+      "text": "A different pass reads the contract cold and lints it. It comes back ready, needs repair or blocked. The pass that wrote the contract never certifies it, because the author already knows what it meant. The certification is tied to the exact text it read, so an edit to the contract means certifying again. The first result here is needs repair: R3 says overrides must be sensible and has no check. The author adds a range and a check, and the lint runs again on the new wording."
+    },
+    {
+      "actor": "skill",
+      "label": "Promote to ready",
+      "text": "Marking the work ready to build is a decision with its own gates. An agent may promote work to ready only when explicit policy gates pass, which can include a person's instruction. Here the gates are a current certification and your instruction to delegate this task."
+    },
+    {
+      "actor": "skill",
+      "label": "Pick it up with a fixed check",
+      "text": "When a builder is about to start, a fixed rule with no judgment re-checks the basics: the work is still marked ready (a material edit to the contract removes that mark), nothing it depends on is unfinished and attempts remain. This check is separate from promotion, so a contract edited after promotion is caught here."
+    },
+    {
+      "actor": "skill",
+      "label": "Build in isolation",
+      "text": "A builder works in its own copy of the project, so a mistake cannot reach the main line. It records evidence against each requirement id as it goes: the test it wrote, the command it ran, what it saw."
+    },
+    {
+      "actor": "skill",
+      "skill": "code-review",
+      "label": "Review it independently",
+      "text": "A reviewer who did not build the work reads the diff on two axes, reported separately: does it follow the project's standards, and does it match the spec. The reviewer works from the contract, not from the builder's account of it."
+    },
+    {
+      "actor": "skill",
+      "label": "Verify the evidence against the contract",
+      "text": "Each requirement is checked against the evidence recorded for its id. R1 has a diff touching two allowed files. R3 has nothing recorded yet. R2, the rule that a well exactly at tolerance is not flagged, has no evidence. Missing counts as unmet, so the result is not all met. Once every requirement is met and the independent review is in, an agent may move the work to review. It cannot mark it finished, merge it or publish it."
+    },
+    {
+      "actor": "artifact",
+      "label": "Branch one: missing evidence",
+      "text": "The work goes back for another attempt, with R2 named as the gap. A fresh attempt adds the boundary test and the work is verified again. Attempts are limited to a small fixed number. After a few failed attempts the work stops being picked up and waits for a person to look, so an agent that cannot satisfy a requirement cannot keep trying."
+    },
+    {
+      "actor": "skill",
+      "label": "Branch two: the contract contradicts itself",
+      "text": "The boundary test passes. The builder then reports that R3 cannot be met inside R1. Checking an override against the allowed range needs the range stored in the shared assay settings schema, and that file is outside the two files R1 allows. More building will not fix a contract that asks for two incompatible things, so the work stops and goes to a person."
+    },
+    {
+      "actor": "human",
+      "label": "A person rules",
+      "text": "You decide: widen R1 to name that one schema file, move the range check somewhere R1 already allows, or drop R3. Say you widen R1. The contract is amended, the readiness lint runs again on the new wording, and the work is promoted and picked up again. The agent does not get to settle the contradiction by picking the reading it prefers."
+    },
+    {
+      "actor": "human",
+      "label": "Accept or reject the result",
+      "text": "With all three requirements met, you read the evidence. Then you accept the work, merge it and publish it, or you do not. Agents take none of those three actions in this pattern."
+    },
+    {
+      "actor": "open",
+      "label": "The attempt limit",
+      "text": "Nobody has decided whether the number of attempts is right. It is a design choice for this task, and a riskier change might wait for a person after the first miss. The example also leaves open how the person finds out the work is waiting."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "Shaping, certifying, promoting, building, reviewing and verifying are separate steps with separate owners.",
+      "A requirement with no evidence counts as unmet.",
+      "R1 is widened by a person to name the schema file. R2 and R3 stay as written."
+    ],
+    "open": [
+      "Whether the attempt limit suits a riskier change.",
+      "Whether one 5% to 30% range suits every assay."
+    ]
+  },
+  "build": {
+    "title": "The gates and what blocks each one",
+    "lead": "Each step waits for the one before it and has its own check. Readiness, execution and the final decision are separate groups in the diagram, because a pass in one never stands in for a pass in the next.",
+    "plates": {
+      "ids": [
+        "wf-delegation-gates"
+      ],
+      "labels": [
+        "Gates and loops"
+      ],
+      "caption": "Diamonds are yes or no decisions. Citrus pills are people. Dashed lines go back: repair before readiness, another attempt at the build step, and an amended contract after a person rules."
+    },
+    "slices": [
+      {
+        "id": "shape",
+        "title": "Shape the contract",
+        "verify": "a separate pass lints it for stable ids and an acceptance check on every requirement"
+      },
+      {
+        "id": "certify",
+        "title": "Certify readiness",
+        "blocked_by": [
+          "shape"
+        ],
+        "verify": "the certification is tied to the exact text it read, and any edit to the contract means certifying again"
+      },
+      {
+        "id": "admit",
+        "title": "Promote and pick up",
+        "blocked_by": [
+          "certify"
+        ],
+        "verify": "promotion needs a current certification and explicit policy gates; pickup is a fixed rule with no agent judgment"
+      },
+      {
+        "id": "build",
+        "title": "Build in isolation",
+        "blocked_by": [
+          "admit"
+        ],
+        "verify": "an independent reviewer reads the diff against the standards and the spec"
+      },
+      {
+        "id": "verify",
+        "title": "Verify the evidence",
+        "blocked_by": [
+          "build"
+        ],
+        "verify": "every requirement id has recorded evidence, and a missing one counts as unmet"
+      },
+      {
+        "id": "authorize",
+        "title": "A person accepts, merges and publishes",
+        "blocked_by": [
+          "verify"
+        ],
+        "verify": "a person reads the evidence report, and no agent performs this step"
+      }
+    ],
+    "parallel": "Each slice waits for the one before it. A larger contract could be split so several builders work at once, with verification and the final decision still after all of them."
+  },
+  "artifact": {
+    "title": "Contract excerpt and readiness decision",
+    "lines": [
+      "R1. Change only the comparison module and its config file. Check: the diff touches no other file.",
+      "R2. A well exactly at tolerance is not flagged. Check: a test with a well at exactly 15% from the reference value.",
+      "R3. Per-assay overrides must lie between 5% and 30%. An out-of-range override is rejected when config loads. Check: tests at 4%, 5%, 30% and 31%.",
+      "Readiness. Needs repair on the first pass: R3 said overrides must be sensible, with no check. Repaired, linted again, ready for this wording.",
+      "Promoted and picked up. Certified for this wording, and the explicit gates pass, including your instruction. An agent may mark it ready to build. It cannot mark it finished, merge it or publish it."
+    ]
+  },
+  "stop": "You are done when every requirement has recorded evidence, or a person has amended the contract to change what could not be met, and you have read the evidence and decided. An agent saying it finished is not the stop. Stop earlier if the contract contradicts itself or the attempts run out.",
+  "limits": "Independent review and evidence checks lower the chance of a bad merge and do not remove it. A contract can pass every check and still describe the wrong change. The number of attempts is a design choice, and the right number depends on the risk of the work.",
+  "next": {
+    "label": "Want to see how a specification becomes slices for this kind of build?",
+    "guide": "spec-to-build"
+  }
+}

@@ -51,6 +51,14 @@
       "customized": false
     },
     {
+      "id": "to-tickets",
+      "name": "to-tickets",
+      "job": "Break a specification into thin end-to-end slices, each stating what blocks it.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/to-tickets/SKILL.md",
+      "customized": false
+    },
+    {
       "id": "wayfinder",
       "name": "wayfinder",
       "job": "Plan work too big for one session as a map of decision tickets, resolved one at a time.",
@@ -58,6 +66,48 @@
       "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/wayfinder/SKILL.md",
       "customized": true,
       "difference": "Same map model. My copy lets the model start it itself and predates several upstream additions, such as fresh-context research agents and the rule that map tickets carry only Wayfinder labels."
+    },
+    {
+      "id": "implement-spec",
+      "name": "implement-spec",
+      "job": "Build a whole specification and its tickets on one integration branch with parallel subagents.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/implement-spec/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "implement",
+      "name": "implement",
+      "job": "Build a piece of work from a spec or ticket in one session, test-first where possible, then review.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/implement/SKILL.md",
+      "customized": false
+    },
+    {
+      "id": "tdd",
+      "name": "tdd",
+      "job": "Red, then green, one test at a time at agreed seams. Refactoring waits for review.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/tdd/SKILL.md",
+      "customized": true,
+      "difference": "Same loop. I reuse test seams already agreed in the plan and ask again only when a new seam would change what the code promises."
+    },
+    {
+      "id": "code-review",
+      "name": "code-review",
+      "job": "Review a change on two separate axes: repository standards and fidelity to the spec.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/code-review/SKILL.md",
+      "customized": true,
+      "difference": "Same two axes. Mine drops the tracker prerequisite, adds an optional browser-walkthrough evidence mode, and predates upstream's instruction to start each review sub-agent fresh."
+    },
+    {
+      "id": "diagnosing-bugs",
+      "name": "diagnosing-bugs",
+      "job": "Build a fast, repeatable failing signal first, then test ranked hypotheses.",
+      "source_kind": "upstream",
+      "url": "https://github.com/mattpocock/skills/blob/d65391149dbb5fe76478e76fa8d5122b2aa5a70e/skills/engineering/diagnosing-bugs/SKILL.md",
+      "customized": false
     },
     {
       "id": "prototype",
@@ -98,6 +148,47 @@
         "thinking",
         "authorization"
       ]
+    },
+    {
+      "id": "spec-to-build",
+      "priority": 2,
+      "task": "The requirements are settled and I need them built",
+      "skills": [
+        "to-tickets",
+        "implement-spec",
+        "implement",
+        "tdd",
+        "code-review"
+      ],
+      "views": [
+        "making",
+        "governed"
+      ]
+    },
+    {
+      "id": "hard-bug",
+      "priority": 2,
+      "task": "Something is broken and I cannot reproduce it reliably",
+      "skills": [
+        "diagnosing-bugs",
+        "tdd"
+      ],
+      "views": [
+        "making"
+      ]
+    },
+    {
+      "id": "safe-delegation",
+      "priority": 2,
+      "task": "I want an agent to do real work without handing it the keys",
+      "skills": [
+        "code-review"
+      ],
+      "views": [
+        "governed",
+        "authorization"
+      ],
+      "source_status": "The shape, certify, pick up, build, review and verify roles are private and unpublished. This guide is an original explanation; it links no instruction text."
     }
   ],
   "intro": {

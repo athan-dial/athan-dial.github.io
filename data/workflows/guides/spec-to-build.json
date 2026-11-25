@@ -1,0 +1,153 @@
+{
+  "id": "spec-to-build",
+  "title": "From a settled specification to reviewed code",
+  "lead": "You have a specification whose questions are answered, and what is left is work.",
+  "produces": "One branch with every slice built and checked on its own (an integration branch if you chose the whole graph), plus a two-part review you can read before you decide to merge.",
+  "scenario": "Your team builds Run comparison v1 from the specification written in the first guide: a small web app that imports instrument exports and shows where a run departs from its reference run. Every ticket here is a slice of work. A ticket that asks a question belongs on a decision map.",
+  "input": "The Run comparison v1 spec is settled. Break it into tickets and get it built.",
+  "steps": [
+    {
+      "actor": "skill",
+      "skill": "to-tickets",
+      "label": "Cut the specification into thin slices",
+      "text": "Each slice goes through every layer a little: an import, a store and a page, not all the importers first and all the pages last. Each one states what blocks it and how you would check it alone. The draft has five slices: import instrument A's export, import instrument B's, normalise to % of control, compare with the reference run, and flag wells outside tolerance."
+    },
+    {
+      "actor": "human",
+      "label": "Approve the breakdown",
+      "text": "Nothing is published until you approve the granularity and the blocking edges. In the draft, normalising waited for the instrument B import. You point out that it only needs one instrument's wells, so it now waits for the instrument A import alone. That one edge lets two slices run side by side. You also decline a sixth slice for instrument C and leave it out of scope."
+    },
+    {
+      "actor": "human",
+      "label": "Choose how to build",
+      "text": "There are two ways to build, and they are different choices. My rule of thumb: One ticket at a time keeps you in every session and suits a chain of dependent slices or a spec you do not yet trust. The whole graph at once suits a settled spec with slices that can run together. Here two slices can run together after the first, but you want to watch the first import land before trusting the rest. Both ways are described next."
+    },
+    {
+      "actor": "skill",
+      "skill": "implement",
+      "label": "Choice A: one ticket, one session",
+      "text": "The session reads the slice, says its title back and builds only that. It writes the check first, makes it pass, runs the whole test suite once at the end and then reviews the result. For the first slice it commits to your current branch. For the next one you start another session. Nothing runs in parallel, and you see every slice finish."
+    },
+    {
+      "actor": "skill",
+      "skill": "implement-spec",
+      "label": "Choice B: the whole graph on one branch",
+      "text": "A fresh subagent takes each slice in its own working copy, and a merger folds finished slices onto one integration branch. The first slice goes alone because nothing else is free. When it merges, the normalise slice and the instrument B import start together. Comparing waits for both, and flagging waits for comparing. A review pass and one fixer run at the end, and if a draft pull request exists it is marked ready for review; otherwise the branch is reported. It stops there. Merging is yours."
+    },
+    {
+      "actor": "skill",
+      "skill": "tdd",
+      "label": "Inside every slice, check first",
+      "text": "Whichever way you chose, each slice builds test-first where possible. The first slice starts with a test that imports a fixture export and counts the wells shown. It fails because nothing imports yet. Then comes the smallest code that passes, then the next behaviour. The test sits at the module's public interface, so it survives a rewrite of what is behind it."
+    },
+    {
+      "actor": "skill",
+      "skill": "tdd",
+      "label": "Failure branch: a slice fails its check at the boundary",
+      "text": "The flagging slice has a check with a well exactly at the limit: reference 80% of control, tolerance 15% of that, so the limit is 92. The first version flags a well at 92, because the comparison reads \"at or beyond the limit\". The check fails, as it should. The builder changes the comparison to \"beyond\" and the check passes. The fix stays inside the slice because the spec was clear about the limit."
+    },
+    {
+      "actor": "skill",
+      "skill": "code-review",
+      "label": "Review on two separate axes",
+      "text": "Two reviewers look at everything since the integration branch left the main line, and their reports stay apart. Standards asks whether the code follows the repository's written conventions plus a fixed list of common code smells treated as judgement calls. Spec asks whether it does what the specification says. A change can pass one and fail the other, so a single blended score would hide the problem."
+    },
+    {
+      "actor": "human",
+      "label": "Failure branch: the spec itself is ambiguous",
+      "text": "The Spec reviewer reports that \"15% of the reference value\" can be read two ways. The reference value is already a percentage of control, so 15% of 80 is 12 points, while 15 percentage points of control would be 15. The code follows the first reading. The reviewer cannot say which was meant. This is not a defect for the builder to fix by guessing. It goes to a person as a decision. You ask the assay lead, record the answer in the spec and then fix or confirm the code."
+    },
+    {
+      "actor": "artifact",
+      "label": "The reviewed branch",
+      "text": "One integration branch with five slices on it, each with a passing check, and a two-part review someone else can read. It is a candidate for merge, not a merged change."
+    },
+    {
+      "actor": "open",
+      "label": "Anything that turns out to be a question",
+      "text": "Per-assay tolerance is out of scope. If a slice cannot be checked because a question is unanswered, it is a decision, not work. Answer it first; a decision map is one way to do that."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "Five slices and the edges between them.",
+      "Normalising needs the instrument A import only.",
+      "Instrument C stays out of scope.",
+      "A well exactly at tolerance is not flagged."
+    ],
+    "open": [
+      "Whether \"15% of the reference value\" means 12 points or 15 points when the reference is 80% of control. A person decides."
+    ]
+  },
+  "build": {
+    "title": "The slices and what blocks them",
+    "lead": "Every slice is work with its own check. Read the edges as cannot start until. A slice with no blocker can start now.",
+    "plates": {
+      "ids": [
+        "wf-build-slices"
+      ],
+      "labels": [
+        "Blocking edges"
+      ],
+      "caption": "Five slices of Run comparison v1. An arrow means the slice at its tail must finish before the slice at its head can start."
+    },
+    "slices": [
+      {
+        "id": "S1",
+        "title": "Import instrument A export and show raw wells",
+        "blocked_by": [],
+        "verify": "a test imports a fixture export of one plate and checks that every well's raw value shows, and that a plate the instrument flagged as failed QC is skipped."
+      },
+      {
+        "id": "S2",
+        "title": "Import instrument B export",
+        "blocked_by": [
+          "S1"
+        ],
+        "verify": "a test imports a fixture export from instrument B and checks that it gives the same well table as the matching instrument A fixture."
+      },
+      {
+        "id": "S3",
+        "title": "Normalise to % of control",
+        "blocked_by": [
+          "S1"
+        ],
+        "verify": "a test with a plate whose control wells average 200 checks that a well reading 150 shows as 75% of control."
+      },
+      {
+        "id": "S4",
+        "title": "Compare with the reference run",
+        "blocked_by": [
+          "S2",
+          "S3"
+        ],
+        "verify": "a test overlays one fixture run on a fixture reference run for the same protocol version and checks each well's difference, and checks that a run for a different protocol version is refused."
+      },
+      {
+        "id": "S5",
+        "title": "Flag wells outside tolerance",
+        "blocked_by": [
+          "S4"
+        ],
+        "verify": "a test with a reference well at 80% of control and 15% tolerance checks that a well at 92 is not flagged and a well at 93 is."
+      }
+    ],
+    "parallel": "Only S1 can start now. After it, S2 and S3 can run side by side. S4 waits for both, and S5 waits for S4, so nothing runs in parallel after S4. The edges are the plan: extra agents do not shorten a chain."
+  },
+  "artifact": {
+    "title": "Review summary: Run comparison v1 branch",
+    "lines": [
+      "Branch: run-comparison-v1, five slices merged onto it, all five checks passing.",
+      "Standards: one finding. Normalisation is written out in two files; the repository's conventions ask for the shared helper.",
+      "Spec: one finding. \"15% of the reference value\" is ambiguous when the reference is itself a percentage of control. The code uses 12 points at a reference of 80. Referred to the assay lead.",
+      "Counts: Standards 1, Spec 1. Neither report was folded into the other.",
+      "Status: ready for a person to read. Not merged."
+    ]
+  },
+  "stop": "You are done when every slice's check passes on the integration branch, both reviews exist and every finding is fixed, recorded or sent to a person, and you have read them. Merging is not part of this. If a slice cannot be checked on its own, it is hiding a question: re-cut it, or answer the question first.",
+  "limits": "Slices come from the spec, so a wrong spec gives five tidy slices of the wrong thing. Parallel agents cost more than one and cannot fix a bad edge. Two slices can run together only where the edges allow it.",
+  "next": {
+    "label": "Something broke and you cannot make it happen again?",
+    "guide": "hard-bug"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "hard-bug",
+  "title": "Finding a bug you cannot make happen",
+  "lead": "Use it when something is wrong in data you cannot see failing on your own machine, and you do not yet know why.",
+  "produces": "A command that fails on demand, a cause that survived a test meant to disprove it, a fix, and a regression test that failed before the fix and passes after it.",
+  "scenario": "Assay Compare imports instrument B exports from two sites. The assay lead at site 2 says the control wells on some plates look about ten times too high, and plates from site 1 look fine.",
+  "input": "Site 2's control wells look about ten times too high on some plates, and I cannot reproduce it with site 1 data. Diagnose this.",
+  "steps": [
+    {
+      "actor": "human",
+      "label": "Check that this is the hard kind",
+      "text": "Ask one thing first: can you make it fail right now? In my experience a crash with a stack trace, a typo or a test someone already wrote does not need this loop. Write a failing test, fix it and move on. Here you cannot see the fault in your own data, so the loop applies."
+    },
+    {
+      "actor": "skill",
+      "skill": "diagnosing-bugs",
+      "label": "Build a signal that fails on demand",
+      "text": "Before any theory, get one command that fails every time. The affected plates all come from site 2, so you take two small exports, one per site, and write a check that parses each and compares the control well with the value you expect. The check exits with an error on the site 2 file. The output shown below is what such a check prints, illustrated on two invented three-line exports."
+    },
+    {
+      "actor": "skill",
+      "skill": "diagnosing-bugs",
+      "label": "Shrink it to the smallest failure",
+      "text": "Cut everything the failure does not need: the database, the overlay, the reference run. What is left is two files and a parser. The site 1 export writes 1.2 and the site 2 export writes 1,2, with semicolons between columns. The parser reads the first as 1.2 and the second as 12."
+    },
+    {
+      "actor": "skill",
+      "skill": "diagnosing-bugs",
+      "label": "Rank four guesses you can disprove",
+      "text": "Each guess gets a prediction and a test that would kill it. One: the parser treats the comma as a thousands separator. Two: site 2 has a different plate layout, so the wrong wells count as controls. Three: the instrument at site 2 really reports larger numbers. Four: normalisation divides by another plate's controls. Order them by how likely each is and how cheap it is to test."
+    },
+    {
+      "actor": "human",
+      "label": "Review the list before anything runs",
+      "text": "You may know what the list cannot. Here the assay lead mentions that only plates exported since site 2 changed its instrument's regional setting are wrong. That strengthens guess one and weakens the other three before a test runs. You can also add a guess. The skill shows you the ranked list before it tests anything, but it does not wait if you are away, so look early."
+    },
+    {
+      "actor": "skill",
+      "skill": "diagnosing-bugs",
+      "label": "Test the guesses, one change at a time",
+      "text": "Each test changes one thing. Open the raw site 2 export: the control is 1,2, the same size as site 1's 1.2, so guess three dies. The error is exactly a factor of ten on every affected plate, not an uneven one, so guesses two and four die. Switch off only the thousands-separator setting in the parser and the site 2 control reads 1.2. Guess one holds, and a plate in the old format from site 2 still parses correctly, which it also predicted."
+    },
+    {
+      "actor": "skill",
+      "skill": "tdd",
+      "label": "Fix it with a test that fails first",
+      "text": "The failing case becomes the regression test: a site 2 export with a comma decimal must give a control of 1.2. Watch it fail for the right reason, then make the parser read the comma as the decimal mark when the delimiter is a semicolon, and watch it pass. If there is no correct place to put the test, that missing seam is itself a finding. Add a test for a value with a comma and two decimals, since 1,25 would have read as 125 and been a hundred times too high."
+    },
+    {
+      "actor": "artifact",
+      "label": "The bug note",
+      "text": "Four lines for a later reader: what failed, the command that shows it, the cause and the tests that now guard it."
+    },
+    {
+      "actor": "open",
+      "label": "When no signal can be built",
+      "text": "Suppose site 2 could not send you a single affected export and no stored plate could be read. Then there is nothing honest to test. Stop and ask for one thing: one raw export, the regional setting on the instrument, or permission to log what the parser receives. Do not ship a guess as a fix. Remove anything sensitive from a file before it is shared."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "The parser reads a comma decimal as a thousands separator.",
+      "The raw site 2 exports are correct, and the plate layout and normalisation are not at fault."
+    ],
+    "open": [
+      "Whether other places in the product parse numbers the same way.",
+      "Whether instrument A ever exports a comma decimal."
+    ]
+  },
+  "artifact": {
+    "title": "Bug note",
+    "lines": [
+      "Failed: control wells on some site 2 plates read ten times too high after import.",
+      "Signal: running the check printed something like 'site2_export.csv: control=12 sample=6 ... FAIL expected control 1.2' and exited 1.",
+      "Cause: the parser removed every comma before converting the number, so 1,2 became 12.",
+      "Guard: two tests. A semicolon-delimited export with 1,2 gives 1.2. One with 1,25 gives 1.25."
+    ]
+  },
+  "stop": "You are done when the command that failed now passes, the regression test fails on the old parser and passes on the new one, and the rest of the tests still pass. Stop earlier if you cannot build a failing signal and ask for access or an artifact. A theory you like is not a stopping point.",
+  "limits": "Most bugs need only a failing test and a fix, and this loop is overhead for them. A real fault can have several causes, need data you cannot get, or change when you look at it.",
+  "next": {
+    "label": "Did the fix grow into a feature-sized job?",
+    "guide": "spec-to-build"
+  },
+  "order": "result-first"
+}
