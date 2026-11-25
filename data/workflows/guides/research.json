@@ -1,0 +1,65 @@
+{
+  "id": "research",
+  "title": "Answering a question from several angles at once",
+  "lead": "Use it when you have to understand a question before anyone decides anything, and one search or one agent would give you a single confident essay.",
+  "produces": "One synthesis report that lists what the sources agree on, what they dispute and which questions went unanswered, with a recommendation addressed to a person.",
+  "scenario": "The assay leads disagree about what \"within tolerance\" should mean when a run is compared to its reference run, and the spec for Run comparison v1 only has a 15% default to point at. You need evidence before anyone defends a number.",
+  "input": "What should \"within tolerance\" mean when comparing a run to its reference run?",
+  "order": "result-first",
+  "steps": [
+    {
+      "actor": "human",
+      "label": "Split the question",
+      "text": "You write four narrow questions: what published guidance says about plate quality metrics, how existing analysis tools show run-to-run comparison, what the control wells in the last twelve runs look like, and what is known to go wrong with fixed thresholds. The method accepts up to six."
+    },
+    {
+      "actor": "skill",
+      "skill": "research",
+      "label": "One agent per question",
+      "text": "Each question goes to its own researcher in a fresh context. Every researcher is told to write findings to one named file and stop. Chat return was unreliable and reports went missing, so files are the only return channel."
+    },
+    {
+      "actor": "artifact",
+      "label": "Four files, one empty",
+      "text": "Three files arrive with findings and sources. The guidance agent could not open one standards document and wrote nothing. The check that runs after the agents finish lists that arm as FAILED. It is not dropped from the count and it is not blended into the other three."
+    },
+    {
+      "actor": "skill",
+      "skill": "research",
+      "label": "A different agent writes it up",
+      "text": "A separate synthesizer reads the files. It writes one report that leads with the answer, then lists findings per question with their sources, where the sources conflict and what is unverified, and names any failed arm. The agents that gathered the evidence never write the conclusion."
+    },
+    {
+      "actor": "human",
+      "label": "Resolve the failed arm and decide",
+      "text": "You read the unreachable document yourself and add two lines to the report, marked as read by a person. Then you decide: keep 15% as the default, keep it with a stated reason, or propose a different rule. The report recommends; you choose."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "Two analysis tools show the percentage difference from the reference value, and let the user see the wells behind it.",
+      "A single fixed percentage treats a noisy control well and a stable one alike."
+    ],
+    "open": [
+      "Whether the last twelve runs' control wells justify 15% or a tighter bound.",
+      "What the unreachable standard says, until a person has read it."
+    ]
+  },
+  "artifact": {
+    "title": "Synthesis excerpt",
+    "lines": [
+      "Answer. No single rule is settled by the evidence. A stated default with a recorded reason is defensible.",
+      "Missing. Question 1, published guidance: FAILED, one standards document unreachable. Resolved by a person; see the note at the end.",
+      "Agreement. Both analysis tools report the deviation as a percentage of the reference value and keep the underlying wells visible.",
+      "Dispute. One source argues for a fixed percentage; another says the bound should follow each control well's own spread. The sources do not settle it.",
+      "Gap in the data. Twelve runs is too few to say how much control wells move between sites.",
+      "Recommendation, for a person: keep 15% as a stated default and record the reason. Whether to change it stays with the assay lead."
+    ]
+  },
+  "stop": "Stop when every question is either answered with a source or listed as missing, and the report separates agreement from dispute. In practice, read why an arm failed before you rerun it.",
+  "limits": "Parallel agents find more than one agent does, and they can also pick up the same wrong claim from the same weak source. The method reports a question that failed, not an answer that is wrong, so you still check anything you will act on.",
+  "next": {
+    "label": "You know enough to put the idea on paper?",
+    "guide": "idea-to-spec"
+  }
+}
