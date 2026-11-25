@@ -1,6 +1,7 @@
 ---
 title: "The Agentic Operating System"
 summary: "How I run work with AI agents: what an agent may do alone, what waits for my approval, and how the next task starts from what the last one taught me. Seven views, from a one-minute overview to the mechanics."
+page_lead: "Jobs I give to agents, each with a worked example, what comes out, and the skills behind it. The whole method sits underneath."
 card_summary: "What an agent may do alone, what waits for my approval, and how one task teaches the next."
 system_limits: "It is one person's working method. It is not a product, not a company system, and not evidence of an enterprise deployment."
 layout: atlas
@@ -14,6 +15,8 @@ themes: [agent-enabled-work, governed-execution, product-judgment]
 # features it (work_kind: system) and Home links to it; both are guarded by site.GetPage.
 draft: true
 ---
+
+## The boundary everything hangs on
 
 Most of what an agent does for me is reversible and local: read, search, edit a working copy, run a
 check. Anything that leaves my machine or is hard to undo, such as a message or a pull request, is

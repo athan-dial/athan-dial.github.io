@@ -1,0 +1,5 @@
+{{- /* The result of a guide, shown as the excerpt a reader would actually get. Input: the artifact object. */ -}}
+<figure class="wf-artifact">
+  <figcaption>{{ .title }}</figcaption>
+  <ul class="wf-artifact__lines">{{ range .lines }}<li>{{ . }}</li>{{ end }}</ul>
+</figure>

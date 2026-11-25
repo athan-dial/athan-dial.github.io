@@ -1,0 +1,81 @@
+{
+  "id": "idea-to-spec",
+  "title": "From a rough idea to a specification",
+  "lead": "You have a rough idea that someone else will have to build, and nobody has yet said exactly what it is.",
+  "produces": "A specification a reader who was not in the conversation could build from: the problem, the decisions made, what was left out and what is still open.",
+  "scenario": "A data team supports an assay team that runs plate-reader assays on three instruments across two sites. Assay leads compare each week's runs against a reference run by hand in spreadsheets, and you are the data engineer asked to do something about it.",
+  "input": "Assay leads compare each week's plate-reader runs against a reference run by hand in spreadsheets. I think we should build something. Grill me.",
+  "steps": [
+    {
+      "actor": "skill",
+      "skill": "grill-me",
+      "label": "Size the job",
+      "text": "The interview first says how much process the work needs. A new tool with no existing code to change gets the full path. It then shows a plan of question rounds alongside the first questions, so you can see which later questions depend on which answers. The size can go up during the interview and never down. Upstream's grilling interviews in the same way but has no sizing step and no approval gate.",
+      "public_equivalents": [
+        "grilling"
+      ]
+    },
+    {
+      "actor": "human",
+      "label": "Answer the first round",
+      "text": "Which instruments are in? Which export format? What counts as the reference run? What default tolerance? What happens to a plate the instrument flagged as failed QC? Each question comes with a recommended answer, so agreeing costs one click and disagreeing costs one sentence. You settle on instruments A and B only, CSV exports only, a default tolerance of 15% and failed-QC plates left out."
+    },
+    {
+      "actor": "skill",
+      "skill": "domain-modeling",
+      "label": "Pin the words",
+      "text": "In the room, \"baseline\" means last week's run and also a plate's control wells. The interview fixes three terms in the project glossary: reference run, the run designated as the standard for one protocol version; % of control, a well's signal as a percentage of that plate's control wells; and tolerance, the allowed deviation from the reference run as a percentage of the reference value. One choice is hard to reverse and would surprise a newcomer: the reference run is designated by a person, never inferred as last week's. That choice also gets a short decision record.",
+      "public_equivalents": [
+        "grill-with-docs"
+      ]
+    },
+    {
+      "actor": "human",
+      "label": "Approve the shared understanding",
+      "text": "Nothing is built, published or committed until you say the summary is right. The option you rejected is recorded with its reason: inferring the reference run as last week's would let one bad week become the standard. Per-assay tolerances and instrument C are left out for now, and the summary says so."
+    },
+    {
+      "actor": "skill",
+      "skill": "to-spec",
+      "label": "Write the specification",
+      "text": "The conversation becomes a document, published as a ticket in the project's tracker. Before writing, the skill sketches where tests will sit and asks you to confirm: the importers, which turn an export into wells, and the comparison module, which returns the flagged wells for two runs. It does not interview you again."
+    },
+    {
+      "actor": "artifact",
+      "label": "The specification",
+      "text": "A problem, a solution, numbered user stories, the decisions made, where to test, and a list of what was left out."
+    },
+    {
+      "actor": "open",
+      "label": "Tolerance by assay, and regulated studies",
+      "text": "Nobody has decided whether tolerance should differ between assays, or what an audit of a regulated study would need. Version 1 does not need either, so both stay open, and the specification lists them out of scope until someone needs them."
+    }
+  ],
+  "ledger": {
+    "settled": [
+      "A reference run is designated per protocol version, never inferred.",
+      "Instruments A and B, CSV exports only.",
+      "Plates the instrument flagged as failed QC are excluded.",
+      "Default tolerance is 15% of the reference value."
+    ],
+    "open": [
+      "Whether tolerance should vary by assay.",
+      "What an audit of a regulated study needs."
+    ]
+  },
+  "artifact": {
+    "title": "Specification excerpt: Run comparison v1",
+    "lines": [
+      "Problem. Assay leads compare each week's runs against a reference run by hand in spreadsheets, and each lead does it a little differently.",
+      "Solution. Import exports from instruments A and B, normalise each well to % of control, overlay the run on the reference run for its protocol version, and flag wells outside tolerance. The default tolerance is 15% of the reference value.",
+      "User story 3. As an assay lead, I want wells outside tolerance flagged on the overlay, so that I check those wells first.",
+      "Decision. A reference run is designated per protocol version and never inferred. Rejected: last week's run. A decision record exists for this one.",
+      "Decision. CSV exports only. Plates flagged as failed QC by the instrument are excluded.",
+      "Testing. Two seams: the importers (an export in, wells out) and the comparison module (a run and a reference run in, flagged wells out).",
+      "Out of scope. Instrument C, per-assay tolerance, curve fitting, access control, regulated studies.",
+      "Open. Whether tolerance should differ by assay. What an audit of a regulated study needs."
+    ]
+  },
+  "stop": "You are done when a reader who was not in the conversation can say what will be built, why and what was left out, and you have approved that summary. Do not start building from the interview alone.",
+  "limits": "A specification shows that a plan is clear. It does not show the idea is worth building. The interview also cannot supply facts nobody in the room has, such as how much run-to-run variation the assays really show."
+}

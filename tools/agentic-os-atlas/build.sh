@@ -22,9 +22,19 @@ git -C "$arc" apply "$here/patches/arc-engine.patch"
 cp "$here/patches/arc-package-lock.json" "$arc/package-lock.json"     # locked dependency set
 ( cd "$arc" && PUPPETEER_SKIP_DOWNLOAD=1 npm ci --legacy-peer-deps --no-audit --no-fund && npm run build:lib )
 python3 "$here/build_plates.py"          # regenerates data/agentic-os from the authored spec
+for f in "$here"/workflow_plates/*.py; do [[ -e "$f" ]] && python3 "$f"; done   # small diagrams embedded in guides
 ARC_DIR="$arc" "$arc/node_modules/.bin/vite" build --config "$here/vite.config.mjs"
 if [[ "${1:-}" == "--studio" ]]; then
   ( cd "$arc" && node_modules/.bin/vite build --base /studio/ --outDir "$work/studio-build" --emptyOutDir )
   echo "Studio built. Serve with: python3 $here/studio-serve.py $work/studio-build"
 fi
+python3 - "$here" <<'PY'
+import hashlib, sys
+from pathlib import Path
+here = Path(sys.argv[1]); root = here.parents[1]
+h = hashlib.sha256()
+for p in sorted((root / "data/agentic-os").rglob("*.json")): h.update(p.relative_to(root).as_posix().encode()); h.update(p.read_bytes())
+for p in ("tools/agentic-os-atlas/src/atlas.jsx", "tools/agentic-os-atlas/src/frame.css"): h.update((root / p).read_bytes())
+(here / ".bundle-digest").write_text(h.hexdigest() + "\n")
+PY
 echo "Bundle written to assets/atlas/agentic-os/. Rebuild Hugo to pick it up."
