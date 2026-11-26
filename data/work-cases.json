@@ -1,5 +1,5 @@
 {
-  "_doc": "Work Product catalog. status: candidate > grilled > drafted > rendered > cleared. Private evidence lives in _private/<slug>-review/, never here. Skill: pm:work-product.",
+  "_doc": "Work Product catalog. status: candidate > approved > grilled > drafted > rendered > cleared. Private evidence lives in _private/<slug>-review/, never here. Skill: pm:work-product.",
   "cases": [
     {
       "slug": "talos",
