@@ -18,3 +18,9 @@ and select it with `diagram`. Add a `stages` list for a numbered text walkthroug
 with `decision_anchor` values matching the decision headings. Keep the evidence register in ignored `_private/`.
 Review-only Work links appear with `hugo -D`; publication requires human clearance,
 then `draft: false`, `status: published`, and `visibility: public`.
+
+The generator places provenance descriptions as native editable 15px text nodes because
+OpenFlowKit 0.3.0 fixes icon-card sublabels at 11px. Stage frames and cards use native
+square-corner appearance settings. Return routes are native scene waypoints derived
+from node bounds; the compiler and exporter remain unmodified. The image preserves
+its natural width, with an HTML text walkthrough for narrow screens.

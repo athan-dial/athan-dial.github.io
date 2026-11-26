@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "bbed5694-89ce-4ad0-adb4-b419fe83ea28",
+  "id": "36dc0985-64ba-42f1-a344-194774aa4d64",
   "name": "workflow",
-  "createdAt": "2026-11-26T12:18:38.799Z",
-  "updatedAt": "2026-11-26T12:18:38.799Z",
+  "createdAt": "2026-11-26T12:23:12.157Z",
+  "updatedAt": "2026-11-26T12:23:12.157Z",
   "pages": [
     {
-      "id": "bbed5694-89ce-4ad0-adb4-b419fe83ea28:page-1",
+      "id": "36dc0985-64ba-42f1-a344-194774aa4d64:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -43,7 +43,9 @@
           "content": {
             "label": ""
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -79,12 +81,14 @@
           },
           "size": {
             "width": 263,
-            "height": 590
+            "height": 625
           },
           "content": {
             "label": "01 \u00b7 Collect"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -122,12 +126,14 @@
           },
           "size": {
             "width": 275,
-            "height": 590
+            "height": 625
           },
           "content": {
             "label": "02 \u00b7 Recognize"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -165,12 +171,14 @@
           },
           "size": {
             "width": 297,
-            "height": 590
+            "height": 625
           },
           "content": {
             "label": "03 \u00b7 Resolve and judge"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -208,12 +216,14 @@
           },
           "size": {
             "width": 266,
-            "height": 590
+            "height": 625
           },
           "content": {
             "label": "04 \u00b7 Remember and deliver"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -251,7 +261,7 @@
           },
           "size": {
             "width": 223,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Public sources",
@@ -260,7 +270,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -274,7 +284,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Reports, filings, publications",
             "color": "slate",
             "icon": "tabler/world",
             "archProvider": "tabler",
@@ -283,7 +292,12 @@
             "archIconShapeId": "world",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -328,7 +342,7 @@
           },
           "size": {
             "width": 200,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Discover and ingest",
@@ -337,7 +351,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -351,7 +365,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Source + date retained",
             "color": "slate",
             "icon": "tabler/download",
             "archProvider": "tabler",
@@ -360,7 +373,12 @@
             "archIconShapeId": "download",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -405,7 +423,7 @@
           },
           "size": {
             "width": 235,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Companies and compounds",
@@ -414,7 +432,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -428,7 +446,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Mentions linked to identities",
             "color": "slate",
             "icon": "tabler/building",
             "archProvider": "tabler",
@@ -437,7 +454,12 @@
             "archIconShapeId": "building",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -482,7 +504,7 @@
           },
           "size": {
             "width": 228,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Targets and indications",
@@ -491,7 +513,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -505,7 +527,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Biology + disease context",
             "color": "slate",
             "icon": "tabler/dna",
             "archProvider": "tabler",
@@ -514,7 +535,12 @@
             "archIconShapeId": "dna",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -559,7 +585,7 @@
           },
           "size": {
             "width": 223,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Resolve observations",
@@ -568,7 +594,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -582,7 +608,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "D2 \u00b7 All contributing sources",
             "color": "custom",
             "customColor": "#14543c",
             "colorMode": "filled",
@@ -593,7 +618,12 @@
             "archIconShapeId": "git-merge",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -638,7 +668,7 @@
           },
           "size": {
             "width": 257,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Analyst review",
@@ -647,7 +677,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -661,7 +691,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "D3 \u00b7 Inspect support + uncertainty",
             "color": "custom",
             "customColor": "#e4f17c",
             "colorMode": "filled",
@@ -672,7 +701,12 @@
             "archIconShapeId": "user-check",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -717,7 +751,7 @@
           },
           "size": {
             "width": 150,
-            "height": 88
+            "height": 105
           },
           "content": {
             "label": "Ready to use?",
@@ -726,7 +760,9 @@
           "appearance": {
             "fill": "#e4f17c",
             "stroke": "#e4f17c",
-            "textColor": "#0f172a"
+            "textColor": "#0f172a",
+            "cornerRadius": 0,
+            "fontSize": 15
           },
           "ports": [],
           "metadata": {
@@ -775,17 +811,19 @@
           },
           "size": {
             "width": 188,
-            "height": 66
+            "height": 105
           },
           "content": {
             "label": "Keep unresolved",
-            "shape": "rectangle",
-            "subLabel": "Evidence retained for review"
+            "shape": "rectangle"
           },
           "appearance": {
             "fill": "transparent",
             "stroke": "#313439",
-            "textColor": "#2b2a29"
+            "textColor": "#2b2a29",
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top"
           },
           "ports": [],
           "metadata": {
@@ -830,7 +868,7 @@
           },
           "size": {
             "width": 204,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Program record",
@@ -839,7 +877,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -853,7 +891,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "D1 \u00b7 Evidence accumulates",
             "color": "custom",
             "customColor": "#14543c",
             "colorMode": "filled",
@@ -864,7 +901,12 @@
             "archIconShapeId": "database",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -909,7 +951,7 @@
           },
           "size": {
             "width": 189,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Landscapes",
@@ -918,7 +960,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -932,7 +974,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "D4 \u00b7 Delivery direction",
             "color": "slate",
             "icon": "tabler/layout-grid",
             "archProvider": "tabler",
@@ -941,7 +982,12 @@
             "archIconShapeId": "layout-grid",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -986,7 +1032,7 @@
           },
           "size": {
             "width": 226,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Timelines",
@@ -995,7 +1041,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -1009,7 +1055,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Dated evidence + source links",
             "color": "slate",
             "icon": "tabler/calendar",
             "archProvider": "tabler",
@@ -1018,7 +1063,12 @@
             "archIconShapeId": "calendar",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -1063,7 +1113,7 @@
           },
           "size": {
             "width": 217,
-            "height": 57
+            "height": 105
           },
           "content": {
             "label": "Leadership briefs",
@@ -1072,7 +1122,7 @@
               "horizontal": "center",
               "vertical": "center",
               "iconPlacement": "left",
-              "labelAlignment": "center",
+              "labelAlignment": "start",
               "padding": {
                 "top": 16,
                 "right": 16,
@@ -1086,7 +1136,6 @@
                 "y": 0.5
               }
             },
-            "subLabel": "Claims retain their evidence",
             "color": "slate",
             "icon": "tabler/file-text",
             "archProvider": "tabler",
@@ -1095,7 +1144,12 @@
             "archIconShapeId": "file-text",
             "assetPresentation": "icon"
           },
-          "appearance": {},
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 15,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
           "ports": [],
           "metadata": {
             "dsl": {
@@ -1118,6 +1172,457 @@
                 "palette": "paper"
               }
             }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "sources-description",
+          "kind": "text",
+          "parentId": "sources",
+          "layerId": "default",
+          "zIndex": 5,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 161,
+            "height": 42
+          },
+          "content": {
+            "label": "Reports, filings,\npublications",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "ingest-description",
+          "kind": "text",
+          "parentId": "ingest",
+          "layerId": "default",
+          "zIndex": 6,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 138,
+            "height": 42
+          },
+          "content": {
+            "label": "Source + date\nretained",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "entities-description",
+          "kind": "text",
+          "parentId": "entities",
+          "layerId": "default",
+          "zIndex": 7,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 173,
+            "height": 42
+          },
+          "content": {
+            "label": "Mentions linked to\nidentities",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "biology-description",
+          "kind": "text",
+          "parentId": "biology",
+          "layerId": "default",
+          "zIndex": 8,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 166,
+            "height": 42
+          },
+          "content": {
+            "label": "Biology + disease\ncontext",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "resolve-description",
+          "kind": "text",
+          "parentId": "resolve",
+          "layerId": "default",
+          "zIndex": 9,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 161,
+            "height": 42
+          },
+          "content": {
+            "label": "D2 \u00b7 All\ncontributing sources",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "review-description",
+          "kind": "text",
+          "parentId": "review",
+          "layerId": "default",
+          "zIndex": 10,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 195,
+            "height": 42
+          },
+          "content": {
+            "label": "D3 \u00b7 Inspect support +\nuncertainty",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "hold-description",
+          "kind": "text",
+          "parentId": "hold",
+          "layerId": "default",
+          "zIndex": 12,
+          "transform": {
+            "translation": {
+              "x": 12,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 168,
+            "height": 42
+          },
+          "content": {
+            "label": "Evidence retained for\nreview",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "record-description",
+          "kind": "text",
+          "parentId": "record",
+          "layerId": "default",
+          "zIndex": 13,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 142,
+            "height": 42
+          },
+          "content": {
+            "label": "D1 \u00b7 Evidence\naccumulates",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "landscapes-description",
+          "kind": "text",
+          "parentId": "landscapes",
+          "layerId": "default",
+          "zIndex": 14,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 127,
+            "height": 42
+          },
+          "content": {
+            "label": "D4 \u00b7 Delivery\ndirection",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "timelines-description",
+          "kind": "text",
+          "parentId": "timelines",
+          "layerId": "default",
+          "zIndex": 15,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 164,
+            "height": 42
+          },
+          "content": {
+            "label": "Dated evidence +\nsource links",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "briefs-description",
+          "kind": "text",
+          "parentId": "briefs",
+          "layerId": "default",
+          "zIndex": 16,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 155,
+            "height": 42
+          },
+          "content": {
+            "label": "Claims retain their\nevidence",
+            "fontSize": 15,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 15,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
           },
           "extensions": {}
         }
@@ -1454,22 +1959,22 @@
           },
           "waypoints": [
             {
-              "x": 1030,
-              "y": 454.0
+              "x": 1050.0,
+              "y": 462.5
             },
             {
-              "x": 1030,
-              "y": 150.5
+              "x": 1050.0,
+              "y": 174.5
             }
           ],
           "labels": [
             {
               "id": "ready->record:1:label",
               "text": "accept",
-              "pathRatio": 0.5,
+              "pathRatio": 0.05,
               "offset": {
                 "x": 0,
-                "y": 0
+                "y": -14
               },
               "metadata": {}
             }
@@ -1561,12 +2066,12 @@
           },
           "waypoints": [
             {
-              "x": 735,
-              "y": 608.0
+              "x": 735.0,
+              "y": 627.5
             },
             {
-              "x": 735,
-              "y": 303.5
+              "x": 735.0,
+              "y": 327.5
             }
           ],
           "labels": [
@@ -1658,12 +2163,12 @@
           },
           "waypoints": [
             {
-              "x": 1292,
-              "y": 150.5
+              "x": 1292.0,
+              "y": 174.5
             },
             {
-              "x": 1292,
-              "y": 438.5
+              "x": 1292.0,
+              "y": 462.5
             }
           ],
           "labels": [],
@@ -1709,12 +2214,12 @@
           },
           "waypoints": [
             {
-              "x": 1300,
-              "y": 150.5
+              "x": 1300.0,
+              "y": 174.5
             },
             {
-              "x": 1300,
-              "y": 573.5
+              "x": 1300.0,
+              "y": 597.5
             }
           ],
           "labels": [],
@@ -1761,15 +2266,15 @@
           "waypoints": [
             {
               "x": 1168.5,
-              "y": 730
+              "y": 760.0
             },
             {
-              "x": 145,
-              "y": 730
+              "x": 145.0,
+              "y": 760.0
             },
             {
-              "x": 145,
-              "y": 150.5
+              "x": 145.0,
+              "y": 174.5
             }
           ],
           "labels": [

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Render TALOS's native diagram with OpenFlowKit 0.3.0 (Node 20.11+)."""
 import json
+import copy
+import re
+import textwrap
 import subprocess
 from pathlib import Path
 root = Path(__file__).resolve().parents[1]
@@ -14,6 +17,42 @@ doc = json.loads(path.read_text())
 # children, then export the four stage frames without the compiler's outer frame.
 page = doc['pages'][0]
 root_frame = next(node for node in page['nodes'] if node['parentId'] is None)
+# Native icon-card sublabels are fixed at 11px in OpenFlowKit 0.3.0. Keep
+# provenance as editable native text nodes so descriptions can meet the site's
+# 15px floor without modifying the renderer or post-processing exported SVG.
+tokens = (root / 'assets/css/tokens.css').read_text()
+def token(name):
+    return re.search(r'--' + re.escape(name) + r':\s*(#[0-9a-fA-F]+)', tokens).group(1)
+annotations = []
+for node in page['nodes']:
+    node['appearance']['cornerRadius'] = 0
+    if node['kind'] == 'frame':
+        continue
+    node['appearance']['fontSize'] = 15
+    node['size']['height'] = max(node['size']['height'], 105)
+    description = node['content'].pop('subLabel', '')
+    if not description:
+        continue
+    node['appearance']['textVerticalAlign'] = 'top'
+    if node['kind'] == 'architecture':
+        node['appearance']['textAlign'] = 'start'
+        node['content']['contentLayout']['labelAlignment'] = 'start'
+    inset = 54 if node['kind'] == 'architecture' else 12
+    annotation = copy.deepcopy(node)
+    annotation.update(id=node['id'] + '-description', kind='text', parentId=node['id'])
+    annotation['transform']['translation'] = {'x': inset, 'y': 55}
+    annotation['size'] = {'width': node['size']['width'] - inset - 8, 'height': 42}
+    annotation['content'] = {'label': '\n'.join(textwrap.wrap(description, max(12, int((node['size']['width'] - inset - 8) / 7.8)))), 'fontSize': 15,
+                             'fontFamily': 'system-ui, sans-serif', 'fontWeight': '400',
+                             'textColor': token('surface') if node['content'].get('customColor') == token('accent') else token('ink')}
+    annotation['appearance'] = {'fontSize': 15, 'textPadding': 0,
+                               'textAlign': 'start', 'textVerticalAlign': 'top',
+                               'textColor': token('surface') if node['content'].get('customColor') == token('accent') else token('ink')}
+    annotation['metadata'] = {'purpose': 'provenance-description'}
+    annotation['ports'] = []
+    annotations.append(annotation)
+page['nodes'].extend(annotations)
+
 for frame in page['nodes']:
     if frame['kind'] != 'frame' or frame is root_frame:
         continue
@@ -25,7 +64,7 @@ for frame in page['nodes']:
     children = [node for node in page['nodes'] if node['parentId'] == frame['id']]
     frame['size'] = {
         'width': max(node['transform']['translation']['x'] + node['size']['width'] for node in children) + 20,
-        'height': 590,
+        'height': 625,
     }
 # Native connector waypoints keep returns in the outside margin and the accept
 # path between stages, avoiding labels or paths running through evidence cards.
@@ -53,19 +92,24 @@ for edge in page['connectors']:
     if pair == ('briefs', 'sources'):
         bx, by, bw, bh = bounds('briefs')
         sx, sy, sw, sh = bounds('sources')
-        route(edge, [(bx + bw / 2, 730), (145, 730), (145, sy + sh / 2)], 'bottom', 'left')
+        route(edge, [(bx + bw / 2, bounds('hold')[1] + bounds('hold')[3] + 80),
+                     (sx - 35, bounds('hold')[1] + bounds('hold')[3] + 80),
+                     (sx - 35, sy + sh / 2)], 'bottom', 'left')
     elif pair == ('hold', 'review'):
         hx, hy, hw, hh = bounds('hold')
         rx, ry, rw, rh = bounds('review')
-        route(edge, [(735, hy + hh / 2), (735, ry + rh / 2)], 'left', 'left')
+        route(edge, [(rx - 10, hy + hh / 2), (rx - 10, ry + rh / 2)], 'left', 'left')
     elif pair == ('ready', 'record'):
         gx, gy, gw, gh = bounds('ready')
         rx, ry, rw, rh = bounds('record')
-        route(edge, [(1030, gy + gh / 2), (1030, ry + rh / 2)], 'right', 'left')
+        route(edge, [(rx - 10, gy + gh / 2), (rx - 10, ry + rh / 2)], 'right', 'left')
+        for label in edge['labels']:
+            label['pathRatio'] = .05
+            label['offset'] = {'x': 0, 'y': -14}
     elif pair in [('record', 'timelines'), ('record', 'briefs')]:
         rx, ry, rw, rh = bounds('record')
         tx, ty, tw, th = bounds(pair[1])
-        lane = 1292 if pair[1] == 'timelines' else 1300
+        lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + (6 if pair[1] == 'timelines' else 14)
         route(edge, [(lane, ry + rh / 2), (lane, ty + th / 2)], 'right', 'right')
         edge['labels'] = []
 root_frame['size'] = {'width': 1166, 'height': 650}
