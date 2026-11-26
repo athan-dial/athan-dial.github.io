@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "36dc0985-64ba-42f1-a344-194774aa4d64",
+  "id": "c7fc85e9-e019-4862-aaa8-e014a86bc696",
   "name": "workflow",
-  "createdAt": "2026-11-26T12:23:12.157Z",
-  "updatedAt": "2026-11-26T12:23:12.157Z",
+  "createdAt": "2026-11-26T12:48:26.168Z",
+  "updatedAt": "2026-11-26T12:48:26.168Z",
   "pages": [
     {
-      "id": "36dc0985-64ba-42f1-a344-194774aa4d64:page-1",
+      "id": "c7fc85e9-e019-4862-aaa8-e014a86bc696:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -20,7 +20,7 @@
       ],
       "nodes": [
         {
-          "id": "dsl-1r2rb92",
+          "id": "dsl-1mznoq7",
           "kind": "frame",
           "parentId": null,
           "layerId": "default",
@@ -51,8 +51,8 @@
             "dsl": {
               "family": "architecture",
               "version": 1,
-              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"D2 \u00b7 All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"D3 \u00b7 Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"70,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"45,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"D1 \u00b7 Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"D4 \u00b7 Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
-              "hash": "1ridp5d",
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support and uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
+              "hash": "14ig80t",
               "direction": "right",
               "appearance": {
                 "palette": "paper"
@@ -65,7 +65,7 @@
         {
           "id": "collect",
           "kind": "frame",
-          "parentId": "dsl-1r2rb92",
+          "parentId": "dsl-1mznoq7",
           "layerId": "default",
           "zIndex": 1,
           "transform": {
@@ -110,7 +110,7 @@
         {
           "id": "recognize",
           "kind": "frame",
-          "parentId": "dsl-1r2rb92",
+          "parentId": "dsl-1mznoq7",
           "layerId": "default",
           "zIndex": 2,
           "transform": {
@@ -155,7 +155,7 @@
         {
           "id": "judge",
           "kind": "frame",
-          "parentId": "dsl-1r2rb92",
+          "parentId": "dsl-1mznoq7",
           "layerId": "default",
           "zIndex": 3,
           "transform": {
@@ -170,7 +170,7 @@
             }
           },
           "size": {
-            "width": 297,
+            "width": 284,
             "height": 625
           },
           "content": {
@@ -200,7 +200,7 @@
         {
           "id": "deliver",
           "kind": "frame",
-          "parentId": "dsl-1r2rb92",
+          "parentId": "dsl-1mznoq7",
           "layerId": "default",
           "zIndex": 4,
           "transform": {
@@ -584,7 +584,7 @@
             }
           },
           "size": {
-            "width": 223,
+            "width": 211,
             "height": 105
           },
           "content": {
@@ -635,7 +635,7 @@
               "attrs": [
                 {
                   "key": "desc",
-                  "value": "D2 \u00b7 All contributing sources"
+                  "value": "All contributing sources"
                 },
                 {
                   "key": "pin",
@@ -667,7 +667,7 @@
             }
           },
           "size": {
-            "width": 257,
+            "width": 244,
             "height": 105
           },
           "content": {
@@ -718,7 +718,7 @@
               "attrs": [
                 {
                   "key": "desc",
-                  "value": "D3 \u00b7 Inspect support + uncertainty"
+                  "value": "Inspect support and uncertainty"
                 },
                 {
                   "key": "pin",
@@ -740,7 +740,7 @@
           "zIndex": 11,
           "transform": {
             "translation": {
-              "x": 70,
+              "x": 67,
               "y": 330
             },
             "rotationRadians": 0,
@@ -774,7 +774,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "70,330"
+                  "value": "67,330"
                 },
                 {
                   "key": "width",
@@ -800,7 +800,7 @@
           "zIndex": 12,
           "transform": {
             "translation": {
-              "x": 45,
+              "x": 48,
               "y": 495
             },
             "rotationRadians": 0,
@@ -839,7 +839,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "45,495"
+                  "value": "48,495"
                 }
               ],
               "appearance": {
@@ -867,7 +867,7 @@
             }
           },
           "size": {
-            "width": 204,
+            "width": 181,
             "height": 105
           },
           "content": {
@@ -918,7 +918,7 @@
               "attrs": [
                 {
                   "key": "desc",
-                  "value": "D1 \u00b7 Evidence accumulates"
+                  "value": "Evidence accumulates"
                 },
                 {
                   "key": "pin",
@@ -950,7 +950,7 @@
             }
           },
           "size": {
-            "width": 189,
+            "width": 163,
             "height": 105
           },
           "content": {
@@ -999,7 +999,7 @@
               "attrs": [
                 {
                   "key": "desc",
-                  "value": "D4 \u00b7 Delivery direction"
+                  "value": "Delivery direction"
                 },
                 {
                   "key": "pin",
@@ -1357,11 +1357,11 @@
             }
           },
           "size": {
-            "width": 161,
+            "width": 149,
             "height": 42
           },
           "content": {
-            "label": "D2 \u00b7 All\ncontributing sources",
+            "label": "All contributing\nsources",
             "fontSize": 15,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
@@ -1398,11 +1398,11 @@
             }
           },
           "size": {
-            "width": 195,
+            "width": 182,
             "height": 42
           },
           "content": {
-            "label": "D3 \u00b7 Inspect support +\nuncertainty",
+            "label": "Inspect support and\nuncertainty",
             "fontSize": 15,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
@@ -1480,11 +1480,11 @@
             }
           },
           "size": {
-            "width": 142,
+            "width": 119,
             "height": 42
           },
           "content": {
-            "label": "D1 \u00b7 Evidence\naccumulates",
+            "label": "Evidence\naccumulates",
             "fontSize": 15,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
@@ -1521,11 +1521,11 @@
             }
           },
           "size": {
-            "width": 127,
+            "width": 101,
             "height": 42
           },
           "content": {
-            "label": "D4 \u00b7 Delivery\ndirection",
+            "label": "Delivery\ndirection",
             "fontSize": 15,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
@@ -2163,11 +2163,11 @@
           },
           "waypoints": [
             {
-              "x": 1292.0,
+              "x": 1296.0,
               "y": 174.5
             },
             {
-              "x": 1292.0,
+              "x": 1296.0,
               "y": 462.5
             }
           ],
@@ -2214,11 +2214,11 @@
           },
           "waypoints": [
             {
-              "x": 1300.0,
+              "x": 1296.0,
               "y": 174.5
             },
             {
-              "x": 1300.0,
+              "x": 1296.0,
               "y": 597.5
             }
           ],

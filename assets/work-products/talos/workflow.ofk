@@ -10,14 +10,14 @@ group recognize = "02 · Recognize" [pin: "275,0"] {
   biology = "Targets and indications" [icon: tabler/dna, iconpos: left, gray, outline, desc: "Biology + disease context", pin: "20,300"]
 }
 group judge = "03 · Resolve and judge" [pin: "565,0"] {
-  resolve = "Resolve observations" [icon: tabler/git-merge, iconpos: left, "#14543c", bold, desc: "D2 · All contributing sources", pin: "20,42"]
-  review = "Analyst review" [icon: tabler/user-check, iconpos: left, "#e4f17c", bold, desc: "D3 · Inspect support + uncertainty", pin: "20,195"]
-  ready = "Ready to use?" [diamond, "#e4f17c", bold, width: 150, height: 88, pin: "70,330"]
-  hold = "Keep unresolved" [gray, outline, desc: "Evidence retained for review", pin: "45,495"]
+  resolve = "Resolve observations" [icon: tabler/git-merge, iconpos: left, "#14543c", bold, desc: "All contributing sources", pin: "20,42"]
+  review = "Analyst review" [icon: tabler/user-check, iconpos: left, "#e4f17c", bold, desc: "Inspect support and uncertainty", pin: "20,195"]
+  ready = "Ready to use?" [diamond, "#e4f17c", bold, width: 150, height: 88, pin: "67,330"]
+  hold = "Keep unresolved" [gray, outline, desc: "Evidence retained for review", pin: "48,495"]
 }
 group deliver = "04 · Remember and deliver" [pin: "880,0"] {
-  record = "Program record" [icon: tabler/database, iconpos: left, "#14543c", bold, desc: "D1 · Evidence accumulates", pin: "20,42"]
-  landscapes = "Landscapes" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: "D4 · Delivery direction", pin: "20,195"]
+  record = "Program record" [icon: tabler/database, iconpos: left, "#14543c", bold, desc: "Evidence accumulates", pin: "20,42"]
+  landscapes = "Landscapes" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: "Delivery direction", pin: "20,195"]
   timelines = "Timelines" [icon: tabler/calendar, iconpos: left, gray, outline, desc: "Dated evidence + source links", pin: "20,330"]
   briefs = "Leadership briefs" [icon: tabler/file-text, iconpos: left, gray, outline, desc: "Claims retain their evidence", pin: "20,465"]
 }
