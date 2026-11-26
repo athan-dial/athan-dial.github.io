@@ -25,6 +25,10 @@ square-corner appearance settings. Return routes are native scene waypoints deri
 from node bounds; the compiler and exporter remain unmodified. The image preserves
 its natural width, with an HTML text walkthrough for narrow screens.
 
+**Problem vignette (motion):** `problem-vignette/` — 15s silent Bang Motion piece (editable
+`index.html`, MP4, poster, `preview.html` with reduced-motion fallback). Review locally;
+not wired into the Hugo page until approved.
+
 OpenFlowKit 0.3.0 exports provenance description text nodes as centered
 (`text-anchor="middle"`); the scene sets `textAlign: start` but the exporter
 ignores it. Left-aligned descriptions require a renderer change or post-export

@@ -28,7 +28,7 @@ for node in page['nodes']:
     node['appearance']['cornerRadius'] = 0
     if node['kind'] == 'frame':
         continue
-    node['appearance']['fontSize'] = 15
+    node['appearance']['fontSize'] = 16
     node['size']['height'] = max(node['size']['height'], 105)
     description = node['content'].pop('subLabel', '')
     if not description:
@@ -42,10 +42,10 @@ for node in page['nodes']:
     annotation.update(id=node['id'] + '-description', kind='text', parentId=node['id'])
     annotation['transform']['translation'] = {'x': inset, 'y': 55}
     annotation['size'] = {'width': node['size']['width'] - inset - 8, 'height': 42}
-    annotation['content'] = {'label': '\n'.join(textwrap.wrap(description, max(12, int((node['size']['width'] - inset - 8) / 7.8)))), 'fontSize': 15,
+    annotation['content'] = {'label': '\n'.join(textwrap.wrap(description, max(12, int((node['size']['width'] - inset - 8) / 7.8)))), 'fontSize': 16,
                              'fontFamily': 'system-ui, sans-serif', 'fontWeight': '400',
                              'textColor': token('surface') if node['content'].get('customColor') == token('accent') else token('ink')}
-    annotation['appearance'] = {'fontSize': 15, 'textPadding': 0,
+    annotation['appearance'] = {'fontSize': 16, 'textPadding': 0,
                                'textAlign': 'start', 'textVerticalAlign': 'top',
                                'textColor': token('surface') if node['content'].get('customColor') == token('accent') else token('ink')}
     annotation['metadata'] = {'purpose': 'provenance-description'}
@@ -112,7 +112,7 @@ for edge in page['connectors']:
         lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + 10
         route(edge, [(lane, ry + rh / 2), (lane, ty + th / 2)], 'right', 'right')
         edge['labels'] = []
-root_frame['size'] = {'width': 1166, 'height': 650}
+root_frame['size'] = {'width': 1195, 'height': 650}
 path.write_text(json.dumps(doc, indent=2) + '\n')
 args = {'format': 'svg', 'scope': 'selection',
         'ids': [node['id'] for node in page['nodes'] if node is not root_frame]

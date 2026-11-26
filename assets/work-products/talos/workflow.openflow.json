@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "39584a55-1723-4b73-8691-760e7b9f1fe6",
+  "id": "7ebd4731-c313-4475-92fc-d307c003ba39",
   "name": "workflow",
-  "createdAt": "2026-11-26T12:49:28.576Z",
-  "updatedAt": "2026-11-26T12:49:28.576Z",
+  "createdAt": "2026-11-26T13:08:00.615Z",
+  "updatedAt": "2026-11-26T13:08:00.615Z",
   "pages": [
     {
-      "id": "39584a55-1723-4b73-8691-760e7b9f1fe6:page-1",
+      "id": "7ebd4731-c313-4475-92fc-d307c003ba39:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -20,7 +20,7 @@
       ],
       "nodes": [
         {
-          "id": "dsl-8uabvb",
+          "id": "dsl-7k016r",
           "kind": "frame",
           "parentId": null,
           "layerId": "default",
@@ -37,7 +37,7 @@
             }
           },
           "size": {
-            "width": 1166,
+            "width": 1195,
             "height": 650
           },
           "content": {
@@ -51,8 +51,8 @@
             "dsl": {
               "family": "architecture",
               "version": 1,
-              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
-              "hash": "15refxv",
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"298,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,42\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,195\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"607,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"915,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
+              "hash": "15gtucq",
               "direction": "right",
               "appearance": {
                 "palette": "paper"
@@ -65,7 +65,7 @@
         {
           "id": "collect",
           "kind": "frame",
-          "parentId": "dsl-8uabvb",
+          "parentId": "dsl-7k016r",
           "layerId": "default",
           "zIndex": 1,
           "transform": {
@@ -110,12 +110,12 @@
         {
           "id": "recognize",
           "kind": "frame",
-          "parentId": "dsl-8uabvb",
+          "parentId": "dsl-7k016r",
           "layerId": "default",
           "zIndex": 2,
           "transform": {
             "translation": {
-              "x": 275.0,
+              "x": 298.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -142,7 +142,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "275,0"
+                  "value": "298,0"
                 }
               ],
               "appearance": {
@@ -155,12 +155,12 @@
         {
           "id": "judge",
           "kind": "frame",
-          "parentId": "dsl-8uabvb",
+          "parentId": "dsl-7k016r",
           "layerId": "default",
           "zIndex": 3,
           "transform": {
             "translation": {
-              "x": 565.0,
+              "x": 607.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -187,7 +187,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "565,0"
+                  "value": "607,0"
                 }
               ],
               "appearance": {
@@ -200,12 +200,12 @@
         {
           "id": "deliver",
           "kind": "frame",
-          "parentId": "dsl-8uabvb",
+          "parentId": "dsl-7k016r",
           "layerId": "default",
           "zIndex": 4,
           "transform": {
             "translation": {
-              "x": 880.0,
+              "x": 915.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -232,7 +232,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "880,0"
+                  "value": "915,0"
                 }
               ],
               "appearance": {
@@ -294,7 +294,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -375,7 +375,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -413,7 +413,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 120
+              "y": 42
             },
             "rotationRadians": 0,
             "scale": {
@@ -456,7 +456,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -475,7 +475,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,120"
+                  "value": "20,42"
                 }
               ],
               "appearance": {
@@ -494,7 +494,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 300
+              "y": 195
             },
             "rotationRadians": 0,
             "scale": {
@@ -537,7 +537,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -556,7 +556,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,300"
+                  "value": "20,195"
                 }
               ],
               "appearance": {
@@ -620,7 +620,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -703,7 +703,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -762,7 +762,7 @@
             "stroke": "#e4f17c",
             "textColor": "#0f172a",
             "cornerRadius": 0,
-            "fontSize": 15
+            "fontSize": 16
           },
           "ports": [],
           "metadata": {
@@ -822,7 +822,7 @@
             "stroke": "#313439",
             "textColor": "#2b2a29",
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top"
           },
           "ports": [],
@@ -903,7 +903,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -984,7 +984,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -1065,7 +1065,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -1146,7 +1146,7 @@
           },
           "appearance": {
             "cornerRadius": 0,
-            "fontSize": 15,
+            "fontSize": 16,
             "textVerticalAlign": "top",
             "textAlign": "start"
           },
@@ -1198,13 +1198,13 @@
           },
           "content": {
             "label": "Reports, filings,\npublications",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1239,13 +1239,13 @@
           },
           "content": {
             "label": "Source + date\nretained",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1280,13 +1280,13 @@
           },
           "content": {
             "label": "Mentions linked to\nidentities",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1321,13 +1321,13 @@
           },
           "content": {
             "label": "Biology + disease\ncontext",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1362,13 +1362,13 @@
           },
           "content": {
             "label": "All contributing\nsources",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#ffffff"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1403,13 +1403,13 @@
           },
           "content": {
             "label": "Inspect support +\nuncertainty",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1444,13 +1444,13 @@
           },
           "content": {
             "label": "Evidence retained for\nreview",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1485,13 +1485,13 @@
           },
           "content": {
             "label": "Evidence\naccumulates",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#ffffff"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1526,13 +1526,13 @@
           },
           "content": {
             "label": "Delivery\ndirection",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1567,13 +1567,13 @@
           },
           "content": {
             "label": "Dated evidence +\nsource links",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1608,13 +1608,13 @@
           },
           "content": {
             "label": "Claims retain their\nevidence",
-            "fontSize": 15,
+            "fontSize": 16,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",
             "textColor": "#0b0b0c"
           },
           "appearance": {
-            "fontSize": 15,
+            "fontSize": 16,
             "textPadding": 0,
             "textAlign": "start",
             "textVerticalAlign": "top",
@@ -1959,11 +1959,11 @@
           },
           "waypoints": [
             {
-              "x": 1050.0,
+              "x": 1085.0,
               "y": 462.5
             },
             {
-              "x": 1050.0,
+              "x": 1085.0,
               "y": 174.5
             }
           ],
@@ -2066,11 +2066,11 @@
           },
           "waypoints": [
             {
-              "x": 735.0,
+              "x": 777.0,
               "y": 627.5
             },
             {
-              "x": 735.0,
+              "x": 777.0,
               "y": 327.5
             }
           ],
@@ -2163,11 +2163,11 @@
           },
           "waypoints": [
             {
-              "x": 1296.0,
+              "x": 1331.0,
               "y": 174.5
             },
             {
-              "x": 1296.0,
+              "x": 1331.0,
               "y": 462.5
             }
           ],
@@ -2214,11 +2214,11 @@
           },
           "waypoints": [
             {
-              "x": 1296.0,
+              "x": 1331.0,
               "y": 174.5
             },
             {
-              "x": 1296.0,
+              "x": 1331.0,
               "y": 597.5
             }
           ],
@@ -2265,7 +2265,7 @@
           },
           "waypoints": [
             {
-              "x": 1168.5,
+              "x": 1203.5,
               "y": 760.0
             },
             {
