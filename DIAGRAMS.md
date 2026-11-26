@@ -31,6 +31,10 @@ Homepage placement and chapter motion live in `assets/css/fieldnotes-home.css`. 
 names fail the Hugo build. Keep prose and diagrams consistent. Diagram labels must not add factual
 claims, imply measurements, or grant authority absent from the article.
 
+## Renderers
+
+Work Product workflows render from `assets/work-products/<slug>/flow.json` with `scripts/render-flow-svg.py`: a dependency-free SVG renderer with left-aligned measured text, inline Lucide icons (`assets/work-products/icons.json`) and Fieldnotes node grammar. OpenFlowKit was retired for this job (centered descriptions, fixed 11px sublabels, icons embedded as nested data-URI images that many viewers drop). Arc is unmerged (`claude/lucid-cray-sezuh0`) and not used. Check a render with `scripts/work-product-ship.sh <slug>`.
+
 ## Brand role
 
 Schematics are a recurring Personal Fieldnotes primitive, not merely article illustrations. They can

@@ -1,0 +1,723 @@
+{{- /*
+  TALOS work-products gallery. Takes no parameters. Classes are prefixed tg-.
+  Four sanitized reconstructions: tile (button) + native <dialog> each.
+  Styles: assets/css/talos-gallery.css  Behaviour: assets/js/talos-gallery.js
+  Source map and sanitization log: _private/talos-review/gallery-evidence.md
+*/ -}}
+<div class="tg" data-tg>
+  <p class="tg-intro">Four artifacts from the work, rebuilt in this site's palette from the originals with the sensitive details removed. Each one opens in a larger view. Names, dates, counts and data are removed or synthetic, and nothing here reports a result.</p>
+
+  <ul class="tg-key" aria-label="Status key">
+    <li><span class="tg-chip tg-chip--built">Built</span> exists in the application</li>
+    <li><span class="tg-chip tg-chip--designed">Designed</span> documented design</li>
+    <li><span class="tg-chip tg-chip--planned">Planned</span> sequenced, not started</li>
+  </ul>
+  <p class="tg-nojs">Opening a tile needs JavaScript. The four artifacts are previewed below.</p>
+
+  <ul class="tg-tiles">
+
+    <!-- 1 · STRATEGY -->
+    <li class="tg-tile-wrap">
+      <button type="button" class="tg-tile" data-tg-open="tg-d-strategy" aria-haspopup="dialog" aria-labelledby="tg-tt-strategy tg-tk-strategy" aria-describedby="tg-tc-strategy">
+        <span class="tg-tile-top">
+          <span class="tg-eyebrow" id="tg-tk-strategy">Strategy · Sanitized reconstruction</span>
+          <span class="tg-chip tg-chip--designed">Designed</span>
+        </span>
+        <span class="tg-mini tg-mini--doc" aria-hidden="true">
+          <span class="tg-mini-sheet">
+            <span class="tg-mini-k">Kickoff brief</span>
+            <span class="tg-mini-h">Competitive-intelligence platform</span>
+            <i class="tg-mini-bar" style="width:92%"></i><i class="tg-mini-bar" style="width:70%"></i>
+            <span class="tg-mini-cols">
+              <span><b>B1</b><i class="tg-mini-bar"></i><i class="tg-mini-bar" style="width:60%"></i></span>
+              <span><b>B2</b><i class="tg-mini-bar"></i><i class="tg-mini-bar" style="width:75%"></i></span>
+              <span><b>B3</b><i class="tg-mini-bar"></i><i class="tg-mini-bar" style="width:50%"></i></span>
+            </span>
+            <span class="tg-mini-cols">
+              <span><b>In v1</b><i class="tg-mini-bar"></i><i class="tg-mini-bar"></i></span>
+              <span><b>Out</b><i class="tg-mini-bar"></i><i class="tg-mini-bar" style="width:55%"></i></span>
+              <span><b>Adjacent</b><i class="tg-mini-bar"></i></span>
+            </span>
+          </span>
+        </span>
+        <span class="tg-tile-title" id="tg-tt-strategy">The kickoff brief as a document sheet</span>
+        <span class="tg-tile-cap" id="tg-tc-strategy">Problem, user, questions, six requirements, three bets with the signal that would make us pivot, and scope edges. From the kickoff brief.</span>
+        <span class="tg-tile-go" aria-hidden="true">Inspect <span class="tg-arrow">↗</span></span>
+      </button>
+    </li>
+
+    <!-- 2 · INFORMATION ARCHITECTURE -->
+    <li class="tg-tile-wrap">
+      <button type="button" class="tg-tile" data-tg-open="tg-d-ia" aria-haspopup="dialog" aria-labelledby="tg-tt-ia tg-tk-ia" aria-describedby="tg-tc-ia">
+        <span class="tg-tile-top">
+          <span class="tg-eyebrow" id="tg-tk-ia">Information architecture · Sanitized reconstruction</span>
+          <span class="tg-chips"><span class="tg-chip tg-chip--built">Built</span><span class="tg-chip tg-chip--designed">Designed</span></span>
+        </span>
+        <span class="tg-mini" aria-hidden="true">
+          <svg viewBox="0 0 480 190" class="tg-mini-svg" focusable="false">
+            <rect x="10" y="8" width="460" height="18" class="tg-s-solid"/>
+            <rect x="10" y="62" width="82" height="34" class="tg-s-solid"/>
+            <rect x="150" y="36" width="82" height="30" class="tg-s-solid"/>
+            <rect x="150" y="104" width="82" height="30" class="tg-s-solid"/>
+            <rect x="272" y="62" width="82" height="34" class="tg-s-solid"/>
+            <rect x="388" y="62" width="82" height="34" class="tg-s-solid"/>
+            <rect x="272" y="150" width="82" height="32" class="tg-s-solid"/>
+            <rect x="388" y="150" width="82" height="32" class="tg-s-dash"/>
+            <path d="M92 74 H120 V51 H150 M92 86 H120 V119 H150 M232 51 H252 V74 H272 M232 119 H252 V84 H272 M354 79 H388 M313 96 V150 M429 96 V150" class="tg-s-line"/>
+            <path d="M42 96 V184 H430 V182" class="tg-s-line tg-s-line--dash"/>
+          </svg>
+        </span>
+        <span class="tg-tile-title" id="tg-tt-ia">View map and data spine</span>
+        <span class="tg-tile-cap" id="tg-tc-ia">Seven views and how an analyst moves between them, plus the chain of records underneath. One view is a design only. From the view and data-model documents.</span>
+        <span class="tg-tile-go" aria-hidden="true">Inspect <span class="tg-arrow">↗</span></span>
+      </button>
+    </li>
+
+    <!-- 3 · PROTOTYPE -->
+    <li class="tg-tile-wrap">
+      <button type="button" class="tg-tile" data-tg-open="tg-d-proto" aria-haspopup="dialog" aria-labelledby="tg-tt-proto tg-tk-proto" aria-describedby="tg-tc-proto">
+        <span class="tg-tile-top">
+          <span class="tg-eyebrow" id="tg-tk-proto">Prototype · Sanitized reconstruction</span>
+          <span class="tg-chip tg-chip--designed">Designed</span>
+        </span>
+        <span class="tg-mini" aria-hidden="true">
+          <svg viewBox="0 0 480 190" class="tg-mini-svg" focusable="false">
+            <path d="M120 10 V180 M210 10 V180 M300 10 V180 M390 10 V180" class="tg-s-grid"/>
+            <rect x="130" y="24" width="190" height="20" class="tg-s-bar"/>
+            <rect x="180" y="62" width="140" height="20" class="tg-s-bar"/>
+            <rect x="240" y="100" width="80" height="20" class="tg-s-bar"/>
+            <rect x="285" y="138" width="35" height="20" class="tg-s-bar"/>
+            <circle cx="150" cy="34" r="5" class="tg-d-high"/><circle cx="200" cy="34" r="5" class="tg-d-med"/><circle cx="270" cy="34" r="5" class="tg-d-high"/><circle cx="305" cy="34" r="7" class="tg-d-unc"/>
+            <circle cx="205" cy="72" r="5" class="tg-d-high"/><circle cx="250" cy="72" r="5" class="tg-d-high"/><circle cx="295" cy="72" r="5" class="tg-d-med"/>
+            <circle cx="262" cy="110" r="5" class="tg-d-med"/><circle cx="308" cy="110" r="7" class="tg-d-unc"/>
+            <circle cx="300" cy="148" r="5" class="tg-d-high"/>
+            <path d="M320 34 H380" class="tg-s-line tg-s-line--dash"/>
+            <rect x="380" y="26" width="84" height="16" class="tg-s-dash"/>
+            <rect x="10" y="24" width="96" height="20" class="tg-s-solid"/><rect x="10" y="62" width="96" height="20" class="tg-s-solid"/><rect x="10" y="100" width="96" height="20" class="tg-s-solid"/><rect x="10" y="138" width="96" height="20" class="tg-s-solid"/>
+          </svg>
+        </span>
+        <span class="tg-tile-title" id="tg-tt-proto">Three annotated screens, synthetic data</span>
+        <span class="tg-tile-cap" id="tg-tc-proto">A landscape timeline, an event provenance walk and a review workbench, each with the design intent beside it. From the design mockups.</span>
+        <span class="tg-tile-go" aria-hidden="true">Inspect <span class="tg-arrow">↗</span></span>
+      </button>
+    </li>
+
+    <!-- 4 · DELIVERY PLANNING -->
+    <li class="tg-tile-wrap">
+      <button type="button" class="tg-tile" data-tg-open="tg-d-plan" aria-haspopup="dialog" aria-labelledby="tg-tt-plan tg-tk-plan" aria-describedby="tg-tc-plan">
+        <span class="tg-tile-top">
+          <span class="tg-eyebrow" id="tg-tk-plan">Delivery planning · Sanitized reconstruction</span>
+          <span class="tg-chip tg-chip--planned">Planned</span>
+        </span>
+        <span class="tg-mini" aria-hidden="true">
+          <svg viewBox="0 0 480 190" class="tg-mini-svg" focusable="false">
+            <rect x="8" y="140" width="68" height="40" class="tg-s-dash"/>
+            <rect x="84" y="116" width="68" height="64" class="tg-s-dash"/>
+            <rect x="160" y="92" width="68" height="88" class="tg-s-dash"/>
+            <rect x="236" y="68" width="68" height="112" class="tg-s-dash"/>
+            <rect x="312" y="44" width="68" height="136" class="tg-s-dash"/>
+            <rect x="388" y="20" width="84" height="160" class="tg-s-dot"/>
+            
+          </svg>
+        </span>
+        <span class="tg-tile-title" id="tg-tt-plan">Milestone ladder, lanes and sub-projects</span>
+        <span class="tg-tile-cap" id="tg-tc-plan">Six milestones, four workstream lanes by role, eight sub-projects in three groups, and the evidence packet. From the kickoff brief and plan.</span>
+        <span class="tg-tile-go" aria-hidden="true">Inspect <span class="tg-arrow">↗</span></span>
+      </button>
+    </li>
+  </ul>
+
+  <!-- ============ DIALOG 1 · STRATEGY ============ -->
+  <dialog class="tg-dialog" id="tg-d-strategy" aria-labelledby="tg-dt-strategy">
+    <div class="tg-frame">
+      <header class="tg-dhead">
+        <div class="tg-dhead-l">
+          <p class="tg-eyebrow">Sanitized reconstruction · from the kickoff brief</p>
+          <h3 class="tg-dtitle" id="tg-dt-strategy">The kickoff brief as a document sheet</h3>
+        </div>
+        <div class="tg-dhead-r">
+          <span class="tg-chip tg-chip--designed">Designed</span>
+          <button type="button" class="tg-close" data-tg-close aria-label="Close: the kickoff brief">Close <span aria-hidden="true">✕</span></button>
+        </div>
+      </header>
+      <div class="tg-dbody">
+        <p class="tg-look"><span class="tg-label">What to look for</span> Each bet is paired with the observable behaviour that would make us change course. Requirements describe what a reader experiences, not how it is built.</p>
+        <div class="tg-region tg-region--sheet" role="region" aria-label="Kickoff brief reconstruction, scrolls" tabindex="0">
+          <article class="tg-doc">
+            <p class="tg-label">Kickoff brief · pre-read</p>
+            <h4 class="tg-doc-title">A competitive-intelligence platform</h4>
+            <p class="tg-doc-sub">Reconstructed and reworded. The first target, names, dates and thresholds are removed.</p>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">01 / Problem</h5>
+              <p>Every competitive-intelligence question is answered by hand. Someone stitches the answer together from several disconnected tools, and the next time the same question comes up the evidence trail is stitched together again. Landscape-shape questions absorb the cost through patient analyst effort. Others, such as what competitors have exemplified for a target or what new intellectual property has appeared recently, are effectively unanswerable: the raw filings and hand-kept trackers exist, the answers do not.</p>
+              <p>The platform makes provenance a property of the substrate. An answer assembled once can be drawn many times, and a record one reader builds is a record every reader can rely on.</p>
+            </section>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">02 / Primary user</h5>
+              <p>The competitive-intelligence analyst. The platform is designed against that person's daily workflow: open a Program, read what changed, drill into the evidence behind a claim, export a brief when leadership asks. Chemistry, intellectual property and leadership readers consume the output. They are the next audience, not the first.</p>
+            </section>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">03 / Questions the product answers</h5>
+              <div class="tg-two">
+                <div>
+                  <p class="tg-label">Analyst level · first release</p>
+                  <ul class="tg-list">
+                    <li>What has surfaced for this target since the last review, with full provenance?</li>
+                    <li>Which Programs have moved phase, changed sponsor or surfaced new data?</li>
+                    <li>Where is entity recognition uncertain, and what is the analyst's call?</li>
+                    <li>What catalysts are coming for tracked Programs?</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="tg-label">Leadership level · later</p>
+                  <ul class="tg-list">
+                    <li>Which targets attract the most competitive activity, and what shape does it take?</li>
+                    <li>Which Programs show signals worth a partnership conversation?</li>
+                    <li>How does the landscape change our read on probability of success?</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">04 / Requirements</h5>
+              <div class="tg-tablewrap">
+              <table class="tg-table">
+                <caption class="tg-sr">Six requirements, each with how we know it works</caption>
+                <thead><tr><th scope="col">#</th><th scope="col">A reader can…</th><th scope="col">We know it works when…</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">R1</th><td>Trace any claim to the Event behind it and the Source that reported it, with publish, ingest and revision dates all readable.</td><td>An analyst can show a skeptical reader where a claim came from without leaving the platform.</td></tr>
+                  <tr><th scope="row">R2</th><td>See one consolidated record when several Sources report the same event, naming every reporting Source and keeping each one's provenance.</td><td>Two analysts asking the same question reach the same record and the same supporting Sources.</td></tr>
+                  <tr><th scope="row">R3</th><td>See who made any entity match, on what evidence and at what confidence, and confirm or reject uncertain ones.</td><td>"Why this match?" is answered in the platform, and unresolved matches arrive as work an analyst can finish.</td></tr>
+                  <tr><th scope="row">R4</th><td>Navigate by Program, with a record that persists as evidence accrues and keeps prior states.</td><td>An analyst can answer "what changed in my watchlist last week?" from the platform alone.</td></tr>
+                  <tr><th scope="row">R5</th><td>Read a confidence signal on every claim, in proportion to the evidence behind it.</td><td>"How sure is this?" is visible wherever a claim appears.</td></tr>
+                  <tr><th scope="row">R6</th><td>Export analyst output to a leadership-ready format with provenance preserved.</td><td>A leadership reader can click any exported claim back to its Source.</td></tr>
+                </tbody>
+              </table>
+              </div>
+            </section>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">05 / Bets and invalidators</h5>
+              <p class="tg-note">Each bet names the behaviour that would force a pivot, and the earliest sign of it.</p>
+              <div class="tg-bets">
+                <div class="tg-bet">
+                  <p class="tg-bet-id">B1</p>
+                  <h6 class="tg-bet-h">Programs are the right unit.</h6>
+                  <p>Analysts and downstream readers think in Programs, so everything is organized around that unit.</p>
+                  <p class="tg-inval"><span class="tg-label">Invalidated if</span> Stakeholders consistently start from another unit, such as phase, modality or sponsor, and find Program navigation gets in the way.</p>
+                  <p class="tg-inval"><span class="tg-label">Earliest signal</span> Analysts ask to list everything in one phase before they ask for a particular Program.</p>
+                </div>
+                <div class="tg-bet">
+                  <p class="tg-bet-id">B2</p>
+                  <h6 class="tg-bet-h">Analysts adopt it as their primary tool.</h6>
+                  <p>Provenance, confidence and persistent Program records earn it the first-open spot.</p>
+                  <p class="tg-inval"><span class="tg-label">Invalidated if</span> Well after delivery, weekly review cycles still do not use it as the primary source.</p>
+                  <p class="tg-inval"><span class="tg-label">Earliest signal</span> The platform is opened for demonstrations only.</p>
+                </div>
+                <div class="tg-bet">
+                  <p class="tg-bet-id">B3</p>
+                  <h6 class="tg-bet-h">Honest confidence earns trust.</h6>
+                  <p>Leadership will tolerate, and ideally value, a platform that says "we do not know" or "low confidence, one Source".</p>
+                  <p class="tg-inval"><span class="tg-label">Invalidated if</span> Leadership routes around it for "definitive" answers and uses it only when convenient.</p>
+                  <p class="tg-inval"><span class="tg-label">Earliest signal</span> A reader asks for a flat answer, ignoring the confidence signal, more than once.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="tg-doc-sec">
+              <h5 class="tg-label tg-label--acc">06 / Scope edges</h5>
+              <div class="tg-three">
+                <div class="tg-edge tg-edge--in">
+                  <p class="tg-label">In v1</p>
+                  <ul class="tg-list">
+                    <li>A landscape-shape question on one Program, for a first target</li>
+                    <li>The analyst as primary user</li>
+                    <li>Export to a leadership-ready format, provenance kept<sup><a href="#tg-fn-export" class="tg-fnref" aria-label="Footnote: export timing">1</a></sup></li>
+                    <li>Active Events from canonical Sources, consolidated</li>
+                    <li>Program-centered navigation with prior states kept</li>
+                    <li>A review queue for uncertain entity matches</li>
+                  </ul>
+                </div>
+                <div class="tg-edge tg-edge--out">
+                  <p class="tg-label">Out of v1</p>
+                  <ul class="tg-list">
+                    <li>Rollout to more targets</li>
+                    <li>Compound exemplification from patents</li>
+                    <li>Ingesting paid third-party analyst reports</li>
+                    <li>Conference posters and abstracts</li>
+                    <li>Rendering of forward catalysts</li>
+                  </ul>
+                </div>
+                <div class="tg-edge tg-edge--adj">
+                  <p class="tg-label">Adjacent</p>
+                  <ul class="tg-list">
+                    <li>A commercial dataset compared against, protected and display-only</li>
+                    <li>An upstream feed, read-only</li>
+                    <li>Platform and environment provisioning</li>
+                    <li>Patent extraction for non-intelligence uses</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="tg-fn" id="tg-fn-export"><sup>1</sup> The later project plan moves export to a follow-on release (see Delivery planning).</p>
+            </section>
+          </article>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ DIALOG 2 · INFORMATION ARCHITECTURE ============ -->
+  <dialog class="tg-dialog" id="tg-d-ia" aria-labelledby="tg-dt-ia">
+    <div class="tg-frame">
+      <header class="tg-dhead">
+        <div class="tg-dhead-l">
+          <p class="tg-eyebrow">Sanitized reconstruction · from the view and data-model documents</p>
+          <h3 class="tg-dtitle" id="tg-dt-ia">View map and data spine</h3>
+        </div>
+        <div class="tg-dhead-r">
+          <span class="tg-chip tg-chip--built">Built</span><span class="tg-chip tg-chip--designed">Designed</span>
+          <button type="button" class="tg-close" data-tg-close aria-label="Close: view map and data spine">Close <span aria-hidden="true">✕</span></button>
+        </div>
+      </header>
+      <div class="tg-dbody">
+        <p class="tg-look"><span class="tg-label">What to look for</span> Solid boxes exist in the application and the dashed box is a documented design that is not built. Every arrow is a move an analyst actually makes, and the event page is where the provenance walk lives.</p>
+
+        <h4 class="tg-label tg-label--acc tg-sub">View map</h4>
+        <div class="tg-region" role="region" aria-label="View map diagram, scrolls" tabindex="0">
+          <svg class="tg-svg tg-svg--ia" viewBox="0 0 960 500" role="img" aria-labelledby="tg-ia-t tg-ia-d">
+            <title id="tg-ia-t">View map</title>
+            <desc id="tg-ia-d">Seven views and one designed view, joined by navigation arrows. A text list of the arrows follows the diagram.</desc>
+            <defs>
+              <marker id="tg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="tg-svg-arrowhead"/></marker>
+            </defs>
+
+            <!-- global command search -->
+            <rect x="30" y="14" width="900" height="44" class="tg-n tg-n--built"/>
+            <text x="48" y="32" class="tg-t-name">Command search</text>
+            <text x="48" y="48" class="tg-t-sub">Built · reaches any Program or Event from every view</text>
+            <text x="912" y="40" text-anchor="end" class="tg-t-tag">GLOBAL</text>
+
+            <!-- edges -->
+            <g class="tg-e" marker-end="url(#tg-arr)">
+              <path d="M200 176 H235 V133 H270" marker-end="url(#tg-arr)"/>
+              <path d="M200 204 H235 V285 H270" marker-end="url(#tg-arr)"/>
+              <path d="M450 133 H485 V180 H520" marker-end="url(#tg-arr)"/>
+              <path d="M450 285 H485 V204 H520" marker-end="url(#tg-arr)"/>
+              <path d="M690 192 H760" marker-end="url(#tg-arr)"/>
+              <path d="M605 232 V360" marker-end="url(#tg-arr)"/>
+              <path d="M800 232 V275 H650 V360" marker-end="url(#tg-arr)"/>
+              <path d="M360 326 V410 H520" marker-end="url(#tg-arr)"/>
+            </g>
+            <g class="tg-e tg-e--dash">
+              <path d="M860 232 V360" marker-end="url(#tg-arr)"/>
+              <path d="M115 230 V474 H845 V442" marker-end="url(#tg-arr)"/>
+            </g>
+            <text x="120" y="468" class="tg-t-edge" dy="-6">uncertain matches</text>
+            <text x="852" y="330" text-anchor="end" class="tg-t-edge">uncertain entity</text>
+            <text x="655" y="268" class="tg-t-edge">add to brief</text>
+            <text x="597" y="330" text-anchor="end" class="tg-t-edge">compose on Program</text>
+            <text x="372" y="404" class="tg-t-edge">compose a brief</text>
+
+            <!-- nodes -->
+            <g>
+              <rect x="30" y="148" width="170" height="82" class="tg-n tg-n--built"/>
+              <text x="44" y="172" class="tg-t-name">Cockpit</text>
+              <text x="44" y="190" class="tg-t-sub">Built</text>
+              <text x="44" y="210" class="tg-t-sub">Since your last visit</text>
+            </g>
+            <g>
+              <rect x="270" y="94" width="180" height="78" class="tg-n tg-n--built"/>
+              <text x="284" y="118" class="tg-t-name">Programs index</text>
+              <text x="284" y="136" class="tg-t-sub">Built</text>
+              <text x="284" y="156" class="tg-t-sub">Every Program tracked</text>
+            </g>
+            <g>
+              <rect x="270" y="246" width="180" height="80" class="tg-n tg-n--built"/>
+              <text x="284" y="270" class="tg-t-name">Landscape</text>
+              <text x="284" y="288" class="tg-t-sub">Built</text>
+              <text x="284" y="308" class="tg-t-sub">Program lanes on a timeline</text>
+            </g>
+            <g>
+              <rect x="520" y="146" width="170" height="86" class="tg-n tg-n--built"/>
+              <text x="534" y="170" class="tg-t-name">Program page</text>
+              <text x="534" y="188" class="tg-t-sub">Built · the home unit</text>
+              <text x="534" y="208" class="tg-t-sub">Phase ladder and events</text>
+            </g>
+            <g>
+              <rect x="760" y="132" width="170" height="100" class="tg-n tg-n--built tg-n--focus"/>
+              <text x="774" y="156" class="tg-t-name">Event page</text>
+              <text x="774" y="174" class="tg-t-sub">Built</text>
+              <text x="774" y="194" class="tg-t-sub">Provenance walk:</text>
+              <text x="774" y="212" class="tg-t-sub">Source › … › Event</text>
+            </g>
+            <g>
+              <rect x="520" y="362" width="170" height="80" class="tg-n tg-n--built"/>
+              <text x="534" y="386" class="tg-t-name">Briefs</text>
+              <text x="534" y="404" class="tg-t-sub">Built</text>
+              <text x="534" y="424" class="tg-t-sub">Claims link back to events</text>
+            </g>
+            <g>
+              <rect x="760" y="362" width="170" height="80" class="tg-n tg-n--designed"/>
+              <text x="774" y="386" class="tg-t-name">Review workbench</text>
+              <text x="774" y="404" class="tg-t-sub">Designed, not built</text>
+              <text x="774" y="424" class="tg-t-sub">Resolve uncertain matches</text>
+            </g>
+          </svg>
+        </div>
+        <ul class="tg-sr">
+          <li>Command search reaches any Program or Event from every view.</li>
+          <li>Cockpit links to Programs index, Landscape, and, by a dashed route, to the Review workbench for uncertain matches.</li>
+          <li>Programs index and Landscape each link to the Program page.</li>
+          <li>Program page links to Event page and to Briefs.</li>
+          <li>Landscape links to Briefs.</li>
+          <li>Event page links to Briefs, and, by a dashed route, to the Review workbench for an uncertain entity.</li>
+        </ul>
+        <ul class="tg-legend" aria-label="Diagram key">
+          <li><span class="tg-sw tg-sw--solid"></span> Solid box: built</li>
+          <li><span class="tg-sw tg-sw--dash"></span> Dashed box: documented design</li>
+          <li><span class="tg-ln tg-ln--solid"></span> Solid arrow: navigation</li>
+          <li><span class="tg-ln tg-ln--dash"></span> Dashed arrow: route to a designed view</li>
+        </ul>
+
+        <h4 class="tg-label tg-label--acc tg-sub">Data spine</h4>
+        <div class="tg-region" role="region" aria-label="Data spine diagram, scrolls" tabindex="0">
+          <svg class="tg-svg tg-svg--spine" viewBox="0 0 960 230" role="img" aria-labelledby="tg-sp-t tg-sp-d">
+            <title id="tg-sp-t">Data spine</title>
+            <desc id="tg-sp-d">A chain of records: Source, Document, Assertion, Event, Program. Canonical entities attach to the Assertion and the Program.</desc>
+            <g class="tg-e">
+              <path d="M180 56 H210" marker-end="url(#tg-arr)"/>
+              <path d="M360 56 H390" marker-end="url(#tg-arr)"/>
+              <path d="M540 56 H570" marker-end="url(#tg-arr)"/>
+              <path d="M720 56 H750" marker-end="url(#tg-arr)"/>
+            </g>
+            <g class="tg-e tg-e--dash">
+              <path d="M465 84 V146" marker-end="url(#tg-arr)"/>
+              <path d="M825 84 V146" marker-end="url(#tg-arr)"/>
+            </g>
+            <g>
+              <rect x="30" y="22" width="150" height="62" class="tg-n tg-n--built"/><text x="44" y="46" class="tg-t-name">Source</text><text x="44" y="66" class="tg-t-sub">Who reported it</text>
+              <rect x="210" y="22" width="150" height="62" class="tg-n tg-n--built"/><text x="224" y="46" class="tg-t-name">Document</text><text x="224" y="66" class="tg-t-sub">Holds the snippet</text>
+              <rect x="390" y="22" width="150" height="62" class="tg-n tg-n--built"/><text x="404" y="46" class="tg-t-name">Assertion</text><text x="404" y="66" class="tg-t-sub">Annotated snippet</text>
+              <rect x="570" y="22" width="150" height="62" class="tg-n tg-n--built"/><text x="584" y="46" class="tg-t-name">Event</text><text x="584" y="66" class="tg-t-sub">Merged, all Sources</text>
+              <rect x="750" y="22" width="150" height="62" class="tg-n tg-n--built"/><text x="764" y="46" class="tg-t-name">Program</text><text x="764" y="66" class="tg-t-sub">Unit analysts open</text>
+            </g>
+            <rect x="390" y="148" width="510" height="56" class="tg-n tg-n--designed"/>
+            <text x="404" y="170" class="tg-t-name">Canonical entities</text>
+            <text x="404" y="190" class="tg-t-sub">Organization · Compound · Indication · Target · Trial</text>
+            <text x="475" y="122" class="tg-t-edge">entities recognized in</text>
+            <text x="815" y="122" text-anchor="end" class="tg-t-edge">Program joins two or more</text>
+          </svg>
+        </div>
+        <ul class="tg-sr">
+          <li>Source reports a Document. A Document holds a snippet. The Assertion annotates the snippet. Assertions consolidate into an Event. Events accrue onto a Program.</li>
+          <li>Canonical entities (Organization, Compound, Indication, Target, Trial) are recognized in the Assertion, and a Program joins two or more of them.</li>
+        </ul>
+        <p class="tg-fn">Provenance is reached through the chain, with no shortcut to a single "primary source". Confidence is one of three bands, never a number.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ DIALOG 3 · PROTOTYPE ============ -->
+  <dialog class="tg-dialog" id="tg-d-proto" aria-labelledby="tg-dt-proto">
+    <div class="tg-frame">
+      <header class="tg-dhead">
+        <div class="tg-dhead-l">
+          <p class="tg-eyebrow">Sanitized reconstruction · from the design mockups and design-intent notes</p>
+          <h3 class="tg-dtitle" id="tg-dt-proto">Three annotated screens, synthetic data</h3>
+        </div>
+        <div class="tg-dhead-r">
+          <span class="tg-chip tg-chip--designed">Designed</span>
+          <button type="button" class="tg-close" data-tg-close aria-label="Close: three annotated screens">Close <span aria-hidden="true">✕</span></button>
+        </div>
+      </header>
+      <div class="tg-dbody">
+        <p class="tg-look"><span class="tg-label">What to look for</span> Colour means one thing only, confidence: filled forest, ringed chartreuse, hollow dashed. The uncertain band is the most visible mark on every screen, because that is where the analyst's judgement is needed.</p>
+
+        <!-- Screen A: landscape -->
+        <section class="tg-screen" aria-labelledby="tg-sa-h">
+          <div class="tg-screen-head">
+            <h4 class="tg-label tg-label--acc" id="tg-sa-h">Screen 1 / Landscape</h4>
+            <span class="tg-synth">Synthetic data</span>
+          </div>
+          <div class="tg-screen-grid">
+            <div class="tg-region" role="region" aria-label="Landscape screen, scrolls" tabindex="0">
+              <div class="tg-app">
+                <div class="tg-app-bar"><span class="tg-label">Landscape · moderate asthma</span><span class="tg-app-meta">4 Programs, invented</span></div>
+                <svg class="tg-svg tg-svg--gantt" viewBox="0 0 760 270" role="img" aria-labelledby="tg-g-t tg-g-d">
+                  <title id="tg-g-t">Landscape timeline with four Program lanes</title>
+                  <desc id="tg-g-d">Each lane is a bar from first seen to today with event dots coloured by confidence. Two lanes project to a dashed catalyst flag.</desc>
+                  <!-- grid & header -->
+                  <rect x="0" y="0" width="760" height="40" class="tg-g-head"/>
+                  <path d="M200 0 V270 M335 0 V270 M470 0 V270 M605 0 V270 M740 0 V270" class="tg-s-grid"/>
+                  <text x="207" y="25" class="tg-t-sub">Q1</text><text x="342" y="25" class="tg-t-sub">Q2</text><text x="477" y="25" class="tg-t-sub">Q3</text><text x="612" y="25" class="tg-t-sub">Q4</text>
+                  <path d="M560 30 V270" class="tg-g-today"/>
+                  <rect x="530" y="8" width="60" height="20" class="tg-g-pill"/><text x="560" y="23" text-anchor="middle" class="tg-t-pilltext">today</text>
+                  <!-- lane separators -->
+                  <path d="M0 96 H760 M0 152 H760 M0 208 H760 M0 264 H760" class="tg-s-grid"/>
+                  <rect x="0" y="40" width="200" height="56" class="tg-g-focal"/>
+                  <!-- identity column -->
+                  <g class="tg-g-id">
+                    <text x="12" y="62" class="tg-t-name">Northwind Therapeutics</text><text x="12" y="80" class="tg-t-sub">NW-101 · Phase 2</text>
+                    <text x="12" y="118" class="tg-t-name">Alder Vale Pharma</text><text x="12" y="136" class="tg-t-sub">AV-220 · Phase 3</text>
+                    <text x="12" y="174" class="tg-t-name">Tern Hollow Pharma</text><text x="12" y="192" class="tg-t-sub">TH-14 · Phase 1</text>
+                    <text x="12" y="230" class="tg-t-name">Marrow Lane Biotech</text><text x="12" y="248" class="tg-t-sub">ML-7 · Preclinical</text>
+                  </g>
+                  <!-- bars -->
+                  <rect x="225" y="58" width="335" height="24" class="tg-g-bar"/><text x="552" y="75" text-anchor="end" class="tg-t-sub">Phase 2</text>
+                  <rect x="300" y="114" width="260" height="24" class="tg-g-bar"/><text x="552" y="131" text-anchor="end" class="tg-t-sub">Phase 3</text>
+                  <rect x="410" y="170" width="150" height="24" class="tg-g-bar"/><text x="552" y="187" text-anchor="end" class="tg-t-sub">Phase 1</text>
+                  <rect x="480" y="226" width="80" height="24" class="tg-g-bar"/><text x="552" y="243" text-anchor="end" class="tg-t-sub">Pre</text>
+                  <!-- projection + flags -->
+                  <path d="M560 70 H620" class="tg-g-proj"/>
+                  <rect x="620" y="60" width="120" height="20" class="tg-g-flag"/><text x="680" y="74" text-anchor="middle" class="tg-t-pilltext">◆ readout · Q4</text>
+                  <path d="M560 182 H600" class="tg-g-proj"/>
+                  <rect x="600" y="172" width="140" height="20" class="tg-g-flag"/><text x="670" y="186" text-anchor="middle" class="tg-t-pilltext">◆ data update · Q4</text>
+                  <!-- dots lane 1 -->
+                  <circle cx="250" cy="70" r="6" class="tg-d-high"/><circle cx="330" cy="70" r="6" class="tg-d-med"/><circle cx="420" cy="70" r="6" class="tg-d-high"/><circle cx="470" cy="70" r="8" class="tg-d-unc"/>
+                  <!-- lane 2 -->
+                  <circle cx="330" cy="126" r="6" class="tg-d-high"/><circle cx="410" cy="126" r="6" class="tg-d-high"/><circle cx="470" cy="126" r="6" class="tg-d-med"/>
+                  <!-- lane 3 -->
+                  <circle cx="440" cy="182" r="6" class="tg-d-med"/><circle cx="485" cy="182" r="8" class="tg-d-unc"/>
+                  <!-- lane 4 -->
+                  <circle cx="520" cy="238" r="6" class="tg-d-high"/>
+                  <!-- callout markers -->
+                  <g class="tg-callout"><circle cx="226" cy="52" r="9"/><text x="226" y="56" text-anchor="middle">1</text></g>
+                  <g class="tg-callout"><circle cx="470" cy="50" r="9"/><text x="470" y="54" text-anchor="middle">2</text></g>
+                </svg>
+                <ul class="tg-legend tg-legend--tight" aria-label="Landscape key">
+                  <li><svg class="tg-key-dot" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6" class="tg-d-high"/></svg> High confidence: filled forest</li>
+                  <li><svg class="tg-key-dot" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6" class="tg-d-med"/></svg> Medium: chartreuse, inked ring</li>
+                  <li><svg class="tg-key-dot" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" class="tg-d-unc"/></svg> Uncertain: hollow, dashed ring</li>
+                  <li><span class="tg-diamond" aria-hidden="true"></span> Next catalyst, projected</li>
+                </ul>
+              </div>
+            </div>
+            <ol class="tg-notes">
+              <li><span class="tg-mark">1</span><p>Bars run from first seen to today, so a lane's length is evidence history, not a schedule.</p></li>
+              <li><span class="tg-mark">2</span><p>Dots are coloured by confidence, never by event type. The uncertain dot is larger and hollow rather than faded.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Screen B: event page -->
+        <section class="tg-screen" aria-labelledby="tg-sb-h">
+          <div class="tg-screen-head">
+            <h4 class="tg-label tg-label--acc" id="tg-sb-h">Screen 2 / Event page</h4>
+            <span class="tg-synth">Synthetic data</span>
+          </div>
+          <div class="tg-screen-grid">
+            <div class="tg-region" role="region" aria-label="Event page screen, scrolls" tabindex="0">
+              <div class="tg-app tg-app--event">
+                <div class="tg-app-bar"><span class="tg-label">Programs / Northwind Therapeutics / NW-101</span><span class="tg-app-meta">Event page</span></div>
+                <div class="tg-ev-head">
+                  <span class="tg-verb">completes enrollment</span>
+                  <span class="tg-conf tg-conf--high"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6" class="tg-d-high"/></svg>High confidence</span>
+                </div>
+                <p class="tg-ev-title">NW-101 completes enrollment in a moderate asthma study</p>
+
+                <p class="tg-label tg-walklabel"><span class="tg-mark" aria-hidden="true">1</span> Provenance walk</p>
+                <ol class="tg-walk" aria-label="Provenance walk: Source, Document, Snippet, Assertion, Event">
+                  <li class="tg-walk-n"><span class="tg-walk-step">1 · Source</span><b>Sponsor press release</b><span>authority: sponsor</span></li>
+                  <li class="tg-walk-n"><span class="tg-walk-step">2 · Document</span><b>"Northwind completes NW-101 enrollment"</b><span>published Day 0</span></li>
+                  <li class="tg-walk-n tg-walk-n--hi"><span class="tg-walk-step">3 · Snippet</span><b>Verbatim quote</b><span>shown below, never paraphrased</span></li>
+                  <li class="tg-walk-n"><span class="tg-walk-step">4 · Assertion</span><b>NW-101 enrollment complete</b><span>entities: sponsor, compound, indication</span></li>
+                  <li class="tg-walk-n tg-walk-n--term"><span class="tg-walk-step">5 · Event</span><b>Enrollment complete</b><span>Northwind · NW-101</span></li>
+                </ol>
+                <blockquote class="tg-quote">
+                  <p class="tg-label">Verbatim from the document</p>
+                  <p>“Enrollment in the NW-101 moderate asthma study has completed, with all planned participants randomized.”</p>
+                </blockquote>
+
+                <p class="tg-label tg-gridlabel"><span class="tg-mark" aria-hidden="true">2</span> Four Sources report this event</p>
+                <div class="tg-tablewrap">
+                <table class="tg-table tg-table--grid">
+                  <caption class="tg-sr">Source agreement grid for the event</caption>
+                  <thead><tr><th scope="col">Source</th><th scope="col">Authority</th><th scope="col">Published</th><th scope="col">Ingested</th><th scope="col">Agreement</th><th scope="col">Note</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Sponsor press release</th><td>sponsor</td><td>Day 0</td><td>Day 0</td><td><span class="tg-agree tg-agree--anchor"><span aria-hidden="true">◆</span> anchor</span></td><td>Source of the quote above</td></tr>
+                    <tr><th scope="row">Trial registry entry</th><td>authoritative</td><td>Day 1</td><td>Day 1</td><td><span class="tg-agree tg-agree--agrees"><span aria-hidden="true">✓</span> agrees</span></td><td>Status updated to match</td></tr>
+                    <tr><th scope="row">Industry news wire</th><td>secondary</td><td>Day 0</td><td>Day 1</td><td><span class="tg-agree tg-agree--adds"><span aria-hidden="true">+</span> adds context</span></td><td>Adds study design detail</td></tr>
+                    <tr><th scope="row">Investor call transcript</th><td>secondary</td><td>Day 3</td><td>Day 4</td><td><span class="tg-agree tg-agree--dis"><span aria-hidden="true">≠</span> disagrees</span></td><td>Calls enrollment "nearly complete"</td></tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
+            <ol class="tg-notes">
+              <li><span class="tg-mark">1</span><p>The walk is the trust mechanism. A skeptical reader can point at any claim and follow it back, with the quote, without anyone narrating.</p></li>
+              <li><span class="tg-mark">2</span><p>All reporting Sources stay visible with a role each. A disagreeing Source is shown, never folded into a single "primary source".</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Screen C: workbench -->
+        <section class="tg-screen" aria-labelledby="tg-sc-h">
+          <div class="tg-screen-head">
+            <h4 class="tg-label tg-label--acc" id="tg-sc-h">Screen 3 / Review workbench</h4>
+            <span class="tg-synth">Synthetic data</span>
+            <span class="tg-chip tg-chip--designed">Designed, not built</span>
+          </div>
+          <div class="tg-screen-grid">
+            <div class="tg-region" role="region" aria-label="Review workbench screen, scrolls" tabindex="0">
+              <div class="tg-app tg-app--wb">
+                <div class="tg-app-bar"><span class="tg-label">Review workbench</span><span class="tg-app-meta">Uncertain matches</span></div>
+                <div class="tg-wb">
+                  <div class="tg-wb-queue">
+                    <p class="tg-label">Queue</p>
+                    <ul>
+                      <li class="is-on"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" class="tg-d-unc"/></svg><span>Mention of "NW"<br><em>open</em></span></li>
+                      <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" class="tg-d-unc"/></svg><span>Mention of "TH-14b"<br><em>open</em></span></li>
+                      <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" class="tg-d-unc"/></svg><span>Mention of "AV"<br><em>deferred</em></span></li>
+                    </ul>
+                  </div>
+                  <div class="tg-wb-main">
+                    <p class="tg-label">Which sponsor does this mention mean?</p>
+                    <p class="tg-wb-ctx">“…enrollment update from <mark>NW</mark> on the lead asthma compound…”</p>
+                    <ol class="tg-cands">
+                      <li class="tg-cand tg-cand--pick">
+                        <span class="tg-key-badge">1</span>
+                        <div class="tg-cand-b">
+                          <p class="tg-cand-n">Northwind Therapeutics <span class="tg-suggest"><span class="tg-mark" aria-hidden="true">2</span> Suggested</span></p>
+                          <p class="tg-cand-r">Sponsor of NW-101, named in the same document.</p>
+                        </div>
+                        <div class="tg-score"><span class="tg-score-l">Strong match</span><span class="tg-bar" role="img" aria-label="Strong match, bar mostly full"><i style="width:86%"></i></span></div>
+                      </li>
+                      <li class="tg-cand">
+                        <span class="tg-key-badge">2</span>
+                        <div class="tg-cand-b">
+                          <p class="tg-cand-n">Northwind Diagnostics</p>
+                          <p class="tg-cand-r">Same name stem, no asthma programs on record.</p>
+                        </div>
+                        <div class="tg-score"><span class="tg-score-l">Possible</span><span class="tg-bar" role="img" aria-label="Possible match, bar about a third full"><i style="width:34%"></i></span></div>
+                      </li>
+                      <li class="tg-cand">
+                        <span class="tg-key-badge">3</span>
+                        <div class="tg-cand-b">
+                          <p class="tg-cand-n">NW Biologics Ltd</p>
+                          <p class="tg-cand-r">Abbreviation matches, different indication area.</p>
+                        </div>
+                        <div class="tg-score"><span class="tg-score-l">Weak match</span><span class="tg-bar" role="img" aria-label="Weak match, bar nearly empty"><i style="width:14%"></i></span></div>
+                      </li>
+                    </ol>
+                    <div class="tg-actions">
+                      <span class="tg-mark" aria-hidden="true">1</span><span class="tg-btn tg-btn--pri">Confirm pick</span><span class="tg-btn">Defer</span>
+                      <span class="tg-keys" aria-label="Keyboard shortcuts"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> pick <kbd>Enter</kbd> confirm <kbd>D</kbd> defer <kbd>Esc</kbd> clear</span>
+                    </div>
+                  </div>
+                  <div class="tg-wb-rail">
+                    <p class="tg-label">Reuse</p>
+                    <p>Earlier decisions are applied to matching mentions, and each one can be reverted. This panel makes the loop visible.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ol class="tg-notes">
+              <li><span class="tg-mark">1</span><p>Selecting is not committing. The analyst picks a card, then confirms from the action bar, and the keys signal a working surface, not a tutorial.</p></li>
+              <li><span class="tg-mark">2</span><p>The platform's pick is a hint beside its rationale, and the bars carry words as well as length. The human call is recorded and reused.</p></li>
+            </ol>
+          </div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ DIALOG 4 · DELIVERY PLANNING ============ -->
+  <dialog class="tg-dialog" id="tg-d-plan" aria-labelledby="tg-dt-plan">
+    <div class="tg-frame">
+      <header class="tg-dhead">
+        <div class="tg-dhead-l">
+          <p class="tg-eyebrow">Sanitized reconstruction · from the kickoff brief and the post-kickoff plan</p>
+          <h3 class="tg-dtitle" id="tg-dt-plan">Milestone ladder, lanes and sub-projects</h3>
+        </div>
+        <div class="tg-dhead-r">
+          <span class="tg-chip tg-chip--planned">Planned</span>
+          <button type="button" class="tg-close" data-tg-close aria-label="Close: milestone ladder, lanes and sub-projects">Close <span aria-hidden="true">✕</span></button>
+        </div>
+      </header>
+      <div class="tg-dbody">
+        <p class="tg-look"><span class="tg-label">What to look for</span> Milestones are ordered by what must be true before the next one, with no dates attached. The evidence packet comes first because it settles architecture questions with real examples before anyone debates them.</p>
+        <div class="tg-region tg-region--sheet" role="region" aria-label="Delivery planning reconstruction, scrolls" tabindex="0">
+          <div class="tg-plan">
+
+            <section class="tg-plan-sec" aria-labelledby="tg-p1">
+              <h4 class="tg-label tg-label--acc" id="tg-p1">01 / Milestone ladder</h4>
+              <ol class="tg-ladder">
+                <li class="tg-rung tg-rung--doc" style="--rung:1"><span class="tg-rung-n">1</span><b>Kickoff alignment</b><span>Shared vocabulary locked, workstream ownership reinforced.</span></li>
+                <li class="tg-rung tg-rung--doc" style="--rung:2"><span class="tg-rung-n">2</span><b>Project plan</b><span>One plan: outcomes, sequencing, dependencies across the four lanes.</span></li>
+                <li class="tg-rung tg-rung--doc" style="--rung:3"><span class="tg-rung-n">3</span><b>Workstream plans</b><span>Each lane plans inside itself, traceable to the success measures.</span></li>
+                <li class="tg-rung tg-rung--doc" style="--rung:4"><span class="tg-rung-n">4</span><b>Single-target MVP</b><span>One end-to-end reference question answered from the platform alone, with provenance.</span></li>
+                <li class="tg-rung tg-rung--doc" style="--rung:5"><span class="tg-rung-n">5</span><b>Delivered to the analyst</b><span>Recurring weekly use, not a demonstration.</span></li>
+                <li class="tg-rung tg-rung--plan" style="--rung:6"><span class="tg-rung-n">6</span><b>Targeted use</b><span>More specific questions borrow the same records. Scope to be decided.</span></li>
+              </ol>
+              <ul class="tg-legend tg-legend--tight" aria-label="Ladder key">
+                <li><span class="tg-sw tg-sw--dash"></span> Dashed: documented plan</li>
+                <li><span class="tg-sw tg-sw--dot"></span> Dotted: planned, scope open</li>
+              </ul>
+            </section>
+
+            <section class="tg-plan-sec" aria-labelledby="tg-p2">
+              <h4 class="tg-label tg-label--acc" id="tg-p2">02 / Four workstream lanes, by role</h4>
+              <div class="tg-lanes">
+                <div class="tg-lane"><p class="tg-lane-h">Source operations</p><p>Decides what the platform pays attention to and how often: source contracts, ingestion, when a Source is adopted or retired.</p></div>
+                <div class="tg-lane"><p class="tg-lane-h">Recognition</p><p>Decides which entity a piece of evidence refers to: the canonical catalog and the resolution streams.</p></div>
+                <div class="tg-lane"><p class="tg-lane-h">Semantics and output</p><p>Decides what an observation means: schema, consolidation, the brief contract and export shape.</p></div>
+                <div class="tg-lane"><p class="tg-lane-h">Analyst surface</p><p>Owns the surfaces an analyst uses end to end: Program pages, landscape, entity pages, briefs and exports.</p></div>
+              </div>
+            </section>
+
+            <section class="tg-plan-sec" aria-labelledby="tg-p3">
+              <h4 class="tg-label tg-label--acc" id="tg-p3">03 / Eight sub-projects in three groups</h4>
+              <div class="tg-groups">
+                <div class="tg-group">
+                  <p class="tg-group-h">A · Data in</p>
+                  <ol class="tg-subs" start="1">
+                    <li><span class="tg-sub-n">1</span><span class="tg-sub-t">Source survey and watchlist</span><span class="tg-ver">V1</span></li>
+                    <li><span class="tg-sub-n">2</span><span class="tg-sub-t">Source operations and freshness</span><span class="tg-ver">V1</span></li>
+                  </ol>
+                  <p class="tg-group-f">Lane: source operations</p>
+                </div>
+                <div class="tg-group">
+                  <p class="tg-group-h">B · Events</p>
+                  <ol class="tg-subs" start="3">
+                    <li><span class="tg-sub-n">3</span><span class="tg-sub-t">Canonical entity catalog</span><span class="tg-ver">V1</span></li>
+                    <li><span class="tg-sub-n">4</span><span class="tg-sub-t">Entity resolution workbench</span><span class="tg-ver">V1</span></li>
+                    <li><span class="tg-sub-n">5</span><span class="tg-sub-t">Assertion-to-event model</span><span class="tg-ver">V1</span></li>
+                  </ol>
+                  <p class="tg-group-f">Lanes: recognition, semantics and output</p>
+                </div>
+                <div class="tg-group">
+                  <p class="tg-group-h">C · In front of an analyst</p>
+                  <ol class="tg-subs" start="6">
+                    <li><span class="tg-sub-n">6</span><span class="tg-sub-t">Weekly analyst cockpit</span><span class="tg-ver">V1</span></li>
+                    <li><span class="tg-sub-n">7</span><span class="tg-sub-t">Provenance and confidence surface</span><span class="tg-ver">V1</span></li>
+                    <li class="tg-sub--later"><span class="tg-sub-n">8</span><span class="tg-sub-t">Export to slides and documents</span><span class="tg-ver tg-ver--later">V1.1</span></li>
+                  </ol>
+                  <p class="tg-group-f">Lane: analyst surface</p>
+                </div>
+              </div>
+              <p class="tg-fn">Each group depends on the one before it. Sub-project 8 is deferred on purpose: the first release has to earn trust before it tries to replace a workflow.</p>
+            </section>
+
+            <section class="tg-plan-sec" aria-labelledby="tg-p4">
+              <h4 class="tg-label tg-label--acc" id="tg-p4">04 / The evidence packet</h4>
+              <div class="tg-packet">
+                <p>A small set of real examples, each chosen to force an architecture decision. Sub-projects 1 and 2 produce it, a working group ratifies it, and the later sub-projects build against what it settled.</p>
+                <ol class="tg-list tg-list--num">
+                  <li><b>Snippet or whole document?</b> A press release whose headline and fourth paragraph contradict each other.</li>
+                  <li><b>Where does an assertion end and an event begin?</b> One article that reports several events.</li>
+                  <li><b>Which source types ship first?</b> Chosen from a longer candidate list.</li>
+                  <li><b>What does confidence look like?</b> One high, one borderline and one ambiguous example.</li>
+                  <li><b>What does a consolidated event show?</b> Every reporting link, or one canonical link.</li>
+                </ol>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</div>

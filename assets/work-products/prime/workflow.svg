@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1832 790" width="1832" height="790" role="img" font-family='"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif'>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></marker></defs>
+<rect width="1832" height="790" fill="#fbfbfa"/>
+<rect x="24" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="44" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">01 · BUILD ADVISOR</text>
+<rect x="492" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="512" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">02 · CONVERSE</text>
+<rect x="960" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="980" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">03 · CRITIQUE AND VERIFY</text>
+<rect x="1428" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="1448" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">04 · SHARE</text>
+<path d="M214.0 196.0 L214.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M214.0 360.0 L214.0 406.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M362.0 465.0 L448.0 465.0 L448.0 137.0 L534.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M682.0 196.0 L682.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M830.0 301.0 L916.0 301.0 L916.0 137.0 L1002.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 196.0 L1150.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 360.0 L1150.0 406.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1262.0 465.0 L1384.0 465.0 L1384.0 137.0 L1470.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 524.0 L1150.0 570.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1002.0 629.0 L977.0 629.0 L977.0 137.0 L1002.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-dasharray="7 5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1618.0 196.0 L1618.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1766.0 137.0 L1796.0 137.0 L1796.0 465.0 L1766.0 465.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1766.0 137.0 L1779.0 137.0 L1779.0 629.0 L1766.0 629.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1618.0 688.0 L1618.0 756.0 L41.0 756.0 L41.0 137.0 L66.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-dasharray="7 5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="66.0" y="78" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="66.0" y="78" width="4" height="118" fill="#0b0b0c"/><line x1="74.0" y1="78" x2="74.0" y2="196" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="90.0" y="115.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(99.0 124.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14" /> <path d="M12 6v14" /> <path d="M8 8v12" /> <path d="M4 4v16" /></g>
+<text x="148.0" y="118.5" font-size="19" font-weight="700" fill="#0b0b0c">Source corpus</text>
+<text x="148.0" y="146.5" font-size="16" fill="#5c6066">Literature + recorded</text>
+<text x="148.0" y="167.5" font-size="16" fill="#5c6066">views</text>
+<rect x="66.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="66.0" y="242" width="4" height="118" fill="#0b0b0c"/><line x1="74.0" y1="242" x2="74.0" y2="360" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="90.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(99.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="10" r="3" /> <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></g>
+<text x="148.0" y="282.5" font-size="19" font-weight="700" fill="#0b0b0c">Grounded profile</text>
+<text x="148.0" y="310.5" font-size="16" fill="#5c6066">Each claim linked to a</text>
+<text x="148.0" y="331.5" font-size="16" fill="#5c6066">source</text>
+<rect x="66.0" y="406" width="296" height="118" fill="#e4f17c" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="66.0" y="406" width="296" height="5" fill="#0b0b0c"/>
+<rect x="88.0" y="445.0" width="44" height="44" fill="rgba(11,11,12,.09)"/>
+<g transform="translate(97.0 454.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <polyline points="16 11 18 13 22 9" /></g>
+<text x="146.0" y="448.5" font-size="19" font-weight="700" fill="#0b0b0c">Curator promotion</text>
+<text x="146.0" y="476.5" font-size="16" fill="#2b2e24">Depth gate before</text>
+<text x="146.0" y="497.5" font-size="16" fill="#2b2e24">critique</text>
+<rect x="534.0" y="78" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="556.0" y="115.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(565.0 124.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></g>
+<text x="614.0" y="117.0" font-size="19" font-weight="700" fill="#ffffff">Advisor</text>
+<text x="614.0" y="141.0" font-size="19" font-weight="700" fill="#ffffff">conversation</text>
+<text x="614.0" y="169.0" font-size="16" fill="#d4e4dc">Hedged on thin evidence</text>
+<rect x="534.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="534.0" y="242" width="4" height="118" fill="#0b0b0c"/><line x1="542.0" y1="242" x2="542.0" y2="360" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="558.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(567.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20" /> <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /> <path d="m7 21 5-5 5 5" /></g>
+<text x="616.0" y="293.0" font-size="19" font-weight="700" fill="#0b0b0c">Deck attached</text>
+<text x="616.0" y="321.0" font-size="16" fill="#5c6066">Added mid-conversation</text>
+<rect x="1002.0" y="78" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="1024.0" y="115.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(1033.0 124.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></g>
+<text x="1082.0" y="129.0" font-size="19" font-weight="700" fill="#ffffff">Draft critique</text>
+<text x="1082.0" y="157.0" font-size="16" fill="#d4e4dc">Points tied to slides</text>
+<rect x="1002.0" y="242" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="1024.0" y="279.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(1033.0 288.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></g>
+<text x="1082.0" y="282.5" font-size="19" font-weight="700" fill="#ffffff">Independent check</text>
+<text x="1082.0" y="310.5" font-size="16" fill="#d4e4dc">Separate pass tests each</text>
+<text x="1082.0" y="331.5" font-size="16" fill="#d4e4dc">point</text>
+<polygon points="1150.0,406 1262.0,465.0 1150.0,524 1038.0,465.0" fill="#e4f17c" stroke="#0b0b0c" stroke-width="1.5"/>
+<text x="1150.0" y="472.0" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0c">Supported?</text>
+<rect x="1002.0" y="570" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1002.0" y="570" width="4" height="118" fill="#0b0b0c"/><line x1="1010.0" y1="570" x2="1010.0" y2="688" stroke="#0b0b0c" stroke-width="1"/>
+<text x="1028.0" y="621.0" font-size="19" font-weight="700" fill="#0b0b0c">State the gap</text>
+<text x="1028.0" y="649.0" font-size="16" fill="#5c6066">Abstain; never fill it in</text>
+<rect x="1470.0" y="78" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="1492.0" y="115.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(1501.0 124.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" /> <path d="m9 18-1.5-1.5" /> <circle cx="5" cy="14" r="3" /></g>
+<text x="1550.0" y="129.0" font-size="19" font-weight="700" fill="#ffffff">Critique readout</text>
+<text x="1550.0" y="157.0" font-size="16" fill="#d4e4dc">Verdict + slide basis</text>
+<rect x="1470.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></g>
+<text x="1550.0" y="293.0" font-size="19" font-weight="700" fill="#0b0b0c">Standalone page</text>
+<text x="1550.0" y="321.0" font-size="16" fill="#5c6066">Readable without the app</text>
+<rect x="1470.0" y="406" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="443.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 452.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20" /> <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /> <path d="m7 21 5-5 5 5" /></g>
+<text x="1550.0" y="457.0" font-size="19" font-weight="700" fill="#0b0b0c">Annotated deck</text>
+<text x="1550.0" y="485.0" font-size="16" fill="#5c6066">Comments on the slides</text>
+<rect x="1470.0" y="570" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="607.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 616.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></g>
+<text x="1550.0" y="610.5" font-size="19" font-weight="700" fill="#0b0b0c">Copy-first handoff</text>
+<text x="1550.0" y="638.5" font-size="16" fill="#5c6066">Planned; labelled</text>
+<text x="1550.0" y="659.5" font-size="16" fill="#5c6066">unverified</text>
+<rect x="406.2" y="290.0" width="83.6" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="448.0" y="306.0" text-anchor="middle" font-size="14.5" fill="#3d4452">promoted</text>
+<rect x="882.4" y="208.0" width="67.2" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="916.0" y="224.0" text-anchor="middle" font-size="14.5" fill="#3d4452">slides</text>
+<rect x="1338.1" y="290.0" width="91.8" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="1384.0" y="306.0" text-anchor="middle" font-size="14.5" fill="#3d4452">supported</text>
+<rect x="1132.8" y="536.0" width="34.4" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="1150.0" y="552.0" text-anchor="middle" font-size="14.5" fill="#3d4452">no</text>
+<g transform="translate(977.0 383.0) rotate(-90)"><rect x="-54.1" y="-11" width="108.2" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text y="5" text-anchor="middle" font-size="14.5" fill="#3d4452">revise once</text></g>
+<rect x="701.6" y="745.0" width="255.8" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="829.5" y="761.0" text-anchor="middle" font-size="14.5" fill="#3d4452">planned expert fidelity check</text>
+</svg>

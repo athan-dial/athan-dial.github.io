@@ -1,0 +1,120 @@
+{
+  "meta": {"target": "Target ZNT4", "today": "2026-06-01", "lastReview": "2026-05-18", "start": "2025-10-01", "end": "2026-10-01"},
+  "phases": ["Preclinical", "Phase 1", "Phase 2", "Phase 3"],
+  "sources": {
+    "nw_pr": {"name": "Northwind press release", "type": "Sponsor", "authority": "authoritative"},
+    "registry": {"name": "Trial registry record", "type": "Registry", "authority": "authoritative"},
+    "wire": {"name": "Biopharma Wire", "type": "News", "authority": "secondary"},
+    "insider": {"name": "Respiratory Insider", "type": "News", "authority": "secondary"},
+    "hb_pr": {"name": "Halden Bio announcement", "type": "Sponsor", "authority": "authoritative"},
+    "cp_pr": {"name": "Cobalt Peak release", "type": "Sponsor", "authority": "authoritative"},
+    "ms_ir": {"name": "Meridian investor update", "type": "Sponsor", "authority": "authoritative"},
+    "tl_pr": {"name": "Tessel Labs release", "type": "Sponsor", "authority": "authoritative"},
+    "digest": {"name": "Markets Digest", "type": "News", "authority": "secondary"}
+  },
+  "programs": [
+    {
+      "id": "nw101", "sponsor": "Northwind Therapeutics", "asset": "NW-101", "indication": "Moderate asthma", "phase": 2, "firstSeen": "2025-10-08",
+      "catalysts": [{"date": "2026-09-15", "label": "Phase 3 design update expected"}],
+      "events": [
+        {"id": "nw1", "date": "2025-10-08", "precision": "day", "verb": "Started", "title": "Northwind starts a Phase 2 study of NW-101", "conf": "high", "score": 0.93, "isNew": false,
+         "sources": [{"src": "nw_pr", "role": "anchor", "published": "2025-10-08", "ingested": "2025-10-08", "claim": "NW-101 Phase 2 study has begun dosing in moderate asthma.", "snippet": "Northwind Therapeutics today announced that the first participants have been dosed in its Phase 2 study of NW-101 in adults with moderate asthma.", "hl": "first participants have been dosed"}],
+         "revisions": [{"kind": "created", "note": "First report of the study start."}],
+         "entities": [{"name": "Northwind Therapeutics", "cls": "Organization", "conf": "high"}, {"name": "NW-101", "cls": "Asset", "conf": "high"}, {"name": "Moderate asthma", "cls": "Indication", "conf": "high"}]},
+        {"id": "nw2", "date": "2025-12-02", "precision": "day", "verb": "Completed", "title": "Northwind completes enrollment in the NW-101 study", "conf": "high", "score": 0.9, "isNew": false,
+         "sources": [{"src": "registry", "role": "anchor", "published": "2025-12-02", "ingested": "2025-12-03", "claim": "Enrollment for the NW-101 Phase 2 study is complete.", "snippet": "Recruitment status: Active, not recruiting. Enrollment target reached.", "hl": "Enrollment target reached"}, {"src": "nw_pr", "role": "agrees", "published": "2025-12-02", "ingested": "2025-12-02", "claim": "Northwind finished enrolling its Phase 2 asthma study.", "snippet": "Northwind has completed enrollment in the Phase 2 study of NW-101, with topline results expected in the first half of next year.", "hl": "completed enrollment"}],
+         "revisions": [{"kind": "created", "note": "Registry status changed."}, {"kind": "corroborated", "note": "Sponsor release restates the same fact."}],
+         "entities": [{"name": "Northwind Therapeutics", "cls": "Organization", "conf": "high"}, {"name": "NW-101", "cls": "Asset", "conf": "high"}]},
+        {"id": "nw3", "date": "2026-03-12", "precision": "day", "verb": "Reported results", "title": "Northwind reports Phase 2 topline for NW-101 in moderate asthma", "conf": "medium", "score": 0.78, "isNew": false, "featured": true,
+         "sources": [
+           {"src": "nw_pr", "role": "anchor", "published": "2026-03-12", "ingested": "2026-03-12", "claim": "NW-101 met its primary endpoint, a change in lung function at week 12.", "snippet": "NW-101 met the primary endpoint of improvement in lung function at week 12 compared with placebo, Northwind Therapeutics announced today.", "hl": "met the primary endpoint of improvement in lung function at week 12"},
+           {"src": "registry", "role": "adds-context", "published": "2026-03-12", "ingested": "2026-03-13", "claim": "The Phase 2 study status changed to completed.", "snippet": "Overall status: Completed. Primary completion reached for the NW-101 Phase 2 study.", "hl": "Overall status: Completed"},
+           {"src": "wire", "role": "agrees", "published": "2026-03-12", "ingested": "2026-03-12", "claim": "Analysts called the lung-function improvement statistically significant.", "snippet": "Shares rose after Northwind said NW-101 produced a statistically significant improvement in lung function in its mid-stage asthma trial.", "hl": "statistically significant improvement in lung function"},
+           {"src": "insider", "role": "disagrees", "published": "2026-03-13", "ingested": "2026-03-13", "claim": "Topline was reported on 13 March.", "snippet": "On Thursday Northwind disclosed topline data for NW-101, its mid-stage asthma candidate, with full results planned for a medical meeting.", "hl": "On Thursday Northwind disclosed topline data"}
+         ],
+         "revisions": [{"kind": "created", "note": "Sponsor release founds the event."}, {"kind": "corroborated", "note": "Registry status adds context, no new claim."}, {"kind": "augmented", "note": "Wire coverage adds the significance claim."}, {"kind": "corroborated", "note": "A fourth report restates it, with a different day."}],
+         "entities": [{"name": "Northwind Therapeutics", "cls": "Organization", "conf": "high"}, {"name": "NW-101", "cls": "Asset", "conf": "high"}, {"name": "Moderate asthma", "cls": "Indication", "conf": "medium", "note": "Matched from 'mid-stage asthma trial'; one source lacks the severity term."}],
+         "note": "Date reads 12 March (day precision). One source gives 'Thursday', published a day later, so the platform keeps both and shows the disagreement."},
+        {"id": "nw4", "date": "2026-05-20", "precision": "month", "verb": "Planned", "title": "Northwind plans a Phase 3 discussion with regulators", "conf": "uncertain", "score": 0.52, "isNew": true,
+         "sources": [{"src": "digest", "role": "anchor", "published": "2026-05-20", "ingested": "2026-05-21", "claim": "Northwind intends to discuss Phase 3 design with regulators this year.", "snippet": "Northwind expects to meet regulators on a Phase 3 design for NW-101 later this year, according to people familiar with the plan.", "hl": "expects to meet regulators on a Phase 3 design"}],
+         "revisions": [{"kind": "created", "note": "A single secondary report; no sponsor confirmation yet."}],
+         "entities": [{"name": "Northwind Therapeutics", "cls": "Organization", "conf": "high"}, {"name": "NW-101", "cls": "Asset", "conf": "high"}]}
+      ]
+    },
+    {
+      "id": "hb2207", "sponsor": "Halden Bio", "asset": "HB-2207", "indication": "Moderate asthma", "phase": 1, "firstSeen": "2025-11-14", "catalysts": [],
+      "events": [
+        {"id": "hb1", "date": "2025-11-14", "precision": "day", "verb": "Started", "title": "Halden Bio doses the first participant with HB-2207", "conf": "high", "score": 0.91, "isNew": false,
+         "sources": [{"src": "hb_pr", "role": "anchor", "published": "2025-11-14", "ingested": "2025-11-14", "claim": "HB-2207 has entered a first-in-human study.", "snippet": "Halden Bio announced that the first participant has been dosed in the first-in-human study of HB-2207.", "hl": "first participant has been dosed"}],
+         "revisions": [{"kind": "created", "note": "First report."}], "entities": [{"name": "Halden Bio", "cls": "Organization", "conf": "high"}, {"name": "HB-2207", "cls": "Asset", "conf": "high"}]},
+        {"id": "hb2", "date": "2026-02-20", "precision": "day", "verb": "Raised financing", "title": "Halden Bio raises financing to advance HB-2207", "conf": "medium", "score": 0.74, "isNew": false,
+         "sources": [{"src": "digest", "role": "anchor", "published": "2026-02-20", "ingested": "2026-02-20", "claim": "Halden Bio raised new funding tied to HB-2207.", "snippet": "Halden Bio has raised new capital that it said would fund the next stage of development of HB-2207.", "hl": "raised new capital"}, {"src": "hb_pr", "role": "agrees", "published": "2026-02-20", "ingested": "2026-02-21", "claim": "The financing supports HB-2207 development.", "snippet": "Proceeds will support the clinical development of HB-2207 in asthma.", "hl": "support the clinical development of HB-2207"}],
+         "revisions": [{"kind": "created", "note": "News report."}, {"kind": "corroborated", "note": "Sponsor restates it."}], "entities": [{"name": "Halden Bio", "cls": "Organization", "conf": "high"}, {"name": "HB-2207", "cls": "Asset", "conf": "high"}]},
+        {"id": "hb3", "date": "2026-05-22", "precision": "day", "verb": "Reported results", "title": "Halden Bio reports Phase 1 safety data for HB-2207", "conf": "high", "score": 0.88, "isNew": true,
+         "sources": [{"src": "hb_pr", "role": "anchor", "published": "2026-05-22", "ingested": "2026-05-22", "claim": "HB-2207 was well tolerated in the Phase 1 study.", "snippet": "HB-2207 was generally well tolerated across dose levels, with no safety signals that would prevent further study.", "hl": "generally well tolerated across dose levels"}, {"src": "wire", "role": "agrees", "published": "2026-05-22", "ingested": "2026-05-23", "claim": "Halden reported a clean early safety profile.", "snippet": "Halden Bio said early safety data for HB-2207 were clean, clearing the way for a mid-stage study.", "hl": "early safety data for HB-2207 were clean"}],
+         "revisions": [{"kind": "created", "note": "Sponsor release."}, {"kind": "augmented", "note": "Wire adds the next-stage implication."}], "entities": [{"name": "Halden Bio", "cls": "Organization", "conf": "high"}, {"name": "HB-2207", "cls": "Asset", "conf": "high"}]}
+      ]
+    },
+    {
+      "id": "cp418", "sponsor": "Cobalt Peak Pharma", "asset": "CP-418", "indication": "Atopic dermatitis", "phase": 2, "firstSeen": "2025-10-22", "catalysts": [{"date": "2026-08-10", "label": "Enrollment update expected"}],
+      "events": [
+        {"id": "cp1", "date": "2025-10-22", "precision": "day", "verb": "Licensed", "title": "Cobalt Peak licenses CP-418", "conf": "high", "score": 0.9, "isNew": false,
+         "sources": [{"src": "cp_pr", "role": "anchor", "published": "2025-10-22", "ingested": "2025-10-22", "claim": "Cobalt Peak obtained rights to CP-418.", "snippet": "Cobalt Peak Pharma has entered a license agreement giving it development rights to CP-418.", "hl": "license agreement giving it development rights"}],
+         "revisions": [{"kind": "created", "note": "First report."}], "entities": [{"name": "Cobalt Peak Pharma", "cls": "Organization", "conf": "high"}, {"name": "CP-418", "cls": "Asset", "conf": "high"}]},
+        {"id": "cp2", "date": "2026-01-30", "precision": "day", "verb": "Started", "title": "Cobalt Peak starts a Phase 2 study of CP-418", "conf": "high", "score": 0.87, "isNew": false,
+         "sources": [{"src": "registry", "role": "anchor", "published": "2026-01-30", "ingested": "2026-01-31", "claim": "A Phase 2 study of CP-418 is recruiting.", "snippet": "Recruitment status: Recruiting. Phase 2, atopic dermatitis, CP-418.", "hl": "Recruitment status: Recruiting"}, {"src": "cp_pr", "role": "agrees", "published": "2026-02-02", "ingested": "2026-02-02", "claim": "Cobalt Peak began dosing in atopic dermatitis.", "snippet": "Cobalt Peak announced the start of dosing in its Phase 2 study of CP-418 in atopic dermatitis.", "hl": "start of dosing"}],
+         "revisions": [{"kind": "created", "note": "Registry status."}, {"kind": "corroborated", "note": "Sponsor confirms."}], "entities": [{"name": "Cobalt Peak Pharma", "cls": "Organization", "conf": "high"}, {"name": "CP-418", "cls": "Asset", "conf": "high"}]},
+        {"id": "cp3", "date": "2026-04-09", "precision": "month", "verb": "Paused", "title": "Cobalt Peak may have paused enrollment in the CP-418 study", "conf": "uncertain", "score": 0.46, "isNew": false,
+         "sources": [{"src": "registry", "role": "anchor", "published": "2026-04-09", "ingested": "2026-04-10", "claim": "The registry lists the study as suspended.", "snippet": "Recruitment status: Suspended.", "hl": "Suspended"}, {"src": "cp_pr", "role": "disagrees", "published": "2026-04-15", "ingested": "2026-04-15", "claim": "Cobalt Peak says enrollment continues.", "snippet": "Enrollment in the CP-418 Phase 2 study is continuing as planned.", "hl": "continuing as planned"}],
+         "revisions": [{"kind": "created", "note": "Registry status change."}, {"kind": "corroborated", "note": "Sponsor statement conflicts; kept as a disagreement."}], "entities": [{"name": "Cobalt Peak Pharma", "cls": "Organization", "conf": "high"}, {"name": "CP-418", "cls": "Asset", "conf": "high"}]}
+      ]
+    },
+    {
+      "id": "ms339", "sponsor": "Meridian Sciences", "asset": "MS-339", "indication": "Moderate asthma", "phase": 3, "firstSeen": "2025-10-15", "catalysts": [{"date": "2026-07-20", "label": "Phase 3 readout expected"}],
+      "events": [
+        {"id": "ms1", "date": "2025-12-18", "precision": "day", "verb": "Reported results", "title": "Meridian reports a Phase 3 interim analysis for MS-339", "conf": "medium", "score": 0.76, "isNew": false,
+         "sources": [{"src": "ms_ir", "role": "anchor", "published": "2025-12-18", "ingested": "2025-12-18", "claim": "The interim analysis supported continuing the Phase 3 study.", "snippet": "A planned interim analysis supported continuing the Phase 3 study of MS-339 without changes.", "hl": "supported continuing the Phase 3 study"}, {"src": "digest", "role": "agrees", "published": "2025-12-19", "ingested": "2025-12-19", "claim": "Meridian's study passed its interim look.", "snippet": "Meridian Sciences said its late-stage asthma study passed a planned interim look.", "hl": "passed a planned interim look"}],
+         "revisions": [{"kind": "created", "note": "Investor update."}, {"kind": "corroborated", "note": "News restates it."}], "entities": [{"name": "Meridian Sciences", "cls": "Organization", "conf": "high"}, {"name": "MS-339", "cls": "Asset", "conf": "high"}]},
+        {"id": "ms2", "date": "2026-05-27", "precision": "month", "verb": "Updated timeline", "title": "Meridian updates the Phase 3 timeline for MS-339", "conf": "medium", "score": 0.7, "isNew": true,
+         "sources": [{"src": "ms_ir", "role": "anchor", "published": "2026-05-27", "ingested": "2026-05-27", "claim": "The Phase 3 readout is now expected in the third quarter.", "snippet": "Meridian now expects the Phase 3 readout for MS-339 in the third quarter.", "hl": "readout for MS-339 in the third quarter"}],
+         "revisions": [{"kind": "created", "note": "Investor update."}], "entities": [{"name": "Meridian Sciences", "cls": "Organization", "conf": "high"}, {"name": "MS-339", "cls": "Asset", "conf": "high"}]}
+      ]
+    },
+    {
+      "id": "tl5", "sponsor": "Tessel Labs", "asset": "TL-5", "indication": "Eosinophilic esophagitis", "phase": 0, "firstSeen": "2026-02-03", "catalysts": [],
+      "events": [
+        {"id": "tl1", "date": "2026-02-03", "precision": "day", "verb": "Selected", "title": "Tessel Labs selects TL-5 as a development candidate", "conf": "high", "score": 0.86, "isNew": false,
+         "sources": [{"src": "tl_pr", "role": "anchor", "published": "2026-02-03", "ingested": "2026-02-03", "claim": "TL-5 is Tessel's development candidate.", "snippet": "Tessel Labs has selected TL-5 as its development candidate for eosinophilic esophagitis.", "hl": "selected TL-5 as its development candidate"}],
+         "revisions": [{"kind": "created", "note": "First report."}], "entities": [{"name": "Tessel Labs", "cls": "Organization", "conf": "high"}, {"name": "TL-5", "cls": "Asset", "conf": "high"}, {"name": "Eosinophilic esophagitis", "cls": "Indication", "conf": "high"}]},
+        {"id": "tl2", "date": "2026-05-12", "precision": "month", "verb": "Started", "title": "Tessel Labs may have begun a first-in-human study of TL-5", "conf": "uncertain", "score": 0.55, "isNew": true,
+         "sources": [{"src": "digest", "role": "anchor", "published": "2026-05-12", "ingested": "2026-05-13", "claim": "A first-in-human study of TL-5 may have started.", "snippet": "Tessel Labs is understood to have begun first-in-human dosing of TL-5, though the company has not confirmed.", "hl": "understood to have begun first-in-human dosing"}],
+         "revisions": [{"kind": "created", "note": "Unconfirmed secondary report."}], "entities": [{"name": "Tessel Labs", "cls": "Organization", "conf": "high"}, {"name": "TL-5", "cls": "Asset", "conf": "high"}]}
+      ]
+    }
+  ],
+  "feed": [
+    {"id": "f1", "program": "nw101", "text": "Northwind reports Phase 2 topline", "day": "12 Mar"},
+    {"id": "f2", "program": "hb2207", "text": "Halden Bio raises financing", "day": "20 Feb"},
+    {"id": "f3", "program": "cp418", "text": "Cobalt Peak starts Phase 2", "day": "30 Jan"},
+    {"id": "f4", "program": "nw101", "text": "Northwind completes enrollment", "day": "2 Dec"},
+    {"id": "f5", "program": "ms339", "text": "Meridian interim analysis", "day": "18 Dec"},
+    {"id": "f6", "program": "hb2207", "text": "Halden Bio doses first participant", "day": "14 Nov"},
+    {"id": "f7", "program": "cp418", "text": "Cobalt Peak licenses CP-418", "day": "22 Oct"},
+    {"id": "f8", "program": "nw101", "text": "Northwind starts Phase 2", "day": "8 Oct"},
+    {"id": "f9", "program": "ms339", "text": "Meridian updates timeline", "day": "27 May"}
+  ],
+  "matches": [
+    {"mention": "Northwind", "to": "Northwind Therapeutics", "score": 0.97},
+    {"mention": "NW 101", "to": "NW-101", "score": 0.94},
+    {"mention": "Halden", "to": "Halden Bio", "score": 0.91},
+    {"mention": "mid-stage asthma trial", "to": "Moderate asthma", "score": 0.78},
+    {"mention": "Cobalt Peak", "to": "Cobalt Peak Pharma", "score": 0.95},
+    {"mention": "CP418", "to": "CP-418", "score": 0.89},
+    {"mention": "Meridian", "to": "Meridian Sciences", "score": 0.93},
+    {"mention": "the Tessel candidate", "to": "TL-5", "score": 0.58},
+    {"mention": "NW-1O1", "to": "NW-101", "score": 0.82},
+    {"mention": "Halden unit", "to": "Halden Bio", "score": 0.64},
+    {"mention": "EoE", "to": "Eosinophilic esophagitis", "score": 0.86},
+    {"mention": "Meridian spin-out", "to": "Meridian Sciences", "score": 0.49}
+  ]
+}

@@ -1,0 +1,41 @@
+{{- $p := .Params -}}
+{{- $d := dict -}}{{- range $p.decisions -}}{{- $d = merge $d (dict .anchor .) -}}{{- end -}}
+{{- $icon := "wp-icon.html" -}}
+<section class="ts-sec ts-decisions" id="decisions" aria-labelledby="decisions-title">
+<div class="ts-sec-head"><p class="wp-label">05 / Key decisions</p><h2 id="decisions-title">Four decisions, shown rather than described</h2>
+<p class="ts-sub">Each one changes how the product behaves. Try the switch or the slider to see the difference.</p></div>
+
+<article class="ts-dx" id="programs" data-dx="program">
+<header><h3>{{ (index $d "programs").title }}</h3><p class="ts-dx-lede">{{ (index $d "programs").problem }} {{ (index $d "programs").call }}</p></header>
+<div class="ts-dx-controls" role="group" aria-label="Choose how reports are organized"><button type="button" class="ts-seg" aria-pressed="true" data-mode="feed">A feed of reports</button><button type="button" class="ts-seg" aria-pressed="false" data-mode="program">Grouped by program</button></div>
+<div class="ts-dx-stage ts-dx-program" data-stage aria-live="polite"></div>
+<p class="ts-dx-cost"><span class="wp-beat">Cost</span>{{ (index $d "programs").cost }}</p>
+</article>
+
+<article class="ts-dx" id="provenance" data-dx="trail">
+<header><h3>{{ (index $d "provenance").title }}</h3><p class="ts-dx-lede">{{ (index $d "provenance").problem }} {{ (index $d "provenance").call }}</p></header>
+<div class="ts-dx-controls" role="group" aria-label="Choose how an event cites its sources"><button type="button" class="ts-seg" aria-pressed="true" data-mode="all">Keep every source</button><button type="button" class="ts-seg" aria-pressed="false" data-mode="one">One convenient citation</button></div>
+<div class="ts-dx-stage ts-dx-trail" data-stage aria-live="polite"></div>
+<p class="ts-dx-cost"><span class="wp-beat">Cost</span>{{ (index $d "provenance").cost }}</p>
+</article>
+
+<article class="ts-dx" id="judgment" data-dx="route">
+<header><h3>{{ (index $d "judgment").title }}</h3><p class="ts-dx-lede">{{ (index $d "judgment").problem }} {{ (index $d "judgment").call }}</p></header>
+<div class="ts-dx-controls ts-dx-controls--route">
+<div class="ts-seg-row" role="group" aria-label="Choose who reviews matches"><button type="button" class="ts-seg" aria-pressed="true" data-mode="selective">Only uncertain matches</button><button type="button" class="ts-seg" aria-pressed="false" data-mode="all">Every match</button></div>
+<label class="ts-range" data-range-wrap>Auto-link at or above <output data-out>0.85</output><input type="range" min="0.5" max="0.95" step="0.01" value="0.85" data-range aria-label="Confidence threshold for linking automatically"></label>
+</div>
+<div class="ts-dx-stage ts-dx-route" data-stage aria-live="polite"></div>
+<p class="ts-dx-cost"><span class="wp-beat">Cost</span>{{ (index $d "judgment").cost }} <em>The threshold here is illustrative.</em></p>
+</article>
+
+<article class="ts-dx" id="scope" data-dx="scope">
+<header><h3>{{ (index $d "scope").title }}</h3><p class="ts-dx-lede">{{ (index $d "scope").call }}</p></header>
+<div class="ts-dx-stage ts-dx-scope">
+<div class="ts-scope-col"><span class="wp-label">First release</span><ul><li class="ts-scope-item ts-scope-item--built">{{ partial $icon (dict "name" "scroll-text" "size" 18) }}An evidence packet</li><li class="ts-scope-item ts-scope-item--built">{{ partial $icon (dict "name" "scan-search" "size" 18) }}Entity matching</li><li class="ts-scope-item ts-scope-item--built">{{ partial $icon (dict "name" "layout-dashboard" "size" 18) }}A plain analyst interface</li></ul></div>
+<div class="ts-scope-gate" aria-hidden="true"><span>Does the intelligence deserve to be used?</span></div>
+<div class="ts-scope-col"><span class="wp-label">Waited</span><ul><li class="ts-scope-item ts-scope-item--planned">{{ partial $icon (dict "name" "chart-gantt" "size" 18) }}Advanced visualization</li><li class="ts-scope-item ts-scope-item--planned">{{ partial $icon (dict "name" "git-merge" "size" 18) }}Replacing the analyst's workflow</li></ul></div>
+</div>
+<p class="ts-dx-cost"><span class="wp-beat">Cost</span>{{ (index $d "scope").cost }}</p>
+</article>
+</section>

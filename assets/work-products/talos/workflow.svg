@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1832 790" width="1832" height="790" role="img" font-family='"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif'>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></marker></defs>
+<rect width="1832" height="790" fill="#fbfbfa"/>
+<rect x="24" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="44" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">01 · COLLECT</text>
+<rect x="492" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="512" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">02 · RECOGNIZE</text>
+<rect x="960" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="980" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">03 · RESOLVE AND JUDGE</text>
+<rect x="1428" y="20" width="380" height="702" fill="#f3f3f1" stroke="#d9d9ce" stroke-width="1.25"/>
+<text x="1448" y="54" font-family='"IBM Plex Mono",ui-monospace,Menlo,monospace' font-size="14" font-weight="600" letter-spacing="1.1" fill="#5c6066">04 · REMEMBER AND DELIVER</text>
+<path d="M214.0 196.0 L214.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M362.0 301.0 L448.0 301.0 L448.0 137.0 L534.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M362.0 301.0 L534.0 301.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M830.0 137.0 L1002.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M830.0 301.0 L916.0 301.0 L916.0 137.0 L1002.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 196.0 L1150.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 360.0 L1150.0 406.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1262.0 465.0 L1384.0 465.0 L1384.0 137.0 L1470.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1150.0 524.0 L1150.0 570.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1002.0 629.0 L977.0 629.0 L977.0 301.0 L1002.0 301.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-dasharray="7 5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1618.0 196.0 L1618.0 242.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1766.0 137.0 L1796.0 137.0 L1796.0 465.0 L1766.0 465.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1766.0 137.0 L1779.0 137.0 L1779.0 629.0 L1766.0 629.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M1618.0 688.0 L1618.0 756.0 L41.0 756.0 L41.0 137.0 L66.0 137.0" fill="none" stroke="#3d4452" stroke-width="1.6" stroke-dasharray="7 5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="66.0" y="78" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="66.0" y="78" width="4" height="118" fill="#0b0b0c"/><line x1="74.0" y1="78" x2="74.0" y2="196" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="90.0" y="115.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(99.0 124.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></g>
+<text x="148.0" y="118.5" font-size="19" font-weight="700" fill="#0b0b0c">Public sources</text>
+<text x="148.0" y="146.5" font-size="16" fill="#5c6066">Reports, filings,</text>
+<text x="148.0" y="167.5" font-size="16" fill="#5c6066">publications</text>
+<rect x="66.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="66.0" y="242" width="4" height="118" fill="#0b0b0c"/><line x1="74.0" y1="242" x2="74.0" y2="360" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="90.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(99.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></g>
+<text x="148.0" y="281.0" font-size="19" font-weight="700" fill="#0b0b0c">Discover and</text>
+<text x="148.0" y="305.0" font-size="19" font-weight="700" fill="#0b0b0c">ingest</text>
+<text x="148.0" y="333.0" font-size="16" fill="#5c6066">Source + date retained</text>
+<rect x="534.0" y="78" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="534.0" y="78" width="4" height="118" fill="#0b0b0c"/><line x1="542.0" y1="78" x2="542.0" y2="196" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="558.0" y="115.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(567.0 124.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /> <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" /> <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" /> <path d="M10 6h4" /> <path d="M10 10h4" /> <path d="M10 14h4" /> <path d="M10 18h4" /></g>
+<text x="616.0" y="106.5" font-size="19" font-weight="700" fill="#0b0b0c">Companies and</text>
+<text x="616.0" y="130.5" font-size="19" font-weight="700" fill="#0b0b0c">compounds</text>
+<text x="616.0" y="158.5" font-size="16" fill="#5c6066">Mentions linked to</text>
+<text x="616.0" y="179.5" font-size="16" fill="#5c6066">identities</text>
+<rect x="534.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="534.0" y="242" width="4" height="118" fill="#0b0b0c"/><line x1="542.0" y1="242" x2="542.0" y2="360" stroke="#0b0b0c" stroke-width="1"/>
+<rect x="558.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(567.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16 1.5 1.5" /> <path d="m14 8-1.5-1.5" /> <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993" /> <path d="m16.5 10.5 1 1" /> <path d="m17 6-2.891-2.891" /> <path d="M2 15c6.667-6 13.333 0 20-6" /> <path d="m20 9 .891.891" /> <path d="M3.109 14.109 4 15" /> <path d="m6.5 12.5 1 1" /> <path d="m7 18 2.891 2.891" /> <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" /></g>
+<text x="616.0" y="270.5" font-size="19" font-weight="700" fill="#0b0b0c">Targets and</text>
+<text x="616.0" y="294.5" font-size="19" font-weight="700" fill="#0b0b0c">indications</text>
+<text x="616.0" y="322.5" font-size="16" fill="#5c6066">Biology + disease</text>
+<text x="616.0" y="343.5" font-size="16" fill="#5c6066">context</text>
+<rect x="1002.0" y="78" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="1024.0" y="115.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(1033.0 124.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3" /> <circle cx="6" cy="6" r="3" /> <path d="M6 21V9a9 9 0 0 0 9 9" /></g>
+<text x="1082.0" y="117.0" font-size="19" font-weight="700" fill="#ffffff">Resolve</text>
+<text x="1082.0" y="141.0" font-size="19" font-weight="700" fill="#ffffff">observations</text>
+<text x="1082.0" y="169.0" font-size="16" fill="#d4e4dc">All contributing sources</text>
+<rect x="1002.0" y="242" width="296" height="118" fill="#e4f17c" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1002.0" y="242" width="296" height="5" fill="#0b0b0c"/>
+<rect x="1024.0" y="281.0" width="44" height="44" fill="rgba(11,11,12,.09)"/>
+<g transform="translate(1033.0 290.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <polyline points="16 11 18 13 22 9" /></g>
+<text x="1082.0" y="284.5" font-size="19" font-weight="700" fill="#0b0b0c">Analyst review</text>
+<text x="1082.0" y="312.5" font-size="16" fill="#2b2e24">Inspect support +</text>
+<text x="1082.0" y="333.5" font-size="16" fill="#2b2e24">uncertainty</text>
+<polygon points="1150.0,406 1262.0,465.0 1150.0,524 1038.0,465.0" fill="#e4f17c" stroke="#0b0b0c" stroke-width="1.5"/>
+<text x="1150.0" y="460.5" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0c">Ready to</text>
+<text x="1150.0" y="483.5" text-anchor="middle" font-size="19" font-weight="700" fill="#0b0b0c">use?</text>
+<rect x="1002.0" y="570" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1002.0" y="570" width="4" height="118" fill="#0b0b0c"/><line x1="1010.0" y1="570" x2="1010.0" y2="688" stroke="#0b0b0c" stroke-width="1"/>
+<text x="1028.0" y="621.0" font-size="19" font-weight="700" fill="#0b0b0c">Keep unresolved</text>
+<text x="1028.0" y="649.0" font-size="16" fill="#5c6066">Evidence retained for review</text>
+<rect x="1470.0" y="78" width="296" height="118" fill="#14543c" stroke="#14543c" stroke-width="1.25"/>
+<rect x="1492.0" y="115.0" width="44" height="44" fill="rgba(255,255,255,.16)"/>
+<g transform="translate(1501.0 124.0) scale(1.0833)" fill="none" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /></g>
+<text x="1550.0" y="129.0" font-size="19" font-weight="700" fill="#ffffff">Program record</text>
+<text x="1550.0" y="157.0" font-size="16" fill="#d4e4dc">Evidence accumulates</text>
+<rect x="1470.0" y="242" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="279.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 288.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" /></g>
+<text x="1550.0" y="293.0" font-size="19" font-weight="700" fill="#0b0b0c">Landscapes</text>
+<text x="1550.0" y="321.0" font-size="16" fill="#5c6066">Delivery direction</text>
+<rect x="1470.0" y="406" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="443.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 452.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /></g>
+<text x="1550.0" y="446.5" font-size="19" font-weight="700" fill="#0b0b0c">Timelines</text>
+<text x="1550.0" y="474.5" font-size="16" fill="#5c6066">Dated evidence + source</text>
+<text x="1550.0" y="495.5" font-size="16" fill="#5c6066">links</text>
+<rect x="1470.0" y="570" width="296" height="118" fill="#ffffff" stroke="#0b0b0c" stroke-width="1.25"/>
+<rect x="1492.0" y="607.0" width="44" height="44" fill="#efefec"/>
+<g transform="translate(1501.0 616.0) scale(1.0833)" fill="none" stroke="#0b0b0c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></g>
+<text x="1550.0" y="610.5" font-size="19" font-weight="700" fill="#0b0b0c">Leadership briefs</text>
+<text x="1550.0" y="638.5" font-size="16" fill="#5c6066">Claims retain their</text>
+<text x="1550.0" y="659.5" font-size="16" fill="#5c6066">evidence</text>
+<rect x="406.2" y="208.0" width="83.6" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="448.0" y="224.0" text-anchor="middle" font-size="14.5" fill="#3d4452">mentions</text>
+<rect x="874.2" y="126.0" width="83.6" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="916.0" y="142.0" text-anchor="middle" font-size="14.5" fill="#3d4452">identity</text>
+<rect x="1108.2" y="208.0" width="83.6" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="1150.0" y="224.0" text-anchor="middle" font-size="14.5" fill="#3d4452">evidence</text>
+<rect x="1350.4" y="290.0" width="67.2" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="1384.0" y="306.0" text-anchor="middle" font-size="14.5" fill="#3d4452">accept</text>
+<rect x="1124.6" y="536.0" width="50.8" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="1150.0" y="552.0" text-anchor="middle" font-size="14.5" fill="#3d4452">hold</text>
+<g transform="translate(977.0 465.0) rotate(-90)"><rect x="-37.7" y="-11" width="75.4" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text y="5" text-anchor="middle" font-size="14.5" fill="#3d4452">revisit</text></g>
+<g transform="translate(1796.0 301.0) rotate(-90)"><rect x="-70.5" y="-11" width="141.0" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text y="5" text-anchor="middle" font-size="14.5" fill="#3d4452">linked evidence</text></g>
+<rect x="709.8" y="745.0" width="239.4" height="22" fill="#fbfbfa" stroke="#d9d9ce"/><text x="829.5" y="761.0" text-anchor="middle" font-size="14.5" fill="#3d4452">next review — what changed?</text>
+</svg>

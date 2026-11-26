@@ -1,0 +1,12 @@
+<section class="ts-sec ts-demo" id="product" aria-labelledby="product-title">
+<div class="ts-sec-head"><p class="wp-label">02 / The product</p><h2 id="product-title">Try it: from the landscape to the evidence</h2>
+<p class="ts-sub">A working slice of the TALOS pattern with synthetic data. Pick a program, read its timeline, open an event, then follow a claim back to the words that support it.</p></div>
+<div class="ts-status" role="note"><span class="ts-chip ts-chip--built">Pattern built in the prototype</span><span class="ts-chip">Synthetic data, not production screens</span></div>
+<div class="ts-app" data-ts-demo role="region" aria-label="Interactive TALOS demo, synthetic data">
+<div class="ts-app-bar"><span class="ts-app-brand">TALOS</span><nav class="ts-crumbs" aria-label="Demo steps" data-crumbs></nav><span class="ts-app-meta" data-meta></span></div>
+<div class="ts-app-body" data-body><noscript><p class="ts-fine">The demo needs JavaScript. It walks a synthetic program from the landscape to its source evidence.</p></noscript></div>
+<p class="ts-region-link" data-region-link hidden></p>
+<p class="ts-sr" role="status" aria-live="polite" data-live></p>
+</div>
+<script type="application/json" id="ts-demo-data">{{ site.Data.talos_demo | jsonify | safeJS }}</script>
+</section>
