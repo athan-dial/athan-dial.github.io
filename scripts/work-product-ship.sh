@@ -4,8 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 slug="${1:?slug}"; out="_private/${slug}-review"; mkdir -p "$out"
-[ -f "assets/work-products/$slug/flow.json" ] && python3 scripts/compile-flow.py "$slug"
-python3 scripts/render-workflow.py "$slug"
+python3 scripts/render-flow-svg.py "$slug"
 hugo server -D --port 8765 >/tmp/hugo-wp.log 2>&1 & pid=$!
 trap 'kill $pid 2>/dev/null' EXIT
 for _ in $(seq 20); do curl -sf "http://localhost:8765/work/$slug/" >/dev/null && break; sleep 1; done
@@ -24,5 +23,5 @@ with sync_playwright() as p:
 PY
 hugo -D --quiet
 python3 scripts/render-work-standalone.py "$slug"
-if [ -n "${2:-}" ]; then mkdir -p "$2/$slug-work-product"; cp "$out"/{*.png,*-standalone.html} "assets/work-products/$slug/"{workflow.svg,workflow.ofk} "$2/$slug-work-product/"; fi
+if [ -n "${2:-}" ]; then mkdir -p "$2/$slug-work-product"; cp "$out"/{*.png,*-standalone.html} "assets/work-products/$slug/"workflow.svg "$2/$slug-work-product/"; fi
 echo "done: $out"

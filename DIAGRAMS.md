@@ -33,7 +33,7 @@ claims, imply measurements, or grant authority absent from the article.
 
 ## Renderers
 
-Work Product workflows use OpenFlowKit (static SVG, editable `.ofk`). "Arc" is the Hudson Kit library vendored in `tools/agentic-os-atlas/` on unmerged branch `claude/lucid-cray-sezuh0`; it is not on main and is not the Work Product renderer. Check a Work Product render with `scripts/work-product-ship.sh <slug>`.
+Work Product workflows render from `assets/work-products/<slug>/flow.json` with `scripts/render-flow-svg.py`: a dependency-free SVG renderer with left-aligned measured text, inline Lucide icons (`assets/work-products/icons.json`) and Fieldnotes node grammar. OpenFlowKit was retired for this job (centered descriptions, fixed 11px sublabels, icons embedded as nested data-URI images that many viewers drop). Arc is unmerged (`claude/lucid-cray-sezuh0`) and not used. Check a render with `scripts/work-product-ship.sh <slug>`.
 
 ## Brand role
 
