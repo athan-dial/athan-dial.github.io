@@ -17,13 +17,15 @@ for href in css_hrefs:
 html = re.sub(r'\s*<link rel="stylesheet"[^>]+>\s*', "\n", html)
 
 svg = (root / f"assets/work-products/{slug}/workflow.svg").read_text()
+svg = re.sub(r'(<svg[^>]*?) width="(\d+)" height="\d+"', r'\1 style="--svg-w:\2px"', svg, count=1)
 html = re.sub(
-    r'<div class="wp-diagram"[^>]*><img src="/work-products/talos/workflow\.svg"[^>]*></div>',
-    f'<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram">{svg}</div>',
+    r'<div class="wp-diagram"[^>]*><img src="/work-products/[^"]*workflow[^"]*\.svg"[^>]*></div>',
+    lambda m: f'<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram">{svg}</div>',
     html,
     count=1,
 )
-
+assert "<svg" in html.split('class="wp-diagram"', 1)[1][:300], "diagram not inlined"
+blocks.append("<style>.wp-diagram svg{display:block;height:auto;max-width:none;width:var(--svg-w);min-width:100%}@media(min-width:1000px){.wp-diagram svg{width:100%;min-width:0}}</style>")
 html = html.replace("</head>", "\n".join(blocks) + "\n</head>", 1)
 html = re.sub(r'href="/([^"]+)"', r'href="#"', html)
 html = re.sub(r'src="/([^"]+)"', r'src="#"', html)
