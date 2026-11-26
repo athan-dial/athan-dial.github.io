@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "7ebd4731-c313-4475-92fc-d307c003ba39",
+  "id": "b90e1dbc-8a47-41a7-a0c4-1c306ace44c4",
   "name": "workflow",
-  "createdAt": "2026-11-26T13:08:00.615Z",
-  "updatedAt": "2026-11-26T13:08:00.615Z",
+  "createdAt": "2026-11-26T15:16:19.298Z",
+  "updatedAt": "2026-11-26T15:16:19.298Z",
   "pages": [
     {
-      "id": "7ebd4731-c313-4475-92fc-d307c003ba39:page-1",
+      "id": "b90e1dbc-8a47-41a7-a0c4-1c306ace44c4:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -37,7 +37,7 @@
             }
           },
           "size": {
-            "width": 1195,
+            "width": 1195.0,
             "height": 650
           },
           "content": {

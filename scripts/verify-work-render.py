@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Render check for the TALOS Work Product (needs `hugo server -D --port 8765`).
+"""Render check for the TALOS Work Product (arg: slug, default talos; needs `hugo server -D --port 8765`).
 Fails if the diagram is clipped at laptop width, sits below the fold, or the page overflows on mobile."""
 import sys
 from playwright.sync_api import sync_playwright
-URL = sys.argv[1] if len(sys.argv) > 1 else 'http://localhost:8765/work/talos/'
+SLUG = sys.argv[1] if len(sys.argv) > 1 else 'talos'
+URL = f'http://localhost:8765/work/{SLUG}/'
 bad = []
 with sync_playwright() as p:
     b = p.chromium.launch()

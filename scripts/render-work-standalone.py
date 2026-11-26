@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Build a self-contained TALOS review HTML file with inlined CSS and diagram SVG."""
 import re
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-html = (root / "public/work/talos/index.html").read_text()
-out = root / "_private/talos-review/talos-standalone.html"
+slug = sys.argv[1] if len(sys.argv) > 1 else "talos"
+html = (root / f"public/work/{slug}/index.html").read_text()
+out = root / f"_private/{slug}-review/{slug}-standalone.html"
 
 css_hrefs = re.findall(r'<link rel="stylesheet" href="([^"]+)"[^>]*>', html)
 blocks = []
@@ -14,7 +16,7 @@ for href in css_hrefs:
     blocks.append(f"<style>\n{path.read_text()}\n</style>")
 html = re.sub(r'\s*<link rel="stylesheet"[^>]+>\s*', "\n", html)
 
-svg = (root / "assets/work-products/talos/workflow.svg").read_text()
+svg = (root / f"assets/work-products/{slug}/workflow.svg").read_text()
 html = re.sub(
     r'<div class="wp-diagram"[^>]*><img src="/work-products/talos/workflow\.svg"[^>]*></div>',
     f'<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram">{svg}</div>',
@@ -28,7 +30,7 @@ html = re.sub(r'src="/([^"]+)"', r'src="#"', html)
 html = html.replace('<a href="#">', '<a href="#" onclick="return false">', 1)
 html = re.sub(
     r'<title>[^<]+</title>',
-    "<title>TALOS Work Product (standalone review)</title>",
+    f"<title>{slug} Work Product (standalone review)</title>",
     html,
     count=1,
 )

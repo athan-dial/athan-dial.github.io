@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-"""Render TALOS's native diagram with OpenFlowKit 0.3.0 (Node 20.11+)."""
+"""Render a Work Product diagram: python3 scripts/render-workflow.py [slug] (default talos).
+OpenFlowKit 0.3.0, Node 20.11+. Edge routing below is keyed to TALOS node ids; other slugs use native routing."""
 import json
+import sys
 import copy
 import re
 import textwrap
 import subprocess
 from pathlib import Path
 root = Path(__file__).resolve().parents[1]
-folder = root / 'assets/work-products/talos'
+slug = sys.argv[1] if len(sys.argv) > 1 else 'talos'
+folder = root / 'assets/work-products' / slug
 cli = ['npx', '--yes', 'openflowkit@0.3.0']
 subprocess.run(cli + ['validate', str(folder / 'workflow.ofk'), '--strict'], check=True)
 subprocess.run(cli + ['convert', str(folder / 'workflow.ofk'), '-o', str(folder / 'workflow.openflow.json'), '--strict'], check=True)
@@ -112,7 +115,9 @@ for edge in page['connectors']:
         lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + 10
         route(edge, [(lane, ry + rh / 2), (lane, ty + th / 2)], 'right', 'right')
         edge['labels'] = []
-root_frame['size'] = {'width': 1195, 'height': 650}
+stage_frames = [n for n in page['nodes'] if n['kind'] == 'frame' and n is not root_frame]
+root_frame['size'] = {'width': max(f['transform']['translation']['x'] + f['size']['width'] for f in stage_frames) + 14,
+                      'height': max(f['size']['height'] for f in stage_frames) + 25}
 path.write_text(json.dumps(doc, indent=2) + '\n')
 args = {'format': 'svg', 'scope': 'selection',
         'ids': [node['id'] for node in page['nodes'] if node is not root_frame]

@@ -33,7 +33,7 @@ claims, imply measurements, or grant authority absent from the article.
 
 ## Renderers
 
-Work Product workflows use OpenFlowKit (static SVG, editable `.ofk`). "Arc" is the Hudson Kit library vendored in `tools/agentic-os-atlas/` on unmerged branch `claude/lucid-cray-sezuh0`; it is not on main and is not the Work Product renderer. Check a Work Product render with `scripts/verify-talos-render.py`.
+Work Product workflows use OpenFlowKit (static SVG, editable `.ofk`). "Arc" is the Hudson Kit library vendored in `tools/agentic-os-atlas/` on unmerged branch `claude/lucid-cray-sezuh0`; it is not on main and is not the Work Product renderer. Check a Work Product render with `scripts/work-product-ship.sh <slug>`.
 
 ## Brand role
 
