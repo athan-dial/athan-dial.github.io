@@ -10,31 +10,33 @@ work_kind: flagship
 timeframe: ""
 disciplines: ""
 tagline: ""
-overview: "50–75 words: audience, problem, purpose."
-ownership: "Individual responsibility; separate team implementation."
+overview: "50-75 words: who has the problem, what the problem is, what this product does about it. Plain words; define domain terms."
+role:
+  led: "What I owned: framing, scope, decisions, milestones."
+  built: "What I built myself (the prototype or artifact). Omit the line if none."
+  with: "Who I worked with and what they owned (team leads, advisors, sponsors)."
 figure_title: ""
+figure_kicker: ""
+figure_note: ""
 diagram: "work-products/project/workflow.svg"
 diagram_alt: "Describe branches, convergence, review and output."
-figure_caption: "Label implemented versus intended capabilities."
+figure_caption: "Generalized product workflow."
 stages:
   - title: "Stage name"
-    description: "What happens, what evidence is retained, and who decides."
-    decision: D1
-    decision_label: "Decision name"
-    decision_anchor: d1-decision
+    description: "What happens and who decides, in one or two sentences."
+    decision_label: "Name of the related key decision"
+    decision_anchor: decision-anchor
+decisions:
+  - title: "The call, named plainly"
+    anchor: decision-anchor
+    problem: "What was wrong or unclear."
+    call: "What I decided, with a concrete verb."
+    cost: "What it gave up."
+outcomes:
+  - "What exists or happened as a result: plain facts, no disclaimers. Delete this list if there is nothing to report."
+reflections:
+  worked: "What worked."
+  didnt: "What didn't."
+  grow: "How I would grow it."
 disclosure_note: "Review copy · Disclosure approval pending."
 ---
-
-<h2 id="decisions">04 / Product and design decisions</h2>
-
-<h3 id="d1-decision">D1 · Decision name</h3>
-
-Describe the problem, choice, rationale and trade-off. Add three or four decisions with anchors matching the stage links.
-
-<h2 id="evidence">05 / Evidence and outcomes</h2>
-
-Separate built artifacts and measured results from proposed acceptance criteria.
-
-<h2 id="reflections">06 / Reflections</h2>
-
-What would change next time, and why?

@@ -13,81 +13,61 @@ description: "A Work Product case study on competitive intelligence, provenance,
 timeframe: "2026"
 disciplines: "Product management / Scientific informatics / Applied AI"
 tagline: "Competitive intelligence with an evidence trail."
-overview: "TALOS is a competitive-intelligence product for scientific analysts and leadership teams. It addresses a recurring problem: each new question requires someone to reconcile scattered reports and rebuild the evidence trail. The product direction is to turn public-source material into persistent competitive program records, so analysts can revisit what changed, inspect its support, and prepare an informed briefing without starting over."
-ownership: "I led product framing, scope, cross-team communication, and milestone facilitation, and brought scientific-user feedback into the work. Data-science and engineering colleagues owned source operations, entity recognition, observation semantics, and analyst-surface implementation."
 figure_title: "From Fragmented Evidence to Decision-Ready Intelligence"
 diagram: "work-products/talos/workflow.svg"
 diagram_alt: "Four stages run left to right: collect, recognize, resolve and judge, remember and deliver. Entity branches converge into observations. Every accepted observation passes through analyst review and a Ready to use decision; held evidence returns for review. Program records feed delivery surfaces, with a dashed next-review loop back to sources. The numbered walkthrough gives the complete text description."
-figure_caption: "Generalized product workflow. Delivery surfaces show product direction; not all are verified as shipped. Review paths illustrate the product principle, not a verified automation policy."
+overview: "Scientific analysts rebuild the same competitive picture every time a new question comes in: who is developing what, and what changed since last time. TALOS keeps that picture. It turns public reports into one record per competing program, links every claim to its sources, and lets an analyst see what changed and brief leadership without starting over."
+role:
+  led: "Product framing, scope, cross-team communication and milestones, and bringing scientific users' feedback into the work."
+  built: "The full working prototype, end to end."
+  with: "Data-science and engineering team leads on my product team, who owned source collection, entity recognition, the observation model and the analyst interface."
+figure_caption: "Generalized product workflow."
+figure_note: "Every claim carries its sources: source → observation → program → briefing."
 stages:
   - title: Collect
-    description: "Discover public reports and preserve each source and date."
-    decision: D2
-    decision_label: Preserve provenance
-    decision_anchor: d2-provenance
+    description: "Find public reports and keep each source and its date."
+    decision_label: Keep the trail through merging
+    decision_anchor: provenance
   - title: Recognize
-    description: "Resolve company, compound, target, and indication mentions into shared identities."
-    decision: D1
-    decision_label: Organize around programs
-    decision_anchor: d1-programs
+    description: "Match every company, compound, target and indication mentioned to one shared identity."
+    decision_label: Organize around the program
+    decision_anchor: programs
   - title: Resolve and judge
-    description: "Consolidate overlapping reports. An analyst inspects support and accepts or holds the observation."
-    decision: D3
+    description: "Merge overlapping reports into one observation. An analyst checks the support, then accepts it or holds it."
     decision_label: Make uncertainty reviewable
-    decision_anchor: d3-judgment
+    decision_anchor: judgment
   - title: Remember and deliver
-    description: "Accumulate evidence in program records; carry its sources into landscapes, timelines, and briefs."
-    decision: D4
-    decision_label: Earn trust before expansion
-    decision_anchor: d4-scope
+    description: "Add each accepted observation to its program's record. Landscapes, timelines and briefs draw on those records and carry the sources with them."
+    decision_label: Earn trust before expanding scope
+    decision_anchor: scope
+decisions:
+  - title: "Organize around the program"
+    anchor: programs
+    problem: "A feed shows new reports but leaves the analyst to rebuild the picture."
+    call: "I framed the program, one developing effort, as the unit the product is built around, so each observation attaches to a record that grows."
+    cost: "The product needs reliable entity matching and a way to keep incomplete records until the picture improves."
+  - title: "Keep the trail through merging"
+    anchor: provenance
+    problem: "Several reports often describe the same development."
+    call: "A merged observation keeps every contributing source, so an answer can still be checked after duplicates are removed."
+    cost: "A richer evidence model and more interface detail. One convenient citation would be simpler, but it could hide sources that disagree."
+  - title: "Make uncertainty reviewable"
+    anchor: judgment
+    problem: "A confident sentence can hide weak evidence."
+    call: "I set the boundary that every observation shows its support and the analyst's judgment. Machine help is limited to merging repeats; an expert decides what gets used."
+    cost: "Review time and slower throughput, in exchange for a clear basis for using each observation."
+  - title: "Earn trust before expanding scope"
+    anchor: scope
+    problem: "The first release covered an evidence packet, entity matching and a plain analyst interface."
+    call: "Advanced visualization and replacing the analyst's workflow waited. I coordinated scope and stakeholder feedback across the workstreams."
+    cost: "A narrower release, whose test was whether the intelligence deserved to be used."
+outcomes:
+  - "A working prototype of the full product, built by me."
+  - "A platform brief, a written split of workstream responsibilities, and data contracts between the teams."
+  - "The team's build: source records, entity models, analyst review checkpoints and briefing collections."
+reflections:
+  worked: "Organizing around the program and keeping every source through merging gave the product one record an analyst can inspect, instead of a feed to reconstruct."
+  didnt: "I tested the briefing, the thing leadership actually reads, later than the underlying records."
+  grow: "Test the briefing alongside the records, then work out how current state, changes since the last review and upcoming evidence fit in one package, and whether that package changes what the reader does next."
 disclosure_note: "Review copy · Generalized workflow; no proprietary scientific examples. Product name and professional attribution await employer disclosure approval."
 ---
-
-<h2 id="decisions">04 / Product and design decisions</h2>
-<div class="wp-decisions">
-<div class="wp-decision">
-
-<h3 id="d1-programs">D1 · Organize around the program</h3>
-
-A feed can show new reports while leaving the analyst to reconstruct the competitive picture. I helped frame the program as the durable unit of navigation: observations accumulate around a developing effort. This supports continuity across reviews, but requires explicit entity resolution and a way to preserve incomplete records as knowledge improves.
-
-</div>
-<div class="wp-decision">
-
-<h3 id="d2-provenance">D2 · Preserve the trail through consolidation</h3>
-
-Several reports can describe the same underlying development. The product contract requires consolidated observations to retain all contributing sources. That makes an answer inspectable after deduplication. The trade-off is a richer evidence model and more interface detail; a single convenient citation would be simpler, but could hide conflicting support.
-
-</div>
-<div class="wp-decision">
-
-<h3 id="d3-judgment">D3 · Make uncertainty reviewable</h3>
-
-A confident sentence can obscure weak evidence. I helped establish a product boundary in which evidence support and analyst judgment remain visible. Narrow machine-assisted consolidation can reduce repetition; expert review remains consequential. This accepts review effort and slower throughput in exchange for a clearer basis for using an observation.
-
-</div>
-<div class="wp-decision">
-
-<h3 id="d4-scope">D4 · Earn trust before expanding scope</h3>
-
-The initial scope emphasized an evidence packet, entity resolution, and a plain analyst surface. Advanced visualization and workflow replacement were deferred. I coordinated scope and stakeholder feedback across the workstreams. This reduced the breadth of the first release while concentrating the test on whether the underlying intelligence deserved to be used.
-
-</div>
-</div>
-
-<h2 id="evidence">05 / Evidence and outcomes</h2>
-
-The project produced a platform brief, workstream responsibilities, data contracts, and an implementation containing provenance records, entity models, analyst review checkpoints, and briefing collections. These are concrete product and engineering artifacts; they do not establish the quality of every generated claim or the usefulness of the complete workflow.
-
-The validation plan called for comparing consolidated observations against expert-curated examples and testing whether an analyst could use the evidence in a real presentation. Those are intended acceptance criteria. This case makes no measured claim about adoption, time saved, accuracy, or business impact.
-
-<details>
-<summary>Discuss architecture and evaluation</summary>
-
-A useful evaluation separates entity identity, observation consolidation, evidence completeness, and usefulness to the reader. Several agreeing articles may repeat one original source. An evaluation should therefore inspect the independence of support, retain disagreements, and test whether an analyst can trace a briefing claim back to its contributing evidence. The repository demonstrates implementation work; a benchmark result would require a defined corpus, adjudication rules, and recorded errors.
-
-</details>
-
-<h2 id="reflections">06 / Reflections</h2>
-
-The lesson I draw is that a durable evidence model only creates value when it serves a recurring decision. I would test the final briefing artifact earlier, alongside the underlying records. Future work should investigate how current state, changes since the last review, and upcoming evidence fit together—then evaluate whether that package changes what the reader does next.
