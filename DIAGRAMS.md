@@ -31,6 +31,10 @@ Homepage placement and chapter motion live in `assets/css/fieldnotes-home.css`. 
 names fail the Hugo build. Keep prose and diagrams consistent. Diagram labels must not add factual
 claims, imply measurements, or grant authority absent from the article.
 
+## Renderers
+
+Work Product workflows use OpenFlowKit (static SVG, editable `.ofk`). "Arc" is the Hudson Kit library vendored in `tools/agentic-os-atlas/` on unmerged branch `claude/lucid-cray-sezuh0`; it is not on main and is not the Work Product renderer. Check a Work Product render with `scripts/verify-talos-render.py`.
+
 ## Brand role
 
 Schematics are a recurring Personal Fieldnotes primitive, not merely article illustrations. They can

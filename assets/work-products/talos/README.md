@@ -22,8 +22,7 @@ then `draft: false`, `status: published`, and `visibility: public`.
 The generator places provenance descriptions as native editable 15px text nodes because
 OpenFlowKit 0.3.0 fixes icon-card sublabels at 11px. Stage frames and cards use native
 square-corner appearance settings. Return routes are native scene waypoints derived
-from node bounds; the compiler and exporter remain unmodified. The image preserves
-its natural width, with an HTML text walkthrough for narrow screens.
+from node bounds; the compiler and exporter remain unmodified. The image scales to its container at 1000px and wider, and keeps natural width (scrolls) below that, with an HTML text walkthrough for narrow screens.
 
 **Problem vignette (motion):** `problem-vignette/` — 15s silent Bang Motion piece (editable
 `index.html`, MP4, poster, `preview.html` with reduced-motion fallback). Review locally;
