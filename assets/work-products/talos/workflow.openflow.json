@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "b90e1dbc-8a47-41a7-a0c4-1c306ace44c4",
+  "id": "95669fbb-ec10-4f0f-8526-698d3c13450e",
   "name": "workflow",
-  "createdAt": "2026-11-26T15:16:19.298Z",
-  "updatedAt": "2026-11-26T15:16:19.298Z",
+  "createdAt": "2026-11-26T15:19:39.922Z",
+  "updatedAt": "2026-11-26T15:19:39.922Z",
   "pages": [
     {
-      "id": "b90e1dbc-8a47-41a7-a0c4-1c306ace44c4:page-1",
+      "id": "95669fbb-ec10-4f0f-8526-698d3c13450e:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -20,7 +20,7 @@
       ],
       "nodes": [
         {
-          "id": "dsl-7k016r",
+          "id": "dsl-1lnujeg",
           "kind": "frame",
           "parentId": null,
           "layerId": "default",
@@ -37,7 +37,7 @@
             }
           },
           "size": {
-            "width": 1195.0,
+            "width": 1198.0,
             "height": 650
           },
           "content": {
@@ -51,8 +51,8 @@
             "dsl": {
               "family": "architecture",
               "version": 1,
-              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"298,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,42\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,195\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"607,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"915,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
-              "hash": "15gtucq",
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,192\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"299,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,42\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,192\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"610,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support + uncertainty\", pin: \"20,192\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,342\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,492\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"918,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,192\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,342\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,492\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
+              "hash": "nark45",
               "direction": "right",
               "appearance": {
                 "palette": "paper"
@@ -65,7 +65,7 @@
         {
           "id": "collect",
           "kind": "frame",
-          "parentId": "dsl-7k016r",
+          "parentId": "dsl-1lnujeg",
           "layerId": "default",
           "zIndex": 1,
           "transform": {
@@ -110,12 +110,12 @@
         {
           "id": "recognize",
           "kind": "frame",
-          "parentId": "dsl-7k016r",
+          "parentId": "dsl-1lnujeg",
           "layerId": "default",
           "zIndex": 2,
           "transform": {
             "translation": {
-              "x": 298.0,
+              "x": 299.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -142,7 +142,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "298,0"
+                  "value": "299,0"
                 }
               ],
               "appearance": {
@@ -155,12 +155,12 @@
         {
           "id": "judge",
           "kind": "frame",
-          "parentId": "dsl-7k016r",
+          "parentId": "dsl-1lnujeg",
           "layerId": "default",
           "zIndex": 3,
           "transform": {
             "translation": {
-              "x": 607.0,
+              "x": 610.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -187,7 +187,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "607,0"
+                  "value": "610,0"
                 }
               ],
               "appearance": {
@@ -200,12 +200,12 @@
         {
           "id": "deliver",
           "kind": "frame",
-          "parentId": "dsl-7k016r",
+          "parentId": "dsl-1lnujeg",
           "layerId": "default",
           "zIndex": 4,
           "transform": {
             "translation": {
-              "x": 915.0,
+              "x": 918.0,
               "y": 0.0
             },
             "rotationRadians": 0,
@@ -232,7 +232,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "915,0"
+                  "value": "918,0"
                 }
               ],
               "appearance": {
@@ -332,7 +332,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 195
+              "y": 192
             },
             "rotationRadians": 0,
             "scale": {
@@ -394,7 +394,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,195"
+                  "value": "20,192"
                 }
               ],
               "appearance": {
@@ -494,7 +494,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 195
+              "y": 192
             },
             "rotationRadians": 0,
             "scale": {
@@ -556,7 +556,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,195"
+                  "value": "20,192"
                 }
               ],
               "appearance": {
@@ -658,7 +658,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 195
+              "y": 192
             },
             "rotationRadians": 0,
             "scale": {
@@ -722,7 +722,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,195"
+                  "value": "20,192"
                 }
               ],
               "appearance": {
@@ -741,7 +741,7 @@
           "transform": {
             "translation": {
               "x": 67,
-              "y": 330
+              "y": 342
             },
             "rotationRadians": 0,
             "scale": {
@@ -774,7 +774,7 @@
               "attrs": [
                 {
                   "key": "pin",
-                  "value": "67,330"
+                  "value": "67,342"
                 },
                 {
                   "key": "width",
@@ -801,7 +801,7 @@
           "transform": {
             "translation": {
               "x": 48,
-              "y": 495
+              "y": 492
             },
             "rotationRadians": 0,
             "scale": {
@@ -839,7 +839,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "48,495"
+                  "value": "48,492"
                 }
               ],
               "appearance": {
@@ -941,7 +941,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 195
+              "y": 192
             },
             "rotationRadians": 0,
             "scale": {
@@ -1003,7 +1003,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,195"
+                  "value": "20,192"
                 }
               ],
               "appearance": {
@@ -1022,7 +1022,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 330
+              "y": 342
             },
             "rotationRadians": 0,
             "scale": {
@@ -1084,7 +1084,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,330"
+                  "value": "20,342"
                 }
               ],
               "appearance": {
@@ -1103,7 +1103,7 @@
           "transform": {
             "translation": {
               "x": 20,
-              "y": 465
+              "y": 492
             },
             "rotationRadians": 0,
             "scale": {
@@ -1165,7 +1165,7 @@
                 },
                 {
                   "key": "pin",
-                  "value": "20,465"
+                  "value": "20,492"
                 }
               ],
               "appearance": {
@@ -1959,11 +1959,11 @@
           },
           "waypoints": [
             {
-              "x": 1085.0,
-              "y": 462.5
+              "x": 1088.0,
+              "y": 474.5
             },
             {
-              "x": 1085.0,
+              "x": 1088.0,
               "y": 174.5
             }
           ],
@@ -2066,12 +2066,12 @@
           },
           "waypoints": [
             {
-              "x": 777.0,
-              "y": 627.5
+              "x": 780.0,
+              "y": 624.5
             },
             {
-              "x": 777.0,
-              "y": 327.5
+              "x": 780.0,
+              "y": 324.5
             }
           ],
           "labels": [
@@ -2163,12 +2163,12 @@
           },
           "waypoints": [
             {
-              "x": 1331.0,
+              "x": 1334.0,
               "y": 174.5
             },
             {
-              "x": 1331.0,
-              "y": 462.5
+              "x": 1334.0,
+              "y": 474.5
             }
           ],
           "labels": [],
@@ -2214,12 +2214,12 @@
           },
           "waypoints": [
             {
-              "x": 1331.0,
+              "x": 1334.0,
               "y": 174.5
             },
             {
-              "x": 1331.0,
-              "y": 597.5
+              "x": 1334.0,
+              "y": 624.5
             }
           ],
           "labels": [],
@@ -2265,12 +2265,12 @@
           },
           "waypoints": [
             {
-              "x": 1203.5,
-              "y": 760.0
+              "x": 1206.5,
+              "y": 757.0
             },
             {
               "x": 145.0,
-              "y": 760.0
+              "y": 757.0
             },
             {
               "x": 145.0,

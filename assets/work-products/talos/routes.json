@@ -1,0 +1,27 @@
+[
+ {
+  "from": "ready",
+  "to": "record",
+  "kind": "gate-lane"
+ },
+ {
+  "from": "hold",
+  "to": "review",
+  "kind": "left-lane"
+ },
+ {
+  "from": "record",
+  "to": "timelines",
+  "kind": "right-bus"
+ },
+ {
+  "from": "record",
+  "to": "briefs",
+  "kind": "right-bus"
+ },
+ {
+  "from": "briefs",
+  "to": "sources",
+  "kind": "return-bottom"
+ }
+]

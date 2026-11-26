@@ -4,6 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 slug="${1:?slug}"; out="_private/${slug}-review"; mkdir -p "$out"
+[ -f "assets/work-products/$slug/flow.json" ] && python3 scripts/compile-flow.py "$slug"
 python3 scripts/render-workflow.py "$slug"
 hugo server -D --port 8765 >/tmp/hugo-wp.log 2>&1 & pid=$!
 trap 'kill $pid 2>/dev/null' EXIT

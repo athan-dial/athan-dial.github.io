@@ -1,0 +1,9 @@
+{
+  "_doc": "Work Product catalog. status: candidate > grilled > drafted > rendered > cleared. Private evidence lives in _private/<slug>-review/, never here. Skill: pm:work-product.",
+  "cases": [
+    {"slug": "talos", "name": "TALOS", "status": "rendered", "pr": "https://github.com/athan-dial/athan-dial.github.io/pull/31",
+     "disclosure": "pending employer approval: product name, workflow detail, role attribution", "flow": "assets/work-products/talos/flow.json"},
+    {"slug": "prime", "name": "PrIME", "status": "candidate", "pr": null, "disclosure": "not started", "flow": null},
+    {"slug": "ark", "name": "ARK", "status": "candidate", "pr": null, "disclosure": "not started", "flow": null}
+  ]
+}

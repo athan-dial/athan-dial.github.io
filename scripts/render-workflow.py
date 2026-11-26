@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Render a Work Product diagram: python3 scripts/render-workflow.py [slug] (default talos).
-OpenFlowKit 0.3.0, Node 20.11+. Edge routing below is keyed to TALOS node ids; other slugs use native routing."""
+OpenFlowKit 0.3.0, Node 20.11+. Edge route hints come from routes.json (written by compile-flow.py)."""
 import json
 import sys
 import copy
@@ -90,30 +90,26 @@ def route(edge, points, source_side, target_side):
     for end, side in [('source', source_side), ('target', target_side)]:
         edge[end]['anchor'] = {'kind': 'side', 'side': side, 'ratio': .5}
 
+routes_file = folder / 'routes.json'
+kinds = {(r['from'], r['to']): r['kind'] for r in json.loads(routes_file.read_text())} if routes_file.exists() else {}
 for edge in page['connectors']:
     pair = (edge['source']['nodeId'], edge['target']['nodeId'])
-    if pair == ('briefs', 'sources'):
-        bx, by, bw, bh = bounds('briefs')
-        sx, sy, sw, sh = bounds('sources')
-        route(edge, [(bx + bw / 2, bounds('hold')[1] + bounds('hold')[3] + 80),
-                     (sx - 35, bounds('hold')[1] + bounds('hold')[3] + 80),
-                     (sx - 35, sy + sh / 2)], 'bottom', 'left')
-    elif pair == ('hold', 'review'):
-        hx, hy, hw, hh = bounds('hold')
-        rx, ry, rw, rh = bounds('review')
-        route(edge, [(rx - 10, hy + hh / 2), (rx - 10, ry + rh / 2)], 'left', 'left')
-    elif pair == ('ready', 'record'):
-        gx, gy, gw, gh = bounds('ready')
-        rx, ry, rw, rh = bounds('record')
-        route(edge, [(rx - 10, gy + gh / 2), (rx - 10, ry + rh / 2)], 'right', 'left')
+    kind = kinds.get(pair)
+    sx, sy, sw, sh = bounds(pair[0])
+    tx, ty, tw, th = bounds(pair[1])
+    if kind == 'return-bottom':
+        y = max(bounds(n)[1] + bounds(n)[3] for n in by_id if by_id[n]['kind'] != 'frame' and by_id[n]['kind'] != 'text') + 80
+        route(edge, [(sx + sw / 2, y), (tx - 35, y), (tx - 35, ty + th / 2)], 'bottom', 'left')
+    elif kind == 'left-lane':
+        route(edge, [(tx - 10, sy + sh / 2), (tx - 10, ty + th / 2)], 'left', 'left')
+    elif kind == 'gate-lane':
+        route(edge, [(tx - 10, sy + sh / 2), (tx - 10, ty + th / 2)], 'right', 'left')
         for label in edge['labels']:
             label['pathRatio'] = .05
             label['offset'] = {'x': 0, 'y': -14}
-    elif pair in [('record', 'timelines'), ('record', 'briefs')]:
-        rx, ry, rw, rh = bounds('record')
-        tx, ty, tw, th = bounds(pair[1])
-        lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + 10
-        route(edge, [(lane, ry + rh / 2), (lane, ty + th / 2)], 'right', 'right')
+    elif kind == 'right-bus':
+        lane = max(bounds(n)[0] + bounds(n)[2] for n in by_id if by_id[n]['parentId'] == by_id[pair[0]]['parentId'] and by_id[n]['kind'] == 'architecture') + 10
+        route(edge, [(lane, sy + sh / 2), (lane, ty + th / 2)], 'right', 'right')
         edge['labels'] = []
 stage_frames = [n for n in page['nodes'] if n['kind'] == 'frame' and n is not root_frame]
 root_frame['size'] = {'width': max(f['transform']['translation']['x'] + f['size']['width'] for f in stage_frames) + 14,
