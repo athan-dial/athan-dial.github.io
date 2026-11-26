@@ -24,6 +24,10 @@
        "css/editorial.css" served the first-built (non-home) bundle to the homepage and
        silently dropped the whole fieldnotes-home layer. */}}
   {{- $bundle := "css/editorial.css" -}}
+  {{- if eq .Layout "work-product" -}}
+    {{- $styles = $styles | append (resources.Get "css/work-product.css") -}}
+    {{- $bundle = "css/work-product.css" -}}
+  {{- end -}}
   {{- if .IsHome -}}
     {{- $fieldnotesHome := resources.Get "css/fieldnotes-home.css" -}}
     {{- $styles = $styles | append $fieldnotesHome -}}

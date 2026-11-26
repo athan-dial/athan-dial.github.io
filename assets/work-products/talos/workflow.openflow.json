@@ -1,0 +1,1132 @@
+{
+  "format": "openflowkit.scene",
+  "schemaVersion": 1,
+  "id": "330500b1-516d-4d8f-ade7-29b4ab03b6b5",
+  "name": "workflow",
+  "createdAt": "2026-11-26T11:55:22.609Z",
+  "updatedAt": "2026-11-26T11:55:22.609Z",
+  "pages": [
+    {
+      "id": "330500b1-516d-4d8f-ade7-29b4ab03b6b5:page-1",
+      "name": "Page 1",
+      "diagramKind": "architecture",
+      "layers": [
+        {
+          "id": "default",
+          "name": "Default",
+          "visible": true,
+          "locked": false
+        }
+      ],
+      "nodes": [
+        {
+          "id": "dsl-1ucx4e6",
+          "kind": "frame",
+          "parentId": null,
+          "layerId": "default",
+          "zIndex": 0,
+          "transform": {
+            "translation": {
+              "x": 160,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 1100,
+            "height": 520
+          },
+          "content": {
+            "label": ""
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "family": "architecture",
+              "version": 1,
+              "source": "architecture right\nappearance: paper\n\"Public sources\" [icon: tabler/world, slate, pin: \"0,80\"]\n\"Discover and ingest\" [icon: tabler/download, slate, pin: \"210,80\"]\n\"Companies and compounds\" [icon: tabler/building, emerald, pin: \"420,0\"]\n\"Targets and indications\" [icon: tabler/dna, emerald, pin: \"420,160\"]\n\"Resolve observations\" [icon: tabler/git-merge, emerald, bold, pin: \"630,80\"]\n\"Assess evidence\" [icon: tabler/scale, amber, pin: \"840,80\"]\n\"Analyst review\" [icon: tabler/user-check, amber, pin: \"840,330\"]\n\"Program record\" [icon: tabler/database, emerald, bold, pin: \"630,330\"]\n\"Landscapes\" [icon: tabler/layout-grid, slate, pin: \"420,280\"]\n\"Timelines\" [icon: tabler/calendar, slate, pin: \"210,330\"]\n\"Leadership briefs\" [icon: tabler/file-text, slate, pin: \"0,330\"]\n\"Public sources\" -> \"Discover and ingest\" : source + date\n\"Discover and ingest\" -> \"Companies and compounds\" : mentions\n\"Discover and ingest\" -> \"Targets and indications\" : mentions\n\"Companies and compounds\" -> \"Resolve observations\" : canonical identity\n\"Targets and indications\" -> \"Resolve observations\"\n\"Resolve observations\" -> \"Assess evidence\" : all contributing sources\n\"Assess evidence\" -> \"Analyst review\" : ambiguity + support\n\"Analyst review\" -> \"Program record\" : reviewed observation\n\"Program record\" -> \"Landscapes\" : traceable claims\n\"Program record\" -> \"Timelines\" : dated evidence\n\"Program record\" -> \"Leadership briefs\" : linked evidence\n",
+              "hash": "1c4nsdm",
+              "direction": "right",
+              "appearance": {
+                "palette": "paper"
+              },
+              "autoIcons": true
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "public-sources",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 1,
+          "transform": {
+            "translation": {
+              "x": 0,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Public sources",
+            "color": "slate",
+            "icon": "tabler/world",
+            "archProvider": "tabler",
+            "archResourceType": "world",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "world",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "public-sources",
+              "line": 3,
+              "color": "gray",
+              "icon": "tabler/world",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "0,80"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "discover-and-ingest",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 2,
+          "transform": {
+            "translation": {
+              "x": 210,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 156,
+            "height": 107
+          },
+          "content": {
+            "label": "Discover and ingest",
+            "color": "slate",
+            "icon": "tabler/download",
+            "archProvider": "tabler",
+            "archResourceType": "download",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "download",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "discover-and-ingest",
+              "line": 4,
+              "color": "gray",
+              "icon": "tabler/download",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "210,80"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "companies-and-compounds",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 3,
+          "transform": {
+            "translation": {
+              "x": 420,
+              "y": 0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 188,
+            "height": 107
+          },
+          "content": {
+            "label": "Companies and compounds",
+            "color": "emerald",
+            "icon": "tabler/building",
+            "archProvider": "tabler",
+            "archResourceType": "building",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "building",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "companies-and-compounds",
+              "line": 5,
+              "color": "green",
+              "icon": "tabler/building",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "420,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "targets-and-indications",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 4,
+          "transform": {
+            "translation": {
+              "x": 420,
+              "y": 160
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 181,
+            "height": 107
+          },
+          "content": {
+            "label": "Targets and indications",
+            "color": "emerald",
+            "icon": "tabler/dna",
+            "archProvider": "tabler",
+            "archResourceType": "dna",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "dna",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "targets-and-indications",
+              "line": 6,
+              "color": "green",
+              "icon": "tabler/dna",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "420,160"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "resolve-observations",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 5,
+          "transform": {
+            "translation": {
+              "x": 630,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 166,
+            "height": 107
+          },
+          "content": {
+            "label": "Resolve observations",
+            "color": "emerald",
+            "colorMode": "filled",
+            "icon": "tabler/git-merge",
+            "archProvider": "tabler",
+            "archResourceType": "git-merge",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "git-merge",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "resolve-observations",
+              "line": 7,
+              "color": "green",
+              "fill": "bold",
+              "icon": "tabler/git-merge",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "630,80"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "assess-evidence",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 6,
+          "transform": {
+            "translation": {
+              "x": 840,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Assess evidence",
+            "color": "amber",
+            "icon": "tabler/scale",
+            "archProvider": "tabler",
+            "archResourceType": "scale",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "scale",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "assess-evidence",
+              "line": 8,
+              "color": "orange",
+              "icon": "tabler/scale",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "840,80"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "analyst-review",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 7,
+          "transform": {
+            "translation": {
+              "x": 840,
+              "y": 330
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Analyst review",
+            "color": "amber",
+            "icon": "tabler/user-check",
+            "archProvider": "tabler",
+            "archResourceType": "user-check",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "user-check",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "analyst-review",
+              "line": 9,
+              "color": "orange",
+              "icon": "tabler/user-check",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "840,330"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "program-record",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 8,
+          "transform": {
+            "translation": {
+              "x": 630,
+              "y": 330
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Program record",
+            "color": "emerald",
+            "colorMode": "filled",
+            "icon": "tabler/database",
+            "archProvider": "tabler",
+            "archResourceType": "database",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "database",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "program-record",
+              "line": 10,
+              "color": "green",
+              "fill": "bold",
+              "icon": "tabler/database",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "630,330"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "landscapes",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 9,
+          "transform": {
+            "translation": {
+              "x": 420,
+              "y": 280
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Landscapes",
+            "color": "slate",
+            "icon": "tabler/layout-grid",
+            "archProvider": "tabler",
+            "archResourceType": "layout-grid",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "layout-grid",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "landscapes",
+              "line": 11,
+              "color": "gray",
+              "icon": "tabler/layout-grid",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "420,280"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "timelines",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 10,
+          "transform": {
+            "translation": {
+              "x": 210,
+              "y": 330
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Timelines",
+            "color": "slate",
+            "icon": "tabler/calendar",
+            "archProvider": "tabler",
+            "archResourceType": "calendar",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "calendar",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "timelines",
+              "line": 12,
+              "color": "gray",
+              "icon": "tabler/calendar",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "210,330"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "leadership-briefs",
+          "kind": "architecture",
+          "parentId": "dsl-1ucx4e6",
+          "layerId": "default",
+          "zIndex": 11,
+          "transform": {
+            "translation": {
+              "x": 0,
+              "y": 330
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 148,
+            "height": 107
+          },
+          "content": {
+            "label": "Leadership briefs",
+            "color": "slate",
+            "icon": "tabler/file-text",
+            "archProvider": "tabler",
+            "archResourceType": "file-text",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "file-text",
+            "assetPresentation": "icon"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "leadership-briefs",
+              "line": 13,
+              "color": "gray",
+              "icon": "tabler/file-text",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "0,330"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        }
+      ],
+      "connectors": [
+        {
+          "id": "edge:public-sources->discover-and-ingest:1",
+          "source": {
+            "nodeId": "public-sources",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "discover-and-ingest",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "public-sources->discover-and-ingest:1:label",
+              "text": "source + date",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 14,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:discover-and-ingest->companies-and-compounds:1",
+          "source": {
+            "nodeId": "discover-and-ingest",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "companies-and-compounds",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "discover-and-ingest->companies-and-compounds:1:label",
+              "text": "mentions",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 15,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:discover-and-ingest->targets-and-indications:1",
+          "source": {
+            "nodeId": "discover-and-ingest",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "targets-and-indications",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "discover-and-ingest->targets-and-indications:1:label",
+              "text": "mentions",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 16,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:companies-and-compounds->resolve-observations:1",
+          "source": {
+            "nodeId": "companies-and-compounds",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "resolve-observations",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "companies-and-compounds->resolve-observations:1:label",
+              "text": "canonical identity",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 17,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:targets-and-indications->resolve-observations:1",
+          "source": {
+            "nodeId": "targets-and-indications",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "resolve-observations",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 18,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:resolve-observations->assess-evidence:1",
+          "source": {
+            "nodeId": "resolve-observations",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "assess-evidence",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "resolve-observations->assess-evidence:1:label",
+              "text": "all contributing sources",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 19,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:assess-evidence->analyst-review:1",
+          "source": {
+            "nodeId": "assess-evidence",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "analyst-review",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "assess-evidence->analyst-review:1:label",
+              "text": "ambiguity + support",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 20,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:analyst-review->program-record:1",
+          "source": {
+            "nodeId": "analyst-review",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "program-record",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "analyst-review->program-record:1:label",
+              "text": "reviewed observation",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 21,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:program-record->landscapes:1",
+          "source": {
+            "nodeId": "program-record",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "landscapes",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "program-record->landscapes:1:label",
+              "text": "traceable claims",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 22,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:program-record->timelines:1",
+          "source": {
+            "nodeId": "program-record",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "timelines",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "program-record->timelines:1:label",
+              "text": "dated evidence",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 23,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:program-record->leadership-briefs:1",
+          "source": {
+            "nodeId": "program-record",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "leadership-briefs",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "program-record->leadership-briefs:1:label",
+              "text": "linked evidence",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 24,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        }
+      ],
+      "metadata": {},
+      "extensions": {}
+    }
+  ],
+  "metadata": {},
+  "extensions": {}
+}

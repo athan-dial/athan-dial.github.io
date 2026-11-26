@@ -20,6 +20,11 @@
   the new stories are review-gated pending prose review, so the proof-note group is
   currently empty and the page must not advertise an empty shelf.
 */ -}}
+{{- if .Site.BuildDrafts -}}
+    {{- range where .Pages "Layout" "work-product" -}}
+      {{- if .Draft -}}<p class="container"><a href="{{ .RelPermalink }}">Review Work Product: {{ .Title }} →</a></p>{{- end -}}
+    {{- end -}}
+    {{- end -}}
 {{- $published := where .Pages "Params.status" "published" -}}
 {{- $public := where $published "Params.visibility" "public" -}}
 {{- $flagship := where $public "Params.work_kind" "flagship" -}}

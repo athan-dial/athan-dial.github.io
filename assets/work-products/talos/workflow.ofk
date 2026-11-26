@@ -1,0 +1,24 @@
+architecture right
+appearance: paper
+"Public sources" [icon: tabler/world, slate, pin: "0,80"]
+"Discover and ingest" [icon: tabler/download, slate, pin: "210,80"]
+"Companies and compounds" [icon: tabler/building, emerald, pin: "420,0"]
+"Targets and indications" [icon: tabler/dna, emerald, pin: "420,160"]
+"Resolve observations" [icon: tabler/git-merge, emerald, bold, pin: "630,80"]
+"Assess evidence" [icon: tabler/scale, amber, pin: "840,80"]
+"Analyst review" [icon: tabler/user-check, amber, pin: "840,330"]
+"Program record" [icon: tabler/database, emerald, bold, pin: "630,330"]
+"Landscapes" [icon: tabler/layout-grid, slate, pin: "420,280"]
+"Timelines" [icon: tabler/calendar, slate, pin: "210,330"]
+"Leadership briefs" [icon: tabler/file-text, slate, pin: "0,330"]
+"Public sources" -> "Discover and ingest" : source + date
+"Discover and ingest" -> "Companies and compounds" : mentions
+"Discover and ingest" -> "Targets and indications" : mentions
+"Companies and compounds" -> "Resolve observations" : canonical identity
+"Targets and indications" -> "Resolve observations"
+"Resolve observations" -> "Assess evidence" : all contributing sources
+"Assess evidence" -> "Analyst review" : ambiguity + support
+"Analyst review" -> "Program record" : reviewed observation
+"Program record" -> "Landscapes" : traceable claims
+"Program record" -> "Timelines" : dated evidence
+"Program record" -> "Leadership briefs" : linked evidence
