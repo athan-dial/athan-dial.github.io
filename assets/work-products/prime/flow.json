@@ -1,0 +1,37 @@
+{
+  "stages": [
+    {"id": "build", "title": "01 · Build advisor", "nodes": [
+      {"id": "corpus", "label": "Source corpus", "type": "state", "icon": "books", "desc": "Literature + recorded views"},
+      {"id": "profile", "label": "Grounded profile", "type": "state", "icon": "user-circle", "desc": "Each claim linked to a source"},
+      {"id": "curator", "label": "Curator promotion", "type": "judgment", "icon": "user-check", "desc": "Depth gate before critique"}]},
+    {"id": "converse", "title": "02 · Converse", "nodes": [
+      {"id": "chat", "label": "Advisor conversation", "type": "action", "icon": "message-circle", "desc": "Hedged on thin evidence"},
+      {"id": "deck", "label": "Deck attached", "type": "state", "icon": "presentation", "desc": "Added mid-conversation"}]},
+    {"id": "critique", "title": "03 · Critique and verify", "nodes": [
+      {"id": "draft", "label": "Draft critique", "type": "action", "icon": "file-text", "desc": "Points tied to slides"},
+      {"id": "verify", "label": "Independent check", "type": "action", "icon": "shield-check", "desc": "Separate pass tests each point"},
+      {"id": "supported", "label": "Supported?", "type": "gate", "x": 67},
+      {"id": "gap", "label": "State the gap", "type": "state", "desc": "Abstain; never fill it in", "x": 48}]},
+    {"id": "share", "title": "04 · Share", "nodes": [
+      {"id": "readout", "label": "Critique readout", "type": "action", "icon": "file-search", "desc": "Verdict + slide basis"},
+      {"id": "html", "label": "Standalone page", "type": "direction", "icon": "world", "desc": "Readable without the app"},
+      {"id": "pptx", "label": "Annotated deck", "type": "direction", "icon": "presentation", "desc": "Comments on the slides"},
+      {"id": "handoff", "label": "Copy-first handoff", "type": "direction", "icon": "copy", "desc": "Planned; labelled unverified"}]}
+  ],
+  "edges": [
+    {"from": "corpus", "to": "profile"},
+    {"from": "profile", "to": "curator"},
+    {"from": "curator", "to": "chat", "label": "promoted"},
+    {"from": "chat", "to": "deck"},
+    {"from": "deck", "to": "draft", "label": "slides"},
+    {"from": "draft", "to": "verify"},
+    {"from": "verify", "to": "supported"},
+    {"from": "supported", "to": "readout", "label": "supported", "route": "gate-lane"},
+    {"from": "supported", "to": "gap", "label": "no"},
+    {"from": "gap", "to": "draft", "label": "revise once", "dashed": true, "sides": ["left", "left"], "route": "left-lane"},
+    {"from": "readout", "to": "html"},
+    {"from": "readout", "to": "pptx", "sides": ["right", "right"], "route": "right-bus"},
+    {"from": "readout", "to": "handoff", "sides": ["right", "right"], "route": "right-bus"},
+    {"from": "handoff", "to": "corpus", "label": "planned expert fidelity check", "dashed": true, "sides": ["bottom", "bottom"], "route": "return-bottom"}
+  ]
+}

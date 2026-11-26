@@ -1,0 +1,2413 @@
+{
+  "format": "openflowkit.scene",
+  "schemaVersion": 1,
+  "id": "c17bdaa3-3312-41d4-99d4-022ab34eab23",
+  "name": "workflow",
+  "createdAt": "2026-11-26T15:23:20.965Z",
+  "updatedAt": "2026-11-26T15:23:20.965Z",
+  "pages": [
+    {
+      "id": "c17bdaa3-3312-41d4-99d4-022ab34eab23:page-1",
+      "name": "Page 1",
+      "diagramKind": "architecture",
+      "layers": [
+        {
+          "id": "default",
+          "name": "Default",
+          "visible": true,
+          "locked": false
+        }
+      ],
+      "nodes": [
+        {
+          "id": "dsl-cfjmm2",
+          "kind": "frame",
+          "parentId": null,
+          "layerId": "default",
+          "zIndex": 0,
+          "transform": {
+            "translation": {
+              "x": 160,
+              "y": 80
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 1169.0,
+            "height": 650
+          },
+          "content": {
+            "label": ""
+          },
+          "appearance": {
+            "cornerRadius": 0
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "family": "architecture",
+              "version": 1,
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup build = \"01 \u00b7 Build advisor\" [pin: \"0,0\"] {\n  corpus = \"Source corpus\" [icon: tabler/books, iconpos: left, gray, outline, desc: \"Literature + recorded views\", pin: \"20,42\"]\n  profile = \"Grounded profile\" [icon: tabler/user-circle, iconpos: left, gray, outline, desc: \"Each claim linked to a source\", pin: \"20,192\"]\n  curator = \"Curator promotion\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Depth gate before critique\", pin: \"20,342\"]\n}\ngroup converse = \"02 \u00b7 Converse\" [pin: \"297,0\"] {\n  chat = \"Advisor conversation\" [icon: tabler/message-circle, iconpos: left, \"#14543c\", bold, desc: \"Hedged on thin evidence\", pin: \"20,42\"]\n  deck = \"Deck attached\" [icon: tabler/presentation, iconpos: left, gray, outline, desc: \"Added mid-conversation\", pin: \"20,192\"]\n}\ngroup critique = \"03 \u00b7 Critique and verify\" [pin: \"584,0\"] {\n  draft = \"Draft critique\" [icon: tabler/file-text, iconpos: left, \"#14543c\", bold, desc: \"Points tied to slides\", pin: \"20,42\"]\n  verify = \"Independent check\" [icon: tabler/shield-check, iconpos: left, \"#14543c\", bold, desc: \"Separate pass tests each point\", pin: \"20,192\"]\n  supported = \"Supported?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,342\"]\n  gap = \"State the gap\" [gray, outline, desc: \"Abstain; never fill it in\", pin: \"48,492\"]\n}\ngroup share = \"04 \u00b7 Share\" [pin: \"898,0\"] {\n  readout = \"Critique readout\" [icon: tabler/file-search, iconpos: left, \"#14543c\", bold, desc: \"Verdict + slide basis\", pin: \"20,42\"]\n  html = \"Standalone page\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Readable without the app\", pin: \"20,192\"]\n  pptx = \"Annotated deck\" [icon: tabler/presentation, iconpos: left, gray, outline, desc: \"Comments on the slides\", pin: \"20,342\"]\n  handoff = \"Copy-first handoff\" [icon: tabler/copy, iconpos: left, gray, outline, desc: \"Planned; labelled unverified\", pin: \"20,492\"]\n}\ncorpus -> profile\nprofile -> curator\ncurator -> chat : promoted [from: right, to: left]\nchat -> deck\ndeck -> draft : slides [from: right, to: left]\ndraft -> verify\nverify -> supported\nsupported -> readout : supported [from: right, to: left]\nsupported -> gap : no\ngap --> draft : revise once [from: left, to: left]\nreadout -> html\nreadout -> pptx [from: right, to: right]\nreadout -> handoff [from: right, to: right]\nhandoff --> corpus : planned expert fidelity check [from: bottom, to: bottom]\n",
+              "hash": "1tceo1b",
+              "direction": "right",
+              "appearance": {
+                "palette": "paper"
+              },
+              "icons": "off"
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "build",
+          "kind": "frame",
+          "parentId": "dsl-cfjmm2",
+          "layerId": "default",
+          "zIndex": 1,
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 261,
+            "height": 625
+          },
+          "content": {
+            "label": "01 \u00b7 Build advisor"
+          },
+          "appearance": {
+            "cornerRadius": 0
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "build",
+              "line": 4,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "0,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "converse",
+          "kind": "frame",
+          "parentId": "dsl-cfjmm2",
+          "layerId": "default",
+          "zIndex": 2,
+          "transform": {
+            "translation": {
+              "x": 297.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 251,
+            "height": 625
+          },
+          "content": {
+            "label": "02 \u00b7 Converse"
+          },
+          "appearance": {
+            "cornerRadius": 0
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "converse",
+              "line": 9,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "297,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "critique",
+          "kind": "frame",
+          "parentId": "dsl-cfjmm2",
+          "layerId": "default",
+          "zIndex": 3,
+          "transform": {
+            "translation": {
+              "x": 584.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 278,
+            "height": 625
+          },
+          "content": {
+            "label": "03 \u00b7 Critique and verify"
+          },
+          "appearance": {
+            "cornerRadius": 0
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "critique",
+              "line": 13,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "584,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "share",
+          "kind": "frame",
+          "parentId": "dsl-cfjmm2",
+          "layerId": "default",
+          "zIndex": 4,
+          "transform": {
+            "translation": {
+              "x": 898.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 257,
+            "height": 625
+          },
+          "content": {
+            "label": "04 \u00b7 Share"
+          },
+          "appearance": {
+            "cornerRadius": 0
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "share",
+              "line": 19,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "898,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "corpus",
+          "kind": "architecture",
+          "parentId": "build",
+          "layerId": "default",
+          "zIndex": 5,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 219,
+            "height": 105
+          },
+          "content": {
+            "label": "Source corpus",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/books",
+            "archProvider": "tabler",
+            "archResourceType": "books",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "books",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "corpus",
+              "line": 5,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/books",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Literature + recorded views"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,42"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "profile",
+          "kind": "architecture",
+          "parentId": "build",
+          "layerId": "default",
+          "zIndex": 6,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 192
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 221,
+            "height": 105
+          },
+          "content": {
+            "label": "Grounded profile",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/user-circle",
+            "archProvider": "tabler",
+            "archResourceType": "user-circle",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "user-circle",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "profile",
+              "line": 6,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/user-circle",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Each claim linked to a source"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,192"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "curator",
+          "kind": "architecture",
+          "parentId": "build",
+          "layerId": "default",
+          "zIndex": 7,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 342
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 213,
+            "height": 105
+          },
+          "content": {
+            "label": "Curator promotion",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "custom",
+            "customColor": "#e4f17c",
+            "colorMode": "filled",
+            "icon": "tabler/user-check",
+            "archProvider": "tabler",
+            "archResourceType": "user-check",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "user-check",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "curator",
+              "line": 7,
+              "color": "#e4f17c",
+              "fill": "bold",
+              "icon": "tabler/user-check",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Depth gate before critique"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,342"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "chat",
+          "kind": "architecture",
+          "parentId": "converse",
+          "layerId": "default",
+          "zIndex": 8,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 211,
+            "height": 105
+          },
+          "content": {
+            "label": "Advisor conversation",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "custom",
+            "customColor": "#14543c",
+            "colorMode": "filled",
+            "icon": "tabler/message-circle",
+            "archProvider": "tabler",
+            "archResourceType": "message-circle",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "message-circle",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "chat",
+              "line": 10,
+              "color": "#14543c",
+              "fill": "bold",
+              "icon": "tabler/message-circle",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Hedged on thin evidence"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,42"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "deck",
+          "kind": "architecture",
+          "parentId": "converse",
+          "layerId": "default",
+          "zIndex": 9,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 192
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 194,
+            "height": 105
+          },
+          "content": {
+            "label": "Deck attached",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/presentation",
+            "archProvider": "tabler",
+            "archResourceType": "presentation",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "presentation",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "deck",
+              "line": 11,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/presentation",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Added mid-conversation"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,192"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "draft",
+          "kind": "architecture",
+          "parentId": "critique",
+          "layerId": "default",
+          "zIndex": 10,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 177,
+            "height": 105
+          },
+          "content": {
+            "label": "Draft critique",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "custom",
+            "customColor": "#14543c",
+            "colorMode": "filled",
+            "icon": "tabler/file-text",
+            "archProvider": "tabler",
+            "archResourceType": "file-text",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "file-text",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "draft",
+              "line": 14,
+              "color": "#14543c",
+              "fill": "bold",
+              "icon": "tabler/file-text",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Points tied to slides"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,42"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "verify",
+          "kind": "architecture",
+          "parentId": "critique",
+          "layerId": "default",
+          "zIndex": 11,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 192
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 238,
+            "height": 105
+          },
+          "content": {
+            "label": "Independent check",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "custom",
+            "customColor": "#14543c",
+            "colorMode": "filled",
+            "icon": "tabler/shield-check",
+            "archProvider": "tabler",
+            "archResourceType": "shield-check",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "shield-check",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "verify",
+              "line": 15,
+              "color": "#14543c",
+              "fill": "bold",
+              "icon": "tabler/shield-check",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Separate pass tests each point"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,192"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "supported",
+          "kind": "process",
+          "parentId": "critique",
+          "layerId": "default",
+          "zIndex": 12,
+          "transform": {
+            "translation": {
+              "x": 67,
+              "y": 342
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 150,
+            "height": 105
+          },
+          "content": {
+            "label": "Supported?",
+            "shape": "diamond"
+          },
+          "appearance": {
+            "fill": "#e4f17c",
+            "stroke": "#e4f17c",
+            "textColor": "#0f172a",
+            "cornerRadius": 0,
+            "fontSize": 16
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "supported",
+              "line": 16,
+              "color": "#e4f17c",
+              "fill": "bold",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "67,342"
+                },
+                {
+                  "key": "width",
+                  "value": "150"
+                },
+                {
+                  "key": "height",
+                  "value": "88"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "gap",
+          "kind": "process",
+          "parentId": "critique",
+          "layerId": "default",
+          "zIndex": 13,
+          "transform": {
+            "translation": {
+              "x": 48,
+              "y": 492
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 159,
+            "height": 105
+          },
+          "content": {
+            "label": "State the gap",
+            "shape": "rectangle"
+          },
+          "appearance": {
+            "fill": "transparent",
+            "stroke": "#313439",
+            "textColor": "#2b2a29",
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "gap",
+              "line": 17,
+              "color": "gray",
+              "fill": "outline",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Abstain; never fill it in"
+                },
+                {
+                  "key": "pin",
+                  "value": "48,492"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "readout",
+          "kind": "architecture",
+          "parentId": "share",
+          "layerId": "default",
+          "zIndex": 14,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 180,
+            "height": 105
+          },
+          "content": {
+            "label": "Critique readout",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "custom",
+            "customColor": "#14543c",
+            "colorMode": "filled",
+            "icon": "tabler/file-search",
+            "archProvider": "tabler",
+            "archResourceType": "file-search",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "file-search",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "readout",
+              "line": 20,
+              "color": "#14543c",
+              "fill": "bold",
+              "icon": "tabler/file-search",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Verdict + slide basis"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,42"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "html",
+          "kind": "architecture",
+          "parentId": "share",
+          "layerId": "default",
+          "zIndex": 15,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 192
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 201,
+            "height": 105
+          },
+          "content": {
+            "label": "Standalone page",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/world",
+            "archProvider": "tabler",
+            "archResourceType": "world",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "world",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "html",
+              "line": 21,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/world",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Readable without the app"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,192"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "pptx",
+          "kind": "architecture",
+          "parentId": "share",
+          "layerId": "default",
+          "zIndex": 16,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 342
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 188,
+            "height": 105
+          },
+          "content": {
+            "label": "Annotated deck",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/presentation",
+            "archProvider": "tabler",
+            "archResourceType": "presentation",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "presentation",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "pptx",
+              "line": 22,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/presentation",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Comments on the slides"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,342"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "handoff",
+          "kind": "architecture",
+          "parentId": "share",
+          "layerId": "default",
+          "zIndex": 17,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 492
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 217,
+            "height": 105
+          },
+          "content": {
+            "label": "Copy-first handoff",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "start",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "color": "slate",
+            "icon": "tabler/copy",
+            "archProvider": "tabler",
+            "archResourceType": "copy",
+            "archIconPackId": "tabler-outline-v3",
+            "archIconShapeId": "copy",
+            "assetPresentation": "icon"
+          },
+          "appearance": {
+            "cornerRadius": 0,
+            "fontSize": 16,
+            "textVerticalAlign": "top",
+            "textAlign": "start"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "handoff",
+              "line": 23,
+              "color": "gray",
+              "fill": "outline",
+              "icon": "tabler/copy",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Planned; labelled unverified"
+                },
+                {
+                  "key": "pin",
+                  "value": "20,492"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "corpus-description",
+          "kind": "text",
+          "parentId": "corpus",
+          "layerId": "default",
+          "zIndex": 5,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 157,
+            "height": 42
+          },
+          "content": {
+            "label": "Literature +\nrecorded views",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "profile-description",
+          "kind": "text",
+          "parentId": "profile",
+          "layerId": "default",
+          "zIndex": 6,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 159,
+            "height": 42
+          },
+          "content": {
+            "label": "Each claim linked to\na source",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "curator-description",
+          "kind": "text",
+          "parentId": "curator",
+          "layerId": "default",
+          "zIndex": 7,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 151,
+            "height": 42
+          },
+          "content": {
+            "label": "Depth gate before\ncritique",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "chat-description",
+          "kind": "text",
+          "parentId": "chat",
+          "layerId": "default",
+          "zIndex": 8,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 149,
+            "height": 42
+          },
+          "content": {
+            "label": "Hedged on thin\nevidence",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "deck-description",
+          "kind": "text",
+          "parentId": "deck",
+          "layerId": "default",
+          "zIndex": 9,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 132,
+            "height": 42
+          },
+          "content": {
+            "label": "Added mid-\nconversation",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "draft-description",
+          "kind": "text",
+          "parentId": "draft",
+          "layerId": "default",
+          "zIndex": 10,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 115,
+            "height": 42
+          },
+          "content": {
+            "label": "Points tied to\nslides",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "verify-description",
+          "kind": "text",
+          "parentId": "verify",
+          "layerId": "default",
+          "zIndex": 11,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 176,
+            "height": 42
+          },
+          "content": {
+            "label": "Separate pass tests\neach point",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "gap-description",
+          "kind": "text",
+          "parentId": "gap",
+          "layerId": "default",
+          "zIndex": 13,
+          "transform": {
+            "translation": {
+              "x": 12,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 139,
+            "height": 42
+          },
+          "content": {
+            "label": "Abstain; never\nfill it in",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "readout-description",
+          "kind": "text",
+          "parentId": "readout",
+          "layerId": "default",
+          "zIndex": 14,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 118,
+            "height": 42
+          },
+          "content": {
+            "label": "Verdict + slide\nbasis",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#ffffff"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#ffffff"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "html-description",
+          "kind": "text",
+          "parentId": "html",
+          "layerId": "default",
+          "zIndex": 15,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 139,
+            "height": 42
+          },
+          "content": {
+            "label": "Readable without\nthe app",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "pptx-description",
+          "kind": "text",
+          "parentId": "pptx",
+          "layerId": "default",
+          "zIndex": 16,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 126,
+            "height": 42
+          },
+          "content": {
+            "label": "Comments on the\nslides",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        },
+        {
+          "id": "handoff-description",
+          "kind": "text",
+          "parentId": "handoff",
+          "layerId": "default",
+          "zIndex": 17,
+          "transform": {
+            "translation": {
+              "x": 54,
+              "y": 55
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 155,
+            "height": 42
+          },
+          "content": {
+            "label": "Planned; labelled\nunverified",
+            "fontSize": 16,
+            "fontFamily": "system-ui, sans-serif",
+            "fontWeight": "400",
+            "textColor": "#0b0b0c"
+          },
+          "appearance": {
+            "fontSize": 16,
+            "textPadding": 0,
+            "textAlign": "start",
+            "textVerticalAlign": "top",
+            "textColor": "#0b0b0c"
+          },
+          "ports": [],
+          "metadata": {
+            "purpose": "provenance-description"
+          },
+          "extensions": {}
+        }
+      ],
+      "connectors": [
+        {
+          "id": "edge:corpus->profile:1",
+          "source": {
+            "nodeId": "corpus",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "profile",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 25,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:profile->curator:1",
+          "source": {
+            "nodeId": "profile",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "curator",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 26,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:curator->chat:1",
+          "source": {
+            "nodeId": "curator",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "chat",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "curator->chat:1:label",
+              "text": "promoted",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 27,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:chat->deck:1",
+          "source": {
+            "nodeId": "chat",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "deck",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 28,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:deck->draft:1",
+          "source": {
+            "nodeId": "deck",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "draft",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "deck->draft:1:label",
+              "text": "slides",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 29,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:draft->verify:1",
+          "source": {
+            "nodeId": "draft",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "verify",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 30,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:verify->supported:1",
+          "source": {
+            "nodeId": "verify",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "supported",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 31,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:supported->readout:1",
+          "source": {
+            "nodeId": "supported",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "readout",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1068.0,
+              "y": 474.5
+            },
+            {
+              "x": 1068.0,
+              "y": 174.5
+            }
+          ],
+          "labels": [
+            {
+              "id": "supported->readout:1:label",
+              "text": "supported",
+              "pathRatio": 0.05,
+              "offset": {
+                "x": 0,
+                "y": -14
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 32,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:supported->gap:1",
+          "source": {
+            "nodeId": "supported",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "gap",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "supported->gap:1:label",
+              "text": "no",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 33,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:gap->draft:1",
+          "source": {
+            "nodeId": "gap",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "draft",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 754.0,
+              "y": 624.5
+            },
+            {
+              "x": 754.0,
+              "y": 174.5
+            }
+          ],
+          "labels": [
+            {
+              "id": "gap->draft:1:label",
+              "text": "revise once",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "dashPattern": "dashed",
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 34,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:readout->html:1",
+          "source": {
+            "nodeId": "readout",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "html",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 35,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:readout->pptx:1",
+          "source": {
+            "nodeId": "readout",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "pptx",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1305.0,
+              "y": 174.5
+            },
+            {
+              "x": 1305.0,
+              "y": 474.5
+            }
+          ],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 36,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:readout->handoff:1",
+          "source": {
+            "nodeId": "readout",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "handoff",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1305.0,
+              "y": 174.5
+            },
+            {
+              "x": 1305.0,
+              "y": 624.5
+            }
+          ],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 37,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:handoff->corpus:1",
+          "source": {
+            "nodeId": "handoff",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "bottom",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "corpus",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1186.5,
+              "y": 757.0
+            },
+            {
+              "x": 145.0,
+              "y": 757.0
+            },
+            {
+              "x": 145.0,
+              "y": 174.5
+            }
+          ],
+          "labels": [
+            {
+              "id": "handoff->corpus:1:label",
+              "text": "planned expert fidelity check",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "dashPattern": "dashed",
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 38,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        }
+      ],
+      "metadata": {},
+      "extensions": {}
+    }
+  ],
+  "metadata": {},
+  "extensions": {}
+}

@@ -1,0 +1,27 @@
+[
+ {
+  "from": "supported",
+  "to": "readout",
+  "kind": "gate-lane"
+ },
+ {
+  "from": "gap",
+  "to": "draft",
+  "kind": "left-lane"
+ },
+ {
+  "from": "readout",
+  "to": "pptx",
+  "kind": "right-bus"
+ },
+ {
+  "from": "readout",
+  "to": "handoff",
+  "kind": "right-bus"
+ },
+ {
+  "from": "handoff",
+  "to": "corpus",
+  "kind": "return-bottom"
+ }
+]
