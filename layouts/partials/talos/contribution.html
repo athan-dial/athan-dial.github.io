@@ -1,0 +1,22 @@
+{{- $p := .Params -}}
+{{- $icon := "wp-icon.html" -}}
+<section class="ts-sec ts-contrib" id="contribution" aria-labelledby="contribution-title">
+<div class="ts-sec-head"><p class="wp-label">03 / My contribution</p><h2 id="contribution-title">What I led, what I built, what the team owned</h2></div>
+<div class="ts-contrib-grid">
+<div class="ts-rolebox" role="group" aria-label="My role">
+{{ with $p.role.led }}<div class="ts-role-row ts-role-row--led"><span class="wp-rolekey">{{ partial $icon (dict "name" "compass" "size" 16) }}Led</span><div class="wp-chips wp-chips--led">{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}</div></div>{{ end }}
+{{ with $p.role.built }}<div class="ts-role-row ts-role-row--built"><span class="wp-rolekey">{{ partial $icon (dict "name" "hammer" "size" 16) }}Built</span><div class="wp-chips wp-chips--built">{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}</div></div>{{ end }}
+{{ with $p.role.with }}<div class="ts-role-row ts-role-row--with"><span class="wp-rolekey">{{ partial $icon (dict "name" "users" "size" 16) }}With</span><div><p class="wp-who">{{ .who }}</p><div class="wp-chips wp-chips--with">{{ range .owned }}<span class="wp-chip">{{ . }}</span>{{ end }}</div></div></div>{{ end }}
+</div>
+<figure class="ts-cmap" aria-label="Who owned which part of the architecture">
+<div class="ts-cmap-bars"><div class="ts-cmap-bar ts-cmap-bar--led"><span>Led · framing, scope, milestones, user feedback</span></div><div class="ts-cmap-bar ts-cmap-bar--built"><span>Built · the full working prototype, end to end</span></div></div>
+<ol class="ts-cmap-regions">
+<li><a href="#architecture" data-light="sources"><span class="wp-label">01 Sources</span><strong>Source operations lead</strong></a></li>
+<li><a href="#architecture" data-light="compute"><span class="wp-label">02 Computation</span><strong>Recognition lead</strong><strong>Semantics lead</strong></a></li>
+<li><a href="#architecture" data-light="substrate"><span class="wp-label">03 Canonical record</span><strong>Semantics and output lead</strong></a></li>
+<li><a href="#architecture" data-light="products"><span class="wp-label">04 Products</span><strong>Analyst surface lead</strong></a></li>
+</ol>
+<figcaption>Team leads on my product team owned the regions. I led across them and built the full working prototype.</figcaption>
+</figure>
+</div>
+</section>

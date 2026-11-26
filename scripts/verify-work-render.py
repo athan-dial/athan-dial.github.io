@@ -11,6 +11,12 @@ with sync_playwright() as p:
     for w, h in [(1280, 800), (1440, 900), (390, 844)]:
         pg = b.new_page(viewport={'width': w, 'height': h})
         pg.goto(URL); pg.wait_for_timeout(500)
+        story = pg.evaluate("() => !!document.querySelector('.ts-problem')")
+        if story:
+            m = pg.evaluate("""() => ({top: document.querySelector('#problem').getBoundingClientRect().top, doc: document.documentElement.scrollWidth})""")
+            if w >= 1000 and m['top'] > h * 0.9: bad.append(f'{w}: problem section below fold {m}')
+            if m['doc'] > w: bad.append(f'{w}: page overflows {m}')
+            continue
         d = pg.evaluate("""() => { const e = document.querySelector('.wp-diagram');
           return {scroll: e.scrollWidth, client: e.clientWidth, top: e.getBoundingClientRect().top,
                   doc: document.documentElement.scrollWidth} }""")

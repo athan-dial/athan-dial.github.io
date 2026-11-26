@@ -1,0 +1,15 @@
+{{ $p := .Params }}
+<section class="wp-figure" id="architecture" aria-labelledby="workflow-title">
+<div class="wp-figure-head"><div><p class="wp-label">{{ with .Params.figure_number }}{{ . }}{{ else }}03{{ end }} / {{ with .Params.figure_label }}{{ . }}{{ else }}How it works{{ end }}</p><h2 id="workflow-title">{{ $p.figure_title }}</h2></div>{{ with $p.figure_kicker }}<span class="wp-label">{{ . }}</span>{{ end }}</div>
+{{ $diagram := resources.Get $p.diagram }}
+<figure>
+{{ with $p.stages }}
+<ol class="wp-stages" aria-label="Workflow walkthrough">
+{{ range . }}<li><strong>{{ .title }}</strong><p>{{ .description }}</p>{{ if .decision_anchor }}<a href="#{{ .decision_anchor }}">{{ .decision_label }} ↓</a>{{ end }}</li>{{ end }}
+</ol>
+{{ end }}
+{{ if $p.diagram_inline }}{{ $mobile := resources.Get $p.diagram_mobile }}<div class="wp-diagram wp-diagram--arch"><div class="wp-arch wp-arch--wide">{{ $diagram.Content | safeHTML }}</div>{{ with $mobile }}<div class="wp-arch wp-arch--narrow">{{ .Content | safeHTML }}</div>{{ end }}</div>{{ else }}<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>{{ end }}
+<figcaption><span>{{ $p.figure_caption }}</span><a href="{{ $diagram.RelPermalink }}">Open full diagram ↗</a></figcaption></figure>
+<div class="wp-legend">{{ with $p.figure_note }}<p>{{ . }}</p>{{ end }}
+<ul aria-label="Diagram legend">{{ with $p.legend }}{{ range . }}<li><span class="wp-key wp-key--{{ .key }}" aria-hidden="true"></span>{{ .label }}</li>{{ end }}{{ else }}<li><span class="wp-key wp-key--action" aria-hidden="true"></span>Forest: system action</li><li><span class="wp-key wp-key--judgment" aria-hidden="true"></span>Citrus: human judgment</li><li>◇ Decision gate</li><li>⇠ Dashed: feedback or revision</li>{{ end }}</ul></div>
+</section>

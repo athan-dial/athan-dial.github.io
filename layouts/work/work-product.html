@@ -7,20 +7,7 @@
 <div class="wp-context"><div class="wp-overview"><h2 class="wp-label">01 / Product overview</h2>{{ $parts := split $p.overview ". " }}{{ if gt (len $parts) 1 }}<p class="wp-lead">{{ index $parts 0 }}.</p><p class="wp-more">{{ delimit (after 1 $parts) ". " }}</p>{{ else }}<p class="wp-more">{{ $p.overview }}</p>{{ end }}</div>
 <div class="wp-role"><h2 class="wp-label">02 / My role</h2><div class="wp-roleviz">{{ with $p.role.led }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "compass" "size" 16) }}Led</span><div class="wp-chips wp-chips--led">{{ if reflect.IsSlice . }}{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}{{ else }}<span class="wp-chip wp-chip--text">{{ . }}</span>{{ end }}</div></div>{{ end }}{{ with $p.role.built }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "hammer" "size" 16) }}Built</span><div class="wp-chips wp-chips--built">{{ if reflect.IsSlice . }}{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}{{ else }}<span class="wp-chip wp-chip--text">{{ . }}</span>{{ end }}</div></div>{{ end }}{{ with $p.role.with }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "users" "size" 16) }}With</span>{{ if reflect.IsMap . }}<div><p class="wp-who">{{ .who }}</p><div class="wp-chips wp-chips--with">{{ range .owned }}<span class="wp-chip">{{ . }}</span>{{ end }}</div></div>{{ else }}<div class="wp-chips wp-chips--with"><span class="wp-chip wp-chip--text">{{ . }}</span></div>{{ end }}</div>{{ end }}</div></div></div></div>
 </header>
-<section class="wp-figure" aria-labelledby="workflow-title">
-<div class="wp-figure-head"><div><p class="wp-label">03 / How it works</p><h2 id="workflow-title">{{ $p.figure_title }}</h2></div>{{ with $p.figure_kicker }}<span class="wp-label">{{ . }}</span>{{ end }}</div>
-{{ $diagram := resources.Get $p.diagram }}
-<figure>
-{{ with $p.stages }}
-<ol class="wp-stages" aria-label="Workflow walkthrough">
-{{ range . }}<li><strong>{{ .title }}</strong><p>{{ .description }}</p>{{ if .decision_anchor }}<a href="#{{ .decision_anchor }}">{{ .decision_label }} ↓</a>{{ end }}</li>{{ end }}
-</ol>
-{{ end }}
-{{ if $p.diagram_inline }}{{ $mobile := resources.Get $p.diagram_mobile }}<div class="wp-diagram wp-diagram--arch"><div class="wp-arch wp-arch--wide">{{ $diagram.Content | safeHTML }}</div>{{ with $mobile }}<div class="wp-arch wp-arch--narrow">{{ .Content | safeHTML }}</div>{{ end }}</div>{{ else }}<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>{{ end }}
-<figcaption><span>{{ $p.figure_caption }}</span><a href="{{ $diagram.RelPermalink }}">Open full diagram ↗</a></figcaption></figure>
-<div class="wp-legend">{{ with $p.figure_note }}<p>{{ . }}</p>{{ end }}
-<ul aria-label="Diagram legend">{{ with $p.legend }}{{ range . }}<li><span class="wp-key wp-key--{{ .key }}" aria-hidden="true"></span>{{ .label }}</li>{{ end }}{{ else }}<li><span class="wp-key wp-key--action" aria-hidden="true"></span>Forest: system action</li><li><span class="wp-key wp-key--judgment" aria-hidden="true"></span>Citrus: human judgment</li><li>◇ Decision gate</li><li>⇠ Dashed: feedback or revision</li>{{ end }}</ul></div>
-</section>
+{{ partial "wp-figure.html" . }}
 <nav class="wp-depth" aria-label="Case study sections"><span class="wp-label">Continue the conversation</span>{{ if $p.decisions }}<a href="#decisions">Key decisions ↓</a>{{ end }}{{ if $p.outcomes }}<a href="#outcomes">Outcomes ↓</a>{{ end }}{{ if $p.reflections }}<a href="#reflections">Reflections ↓</a>{{ end }}</nav>
 <div class="wp-body">
 {{ $n := 4 }}

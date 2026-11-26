@@ -28,6 +28,12 @@
     {{- $styles = $styles | append (resources.Get "css/work-product.css") -}}
     {{- $bundle = "css/work-product.css" -}}
   {{- end -}}
+  {{- if eq .Layout "work-story" -}}
+    {{- $styles = $styles | append (resources.Get "css/work-product.css") -}}
+    {{- $styles = $styles | append (resources.Get "css/work-story.css") -}}
+    {{- with resources.Get "css/talos-gallery.css" -}}{{- $styles = $styles | append . -}}{{- end -}}
+    {{- $bundle = "css/work-story.css" -}}
+  {{- end -}}
   {{- if .IsHome -}}
     {{- $fieldnotesHome := resources.Get "css/fieldnotes-home.css" -}}
     {{- $styles = $styles | append $fieldnotesHome -}}
@@ -46,6 +52,11 @@
     {{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- if eq .Layout "work-story" -}}
+    {{- $storyJS := resources.Get "js/talos-story.js" | minify | fingerprint -}}
+    <script src="{{ $storyJS.RelPermalink }}" integrity="{{ $storyJS.Data.Integrity }}" defer></script>
+    {{- with resources.Get "js/talos-gallery.js" -}}{{- $g := . | minify | fingerprint -}}<script src="{{ $g.RelPermalink }}" integrity="{{ $g.Data.Integrity }}" defer></script>{{- end -}}
+  {{- end -}}
   {{- if .IsHome -}}
     {{- $fieldnotesHomeJS := resources.Get "js/fieldnotes-home.js" | minify | fingerprint -}}
     <script src="{{ $fieldnotesHomeJS.RelPermalink }}" integrity="{{ $fieldnotesHomeJS.Data.Integrity }}" defer></script>

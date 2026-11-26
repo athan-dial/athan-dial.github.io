@@ -1,6 +1,6 @@
 ---
 title: TALOS
-layout: work-product
+layout: work-story
 type: work
 date: 2026-11-26
 draft: true
@@ -20,12 +20,14 @@ role:
   with:
     who: "Data-science and engineering team leads on my product team, who owned"
     owned: ["Source collection", "Entity recognition", "Observation model", "Analyst interface"]
+figure_number: "04"
+figure_label: "Architecture"
 figure_title: "Architecture of a Continuous Competitive Intelligence Platform"
 diagram: "work-products/talos/architecture.svg"
 diagram_mobile: "work-products/talos/architecture-mobile.svg"
 diagram_inline: true
 diagram_alt: "Architecture in four regions, left to right. Four source lanes (news, clinical trial registries, patents, commercial reference data) each take their own processing path: news is extracted into atomic assertions, recognized, resolved, consolidated into events and dated; trials load as records; patents run a classify and summarize lane; reference data is mapped and compared beside the news, never merged. Everything lands in a canonical substrate where documents back assertions, assertions consolidate into events, and events build development programs defined by asset, indication and sponsor, linked to canonical entities, with provenance, confidence, temporal state and revision history. Intelligence products answer what changed, who is developing what, what we know about a program, why we believe it, and let other tools ask. An analyst resolution workbench handles only uncertain matches and feeds corrections back. A continuous loop covers incremental ingestion, event revisions and changes since last review."
-figure_caption: "Generalized product architecture. Select a region to jump to the decision behind it."
+figure_caption: "Generalized product architecture. Select a region to jump to the decision behind it, or try the demo above first."
 legend:
   - key: solid
     label: "Solid outline: built"
@@ -103,5 +105,6 @@ reflections:
   worked: "Organizing around the program and keeping every source through merging gave the product one record an analyst can inspect, instead of a feed to reconstruct."
   didnt: "I tested the briefing, the thing leadership actually reads, later than the underlying records."
   grow: "Test the briefing alongside the records, then work out how current state, changes since the last review and upcoming evidence fit in one package, and whether that package changes what the reader does next."
+limits: "This page makes no claim about adoption, time saved or accuracy. The demo uses synthetic data, and the analyst review page is a design, not a built screen."
 disclosure_note: "Review copy · Generalized workflow; no proprietary scientific examples. Product name and professional attribution await employer disclosure approval."
 ---

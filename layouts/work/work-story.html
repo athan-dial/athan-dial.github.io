@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ $p := .Params }}
+<article class="wp ts">
+<header class="wp-header ts-hero">
+<div class="wp-topline"><a href="/work/">← Selected work</a><span>Work product / {{ $p.timeframe }}</span></div>
+<div class="ts-hero-grid"><div><p class="wp-label">{{ $p.disciplines }}</p><h1>{{ .Title }}</h1><p class="wp-deck">{{ $p.tagline }}</p></div>
+<div class="ts-hero-copy">{{ $parts := split $p.overview ". " }}{{ if gt (len $parts) 1 }}<p class="wp-lead">{{ index $parts 0 }}.</p><p class="wp-more">{{ delimit (after 1 $parts) ". " }}</p>{{ else }}<p class="wp-more">{{ $p.overview }}</p>{{ end }}
+<nav class="ts-toc" aria-label="On this page"><a href="#problem">Problem</a><a href="#product">Product demo</a><a href="#contribution">Contribution</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a><a href="#work-products">Work products</a><a href="#reflections">Reflections</a></nav></div></div>
+</header>
+{{ partial "talos/problem.html" . }}
+{{ partial "talos/demo.html" . }}
+{{ partial "talos/contribution.html" . }}
+{{ partial "wp-figure.html" . }}
+{{ partial "talos/decisions.html" . }}
+<section class="ts-sec ts-wp" id="work-products" aria-labelledby="wp-title">
+<div class="ts-sec-head"><p class="wp-label">06 / Work products</p><h2 id="wp-title">The artifacts behind it, rebuilt and sanitized</h2>
+<p class="ts-sub">Open any of them. Each is a reconstruction in the structure of the original, with names, dates and internal references removed.</p></div>
+{{ partial "talos/gallery.html" . }}
+</section>
+{{ with $p.reflections }}
+<section class="ts-sec ts-reflect" id="reflections" aria-labelledby="reflections-title">
+<div class="ts-sec-head"><p class="wp-label">07 / Reflections</p><h2 id="reflections-title">What I would carry forward</h2></div>
+<div class="wp-reflect"><div class="wp-reflect--worked"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "circle-check" "size" 24) }}</span><h3>What worked</h3><p>{{ .worked }}</p></div><div class="wp-reflect--didnt"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "circle-x" "size" 24) }}</span><h3>What didn't</h3><p>{{ .didnt }}</p></div><div class="wp-reflect--grow"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "arrow-up-right" "size" 24) }}</span><h3>How I'd grow it</h3><p>{{ .grow }}</p></div></div>
+{{ with $p.limits }}<p class="ts-limits"><span class="wp-label">Limits</span>{{ . }}</p>{{ end }}
+</section>
+{{ end }}
+<footer class="wp-end"><p>{{ $p.disclosure_note }}</p><a href="/work/">← Back to selected work</a></footer>
+</article>
+{{ end }}

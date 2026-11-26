@@ -28,6 +28,11 @@ html = re.sub(
 assert "<svg" in html.split('class="wp-diagram', 1)[1][:600], "diagram not inlined"
 if not inline:
     blocks.append("<style>.wp-diagram svg{display:block;height:auto;max-width:none;width:var(--svg-w);min-width:100%}@media(min-width:1000px){.wp-diagram svg{width:100%;min-width:0}}</style>")
+def inline_js(m):
+    src = m.group(1)
+    f = root / "public" / src.lstrip("/")
+    return "<script>\n" + f.read_text().replace("</script", "<\\/script") + "\n</script>" if f.exists() else m.group(0)
+html = re.sub(r'<script src="(/[^"]+\.js)"[^>]*></script>', inline_js, html)
 html = html.replace("</head>", "\n".join(blocks) + "\n</head>", 1)
 html = re.sub(r'href="/([^"]+)"', r'href="#"', html)
 html = re.sub(r'src="/([^"]+)"', r'src="#"', html)

@@ -1,0 +1,31 @@
+{{- $icon := "wp-icon.html" -}}
+<section class="ts-sec ts-problem" id="problem" aria-labelledby="problem-title">
+<div class="ts-sec-head"><p class="wp-label">01 / The problem</p><h2 id="problem-title">Every new question rebuilds the same picture</h2>
+<p class="ts-sub">Competitive evidence arrives in pieces: news, trial records, patents and an analyst's own notes. TALOS keeps the piece-to-claim links, so the picture persists.</p></div>
+<figure class="ts-motion" data-ts-motion>
+<div class="ts-stage" role="img" aria-label="Animation: four scattered fragments of evidence, a news story, a trial record, a patent claim and an analyst note, are linked into one persistent program record with every claim tied to its source.">
+<div class="ts-frags" aria-hidden="true">
+<div class="ts-frag ts-frag--news" style="--sx:24px;--sy:96px;--sr:-6deg;--d:0s"><span class="ts-tag">News · Biopharma Wire</span><p>Shares rose after Northwind said NW-101 produced a <mark>statistically significant improvement</mark> in its mid-stage asthma trial.</p></div>
+<div class="ts-frag ts-frag--trial" style="--sx:150px;--sy:-30px;--sr:5deg;--d:.12s"><span class="ts-tag">Trial record</span><p>Overall status: <mark>Completed</mark><br>Phase 2 · moderate asthma</p></div>
+<div class="ts-frag ts-frag--patent" style="--sx:70px;--sy:-110px;--sr:4deg;--d:.24s"><span class="ts-tag">Patent</span><p><mark>Claim 1:</mark> a method of treating asthma comprising administering a compound…</p></div>
+<div class="ts-frag ts-frag--note" style="--sx:190px;--sy:70px;--sr:-5deg;--d:.36s"><span class="ts-tag">Analyst note</span><p>Wire says <mark>Thursday</mark>. Press release says 12 Mar. Which day?</p></div>
+</div>
+<div class="ts-rec" aria-hidden="true"><div class="ts-rec-card">
+<span class="ts-tag">Program record</span>
+<h3>NW-101 · Moderate asthma</h3>
+<p class="ts-rec-sub">Northwind Therapeutics · Phase 2</p>
+<ol class="ts-rec-ladder"><li class="on">Pre</li><li class="on">P1</li><li class="now">P2</li><li>P3</li></ol>
+<ul class="ts-rec-ev">
+<li style="--i:0"><b>Topline reported</b><span>from news and release</span></li>
+<li style="--i:1"><b>Status: completed</b><span>from the trial record</span></li>
+<li style="--i:2"><b>Method claim</b><span>from the patent</span></li>
+<li style="--i:3"><b>Date checked</b><span>from the analyst's note</span></li>
+</ul>
+<p class="ts-rec-foot">{{ partial $icon (dict "name" "refresh-cw" "size" 14) }} Updates as new evidence arrives</p>
+</div></div>
+</div>
+<figcaption class="ts-caption"><ol class="ts-beats"><li data-beat="1">Evidence is scattered across kinds of source.</li><li data-beat="2">Claims are pulled out and linked.</li><li data-beat="3">One record persists, and every claim keeps its source.</li></ol>
+<button type="button" class="ts-btn" data-ts-replay>{{ partial $icon (dict "name" "refresh-cw" "size" 14) }} Replay</button></figcaption>
+</figure>
+<p class="ts-fine">Illustration with synthetic data.</p>
+</section>
