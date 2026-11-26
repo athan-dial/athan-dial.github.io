@@ -13,31 +13,43 @@ description: "A Work Product case study on competitive intelligence, provenance,
 timeframe: "2026"
 disciplines: "Product management / Scientific informatics / Applied AI"
 tagline: "Competitive intelligence with an evidence trail."
-figure_title: "From Fragmented Evidence to Decision-Ready Intelligence"
-diagram: "work-products/talos/workflow.svg"
-diagram_alt: "Four stages run left to right: collect, recognize, resolve and judge, remember and deliver. Entity branches converge into observations. Every accepted observation passes through analyst review and a Ready to use decision; held evidence returns for review. Program records feed delivery surfaces, with a dashed next-review loop back to sources. The numbered walkthrough gives the complete text description."
 overview: "Scientific analysts rebuild the same competitive picture every time a new question comes in: who is developing what, and what changed since last time. TALOS keeps that picture. It turns public reports into one record per competing program, links every claim to its sources, and lets an analyst see what changed and brief leadership without starting over."
 role:
   led: "Product framing, scope, cross-team communication and milestones, and bringing scientific users' feedback into the work."
   built: "The full working prototype, end to end."
   with: "Data-science and engineering team leads on my product team, who owned source collection, entity recognition, the observation model and the analyst interface."
-figure_caption: "Generalized product workflow."
-figure_note: "Every claim carries its sources: source → observation → program → briefing."
+figure_title: "Architecture of a Continuous Competitive Intelligence Platform"
+diagram: "work-products/talos/architecture.svg"
+diagram_mobile: "work-products/talos/architecture-mobile.svg"
+diagram_inline: true
+diagram_alt: "Architecture in four regions, left to right. Four source lanes (news, clinical trial registries, patents, commercial reference data) each take their own processing path: news is extracted into atomic assertions, recognized, resolved, consolidated into events and dated; trials load as records; patents run a classify and summarize lane; reference data is mapped and compared beside the news, never merged. Everything lands in a canonical substrate where documents back assertions, assertions consolidate into events, and events build development programs defined by asset, indication and sponsor, linked to canonical entities, with provenance, confidence, temporal state and revision history. Intelligence products answer what changed, who is developing what, what we know about a program, why we believe it, and let other tools ask. An analyst resolution workbench handles only uncertain matches and feeds corrections back. A continuous loop covers incremental ingestion, event revisions and changes since last review."
+figure_caption: "Generalized product architecture. Select a region to jump to the decision behind it."
+legend:
+  - key: solid
+    label: "Solid outline: built"
+  - key: dashed
+    label: "Dashed outline: documented design"
+  - key: dotted
+    label: "Dotted outline: planned"
+  - key: substrate
+    label: "Forest: canonical substrate"
+  - key: review
+    label: "Citrus: analyst review"
 stages:
-  - title: Collect
-    description: "Find public reports and keep each source and its date."
+  - title: Source lanes
+    description: "News, clinical trial registries, patents and commercial reference data each take their own path in. Only the news is extracted."
     decision_label: Keep the trail through merging
     decision_anchor: provenance
-  - title: Recognize
-    description: "Match every company, compound, target and indication mentioned to one shared identity."
+  - title: Computational intelligence
+    description: "News becomes atomic assertions, resolved entities, consolidated events and dated state. Trials load as records, patents run their own lane, and reference data is compared beside the news."
+    decision_label: Keep the trail through merging
+    decision_anchor: provenance
+  - title: Canonical intelligence
+    description: "Documents back assertions, assertions consolidate into events, and events build programs: asset × indication × sponsor, with targets attached to assets. Provenance, confidence, time and revisions travel with every record."
     decision_label: Organize around the program
     decision_anchor: programs
-  - title: Resolve and judge
-    description: "Merge overlapping reports into one observation. An analyst checks the support, then accepts it or holds it."
-    decision_label: Make uncertainty reviewable
-    decision_anchor: judgment
-  - title: Remember and deliver
-    description: "Add each accepted observation to its program's record. Landscapes, timelines and briefs draw on those records and carry the sources with them."
+  - title: Intelligence products
+    description: "A cockpit, a landscape, a program explorer, an evidence explorer and programmatic access, each framed by the question it answers."
     decision_label: Earn trust before expanding scope
     decision_anchor: scope
 decisions:
@@ -54,8 +66,8 @@ decisions:
   - title: "Make uncertainty reviewable"
     anchor: judgment
     problem: "A confident sentence can hide weak evidence."
-    call: "I set the boundary that every observation shows its support and the analyst's judgment. Machine help is limited to merging repeats; an expert decides what gets used."
-    cost: "Review time and slower throughput, in exchange for a clear basis for using each observation."
+    call: "I set the boundary that every observation shows its support and its confidence, and that only uncertain matches and conflicts route to an analyst. The rest do not wait for approval."
+    cost: "Analyst time goes to the uncertain cases, and confident links rely on the evidence trail instead of a human check."
   - title: "Earn trust before expanding scope"
     anchor: scope
     problem: "The first release covered an evidence packet, entity matching and a plain analyst interface."

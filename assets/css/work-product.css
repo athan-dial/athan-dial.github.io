@@ -51,6 +51,14 @@
 .wp-diagram { overflow: auto; }
 .wp-diagram img { display: block; width: auto; min-width: 100%; max-width: none; height: auto; }
 @media (min-width: 1000px) { .wp-diagram img { width: 100%; min-width: 0; } }
+.wp-arch svg { display: block; width: 100%; height: auto; }
+.wp-arch--narrow { display: none; }
+.wp-arch a, .wp-arch a * { text-decoration: none; }
+.arch-link { cursor: pointer; }
+.arch-hit rect { fill: transparent; }
+.arch-hit:hover rect, .arch-hit:focus-visible rect { fill: rgba(228, 241, 124, .16); stroke: var(--accent); stroke-width: 2.5; }
+.arch-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 900px) { .wp-arch--wide { display: none; } .wp-arch--narrow { display: block; max-width: 430px; margin: 0 auto; } }
 .wp figcaption {
   display: flex;
   justify-content: space-between;
@@ -84,6 +92,11 @@
 .wp-key { width: 12px; height: 12px; border: 1px solid var(--ink); }
 .wp-key--action { background: var(--accent); }
 .wp-key--judgment { background: var(--citrus); }
+.wp-key--solid { background: var(--surface); }
+.wp-key--dashed { background: var(--surface); border-style: dashed; }
+.wp-key--dotted { background: var(--surface); border-style: dotted; border-width: 2px; }
+.wp-key--substrate { background: var(--accent); }
+.wp-key--review { background: var(--citrus); border-style: dashed; }
 .wp-depth { display: flex; gap: 30px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--field-rule); font-size: 14px; }
 .wp-depth span { margin-right: auto; color: var(--ink-secondary); }
 .wp-body { max-width: 1080px; margin: 48px auto; }

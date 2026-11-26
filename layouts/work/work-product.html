@@ -16,10 +16,10 @@
 {{ range . }}<li><strong>{{ .title }}</strong><p>{{ .description }}</p>{{ if .decision_anchor }}<a href="#{{ .decision_anchor }}">{{ .decision_label }} ↓</a>{{ end }}</li>{{ end }}
 </ol>
 {{ end }}
-<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>
+{{ if $p.diagram_inline }}{{ $mobile := resources.Get $p.diagram_mobile }}<div class="wp-diagram wp-diagram--arch"><div class="wp-arch wp-arch--wide">{{ $diagram.Content | safeHTML }}</div>{{ with $mobile }}<div class="wp-arch wp-arch--narrow">{{ .Content | safeHTML }}</div>{{ end }}</div>{{ else }}<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>{{ end }}
 <figcaption><span>{{ $p.figure_caption }}</span><a href="{{ $diagram.RelPermalink }}">Open full diagram ↗</a></figcaption></figure>
 <div class="wp-legend">{{ with $p.figure_note }}<p>{{ . }}</p>{{ end }}
-<ul aria-label="Diagram legend"><li><span class="wp-key wp-key--action" aria-hidden="true"></span>Forest: system action</li><li><span class="wp-key wp-key--judgment" aria-hidden="true"></span>Citrus: human judgment</li><li>◇ Decision gate</li><li>⇠ Dashed: feedback or revision</li></ul></div>
+<ul aria-label="Diagram legend">{{ with $p.legend }}{{ range . }}<li><span class="wp-key wp-key--{{ .key }}" aria-hidden="true"></span>{{ .label }}</li>{{ end }}{{ else }}<li><span class="wp-key wp-key--action" aria-hidden="true"></span>Forest: system action</li><li><span class="wp-key wp-key--judgment" aria-hidden="true"></span>Citrus: human judgment</li><li>◇ Decision gate</li><li>⇠ Dashed: feedback or revision</li>{{ end }}</ul></div>
 </section>
 <nav class="wp-depth" aria-label="Case study sections"><span class="wp-label">Continue the conversation</span>{{ if $p.decisions }}<a href="#decisions">Key decisions ↓</a>{{ end }}{{ if $p.outcomes }}<a href="#outcomes">Outcomes ↓</a>{{ end }}{{ if $p.reflections }}<a href="#reflections">Reflections ↓</a>{{ end }}</nav>
 <div class="wp-body">

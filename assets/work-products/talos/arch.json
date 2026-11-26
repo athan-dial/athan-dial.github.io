@@ -1,0 +1,250 @@
+{
+  "alt": "Architecture in four regions, left to right. Four source lanes (news, clinical trial registries, patents, commercial reference data) each take their own processing path: news is extracted into atomic assertions, recognized, resolved, consolidated into events and dated; trials load as records; patents run a classify and summarize lane; reference data is mapped and compared beside the news, never merged. Everything lands in a canonical substrate where documents back assertions, assertions consolidate into events, and events build development programs defined by asset, indication and sponsor, linked to canonical entities, with provenance, confidence, temporal state and revision history. Intelligence products answer what changed, who is developing what, what we know about a program, why we believe it, and let other tools ask. An analyst resolution workbench handles only uncertain matches and feeds corrections back. A continuous loop covers incremental ingestion, event revisions and changes since last review.",
+  "regions": {
+    "sources": {
+      "num": "01",
+      "title": "Source lanes",
+      "sub": "Four sources, four paths"
+    },
+    "compute": {
+      "num": "02",
+      "title": "Computational intelligence",
+      "sub": "Each lane is processed on its own path",
+      "href": "#provenance"
+    },
+    "substrate": {
+      "num": "03",
+      "title": "Canonical intelligence",
+      "sub": "One linked, persistent record",
+      "href": "#programs"
+    },
+    "products": {
+      "num": "04",
+      "title": "Intelligence products",
+      "sub": "Organized around questions",
+      "href": "#scope"
+    }
+  },
+  "lanes": [
+    {
+      "id": "news",
+      "icon": "newspaper",
+      "title": "News and announcements",
+      "desc": "Articles about companies, drugs and trials, pulled hourly",
+      "tag": "Extracted",
+      "label": "Extraction pipeline",
+      "steps": [
+        {
+          "icon": "layers",
+          "title": "Extract atomic assertions"
+        },
+        {
+          "icon": "scan-search",
+          "title": "Recognize and resolve entities"
+        },
+        {
+          "icon": "git-merge",
+          "title": "Consolidate into events"
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Interpret dates and change"
+        }
+      ]
+    },
+    {
+      "id": "trials",
+      "icon": "flask-conical",
+      "title": "Clinical trial registries",
+      "desc": "Public trial records",
+      "tag": "Loaded as records",
+      "label": "Record load",
+      "steps": [
+        {
+          "icon": "database",
+          "title": "Link to tracked drugs and diseases",
+          "desc": "Loaded, not extracted"
+        }
+      ]
+    },
+    {
+      "id": "patents",
+      "icon": "file-badge",
+      "title": "Patents",
+      "desc": "Applications and grants",
+      "tag": "Own lane",
+      "label": "Patent lane",
+      "steps": [
+        {
+          "icon": "scale",
+          "title": "Judge per target"
+        },
+        {
+          "icon": "file-text",
+          "title": "Summarize"
+        }
+      ]
+    },
+    {
+      "id": "reference",
+      "icon": "database",
+      "title": "Commercial reference data",
+      "desc": "Program history data",
+      "tag": "Kept beside",
+      "label": "Reference layer",
+      "steps": [
+        {
+          "icon": "git-merge",
+          "title": "Map and compare to the news",
+          "desc": "Shown beside, never merged"
+        }
+      ]
+    }
+  ],
+  "chain": [
+    {
+      "id": "document",
+      "icon": "file-text",
+      "title": "Document",
+      "desc": "Source text and its dates",
+      "stack": true
+    },
+    {
+      "id": "assertion",
+      "icon": "quote",
+      "title": "Assertion",
+      "desc": "One atomic claim with confidence",
+      "stack": true
+    },
+    {
+      "id": "event",
+      "icon": "git-merge",
+      "title": "Event",
+      "desc": "Many claims, one event; sources kept"
+    },
+    {
+      "id": "program",
+      "icon": "layers",
+      "title": "Development program",
+      "desc": "Asset × indication × sponsor",
+      "key": true
+    }
+  ],
+  "chain_labels": [
+    "claims",
+    "many to one",
+    "by program"
+  ],
+  "entities": {
+    "title": "Canonical entities",
+    "sub": "Targets attach to assets",
+    "rows": [
+      {
+        "icon": "building-2",
+        "title": "Organization"
+      },
+      {
+        "icon": "pill",
+        "title": "Asset"
+      },
+      {
+        "icon": "stethoscope",
+        "title": "Indication"
+      },
+      {
+        "icon": "crosshair",
+        "title": "Target"
+      },
+      {
+        "icon": "flask-conical",
+        "title": "Trial"
+      }
+    ]
+  },
+  "chips": [
+    {
+      "icon": "file-badge",
+      "title": "Patent records",
+      "desc": "Judged patents"
+    },
+    {
+      "icon": "database",
+      "title": "Reference layer",
+      "desc": "Beside the news"
+    }
+  ],
+  "guarantees": [
+    {
+      "icon": "shield-check",
+      "title": "Provenance"
+    },
+    {
+      "icon": "gauge",
+      "title": "Confidence"
+    },
+    {
+      "icon": "clock",
+      "title": "Temporal state"
+    },
+    {
+      "icon": "history",
+      "title": "Revision history"
+    }
+  ],
+  "products": [
+    {
+      "icon": "layout-dashboard",
+      "tag": "Cockpit",
+      "q": "What changed since my last review?",
+      "desc": "New and revised events"
+    },
+    {
+      "icon": "chart-gantt",
+      "tag": "Landscape",
+      "q": "Who is developing what?",
+      "desc": "Program lanes over time, with phase"
+    },
+    {
+      "icon": "folder-kanban",
+      "tag": "Program explorer",
+      "q": "What do we know about this program?",
+      "desc": "Phase, timeline, every event"
+    },
+    {
+      "icon": "search-check",
+      "tag": "Evidence explorer",
+      "q": "Why do we believe it?",
+      "desc": "Walk from claim to event to source"
+    },
+    {
+      "icon": "plug",
+      "tag": "Programmatic access",
+      "q": "Can other tools ask?",
+      "desc": "Read-only, over the same records"
+    }
+  ],
+  "workbench": {
+    "icon": "user-check",
+    "title": "Analyst resolution workbench",
+    "desc": "Review for uncertainty, not a gate on every claim",
+    "status": "Queue built · review page designed",
+    "points": [
+      "Uncertain matches and conflicts are queued",
+      "An analyst confirms or rejects",
+      "Corrections are recorded and replayed forward"
+    ],
+    "href": "#judgment",
+    "in_label": "Uncertain matches",
+    "out_label": "Corrections"
+  },
+  "loop": {
+    "icon": "refresh-cw",
+    "title": "Continuous intelligence",
+    "items": [
+      "Incremental ingestion",
+      "Event revisions",
+      "Changes since last review"
+    ],
+    "planned": "Planned: push alerts · leadership export"
+  }
+}
