@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "330500b1-516d-4d8f-ade7-29b4ab03b6b5",
+  "id": "bbed5694-89ce-4ad0-adb4-b419fe83ea28",
   "name": "workflow",
-  "createdAt": "2026-11-26T11:55:22.609Z",
-  "updatedAt": "2026-11-26T11:55:22.609Z",
+  "createdAt": "2026-11-26T12:18:38.799Z",
+  "updatedAt": "2026-11-26T12:18:38.799Z",
   "pages": [
     {
-      "id": "330500b1-516d-4d8f-ade7-29b4ab03b6b5:page-1",
+      "id": "bbed5694-89ce-4ad0-adb4-b419fe83ea28:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -20,7 +20,7 @@
       ],
       "nodes": [
         {
-          "id": "dsl-1ucx4e6",
+          "id": "dsl-1r2rb92",
           "kind": "frame",
           "parentId": null,
           "layerId": "default",
@@ -37,8 +37,8 @@
             }
           },
           "size": {
-            "width": 1100,
-            "height": 520
+            "width": 1166,
+            "height": 650
           },
           "content": {
             "label": ""
@@ -49,27 +49,27 @@
             "dsl": {
               "family": "architecture",
               "version": 1,
-              "source": "architecture right\nappearance: paper\n\"Public sources\" [icon: tabler/world, slate, pin: \"0,80\"]\n\"Discover and ingest\" [icon: tabler/download, slate, pin: \"210,80\"]\n\"Companies and compounds\" [icon: tabler/building, emerald, pin: \"420,0\"]\n\"Targets and indications\" [icon: tabler/dna, emerald, pin: \"420,160\"]\n\"Resolve observations\" [icon: tabler/git-merge, emerald, bold, pin: \"630,80\"]\n\"Assess evidence\" [icon: tabler/scale, amber, pin: \"840,80\"]\n\"Analyst review\" [icon: tabler/user-check, amber, pin: \"840,330\"]\n\"Program record\" [icon: tabler/database, emerald, bold, pin: \"630,330\"]\n\"Landscapes\" [icon: tabler/layout-grid, slate, pin: \"420,280\"]\n\"Timelines\" [icon: tabler/calendar, slate, pin: \"210,330\"]\n\"Leadership briefs\" [icon: tabler/file-text, slate, pin: \"0,330\"]\n\"Public sources\" -> \"Discover and ingest\" : source + date\n\"Discover and ingest\" -> \"Companies and compounds\" : mentions\n\"Discover and ingest\" -> \"Targets and indications\" : mentions\n\"Companies and compounds\" -> \"Resolve observations\" : canonical identity\n\"Targets and indications\" -> \"Resolve observations\"\n\"Resolve observations\" -> \"Assess evidence\" : all contributing sources\n\"Assess evidence\" -> \"Analyst review\" : ambiguity + support\n\"Analyst review\" -> \"Program record\" : reviewed observation\n\"Program record\" -> \"Landscapes\" : traceable claims\n\"Program record\" -> \"Timelines\" : dated evidence\n\"Program record\" -> \"Leadership briefs\" : linked evidence\n",
-              "hash": "1c4nsdm",
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"D2 \u00b7 All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"D3 \u00b7 Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"70,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"45,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"D1 \u00b7 Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"D4 \u00b7 Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
+              "hash": "1ridp5d",
               "direction": "right",
               "appearance": {
                 "palette": "paper"
               },
-              "autoIcons": true
+              "icons": "off"
             }
           },
           "extensions": {}
         },
         {
-          "id": "public-sources",
-          "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "id": "collect",
+          "kind": "frame",
+          "parentId": "dsl-1r2rb92",
           "layerId": "default",
           "zIndex": 1,
           "transform": {
             "translation": {
-              "x": 0,
-              "y": 80
+              "x": 0.0,
+              "y": 0.0
             },
             "rotationRadians": 0,
             "scale": {
@@ -78,11 +78,203 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 263,
+            "height": 590
+          },
+          "content": {
+            "label": "01 \u00b7 Collect"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "collect",
+              "line": 4,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "0,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "recognize",
+          "kind": "frame",
+          "parentId": "dsl-1r2rb92",
+          "layerId": "default",
+          "zIndex": 2,
+          "transform": {
+            "translation": {
+              "x": 275.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 275,
+            "height": 590
+          },
+          "content": {
+            "label": "02 \u00b7 Recognize"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "recognize",
+              "line": 8,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "275,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "judge",
+          "kind": "frame",
+          "parentId": "dsl-1r2rb92",
+          "layerId": "default",
+          "zIndex": 3,
+          "transform": {
+            "translation": {
+              "x": 565.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 297,
+            "height": 590
+          },
+          "content": {
+            "label": "03 \u00b7 Resolve and judge"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "judge",
+              "line": 12,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "565,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "deliver",
+          "kind": "frame",
+          "parentId": "dsl-1r2rb92",
+          "layerId": "default",
+          "zIndex": 4,
+          "transform": {
+            "translation": {
+              "x": 880.0,
+              "y": 0.0
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 266,
+            "height": 590
+          },
+          "content": {
+            "label": "04 \u00b7 Remember and deliver"
+          },
+          "appearance": {},
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "deliver",
+              "line": 18,
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "880,0"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "sources",
+          "kind": "architecture",
+          "parentId": "collect",
+          "layerId": "default",
+          "zIndex": 5,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 223,
+            "height": 57
           },
           "content": {
             "label": "Public sources",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Reports, filings, publications",
             "color": "slate",
             "icon": "tabler/world",
             "archProvider": "tabler",
@@ -95,14 +287,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "public-sources",
-              "line": 3,
+              "id": "sources",
+              "line": 5,
               "color": "gray",
+              "fill": "outline",
               "icon": "tabler/world",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Reports, filings, publications"
+                },
+                {
                   "key": "pin",
-                  "value": "0,80"
+                  "value": "20,42"
                 }
               ],
               "appearance": {
@@ -113,15 +310,15 @@
           "extensions": {}
         },
         {
-          "id": "discover-and-ingest",
+          "id": "ingest",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "collect",
           "layerId": "default",
-          "zIndex": 2,
+          "zIndex": 6,
           "transform": {
             "translation": {
-              "x": 210,
-              "y": 80
+              "x": 20,
+              "y": 195
             },
             "rotationRadians": 0,
             "scale": {
@@ -130,11 +327,31 @@
             }
           },
           "size": {
-            "width": 156,
-            "height": 107
+            "width": 200,
+            "height": 57
           },
           "content": {
             "label": "Discover and ingest",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Source + date retained",
             "color": "slate",
             "icon": "tabler/download",
             "archProvider": "tabler",
@@ -147,14 +364,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "discover-and-ingest",
-              "line": 4,
+              "id": "ingest",
+              "line": 6,
               "color": "gray",
+              "fill": "outline",
               "icon": "tabler/download",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Source + date retained"
+                },
+                {
                   "key": "pin",
-                  "value": "210,80"
+                  "value": "20,195"
                 }
               ],
               "appearance": {
@@ -165,15 +387,15 @@
           "extensions": {}
         },
         {
-          "id": "companies-and-compounds",
+          "id": "entities",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "recognize",
           "layerId": "default",
-          "zIndex": 3,
+          "zIndex": 7,
           "transform": {
             "translation": {
-              "x": 420,
-              "y": 0
+              "x": 20,
+              "y": 120
             },
             "rotationRadians": 0,
             "scale": {
@@ -182,12 +404,32 @@
             }
           },
           "size": {
-            "width": 188,
-            "height": 107
+            "width": 235,
+            "height": 57
           },
           "content": {
             "label": "Companies and compounds",
-            "color": "emerald",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Mentions linked to identities",
+            "color": "slate",
             "icon": "tabler/building",
             "archProvider": "tabler",
             "archResourceType": "building",
@@ -199,14 +441,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "companies-and-compounds",
-              "line": 5,
-              "color": "green",
+              "id": "entities",
+              "line": 9,
+              "color": "gray",
+              "fill": "outline",
               "icon": "tabler/building",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Mentions linked to identities"
+                },
+                {
                   "key": "pin",
-                  "value": "420,0"
+                  "value": "20,120"
                 }
               ],
               "appearance": {
@@ -217,15 +464,15 @@
           "extensions": {}
         },
         {
-          "id": "targets-and-indications",
+          "id": "biology",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "recognize",
           "layerId": "default",
-          "zIndex": 4,
+          "zIndex": 8,
           "transform": {
             "translation": {
-              "x": 420,
-              "y": 160
+              "x": 20,
+              "y": 300
             },
             "rotationRadians": 0,
             "scale": {
@@ -234,12 +481,32 @@
             }
           },
           "size": {
-            "width": 181,
-            "height": 107
+            "width": 228,
+            "height": 57
           },
           "content": {
             "label": "Targets and indications",
-            "color": "emerald",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Biology + disease context",
+            "color": "slate",
             "icon": "tabler/dna",
             "archProvider": "tabler",
             "archResourceType": "dna",
@@ -251,14 +518,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "targets-and-indications",
-              "line": 6,
-              "color": "green",
+              "id": "biology",
+              "line": 10,
+              "color": "gray",
+              "fill": "outline",
               "icon": "tabler/dna",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Biology + disease context"
+                },
+                {
                   "key": "pin",
-                  "value": "420,160"
+                  "value": "20,300"
                 }
               ],
               "appearance": {
@@ -269,15 +541,15 @@
           "extensions": {}
         },
         {
-          "id": "resolve-observations",
+          "id": "resolve",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "judge",
           "layerId": "default",
-          "zIndex": 5,
+          "zIndex": 9,
           "transform": {
             "translation": {
-              "x": 630,
-              "y": 80
+              "x": 20,
+              "y": 42
             },
             "rotationRadians": 0,
             "scale": {
@@ -286,12 +558,33 @@
             }
           },
           "size": {
-            "width": 166,
-            "height": 107
+            "width": 223,
+            "height": 57
           },
           "content": {
             "label": "Resolve observations",
-            "color": "emerald",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "D2 \u00b7 All contributing sources",
+            "color": "custom",
+            "customColor": "#14543c",
             "colorMode": "filled",
             "icon": "tabler/git-merge",
             "archProvider": "tabler",
@@ -304,67 +597,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "resolve-observations",
-              "line": 7,
-              "color": "green",
+              "id": "resolve",
+              "line": 13,
+              "color": "#14543c",
               "fill": "bold",
               "icon": "tabler/git-merge",
               "attrs": [
                 {
-                  "key": "pin",
-                  "value": "630,80"
-                }
-              ],
-              "appearance": {
-                "palette": "paper"
-              }
-            }
-          },
-          "extensions": {}
-        },
-        {
-          "id": "assess-evidence",
-          "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
-          "layerId": "default",
-          "zIndex": 6,
-          "transform": {
-            "translation": {
-              "x": 840,
-              "y": 80
-            },
-            "rotationRadians": 0,
-            "scale": {
-              "x": 1,
-              "y": 1
-            }
-          },
-          "size": {
-            "width": 148,
-            "height": 107
-          },
-          "content": {
-            "label": "Assess evidence",
-            "color": "amber",
-            "icon": "tabler/scale",
-            "archProvider": "tabler",
-            "archResourceType": "scale",
-            "archIconPackId": "tabler-outline-v3",
-            "archIconShapeId": "scale",
-            "assetPresentation": "icon"
-          },
-          "appearance": {},
-          "ports": [],
-          "metadata": {
-            "dsl": {
-              "id": "assess-evidence",
-              "line": 8,
-              "color": "orange",
-              "icon": "tabler/scale",
-              "attrs": [
+                  "key": "desc",
+                  "value": "D2 \u00b7 All contributing sources"
+                },
                 {
                   "key": "pin",
-                  "value": "840,80"
+                  "value": "20,42"
                 }
               ],
               "appearance": {
@@ -375,15 +620,15 @@
           "extensions": {}
         },
         {
-          "id": "analyst-review",
+          "id": "review",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "judge",
           "layerId": "default",
-          "zIndex": 7,
+          "zIndex": 10,
           "transform": {
             "translation": {
-              "x": 840,
-              "y": 330
+              "x": 20,
+              "y": 195
             },
             "rotationRadians": 0,
             "scale": {
@@ -392,12 +637,34 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 257,
+            "height": 57
           },
           "content": {
             "label": "Analyst review",
-            "color": "amber",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "D3 \u00b7 Inspect support + uncertainty",
+            "color": "custom",
+            "customColor": "#e4f17c",
+            "colorMode": "filled",
             "icon": "tabler/user-check",
             "archProvider": "tabler",
             "archResourceType": "user-check",
@@ -409,14 +676,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "analyst-review",
-              "line": 9,
-              "color": "orange",
+              "id": "review",
+              "line": 14,
+              "color": "#e4f17c",
+              "fill": "bold",
               "icon": "tabler/user-check",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "D3 \u00b7 Inspect support + uncertainty"
+                },
+                {
                   "key": "pin",
-                  "value": "840,330"
+                  "value": "20,195"
                 }
               ],
               "appearance": {
@@ -427,14 +699,14 @@
           "extensions": {}
         },
         {
-          "id": "program-record",
-          "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "id": "ready",
+          "kind": "process",
+          "parentId": "judge",
           "layerId": "default",
-          "zIndex": 8,
+          "zIndex": 11,
           "transform": {
             "translation": {
-              "x": 630,
+              "x": 70,
               "y": 330
             },
             "rotationRadians": 0,
@@ -444,12 +716,146 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 150,
+            "height": 88
+          },
+          "content": {
+            "label": "Ready to use?",
+            "shape": "diamond"
+          },
+          "appearance": {
+            "fill": "#e4f17c",
+            "stroke": "#e4f17c",
+            "textColor": "#0f172a"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "ready",
+              "line": 15,
+              "color": "#e4f17c",
+              "fill": "bold",
+              "attrs": [
+                {
+                  "key": "pin",
+                  "value": "70,330"
+                },
+                {
+                  "key": "width",
+                  "value": "150"
+                },
+                {
+                  "key": "height",
+                  "value": "88"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "hold",
+          "kind": "process",
+          "parentId": "judge",
+          "layerId": "default",
+          "zIndex": 12,
+          "transform": {
+            "translation": {
+              "x": 45,
+              "y": 495
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 188,
+            "height": 66
+          },
+          "content": {
+            "label": "Keep unresolved",
+            "shape": "rectangle",
+            "subLabel": "Evidence retained for review"
+          },
+          "appearance": {
+            "fill": "transparent",
+            "stroke": "#313439",
+            "textColor": "#2b2a29"
+          },
+          "ports": [],
+          "metadata": {
+            "dsl": {
+              "id": "hold",
+              "line": 16,
+              "color": "gray",
+              "fill": "outline",
+              "attrs": [
+                {
+                  "key": "desc",
+                  "value": "Evidence retained for review"
+                },
+                {
+                  "key": "pin",
+                  "value": "45,495"
+                }
+              ],
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "record",
+          "kind": "architecture",
+          "parentId": "deliver",
+          "layerId": "default",
+          "zIndex": 13,
+          "transform": {
+            "translation": {
+              "x": 20,
+              "y": 42
+            },
+            "rotationRadians": 0,
+            "scale": {
+              "x": 1,
+              "y": 1
+            }
+          },
+          "size": {
+            "width": 204,
+            "height": 57
           },
           "content": {
             "label": "Program record",
-            "color": "emerald",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "D1 \u00b7 Evidence accumulates",
+            "color": "custom",
+            "customColor": "#14543c",
             "colorMode": "filled",
             "icon": "tabler/database",
             "archProvider": "tabler",
@@ -462,15 +868,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "program-record",
-              "line": 10,
-              "color": "green",
+              "id": "record",
+              "line": 19,
+              "color": "#14543c",
               "fill": "bold",
               "icon": "tabler/database",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "D1 \u00b7 Evidence accumulates"
+                },
+                {
                   "key": "pin",
-                  "value": "630,330"
+                  "value": "20,42"
                 }
               ],
               "appearance": {
@@ -483,13 +893,13 @@
         {
           "id": "landscapes",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "deliver",
           "layerId": "default",
-          "zIndex": 9,
+          "zIndex": 14,
           "transform": {
             "translation": {
-              "x": 420,
-              "y": 280
+              "x": 20,
+              "y": 195
             },
             "rotationRadians": 0,
             "scale": {
@@ -498,11 +908,31 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 189,
+            "height": 57
           },
           "content": {
             "label": "Landscapes",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "D4 \u00b7 Delivery direction",
             "color": "slate",
             "icon": "tabler/layout-grid",
             "archProvider": "tabler",
@@ -516,13 +946,18 @@
           "metadata": {
             "dsl": {
               "id": "landscapes",
-              "line": 11,
+              "line": 20,
               "color": "gray",
+              "fill": "outline",
               "icon": "tabler/layout-grid",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "D4 \u00b7 Delivery direction"
+                },
+                {
                   "key": "pin",
-                  "value": "420,280"
+                  "value": "20,195"
                 }
               ],
               "appearance": {
@@ -535,12 +970,12 @@
         {
           "id": "timelines",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "deliver",
           "layerId": "default",
-          "zIndex": 10,
+          "zIndex": 15,
           "transform": {
             "translation": {
-              "x": 210,
+              "x": 20,
               "y": 330
             },
             "rotationRadians": 0,
@@ -550,11 +985,31 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 226,
+            "height": 57
           },
           "content": {
             "label": "Timelines",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Dated evidence + source links",
             "color": "slate",
             "icon": "tabler/calendar",
             "archProvider": "tabler",
@@ -568,13 +1023,18 @@
           "metadata": {
             "dsl": {
               "id": "timelines",
-              "line": 12,
+              "line": 21,
               "color": "gray",
+              "fill": "outline",
               "icon": "tabler/calendar",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Dated evidence + source links"
+                },
+                {
                   "key": "pin",
-                  "value": "210,330"
+                  "value": "20,330"
                 }
               ],
               "appearance": {
@@ -585,15 +1045,15 @@
           "extensions": {}
         },
         {
-          "id": "leadership-briefs",
+          "id": "briefs",
           "kind": "architecture",
-          "parentId": "dsl-1ucx4e6",
+          "parentId": "deliver",
           "layerId": "default",
-          "zIndex": 11,
+          "zIndex": 16,
           "transform": {
             "translation": {
-              "x": 0,
-              "y": 330
+              "x": 20,
+              "y": 465
             },
             "rotationRadians": 0,
             "scale": {
@@ -602,11 +1062,31 @@
             }
           },
           "size": {
-            "width": 148,
-            "height": 107
+            "width": 217,
+            "height": 57
           },
           "content": {
             "label": "Leadership briefs",
+            "contentLayout": {
+              "version": 1,
+              "horizontal": "center",
+              "vertical": "center",
+              "iconPlacement": "left",
+              "labelAlignment": "center",
+              "padding": {
+                "top": 16,
+                "right": 16,
+                "bottom": 16,
+                "left": 16
+              },
+              "gap": 8,
+              "iconScale": 1,
+              "freeIconPosition": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            },
+            "subLabel": "Claims retain their evidence",
             "color": "slate",
             "icon": "tabler/file-text",
             "archProvider": "tabler",
@@ -619,14 +1099,19 @@
           "ports": [],
           "metadata": {
             "dsl": {
-              "id": "leadership-briefs",
-              "line": 13,
+              "id": "briefs",
+              "line": 22,
               "color": "gray",
+              "fill": "outline",
               "icon": "tabler/file-text",
               "attrs": [
                 {
+                  "key": "desc",
+                  "value": "Claims retain their evidence"
+                },
+                {
                   "key": "pin",
-                  "value": "0,330"
+                  "value": "20,465"
                 }
               ],
               "appearance": {
@@ -639,195 +1124,15 @@
       ],
       "connectors": [
         {
-          "id": "edge:public-sources->discover-and-ingest:1",
+          "id": "edge:sources->ingest:1",
           "source": {
-            "nodeId": "public-sources",
+            "nodeId": "sources",
             "portId": null,
             "anchor": null,
             "point": null
           },
           "target": {
-            "nodeId": "discover-and-ingest",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "route": {
-            "kind": "orthogonal",
-            "ownership": "automatic"
-          },
-          "waypoints": [],
-          "labels": [
-            {
-              "id": "public-sources->discover-and-ingest:1:label",
-              "text": "source + date",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
-            }
-          ],
-          "appearance": {
-            "markerEnd": "arrow"
-          },
-          "semantics": {},
-          "metadata": {
-            "dsl": {
-              "line": 14,
-              "appearance": {
-                "palette": "paper"
-              }
-            }
-          },
-          "extensions": {}
-        },
-        {
-          "id": "edge:discover-and-ingest->companies-and-compounds:1",
-          "source": {
-            "nodeId": "discover-and-ingest",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "target": {
-            "nodeId": "companies-and-compounds",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "route": {
-            "kind": "orthogonal",
-            "ownership": "automatic"
-          },
-          "waypoints": [],
-          "labels": [
-            {
-              "id": "discover-and-ingest->companies-and-compounds:1:label",
-              "text": "mentions",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
-            }
-          ],
-          "appearance": {
-            "markerEnd": "arrow"
-          },
-          "semantics": {},
-          "metadata": {
-            "dsl": {
-              "line": 15,
-              "appearance": {
-                "palette": "paper"
-              }
-            }
-          },
-          "extensions": {}
-        },
-        {
-          "id": "edge:discover-and-ingest->targets-and-indications:1",
-          "source": {
-            "nodeId": "discover-and-ingest",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "target": {
-            "nodeId": "targets-and-indications",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "route": {
-            "kind": "orthogonal",
-            "ownership": "automatic"
-          },
-          "waypoints": [],
-          "labels": [
-            {
-              "id": "discover-and-ingest->targets-and-indications:1:label",
-              "text": "mentions",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
-            }
-          ],
-          "appearance": {
-            "markerEnd": "arrow"
-          },
-          "semantics": {},
-          "metadata": {
-            "dsl": {
-              "line": 16,
-              "appearance": {
-                "palette": "paper"
-              }
-            }
-          },
-          "extensions": {}
-        },
-        {
-          "id": "edge:companies-and-compounds->resolve-observations:1",
-          "source": {
-            "nodeId": "companies-and-compounds",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "target": {
-            "nodeId": "resolve-observations",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "route": {
-            "kind": "orthogonal",
-            "ownership": "automatic"
-          },
-          "waypoints": [],
-          "labels": [
-            {
-              "id": "companies-and-compounds->resolve-observations:1:label",
-              "text": "canonical identity",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
-            }
-          ],
-          "appearance": {
-            "markerEnd": "arrow"
-          },
-          "semantics": {},
-          "metadata": {
-            "dsl": {
-              "line": 17,
-              "appearance": {
-                "palette": "paper"
-              }
-            }
-          },
-          "extensions": {}
-        },
-        {
-          "id": "edge:targets-and-indications->resolve-observations:1",
-          "source": {
-            "nodeId": "targets-and-indications",
-            "portId": null,
-            "anchor": null,
-            "point": null
-          },
-          "target": {
-            "nodeId": "resolve-observations",
+            "nodeId": "ingest",
             "portId": null,
             "anchor": null,
             "point": null
@@ -844,7 +1149,7 @@
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 18,
+              "line": 24,
               "appearance": {
                 "palette": "paper"
               }
@@ -853,17 +1158,25 @@
           "extensions": {}
         },
         {
-          "id": "edge:resolve-observations->assess-evidence:1",
+          "id": "edge:ingest->entities:1",
           "source": {
-            "nodeId": "resolve-observations",
+            "nodeId": "ingest",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "target": {
-            "nodeId": "assess-evidence",
+            "nodeId": "entities",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
             "point": null
           },
           "route": {
@@ -873,8 +1186,8 @@
           "waypoints": [],
           "labels": [
             {
-              "id": "resolve-observations->assess-evidence:1:label",
-              "text": "all contributing sources",
+              "id": "ingest->entities:1:label",
+              "text": "mentions",
               "pathRatio": 0.5,
               "offset": {
                 "x": 0,
@@ -889,7 +1202,7 @@
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 19,
+              "line": 25,
               "appearance": {
                 "palette": "paper"
               }
@@ -898,17 +1211,67 @@
           "extensions": {}
         },
         {
-          "id": "edge:assess-evidence->analyst-review:1",
+          "id": "edge:ingest->biology:1",
           "source": {
-            "nodeId": "assess-evidence",
+            "nodeId": "ingest",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "target": {
-            "nodeId": "analyst-review",
+            "nodeId": "biology",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 26,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:entities->resolve:1",
+          "source": {
+            "nodeId": "entities",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "resolve",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
             "point": null
           },
           "route": {
@@ -918,8 +1281,8 @@
           "waypoints": [],
           "labels": [
             {
-              "id": "assess-evidence->analyst-review:1:label",
-              "text": "ambiguity + support",
+              "id": "entities->resolve:1:label",
+              "text": "identity",
               "pathRatio": 0.5,
               "offset": {
                 "x": 0,
@@ -934,7 +1297,7 @@
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 20,
+              "line": 27,
               "appearance": {
                 "palette": "paper"
               }
@@ -943,15 +1306,57 @@
           "extensions": {}
         },
         {
-          "id": "edge:analyst-review->program-record:1",
+          "id": "edge:biology->resolve:1",
           "source": {
-            "nodeId": "analyst-review",
+            "nodeId": "biology",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "resolve",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 28,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:resolve->review:1",
+          "source": {
+            "nodeId": "resolve",
             "portId": null,
             "anchor": null,
             "point": null
           },
           "target": {
-            "nodeId": "program-record",
+            "nodeId": "review",
             "portId": null,
             "anchor": null,
             "point": null
@@ -963,8 +1368,8 @@
           "waypoints": [],
           "labels": [
             {
-              "id": "analyst-review->program-record:1:label",
-              "text": "reviewed observation",
+              "id": "resolve->review:1:label",
+              "text": "evidence",
               "pathRatio": 0.5,
               "offset": {
                 "x": 0,
@@ -979,7 +1384,7 @@
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 21,
+              "line": 29,
               "appearance": {
                 "palette": "paper"
               }
@@ -988,9 +1393,213 @@
           "extensions": {}
         },
         {
-          "id": "edge:program-record->landscapes:1",
+          "id": "edge:review->ready:1",
           "source": {
-            "nodeId": "program-record",
+            "nodeId": "review",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "ready",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 30,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:ready->record:1",
+          "source": {
+            "nodeId": "ready",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "record",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1030,
+              "y": 454.0
+            },
+            {
+              "x": 1030,
+              "y": 150.5
+            }
+          ],
+          "labels": [
+            {
+              "id": "ready->record:1:label",
+              "text": "accept",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 31,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:ready->hold:1",
+          "source": {
+            "nodeId": "ready",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "target": {
+            "nodeId": "hold",
+            "portId": null,
+            "anchor": null,
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "automatic"
+          },
+          "waypoints": [],
+          "labels": [
+            {
+              "id": "ready->hold:1:label",
+              "text": "hold",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 32,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:hold->review:1",
+          "source": {
+            "nodeId": "hold",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "review",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 735,
+              "y": 608.0
+            },
+            {
+              "x": 735,
+              "y": 303.5
+            }
+          ],
+          "labels": [
+            {
+              "id": "hold->review:1:label",
+              "text": "revisit",
+              "pathRatio": 0.5,
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "metadata": {}
+            }
+          ],
+          "appearance": {
+            "dashPattern": "dashed",
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 33,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:record->landscapes:1",
+          "source": {
+            "nodeId": "record",
             "portId": null,
             "anchor": null,
             "point": null
@@ -1006,25 +1615,14 @@
             "ownership": "automatic"
           },
           "waypoints": [],
-          "labels": [
-            {
-              "id": "program-record->landscapes:1:label",
-              "text": "traceable claims",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
-            }
-          ],
+          "labels": [],
           "appearance": {
             "markerEnd": "arrow"
           },
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 22,
+              "line": 34,
               "appearance": {
                 "palette": "paper"
               }
@@ -1033,43 +1631,49 @@
           "extensions": {}
         },
         {
-          "id": "edge:program-record->timelines:1",
+          "id": "edge:record->timelines:1",
           "source": {
-            "nodeId": "program-record",
+            "nodeId": "record",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "target": {
             "nodeId": "timelines",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "route": {
             "kind": "orthogonal",
-            "ownership": "automatic"
+            "ownership": "manual"
           },
-          "waypoints": [],
-          "labels": [
+          "waypoints": [
             {
-              "id": "program-record->timelines:1:label",
-              "text": "dated evidence",
-              "pathRatio": 0.5,
-              "offset": {
-                "x": 0,
-                "y": 0
-              },
-              "metadata": {}
+              "x": 1292,
+              "y": 150.5
+            },
+            {
+              "x": 1292,
+              "y": 438.5
             }
           ],
+          "labels": [],
           "appearance": {
             "markerEnd": "arrow"
           },
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 23,
+              "line": 35,
               "appearance": {
                 "palette": "paper"
               }
@@ -1078,28 +1682,100 @@
           "extensions": {}
         },
         {
-          "id": "edge:program-record->leadership-briefs:1",
+          "id": "edge:record->briefs:1",
           "source": {
-            "nodeId": "program-record",
+            "nodeId": "record",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "target": {
-            "nodeId": "leadership-briefs",
+            "nodeId": "briefs",
             "portId": null,
-            "anchor": null,
+            "anchor": {
+              "kind": "side",
+              "side": "right",
+              "ratio": 0.5
+            },
             "point": null
           },
           "route": {
             "kind": "orthogonal",
-            "ownership": "automatic"
+            "ownership": "manual"
           },
-          "waypoints": [],
+          "waypoints": [
+            {
+              "x": 1300,
+              "y": 150.5
+            },
+            {
+              "x": 1300,
+              "y": 573.5
+            }
+          ],
+          "labels": [],
+          "appearance": {
+            "markerEnd": "arrow"
+          },
+          "semantics": {},
+          "metadata": {
+            "dsl": {
+              "line": 36,
+              "appearance": {
+                "palette": "paper"
+              }
+            }
+          },
+          "extensions": {}
+        },
+        {
+          "id": "edge:briefs->sources:1",
+          "source": {
+            "nodeId": "briefs",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "bottom",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "target": {
+            "nodeId": "sources",
+            "portId": null,
+            "anchor": {
+              "kind": "side",
+              "side": "left",
+              "ratio": 0.5
+            },
+            "point": null
+          },
+          "route": {
+            "kind": "orthogonal",
+            "ownership": "manual"
+          },
+          "waypoints": [
+            {
+              "x": 1168.5,
+              "y": 730
+            },
+            {
+              "x": 145,
+              "y": 730
+            },
+            {
+              "x": 145,
+              "y": 150.5
+            }
+          ],
           "labels": [
             {
-              "id": "program-record->leadership-briefs:1:label",
-              "text": "linked evidence",
+              "id": "briefs->sources:1:label",
+              "text": "next review \u2014 what changed?",
               "pathRatio": 0.5,
               "offset": {
                 "x": 0,
@@ -1109,12 +1785,13 @@
             }
           ],
           "appearance": {
+            "dashPattern": "dashed",
             "markerEnd": "arrow"
           },
           "semantics": {},
           "metadata": {
             "dsl": {
-              "line": 24,
+              "line": 37,
               "appearance": {
                 "palette": "paper"
               }

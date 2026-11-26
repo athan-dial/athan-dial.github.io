@@ -4,15 +4,22 @@
 <header class="wp-header">
 <div class="wp-topline"><a href="/work/">← Selected work</a><span>Work product / {{ $p.timeframe }}</span></div>
 <div class="wp-intro"><div><p class="wp-label">{{ $p.disciplines }}</p><h1>{{ .Title }}</h1><p class="wp-deck">{{ $p.tagline }}</p></div>
-<div class="wp-overview"><h2 class="wp-label">01 / Product overview</h2><p>{{ $p.overview }}</p></div></div>
-<div class="wp-role"><h2 class="wp-label">02 / My role</h2><p>{{ $p.ownership }}</p></div>
+<div class="wp-context"><div class="wp-overview"><h2 class="wp-label">01 / Product overview</h2><p>{{ $p.overview }}</p></div>
+<div class="wp-role"><h2 class="wp-label">02 / My role</h2><p>{{ $p.ownership }}</p></div></div></div>
 </header>
 <section class="wp-figure" aria-labelledby="workflow-title">
 <div class="wp-figure-head"><div><p class="wp-label">03 / How it works</p><h2 id="workflow-title">{{ $p.figure_title }}</h2></div><span class="wp-label">Evidence → judgment → action</span></div>
 {{ $diagram := resources.Get $p.diagram }}
-<figure><div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>
+<figure>
+{{ with $p.stages }}
+<ol class="wp-stages" aria-label="Workflow walkthrough">
+{{ range . }}<li><strong>{{ .title }}</strong><p>{{ .description }}</p><a href="#{{ .decision_anchor }}">{{ .decision }} · {{ .decision_label }} ↓</a></li>{{ end }}
+</ol>
+{{ end }}
+<div class="wp-diagram" tabindex="0" role="region" aria-label="Workflow diagram; scroll horizontally on small screens"><img src="{{ $diagram.RelPermalink }}" alt="{{ $p.diagram_alt }}"></div>
 <figcaption><span>{{ $p.figure_caption }}</span><a href="{{ $diagram.RelPermalink }}">Open full diagram ↗</a></figcaption></figure>
-<p class="wp-provenance">Provenance travels with the evidence: source → observation → program → briefing.</p>
+<div class="wp-legend"><p>Provenance travels with the evidence: source → observation → program → briefing.</p>
+<ul aria-label="Diagram legend"><li><span class="wp-key wp-key--action" aria-hidden="true"></span>Forest: system action</li><li><span class="wp-key wp-key--judgment" aria-hidden="true"></span>Citrus: human judgment</li><li>◇ Decision gate</li><li>⇠ Dashed: review or revision</li><li>Outline delivery: product direction</li></ul></div>
 </section>
 <nav class="wp-depth" aria-label="Case study sections"><span class="wp-label">Continue the conversation</span><a href="#decisions">Product decisions ↓</a><a href="#evidence">Evidence ↓</a><a href="#reflections">Reflections ↓</a></nav>
 <div class="wp-body">{{ .Content }}</div>

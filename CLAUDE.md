@@ -72,6 +72,7 @@ Authority: `DESIGN.md`. Tokens: `assets/css/tokens.css`. Existing base/book impl
 - Fieldnotes is the public label at the existing `/thinking/` path. `/notes/` and `/essays/`
   remain archives. Do not redirect or remove existing articles as a redesign side effect.
 - Homepage/list cards include only published/public content; drafts stay excluded.
+- Work Product cases use `layouts/work/work-product.html`, `assets/css/work-product.css`, and native OpenFlowKit resources under `assets/work-products/`. Keep the HTML walkthrough and legend aligned with the figure; `scripts/render-workflow.py` regenerates the inaugural workflow.
 - Signature diagrams use `layouts/partials/fieldnote-schematic.html` and its shortcode.
   `boundary-diagram` remains supported for existing work. See `DIAGRAMS.md` for authoring.
 - Browser viewport, 200% text zoom, keyboard focus, JavaScript-disabled behavior, and computed

@@ -17,8 +17,29 @@ overview: "TALOS is a competitive-intelligence product for scientific analysts a
 ownership: "I led product framing, scope, cross-team communication, and milestone facilitation, and brought scientific-user feedback into the work. Data-science and engineering colleagues owned source operations, entity recognition, observation semantics, and analyst-surface implementation."
 figure_title: "From Fragmented Evidence to Decision-Ready Intelligence"
 diagram: "work-products/talos/workflow.svg"
-diagram_alt: "Public sources are discovered and ingested, then branch into recognition of companies and compounds and of targets and indications. Both converge into resolved observations. Evidence assessment and analyst review precede persistent program records, which feed landscapes, timelines, and leadership briefs. Source links travel throughout."
-figure_caption: "Generalized product workflow, not a deployment map. The full delivery vision includes landscapes, timelines, and leadership briefings; their inclusion does not imply every surface shipped in the MVP. Scroll the figure on mobile."
+diagram_alt: "Four stages run left to right: collect, recognize, resolve and judge, remember and deliver. Entity branches converge into observations. Every accepted observation passes through analyst review and a Ready to use decision; held evidence returns for review. Program records feed delivery surfaces, with a dashed next-review loop back to sources. The numbered walkthrough gives the complete text description."
+figure_caption: "Generalized product workflow. Delivery surfaces show product direction; not all are verified as shipped. Review paths illustrate the product principle, not a verified automation policy."
+stages:
+  - title: Collect
+    description: "Discover public reports and preserve each source and date."
+    decision: D2
+    decision_label: Preserve provenance
+    decision_anchor: d2-provenance
+  - title: Recognize
+    description: "Resolve company, compound, target, and indication mentions into shared identities."
+    decision: D1
+    decision_label: Organize around programs
+    decision_anchor: d1-programs
+  - title: Resolve and judge
+    description: "Consolidate overlapping reports. An analyst inspects support and accepts or holds the observation."
+    decision: D3
+    decision_label: Make uncertainty reviewable
+    decision_anchor: d3-judgment
+  - title: Remember and deliver
+    description: "Accumulate evidence in program records; carry its sources into landscapes, timelines, and briefs."
+    decision: D4
+    decision_label: Earn trust before expansion
+    decision_anchor: d4-scope
 disclosure_note: "Review copy · Generalized workflow; no proprietary scientific examples. Product name and professional attribution await employer disclosure approval."
 ---
 
@@ -26,28 +47,28 @@ disclosure_note: "Review copy · Generalized workflow; no proprietary scientific
 <div class="wp-decisions">
 <div class="wp-decision">
 
-### Organize around the program
+<h3 id="d1-programs">D1 · Organize around the program</h3>
 
 A feed can show new reports while leaving the analyst to reconstruct the competitive picture. I helped frame the program as the durable unit of navigation: observations accumulate around a developing effort. This supports continuity across reviews, but requires explicit entity resolution and a way to preserve incomplete records as knowledge improves.
 
 </div>
 <div class="wp-decision">
 
-### Preserve the trail through consolidation
+<h3 id="d2-provenance">D2 · Preserve the trail through consolidation</h3>
 
 Several reports can describe the same underlying development. The product contract requires consolidated observations to retain all contributing sources. That makes an answer inspectable after deduplication. The trade-off is a richer evidence model and more interface detail; a single convenient citation would be simpler, but could hide conflicting support.
 
 </div>
 <div class="wp-decision">
 
-### Make uncertainty reviewable
+<h3 id="d3-judgment">D3 · Make uncertainty reviewable</h3>
 
 A confident sentence can obscure weak evidence. I helped establish a product boundary in which evidence support and analyst judgment remain visible. Narrow machine-assisted consolidation can reduce repetition; expert review remains consequential. This accepts review effort and slower throughput in exchange for a clearer basis for using an observation.
 
 </div>
 <div class="wp-decision">
 
-### Earn trust before expanding scope
+<h3 id="d4-scope">D4 · Earn trust before expanding scope</h3>
 
 The initial scope emphasized an evidence packet, entity resolution, and a plain analyst surface. Advanced visualization and workflow replacement were deferred. I coordinated scope and stakeholder feedback across the workstreams. This reduced the breadth of the first release while concentrating the test on whether the underlying intelligence deserved to be used.
 

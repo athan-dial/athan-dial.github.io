@@ -212,3 +212,14 @@ Hugo production builds and repository publication checks are required. New palet
 calculated from sRGB values and recorded in `.planning/ACCESSIBILITY-CHECKS.md`. Browser layout,
 200% text zoom, keyboard focus, JavaScript-disabled behavior, and computed-color verification require
 visual review. Do not present source inspection or historical measurements as browser verification.
+
+## Work Product workflow figures
+
+The `work-product` layout extends Fieldnotes with a single native OpenFlowKit figure.
+Its four stages have a numbered HTML walkthrough and links to decision anchors. On
+mobile the text walkthrough precedes the horizontally scrollable visual. Forest means
+system action, citrus means human judgment, and a diamond is a decision; a written
+legend repeats every meaning. Outlined delivery surfaces are explicitly product direction.
+The compact header keeps product overview and role together beside the identity.
+Body and role copy use 16px; metadata and captions use at least 12px. The original
+native HTML schematic convention remains the default outside workflow Work Products.

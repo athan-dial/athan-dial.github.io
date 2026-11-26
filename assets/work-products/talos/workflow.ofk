@@ -1,24 +1,37 @@
 architecture right
 appearance: paper
-"Public sources" [icon: tabler/world, slate, pin: "0,80"]
-"Discover and ingest" [icon: tabler/download, slate, pin: "210,80"]
-"Companies and compounds" [icon: tabler/building, emerald, pin: "420,0"]
-"Targets and indications" [icon: tabler/dna, emerald, pin: "420,160"]
-"Resolve observations" [icon: tabler/git-merge, emerald, bold, pin: "630,80"]
-"Assess evidence" [icon: tabler/scale, amber, pin: "840,80"]
-"Analyst review" [icon: tabler/user-check, amber, pin: "840,330"]
-"Program record" [icon: tabler/database, emerald, bold, pin: "630,330"]
-"Landscapes" [icon: tabler/layout-grid, slate, pin: "420,280"]
-"Timelines" [icon: tabler/calendar, slate, pin: "210,330"]
-"Leadership briefs" [icon: tabler/file-text, slate, pin: "0,330"]
-"Public sources" -> "Discover and ingest" : source + date
-"Discover and ingest" -> "Companies and compounds" : mentions
-"Discover and ingest" -> "Targets and indications" : mentions
-"Companies and compounds" -> "Resolve observations" : canonical identity
-"Targets and indications" -> "Resolve observations"
-"Resolve observations" -> "Assess evidence" : all contributing sources
-"Assess evidence" -> "Analyst review" : ambiguity + support
-"Analyst review" -> "Program record" : reviewed observation
-"Program record" -> "Landscapes" : traceable claims
-"Program record" -> "Timelines" : dated evidence
-"Program record" -> "Leadership briefs" : linked evidence
+icons: off
+group collect = "01 · Collect" [pin: "0,0"] {
+  sources = "Public sources" [icon: tabler/world, iconpos: left, gray, outline, desc: "Reports, filings, publications", pin: "20,42"]
+  ingest = "Discover and ingest" [icon: tabler/download, iconpos: left, gray, outline, desc: "Source + date retained", pin: "20,195"]
+}
+group recognize = "02 · Recognize" [pin: "275,0"] {
+  entities = "Companies and compounds" [icon: tabler/building, iconpos: left, gray, outline, desc: "Mentions linked to identities", pin: "20,120"]
+  biology = "Targets and indications" [icon: tabler/dna, iconpos: left, gray, outline, desc: "Biology + disease context", pin: "20,300"]
+}
+group judge = "03 · Resolve and judge" [pin: "565,0"] {
+  resolve = "Resolve observations" [icon: tabler/git-merge, iconpos: left, "#14543c", bold, desc: "D2 · All contributing sources", pin: "20,42"]
+  review = "Analyst review" [icon: tabler/user-check, iconpos: left, "#e4f17c", bold, desc: "D3 · Inspect support + uncertainty", pin: "20,195"]
+  ready = "Ready to use?" [diamond, "#e4f17c", bold, width: 150, height: 88, pin: "70,330"]
+  hold = "Keep unresolved" [gray, outline, desc: "Evidence retained for review", pin: "45,495"]
+}
+group deliver = "04 · Remember and deliver" [pin: "880,0"] {
+  record = "Program record" [icon: tabler/database, iconpos: left, "#14543c", bold, desc: "D1 · Evidence accumulates", pin: "20,42"]
+  landscapes = "Landscapes" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: "D4 · Delivery direction", pin: "20,195"]
+  timelines = "Timelines" [icon: tabler/calendar, iconpos: left, gray, outline, desc: "Dated evidence + source links", pin: "20,330"]
+  briefs = "Leadership briefs" [icon: tabler/file-text, iconpos: left, gray, outline, desc: "Claims retain their evidence", pin: "20,465"]
+}
+sources -> ingest
+ingest -> entities : mentions [from: right, to: left]
+ingest -> biology [from: right, to: left]
+entities -> resolve : identity [from: right, to: left]
+biology -> resolve [from: right, to: left]
+resolve -> review : evidence
+review -> ready
+ready -> record : accept [from: right, to: left]
+ready -> hold : hold
+hold --> review : revisit [from: left, to: left]
+record -> landscapes
+record -> timelines : linked evidence [from: right, to: right]
+record -> briefs [from: right, to: right]
+briefs --> sources : next review — what changed? [from: bottom, to: bottom]
