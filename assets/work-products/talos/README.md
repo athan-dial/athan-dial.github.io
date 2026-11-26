@@ -24,3 +24,8 @@ OpenFlowKit 0.3.0 fixes icon-card sublabels at 11px. Stage frames and cards use 
 square-corner appearance settings. Return routes are native scene waypoints derived
 from node bounds; the compiler and exporter remain unmodified. The image preserves
 its natural width, with an HTML text walkthrough for narrow screens.
+
+OpenFlowKit 0.3.0 exports provenance description text nodes as centered
+(`text-anchor="middle"`); the scene sets `textAlign: start` but the exporter
+ignores it. Left-aligned descriptions require a renderer change or post-export
+SVG edits, which this pipeline does not do.

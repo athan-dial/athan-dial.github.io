@@ -1,13 +1,13 @@
 {
   "format": "openflowkit.scene",
   "schemaVersion": 1,
-  "id": "c7fc85e9-e019-4862-aaa8-e014a86bc696",
+  "id": "39584a55-1723-4b73-8691-760e7b9f1fe6",
   "name": "workflow",
-  "createdAt": "2026-11-26T12:48:26.168Z",
-  "updatedAt": "2026-11-26T12:48:26.168Z",
+  "createdAt": "2026-11-26T12:49:28.576Z",
+  "updatedAt": "2026-11-26T12:49:28.576Z",
   "pages": [
     {
-      "id": "c7fc85e9-e019-4862-aaa8-e014a86bc696:page-1",
+      "id": "39584a55-1723-4b73-8691-760e7b9f1fe6:page-1",
       "name": "Page 1",
       "diagramKind": "architecture",
       "layers": [
@@ -20,7 +20,7 @@
       ],
       "nodes": [
         {
-          "id": "dsl-1mznoq7",
+          "id": "dsl-8uabvb",
           "kind": "frame",
           "parentId": null,
           "layerId": "default",
@@ -51,8 +51,8 @@
             "dsl": {
               "family": "architecture",
               "version": 1,
-              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support and uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
-              "hash": "14ig80t",
+              "source": "architecture right\nappearance: paper\nicons: off\ngroup collect = \"01 \u00b7 Collect\" [pin: \"0,0\"] {\n  sources = \"Public sources\" [icon: tabler/world, iconpos: left, gray, outline, desc: \"Reports, filings, publications\", pin: \"20,42\"]\n  ingest = \"Discover and ingest\" [icon: tabler/download, iconpos: left, gray, outline, desc: \"Source + date retained\", pin: \"20,195\"]\n}\ngroup recognize = \"02 \u00b7 Recognize\" [pin: \"275,0\"] {\n  entities = \"Companies and compounds\" [icon: tabler/building, iconpos: left, gray, outline, desc: \"Mentions linked to identities\", pin: \"20,120\"]\n  biology = \"Targets and indications\" [icon: tabler/dna, iconpos: left, gray, outline, desc: \"Biology + disease context\", pin: \"20,300\"]\n}\ngroup judge = \"03 \u00b7 Resolve and judge\" [pin: \"565,0\"] {\n  resolve = \"Resolve observations\" [icon: tabler/git-merge, iconpos: left, \"#14543c\", bold, desc: \"All contributing sources\", pin: \"20,42\"]\n  review = \"Analyst review\" [icon: tabler/user-check, iconpos: left, \"#e4f17c\", bold, desc: \"Inspect support + uncertainty\", pin: \"20,195\"]\n  ready = \"Ready to use?\" [diamond, \"#e4f17c\", bold, width: 150, height: 88, pin: \"67,330\"]\n  hold = \"Keep unresolved\" [gray, outline, desc: \"Evidence retained for review\", pin: \"48,495\"]\n}\ngroup deliver = \"04 \u00b7 Remember and deliver\" [pin: \"880,0\"] {\n  record = \"Program record\" [icon: tabler/database, iconpos: left, \"#14543c\", bold, desc: \"Evidence accumulates\", pin: \"20,42\"]\n  landscapes = \"Landscapes\" [icon: tabler/layout-grid, iconpos: left, gray, outline, desc: \"Delivery direction\", pin: \"20,195\"]\n  timelines = \"Timelines\" [icon: tabler/calendar, iconpos: left, gray, outline, desc: \"Dated evidence + source links\", pin: \"20,330\"]\n  briefs = \"Leadership briefs\" [icon: tabler/file-text, iconpos: left, gray, outline, desc: \"Claims retain their evidence\", pin: \"20,465\"]\n}\nsources -> ingest\ningest -> entities : mentions [from: right, to: left]\ningest -> biology [from: right, to: left]\nentities -> resolve : identity [from: right, to: left]\nbiology -> resolve [from: right, to: left]\nresolve -> review : evidence\nreview -> ready\nready -> record : accept [from: right, to: left]\nready -> hold : hold\nhold --> review : revisit [from: left, to: left]\nrecord -> landscapes\nrecord -> timelines : linked evidence [from: right, to: right]\nrecord -> briefs [from: right, to: right]\nbriefs --> sources : next review \u2014 what changed? [from: bottom, to: bottom]\n",
+              "hash": "15refxv",
               "direction": "right",
               "appearance": {
                 "palette": "paper"
@@ -65,7 +65,7 @@
         {
           "id": "collect",
           "kind": "frame",
-          "parentId": "dsl-1mznoq7",
+          "parentId": "dsl-8uabvb",
           "layerId": "default",
           "zIndex": 1,
           "transform": {
@@ -110,7 +110,7 @@
         {
           "id": "recognize",
           "kind": "frame",
-          "parentId": "dsl-1mznoq7",
+          "parentId": "dsl-8uabvb",
           "layerId": "default",
           "zIndex": 2,
           "transform": {
@@ -155,7 +155,7 @@
         {
           "id": "judge",
           "kind": "frame",
-          "parentId": "dsl-1mznoq7",
+          "parentId": "dsl-8uabvb",
           "layerId": "default",
           "zIndex": 3,
           "transform": {
@@ -170,7 +170,7 @@
             }
           },
           "size": {
-            "width": 284,
+            "width": 272,
             "height": 625
           },
           "content": {
@@ -200,7 +200,7 @@
         {
           "id": "deliver",
           "kind": "frame",
-          "parentId": "dsl-1mznoq7",
+          "parentId": "dsl-8uabvb",
           "layerId": "default",
           "zIndex": 4,
           "transform": {
@@ -667,7 +667,7 @@
             }
           },
           "size": {
-            "width": 244,
+            "width": 232,
             "height": 105
           },
           "content": {
@@ -718,7 +718,7 @@
               "attrs": [
                 {
                   "key": "desc",
-                  "value": "Inspect support and uncertainty"
+                  "value": "Inspect support + uncertainty"
                 },
                 {
                   "key": "pin",
@@ -1398,11 +1398,11 @@
             }
           },
           "size": {
-            "width": 182,
+            "width": 170,
             "height": 42
           },
           "content": {
-            "label": "Inspect support and\nuncertainty",
+            "label": "Inspect support +\nuncertainty",
             "fontSize": 15,
             "fontFamily": "system-ui, sans-serif",
             "fontWeight": "400",

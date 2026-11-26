@@ -109,7 +109,7 @@ for edge in page['connectors']:
     elif pair in [('record', 'timelines'), ('record', 'briefs')]:
         rx, ry, rw, rh = bounds('record')
         tx, ty, tw, th = bounds(pair[1])
-        lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + (6 if pair[1] == 'timelines' else 14)
+        lane = max(bounds(item)[0] + bounds(item)[2] for item in ['record', 'landscapes', 'timelines', 'briefs']) + 10
         route(edge, [(lane, ry + rh / 2), (lane, ty + th / 2)], 'right', 'right')
         edge['labels'] = []
 root_frame['size'] = {'width': 1166, 'height': 650}

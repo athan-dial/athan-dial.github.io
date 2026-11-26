@@ -11,7 +11,7 @@ group recognize = "02 · Recognize" [pin: "275,0"] {
 }
 group judge = "03 · Resolve and judge" [pin: "565,0"] {
   resolve = "Resolve observations" [icon: tabler/git-merge, iconpos: left, "#14543c", bold, desc: "All contributing sources", pin: "20,42"]
-  review = "Analyst review" [icon: tabler/user-check, iconpos: left, "#e4f17c", bold, desc: "Inspect support and uncertainty", pin: "20,195"]
+  review = "Analyst review" [icon: tabler/user-check, iconpos: left, "#e4f17c", bold, desc: "Inspect support + uncertainty", pin: "20,195"]
   ready = "Ready to use?" [diamond, "#e4f17c", bold, width: 150, height: 88, pin: "67,330"]
   hold = "Keep unresolved" [gray, outline, desc: "Evidence retained for review", pin: "48,495"]
 }
