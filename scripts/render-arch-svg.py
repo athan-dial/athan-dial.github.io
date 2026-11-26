@@ -64,9 +64,10 @@ class Svg:
         o = (box - glyph) / 2
         self.add(f'<g transform="translate({x + o:.1f} {y + o:.1f}) scale({s:.4f})" fill="none" stroke="{stroke}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{icons[name]}</g>')
 
-    def rect(self, x, y, w, h, fill=SURFACE, stroke=INK, sw=1.25, dash=None):
+    def rect(self, x, y, w, h, fill=SURFACE, stroke=INK, sw=1.25, dash=None, cls=None):
         d = f' stroke-dasharray="{dash}"' if dash else ''
-        self.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw}"{d}/>')
+        c = f' class="{cls}"' if cls else ''
+        self.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw}"{d}{c}/>')
 
     def path(self, pts, dash=None, stroke=EDGE, end='ah', start=None, sw=1.6):
         d = ' L'.join(f'{x:.1f} {y:.1f}' for x, y in pts)
@@ -110,9 +111,10 @@ class Svg:
             del self.out[parts_before:]
             self.add(f'<a href="{href}" class="arch-link">' + ''.join(chunk) + '</a>')
 
-    def region(self, x, y, w, h, num, title, sub, fill=FRAME, ink=INK, subc=MUTED, stroke=RULE, href=None):
+    def region(self, x, y, w, h, num, title, sub, fill=FRAME, ink=INK, subc=MUTED, stroke=RULE, href=None, key=''):
         before = len(self.out)
-        self.rect(x, y, w, h, fill, stroke, 1.25)
+        cls = ' '.join(['arch-region'] + [f'arch-region--{k}' for k in key.split()])
+        self.rect(x, y, w, h, fill, stroke, 1.25, None, cls)
         self.text(x + 20, y + 34, f'{num} · {title.upper()}', 14, 600, ink, mono=True, spacing=1.0)
         for i, ln in enumerate(wrap(sub, 14.5, False, w - 40)):
             self.text(x + 20, y + 58 + i * 19, ln, 14.5, 400, subc)
@@ -145,10 +147,10 @@ def wide():
     LOOP_Y = WB_Y + WB_H + 28
     HGT = LOOP_Y + 56 + 24
     s = Svg(W, HGT, spec['alt'], 'w')
-    s.region(R1X, TOP, R1W, H, R['sources']['num'], R['sources']['title'], R['sources']['sub'])
-    s.region(R2X, TOP, R2W, H, R['compute']['num'], R['compute']['title'], R['compute']['sub'], href=R['compute'].get('href'))
-    s.region(R3X, TOP, R3W, H, R['substrate']['num'], R['substrate']['title'], R['substrate']['sub'], fill=ACCENT, ink=ONFOREST, subc=ONFOREST_SUB, stroke=ACCENT, href=R['substrate'].get('href'))
-    s.region(R4X, TOP, R4W, H, R['products']['num'], R['products']['title'], R['products']['sub'], href=R['products'].get('href'))
+    s.region(R1X, TOP, R1W, H, R['sources']['num'], R['sources']['title'], R['sources']['sub'], key='sources')
+    s.region(R2X, TOP, R2W, H, R['compute']['num'], R['compute']['title'], R['compute']['sub'], href=R['compute'].get('href'), key='compute')
+    s.region(R3X, TOP, R3W, H, R['substrate']['num'], R['substrate']['title'], R['substrate']['sub'], fill=ACCENT, ink=ONFOREST, subc=ONFOREST_SUB, stroke=ACCENT, href=R['substrate'].get('href'), key='substrate')
+    s.region(R4X, TOP, R4W, H, R['products']['num'], R['products']['title'], R['products']['sub'], href=R['products'].get('href'), key='products')
     # lanes: sources card + processing lane aligned
     y = TOP + 78
     lane_y = {}
@@ -240,7 +242,7 @@ def wide():
     wx, ww = R2X, R3X + R3W - R2X
     wbl = lambda: None
     before = len(s.out)
-    s.rect(wx, WB_Y, ww, WB_H, CITRUS, INK, 1.6, '8 5')
+    s.rect(wx, WB_Y, ww, WB_H, CITRUS, INK, 1.6, '8 5', 'arch-region arch-region--workbench')
     s.icon(wb['icon'], wx + 20, WB_Y + 26, 44, INK, 'rgba(11,11,12,.09)', 26)
     s.text(wx + 78, WB_Y + 44, wb['title'], 19, 700, INK)
     for i, ln in enumerate(wrap(wb['desc'], 14.5, False, 380)):
@@ -301,7 +303,7 @@ def narrow():
         block.append((ln, cy, h, ch))
         cy += h + 12
     total = cy - y + 4
-    s.region(M, y, PW, total, '01–02', 'Sources and paths', 'Four sources, four processing paths', href=R['compute'].get('href'))
+    s.region(M, y, PW, total, '01–02', 'Sources and paths', 'Four sources, four processing paths', href=R['compute'].get('href'), key='sources compute')
     for ln, ly, h, ch in block:
         s.rect(M + 12, ly, IW, h, SURFACE, RULE, 1.25)
         s.card(M + 18, ly + 8, IW - 12, ch, ln['title'], ln['desc'], ln['icon'], ln['tag'], dsize=14, tsize=16.5)
@@ -323,7 +325,7 @@ def narrow():
     ent = spec['entities']
     eh = 70 + len(ent['rows']) * 36
     sub_h = 78 + chain_h + 22 + eh + 18 + 2 * 66 + 12 + 18 + 4 * 34 + 18
-    s.region(M, y, PW, sub_h, R['substrate']['num'], R['substrate']['title'], R['substrate']['sub'], fill=ACCENT, ink=ONFOREST, subc=ONFOREST_SUB, stroke=ACCENT, href=R['substrate'].get('href'))
+    s.region(M, y, PW, sub_h, R['substrate']['num'], R['substrate']['title'], R['substrate']['sub'], fill=ACCENT, ink=ONFOREST, subc=ONFOREST_SUB, stroke=ACCENT, href=R['substrate'].get('href'), key='substrate')
     cx, cw = M + 24, IW - 24 - 12
     for i, c in enumerate(CHAIN):
         cyy = parts_y + i * (NH + GAP)
@@ -362,7 +364,7 @@ def narrow():
     wb = spec['workbench']
     wh = 118 + len(wb['points']) * 24 + 16
     before = len(s.out)
-    s.rect(M, y, PW, wh, CITRUS, INK, 1.6, '8 5')
+    s.rect(M, y, PW, wh, CITRUS, INK, 1.6, '8 5', 'arch-region arch-region--workbench')
     s.icon(wb['icon'], M + 14, y + 18, 40, INK, 'rgba(11,11,12,.09)', 24)
     s.text(M + 66, y + 38, wb['title'], 17, 700, INK)
     for i, ln in enumerate(wrap(wb['desc'], 14, False, PW - 80)):
@@ -378,7 +380,7 @@ def narrow():
     y += wh + 14
     # products
     ph = 78 + len(spec['products']) * 100 + 8
-    s.region(M, y, PW, ph, R['products']['num'], R['products']['title'], R['products']['sub'], href=R['products'].get('href'))
+    s.region(M, y, PW, ph, R['products']['num'], R['products']['title'], R['products']['sub'], href=R['products'].get('href'), key='products')
     py = y + 78
     for p in spec['products']:
         s.card(M + 12, py, IW, 92, p['q'], p['desc'], p['icon'], p['tag'], tsize=16, dsize=14, href=R['products'].get('href'))

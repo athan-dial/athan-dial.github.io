@@ -4,8 +4,8 @@
 <header class="wp-header">
 <div class="wp-topline"><a href="/work/">← Selected work</a><span>Work product / {{ $p.timeframe }}</span></div>
 <div class="wp-intro"><div><p class="wp-label">{{ $p.disciplines }}</p><h1>{{ .Title }}</h1><p class="wp-deck">{{ $p.tagline }}</p></div>
-<div class="wp-context"><div class="wp-overview"><h2 class="wp-label">01 / Product overview</h2><p>{{ $p.overview }}</p></div>
-<div class="wp-role"><h2 class="wp-label">02 / My role</h2><dl class="wp-role-lines">{{ with $p.role.led }}<div><dt>Led</dt><dd>{{ . }}</dd></div>{{ end }}{{ with $p.role.built }}<div><dt>Built</dt><dd>{{ . }}</dd></div>{{ end }}{{ with $p.role.with }}<div><dt>With</dt><dd>{{ . }}</dd></div>{{ end }}</dl></div></div></div>
+<div class="wp-context"><div class="wp-overview"><h2 class="wp-label">01 / Product overview</h2>{{ $parts := split $p.overview ". " }}{{ if gt (len $parts) 1 }}<p class="wp-lead">{{ index $parts 0 }}.</p><p class="wp-more">{{ delimit (after 1 $parts) ". " }}</p>{{ else }}<p class="wp-more">{{ $p.overview }}</p>{{ end }}</div>
+<div class="wp-role"><h2 class="wp-label">02 / My role</h2><div class="wp-roleviz">{{ with $p.role.led }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "compass" "size" 16) }}Led</span><div class="wp-chips wp-chips--led">{{ if reflect.IsSlice . }}{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}{{ else }}<span class="wp-chip wp-chip--text">{{ . }}</span>{{ end }}</div></div>{{ end }}{{ with $p.role.built }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "hammer" "size" 16) }}Built</span><div class="wp-chips wp-chips--built">{{ if reflect.IsSlice . }}{{ range . }}<span class="wp-chip">{{ . }}</span>{{ end }}{{ else }}<span class="wp-chip wp-chip--text">{{ . }}</span>{{ end }}</div></div>{{ end }}{{ with $p.role.with }}<div class="wp-rolerow"><span class="wp-rolekey">{{ partial "wp-icon.html" (dict "name" "users" "size" 16) }}With</span>{{ if reflect.IsMap . }}<div><p class="wp-who">{{ .who }}</p><div class="wp-chips wp-chips--with">{{ range .owned }}<span class="wp-chip">{{ . }}</span>{{ end }}</div></div>{{ else }}<div class="wp-chips wp-chips--with"><span class="wp-chip wp-chip--text">{{ . }}</span></div>{{ end }}</div>{{ end }}</div></div></div></div>
 </header>
 <section class="wp-figure" aria-labelledby="workflow-title">
 <div class="wp-figure-head"><div><p class="wp-label">03 / How it works</p><h2 id="workflow-title">{{ $p.figure_title }}</h2></div>{{ with $p.figure_kicker }}<span class="wp-label">{{ . }}</span>{{ end }}</div>
@@ -25,12 +25,31 @@
 <div class="wp-body">
 {{ $n := 4 }}
 {{ with $p.decisions }}<h2 id="decisions">{{ printf "%02d" $n }} / Key decisions</h2>{{ $n = add $n 1 }}
-<div class="wp-decisions">{{ range . }}<div class="wp-decision"><h3 id="{{ .anchor }}">{{ .title }}</h3><p><span class="wp-beat">Problem</span>{{ .problem }}</p><p><span class="wp-beat">Call</span>{{ .call }}</p><p><span class="wp-beat">Cost</span>{{ .cost }}</p></div>{{ end }}</div>{{ end }}
+<div class="wp-dtracks">{{ range . }}{{ $stage := .stage }}<article class="wp-dtrack wp-reveal"{{ with .region }} data-region="{{ . }}"{{ end }}><header><h3 id="{{ .anchor }}">{{ .title }}</h3>{{ with $stage }}<a class="wp-locator" href="#workflow-title" aria-label="Stage {{ . }} of 4 in the diagram"><span class="wp-label">In the diagram</span><span class="wp-locator-bars" aria-hidden="true">{{ range seq 1 4 }}<i{{ if eq . $stage }} class="on"{{ end }}></i>{{ end }}</span></a>{{ end }}</header>
+<div class="wp-beats"><div class="wp-beatcard wp-beatcard--problem">{{ partial "wp-icon.html" (dict "name" "triangle-alert" "size" 20) }}<span class="wp-beat">Problem</span><p>{{ .problem }}</p></div><span class="wp-beatarrow" aria-hidden="true">{{ partial "wp-icon.html" (dict "name" "arrow-right" "size" 18) }}</span><div class="wp-beatcard wp-beatcard--call">{{ partial "wp-icon.html" (dict "name" "signpost" "size" 20) }}<span class="wp-beat">Call</span><p>{{ .call }}</p></div><span class="wp-beatarrow" aria-hidden="true">{{ partial "wp-icon.html" (dict "name" "arrow-right" "size" 18) }}</span><div class="wp-beatcard wp-beatcard--cost">{{ partial "wp-icon.html" (dict "name" "scale" "size" 20) }}<span class="wp-beat">Cost</span><p>{{ .cost }}</p></div></div></article>{{ end }}</div>{{ end }}
 {{ with $p.outcomes }}<h2 id="outcomes">{{ printf "%02d" $n }} / Outcomes</h2>{{ $n = add $n 1 }}
-<ul class="wp-outcomes">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+<ul class="wp-tiles">{{ range . }}{{ if reflect.IsMap . }}<li class="wp-tile wp-tile--{{ .status | default "built" }} wp-reveal"><span class="wp-tile-ico">{{ partial "wp-icon.html" (dict "name" (.icon | default "layers") "size" 22) }}</span><strong>{{ .title }}</strong>{{ with .note }}<p>{{ . }}</p>{{ end }}<span class="wp-label wp-tile-status">{{ .status | default "built" }}</span></li>{{ else }}<li class="wp-tile wp-tile--built wp-reveal"><strong>{{ . }}</strong></li>{{ end }}{{ end }}</ul>{{ end }}
 {{ with $p.reflections }}<h2 id="reflections">{{ printf "%02d" $n }} / Reflections</h2>
-<div class="wp-reflect"><div><h3>What worked</h3><p>{{ .worked }}</p></div><div><h3>What didn't</h3><p>{{ .didnt }}</p></div><div><h3>How I'd grow it</h3><p>{{ .grow }}</p></div></div>{{ end }}
+<div class="wp-reflect"><div class="wp-reflect--worked wp-reveal"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "circle-check" "size" 24) }}</span><h3>What worked</h3><p>{{ .worked }}</p></div><div class="wp-reflect--didnt wp-reveal"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "circle-x" "size" 24) }}</span><h3>What didn't</h3><p>{{ .didnt }}</p></div><div class="wp-reflect--grow wp-reveal"><span class="wp-reflect-mark">{{ partial "wp-icon.html" (dict "name" "arrow-up-right" "size" 24) }}</span><h3>How I'd grow it</h3><p>{{ .grow }}</p></div></div>{{ end }}
 {{ .Content }}</div>
 <footer class="wp-end"><p>{{ $p.disclosure_note }}</p><a href="/work/">← Back to selected work</a></footer>
+<script>
+(function(){
+  var d=document.documentElement; d.classList.add('wp-js');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wp-static');return;}
+  var reveal=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');reveal.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.wp-reveal').forEach(function(el){reveal.observe(el);});
+  var lit=null;
+  function light(key){
+    document.querySelectorAll('.arch-region').forEach(function(r){r.classList.toggle('is-lit',!!key&&r.classList.contains('arch-region--'+key));});
+    lit=key;
+  }
+  var rows=document.querySelectorAll('.wp-dtrack[data-region]');
+  if(rows.length){
+    var act=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){light(e.target.getAttribute('data-region'));}else if(lit===e.target.getAttribute('data-region')){light(null);}});},{rootMargin:'-35% 0px -35% 0px'});
+    rows.forEach(function(r){act.observe(r);r.addEventListener('mouseenter',function(){light(r.getAttribute('data-region'));});r.addEventListener('mouseleave',function(){light(null);});});
+  }
+})();
+</script>
 </article>
 {{ end }}
