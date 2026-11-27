@@ -60,7 +60,7 @@ Inherit parent C5 in full. See the bound parent issue; the slice may not weaken 
 # Implementation Decisions
 
 ## Locked
-Use the original #32 contract and current integrated revision, plus the original case-study obligations. Work only in the authorized review integration branch. External prerequisites: verified implementations of the three proposed case packages and compatible work-product/workflow-atlas revisions; verify actual review/authority rather than treating these references as completed. No release authorization.
+Use the original #32 contract and current integrated revision, plus the original case-study obligations. Work only in the authorized review integration branch. Sibling case implementations and the workflow atlas are integrated by 01a/01b. Verify actual review/authority rather than treating them as completed. No release authorization.
 
 ## Executor discretion
 Choose the smallest local implementation and verification seam that delivers this slice in accordance with the parent and repository authorities. Preserve prior verified behavior.
@@ -85,7 +85,7 @@ A consequential conflict in original contracts, approval or disclosure, missing 
 For this slice, collect direct evidence for its acceptance criteria. Integrated re-verification remains a separate obligation under 07.
 
 # Blocked by
-03, 05, 06
+01b, 03, 05, 06
 
 # Out of Scope
 Building missing features under the integration contract, bypassing case-specific acceptance, approving disclosure, PR merge, production deployment or closing existing release gates.

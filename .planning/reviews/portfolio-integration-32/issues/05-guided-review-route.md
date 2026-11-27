@@ -40,7 +40,8 @@ Inherit parent C5 in full. See the bound parent issue; the slice may not weaken 
 # Implementation Decisions
 
 ## Locked
-Use 02/04's real eligible links and existing Hugo draft-build conventions; preserve all case publication flags. Suggested segment times are planning guidance, not measured visitor behavior.
+Use 02/04's real eligible links and existing Hugo draft-build conventions; preserve all case publication flags.
+- Use 02's local-review flag; no second mechanism. Suggested segment times are planning guidance, not measured visitor behavior.
 
 ## Executor discretion
 Choose the smallest local implementation and verification seam that delivers this slice in accordance with the parent and repository authorities. Preserve prior verified behavior.

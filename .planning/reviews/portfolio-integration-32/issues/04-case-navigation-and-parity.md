@@ -40,7 +40,7 @@ Inherit parent C5 in full. See the bound parent issue; the slice may not weaken 
 # Implementation Decisions
 
 ## Locked
-Original case-study contracts remain authoritative. Reconcile with 01's manifest and the current availability rules from 02. Keep pending implementations external; this ticket may align eligible cases but cannot certify absent ones.
+Original case-study contracts remain authoritative. Reconcile with the 01a/01b manifest; parity needs all four exhibits present (01b) and the current availability rules from 02. Keep pending implementations external; this ticket may align eligible cases but cannot certify absent ones.
 
 ## Executor discretion
 Choose the smallest local implementation and verification seam that delivers this slice in accordance with the parent and repository authorities. Preserve prior verified behavior.
@@ -58,7 +58,7 @@ A consequential conflict in original contracts, approval or disclosure, missing 
 For this slice, collect direct evidence for its acceptance criteria. Integrated re-verification remains a separate obligation under 07.
 
 # Blocked by
-02
+02, 01b
 
 # Out of Scope
 Implementing missing case-study features, rewriting historical claims or scientific demos, replacing Arc or generalizing all page layouts.

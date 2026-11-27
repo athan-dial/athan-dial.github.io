@@ -44,6 +44,9 @@ Inherit parent C5 in full. See the bound parent issue; the slice may not weaken 
 
 ## Locked
 Retain Home chapter order and Work classification; use existing Hugo content/data as authority and the smallest useful shared eligibility/preview helper. Preserve existing public URLs and all other working content.
+- Work index owner: the trunk's work/list.html and work-card.html. The atlas's flat grid is not used.
+- Keep work_kind unchanged (flagship = case, system = operating system). Add a frontmatter number exhibit_order: it orders Cases ahead of date (discovery, intelligence, governed); the system block stays the capstone.
+- Local draft-review flag: define the build-mode flag and the shared eligibility helper here. Draft-review links appear only when it is set; verify-build.sh asserts their absence in production.
 
 ## Executor discretion
 Choose the smallest local implementation and verification seam that delivers this slice in accordance with the parent and repository authorities. Preserve prior verified behavior.
@@ -62,7 +65,7 @@ A consequential conflict in original contracts, approval or disclosure, missing 
 For this slice, collect direct evidence for its acceptance criteria. Integrated re-verification remains a separate obligation under 07.
 
 # Blocked by
-01
+01a
 
 # Out of Scope
 Site rebrand, new generic case-study engine, rewriting historical case claims, capability navigation, guided route, publication.

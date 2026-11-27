@@ -64,4 +64,6 @@ None
 Building missing case-study features; approving unresolved branch conflicts; changing canonical profile, content gates, main, release heads or deployment.
 
 # Further Notes
+SUPERSEDED by 01a-integrated-trunk.md and 01b-discovery-and-workflow-atlas.md in the revised graph. Retained unchanged for comparison; do not publish.
+
 This is a proposed review artifact, not an activated tracker ticket. Numeric blockers are draft graph IDs; after the required graph approval, map them to actual issue identifiers, preserve the parent binding, create one issue per contract and independently certify its current revision.
